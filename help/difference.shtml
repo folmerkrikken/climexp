@@ -1,0 +1,41 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Apply temporal filter</div> 
+
+<div class="alineakop">Year-on-year differences</div> 
+This option replaces each data point with the dfference between the
+value of this year and the previous year.  It acts as a (primitive)
+high-pass filter and is often used to eliminate to first order slow
+variations or trends.  Note that higher-order effects, such as a
+slowly varying variance, are not removed.
+
+<div class="alineakop">Subtract mean of previous years</div> 
+This is an extension of the year-on-year differences in which the mean
+of the previous <i>N</i> years is subtracted.  (For <i>N</i>=1 they
+coincide).  Again, these high-pass filters are used to remove
+low-frequency signals or trends.  For <i>N</i>&gt;1 the filter is more
+gentle than the year-on-year difference method and retains
+more low-frequency signal.
+
+<div class="alineakop">Average with previous years</div> 
+The converse is to average with <i>N</i> previous years, making a
+<i>N</i>+1 year running mean. This primitive low-pass filter can be
+used to improve the signal/noise ratio of slowly-varying signals.
+Note that the degrees of freedom in the significance calculations are
+adjusted accordingly, so the signal may not be more significant after
+this low-pass filtering.
+
+<div class="alineakop">No overlap</div>
+<p>If there is an option "no overlap" (currently only on the
+verification pages), this means that instead of the default sliding
+window, non-overlapping windows are taken. An example: if you have 100
+years of data with a 10-yr running window ("average with [9] previous
+years"), you will normally get 90 or more data points that are not
+independent: years 1-10, 2-11, 3-12, ..., 91-100.  With this option
+you will get 10 independent data points: years 1-10, 11-20, ..., 91-100.
+
+<div class="alineakop">Plans</div>
+One day I will implement more sophisticated low-pass, high-pass and
+band-pass filters.
+
+<p>See also the <a href="detrend.shtml">detrend</a> option.
+<!--#include virtual="help_footer.html"-->

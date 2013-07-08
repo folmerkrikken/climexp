@@ -1,0 +1,29 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Restrict data range</div> 
+With his otion you can indicate that you only want to perform the
+operation on a restricted range of the data.  Data points not
+satisfying the criterion are set to undefined and are not used.
+
+<p>There are four ways in which the range can be specified
+<ul>
+  <li>If only the first field is filled out, only data larger than the
+  threshold are considered.
+  <li>If only the second field is filled out, only data smaller than the
+threshold are considered.
+  <li>If both fields are filled in, and the first is smaller than the
+  second, only data in the range between these values are considered.
+  <li>If both fields are filled in, and the first is larger than the
+  second, only data outside the range are considered.
+</ul>
+
+<p>The tresholds can be entered as an absolute value or as a
+percentage.  The latter is indicated by a "%" after he number.
+
+<p>Note that the thresholds are enforced <i>after</i> all other
+operations (seasonal means, anomalies, log/sqrt, etc) have been
+perfomed on the data.
+
+<p>It is advisable to first try out these ranges on a time series
+before attempting to use them on a field.  This way the results are
+clear from the plots.
+<!--#include virtual="help_footer.html"-->

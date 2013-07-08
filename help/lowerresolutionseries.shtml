@@ -1,0 +1,7 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Create a lower-resolution time series</div> 
+This function creates a lower (or equal) resolution time series from
+the one displayed above.
+
+<!--#include virtual="lowerresolution.html"-->
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,40 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select a season (monthly data)</div> 
+This option allows you to restrict the correlations to a specific
+season.  Many effects vary greatly with the seasonal cycle, and it is
+rarely a good idea to combine all seasons.
+
+<br><br>In the Climate Explorer, the season is defined by a starting month
+and the duration of the season.  The starting month is
+<ul>
+  <li>all months separately, this gives 12 results, or
+  <li>a single calendar month (each January, February, ...), or
+  <li>all months together, this gives one result.
+</ul>
+Some of these options are not supported in specific contexts.<br><br>
+
+The length of the season can be interpreted in two different ways:
+<ul>
+  <li>an average over the months of the season, or
+  <li>all months of the season considered separately
+</ul>
+If there are two datasets the lengths of the seasons can be chosen
+separately.  Again, not all combinations make sense.
+
+<div class="alineakop">A few examples</div>
+<ul>
+  <li>To compute a property of all winters in the Netherlands, set the
+  starting month to [December], keep the method on [averaging] and select
+  the length of the season as [3].  This enters a single number for
+  each year, the average over December, January and February.
+  <li>To get twelve 3-month averages, change the starting month to [all]
+  <li>To study all NH winter months, set the starting month back to
+  [December] and change the method to [selecting].  This enters three
+  numbers for each year into the calculation, the values for 
+  January, February and December.
+  <li>To compute a property of the anomalies with respect to the
+  seasonal cycle, put the starting month to [together], check the box <a href="anomalies.shtml">anomalies</a>
+  and make sure the length of the season is equal to [1].
+</ul>
+  
+<!--#include virtual="help_footer.html"-->

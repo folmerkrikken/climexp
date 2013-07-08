@@ -1,0 +1,13 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">PSMSL monthly sea-level data</div> 
+The <a href=http://www.pol.ac.uk/psmsl/" target="_new">PSMSL</a>
+dataset contains 1214 series of monthly mean sea-level data, from 1 to
+183 years long.
+
+<p>I am not sure what the reference is for individual stations: the
+geoid or (moving) land.  Please consult <a href=http://www.pol.ac.uk/psmsl/" target="_new">their web pages</a>.
+
+<p>The dataset is updates once a month from PSMSL.  However, PSMSL
+depends on the data being sent to them, so the series do not quite
+extend to the last month in general.
+<!--#include virtual="help_footer.html"-->

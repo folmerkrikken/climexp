@@ -1,0 +1,15 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select a set of stations: amount of data, distance, elevation</div> 
+
+The station set can be reduced by these additional criteria.
+<ul>
+  <li>The number of years with data.  In the case of monthly data
+  there sometimes is enough metadata to demand this for a specific
+  season.  If not, the only guarantee is that there is <i>some</i> data in
+  each of the years.
+  <li>Distance between stations.  Which stations are chosen depends on
+  the ordering in the database and is therefore approximately random.
+  <li>Altitude (elevation): for some analyses it is useful to exclude
+  mountain-top stations.
+</ul>
+<!--#include virtual="help_footer.html"-->

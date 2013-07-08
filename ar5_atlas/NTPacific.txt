@@ -1,0 +1,5 @@
+# Northern Tropical Pacific small island region (all points)
+155   5
+155  25
+210  25
+210   5

@@ -1,0 +1,22 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Fit function</div> 
+The usual regressio or correlation analysis uses a straight line
+relationship between the two variables
+
+<p><i>Y</i> = <i>a</i>+<i>bX</i>.
+
+<p>The Climate Explorer fit routine can also fit other functions, such
+as the parabola
+
+<p><i>Y</i> = <i>a</i>+<i>bX</i>(1+<i>cX</i>).
+
+<p>In this case the correlation indicates the correlation between the
+fitted right-hand side and <i>Y</i> and is therefore always positive.
+
+<p>For correlations between two time series, a cubic fit (<i>Y</i> = <i>a</i>+<i>BX</i>+<i>cX&sup2</i>+<i>dX&sup3</i>) and a
+straight line plus time derivative (<i>Y</i> =
+<i>a</i>+<i>bX</i>+c<i>Y'</i>) are also available.
+
+<p>The option "phase diagram" does not perform a fit and connects all
+(<i>X<sub>i</sub>,Y<sub>i</sub></i>) pairs by a line.
+<!--#include virtual="help_footer.html"-->

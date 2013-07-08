@@ -1,0 +1,22 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Upload masks</div> 
+
+The area average of a field can be restricted to a user-defined mask, as well as the usual land and sea masks. These masks have to be uploaded first. They should be in the format
+<pre>
+# optional comments
+longitude1 latitude1 [optional information, is ignored]
+longitude2 latitude2 [optional information, is ignored]
+longitude3 latitude3 [optional information, is ignored]
+...
+</pre>
+The path is closed by drawing a segment from the last line to the first. A grid point is included if the line from the South Pole to the point crosses an odd number of segments, it is given weight 0.5 if it is on a segment, and is excluded if it crosses an even number of segments. The definition can be reversed by checking the box "include South Pole".
+
+<p>There are a few standard masks:
+<ul>
+<li>SREX regions, note that these are defined on land only so make sure you check that option
+<li>Additional IPCC WG1 AR5 Atlas regions (Arctic, small island regions, Antarctic), again the land/sea mask is not included
+<li>European river catchments
+</ul>
+Please contact me if you have another dataset that you would like to have in this list.
+
+<!--#include virtual="help_footer.html"-->

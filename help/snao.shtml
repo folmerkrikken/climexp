@@ -1,0 +1,9 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Summer NAO</div> 
+
+The Summer NAO (SNAO) is defined as the first EOF of sea-level pressure over the area 40&deg;N&ndash;70&deg;N, 90&deg;W&ndash;30&deg;E over 1950&ndash;2010 (Folland et al, 2009, Blad&eacute; et al, 2011). It only is the dominant mode of variaibility in high summer (July-August) and should not be used outside of summer.
+
+<ul>
+<li>Folland, C. K., J. Knight, H. W. Linderholm, D. Fereday, S. Ineson, and J. W. Hurrell (2009).  <a href="http://acacia.ucar.edu/cas/jhurrell/Docs/folland.summerNAO.jclim08.pdf">The Summer North Atlantic Oscillation: Past, Present, and Future</a>. J. Climate, 22, 1082–1103.
+<li>-Blad&eacute; I., B. Liebmann, D. Fortuny, G. J. Oldenborgh. (2011). <a href="hhttp://www.knmi.nl/publications/fulltexts/clidyd11001301.pdf">Observed and simulated impacts of the summer NAO in Europe: implications for projected drying in the Mediterranean region</a>. Climate Dynamics. DOI:10.1007/s00382-011-1195-x
+<!--#include virtual="help_footer.html"-->

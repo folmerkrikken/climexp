@@ -1,0 +1,39 @@
+<p><a name=\"options\"><div class="alineakop">Explanation of the options</div><ul></a>
+
+<li>Starting month: [all] means that you get twelve values, one for
+each month, [with seasons] groups all months together, [anomalies]
+also subtracts the seasonal cycle.
+
+<li>You can define the season to apply either to the time series you
+selected first [timeseries], or the index you selected on this page
+[index]
+
+<li>A season is either defined as the [average] (sum in the case of
+precipitation) of the months (one number per year), or by [selecting]
+the specified months individually (<i>n</i> numbers per year)
+
+<li>A lag of the form <i>m:n</i> gives a range of lags
+
+<li>Begin year, End year: restrict data between these two years.
+
+<li>Only for: restrict the range of the index or the data to the one
+given (e.g., only El Ni&ntilde;os is indicated by NINO3 &gt; .5)
+
+<li>Logarithmic: take logarithm of (precipitation) data before
+correlating, zero is translated to 0.1 and negative values are ignored
+
+<li>Sqrt: take sqrt of (precipitation) data before correlating,
+negative values are ignored
+
+<li>Rank correlation: a rank correlation is performed
+
+<li>Contingency tables: 3x3, give the cut-off values in the fields
+before, these can be specified as percentages
+
+<li>Detrend: a linear trend is first subtracted per month from the
+data and indices
+
+<li>Differences: first the finite difference is taken: <i>f'(yr,month)
+= f(yr+1,month) - f(yr,month)</i>
+
+</ul>

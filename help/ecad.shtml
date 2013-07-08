@@ -1,0 +1,32 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">ECA&amp;D daily station data</div> 
+The <a href="http://eca.knmi.nl/" target="_new">ECA&amp;D</a> dataset from KNMI consists of European daily station data.
+The coverage is a bit uneven, as some countries
+still are reluctant to freely share daily data (this is improving steadily).  In January 2009 the dataset contained 979 precipitation series and 485
+temperature series with lengths varying from 2 to 248 years.
+
+<p>The data is obtained from two main sources: the weather services
+and the GTS (Global Telecommunicaion System, the system used to
+exchange data to make weather forecasts).  The latter is used to bring
+the series up-to-date, but is also notoriously
+unreliable, with many typos, misplaced decimal points, missing data
+etc.  The majority of these errors are caught in the Quality Control, but some inevitably remain.  The <i>pure</i> series do not include GTS data, the <i>blended</i> series do.  The latter are therefore more up-to-date but less reliable.
+
+<p>The full ECA&amp;D data can be obtained from their <a
+href="http://eca.knmi.nl" target="_new">server</a>.  The
+data are updated daily there, the Climate Explorer makes a copy about
+once a month.  The ECA&amp;D server contains much more metadata than the Climate Explorer, which just tries to give a reasonable time series.  These metadata indicate the averaging period (0-24 or 8-8 hours) and station relocations that could be associated with inhomogeneities.
+
+<div class="alineakop">Precipitation, temperature</div>
+These comprise the majority of the data in the datset, and in general have good quality.
+
+<div class="alineakop">Pressure</div>
+The pressure data are not well homogenised yet.  The reduction to sea-level is also not uniform.
+
+<div class="alineakop">Cloud cover, snow depth</div>
+These variables ar relatively recent additions and do not yet have the level of quality control of the other data.
+
+<div class="alineakop">Relative humidity, sunshine duration</div>
+At the moment only available from the <a href="http://eca.knmi.nl/">ECA&amp;D website</a>.
+
+<!--#include virtual="help_footer.html"-->

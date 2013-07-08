@@ -1,0 +1,25 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">SVD input normalisation</div> 
+In climate science, the term SVD (Singular vector Decomposition) is
+used for the procedure to find a decomposition of two time-varying
+fields into a sum of maps (the SVDs) times time series (confusing referred to as Prinicpal Components, PCs):
+<p><i>E</i>(<i>x</i>,<i>t</i>) = &sum;<sub>i=1</sib><sup>N</sup>
+<i>E<sub>i</sub></i>(<i>x</i>) p<sub>i</sub>(<i>t</i>)
+<p>The SVDs (maps) and PCs are chosen such that for small <i>N</i> the
+difference with the full field is as small as possible.
+
+<p>In this field you can choose how many SVDs (and PCs) you want to have
+computed, and how the difference should be evaluated.
+
+<p>More SVDs only take slightly more time to compute, so feel free to
+give a large number.
+
+<p>The SVD decomposition can be defined in two ways.  The first is to
+minimise the difference in absolute units, for instance in mb or mm/dy.  The
+second is to minimse the fraction of the variability at each point
+that is explained by the SVD decomposition, i.e., diagonalise the
+cross-correlation matrix instead of the covariance matrix.  This is
+also known as Canonical Correlation analysis (CCA).  The first method
+emphasises the areas in which the variability is large, the second one
+treats all areas equally.
+<!--#include virtual="help_footer.html"-->

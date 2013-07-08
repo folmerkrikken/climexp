@@ -1,0 +1,17 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Combine a series with another time series</div> 
+
+Climate indices are often defined as the (normalised) difference
+between two time series.  Examples are common definitions of the NAO
+index and the SOI.  This options allows you to subtract two time series of your
+own choosing to form a new one.
+
+<p>Note that there are many different ways to normalise.  First the
+anomalies are computed with respect to te annual cycle.  Next the
+series are optionally normalised to standard deviation one, either
+for each calendar month separately or everyting together.  Finally the
+difference of these series is optionally normalised to standard
+deviation one, again either for each month separately or just the
+whole series.
+
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,8 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Percentage valid points</div> 
+The area average is only considered valid when at least this many
+valid points are included.  Enter a smaller number to get 
+more valid data in the resulting time series, but the quality of these
+data will be lower.  A higher number gives fewer but higher-quality
+data points.
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,226 @@
+#!/bin/sh
+# set the time-independent part of the title
+case "${NPERYEAR:-12}" in
+1) timescale="year";timely="annual";;
+4) timescale="season";timely="seasonal";;
+12) timescale="month";timely="monthly";;
+36) timescale="decade";timely="decadal";;
+73) timescale="pentad";timely="pentad";;
+360) timescale="day";timely="daily";;
+365) timescale="day";timely="daily";;
+366) timescale="day";timely="daily";;
+*) timescale="period";timely="period";;
+esac
+
+if [ "${FORM_month:-0}" = "0" ]; then
+  if [ "${FORM_sum:-1}" -gt 1 ]; then
+    seriesmonth="${FORM_sum}-"$timely
+  else
+    seriesmonth=$timely
+  fi
+  if [ -z "$FORM_lag" -o "$FORM_lag" = 0 ]; then
+    indexmonth=""
+  else
+    indexmonth="${FORM_lag}$timescale-lag"
+  fi
+fi
+if [ ${NPERYEAR:-12} != 12 ]; then
+  if [ "${FORM_lag:-0}" != "0" ]; then
+    indexmonth="${FORM_lag}$timescale-lag"
+  fi
+fi
+if [ "$FORM_plottype" = "time-lon" ]; then
+  if [ -z "$FORM_lat2" -o "$FORM_lat1" = "$FORM_lat2" ]; then      
+    indexmonth="$indexmonth ${FORM_lat1}N"
+  else
+    indexmonth=""
+  fi
+  if [ -n "$FORM_lag" ]; then
+    if [ "$FORM_fix" = "fix1" ]; then
+      indexmonth="${FORM_lag}$timescale-lag"
+    else
+      seriesmonth="${FORM_lag}$timescale-lag"
+    fi
+  fi
+fi
+if [ "$FORM_plottype" = "time-lat" ]; then
+  if [ -z "$FORM_lon2" -o "$FORM_lon1" = "$FORM_lon2" ]; then
+    indexmonth="${FORM_lon1}E"
+  else
+    indexmonth=""
+  fi
+  if [ -n "$FORM_lag" ]; then
+    if [ "$FORM_fix" = "fix1" ]; then
+      indexmonth="${FORM_lag}$timescale-lag"
+    else
+      seriesmonth="${FORM_lag}$timescale-lag"
+    fi
+  fi
+fi
+
+ylabel=" "
+[ -n "$FORM_log" ] && ylabel=" log$ylabel"
+[ -n "$FORM_sqrt" ] && ylabel=" sqrt$ylabel"
+[ -n "$FORM_square" ] && ylabel=" ${ylabel}^2"
+
+extra=""
+if [ -n "$FORM_anomal" -o \( "FORM_operation" = "selecting" -a ${FORM_sum:-1} -gt 1 \) ]; then
+  if [ `echo "$CLIM" | fgrep -c "anom"` = 0 ]; then
+    anoclim="$CLIM anomalies"
+  fi
+  if [ `echo "$climfield" | fgrep -c "anom"` = 0 ]; then
+    climfield="$climfield anomalies"
+  fi
+else
+  anoclim="$CLIM"
+fi
+if [ -n "$FORM_nens1" -o -n "$FORM_nens2" ]; then
+  extra=" ${FORM_nens1}:${FORM_nens2}$extra"
+fi
+
+if [ -n "$FORM_ndiff" -o -n "$FORM_ndiff2" -o -n "$FORM_diff" -o -n "$FORM_detrend" -o "${FORM_debias:-none}" != "none" ]; then
+  bracket=true
+  extra="$extra ("
+  started=""
+fi
+if [ -n "$FORM_nooverlap" ]; then
+    nooverlap=", no overlap"
+fi
+if [ -n "$ndiff" ]; then
+  if [ -n "$ndiff2" ]; then
+    extra="$extra${ndiff2}, ${ndiff}-yr running means$nooverlap"
+  else
+    extra="$extra${ndiff}-yr running mean$nooverlap"
+  fi
+  started=true
+else
+  if [ -n "$ndiff2" ]; then
+    extra="$extra$ndiff2 running mean$nooverlap"
+    started=true
+  fi
+  if [ -n "$FORM_diff" ]; then
+    extra="${extra}diff"
+    started=true
+  fi
+fi
+if [ -n "$FORM_detrend" ]; then
+  [ -n "$started" ] && extra="${extra}, "
+  extra="${extra}detrend"
+  started=true
+fi
+if [ ${FORM_debias:-none} != none ]; then
+  [ -n "$started" ] && extra="${extra}, "
+  extra="${extra}debias $FORM_debias"
+  started=true
+fi
+if [ -n "$bracket" ]; then
+  extra="${extra})"
+fi
+if [ -n "$ENSEMBLE" -a -n "$FORM_ensanom" ]; then
+  extra="$extra\\ anomalies wrt ensemble mean"
+fi
+###echo "startstop=$startstop, "`cat $startstop`
+if [ -n "$startstop" -a -s ${startstop:-aap} ]; then
+  yrstart=`head -1 $startstop`
+  yrstop=`tail -1 $startstop`
+  if [ ${startstop#/tmp} != $startstop ]; then
+    rm $startstop
+  fi
+fi
+if [ -n "$yrstart" ]; then
+  extra="$extra $yrstart:$yrstop"
+elif [ -n "$FORM_begin2" ]; then
+  extra="$extra ${FORM_begin2}-$FORM_end2"
+  if [ -n "$FORM_begin" ]; then
+    extrap=" ${FORM_begin}-$FORM_end"
+  fi
+elif [ -n "$FORM_end" ]; then
+  if [ -n "$FORM_begin" ]; then
+    extra="$extra ${FORM_begin}-$FORM_end"
+  else
+    extra="$extra ending $FORM_end"
+  fi
+elif [ -n "$FORM_begin" ]; then
+  extra="$extra beginning $FORM_begin"
+fi
+
+if [ -n "$FORM_dgt" ]; then
+  if [ -n "$FORM_dlt" ]; then
+    titleclim="$anoclim, $FORM_dgt < $anoclim < $FORM_dlt"
+  else
+    titleclim="$anoclim > $FORM_dgt"
+  fi
+elif [ -n "$FORM_dlt" ]; then
+  titleclim="$anoclim < $FORM_dlt"
+else
+  titleclim="$anoclim"
+fi
+
+if [ -n "$FORM_gt" ]; then
+  if [ -n "$FORM_lt" ]; then
+    extra="$extra, $FORM_gt < $climfield < $FORM_lt"
+  else
+    extra="$extra, $climfield > $FORM_gt"
+  fi
+elif [ -n "$FORM_lt" ]; then
+  extra="$extra, $climfield < $FORM_lt"
+fi
+
+if [ "$FORM_type" = histogram ]; then
+  with=""
+elif [ -n "$FORM_STATION" ]; then
+  if [ "$FORM_var" = "composite" ]; then
+    with="of"
+  else
+    with="with"
+  fi
+  if [ -n "$kindname" ]; then
+    with="\\$with $indexmonth $kindname $climfield$extra"
+  else
+    with="\\$with $indexmonth $climfield$extra"
+  fi
+elif [ -n "$extra" ]; then
+  with="\ $extra"
+fi
+if [ -n "$FORM_year2" ]; then
+  seriesmonth=""
+fi
+case "$FORM_var" in
+higa) var="fit of Gaussian to";;
+hime) var="mean";;
+hisd) var="s.d.";;
+hisk) var="skew";;
+higr) var="return time of $FORM_year in normal fit\\";;
+higR) var="2.5% lower bound on return time of $FORM_year in normal fit\\";;
+hipr) var="return time of $FORM_year in GPD fit, threshold ${FORM_threshold}%\\";;
+hipR) var="2.5% lower bound on return time of $FORM_year in GPD fit, threshold ${FORM_threshold}%\\";;
+"") var="corr";;
+*) var="$FORM_var";;
+esac
+
+if [ -z "$FORM_hour" ]; then
+  day="$FORM_day"
+else
+  day="${FORM_hour}Z$FORM_day"
+fi
+if [ "$lwrite" = true ]; then
+  echo '<pre>'
+  echo title.cgi
+  echo RANK=$RANK
+  echo var=$var
+  echo day=$day
+  echo seriesmonth=$seriesmonth
+  echo plotyear=$plotyear
+  echo ylabel=$ylabel
+  echo station=$station
+  echo titleclim=$titleclim
+  echo extrap=$extrap
+  echo with=$with
+  echo '</pre>'
+fi
+title="$RANK$var $day$seriesmonth$plotyear$ylabel$station $titleclim$extrap$with"
+if [ -n "$FORM_pmin" ]; then
+  if [ ${FORM_pmin#-} = ${FORM_pmin} -a $FORM_pmin != 100 ]; then
+    title="$title p<${FORM_pmin}%"
+  fi
+fi

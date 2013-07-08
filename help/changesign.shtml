@@ -1,0 +1,9 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Change sign</div> 
+
+By default, the extreme value options (Gumbel and (sqrt)logarithmic
+plots; Gumbel, GEV and GPD fits) will fit the high tail of the
+distribution.  To fit the low tail of the distribution check this
+button.
+
+<!--#include virtual="help_footer.html"-->

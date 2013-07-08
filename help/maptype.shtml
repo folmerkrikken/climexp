@@ -1,0 +1,19 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Map projection</div> 
+Selects the projection of maps; this is ignored for vertical sections,
+time-lon and time-lat plots.
+<ul>
+  <li>The default depends on the daatset.  Most often it is a lat-lon
+  map, but for a few arctic and antarctic datasets it is a polar
+  projection.
+  <li>Lat-lon: an equal distance latitude-longitude map (not a
+  Mercator projection).
+  <li>North-polar stereograhic: equal distance in latitude, polar in
+  longitude.  Default the plot is cut off at 20&deg;N.
+  <li>South-polar stereograhic: equal distance in latitude, polar in
+  longitude.  Default the plot is cut off at 20&deg;S.
+  <li>Robinson: the oval IPCC style.  Only works for longitude from
+  180&deg;W to 180&deg;E.
+</ul>
+
+<!--#include virtual="help_footer.html"-->

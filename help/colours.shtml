@@ -1,0 +1,8 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Plot colours</div> 
+The colour scale that is used for the plots.  The default is optimised for anomaly plots, with a grey band in the middle that is two times larger than the colour bands.  Yellow-orange-red to the positive values, green-blue to negative ones.  For precipitation and ice anomalies a reversed colour scale is more intuitive.
+
+<p>Note that a distinction is made between values around zero, which are grey, and undefined value, which are white.
+
+<p>For non-anomaly values (mean, standard deviation, ...) there are colour scales available that do not have grey in the middle.
+<!--#include virtual="help_footer.html"-->

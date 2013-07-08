@@ -1,0 +1,768 @@
+<tr>
+<th width=120px><a href="javascript:hidden_info_switch('erainterim');">show/hide</a></th>
+<th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://data-portal.ecmwf.int/data/d/interim_moda/" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>ERA-interim 1979-"now"</div> ERA-interim runs 2-3 monts behind real time</th>
+</tr>
+<tr><td colspan=8>
+<div id="erainterim" hiddenstyle_erainterim>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr><th align="right" width=116px><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+<th><small>zonal</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="erai_slp"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="erai_z850"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_z700"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_z500"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_z300"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_z200"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_zzon"></td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><input type="radio" class="formradio" name="field" value="erai_ts"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_t2m"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_t850"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_t700"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_t500"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_t300"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_t200"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_tzon"></td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="erai_taux"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_u10m"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_u850"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_u700"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_u500"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_u300"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_u200"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_uzon"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="erai_tauy"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_v10m"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_v850"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_v700"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_v500"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_v300"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_v200"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_vzon"></td>
+</tr>
+<tr><td align="right">wind speed/vertical velocity</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="erai_wspd"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_w850"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_w700"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_w500"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_w300"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_w200"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_wzon"></td>
+</tr>
+<tr><td align="right">latent/sensible heat flux / humidity</td>
+<td><input type="radio" class="formradio" name="field" value="erai_lhf"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_shf"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_q850"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_q700"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_q500"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_q300"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_q200"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_qzon"></td>
+</tr>
+<tr><td align="right">P-E / surface humidity</td>
+<td><input type="radio" class="formradio" name="field" value="erai_pme"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_huss"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation/ t2m+SST</td>
+<td><input type="radio" class="formradio" name="field" value="erai_tp"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_t2msst"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">surface net solar/longwave  radiation</td>
+<td><input type="radio" class="formradio" name="field" value="erai_ssr"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_str"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">sea ice / snow depth</td>
+<td><input type="radio" class="formradio" name="field" value="erai_ci"></td>
+<td><input type="radio" class="formradio" name="field" value="erai_snd"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table></div>
+</tr><tr>
+<th width=120px><a href="javascript:hidden_info_switch('merra');">show/hide</a></th>
+<th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://disc.sci.gsfc.nasa.gov/daac-bin/DataHoldings.pl" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>NASA MERRA 1979-"now"</div></th>
+</tr>
+<tr><td colspan=8>
+<div id="merra" hiddenstyle_merra>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr><th align="right" width=116px><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+<th><small>zonal</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="merra_slp"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="merra_z850"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_z700"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_z500"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_z300"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_z200"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_zzon"></td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><input type="radio" class="formradio" name="field" value="merra_ts"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_t2m"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_t850"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_t700"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_t500"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_t300"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_t200"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_tzon"></td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="merra_taux"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_u10m"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_u850"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_u700"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_u500"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_u300"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_u200"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_uzon"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="merra_tauy"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_v10m"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_v850"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_v700"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_v500"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_v300"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_v200"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_vzon"></td>
+</tr>
+<tr><td align="right">wind speed/vertical velocity</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="merra_wspd"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_w850"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_w700"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_w500"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_w300"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_w200"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_wzon"></td>
+</tr>
+<tr><td align="right">latent/sensible heat flux / humidity</td>
+<td><input type="radio" class="formradio" name="field" value="merra_lhf"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_shf"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_q850"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_q700"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_q500"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_q300"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_q200"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_qzon"></td>
+</tr>
+<tr><td align="right">P-E/relative humidity</td>
+<td><input type="radio" class="formradio" name="field" value="merra_pme"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation/ t2m+SST</td>
+<td><input type="radio" class="formradio" name="field" value="merra_tp"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_t2msst"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">surface net solar/longwave  radiation</td>
+<td><input type="radio" class="formradio" name="field" value="merra_ssr"></td>
+<td><input type="radio" class="formradio" name="field" value="merra_str"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div>
+<tr>
+<th width=120px><a href="javascript:hidden_info_switch('cfsr');">show/hide</a></th>
+<th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://cfs.ncep.noaa.gov/cfsr/" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>NCEP CFSR 1979-2009</div>CFSR will be updated operationally starting in 2011</th>
+</tr>
+<tr><td colspan=8>
+<div id="cfsr" hiddenstyle_cfsr>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr><th align="right" width=116px><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_slp"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_z850"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_z700"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_z500"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_z300"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_z200"></td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_ts"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_t2m"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_t850"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_t700"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_t500"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_t300"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_t200"></td>
+</tr>
+<tr><td align="right">min/max 2m temperature</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_tmin"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_tmax"></td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_uflx"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_u10m"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_u850"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_u700"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_u500"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_u300"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_u200"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_vflx"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_v10m"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_v850"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_v700"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_v500"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_v300"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_v200"></td>
+</tr>
+<tr><td align="right">wind speed/vertical velocity</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_wspd"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_w850"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_w700"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_w500"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_w300"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_w200"></td>
+</tr>
+<tr><td align="right">latent/sensible heat flux / humidity</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_lhf"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_shf"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_q850"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_q700"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_q500"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_q300"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_q200"></td>
+</tr>
+<tr><td align="right">P-E/relative humidity</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_pme"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_qrel850"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_qrel700"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_qrel500"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_qrel300"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_qrel200"></td>
+</tr>
+<tr><td align="right">precipitation</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_tp"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">surface net solar/longwave  radiation</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_ssr"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_str"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">TOA net solar/longwave  radiation</td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_tsr"></td>
+<td><input type="radio" class="formradio" name="field" value="cfsr_ttr"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div></td></tr>
+<tr>
+<th width=120px><a href="javascript:hidden_info_switch('era40');">show/hide</a></th>
+<th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://www.ecmwf.int/research/era/" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>ERA-40 1957-2002</div></th>
+</tr>
+<tr><td colspan=8>
+<div id="era40" hiddenstyle_era40>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr><th align="right width=116px"><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="era40_slp"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era40_z850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_z700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_z500"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_z300"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_z200"></td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><input type="radio" class="formradio" name="field" value="era40_tsfc"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_t2m"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_t850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_t700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_t500"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_t300"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_t200"></td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="era40_taux"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_u10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_u850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_u700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_u500"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_u300"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_u200"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="era40_tauy"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_v10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_v850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_v700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_v500"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_v300"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_v200"></td>
+</tr>
+<!--
+<tr><td align="right">relative vorticity</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era40_rv10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_rv850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_rv700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_rv500"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_rv300"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_rv200"></td>
+</tr>
+-->
+<tr><td align="right">wind speed/vertical velocity</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era40_wspd"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_w850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_w700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_w500"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_w300"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_w200"></td>
+</tr>
+<tr><td align="right">horizontal divergence</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era40_hordiv10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_hordiv850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_hordiv700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_hordiv500"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_hordiv300"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_hordiv200"></td>
+</tr>
+<tr><td align="right">vertical shear</td>
+<td>&nbsp;</td>
+<td align="right"><input type="radio" class="formradio" name="field" value="era40_vs925"></td>
+<td align="right"><input type="radio" class="formradio" name="field" value="era40_vs775"></td>
+<td align="right"><input type="radio" class="formradio" name="field" value="era40_vs600"></td>
+<td align="right"><input type="radio" class="formradio" name="field" value="era40_vs350"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">latent/sensible heat flux / humidity</td>
+<td><input type="radio" class="formradio" name="field" value="era40_lhf"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_shf"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_q850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_q700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_q500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">soil moisture/P-E/relative humidity</td>
+<td><input type="radio" class="formradio" name="field" value="era40_swvl1"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_pme"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_qrel850"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_qrel700"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_qrel500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation/OLR</td>
+<td><input type="radio" class="formradio" name="field" value="era40_tp"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era40_olr"></td>
+</tr>
+<tr><td align="right">surface net solar/longwave  radiation</td>
+<td><input type="radio" class="formradio" name="field" value="era40_ssr"></td>
+<td><input type="radio" class="formradio" name="field" value="era40_str"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div>
+<tr>
+<th width=120px><a href="javascript:hidden_info_switch('ncepncar');">show/hide</a></th>
+<th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://www.cdc.noaa.gov/cdc/reanalysis/reanalysis.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>NCEP/NCAR R1
+1948-now.<br>
+The complete set is available under "external data"</a>
+<br>(see also <a href="wipefeet.cgi?http://www.cdc.noaa.gov/Correlation/" target="_new" >their correlation page</a>)</div></th>
+</tr>
+<tr><td colspan=8>
+<div id="ncepncar" hiddenstyle_era40>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr>
+<th width=116ox><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="nslp"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nz850"></td>
+<td><input type="radio" class="formradio" name="field" value="nz700"></td>
+<td><input type="radio" class="formradio" name="field" value="nz500"></td>
+<td><input type="radio" class="formradio" name="field" value="nz300"></td>
+<td><input type="radio" class="formradio" name="field" value="nz200"></td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><input type="radio" class="formradio" name="field" value="ntsfc"></td>
+<td><input type="radio" class="formradio" name="field" value="nair"></td>
+<td><input type="radio" class="formradio" name="field" value="nt850"></td>
+<td><input type="radio" class="formradio" name="field" value="nt700"></td>
+<td><input type="radio" class="formradio" name="field" value="nt500"></td>
+<td><input type="radio" class="formradio" name="field" value="nt300"></td>
+<td><input type="radio" class="formradio" name="field" value="nt200"></td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="ntaux"></td>
+<td><input type="radio" class="formradio" name="field" value="nu10m"></td>
+<td><input type="radio" class="formradio" name="field" value="nu850"></td>
+<td><input type="radio" class="formradio" name="field" value="nu700"></td>
+<td><input type="radio" class="formradio" name="field" value="nu500"></td>
+<td><input type="radio" class="formradio" name="field" value="nu300"></td>
+<td><input type="radio" class="formradio" name="field" value="nu200"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="ntauy"></td>
+<td><input type="radio" class="formradio" name="field" value="nv10m"></td>
+<td><input type="radio" class="formradio" name="field" value="nv850"></td>
+<td><input type="radio" class="formradio" name="field" value="nv700"></td>
+<td><input type="radio" class="formradio" name="field" value="nv500"></td>
+<td><input type="radio" class="formradio" name="field" value="nv300"></td>
+<td><input type="radio" class="formradio" name="field" value="nv200"></td>
+</tr>
+<!--
+<tr><td align="right">relative vorticity</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nrv10m"></td>
+<td><input type="radio" class="formradio" name="field" value="nrv850"></td>
+<td><input type="radio" class="formradio" name="field" value="nrv700"></td>
+<td><input type="radio" class="formradio" name="field" value="nrv500"></td>
+<td><input type="radio" class="formradio" name="field" value="nrv300"></td>
+<td><input type="radio" class="formradio" name="field" value="nrv200"></td>
+</tr>
+-->
+<tr><td align="right">wind speed/vertical velocity</td>
+<td><input type="radio" class="formradio" name="field" value="nwspd"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nw850"></td>
+<td><input type="radio" class="formradio" name="field" value="nw700"></td>
+<td><input type="radio" class="formradio" name="field" value="nw500"></td>
+<td><input type="radio" class="formradio" name="field" value="nw300"></td>
+<td><input type="radio" class="formradio" name="field" value="nw200"></td>
+</tr>
+<tr><td align="right">curl wind stress / horizontal divergence</td>
+<td><input type="radio" class="formradio" name="field" value="ncurl"></td>
+<td><input type="radio" class="formradio" name="field" value="nhordiv10m"></td>
+<td><input type="radio" class="formradio" name="field" value="nhordiv850"></td>
+<td><input type="radio" class="formradio" name="field" value="nhordiv700"></td>
+<td><input type="radio" class="formradio" name="field" value="nhordiv500"></td>
+<td><input type="radio" class="formradio" name="field" value="nhordiv300"></td>
+<td><input type="radio" class="formradio" name="field" value="nhordiv200"></td>
+</tr>
+<tr><td align="right">stream function</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="npsi1000"></td>
+<td><input type="radio" class="formradio" name="field" value="npsi850"></td>
+<td><input type="radio" class="formradio" name="field" value="npsi700"></td>
+<td><input type="radio" class="formradio" name="field" value="npsi500"></td>
+<td><input type="radio" class="formradio" name="field" value="npsi300"></td>
+<td><input type="radio" class="formradio" name="field" value="npsi200"></td>
+</tr>
+<tr><td align="right">vertical shear</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right"><input type="radio" class="formradio" name="field" value="nvs925"></td>
+<td align="right"><input type="radio" class="formradio" name="field" value="nvs775"></td>
+<td align="right"><input type="radio" class="formradio" name="field" value="nvs600"></td>
+<td align="right"><input type="radio" class="formradio" name="field" value="nvs350"></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">latent heat flux/humidity</td>
+<td><input type="radio" class="formradio" name="field" value="nlhtfl"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nq850"></td>
+<td><input type="radio" class="formradio" name="field" value="nq700"></td>
+<td><input type="radio" class="formradio" name="field" value="nq500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">soil moisture/P-E/relative humidity</td>
+<td><input type="radio" class="formradio" name="field" value="nsoil"></td>
+<td><input type="radio" class="formradio" name="field" value="npme"></td>
+<td><input type="radio" class="formradio" name="field" value="nqrel850"></td>
+<td><input type="radio" class="formradio" name="field" value="nqrel700"></td>
+<td><input type="radio" class="formradio" name="field" value="nqrel500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation / sensible heat flux / OLR</td>
+<td><input type="radio" class="formradio" name="field" value="nprate"></td>
+<td><input type="radio" class="formradio" name="field" value="nshtfl"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nolr"></td>
+</tr>
+<tr><td align="right">surface net solar/longwave radiation</td>
+<td><input type="radio" class="formradio" name="field" value="nnsr"></td>
+<td><input type="radio" class="formradio" name="field" value="nnlr"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">2-7 day variance height</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nz500_var"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nz200_var"></td>
+</tr>
+</table>
+</div>
+<tr><th width=120px><a href="javascript:hidden_info_switch('ncepdoe');">show/hide</a></th>
+<th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?ftp://nomad3.ncep.noaa.gov/pub/reanalysis-2/month/flx/" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>NCEP/DOE R2 1979-now.<br>
+The complete set is available under "external data"</a></div></th>
+</tr>
+<tr><td colspan=8>
+<div id="ncepdoe" hiddenstyle_ncepdoe>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr>
+<th width=116px><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+</tr>
+<tr><td align="right">temperature</td>
+<td&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="nt2m"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation / sensible heat flux / OLR</td>
+<td><input type="radio" class="formradio" name="field" value="nprcp"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">surface downward solar/longwave radiation</td>
+<td><input type="radio" class="formradio" name="field" value="ndswrfsfc"></td>
+<td><input type="radio" class="formradio" name="field" value="ndlwrfsfc"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div>
+<tr><th width=120px><a href="javascript:hidden_info_switch('20c');">show/hide</a></th><th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_Rean.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>Twentieth Century Reanalysis</a>1878-2010<br>
+The complete set will become available under "external data"</div></th>
+</tr>
+<tr><td colspan=8>
+<div id="20c" hiddenstyle_20c>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr>
+<th width=116px><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="cslp"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="cz850"></td>
+<td><input type="radio" class="formradio" name="field" value="cz700"></td>
+<td><input type="radio" class="formradio" name="field" value="cz500"></td>
+<td><input type="radio" class="formradio" name="field" value="cz300"></td>
+<td><input type="radio" class="formradio" name="field" value="cz200"></td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><input type="radio" class="formradio" name="field" value="ctsfc"></td>
+<td><input type="radio" class="formradio" name="field" value="cair"></td>
+<td><input type="radio" class="formradio" name="field" value="ct850"></td>
+<td><input type="radio" class="formradio" name="field" value="ct700"></td>
+<td><input type="radio" class="formradio" name="field" value="ct500"></td>
+<td><input type="radio" class="formradio" name="field" value="ct300"></td>
+<td><input type="radio" class="formradio" name="field" value="ct200"></td>
+</tr>
+<tr><td align="right">min/max 2m temperature</td>
+<td><input type="radio" class="formradio" name="field" value="ctmin"></td>
+<td><input type="radio" class="formradio" name="field" value="ctmax"></td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="ctaux"></td>
+<td><input type="radio" class="formradio" name="field" value="cu10m"></td>
+<td><input type="radio" class="formradio" name="field" value="cu850"></td>
+<td><input type="radio" class="formradio" name="field" value="cu700"></td>
+<td><input type="radio" class="formradio" name="field" value="cu500"></td>
+<td><input type="radio" class="formradio" name="field" value="cu300"></td>
+<td><input type="radio" class="formradio" name="field" value="cu200"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="ctauy"></td>
+<td><input type="radio" class="formradio" name="field" value="cv10m"></td>
+<td><input type="radio" class="formradio" name="field" value="cv850"></td>
+<td><input type="radio" class="formradio" name="field" value="cv700"></td>
+<td><input type="radio" class="formradio" name="field" value="cv500"></td>
+<td><input type="radio" class="formradio" name="field" value="cv300"></td>
+<td><input type="radio" class="formradio" name="field" value="cv200"></td>
+</tr>
+<tr><td align="right">latent heat flux/humidity</td>
+<td><input type="radio" class="formradio" name="field" value="clhtfl"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="cq850"></td>
+<td><input type="radio" class="formradio" name="field" value="cq700"></td>
+<td><input type="radio" class="formradio" name="field" value="cq500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">soil moisture/relative humidity</td>
+<td><input type="radio" class="formradio" name="field" value="csoil"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="cqrel850"></td>
+<td><input type="radio" class="formradio" name="field" value="cqrel700"></td>
+<td><input type="radio" class="formradio" name="field" value="cqrel500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation / sensible heat flux</td>
+<td><input type="radio" class="formradio" name="field" value="cprate"></td>
+<td><input type="radio" class="formradio" name="field" value="cshtfl"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">surface net solar/longwave radiation</td>
+<td><input type="radio" class="formradio" name="field" value="cnsr"></td>
+<td><input type="radio" class="formradio" name="field" value="cnlr"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</tr>
+

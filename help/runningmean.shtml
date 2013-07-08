@@ -1,0 +1,9 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Running mean</div> 
+
+This option replaces the data by <i>N</i>-day (period) means.  The
+date is kept at the beginning of the averaging period.  For instance,
+a 10-day running mean means that the Jan 1 data will be replaced by the
+average over Jan 1-10.
+
+<!--#include virtual="help_footer.html"-->

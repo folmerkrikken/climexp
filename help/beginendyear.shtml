@@ -1,0 +1,7 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select begin and end years</div> 
+This allow you to restrict the operation to a temporal subset of the
+data.  Note that the begin and end year refer to the starting month of
+the season.  An end year of 2008 combined with a 3-month season will
+run up to February 2009.
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,4 @@
+# AR5 Atlas Arctic (used for both land and sea)
+  0 67.5
+120 67.5
+240 67.5

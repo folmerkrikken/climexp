@@ -1,0 +1,8 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Time derivative of a series</div> 
+Also called tendencies by meteorologists.  This takes the simple
+centered time derivative of the series
+<p>dX/dt = (X(t+1) - X(t-1))/2
+<p>with the size of the time steps dicatated by the frequency of the
+time serie, e.g., months.
+<!--#include virtual="help_footer.html"-->

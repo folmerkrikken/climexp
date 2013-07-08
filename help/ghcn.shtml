@@ -1,0 +1,31 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">GHCN monthly station data</div> 
+The <a href="http://www.ncdc.noaa.gov/ghcnm/"
+target="_new">GHCN</a> monthly climate dataset coms from NOAA/NCDC.
+In late 2008 it contained 20586 precipitation stations, 7279 mean
+temperature stations, 4965 min/max temperature stations and 2667
+pressure stations, varying in length from hundreds of years to just a few.
+
+<p>The data comes in two flavours, <i>adjusted</i> and <i>all</i>
+(unadjusted).  The first set has been corrected for urban effects and
+other biases by comparing urban stations to nearby rural stations.
+The adjusted data are only available for a few countries.
+
+<p>I have post-processed the NCDC data by combining all time series
+for a given station.  At the momen this is done very crudely.  For
+each year, the first series with valid data is chosen.  <i>I plan to
+merge these series more intelligently, using all data and taking into
+account the possibility of biases.</i>
+
+<p>The quality of the data varies. Most problematic are very old data,
+before observations were standardised enough (1855, 1905, 1950 are
+common disconinuities), and very new data from the GTS.  Most errors
+have been removed by the quality control system at NCDC, but
+inevitably some remain. It always pays to have a glance at
+the time series.  It may also be worth it to check whether the
+coordinates match with those you expect, e.g., in Google Earth - some
+stations are mislocated.  Please report errors back to me and NCDC.
+
+<p>The database is updated from NCDC into the Climate Explorer once
+every month.
+<!--#include virtual="help_footer.html"-->

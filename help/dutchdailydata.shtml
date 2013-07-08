@@ -1,0 +1,12 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Dutch daily data</div> 
+The KNMI makes available more data than is contained in the standard
+daily datasets (GHCN-D, ECA&amp;D).  All these data, organized per variable,
+are available below.  The <a href="http://www.knmi.nl/klimatologie/" target="_new">KNMI web site</a> contains the same information
+organised per station.
+
+<p>Note that the data has not been homogenised.
+
+<p><i>The extra precipitation stations made public in January 2009 have not yet been
+incorporated into the Climate Explorer</i>
+<!--#include virtual="help_footer.html"-->

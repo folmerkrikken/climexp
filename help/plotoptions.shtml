@@ -1,0 +1,11 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Plot options: colour bar, title, grid, labels</div> 
+Some options to influence he appearance of the 2D plots.  Usually these are used for plots that are used in publications that show the information elsewhere.
+<ul>
+  <li>Color bar: deafult a colour bar is produced, this turns off the colour bar.
+  <li>Title: default a fairly complete description of the plot is drawn above it, this can b turned off.
+  <li>Grads default draws dotted lines at regular lat/lon/lev intervals, this can be turned off.
+  <li>Grads has its own oideas where to put lat/lon/lev labels.  These can be overridden with this option.
+</ul>
+Note that an alternative is to downlod the raw data underlying the plot and use your own favourite plotting software to make more beautiful plots.
+<!--#include virtual="help_footer.html"-->

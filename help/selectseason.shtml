@@ -1,0 +1,31 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select a season (other time scales)</div> 
+This option allows you to restrict the computations to a specific
+season.  Many effects vary greatly with the seasonal cycle, and it is
+rarely a good idea to combine all seasons.
+
+<br><br>In the Climate Explorer, the season is defined by a starting month
+and the length of the season.  The starting month is
+<ul>
+  <li>all: separate months, this gives 12 results (not always present), or  
+  <li>a single calendar month (each January, February, ...), or
+  <li>together: all months together, giving a single result.
+</ul>
+The length of the season is defined by selecting the number of months
+in the season (1 to 12).  If you want to subtract the seasonal cycle
+to first order, check the box <a href="anomalies.shtml">anomalies</a>.
+
+<p>Note that if you have also requested averaging the data, the season
+refers to the beginning of the averaging period.
+
+<div class="alineakop">A few examples</div>
+<ul>
+  <li>To compute a property of all December periods, set the
+  starting month to [December] and select [1] month.
+  <li>To compute a property of all winter periods in the Netherlands, set the
+  starting month to [December] and select [3] months.  This will select
+  all periods in December, January or February.
+  <p>
+</ul>
+  
+<!--#include virtual="help_footer.html"-->

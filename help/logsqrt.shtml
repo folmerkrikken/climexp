@@ -1,0 +1,14 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Apply a logarithm or square root to the data</div> 
+For some variables, for instance precipitation, the distribution is
+closer to a normal distribution after taking te logarithm or square
+root of the data.  When the operation assumes a normally distrbuted
+variable (e.g., correlation, regression) the results may be better
+after such a transformation.  For plots the variables are transformed
+back to the original scale, so that a straight-line regression becomes
+an exponential or parabolic line.
+
+<p>Negative data are replaced by undefined.  In the case of a
+logarithmic transformation, zeros are arbitrarily replaced by 1/5 of
+the lowest positive value encountered.
+<!--#include virtual="help_footer.html"-->

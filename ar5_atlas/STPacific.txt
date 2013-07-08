@@ -1,0 +1,5 @@
+# Southern Tropical Pacific small island region (all points)
+155 -25
+155  -5
+230  -5
+230 -25

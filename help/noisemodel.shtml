@@ -1,0 +1,14 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Noise model</div> 
+To compute an area avergae, the average anomaly is computed and this
+is added to the climatology.  This usually gives a better estimate
+than a straight average in the presence of missing data, especially
+when there is a gradient in the clmatoloy over the area (e.g.,
+Ni&ntilde;o3).
+
+However, this assumption that the noise amplitude is equal in all grid
+points can give rise to negative numbers for positive-definite
+quantities such as precipitation.  For this variable an error model
+proportional to the variability is better <i>but this option has not
+yet been implemented</i>.
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>NetCDF file format</title>
+</head>
+<body bgcolor="#ffffff">
+
+<h2>NetCDF file requirements</h2>
+
+The Climate Explorer will accept any netCDF file provided it meets the
+following requirements.
+
+<ol>
+
+<li>There is exactly one variable called 'lon*' or 'x' with units
+'degree[s]_e*'.
+
+<li>There is exactly one variable called 'lat*' or 'y' with units
+'degree[s]_n*'.
+
+<li>There is exactly one variable called 'time*' or 't' with units
+'months since yyyy-mm*' containing consecutive months.
+
+<li>There is exactly one variable not called 'time*' or 't' that
+depends at least on time and preferably on x and y, possibly on a
+single-level variable 'z'.  Missing values are indicated by numbers
+larger than a bit less than min(_FillValue,missing_value,valid_max) if
+this is positive, exactly that number if it is negative.
+
+</ol>
+
+'*' denotes anything, [x] denotes x is optional.  All name
+requirements are case insensitive.
+
+<p>I have very little experience working with netCDF (COARDS
+conventions), this covered the two files that I have experimented
+with.  Please let <a href="mailto:oldenborgh@knmi.nl">me</a> know if
+the conditions should be relaxed.
+
+<p><address>
+<a href="http://www.knmi.nl/~oldenbor">Geert Jan van Oldenborgh</a>, KNMI, 2-aug-2000
+</address>
+
+</body>
+</html>

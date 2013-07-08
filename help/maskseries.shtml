@@ -1,0 +1,14 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Mask out part of a time series based on another time series</div> 
+
+This option is available to be able to compute conditional
+relationships.  An example would be the ENSO teleconnections to Europe
+for years in which the NAO is positive.  One first uses this function
+to generate a new time series with all winters with negative NAO set
+to undefined, so that only the positive ones remain.  Next that time
+series is correlated to an ENSO index as usual.
+
+<p>Note that conditional correlations depending on the time series
+itself can be done directly from the correlation form.  This option is
+only needed when the condition involves a third time series.
+<!--#include virtual="help_footer.html"-->

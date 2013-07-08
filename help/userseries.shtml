@@ -1,0 +1,18 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">User-defined time series</div> 
+
+User-defined time series are added to your working set in two ways.
+If you select a time series of type "index" it is atomatically added
+to the list.  This includes almost all time series called <i>climate
+indices</i>, plus area averages from fields.  Other time series, such
+as station data, have to be <a href="makeindex.shtml">added to the
+list explicitly</a> after they have been selected (otherwise the list
+would get too long).
+
+<p>Note that you will only be shown time series with the same time
+resolution (daily, monthly, ...) as the series or field you are
+working with.  If you want to correlate it with a time series with
+another time resolution you should convert it first, either to a <a
+href="lowerresolution.shtml">lower resolution</a> or a <a
+href="higherresolution.shtml">higher resolution</a>.
+<!--#include virtual="help_footer.html"-->

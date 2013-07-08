@@ -1,0 +1,8 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Convert units</div> 
+You can choose here whether the computation will be done in the original units of the data, or converted to standard units.  For a correlation this makes no difference, but other operations such as the mean or a regression depend on the units used.
+
+<p>The system will try to guess what kind of quantity is represented and determine the standard units accordingly.  This is not foolproof but works most of the time.
+
+<p>Some data do not have valid units.  Please inform <a href="http://www.knmi.nl/~oldenbor/">me</a> if you find standard data without units.  If you upload your own data, you can indicate the units in an ascii file by a line "# var [units]" in the header.  In a netcdf file use the standard "units" attribute, in GrADS I use the convention that the units are in square brackets after the long name.
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,20 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Land/sea mask</div> 
+For some fields the land/sea mask is available.  This devides the
+grid points into land and sea grid points.  Some datasets contain
+fractional grid boxes, in which one grid box can contain a fraction land
+and a fraction sea.  In this case boxes with more than 50% sea are
+classified as sea, and the rest as land.  There are more strict options: 
+"only land" requires that the grid box is 100% land, "not land" that it is
+0% land. (These options are hidden by default, click on "show/hide more" 
+to make them visible.) Generally the 50% criterion gives the best results.
+
+<p>The land/sea mask can be used to constrain interpolation and a few
+analyses to land points or sea points only. In general the result will 
+indicate the kind of operation performed, "5lan" and "5sea" denote the
+default 50% cut-off criterion.
+
+<p>The land/sea mask is considered a fixed field and does not take
+into account the tides, sea-level rise, land reclaiming or erosion, or 
+continental drift. I try to include land-ice covered areas as land.
+<!--#include virtual="help_footer.html"-->

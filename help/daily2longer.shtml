@@ -1,0 +1,26 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Apply yearly high/low-pass filter</div> 
+This option filters all Januaries, all Februaries with a high-pass or
+low-pass filter.  Adjacent months (days, pentads, decades) do not
+influence each other.  This option is rarely needed: almost all
+analysis forms have the option to apply high- and low-pass filters as
+well.
+
+<p><i>X<sub>new</sub></i>(mo,yr) =
+<i>f</i>(...,<i>X</i>(mo,yr-1),<i>X</i>(mo,yr),<i>X</i>(mo,yr+1),...)
+
+<p>with <i>f</i> the filtering function.  In case of an even number of
+years the result is centered on yr-1/2.
+
+<p>Note that this filter does not preserve causality, unlike the
+filters that are present on the correlation pages.
+
+<p>The dataset that results from his operation will be available for
+three days under <i>View, upload your time series</i> or <i>View,
+upload your field</i> in the menu on the right.
+
+<p>At the moment only a running-mean filter is available.  More
+filters are planned, contact <a
+href="http://www.knmi.nl/~oldenbor/">me</a> if you need one (or
+better, have one that you'd like added).
+<!--#include virtual="help_footer.html"-->

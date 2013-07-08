@@ -1,0 +1,5 @@
+# SREX region no 13 MED South Europe/Mediterranean
+  -10.0000   30.0000
+  -10.0000   45.0000
+   40.0000   45.0000
+   40.0000   30.0000

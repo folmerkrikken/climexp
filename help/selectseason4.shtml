@@ -1,0 +1,23 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select a season (seasonal data)</div> 
+This option allows you to restrict the correlations to a specific
+season.  Many effects vary greatly with the seasonal cycle, and it is
+rarely a good idea to combine all seasons.
+
+<br><br>In the Climate Explorer, the extended season is defined by a starting 3-month season and the duration of the extended season.  The starting season is
+<ul>
+  <li>all seasons togther, this gives one result, or
+  <li>a single 3-month season (each Dec-Feb, Mar-May, ...), or
+  <li>all seasons separately, this gives 4 results.
+</ul>
+Some of these options are not supported in specific contexts.<br><br>
+
+The length of the extended season can be interpreted in two different ways:
+<ul>
+  <li>an average over the 3-month seasons of the seaosn, or
+  <li>all 3-month seasons of the extended season considered separately
+</ul>
+If there are two datasets the lengths of the seasons can be chosen
+separately.  Again, not all combinations make sense.
+
+<!--#include virtual="help_footer.html"-->

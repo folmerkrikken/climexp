@@ -1,0 +1,5 @@
+# North Indian Ocean small island region (sea points only)
+60   5
+60  30
+95  30
+95   5

@@ -1,0 +1,48 @@
+Starting month: <select name="month">
+<option value="1:12" selected>all
+<option value="1">Jan
+<option value="2">Feb
+<option value="3">Mar
+<option value="4">Apr
+<option value="5">May
+<option value="6">Jun
+<option value="7">Jul
+<option value="8">Aug
+<option value="9">Sep
+<option value="10">Oct
+<option value="11">Nov
+<option value="12">Dec
+<option value="0">together:
+<option value="0">with seasons
+<option value="-1">anomalies
+</select>,
+<select name="operation"><option>averaging<option>selecting</select> over
+<select name="sum">
+<option selected>1
+<option>2
+<option>3
+<option>4
+<option>5
+<option>6
+<option>7
+<option>8
+<option>9
+<option>10
+<option>11
+<option>12
+</select>month(s),<br>
+Begin year: <input type="text" name="begin" size=4>
+End year: <input type="text" name="end" size=4>, 
+<br>
+Only for <input type="text" name="gt" size=4> &lt; field &lt; 
+<input type="text" name="lt" size=4>.
+<br>
+Apply <input type="checkbox" name="log">logarithm, 
+<input type="checkbox" name="sqrt">sqrt to field
+<br>
+<input type="checkbox" name="diff"> difference or
+<select name="subsum">
+<option value="1">subtract mean of
+<option value="-1">average with
+</select>
+<input type="text" name="ndiff" size=3> previous years on all data<br>

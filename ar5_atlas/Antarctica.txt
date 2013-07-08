@@ -1,0 +1,4 @@
+# AR5 Atlas Antarctica (used for both land and sea)
+  0 -50
+120 -50
+240 -50

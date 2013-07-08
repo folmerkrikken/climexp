@@ -1,0 +1,6 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Plot output type: graphics and raw data, or kml for other viewers</div> 
+The default output is to produce 2D maps (or vertical sections).  These maps are displayed as a relatively low-resolution png bitmap, but can be downloaded in high-resolotion eps and pdf formats.  A data file describing the map is also available in netcdf, hdf and ascii formats.
+
+<p>An alternative is to produce a kmz bitmap file that can be loaded into 3D visiualisation programmes such as Google Earth, World Wind, ArcGIS.  The veiwing point is deduced from the e-mail address.
+<!--#include virtual="help_footer.html"-->

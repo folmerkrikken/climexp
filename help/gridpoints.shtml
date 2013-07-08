@@ -1,0 +1,10 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Average or set of grid points</div> 
+The default operation when more than one <a
+href="choosecoordinate.shtml">coordinate is entered</a> is to compute
+an average over this area.
+
+<p>You can also generate a set of grid points in the region for
+further analysis by selecting this option.
+
+<!--#include virtual="help_footer.html"-->

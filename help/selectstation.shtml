@@ -1,0 +1,26 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select a set of stations: name, geographical location, id</div> 
+
+There are four ways to select a set of stations from a dataset
+(selected above).  The first non-blank field is used.
+<ul>
+  <li>By name: all stations with the substring given are selected.  Note
+  that almost all stations names have been reduced to plain latin
+  characters without accents, so searching for stations outside the UK
+  or US somtimes requires some phantasy.
+  <li>By approximate coordinates: <i>N</i> stations (default 10)
+  around a point on the map are returned.  Please enter degrees west
+  or south as negative numbers, if necessary with a decimal fraction
+  (minutes and seconds are not recognised).  Alternatively you can
+  obtain the coordinates by clicking on a world map (follow the link).
+  <li>All stations in a rectangle, again use negative numbers for
+  degrees west or south.
+  <li>A list of station numbers.  This can be useful if you want to
+  exclude some stations that are included in the rectangle above.
+</ul>
+The set can be restricted by the number of years with data, the
+altitude, and the distance between stations <a href="timedistance.shtml"><img src="../images/info-i.gif" alt="help" border="0"></a>.
+
+<p>Once a set of stations has been selected you can select a single
+station or operate on the whole set.
+<!--#include virtual="help_footer.html"-->

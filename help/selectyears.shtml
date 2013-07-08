@@ -1,0 +1,7 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select years of a time series</div> 
+Here you can construct a shorter time series from the original one.
+Note that this is not often necessary, as all analysis methods support
+the selection of a begin and end year.  It is used most often to
+re-make the plots on this page over a common time period.
+<!--#include virtual="help_footer.html"-->

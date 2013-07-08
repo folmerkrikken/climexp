@@ -1,0 +1,5 @@
+# AR5 small islands regions Caribbean (all points)
+  -68.8000   11.4390
+  -85.8353   25.0000
+  -60.0000   25.0000
+  -60.0000   11.4390

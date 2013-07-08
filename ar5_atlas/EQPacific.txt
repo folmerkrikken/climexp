@@ -1,0 +1,5 @@
+# Equatorial Pacific small island region (all points)
+155  -5
+155   5
+210   5
+210  -5

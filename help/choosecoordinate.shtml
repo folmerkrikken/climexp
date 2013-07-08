@@ -1,0 +1,22 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Choose coordinates</div> 
+Fill in the coordinates of the point or region you want a time series
+for. Degrees west or south are indicated by a negative number.  Digits
+after a decimal point are accepted, minutes and seconds are not.
+
+<p>To obtain a grid point, fill out only one latitude and one
+longitude and select [halfway grid points].  This gives the grid point
+nearest to the point given.
+
+<p>Selecting [interpolated] with only one latitude and one longitude
+gives a simple bilinear interpolation.  You can restrict the
+interpolation to land points or sea points only if the land/sea mask is
+available.
+
+<p>By filling out two coordinates you request the area average between
+these coordinates.  Only whole grid points are supported at the
+moment, the option [half-way between grid points]. 
+
+
+
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>Climate Explorer implementatie</title>
+</head>
+<body bgcolor="#ffffff">
+
+<h2>KNMI Climate Explorer: implementatie</h2>
+
+<p align="right"><small><i>Presentatie op de workshop<br>"Het
+toegankelijk maken van KNMI-data via het intra-/internet",<br> 9 november
+2000, KNMI.</i></small></p>
+
+<ol>
+<li><a href="#ontwerp">Ontwerp</a>
+<li><a href="#inhoud">Inhoud</a>
+<li><a href="#doelgroep">Doelgroep</a>
+<li><a href="#gegevens">Gegevensopslag en toegang</a>
+<li><a href="#interface">User interface</a>
+<li><a href="#security">Security</a>
+<li><a href="#accounting">Accounting</a>
+<li><a href="#conclusies">Conclusies</a>
+</ol>
+
+<h3><a name="ontwerp">Ontwerp</a></h3>
+
+<p>Tijdens de grote El Ni&ntilde;o van 1997-98 werden we overspoeld
+met vragen van het type "wat is het effect van El Ni&ntilde;o op het
+weer in Zanzibar?".  Om deze snel te kunnen beantwoorden haalde ik
+stationsdata uit de GHCN database via hun <a
+href="http://www.ncdc.noaa.gov/ghcn/ghcn.SELECT.html" target=_top>web
+front-end</a> en maakte met een 10-regelig Fortran programmaatje een
+maandelijkse correlatie met de NINO3 en SOI indices.  Helaas werd deze
+toegang tot de database afgesloten wegens politieke problemen.  De
+files waren wel te ftp'en, dus schreef ik nog een Fortran
+programmaatje om de data er uit te halen.</p>
+
+<p>De programma's groeiden tot ik de opties niet meer kon onthouden.
+De simpelste grafische interface leek een HTML formulier met een CGI
+wrappertje om de Fortran programma's.  Op verzoek van collega's heb ik
+het ook op het internet gezet.  Ook heb ik toen wat moeite gedaan om
+het voor derden ook bruikbaar te maken.</p>
+
+<p>Het systeem is dus gegroeid, niet ontworpen, met alle nadelen van
+dien.  Het laat zien hoe ver je een zo simpel mogelijk opgezet systeem
+(shellscriptjes, Fortran) kan doorzetten.</p>
+
+<h3><a name="inhoud">Inhoud</a></h3>
+
+<p>De <a href="http://climexp.knmi.nl">Climate Explorer</a> omvat nu
+de volgende vrij beschikbare maandgemiddelde datasets (met
+verwijzingen naar de webpagina waar ze vandaan gehaald zijn):
+<ul>
+<li>databases van maandelijkse stationsdata van temperatuur, neerslag,
+luchtdruk, zeespiegelhoogte en rivierafvoeren,
+<li>een set klimaatindices (zoals NINO3, SOI, NAO, AIR, Taveglobal, en
+voor liefhebbers de zonnevlekkencyclus),
+<li>maandelijkse velden van observaties (bv Jones&Parker T2m/SST), 
+reconstructies (bv Kaplan SST) en heranalyses (NCEP/NCAR, ERA15).
+</ol>
+Het biedt de mogelijkheid deze tijdreeksen en velden te visualiseren,
+te correleren en lineaire statistische modellen op te stellen.
+
+<h3><a name="doelgroep">Doelgroep</a></h3>
+
+Er zijn vier groepen die van de Climate Explorer gebruik maken:
+<ol>
+<li>ik voor mijn eigen onderzoek,
+<li>onderzoekers die snel nieuwe klimaatverbanden willen exploreren,
+<li>studenten die huiswerk maken (standaardplaatjes),
+<li>amateurs die tijdreeksen opvragen.
+</ol>
+Per dag gebruiken gemiddeld een half dozijn mensen het systeem.  De
+belasting in CPU tijd en lijncapaciteit lijkt op het moment te
+verwaarlozen, hoewel het verkeer in de webstatistieken wel te zien
+is.
+
+<h3><a name="gegevens">Gegevensopslag en toegang</a></h3>
+
+<p>De 'databases' van de tijdreeksen zijn zo veel mogelijk in het
+oorspronkelijke formaat gehouden, om updates te vergemekkelijken.  Dit
+zijn meestal fixed format flat files, soms een directory boom.  Een
+database-specifiek (Fortran) programmaatje extraheert de metadata en
+data in een standaardformaat.</p>
+
+<p>De velden zijn allemaal naar een standaard formaat geconverteerd (eerst
+<a href="http://grads.iges.org/grads/" target=_top>GrADS</a>
+data/metadata, nu netCDF).</p>
+
+<p>Alle data bevinden zich op de webserver (1.6GB op het moment), de
+scripts en programma's lopen daar ook parasitair.  Tussenresultaten
+worden daar in een world-writable directory opgeslagen en na 24 uur
+verwijderd.</p>
+
+<h3><a name="interface">User interface</a></h3>
+
+<p>De user interface bestaat uit een set (grote) HTML 3.2 formulieren,
+die CGI scriptjes opstarten die de Fortran programma's draaien en weer
+nieuwe HTML pagina's maken.  Er is geen gebruik gemaakt van Java,
+JavaScript o.i.d., en het geheel is zelfs in de tekstbrowser lynx goed
+te bedienen.</p>
+
+<p>De visualisatie van de data wordt gedaan met de open source tools
+<a href="http://www.gnuplot.vt.edu" target=_top>gnuplot</a> en <a
+href="ttp://grads.iges.org/grads/" target=_top>GrADS</a>.  Het geheel
+draait onder IRIX en linux.
+
+<h3><a name="security">Security</a></h3>
+
+<ol>
+<li>Vrijwel alle scriptjes zijn zelfgeschreven, dus hebben in ieder
+geval niet-standaard veiligheidsproblemen.
+<li>Alle argumenten naar externe programma's worden gecontroleerd op
+metakarakters.
+<li>Alle rekenintensieve taken worden met lage prioriteit opgestart,
+en het gebruik wordt geprotocolleerd (zie <a
+href="#accounting">accounting</a>).
+<li>Ik hoop dat de standaard perl-modules die de file-upload
+implementeren waterdicht zijn, helaas kon ik de aanbevolen constructie
+niet implementeren omdat de perl-versie op de server die nog niet kent.
+</ol>
+
+<h3><a name="accounting">Accounting</a></h3>
+
+<p>Elke gebruiker wordt vriendelijk verzocht zich aan te melden met
+e-mail adres, naam en instituut.  Dit wordt samen met het IP adres
+opgeslagen.  Het e-mail adres wordt vervolgens opgezocht in de lijst
+bij alle belangrijke operaties (data-extractie, correlaties, eofs).
+Deze worden, met IP adres, in een logfile geprotocolleerd.  De privacy
+policy is simpel: iedereen kan de <a
+href="http://www.knmi.nl/onderzk/oceano/climexp/log/">logfile</a>
+bekijken.</p>
+
+<p>In de praktijk zijn er zeer weinig gebruikers die ongeldige
+gegevens opgeven, dit zijn meestal studenten die niet meer terugkomen,
+of medewerkers van commerci&euml;le weerbureaus.
+
+<h3><a name="conclusies">Conclusies</a></h3>
+
+De Climate Explorer is voor mij en anderen een zeer nuttig gereedschap
+bij klimaatonderzoek.  Het systeem laat zien hoe ver je een zeer
+simpel shellscript/Fortran CGI systeem kan drijven voordat er
+problemen ontstaan.  Als ik tijd had zou ik het van de grond af aan
+opnieuw implementeren met de volgende verbeteringen
+<ol>
+<li>Aparte applicatieserver
+<li>Meer modulaire opzet (nu ad-hoc)
+<li>Flexibelere tijdseenheid (nu alleen maand)
+<li>Betere programmeertaal (Python?)
+<li>Beter tussenopslagmechanisme waarbij meta-data ook bewaard blijft
+(ZOPE?)
+</ol>
+
+<p>
+<address><a href="http://www.knmi.nl/~oldenbor" target=_top>Geert Jan van
+Oldenborgh</a>, <a href="http:/onderzk/oceano">KS/OO</a>, 18-oct-2000</address>
+</body>
+</html>

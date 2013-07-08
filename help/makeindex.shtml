@@ -1,0 +1,17 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Add / remove time series on the list of user-defined indices</div> 
+This adds or removes the current time series to the working set of climate
+indices.  These will be shown when another time series or field is
+correlated with a time series.
+
+<p>So, in order to correlate a time series or field with a time series
+that is not in the standard set, one should first select the second
+time series, add it to the list of user-defined indices, next
+select the field or other time series and follow the link in the
+right-hand menu <i>Correlate with a time series</i>.  The user-defined
+index should now appear in the list.
+
+<p>If the list becomes too long the one can remove indices from the
+list. Just select the time series, and the functio "add to list"
+should be replaced by the option to remove it.
+<!--#include virtual="help_footer.html"-->

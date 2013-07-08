@@ -1,0 +1,8 @@
+For more insformation on the CMIP5 dataset see the <a href="wipefeet.cgi?http://cmip-pcmdi.llnl.gov/cmip5/data_getting_started.html" target="_new">getting started guide</a>. The data can be downloaded via any of the ESG gateways (eg at <a href="wipefeet.cgi?http://cmip-gw.badc.rl.ac.uk/home.htm">BADC</a>, <a href="wipefeet.cgi?http://pcmdi3.llnl.gov/esgcet/home.htm">PCMDI</a>, <a href="wipefeet.cgi?http://esg.nci.org.au/esgcet/home.htm">NCI</a>). Please note the following.
+<ul>
+<li>I am trying to converge on the dataset that is used for the IPCC WG1 AR5 (and probably WGII as well). Variables that are black should be final, grey ones are still being worked on. Note that this <b>only</b> fixes the "one ensemble member per model" ensemble, the others may still change.
+<li>The ensemble numbering 00, 01, ... is an internal convention. The same number may refer to a different ensemble member tomorrow. The netcdf metadata contains the CMIP5 ensemble numbers rNiMpL that are definitive.
+<li>If the ensemble size is different for different variables they do <b>not</b> match (so tos00 may correspond to tas02). Again, consult the netcdf metadata. If the ensemble sizes are all the same, they probably match.
+<li>The fields have not been bias-corrected, but the drifts have been found to be small in the variables currently available; IPCC WG1 has decided not to correct for drift in these variables.
+<li>Please contact me if you find a bug or if you need automated access to this dataset.
+</ul>

@@ -1,0 +1,5 @@
+# SREX region no 26 SAU South Australia/New Zealand
+  110.0000  -50.0000
+  110.0000  -30.0000
+  180.0000  -30.0000
+  180.0000  -50.0000

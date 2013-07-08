@@ -1,0 +1,10 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Mask</div> 
+
+<p>Besides a rectangular lat/lon box, the field can also be averaged (subsetted, grid points extracted) over an arbitrary region that is defined by a shapefile: a polygon connecting a set of (X,Y) points. If the mask is selected it takes precedence over the coordinates filled out below (which are now interpreted as the boundaries of the map that shows the mask).
+
+<p>A point is defined to be inside the mask if a line from the South Pole crosses an odd number of segments. If the grid point is on a segment it is assigned a value 0.5. If the region includes the South Pole the definition is reversed.
+
+<p>Masks can be uploaded or selected from standard sets by following the link "add a mask to the list".
+
+<!--#include virtual="help_footer.html"-->

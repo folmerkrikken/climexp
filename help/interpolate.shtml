@@ -1,0 +1,20 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Interpolation options</div> 
+Interpolation is done with a simple bi-linear algorithm.
+Unfortunately the routine does not average from finer to coarser grids
+yet, but really interpolates.  There are some heuristics to check
+whether a grid wraps in longitude, otherwise the last two points are
+sometimes extrapolated slightly.
+<ul>
+  <li>Finest: select the grid with the smallest distance between
+  latitude or longitude values and interpolate the other grid to this
+  one.
+  <li>Coarsest: select the grid that does not have the smallest gaps
+  and interpolate the other field to this one.
+  <li>First: interpolate to the grid of the field that was selected first.
+  <li>Second: interpolate to the grid of the field that was selected
+  on this page.
+</ul>
+Interpolation turned out to be a very non-trivial problem.  Please
+report problems to <a href="http://www.knmi.nl/~oldenbor/">me</a>.
+<!--#include virtual="help_footer.html"-->

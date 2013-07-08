@@ -1,0 +1,33 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">ECMWF system-2 seasonal forecast fields</div>
+
+Some fields of the ECMWF seasonal forecast system-2 and 3 have been
+included to enable verification studies. A
+lot of verification studies have also been done at the ECMWF.  Some
+results are available at their <a
+href="http://wms.ecmwf.int/"
+target="_top">member state server</a>.
+
+<p>The fields are not homogeneous.  They consist of ensembles started
+at the first of the month with perturbed ocean analyses.
+
+<p>For System-2 there is
+<ul>
+<li>1987-jul2001 calibration hindcasts; 5 ensemble members per month except
+May and November, which have 41.
+<li>aug2001-dec2001 forecasts: 40 ensemble members (41 in November again).
+</ul>
+
+<p>For System-3
+<ul>
+<li>1981-2006 calibration hindcasts; 11 ensemble members per month.
+</ul>
+
+Note that the forecast would have been available around the 15th of
+the month that the "+0" forecast refers to.
+
+<p>Each starting month is treated as a separate "reality", with 6 or 7
+months with data and then 6 or 5 months with missing data, followed by
+the next year with the same pattern.
+
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,20 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Lag</div> 
+A lagged correlation is used for when a time delay is suspected in the
+connection between the two variables.  The sign of the time delay can
+point to he causality of the relationship.  A correlation between two
+variables <i>X</i> and <i>Y</i> can mean four things:
+<ul>
+  <li><i>X</i> affects <i>Y</i>,
+  <li><i>Y</i> affects <i>X</i>,
+  <li><i>X</i> and <i>Y</i> are affcted by a third variable <i>Z</i>,
+  or
+  <li>the correlation was a coincidence.
+</ul>
+A lagged correlation can sometimes eliminate the first or second
+connection.
+
+<p>The lag can ether be a single time delay, or a range.  It is not
+allowed to vary both the starting month and the lag.  Please contact
+me if you need a lag that is not in the long list.
+<!--#include virtual="help_footer.html"-->

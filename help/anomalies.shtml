@@ -1,0 +1,10 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Anomalies</div> 
+
+By checking this box you instruct the system to subtrcat the seasonal
+cycle before doing the computations.   For monthly data, this implies
+that the mean of all January values is composed and subtracted from
+the individual January values, the mean of all Februaries is
+subtracted from the February values, etc.  For other time scales a
+similar procedure is followed.  The seasonal cycle is not smoothed.
+<!--#include virtual="help_footer.html"-->

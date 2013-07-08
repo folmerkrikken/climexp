@@ -1,0 +1,10 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Plot shading</div> 
+The plotting programme offers the following options.
+<ul>
+  <li>Shading and contours: interpolated coloured bands are drawn delineated by black lines.  For contours above the upper bound or below the lower bound only the black lines are drawn, the colour stays the same.  The interpolation stops in the center of the grid boxes, so that at boundaries with undefined data only part of the grid boxes is coloured.  This implies that isolated patched smaller than 2&times;2 grid boxes are not drawn.
+  <li>Shading: only coloured bands are drawn.  Values above the upper bound or below the lower bound all have the same colour.  As above the interpolation means that small clusters of grid point with values are not shown.
+  <li>Countours: coloured contours.
+  <li>Grid boxes: square boxes are filled with the appropriate colours.  Visually this is harder to interpret than shaded plots, but it has the advatage that all data are shown, and the coarseness gives a visual indication of the resolution of the data.
+</ul> 
+<!--#include virtual="help_footer.html"-->

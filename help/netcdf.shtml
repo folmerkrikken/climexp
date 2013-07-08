@@ -1,0 +1,31 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">NetCDF file requirements</div> 
+
+The Climate Explorer will accept netCDF files provided they are
+reasonably <a href="http://cf-pcmdi.llnl.gov/"
+target=_new>CF-compliant</a> and adhere to the following extra restrictions.
+
+<ol>
+
+<li>There is exactly one variable called 'lon*' or 'x' with units
+'degree[s]_e*'.
+
+<li>There is exactly one variable called 'lat*' or 'y' with units
+'degree[s]_n*'.
+
+<li>There is exactly one variable called 'time*' or 't' with
+  consecutive days/months/years.  If there are missing data please
+  include these time steps.  (Note that the ASCII time series
+  representation does allow holes in the time axis.)
+
+<li>There is exactly one variable not called 'time*' or 't' that
+depends at least on time and possibly on the x, y and (optionally)
+  z-axes.  Missing values are indicated by _FillValue or
+  missing_value, valid_min/valid_max or not considered.
+
+</ol>
+
+'*' denotes anything, [x] denotes x is optional.  All name
+requirements are case insensitive.
+
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,27 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">EOF output normalisation</div> 
+In an Empirical Orthogobal Function (EOF) decomposition the
+normalisation of the EOF maps and PC time series in arbitarry.
+Consider the definition
+<p><i>E</i>(<i>x</i>,<i>t</i>) = &sum;<sub>i=1</sib><sup>N</sup>
+<i>E<sub>i</sub></i>(<i>x</i>) p<sub>i</sub>(<i>t</i>)
+<p>One can multiply the EOF <i>E<sub>i</sub></i>(<i>x</i>) by an
+arbitrary factor <i>A</i> as long as you divide the time series
+p<sub>i</sub>(<i>t</i>) by the same factor <i>A</i>.
+
+<p>You can choose between four normalisation schemes.
+<ul>
+  <li>Spatial maximum one.  This implies that all EOF plots will run
+  from -1 to +1, which makes them easy to plot.  The PC time series
+  will have the units of the original field and smaller amplitudes for
+  higher values of EOF number <i>i</i>.
+  <li>Spatial variance one.  resembles the previous option, but makes
+  the EOFs and PCs more comparable if there are few isolated areas
+  with large amplitude in the EOF.
+  <li>Time series maximum one.  Not very useful, included for
+  symmtery.
+  <i>Time series variance one.  This option implies that the EOF maps
+  have the units of teh original field.  They will have smaller
+  amplitude for larger EOF number <i>i</i>.
+</ul>
+<!--#include virtual="help_footer.html"-->

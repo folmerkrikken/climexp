@@ -1,0 +1,13 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">HCDN US daily runoff data</div> 
+
+The <a href="../wipefeet.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
+target="_new">HCDN dataset</a> contains daily unoff data from the US
+only over the period 1874-1988.  In general hydrologists are not keen to share
+their data, and with the exception of the US it is almost impossible
+to get hydrological data for use in the Climate Explorer.
+
+<p>This is the best I could find a few years ago, please contact <a
+href="http://www.knmi.nl/~oldenbor/">me</a> if you know of a more
+extensive or up-to-date dataset.
+<!--#include virtual="help_footer.html"-->

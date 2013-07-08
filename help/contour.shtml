@@ -1,0 +1,13 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Plot contour levels</div> 
+The plotting routine tries to figure out the contour levels on its own, choosing a scale that is symmetric about zero when this seems appropriate.  It uses 10 intervals between lower and upper bounds.  There are two special scales.  For correlations the scale is forced to -0.6 to 0.6 with |<i>r</i>|&lt;0.2 grey, which is appropriate for ENSO teleconnections.  <i>p</i>-values (significances) are plotted on a non-linear scale.
+
+<p>These fields allow the user to override the defaults.  Note that scientific notation is not yet accepted, use zeroes.  Both values should be provided.  Keep in mind that often the values depend on the units, and whether these are changed to standard units.
+
+<div class="alineakop">Significance masking</div> 
+In correlation, regression and difference maps, by default grid boxes with <i>p</i>-values above 0.1 (less than 90% significant) are left blank.  This gives a first-oder estimate of whether a signal is really physical.  Not that one should expect 10% of the map to be coloured even if here is no signal whatsoever by pure chance.  Field significances are not yet computed.
+
+The <i>p</i>-values are computed assuming normal distributions, which means that they should only be comsidered a rough estimate of the significance.
+
+Note that small clusters of grid points are often not plotted in shaded plots as one cannot interpolate with less than a 2&times;2 square.  Plot with the option "grid boxes" to show all points.
+<!--#include virtual="help_footer.html"-->

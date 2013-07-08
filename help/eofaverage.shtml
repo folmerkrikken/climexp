@@ -1,0 +1,33 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">EOF input averaging</div> 
+Computing Empirical Orthogobal Functions (EOFs) can take a lot of
+computer time.  First the covariance matrix is estimated, this takes
+<i>N<sub>x</sub>&sup2;N<sub>t</sub></i> time, with
+<i>N<sub>x</sub></i> the number of spatial points and
+<i>N<sub>t</sub></i> the number of time steps. Next the eigenvalues
+are computed, taking <i>N<sub>x</sub>&sup3</i> time.
+
+<p>The computation can therefore be sped up by computing the EOFs on a
+coarser grid than the orginal data, reducing <i>N<sub>x</sub></i>.  If
+one averages over two grid boxes in longitude and two in latitude,
+<i>N<sub>x</sub></i> is reduced by a factor 4, and the EOF are
+computed between 16 and 64 times faster.
+
+<p>If an EOF computation takes too long, please kill it (using the
+link provided on the next page) and retry with larger numbers in these
+fields.
+
+<p>There are more efficient algorithms to compute he EOFs, but as far
+as I know these do not work when there is missing data.  I plan to
+implement a faster method for fields without missing data in the
+future.
+
+<div class="alineakop">Percentage valid points</div> 
+The covariance between two grid points is only considered valid when
+percentage of the time series both have valid data.  Enter a smaller
+number to get more valid data in the EOFs, but the quality of these
+data will be lower.  A higher number gives fewer but higher-quality
+data points.  At very low values the EOF procedure will fail, as the
+estimate of the covariance matrix is no longer positive-definite.
+
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,30 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Select plot region</div> 
+This option selects the region to plot.  Note that for most operations
+the whole field is computed, so that one can choose other regions
+afterwards.  Only for EOFs, SVDs, EOTs and verification measures the data is
+actually restricted to the region indicated.
+
+<p>The default is the area of the field.  When the field is global,
+the default longitude range is from 180&deg;W to 180&deg;E
+(Europe/Africa-biased).
+
+<p>If a field is unexpectedly empty, try adding or subtracting
+360&deg; to the longitude.  I try to map everything to a common range,
+but this sometimes fails.
+
+<p>Degrees south and west should be indicated by negative numbers.
+
+<p>A small region will select a high-resolution background map. for a
+large region a low-resolution version is used.
+
+<div class="alineakop">Plot type</div>
+When the maps are computed for a range of time values (seasons or
+lags) there is the possibility to draw the results as a time-lon or
+time-lat plot.  The other spatial dimension then indicates a range
+over which the values are averaged
+
+<br><i>This feature currently does not work corectly, contact <a
+href="http://ww.knmi.nl~oldenbor/">me</a> if yo need it now</i>.
+
+<!--#include virtual="help_footer.html"-->

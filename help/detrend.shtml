@@ -1,0 +1,11 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Detrend</div> 
+Check this option to subtract a linear trend from
+all data before performing the requested operation.  For fields, this
+means that for each grid point seperately the trend is determined and
+subtracted.  This may take some time.
+
+<p>The detrend option only removes linear trends, use other <a
+href="detrend.shtml">temporal filters</a> options to get rid of
+non-linear trends.
+<!--#include virtual="help_footer.html"-->

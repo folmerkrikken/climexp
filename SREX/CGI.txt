@@ -1,0 +1,5 @@
+# SREX region no  2 CGI Canada/Greenland/Iceland
+  -10.0000   50.0000
+ -105.0000   50.0000
+ -105.0000   85.0000
+  -10.0000   85.0000

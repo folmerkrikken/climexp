@@ -1,0 +1,5 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Scale a time series</div> 
+This just multiplies a time series with a constant factor.  Used most
+often to flip the sign by multiplying with -1.
+<!--#include virtual="help_footer.html"-->
