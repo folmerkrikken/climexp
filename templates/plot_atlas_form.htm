@@ -1,0 +1,400 @@
+{# begin form #}
+
+<div class="kalelink">
+<form action="plot_atlas_form.py" method="POST">
+<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+
+{# select a region - standard or custom
+   except the top few the same as the AR5 Atlas #}
+
+<tr><th colspan="3">Select a region</th></tr>
+<tr><td>
+Type:
+</td><td>
+<input type=hidden name=id value="{{EMAIL}}">
+<input type=hidden name=resubmitted value="true">
+<input type=hidden name=region_old value="{{ FORM_region }}">
+{% for val in region_values %}
+    <input class=formradio type=radio name=region value={{val[0]}} {{ 'checked' if FORM_region == val[0] }} onchange=this.form.submit();>{{val[1]}}
+{% endfor %}
+
+{% if FORM_region == 'srex' %}
+    </td></tr><tr><td>
+    Predefined:
+    </td><td>
+    <select class=forminput name=srex>
+    {% for srex_val in srex_values %}
+        <option value={{srex_val[0]}} {{ 'selected' if FORM_srex == srex_val[0] }} >{{srex_val[1]}}</option>
+    {% endfor %}
+    </select>
+    </td><td align="right"><a href="javascript:pop_page('help/chooseareas.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a>
+{% else %}
+    {# save the variable in a hidden variable #}
+    <input type=hidden name=srex value="{{FORM_srex}}">
+{% endif %}
+
+{% if FORM_region == 'box' %}
+    </td></tr><tr><td>
+    Box:</td><td>
+    <input type="{{number}}" step=any class="forminput" name="lat1" {{textsize4}} value="{{FORM_lat1}}">&deg;N -
+    <input type="{{number}}" step=any class="forminput" name="lat2" {{textsize4}} value="{{FORM_lat2}}">&deg;N,
+    <input type="{{number}}" step=any class="forminput" name="lon1" {{textsize4}} value="{{FORM_lon1}}">&deg;E -
+    <input type="{{number}}" step=any class="forminput" name="lon2" {{textsize4}} value="{{FORM_lon2}}">&deg;E
+    </td></tr><tr><td>
+    Land/sea mask:
+    </td><td>
+    <input type="radio" class="formradio" name="masktype" value="all" {{ 'checked' if FORM_masktype == 'all' }}>everything
+    <input type="radio" class="formradio" name="masktype" value="5lan" {{ 'checked' if FORM_masktype == '5lan' }}>only land points
+    <input type="radio" class="formradio" name="masktype" value="5sea" {{ 'checked' if FORM_masktype == '5sea' }}>only sea points<br>
+    </td><td align="right"><a href="javascript:pop_page('help/landseamask.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
+{% else %}
+    {# save the variables #}
+    <input type=hidden name=lon1 value="{{FORM_lon1}}">
+    <input type=hidden name=lon2 value="{{FORM_lon2}}">
+    <input type=hidden name=lat1 value="{{FORM_lat1}}">
+    <input type=hidden name=lat2 value="{{FORM_lat2}}">
+    <input type=hidden name=masktype value="{{FORM_masktype}}">
+{% endif %}
+
+{% if FORM_region == 'point' %}
+    </td></tr><tr><td>
+    Place:
+    </td><td>
+    <input type="{{number}}" step=any class="forminput" name="lat" {{textsize4}} value="{{FORM_lat}}">&deg;N -
+    <input type="{{number}}" step=any class="forminput" name="lon" {{textsize4}} value="{{FORM_lon}}">&deg;E
+{% else %}
+    <input type=hidden name=lon value="{{FORM_lon}}">
+    <input type=hidden name=lat value="{{FORM_lat}}">
+{% endif %}
+
+{% if FORM_region == 'mask' %}
+    </td></tr><tr><td>
+    Mask file:
+    </td><td>
+    <input type="file" class="formbutton" name="mask" value="mask.nc">
+    <br>(netcdf file on 2.5&deg; grid starting at 1.25&deg;E/88.75&deg;S)
+{% endif %}
+
+{# season #}
+</td></tr><tr><th colspan=3>Select a season
+</th></tr><tr><td>
+Season:</td><td>
+First month
+<select class="forminput" name="mon">
+{% for mon_val in mon_values %}
+    <option value="{{mon_val[0]}}" {{ 'selected' if FORM_mon == mon_val[0] }}>{{mon_val[1]}}</option> 
+{% endfor %}
+</select>, 
+length 
+<select class="forminput" name="sum">
+{% for sum_val in sum_values %}
+    <option value="{{sum_val}}" {{ 'selected' if FORM_sum == sum_val }}>{{sum_val}}</option>
+{% endfor %}
+</select> months
+</td><td><a href="javascript:pop_page('help/selectseason12.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+
+{# Dataset #}
+</td></tr><tr><th colspan=3>
+Select a dataset and variable
+</th></tr><tr><td>
+Dataset:
+</td><td>
+<input type=hidden name=dataset_old value={{FORM_dataset}}>
+<select class=forminput name=dataset onchange=this.form.submit();>
+{% for dataset_val in dataset_values %}
+    <option value="{{dataset_val[0]}}" {{ 'selected' if FORM_dataset == dataset_val[0] }}>{{dataset_val[1]}}</option>
+{% endfor %}
+</select> 
+
+</td></tr><tr><td>
+Variable:
+</td><td>
+<input type=hidden name=var_old value="{{FORM_var}}">
+<select class=forminput name=var onchange=this.form.submit();>
+{% for var_val in var_values %}
+    <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
+{% endfor %}
+</select>
+</td></tr><tr><td>
+&nbsp;
+</td><td>
+<input type=radio class="formradio" name="normsd" value="" {{ 'checked' if not FORM_normsd }}>absolute
+<input type=radio class="formradio" name="normsd" value="normsd" {{ 'checked' if FORM_normsd }}>relative
+</select> changes are shown
+
+{# map or time series #}
+</td></tr><tr><td>
+Output:
+</td><td>
+<input type=hidden name=output_old value={{FORM_output}}>
+{% for output_val in output_values %}
+    <input type=radio class="formradio" name="output" value="{{output_val[0]}}" {{ 'checked' if FORM_output == output_val[0] }} onchange=this.form.submit();>{{output_val[1]}} 
+{% endfor %}
+
+{% if FORM_output in ['map', 'histogram'] %}
+    {# map & histogram options #}
+    </td></tr><tr><th colspan=3>
+    Map options
+    </th></tr><tr><td>
+
+    {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP3', 'RT2b'] %}
+        Scenario:
+    {% else %}
+        (Re)analysis:
+    {% endif %}
+
+    {% if FORM_dataset in ['CMIP5', 'CMIP5one'] %}
+        </td><td>
+        <select class=forminput name=scenario_cmip5>
+        {% for val in scenario_cmip5_values %}
+            <option value={{val[0]}} {{ 'selected' if FORM_scenario_cmip5 == val[0] }}>{{val[1]}}</option>
+        {% endfor %}
+        <!--
+        <option value=rcp26 $rcp26_selected>Historical + RCP2.6
+        <option value=rcp45 $rcp45_selected>Historical + RCP4.5
+        <option value=rcp60 $rcp60_selected>Historical + RCP6.0
+        <option value=rcp85 $rcp85_selected>Historical + RCP8.5
+        -->
+        </select>
+    {% else %}
+        <input type=hidden name=scenario_cmip5 value={{FORM_scenario_cmip5}}>
+    {% endif %}
+
+    {% if FORM_dataset == 'CMIP3' %}
+        <input type=hidden name=scenario_cmip3 value=sresa1b>
+        </td><td>SRES A1B
+    {% else %}
+        <input type=hidden name=scenario_cmip3 value=sresa1b>
+    {% endif %}
+
+    {% if FORM_dataset == 'RT2b' %}
+        <input type=hidden name=scenario_rt2b value=A1B>
+        </td><td>SRES A1B
+    {% else %}
+        <input type=hidden name=scenario_rt2b value=A1B>
+    {% endif %}
+   
+    {% if FORM_dataset == 'RT3' %}
+        </td><td>ERA-40 boundary conditions
+    {% endif %}
+
+    {% if FORM_dataset == 'ERAi' %}
+        </td><td>ERA-interim reanalysis
+    {% endif %}
+
+    {% if FORM_dataset == '20CR' %}
+        </td><td>Reanalysis of the twentieth century
+    {% endif %}
+   
+    {% if FORM_dataset == 'obs' %}
+        {% if FORM_var == 'tas' %}
+            </td><td>
+            <select class=forminput name=obs_tas>
+            {% for val in obs_tas_values %}
+                <option value={{val[0]}} {{ 'selected' if FORM_obs_tas == val[0]}}>{{val[1]}}</option>
+            {% endfor %}
+            <!--
+            <option value=giss_temp_1200 $giss_temp_1200_selected>GISTEMP 1200
+            <option value=ncdc_temp $ncdc_temp_selected>NCDC MOST
+            <option value=hadcrut4110 $hadcrut4110_selected>HadCRUT4.1.1.0
+            -->
+            </select>
+        {% else %}
+            <input type=hidden name=obs_tas value={{FORM_obs_tas}}>
+        {% endif %}
+
+        {% if FORM_var == 'pr' %}
+            </td><td>
+            <select class=forminput name=obs_pr>
+            {% for val in obs_pr_values %}
+                <option value={{val[0]}} {{ 'selected' if FORM_obs_pr == val[0] }}>{{val[1]}}</option>
+            {% endfor %}
+            <!--
+            <option value=gpcc_25 $gpcc_25_selected>GPCC v6
+            <option value=prca $prca_selected>NCDC anomalies
+            <option value=cru311_pre_25 $cru311_pre_25_selected>CRU TS 3.10.01
+            -->
+            </select>
+        {% else %}
+            <input type=hidden name=obs_pr value={{FORM_obs_pr}}>
+        {% endif %}
+
+        {% if FORM_var == 'psl' %}
+            </td><td>
+            <select class=forminput name=obs_psl>
+            {% for val in obs_psl_values %}
+                <option value={{val[0]}} {{ 'selected' if FORM_obs_psl == val[0] }}>{{val[1]}}</option>
+            {% endfor %}
+            <!--
+            <option value=trenberthslp $trenberthslp_selected>UCAR ds010 (NH only)
+            <option value=hadslp2r $hadslp2r_selected>HadSLP2r
+            -->
+            </select>
+        {% else %}
+            <input type=hidden name=obs_pr value={{FORM_obs_pr}}>
+        {% endif %}
+    {% endif %}
+
+    </th></tr><tr><td>
+    Measure:
+    </td><td>
+    <input type=hidden name=measure_old value={{FORM_measure}}>
+    <select class=forminput name=measure onchange=this.form.submit();>
+    {% for val in measure_values %}
+        <option value={{val[0]}} {{ 'selected' if FORM_measure == val[0] }}>{{val[1]}}</option>
+    {% endfor %}
+    <!--
+    <option value=diff $diff_selected>Difference of two periods
+    <option value=regr $regr_selected>Linear or non-linear trend
+    -->
+    </select>
+
+    {% if var_ok %}
+        Sorry, cannot handle variable '{{FORM_var}}' in dataset observations yet
+        </td></tr></table</form></div>
+        {# TODO: exit the script #}
+        {#. ./myvinkfoot.cgi #}
+    {% endif %}        
+
+    {% if FORM_measure == 'diff' %}
+        </td></tr><tr><td>
+        Reference period:
+        </td><td>
+        <input type="text" min={{yr1}} max={{yr2}} step=1 name="begin" size=4 value="{{FORM_begin|default('1986', true)}}">-<input type="text" min={{yr1}} max={{yr2}} step=1 name="end" size=4 value="{{FORM_end|default('2005', true)}}">
+        </td></tr><tr><td>
+        Future period:
+        </td><td>
+        <input type="text" min={{yr1}} max={{yr2}} step=1 name="begin2" size=4 value="{{FORM_begin2|default(yr2-19, true)}}">-<input type="text" min={{yr1}} max={{yr2}} step=1 name="end2" size=4 value="{{FORM_end2|default(yr2)}}">
+    {% else %}
+        {# these two are not used in the regression #}
+        <input type=hidden name=end value={{FORM_end}}>
+        <input type=hidden name=begin2 value={{FORM_begin2}}>
+    {% endif %}
+
+    {% if FORM_measure == 'regr' %}
+        </td></tr><tr><td>
+        Trend definition:
+        </td><td>
+        <select class=forminput name=regr>
+        {% for val in regr_values %}
+            <option value={{val[0]}} {{ 'selected' if FORM_regr == val[0] }}>{{val[1]}}</option>
+        {% endfor %}
+        <!--
+        <option value=time $time_selected>Linear trend in time
+        <option value=co2eq $co2eq_selected>Proportional to effective CO2 concentration
+        <option value=obstglobal $obstglobal_selected>Proportional to observed Tglobal
+        <option value=modtglobal $modtglobal_selected>Proportional to modelled Tglobal
+        -->
+        </select>
+        </td></tr><tr><td>
+        Fit period:
+        </td><td>
+        <input type="text" min={{yr1}} max={{yr2}} step=1 name="begin" size=4 value="{{FORM_begin|default('1950', true)}}">-<input type="text" min={{yr1}} max={{yr2}} step=1 name="end2" size=4 value="{{FORM_end|default('2100', true)}}">
+    {% else %}
+        {# these variables are not used in the difference definition #}
+        <input type=hidden name=regr value={{FORM_regr}}>
+    {% endif %}
+
+    {% if FORM_output == 'map' %}
+        {# measure of PDF - coordinate with quantiles_field and getweightedquantile #}
+        </td></tr><tr><td>
+        Plot:
+        </td><td>
+        <select class=forminput name=plotvar>
+        {% for val in plotvar_values %}
+            <option value={{val[0]}} {{ 'selected' if FORM_plotvar == val[0] }}>{{val[1]}}</option>
+        {% endfor %}
+        <!--
+        <option value=mean $mean_selected>mean
+        <option value=p025 $p025_selected>2.5%
+        <option value=p05 $p05_selected>5%
+        <option value=p10 $p10_selected>10%
+        <option value=p17 $p17_selected>17%
+        <option value=p25 $p25_selected>25%
+        <option value=p50 $p50_selected>50%
+        <option value=p75 $p75_selected>75%
+        <option value=p83 $p83_selected>83%
+        <option value=p90 $p90_selected>90%
+        <option value=p95 $p95_selected>95%
+        <option value=p975 $p975_selected>97.5%
+        -->
+        </select>
+
+        {# submit #}
+        </td></tr><tr><td colspan=2>
+        <input type="submit" class="formbutton" value="Make map">
+    {% else %}
+
+        {# histogram #}
+        <input type=hidden name=plotvar value={{FORM_plotvar}}>
+        </td></tr><tr><td colspan=2>
+        <input type="submit" class="formbutton" value="Make histogram">
+    {% endif %}
+{% else %}            
+    {# hidden versions of all parameters in map, histogram to save them #}
+    {# TODO: cgi line 754, FORM_measure_old=$FORM_measure #}
+    <input type=hidden name=scenario_cmip5 value={{FORM_scenario_cmip5}}>
+    <input type=hidden name=scenario_cmip3 value={{FORM_scenario_cmip3}}>
+    <input type=hidden name=scenario_rt2b value={{FORM_scenario_rt2b}}>
+    <input type=hidden name=measure value={{FORM_measure}}>
+    <input type=hidden name=begin value={{FORM_begin}}>
+    <input type=hidden name=end2 value={{FORM_end2}}>
+    <input type=hidden name=regr value={{FORM_regr}}>
+    <input type=hidden name=plotvar value={{FORM_plotvar}}>
+{% endif %}
+
+{% if FORM_output == 'series' %}
+    {# time series options #}
+    </td></tr><tr><th colspan=3>
+    Time series options
+    </th></tr><tr><td>
+    Scenario(s):
+    </td><td>
+
+    {% if FORM_dataset in ['CMIP5', 'CMIP5one'] %}
+        <input type=checkbox class=formcheck name=rcp26 {{ 'checked' if FORM_rcp26 }}>RCP2.6
+        <input type=checkbox class=formcheck name=rcp45 {{ 'checked' if FORM_rcp45 }}>RCP4.5
+        <input type=checkbox class=formcheck name=rcp60 {{ 'checked' if FORM_rcp60 }}>RCP6.0
+        <input type=checkbox class=formcheck name=rcp85 {{ 'checked' if FORM_rcp85 }}>RCP8.5
+    {% else %}
+        <input type=hidden name=rcp26 value={{FORM_rcp26}}>
+        <input type=hidden name=rcp45 value={{FORM_rcp45}}>
+        <input type=hidden name=rcp60 value={{FORM_rcp60}}>
+        <input type=hidden name=rcp85 value={{FORM_rcp85}}>
+    {% endif %}
+     
+    {% if FORM_dataset == 'CMIP3' %}
+        {{ FORM_scenario_cmip3 }}
+    {% elif FORM_dataset == 'RT2b' %}    
+        {{ FORM_scenario_rt2b }}
+    {% elif FORM_dataset[:4] == 'CMIP5' %} 
+		approximation of real world
+    {% endif %}
+
+    </td></tr><tr><td>
+    Plot period:
+    </td><td>
+    <input type="text" min={{yr1}} max={{yr2}} step=1 name="begin" size=4 value="{{FORM_begin|default(yr1, true)}}">-<input type="text" min={{yr1}} max={{yr2}} step=1 name="end2" size=4 value="{{FORM_end2|default(yr2, true)}}">
+    </td></tr><tr><td>
+    Anomalies:
+    </td><td>
+    <input type=checkbox class=formcheck name=anomaly {{ 'checked' if FORM_anomaly }}>Take anomalies wrt 
+    <input type="text" min={{yr1}} max={{yr2}} step=1 name="anom1" size=4 value="{{FORM_anom1|default('1986', true)}}">-<input type="text" min={{yr1}} max={{yr2}} step=1 name="anom2" size=4 value="{{FORM_anom2|default('2005', true)}}">
+
+    {# submit #}
+    </td></tr><tr><td colspan=2>
+    <input type="submit" class="formbutton" value="Make time series">
+{% else %}
+    <input type=hidden name=rcp26 value={{FORM_rcp26}}>
+    <input type=hidden name=rcp45 value={{FORM_rcp45}}>
+    <input type=hidden name=rcp60 value={{FORM_rcp60}}>
+    <input type=hidden name=rcp85 value={{FORM_rcp85}}>
+    <input type=hidden name=anomaly value={{FORM_anomaly}}>
+    <input type=hidden name=anom1 value={{FORM_anom1}}>
+    <input type=hidden name=anom2 value={{FORM_anom2}}>
+{% endif %}
+
+</td></tr>
+</table>
+</form>
+</div>
