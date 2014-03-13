@@ -1,0 +1,20 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas scenarios</div> 
+
+The future climate depends on how much we change the composition of the atmosphere (CO2, other gases, aerosols) and land properties. This in turn depends on economical growth, technological progress, and choices that are made whether to limit emissions or not. Possible futures are described by <i>scenarios</i>, plausible ways that the world could develop that are constructed so that the consequences of climate change and choices to limit it can be investigated.
+
+<p>The most recent scenarios used for the CMIP5 experiments run in support of the <a herf="http://www.climatechange2013.org" target=_new>IPCC AR5 report<a> are the <a href="http://www.skepticalscience.com/rcp.php" target=_new>Representative Concentration Pathways</a> or RCPs. The four scenarios have been chosen to span a wide range of possible futures:
+<ul>
+<li>RCP8.5 is a business-as-usual scenario with increasing greenhouse gas emissions over time, leading to high greenhouse gas concentration levels,
+<li>RCP6.0  is a stabilization scenario in which emissions rise quickly up to 2060 and then decrease,
+<li>RCP4.5 assumes quicker action to limit greenhouse gas emissions with emissions peaking in 2040 and declining strongly until 2080,
+<li>RCP2.6 describes an all-out effort to limit global warming to below 2&deg;C with emissions decreasing sharply after 2020 and zero from 2080 onward.
+</ul>
+<div class=bijschrift>Emissions of main greenhouse gases across the RCPs. Grey area indicates the 98th and 90th percentiles (light/dark grey) of the literature. The dotted lines indicate four of the SRES marker scenarios (from van Vuuren et.al. 2011).</div>
+<center><img src="emissions-graph-rpc.png" width=100% alt="emissions in the four RCPs and other scenarios"></center>
+<div class=bijschrift>Concentrations of main greenhouse gases across the RCPs. Grey area indicates the 98th and 90th percentiles (light/dark grey) of the literature. The dotted lines indicate four of the SRES marker scenarios (from van Vuuren et.al. 2011).</div>
+<center><img src="ghg-concentrations.png" width=100% alt="concentrations in the four RCPs and other scenarios"></center>
+
+<p>The two previous IPCC report (TAR and AR4) used the <a href="http://en.wikipedia.org/wiki/Special_Report_on_Emissions_Scenarios" target=_new>SRES scenarios</a>. One of the major differences between these two sets is that the SRES scenarios are based on socio-economic storylines giving rise to emissions. These are then converted to concentrations including feedbacks that affect how much greenhouse gases are absorbed by land and ocean. In contrast, the RCPs are specified in terms of concentrations, so that these carbon-cycle feedbacks enter in the connection from the concentrations to the storylines, but not in the physical climate models.
+
+<!--#include virtual="help_footer.html"-->

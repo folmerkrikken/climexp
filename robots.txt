@@ -1,0 +1,56 @@
+# according to http://www.bing.com/community/blogs/webmaster/archive/2009/08/10/crawl-delay-and-the-bing-crawler-msnbot.aspx this is the new way to tell crawlers to slow down,
+# and the only way to tell MSNbot to take it easy (Google has a setting in the webmaster's center)
+# According to Wikipedia, the MS information is not correct, the number is the delay in seconds, and not an aribtrary scale.
+User-agent: * 
+Crawl-delay: 5
+
+# downloading all kind of forbidden links
+User-agent: Ezooms
+Disallow: /
+# This Czech robot seems to ignore the above.  Kill.
+User-agent: Jyxobot
+Disallow: /
+# The robot at wise-guys.nl is too stupid (smart?) and misbehaves
+User-agent: Vagabondo
+Disallow: /
+# there are no papers to plagiarize here
+User-agent: TurnitinBot
+Disallow: /
+# there is not much one can do off-line here...
+User-agent: MSIECrawler
+Disallow: /
+# no, we do not want help NameProtect out!
+User-agent: NPBot
+Disallow: /
+# Engineering?  impolite robot...
+User-agent: Ocelli
+Disallow: /
+# not serving a public goal, refreshing every month...
+User-agent: e-SocietyRobot
+Disallow: /
+# follows links that it should not follow
+User-agent: discobot
+Disallow: /
+
+# Google was busy indexing the data files, also images disappear after 3 days
+User-agent: *
+Disallow: /data/
+Disallow: /SOS/
+Disallow: /ChallengeData/
+Disallow: /plotseries.cgi*
+Disallow: /waveform.cgi*
+Disallow: /periodform.cgi*
+Disallow: /corfield*
+Disallow: /corseries*
+Disallow: /verificationform.cgi*
+Disallow: /regionverificationform.cgi*
+Disallow: /dat2nc.cgi*
+Disallow: /histogramform.cgi*
+Disallow: /runningmomentsform.cgi*
+Disallow: /periodform.cgi*
+Disallow: /normdiffform.cgi*
+Disallow: /fieldcorrfield*
+Disallow: /plotboxval.cgi*
+Disallow: /listbox.cgi*
+Disallow: /eofform.cgi*
+Disallow: /maskseriesform.cgi*

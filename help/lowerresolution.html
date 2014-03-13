@@ -1,0 +1,21 @@
+The options are quite general, and allow for
+the computation of most standard derived time series.
+
+<p>You can transform into any of the time resolutions the Climate Explorer
+understands: annual, seasonal (DJF, MAM, JJA, SON), monthly, decadal
+(1-10, 11-20, 21-end), pentad, or daily (6-hourly is experimental).  The
+pentad including February 29 in a leap year is over 6 days.
+
+<p>You can take the mean, standard deviation, min and max of the time
+series when going to a lower time resolution.  The options sum above,
+sum below and number are used in combination with a threshold.  This
+allows the construction of heating degree days (sum above 17&deg;C),
+warm days (number of days with temperature above the 95th
+percentile), number of days with dense fog (number below 201m), etc.
+The threshold can be specified in the absolute units of the time
+series, as percentile, or relative to the 1971-2000 normals.
+
+<p>Note that the Climate Explorer cannot correlate two datasets
+with a different time resolution, you should always use this function
+(or its <a href="higherresolution.shtml">converse</a>) to convert one
+of the two to the time scale of the other.

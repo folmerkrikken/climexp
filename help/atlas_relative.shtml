@@ -1,0 +1,10 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas: absolute and relative variable plots</div> 
+
+The default way to plot a variable is just to take the values from the observations or models. These are converted to meteorologically more common forms than the scientific ones: Kelvin to Celsius, kg m<sup>-2</sup> s<sup>-1</sup> to mm/day, Pa to hPa.
+
+<p>Often for water cycle quantities one gets a better impression by plotting the changes relative to the model climatology. The assumption is that if the model has a strong bias in the mean state it will have similar bias in the climate change signal and the relative change is then a better representation of the signal than the absolute numbers. The relative changes are always plotted in percentages. Note that for fields that include zero, such as P-E, the relative changes may become very large and should be considered with great care in the regions where the climatology is near-zero.
+
+<p>Temperature and pressure fields are never plotted as relative changes.
+
+<!--#include virtual="help_footer.html"-->

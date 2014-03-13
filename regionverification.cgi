@@ -102,7 +102,7 @@ fi
 startstop=data/$rootname.startstop
 corrargs="$corrargs startstop $startstop"
 
-if [ 1 = 0 ]; then
+if [ 0 = 1 ]; then
   echo '<pre>'
   echo ./bin/getunits.sh $file1
   ./bin/getunits.sh $file1
@@ -118,6 +118,19 @@ eval `./bin/getunits.sh $file1`
 if [ "$NEWUNITS" != "$UNITS" ];then
   echo "Converting $kindname1 $climfield1 from $UNITS to $NEWUNITS<br>"
 fi
+# Make sure reliability plots have no more bins than ensemble members...
+if [ -n "$NENS" ]; then
+  if [ -n "$FORM_nbins" ]; then
+    if [ "$((NENS+1))" -lt "$FORM_nbins" ]; then
+      echo "Adjusting number of bins down to number of ensemble members plus one<br>"
+      FORM_nbins="$((NENS+1))"
+    fi
+  else
+    echo "Setting number of bins equal to number of ensemble members plus one<br>"
+    FORM_nbins="$((NENS+1))"
+  fi
+fi
+
 eval `./bin/getunits.sh $file2`
 [ "$UNITS" = Celsius ] && NEWUNITS="C"
 [ "$NEWUNITS" = Celsius ] && NEWUNITS="C"
@@ -151,7 +164,7 @@ cat <<EOF
 <small>Verification is under active development and may still contain bugs.  Please report problems back to <a href="http://www.knmi.nl/~oldenbor/">me</a>.</small><p>
 EOF
 if [ -s $table ]; then
-  echo "Using cached data<br>"
+  echo "Using cached data. "
 else
   cat <<EOF
 Retrieving data, $cutting $seriesmonth average, $debias $anomalies ...
@@ -184,6 +197,11 @@ EOF
   fi
   rm /tmp/regionverification$$.log
 fi # file cached
+if [ ${table%.nc} = $table ]; then
+  echo "<a href=$table>Download big table with intermediate results</a><p>"
+else
+  echo "Download big netcdf files with <a href=$table>intermediate model</a>, <a href=${table%.nc}_obs.nc>observational</a> results</a><p>"
+fi
 if [ ${FORM_verif%persist} != $FORM_verif -o ${FORM_verif%nino34} != $FORM_verif ]; then
   if [ -z "$FORM_analysis" ];then
     # deduce from field name...

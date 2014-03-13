@@ -21,31 +21,31 @@ if [ "$EMAIL" != "someone@somewhere" ]; then
   forbidden='!`;'
   for NPERYEAR in 1464 366 365 360 73 36 12 4 1
   do
-    started=false
-    for file in data/*$NPERYEAR.$EMAIL.inf
-    do
-      ###echo "NPERYEAR,file = $NPERYEAR,$file<br>"
-      if [ -f $file ]; then
-        if [ $started = false ]
-        then
-          started=true
-          . ./nperyear2timescale.cgi
-          echo "<tr><th>${timescale}timeseries"
-	  case $NPERYEAR in
-	      365) echo "(365-day calendar)";;
-	      360) echo "(360-day calendar)";;
-	  esac
-        fi
-	datfile=`cat "$file"|head -1|        tr "+$forbidden" '%?'`
-	wmo=`    cat "$file"|tail -1|        tr "+$forbidden" '%?'`
-	type=`   basename $datfile .dat`
-        type=`   basename $type $wmo`
-        wmo=${wmo##$type}
-	STATION=`cat "$file"|head -2|tail -1|tr "+$forbidden" '%?'`
-	station=`echo $STATION | tr '_%' ' +'`
-	echo "<tr><td><div class=\"kalelink\"><a href=\"getindices.cgi?WMO=data/$type${wmo}&STATION=${STATION}&TYPE=${type}&id=${EMAIL}&NPERYEAR=$NPERYEAR\">$station</a> ($type$wmo)</div>"
-      fi
-    done
+	started=false
+	for file in data/*$NPERYEAR.$EMAIL.inf
+	do
+	  ###echo "NPERYEAR,file = $NPERYEAR,$file<br>"
+	  if [ -f $file ]; then
+		if [ $started = false ]
+		then
+		  started=true
+		  . ./nperyear2timescale.cgi
+		  echo "<tr><th>${timescale}timeseries"
+		  case $NPERYEAR in
+			  365) echo "(365-day calendar)";;
+			  360) echo "(360-day calendar)";;
+		  esac
+		fi
+		datfile=`cat "$file"|head -1|		 tr "+$forbidden" '%?'`
+		wmo=`	 cat "$file"|tail -1|		 tr "+$forbidden" '%?'`
+		type=`	 basename $datfile .dat`
+		type=`	 basename $type $wmo`
+		wmo=${wmo##$type}
+		STATION=`cat "$file"|head -2|tail -1|tr "+$forbidden" '%?'`
+		station=`echo $STATION | tr '_%' ' +'`
+		echo "<tr><td><div class=\"kalelink\"><a href=\"getindices.cgi?WMO=data/$type${wmo}&STATION=${STATION}&TYPE=${type}&id=${EMAIL}&NPERYEAR=$NPERYEAR\">$station</a> ($type$wmo)</div>"
+	  fi
+	done
   done
 else
   echo "<tr><th>Anonymous users cannot use user-defined indices"

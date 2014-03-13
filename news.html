@@ -1,4 +1,32 @@
-<tr><td>08-jul-2013</td><d>A large part of the June 2013 data are available now</td></tr>
+<tr><td>13-mar-2014</td><td>SPECS verification measures were added (thanks Stefan, Camiel). They seem to work, please report problems.</td></tr>
+<tr><td>08-mar-2014</td><td>Added Berkeley daily homogenised Tavg, Tmin, Tmax analyses, updated monthly ones to 2013</td></tr>
+<tr><td>07-mar-2014</td><td>Finally upgraded the GHCN station temperatures to version 3</td></tr>
+<tr><td>04-mar-2014</td><td>First data from the extraordinary winter 2013/2014 available now, for plots see also the <a href="http://www.knmi.nl/klimatologie/seasonal_overview_world_weather/index.cgi?var=slp_ncepncar&mon1=DJF&year1=2014">overview world weather</a>
+<tr><td>18-feb-2013</td><td>Due to a network reconfiguration the Climate Explorer has been unavailable 14:40-15:10 GMT+1.</td></tr>
+<tr><td>10-feb-2013</td><td>The option in the time-dependent GEV-fit of block maxima (minima) to scale the position and scale parameters simultaneously seems to work now. This option is recommended for large-scale precipitation.</td></tr>
+<tr><td>05-feb-2013</td><td>The monthly update failed on a full hard disk, which means quite a few files have been corrupted. I am repairing most, please let me know which ones I missed.</td></tr>
+<tr><td>09-jan-2013</td><td>Changed the way countries are treated: if a region (island) is too small to have a grid point in the interior it contributes proportional to its area. This way small countries still give a result, even though it may not be completely representative of the area of the country itself.</td></tr>
+<tr><td>09-jan-2013</td><td>Added a set of 235 countries to the pre-defined masks. Also split up a few countries with overseas parts. Please send me useful subdivisions if you need these.</td></tr>
+<tr><td>16-dec-2013</td><td>The 2013 ERA-interim 3D fields have the order of the levels reversed, so that the 850mb level was continued with 300mb etc. Fixed. (Thanks Phil.)</td></tr>
+<tr><td>11-dec-2013</td><td>A typo introduced a month ago (lack of concentration...) meant that netcdf files with a "since" date with days other than one were offset in time. This affected the ERA-interim files (offset 14 months), possibly others (thanks Phil).</td></tr>
+<tr><td>22-nov-2013</td><td>Added hurs (relative humidity) to the CMIP5 dataset, put in list instead of huss (specific humidity).</td></tr>
+<tr><td>01-nov-2013</td><td>Added a first version of the Climate Change Atlas inspired by the IPCC WG1 AR5 Annex I "Atlas". Please report bugs</td></tr>
+<tr><td>18-oct-2013</td><td>Computing annual means of CMIP5 data should work again (thanks a lot Jorge).</td></tr>
+<tr><td>18-oct-2013</td><td>NCEP/NCAR and TAO data are updated again now that the shutdown has been ended.</td></tr>
+<tr><td>08-oct-2013</td><td>Fixed the monthly update of the ERA-interim monthly fields.</td></tr>
+<tr><td>03-oct-2013</td><td>Due to the US government shutdown some data (TAO, NCAR) cannot be updated any more.</td></tr>
+<tr><td>25-sep-2013</td><td>CMIP5 global means work again.</td></tr>
+<tr><td>20-sep-2013</td><td>GISTEMP has been updated to a new version of GHCN land data.</td></tr>
+<tr><td>10-aug-2013</td><td>Due to illness I will be unable to offer much support for the Climate Explorer the next half year. If there are technical problems (missing data or analysis methods that do not work) please also contact Camiel.Severijns@knmi.nl.</td></tr>
+<tr><td>02-aug-2013</td><td>Added most pre-industrial control runs (piControl) to my CMIP5 collection.</td></tr>
+<tr><td>02-aug-2013</td><td>Due to computer problems at NOAA and my holiday the GHCN/CAMS update will be delayed this month.</td></tr>
+<tr><td>30-jul-2013</td><td>First version of percentile ETCCDI/ECA&amp;D extreme routines, use with care (thanks Gerard).</td></tr>
+<tr><td>22-jul-2013</td><td>Patched a bug in the reliability diagram verification routine that the number of bins is never larger than Nens+1 (thanks Stefan).</td></tr>
+<tr><td>17-jul-2013</td><td>Updated the HadCRUT4, CRUTEM4 datasets to version 4.2.0.0.</td></tr>
+<tr><td>12-jul-2013</td><td>Deleted the EC-EARTH tos r11 and r13 ensemble members because of errors, recomputing the ensemble means (thanks Rein).</td></tr>
+<tr><td>10-jul-2013</td><td>Due to full disk the GHCN-D update failed this month, I am redoing it, these data should be available again in a few hours.</td></tr>
+<tr><td>10-jul-2013</td><td>First implementation of a subset of the ETCCDI/ECA&amp;D extreme indices for daily time series. Handle with care, not yet fully tested (thanks Gerard).</td></tr>
+<tr><td>08-jul-2013</td><td>A large part of the June 2013 data are available now</td></tr>
 <tr><td>25-jun-2013</td><td>Added the possibility to average fields over irregular region, either pre-defined SREX regions or uploaded by the user.</td></tr>
 <tr><td>25-jun-2013</td><td>Whoever is teaching a course at 212.205.78.34 in Greece please do NOT use big datasets like CRU TS 3.1, GPCC 0.5&deg;, the server can only handle 2 or 3 of these at the same time, not six.</td><tr>
 <tr><td>24-jun-2013</td><td>The zombie bug in the CESM1-CAM5 r3i1p1 data that was squashed more than a year ago has risen from the grave again. I deleted all data from this run until the correct version again replaces the buggy one and is propagated (thanks Kenneth)</td><tr>

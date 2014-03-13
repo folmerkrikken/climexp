@@ -28,7 +28,7 @@ do
 		cat << EOF
 <tr><td>$i
 <td><a href="$file"><img src="images/download.gif" border=0 alt="ascii data $name"></a>
-<td><a href="dat2nc.cgi?datafile=$file$type=i&station=ensemble_member_$i&id=$EMAIL"><img src="images/download.gif" border=0 alt="netcdf data $name"></a>
+<td><a href="dat2nc.cgi?datafile=$file&type=i&station=ensemble_member_$i&id=$EMAIL"><img src="images/download.gif" border=0 alt="netcdf data $name"></a>
 <td><a href="getindices.cgi?WMO=$wmo&STATION=$name&TYPE=$type&id=$EMAIL&NPERYEAR=$nperyear"><img src="images/go_pijl.gif" border=0 alt="analyse $name"></a>
 EOF
 		i=$(($i + 1))

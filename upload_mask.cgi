@@ -11,10 +11,10 @@ if [ "$EMAIL" = "someone@somewhere" ]; then
   . ./myvinkfoot.cgi
 fi
 
-if [ "$FORM_set" = SREX -o "$FORM_set" = eu_rivers -o "$FORM_set" = ar5_atlas ]; then
+if [ "$FORM_set" = SREX -o "$FORM_set" = eu_rivers -o "$FORM_set" = ar5_atlas -o "$FORM_set" = countries ]; then
 	for file in $FORM_set/*.txt
 	do
-		if [ -s $file -a ${file%kaal.txt} = $file ]; then
+		if [ -s $file -a ${file%kaal.txt} = $file -a ${file%nan.txt} = $file ]; then
 			cp $file data/
 			f=`basename $file .txt`
 			maskfile=data/$f.txt

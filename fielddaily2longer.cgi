@@ -9,6 +9,14 @@ EOF
 . ./getargs.cgi
 # check email address
 . ./checkemail.cgi
+if [ "$EMAIL" = "someone@somewhere" ]; then
+  echo "Anonymous users cannot use this function as it stores new data on the server. Please <a href=\"registerform.cgi\">register or log in</a>"
+  . ./myvinkfoot.cgi
+  exit
+fi
+if [ $EMAIL = oldenbor@knmi.nl ]; then
+    lwrite=false # true
+fi
 
 . ./queryfield.cgi
 
@@ -27,7 +35,7 @@ fi
 . ./save_daily2longer.cgi
 
 NAME="$climfield"
-###echo "NPERYEAR = $NPERYEAR<br>"
+[ "$lwrite" = true ] && echo "NPERYEAR = $NPERYEAR<br>"
 if [ "$NPERYEAR" = 366 -o "$NPERYEAR" = 365 -o "$NPERYEAR" = 360 ]; then
   NAME="daily $NAME"
 elif [ "$NPERYEAR" = 73 ]; then
@@ -44,7 +52,7 @@ else
   NAME="$NAME"
 fi
 NAME="$FORM_oper of $NAME"
-###echo "FORM_nperyearnew = $FORM_nperyearnew<br>"
+[ "$lwrite" = true ] && echo "FORM_nperyearnew = $FORM_nperyearnew<br>"
 if [ "$FORM_nperyearnew" = 366 -o "$FORM_nperyearnew" = 365 -o "$FORM_nperyearnew" = 360 ]; then
   NAME="daily $NAME"
 elif [ "$FORM_nperyearnew" = 73 ]; then
@@ -79,20 +87,27 @@ if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
   fi    
 fi
 
-if [ -n "$ENSEMBLE" ]
-then
-    testfile=${outfile}_01
-    outfile=${outfile}_%%
+if [ -n "$ENSEMBLE" ]; then
+    c=`echo $file | fgrep -c '%%%'`
+    if [ $c = 1 ]; then
+        testfile=${outfile}_000
+        outfile=${outfile}_%%%
+    else
+        testfile=${outfile}_00
+        outfile=${outfile}_%%
+    fi
 else
     testfile=$outfile
 fi
 
+[ "$lwrite" = true ] && echo "c=$c<br>file=$file<br>testfile = $testfile<br>outfile=$outfile<br>"
 if [ ! -s $testfile.ctl -o $testfile.ctl -ot $file ]; then
     if [ -s $testfile.ctl ]; then
-       rm `echo $outfile.ctl | sed -e 's/%%/??/'`
-       rm `echo $outfile.dat | sed -e 's/%%/??/'`
+       rm `echo $outfile.ctl | sed -e 's/%%%/???/' -e 's/%%/??/'`
+       rm `echo $outfile.dat | sed -e 's/%%%/???/' -e 's/%%/??/'`
     fi
-    echo "daily2longerfield.sh $corrargs $NOMISSING" >> log/log
+    [ "$lwrite" = true ] && echo "daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl"
+    echo "daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl" >> log/log
     (./bin/daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl) 2>&1
 fi
 

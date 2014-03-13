@@ -51,7 +51,7 @@ if [ -z "$NZ" ]; then
 		echo '</pre>'
 	fi
 	NPERYEAROLD=$NPERYEAR
-	eval `bin/getunits.sh $file`
+	eval `bin/getunits.sh $file | egrep -v 'error|warning|getfileunits'`
 # changed 28-apr-2009 to make work again with verification plots, which have
 # NPERYEAR=1 but refer to monthly data...
 	if [ -n "$NPERYEAROLD" ]; then
@@ -145,8 +145,9 @@ fi
 # generate GrADS metadata file - should be doing this in perl...
 firstmonth=`echo ${FORM_month:-1:12} | sed -e 's/\:.*//'`
 lastmonth=`echo ${FORM_month:-1:12} | sed -e 's/.*\://'`
-if [ $lastmonth -gt $NPERYEAR ]; then
-	lastmonth=$NPERYEAR
+nperyear=${NPERYEAR#-}
+if [ $lastmonth -gt $nperyear ]; then
+	lastmonth=$nperyear
 fi
 firstlag=`echo ${FORM_lag:-0} | sed -e 's/\:.*//'`
 lastlag=`echo ${FORM_lag:-0} | sed -e 's/.*\://'`
@@ -167,7 +168,9 @@ if [ "$lwrite" = true ]; then
 	echo "l=$l<br>"
 fi
 
-if [ $NPERYEAR = 4 ]; then
+if [ $NPERYEAR = 1 ]; then
+	month2string=./bin/annual2string
+elif [ $NPERYEAR = 4 ]; then
 	month2string=./bin/season2string
 else
 	month2string=./bin/month2string
@@ -291,7 +294,7 @@ printim data/g${id}_$i.png white $doublesize"
 		if [ "$XWRAP" = true ]; then
 			setlon="set lon -180 180"
 		fi
-		if [ "$NZ" -gt 1 ]; then
+		if [ ${NZ:-0} -gt 1 ]; then
 			setlev="set z 1 $NZ"
 		fi
 		if [ -z "$FORM_maskout" -o "$FORM_maskout" = mask ]; then

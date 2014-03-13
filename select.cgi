@@ -25,7 +25,7 @@ fi
 
 # start real work
 . ./queryfield.cgi
-[ "$lwrite" = true ] && echo "file=$file<br>"
+[ "$lwrite" = true ] && echo "FORM_field=$FORM_field<br>file=$file<br>"
 
 if [ "$EMAIL" != someone@somewhere ]; then
     echo "FORM_field=$FORM_field;" > prefs/$EMAIL.field.$NPERYEAR
@@ -34,7 +34,7 @@ fi
 . ./myvinkhead.cgi "Field" "$kindname $climfield" "nofollow,index"
 
 if [ ${FORM_field#rt2b_} != $FORM_field -o ${FORM_field#rt3_} != $FORM_field ]; then
-	if [ $id = someone@somewhere ]; then
+	if [ "$EMAIL" = someone@somewhere ]; then
 		echo "Sorry, you need to be <a href=\"registerform.cgi\">logged in</a> to use ENSEMBLES data"
 		FORM_field=""
 		. ./myvinkfoot.cgi
@@ -75,6 +75,7 @@ ERA*)      url="wipefeet.cgi?http://www.ecmwf.int/research/era/";;
 Demeter*)  url="wipefeet.cgi?http://data.ecmwf.int/data";;
 ECMWF*)    url="wipefeet.cgi?http://www.ecmwf.int";;
 NCEPNCAR*) url="wipefeet.cgi?http://www.cdc.noaa.gov/cdc/reanalysis/reanalysis.shtml";;
+CMIP5_yr*) url="wipefeet.cgi?http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml";;
 CMIP5*)    url="showmetadata.cgi?EMAIL=$EMAIL&field=$FORM_field";;
 data*)     url="";;
 *)         url=`fgrep \"${FORM_field}\" selectfield_obs.html selectfield_rapid.html selectdailyfield*.html | sed -e 's/^.*href=\"//'  -e 's/\".*$//' -e "s/EMAIL/$EMAIL/"`;;
@@ -110,7 +111,8 @@ if [ -n "$LSMASK" ]; then
     echo "<font color='#ff4444'>Cannot locate the land/sea mask file</font>"
   fi
 fi
-cat <<EOF
+if [ ${NZ:-1} -le 1 ]; then
+	cat <<EOF
 <p><form action="get_index.cgi" method="POST">
 <div class="formheader">Get grid points, average area or generate subset</div>
 <div class="formbody">
@@ -118,13 +120,15 @@ cat <<EOF
 <input type="hidden" name="email" value="$EMAIL">
 <input type="hidden" name="field" value="$FORM_field">
 EOF
-SHOWMASK=true
-. ./choose_coordinates.cgi
-cat <<EOF 
+	SHOWMASK=true
+	. ./choose_coordinates.cgi
+	cat <<EOF 
 </table>
 </div>
 </form>
 EOF
+fi # NZ <= 1
+
 if [ $NPERYEAR -gt 1 ]; then
     case $NPERYEAR in
 	4) monthly=seasonally;;
@@ -255,6 +259,8 @@ elif [ ${file#IPCCData} != $file -o ${file#ESSENCE} != $file ]; then
 elif [ "${FORM_field#rutgers}" != "${FORM_field}" ]; then
   echo "Rutgers University does not allow us to redistribute this file. "
   echo "Please contact <a href=\"wipefeet.cgi?http://climate.rutgers.edu/snowcover/docs.php?target=datareq\" target=\"_new\">Thomas Estilow</a> for access to these data."
+elif [  "${FORM_field#cmip5_yr}" != "${FORM_field}" ]; then
+    echo "Please download the CMIP5 fields from the <a href=\"http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml\">CCCMA ETCCDI site</a>."
 elif [  "${FORM_field#cmip5}" != "${FORM_field}" ]; then
     echo "Please download the CMIP5 fields from the Earth System Grid servers, eg at <a href=\"http://cmip-pcmdi.llnl.gov/cmip5/data_getting_started.html\">PCMDI</a>. Contact <a href="http://www.knmi.nl/~oldenbor/">me</a> if you need access via this site."
 else
@@ -266,12 +272,25 @@ fi
 if [ "$download" = OK ]; then
 if [ -n "$ENSEMBLE" ]; then
   i=0
-  while [ $i -lt 100 ]
+  c2=`echo $file | fgrep -c '%%'`
+  if [ $c2 = 0 ]; then
+    imax=1
+  else
+    c3=`echo $file | fgrep -c '%%%'`
+    if [ $c3 = 0 ]; then
+      imax=100
+    else
+      imax=1000
+    fi
+  fi
+  while [ $i -lt $imax ]
   do
     if [ $i -lt 10 ]; then
-      member=`echo $file | sed -e "s/%%/0$i/"`
+      member=`echo $file | sed -e "s/%%%/00$i/" -e "s/%%/0$i/"`
+    elif [ $i -lt 100 ]; then
+      member=`echo $file | sed -e "s/%%%/0$i/" -e "s/%%/$i/"`
     else
-      member=`echo $file | sed -e "s/%%/$i/"`
+      member=`echo $file | sed -e "s/%%%/$i/"`
     fi
     ###echo "member=$member<br>"
     if [ -f $member ]; then
@@ -320,27 +339,32 @@ else
 fi
 fi
 if [ -z "$ensemble_done" -a -n "$ENSEMBLE" ]; then
-echo "<div class=\"alineakop\"><a name=\"members\">Ensemble members</a></div>"
+echo "<div class=\"alineakop\"><a name=\"members\"></a>Ensemble members</div>"
   i=0
-  c3=`echo $file | fgrep -c '%%%'`
-  if [ $c3 = 0 ]; then
-  	nmax=100
+  c2=`echo $file | fgrep -c '%%'`
+  if [ $c2 = 0 ]; then
+    nmax=1
   else
-  	nmax=1000
+    c3=`echo $file | fgrep -c '%%%'`
+    if [ $c3 = 0 ]; then
+  	  nmax=100
+    else
+      nmax=1000
+    fi
   fi
   while [ $i -lt $nmax ]
   do
     if [ $i -lt 10 ]; then
       member=`echo $file | sed -e "s/%%%/00$i/" -e "s/%%/0$i/"`
     elif [ $i -lt 100 ]; then
-      member=`echo $file | sed -e "s/%%%/0$i/" -e "s/%%/0$i/"`
+      member=`echo $file | sed -e "s/%%%/0$i/" -e "s/%%/$i/"`
     else
       member=`echo $file | sed -e "s/%%%/$i/"`
     fi
     if [ -f $member ]; then
       echo "analyse ensemble member $i <a href=\"selectmember.cgi?id=$EMAIL&i=$i&field=$FORM_field\">separately</a><br>"
     fi
-    i=$(($i + 1))
+    i=$((i + 1))
   done
 fi
 

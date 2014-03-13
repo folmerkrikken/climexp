@@ -1,20 +1,20 @@
 #!/bin/sh
 # form with options for daily2longer.cgi
 
-if [ "$EMAIL" != somene@somewhere ]; then
+if [ "$EMAIL" != someone@somewhere ]; then
   if [ -n "$DIR" ]; then
     def=$DIR/prefs/$EMAIL.daily2longeroptions.$NPERYEAR
   else
     def=prefs/$EMAIL.daily2longeroptions.$NPERYEAR
   fi
   if [ -s $def ]; then
-    eval `egrep '^FORM_[a-z0-9]*=[a-zA-Z]*[-+0-9.]*;$' $def`
+    eval `egrep '^FORM_[a-z0-9]*=[-a-zA-Z]*[-+0-9.]*;$' $def`
   fi
 fi
 
 if [ -n "$FORM_nperyearnew" ]; then
   case $FORM_nperyearnew in
-  -1) sel_annual_shifted="selected";;
+  "-1") sel_annual_shifted="selected";;
   1) sel_annual="selected";;
   4) sel_seasonal="selected";;
   12) sel_monthly="selected";;

@@ -1,0 +1,5 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas anomalies</div> 
+
+Because the mean state of climate models often is not exactly the same as the mean real climate, most often the change relative to a reference period is considered. This change excludes the biases to first order and hence has smaller uncertainties. The length of the reference period is a compromise between a longer period giving less influence of natural variability and a shorter one being more recent and better-observed. The climatological standard is a 30-yr period, IPCC traditionally uses 20-yr periods. For temperature, 10 or 20 years is often enough, for precipitation longer periods (50 years) often give best results.
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,13 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas: choose area</div> 
+
+The KNMI Climate Change Atlas supports three ways to select an area for the map or time series plots.
+
+<ol>
+<li>A list of IPCC WG1 pre-defined areas, which at this moment encompass the whole world (all, land, see), continents, and the areas used in the <a href="http://www.climatechange2013.org/report/" target="_new">IPCC WG1 AR5</a> Annex I "Atlas" (which includes all coordinates). For the land areas these are equal to the areas defined in the <a href="http://ipcc-wg2.gov/SREX/" target="_new">IPCC SREX report</a>.
+<li>A list of <a href="http://www.rjruss.info/2010/12/free-countries-of-world-in-polygon-kml.html" target=_new>countries and autonomous regions</a>. The fields is taken with weight one if the center of the grid box falls inside one of the polygons that make up the country, weight 1/2 if it is on the edge. Small islands are given fractional weights as follows. If the centre of bounding-box of a polygon falls inside a box, but the centre of the box outside the polygon (weight 0), the weight is set equal to the area of the polygon divided by the area of the box. If more polygons fall in the same box the weights are added. This way small island states still have defined averages, although these are over much larger grid boxes. Note that some countries have unexpected far-away parts.
+<li>A place, defined by lat/lon co-ordinates, enter degrees West as negative degrees East and degrees South as negative degrees North. The fields will be interpolated to this point and a map will be shown with a 10&deg; margin around it.
+<li>A box, defined by two co-ordinates, again with negative values for degrees East or South. The field can be restricted to land or sea points defined on the model grid as provided by the data provider. For fields with fractional land/sea masks the cut-off is put at 50%.
+</ol>
+
+<!--#include virtual="help_footer.html"-->

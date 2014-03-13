@@ -49,6 +49,7 @@ FORM_nbin=$FORM_nbin;
 FORM_changesign=$FORM_changesign;
 FORM_restrain=$FORM_restrain;
 FORM_year=$FORM_year;
+FORM_begin2=$FORM_begin2;
 FORM_decor=$FORM_decor;
 FORM_fit=$FORM_fit;
 FORM_xlo=$FORM_xlo;
@@ -143,6 +144,8 @@ set output "$root.png"
 set datafile missing "-999.90"
 set title "$title"
 set xlabel "$ylabel"
+set xrange [${FORM_xlo}:${FORM_xhi}]
+set yrange [${FORM_ylo}:${FORM_yhi}]
 #set ylabel "number"
 plot "$root.txt" u 2:3 notitle with boxes, "$root.txt" u 2:5 title "fit" with linespoints
 set term postscript epsf color solid
@@ -304,7 +307,7 @@ set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [${FORM_ylo}:${FORM_yhi}]
-plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title title "$FORM_fit fit" with line$plotformyear
+plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit fit" with line$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
 replot

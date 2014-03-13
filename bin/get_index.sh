@@ -1,7 +1,7 @@
 #!/bin/sh
 lwrite=false
 if [ -n "$EMAIL " -a "$EMAIL" = oldenbor@knmi.nl ]; then
-	lwrite=false
+	lwrite=true # false
 fi
 if [ -z "$DIR" ]; then
 	DIR=`pwd`
@@ -20,8 +20,11 @@ c2=`echo $file | fgrep -c '++'`
 c3=`echo $file | egrep -c '%%%|\+\+\+'`
 if [ $c1 -eq 0 -a $c2 -eq 0 ]
 then
-	[ $lwrite = true ] && echo "# $DIR/bin/$PROG $*"
-	$DIR/bin/$PROG $*
+	outfile=data/$TYPE$WMO.dat
+	if [ ! -s $outfile -o $outfile -ot $file ]; then
+		[ $lwrite = true ] && echo "# $DIR/bin/$PROG $*"
+		$DIR/bin/$PROG $*
+	fi
 else
 	i=0
 	if [ $c3 = 0 ]; then
@@ -36,7 +39,7 @@ else
 	ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
 	while [ $i -lt $nmax ]
 	do
-		[ $lwrite = true ] && echo "ensfile = $ensfile"
+		[ "$lwrite" = true ] && echo "ensfile = $ensfile"
 		if [ -s $ensfile -o -s data/$ensfile ]
 		then
 			ensargs=`echo $* | sed -e "s@$file@$ensfile@"`

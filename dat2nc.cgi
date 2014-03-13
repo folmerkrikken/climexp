@@ -5,6 +5,7 @@ echo
 
 . ./getargs.cgi
 
+FORM_datafile=`echo $FORM_datafile | sed -e 's/_W _/_W+_/' -e 's/_G _/_G+_/'`
 datafile=data/`basename "$FORM_datafile"`
 type="$FORM_type"
 station=`echo "$FORM_station" | tr '/' '_'`

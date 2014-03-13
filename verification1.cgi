@@ -71,9 +71,9 @@ if [ -z "$makemap" ]; then
   fi
 fi
 if [ "$FORM_threshold_type" = TRUE ]; then
-    threshold_units="%"
-else
     threshold_units=$NEWUNITS
+else
+    threshold_units="%"
 fi
 if [ -n "$FORM_lon1$FORM_lon12$FORM_lat1$FORM_lat2" ]; then
     area="\n${FORM_lat1:--90}-${FORM_lat2:-90}N, ${FORM_lon1:--0}-${FORM_lon2:-360}E"
@@ -84,14 +84,42 @@ fi
 PROG=$FORM_verif
 case $FORM_verif in
 
-likelihood) args="data, xlab=\"$verifxlabel\", ylab=\"$verifylabel\""; lvar="likelihood";;
+likelihood)
+	args="data, xlab=\"$verifxlabel\", ylab=\"$verifylabel\"";
+	lvar="likelihood";;
 
-brierscore) args="data,u=$FORM_threshold, threshold=$FORM_threshold_type, size=0, bsfile=\"$DIR/data/R$$.brierscore\""; noplot=T; needsthreshold="true"; lvar="Brier Score";;
+brierscore)
+	args="data,u=$FORM_threshold,threshold=$FORM_threshold_type,nbins=$FORM_nbins,bsfile=\"$DIR/data/R$$.brierscore\"";
+	noplot=T;
+	needsthreshold="true";
+	lvar="Brier Score";;
+
+fairbrierscore)
+	args="data,threshold=$FORM_threshold,is.value=$FORM_threshold_type,fbsfile=\"$DIR/data/R$$.brierscore\"";
+	noplot=true;
+	needsthreshold="true";
+	lvar="Fair Brier Score";;
+
+fairCRPSanalysis)
+	args="data,fcafile=\"$DIR/data/R$$.brierscore\"";
+	noplot=true;
+	needsthreshold="false";
+	lvar="Fair CRPS Analysis";;
+
+rankhistogram)
+	args="data,graphvaluefile=\"data/R$$.txt\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel\"";
+	needsthreshold="false";
+	lvar="Fair CRPS Analysis";;
 
 reliability) 
-args="data,u=$FORM_threshold,nbins=$FORM_nbins,threshold=$FORM_threshold_type,reliabfile=\"data/R$$.reliab\",graphvaluefile=\"data/R$$.txt\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel, threshold=$FORM_threshold$threshold_units$area\""; needsthreshold="true"; lvar="reliability";;
+	args="data,u=$FORM_threshold,nbins=$FORM_nbins,threshold=$FORM_threshold_type,reliabfile=\"data/R$$.reliab\",graphvaluefile=\"data/R$$.txt\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel, threshold=$FORM_threshold$threshold_units$area\"";
+	needsthreshold="true";
+	lvar="reliability";;
 
-deterministic) args="data, detfile=\"$DIR/data/R$$.deterministic\""; noplot=T; lvar="ensemble mean scores";;
+deterministic)
+	args="data, detfile=\"$DIR/data/R$$.deterministic\"";
+	noplot=T;
+	lvar="ensemble mean scores";;
 
 rps) args="data,\"$DIR/data/R$$.rps\""; lvar="tercile RPS";noplot=true;;
 
@@ -111,15 +139,15 @@ mapmae) PROG="maetwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$mae";FOR
 
 maprmse) PROG="rmsetwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rmse";FORM_var="rmse";lvar="root mean square error of ensemble mean";;
 
-mapbrier) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$bs";FORM_var="bs";lvar="Brier Score";;
+mapbrier) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$bs";FORM_var="bs";lvar="Brier Score";;
 
 mapbriar) myprog="./bin/Briar $threshold $obsfile $table data/R$$.nc";FORM_var="bs";lvar="Brier Score";;
 
-mapresolution) PROG="bsdecomptwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$res";FORM_var="resolution";lvar="Resolution component of the Brier Score";;
+mapresolution) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$res";FORM_var="resolution";lvar="Resolution component of the Brier Score";;
 
-mapreliability) PROG="bsdecomptwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$rel";FORM_var="reliability";lvar="Reliability component of the Brier Score";;
+mapreliability) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$rel";FORM_var="reliability";lvar="Reliability component of the Brier Score";;
 
-mapuncertainty) PROG="bsdecomptwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$unc";FORM_var="uncertainty";lvar="Uncertainty component of the Brier Score";;
+mapuncertainty) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$unc";FORM_var="uncertainty";lvar="Uncertainty component of the Brier Score";;
 
 mapbss) PROG="bsstwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$bss";FORM_var="bss";lvar="BSS wrt climatology";;
 
@@ -231,12 +259,13 @@ EOF
     $myprog 2>&1
   fi
 elif [ -n "$PROG" ]; then
-  echo "Computing $lvar in <a href=\"http://cran.r-project.org/\">R</a>.  This will take (quite) a while...<br>"
+  echo "Computing $lvar in <a href=\"http://cran.r-project.org/\">R</a>.  This will take (quite) a while..."
   echo "<small>If it takes too long you can abort the job <a href=\"killit.cgi?id=$FORM_EMAIL&pid=$$\" target=\"_new\">here</a> (using the [back] button of the browser does <it>not</it> kill the R job)</small><p>"
 
 # Make a temp file with R command (R does not accept input redirection)
   if [ -z "$makemap" ]; then
     cat > /tmp/R$$.r <<EOF
+library("SpecsVerification", lib.loc="./r")
 dyn.load("./r/rkillfile.so")
 .Fortran("rkillfile")
 dyn.load("./r/rkeepalive.so")
@@ -256,6 +285,7 @@ dyn.load("./r/rkillfile.so")
 dyn.load("./r/rkeepalive.so")
 .Fortran("rkeepalive",i=as.integer(0),n=as.integer(0))
 source("./r/maplibs.r")
+library("SpecsVerification", lib.loc="./r")
 source("./r/applyfieldclimexp.r")
 source("./r/$PROG.r")
 infobs<-netcdfinfo("$obsfile")
@@ -265,8 +295,8 @@ if ( length(infofcst\$vars) == 4 )
   fcst<-netcdfread("$table",infofcst\$vars[2],infofcst\$vars[3],infofcst\$vars[4])
 if ( length(infofcst\$vars) == 5 )
   fcst<-netcdfreadclimexp("$table",infofcst\$vars[2],infofcst\$vars[3],infofcst\$vars[5])
-###save(file="/tmp/data1.RData",fcst$data)
-###save(file="/tmp/data2.RData",obs$data)
+###save(file="./data/data1.RData",fcst$data)
+###save(file="./data/data2.RData",obs$data)
 map<-$PROG($args)$comp
 ###pdf("data/R$$.pdf")
 ###plotmap(obs\$lonncfile,obs\$latncfile,map)
@@ -287,6 +317,8 @@ EOF
   export SCRIPTPID=$$
   export FORM_EMAIL
   export UDUNITS_PATH=$DIR/grads/udunits.dat
+  cp /tmp/R$$.r data/
+  echo "(<a href=data/R$$.r>R script being run</a>, <a href=r/$PROG.r>library routine</a>)<p>"
   (R --vanilla < /tmp/R$$.r > /tmp/R$$.log ) 2>&1
   # pnmtopng chatters to stderr
   rm pid/$$.$FORM_EMAIL
@@ -299,7 +331,6 @@ EOF
         nomap=true
     fi
   fi
-
   if [ -n "$FORM_debug" ]; then
     echo '<pre>'
 ###   cat /tmp/R$$.r

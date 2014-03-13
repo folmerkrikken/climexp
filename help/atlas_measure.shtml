@@ -1,0 +1,7 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas measure of change</div> 
+
+There are many ways to measure how much the climate has changed or may change. The most straightforward one, widely used, is to take the difference of two periods. This is easy to interpret but suffers from rather large uncertainties due to the natural variability of the climate, depending on the variable and the length of the periods. The official climatological reference periods are 30 years long, this is a compromise between the longer period that is needed for precipitation and the shorter one that would be sufficient for temperature. IPCC traditionally uses 20-yr periods, which means that changes in precipitation and other variables with high natural variability compared to the climate change signal have large uncertainties, indicated here by the hatching.
+
+<p>Linear trends are also widely used, these maps have a better signal-to-noise ratio than the equivalent differences between two periods. The trend can be described even better as proportional to the CO2 concentration or the global mean temperature, this also captures the fact that the trend is not linear in time. These measures are harder to interpret but have the best signal-to-noise ratio, i.e., they are least affected by the natural variability of the climate. In these maps the areas covered by hatching are therefore smaller.
+<!--#include virtual="help_footer.html"-->

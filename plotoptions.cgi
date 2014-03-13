@@ -105,16 +105,16 @@ else
     echo '<tr valign="baseline"><td>Region first field:<td>'
 fi
 if [ -z "$NX" -a -z "$NY" -a -z "$NY" ]; then
-  eval `bin/getunits.sh $file`
+  eval `bin/getunits.sh $file | egrep v 'warning|error|getfileunits'`
 fi
-if [ -z "$NY" -o "$NY" -gt 1 ]; then
+if [ -z "$NY" -o "${NY:-0}" -gt 1 ]; then
 cat <<EOF
 <input type="$number" step=any class="forminput" name="lat1" value="$FORM_lat1" $textsize4>&deg;N 
 to
 <input type="$number" step=any class="forminput" name="lat2" value="$FORM_lat2" $textsize4>&deg;N, 
 EOF
 fi
-if [ -z "$NX" -o "$NX" -gt 1 ]; then
+if [ -z "$NX" -o "${NX:-0}" -gt 1 ]; then
 cat <<EOF
 <input type="$number" step=any class="forminput" name="lon1" value="$FORM_lon1" $textsize4>&deg;E 
 to

@@ -48,9 +48,10 @@ if [ -n "$masknetcdf" ]; then
 		. ./myvinkfoot.cgi
 	fi
     cat <<EOF
-Dowload <a href="$masknetcdf">mask file</a>
+Download <a href="$masknetcdf">mask file</a>
 EOF
 	FORM_var=mask
+	oldfile=$file
 	file=$masknetcdf
 	NPERYEAR=1
     FORM_year=0001 # grads puts netcdf files without date on 1:1:1:0
@@ -63,6 +64,7 @@ EOF
 	. ./grads.cgi
     station=$oldstation
     CLIM=$oldCLIM
+    file=$oldfile
 fi
 
 wmo=$WMO
@@ -168,7 +170,7 @@ if [ -s $DIR/data/$TYPE$WMO.dat ]; then
     $DIR/bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > $DIR/data/$TYPE$WMO.txt
     c=`cat $DIR/data/$TYPE$WMO.txt | fgrep -v '#' | wc -l`
     if [ $c -eq 0 ]; then
-      echo "No valid data was found.  Please check your choices on the previous page.<br>"
+      echo "No valid data were found.  Please check your choices on the previous page.<br>"
       echo "Having a look at the <a href=\"data/$TYPE$WMO.dat\">raw data</a> might help."
       if [ "${PROG#get_index}" != "$PROG" ]; then
       	echo "<p>Often, this is caused by selecting an area without data, for instance a sea area in a dataset with only land data or the other way around."
@@ -389,13 +391,34 @@ Take anomalies and set standard deviation to one
 </td><td><a href="javascript:pop_page('help/maskseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 </table>
 </div>
+EOF
 
+if [ $NPERYEAR = 360 -o $NPERYEAR = 365 -o $NPERYEAR = 366 ]; then
+	if [ "$NEWUNITS" = "Celsius" -o "$NEWUNITS" = "mm/day" ]; then
+		cat <<EOF
+<p><div class='formheader'><a href="javascript:pop_page('help/extremeindices.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Compute extreme indices</div>
+<div class='formbody'>
+<form action="extremeseries.cgi" method="POST">
+<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+EOF
+	. ./extremeform.cgi
+	cat << EOF
+<tr><td colspan=2><input type="submit" class="formbutton" value="make new time series">
+</td></tr>
+</table>
+</form>
+</div>
+EOF
+	fi # supported variable: temperature or precipitation
+fi # daily data
+
+cat <<EOF
 <p><div class='formheader'><a href="javascript:pop_page('help/lowerresolutionseries.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Create a lower resolution time series</div>
 <div class='formbody'>
 <form action="daily2longer.cgi" method="POST">
 <table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
 EOF
-. $DIR/daily2longerform.cgi
+. ./daily2longerform.cgi
 cat << EOF
 <tr><td colspan=2><input type="submit" class="formbutton" value="make new time series">
 </td></tr>
@@ -403,6 +426,8 @@ cat << EOF
 </form>
 </div>
 EOF
+
+
 if [ $NPERYEAR = 1 ]; then
 cat <<EOF
 <p><div class='formheader'>Create a monthly time series</div>

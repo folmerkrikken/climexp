@@ -67,6 +67,7 @@ fi
 
 . ./queryfield.cgi
 FIELDNPERYEAR="$NPERYEAR"
+FIELDFILE=$file
 
 if [ -n "$ENSEMBLE" -a $FORM_gridpoints = true ]; then
     echo "Content-Type: text/html"
@@ -136,17 +137,18 @@ if [ -n "$LSMASK" -a -n "$FORM_masktype" ]; then
 fi
 if [ -n "$FORM_maskmetadata" ]; then
 	# generate masknetcdf for this particular grid
-	masknetcdf=data/mask_${basefile}_${FORM_field}.nc
+	basefield=`basename ${FORM_field}`
+	masknetcdf=data/mask_${basefile}_${basefield}.nc
 	if [ ! -f $masknetcdf -o $masknetcdf -ot $maskfile ]; then
 		# generate maskfile including the land/sea mask
 		onefile=`echo $file | sed -e 's/%%%/000/' -e 's/%%/00/'`
 		if [ ! -s $onefile ]; then
 			onefile=`echo $file | sed -e 's/%%%/001/' -e 's/%%/01/'`
-			if [ ! -s $onfile ]; then
+			if [ ! -s $onefile ]; then
 			    echo "Content-Type: text/html"
     			echo
 			    echo
-    			. ./myvinkhead.cgi "Error" "Fiel not found"
+    			. ./myvinkhead.cgi "Error" "Field not found"
     			cat <<EOF
 Something went wrong, cannot locate $onefile."
 EOF
@@ -169,7 +171,12 @@ export file
 export TYPE
 if [ "$FORM_gridpoints" != true ]; then
   outfile=data/$TYPE$WMO.dat
-  if [ -s $outfile -a $outfile -nt $file ]; then
+  if [ -s $outfile ]; then
+    n=`cat $outfile | wc -l`
+  else
+    n=0
+  fi
+  if [ $n -gt 10 -a $outfile -nt $file ]; then
     PROG=""
   fi
   . $DIR/getdata.cgi
@@ -215,6 +222,7 @@ EOF
 	  echo "Field already exists<br>"
     else
       if [ -n "$FORM_metadata" ]; then
+        [ "$lwrite" = true ] && echo cdo maskregion,$maskfile $file $outfile.nc
         cdo maskregion,$maskfile $file $outfile.nc
       else
         [ "$lwrite" = true ] && echo ./bin/get_index $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits outfield $outfile.nc
@@ -240,6 +248,7 @@ EOF
     ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii: -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
     while [ $i -lt $nmax ]
     do
+      [ "$lwrite" = true ] && echo "i=$i, checking for $ensfile"
       if [ -f $ensfile -o -f data/$ensfile ]
       then
       	[ ! -s $ensfile ] && ensfile=data/$ensfile # I think

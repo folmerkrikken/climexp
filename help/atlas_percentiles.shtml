@@ -1,0 +1,9 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas: mean and percentiles</div> 
+
+There are two main sources of uncertainty in the climate change projections: natural variability and model uncertainty. The first describes that the weather is always capricious and deviates from the mean. This leads to random colder/warmer/drier/wetter years superimposed on the climate change changes. The second is due to the fact that climate models are not perfect and especially on the local scale have large uncertainties. An estimate of these uncertainties is the spread of a multi-model ensemble beyond the natural variability.
+
+<p>In this form the percentiles give the user the option to explore the total uncertainty resulting from natural variability and model spread. The 50% map shows the median change across all models. This gives a central value, but lower and higher values are still very plausible. The highest and lowest values are dominated by a few models that may not be very realistic, so the useful range is 10%-25% on the low side and 75%-90% on the high side. Any investigation into the possible effects of climate change should take this bandwidth into account.
+
+<p>Note that the maps show the percentiles for each grid point separately. In practice it is often not possible to have these low or high values everywhere on the map simultaneously, areas with more change are usually compensated by areas with less change. These connections are not captured by the maps.
+<!--#include virtual="help_footer.html"-->

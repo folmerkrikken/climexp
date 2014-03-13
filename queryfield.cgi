@@ -55,6 +55,9 @@ cmip5*|thor*) # expecting cmip5_var_Amon_model_exp
 	if [ $type = Amon -o $type = Lmon -o $type = Omon -o $type = OImon ]; then
 	   dir=monthly
 	   NPERYEAR=12
+	elif [ $type = yr ]; then
+	    dir=annual
+	    NPERYEAR=1
 	else
 	   echo "$0: cannot handle type $type yet"
 	   exit -1
@@ -64,7 +67,7 @@ cmip5*|thor*) # expecting cmip5_var_Amon_model_exp
 	     thor) datasetname=THOR;decdir=THOR;;
 	     *) echo "unknown dataset $dataset"; exit -1;;
 	esac
-	if [ $var = pr ]; then
+	if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs ]; then
 	    flipcolor=1
 	fi
 	if [ $exp = decadal ]; then
@@ -158,18 +161,18 @@ rt2b_*)
 rt3_*) 
 	. ./ENSEMBLES_RCM/rt3.cgi;;
 	
-tempa) file=NCDCData/temp_anom.ctl;kindname="NCDC v3";climfield="T2m anom";;
-tempa_old) file=NCDCData/temp_anom_old.ctl;kindname="NCDC v2";climfield="T2m anom";;
-ncdc_temp) file=NCDCData/t_anom.ctl;kindname="NCDC v3";climfield="SST/T2m anom";;
-ncdc_temp_old) file=NCDCData/t_anom.ctl;kindname="NCDC v2";climfield="SST/T2m anom";;
+tempa) file=NCDCData/temp_anom.ctl;kindname="NCDC v3";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
+tempa_old) file=NCDCData/temp_anom_old.ctl;kindname="NCDC v2";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
+ncdc_temp) file=NCDCData/t_anom.ctl;kindname="NCDC v3";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
+ncdc_temp_old) file=NCDCData/t_anom.ctl;kindname="NCDC v2";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 temp) file=CRUData/hadcrut.ctl;kindname="HadCRUT";climfield="SST/T2m anom";;
 tempv) file=CRUData/hadcrutv.ctl;kindname="HadCRUTv";climfield="SST/T2m anom";;
 hadcrut2) file=CRUData/hadcrut2.ctl;kindname="HadCRUT2";climfield="SST/T2m anom";;
 hadcrut2v) file=CRUData/hadcrut2v.ctl;kindname="HadCRUT2v";climfield="SST/T2m anom";;
 hadcrut3) file=CRUData/HadCRUT3_ce.nc;kindname="HadCRUT3";climfield="SST/T2m anom";;
 hadcrut3v) file=CRUData/HadCRUT3v_ce.nc;kindname="HadCRUT3v";climfield="SST/T2m anom";;
-hadcrut4) file=UKMOData/hadcrut4_median.nc;kindname="HadCRUT4";climfield="SST/T2m anom";;
-hadcrut4110) file=UKMOData/HadCRUT.4.1.1.0.median.nc;kindname="HadCRUT4110";climfield="SST/T2m anom";;
+###hadcrut4) file=UKMOData/hadcrut4_median.nc;kindname="HadCRUT4";climfield="SST/T2m anom";;
+hadcrut4) file=UKMOData/HadCRUT.4.2.0.0.median.nc;kindname="HadCRUT4200";climfield="SST/T2m anom";;
 crutem1) file=CRUData/crutem1.ctl;kindname="CRUTEM1";climfield="T2m anom";;
 ncrutem1) file=CRUData/ncrutem1.ctl;kindname="CRUTEM1";climfield="number of stations";;
 crutem1v) file=CRUData/crutem1v.ctl;kindname="CRUTEM1v";climfield="T2m anom";;
@@ -179,8 +182,8 @@ crutem2v) file=CRUData/crutem2v.ctl;kindname="CRUTEM2v";climfield="T2m anom";;
 crutem3) file=CRUData/CRUTEM3_ce.nc;kindname="CRUTEM3";climfield="T2m anom";;
 ncrutem3) file=CRUData/CRUTEM3_nobs_ce.nc;kindname="CRUTEM3";climfield="number of stations";;
 crutem3v) file=CRUData/CRUTEM3v_ce.nc;kindname="CRUTEM3v";climfield="T2m anom";;
-crutem4) file=UKMOData/CRUTEM.4.1.1.0.anomalies.nc;kindname="CRUTEM4";climfield="T2m anom";;
-crutem4v) file=CRUData/CRUTEM4v.nc;kindname="CRUTEM4v";climfield="T2m anom";;
+crutem4) file=CRUData/CRUTEM.4.2.0.0.anomalies.nc;kindname="CRUTEM4.2";climfield="T2m anom";;
+crutem4v) file=CRUData/CRUTEM.4.2.0.0.variance_adjusted.nc;kindname="CRUTEM4.2v";climfield="T2m anom";;
 crutem3_hadsst2) file=CRUData/crutem3_hadsst2.ctl;kindname="CRUTEM3+HadSST2";climfield="T2m/SST anom";;
 giss_temp_250) file=NASAData/giss_temp_both_250.nc;kindname="GISS 250";climfield="T2m/SST anom";LSMASK=NASAData/lsmask.nc;;
 giss_temp_land_250) file=NASAData/giss_temp_land_250.nc;kindname="GISS 250";climfield="T2m anom";LSMASK=NASAData/lsmask.nc;;
@@ -189,9 +192,12 @@ giss_temp_land_1200) file=NASAData/giss_temp_land_1200.nc;kindname="GISS 1200";c
 ghcn_cams_05) file=NCEPData/ghcn_cams_05.ctl;kindname="GHCN/CAMS";climfield="t2m";;
 ghcn_cams_10) file=NCEPData/ghcn_cams_10.ctl;kindname="GHCN/CAMS";climfield="t2m";;
 ghcn_cams_25) file=NCEPData/ghcn_cams_25.ctl;kindname="GHCN/CAMS";climfield="t2m";;
-berkeley_tavg) file=BerkeleyData/TAVG_LatLong1.nc;kindname="Berkeley";climfield="Tavg";;
-berkeley_tmax) file=BerkeleyData/TMAX_LatLong1.nc;kindname="Berkeley";climfield="Tmax";;
-berkeley_tmin) file=BerkeleyData/TMIN_LatLong1.nc;kindname="Berkeley";climfield="Tmin";;
+berkeley_tavg_daily) file=BerkeleyData/TAVG_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tavg";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmax_daily) file=BerkeleyData/TMAX_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmax";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmin_daily) file=BerkeleyData/TMIN_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmin";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tavg) file=BerkeleyData/TAVG_LatLong1.nc;kindname="Berkeley";climfield="Tavg";LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmax) file=BerkeleyData/TMAX_LatLong1.nc;kindname="Berkeley";climfield="Tmax";LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmin) file=BerkeleyData/TMIN_LatLong1.nc;kindname="Berkeley";climfield="Tmin";LSMASK=BerkeleyData/land_mask.nc;;
 hadghcnd_tx) file=UKMOData/hadghcnd_tx.ctl;kindname="HadGHCND";climfield="Tmax";NPERYEAR=366;;
 hadghcnd_tn) file=UKMOData/hadghcnd_tn.ctl;kindname="HadGHCND";climfield="Tmin";NPERYEAR=366;;
 rtg_sst_5dy) file=NCEPData/rtg_sst_5dy.ctl;kindname="RTG";climfield="SST";NPERYEAR=73;;
@@ -269,39 +275,39 @@ cru31_vap_25) file=CRUData/cru_ts_3_10_vap_25.nc;kindname="CRU TS3.10";climfield
 hadcruh_q) file=CRUData/CRU_blendnewjul08_q_7303cf.nc;kindname="HadCRUH";climfield="specific humidity";flipcolor=1;;
 hadcruh_rh) file=CRUData/CRU_blendnewjul08_RH_7303cf.nc;kindname="HadCRUH";climfield="relative humidity";flipcolor=1;;
 
-ensembles_05_tg) file=ENSEMBLES/tg_0.50deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
+ensembles_05_tg) file=ENSEMBLES/tg_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_tg) file=ENSEMBLES/tg_0.25deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
+ensembles_025_tg) file=ENSEMBLES/tg_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tg_mo) file=ENSEMBLES/tg_0.25deg_reg_v8.0u_mo.nc;kindname="E-OBS 8.0";climfield="Tmean";map='set lon -30 50
+ensembles_05_tg_mo) file=ENSEMBLES/tg_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="Tmean";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tn) file=ENSEMBLES/tn_0.50deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
+ensembles_05_tn) file=ENSEMBLES/tn_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_tn) file=ENSEMBLES/tn_0.25deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
+ensembles_025_tn) file=ENSEMBLES/tn_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tn_mo) file=ENSEMBLES/tn_0.25deg_reg_v8.0u_mo.nc;kindname="E-OBS 8.0";climfield="Tmin";map='set lon -30 50
+ensembles_05_tn_mo) file=ENSEMBLES/tn_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="Tmin";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tx) file=ENSEMBLES/tx_0.50deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
+ensembles_05_tx) file=ENSEMBLES/tx_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_tx) file=ENSEMBLES/tx_0.25deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
+ensembles_025_tx) file=ENSEMBLES/tx_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tx_mo) file=ENSEMBLES/tx_0.25deg_reg_v8.0u_mo.nc;kindname="E-OBS 8.0";climfield="Tmax";map='set lon -30 50
+ensembles_05_tx_mo) file=ENSEMBLES/tx_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="Tmax";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_rr) file=ENSEMBLES/rr_0.50deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
+ensembles_05_rr) file=ENSEMBLES/rr_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_rr) file=ENSEMBLES/rr_0.25deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
+ensembles_025_rr) file=ENSEMBLES/rr_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_rr_mo) file=ENSEMBLES/rr_0.25deg_reg_v8.0u_mo.nc;kindname="E-OBS 8.0";climfield="prcp";map='set lon -30 50
+ensembles_05_rr_mo) file=ENSEMBLES/rr_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="prcp";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_pp) file=ENSEMBLES/pp_0.50deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
+ensembles_05_pp) file=ENSEMBLES/pp_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_pp) file=ENSEMBLES/pp_0.25deg_reg_v8.0u.nc;kindname="E-OBS 8.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
+ensembles_025_pp) file=ENSEMBLES/pp_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_pp_mo) file=ENSEMBLES/pp_0.25deg_reg_v8.0u_mo.nc;kindname="E-OBS 8.0";climfield="slp";map='set lon -30 50
+ensembles_05_pp_mo) file=ENSEMBLES/pp_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="slp";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_elev) file=ENSEMBLES/elev_0.50deg_reg_v4.0.nc;kindname="E-OBS 8.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
+ensembles_05_elev) file=ENSEMBLES/elev_0.50deg_reg_v4.0.nc;kindname="E-OBS 9.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_elev) file=ENSEMBLES/elev_0.25deg_reg_v4.0.nc;kindname="E-OBS 8.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
+ensembles_025_elev) file=ENSEMBLES/elev_0.25deg_reg_v4.0.nc;kindname="E-OBS 9.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
 set lat 30 75';;
 scpdsi) file=CRUData/pdsi.penman.vegetat.snow.1901-2009.nc;kindname="CRU";climfield="scPDSI";;
 scpdsi_alpine) file=CRUData/scpdsi_alpine.ctl;kindname="CRU";climfield="scPDSI";map='set lon 4 19
@@ -319,7 +325,7 @@ gpcc_10_n1_5) file=GPCCData/gpcc_V5_10_n1.ctl;kindname="GPCC V5 1.0";climfield="
 gpcc_05_n1_5) file=GPCCData/gpcc_V5_05_n1.ctl;kindname="GPCC V5 0.5";climfield="precipitation";flipcolor=1;;
 gpcc_25) file=GPCCData/gpcc_V6_25.ctl;kindname="GPCC V6 2.5";climfield="precipitation";flipcolor=1;;
 gpcc_10) file=GPCCData/gpcc_V6_10.ctl;kindname="GPCC V6 1.0";climfield="precipitation";flipcolor=1;;
-gpcc_05) file=GPCCData/gpcc_V6_05.ctl;kindname="GPCC V6 0.5";climfield="precipitation";flipcolor=1;;
+gpcc_05) file=GPCCData/gpcc_V6_05.ctl;kindname="GPCC V6 0.5";climfield="precipitation";flipcolor=1;LSMASK=GPCCData/lsmask_05.nc;;
 gpcc_25_n1) file=GPCCData/gpcc_V6_25_n1.ctl;kindname="GPCC V6 2.5";climfield="precipitation";flipcolor=1;;
 gpcc_10_n1) file=GPCCData/gpcc_V6_10_n1.ctl;kindname="GPCC V6 1.0";climfield="precipitation";flipcolor=1;;
 gpcc_05_n1) file=GPCCData/gpcc_V6_05_n1.ctl;kindname="GPCC V6 0.5";climfield="precipitation";flipcolor=1;;
@@ -738,46 +744,51 @@ cfsr_str) file=CFSR/cfsr_lwrf_sfc.nc;kindname=CFSR;climfield="net LW sfc";LSMASK
 cfsr_tsr) file=CFSR/cfsr_swrf_toa.nc;kindname=CFSR;climfield="net SW TOA";LSMASK=CFSR/lsmask_f.nc;;
 cfsr_ttr) file=CFSR/cfsr_ulwrf_toa.nc;kindname=CFSR;climfield="net LW TOA";LSMASK=CFSR/lsmask_f.nc;;
 
-cslp|cpsl) file=20C/prmsl.mon.mean.nc;kindname="20C";climfield="SLP";;
+cslp|cpsl|cprmsl) file=20C/prmsl.mon.mean.nc;kindname="20C";climfield="SLP";LSMASK=unknown;;
 cz850) file=20C/hgt850.nc;kindname="20C";climfield="850mb height";;
 cz700) file=20C/hgt700.nc;kindname="20C";climfield="700mb height";;
 cz500) file=20C/hgt500.nc;kindname="20C";climfield="500mb height";;
 cz300) file=20C/hgt300.nc;kindname="20C";climfield="300mb height";;
 cz200) file=20C/hgt200.nc;kindname="20C";climfield="200mb height";;
-ctaux) file=20C/uflx.mon.mean.nc;kindname="20C";climfield="zonal windstress";;
-cu10m) file=20C/uwnd.10m.mon.mean.nc;kindname="20C";climfield="10m zonal wind";;
+ctaux) file=20C/uflx.mon.mean.nc;kindname="20C";climfield="zonal windstress";LSMASK=20C/land.nc;;
+cu10m) file=20C/uwnd.10m.mon.mean.nc;kindname="20C";climfield="10m zonal wind";LSMASK=20C/land.nc;;
 cu850) file=20C/uwnd850.nc;kindname="20C";climfield="850mb zonal wind";;
 cu700) file=20C/uwnd700.nc;kindname="20C";climfield="700mb zonal wind";;
 cu500) file=20C/uwnd500.nc;kindname="20C";climfield="500mb zonal wind";;
 cu300) file=20C/uwnd300.nc;kindname="20C";climfield="300mb zonal wind";;
 cu200) file=20C/uwnd200.nc;kindname="20C";climfield="200mb zonal wind";;
-ctauy) file=20C/vflx.mon.mean.nc;kindname="20C";climfield="meridional windstress";;
-cv10m) file=20C/vwnd.10m.mon.mean.nc;kindname="20C";climfield="10m meridional wind";;
+ctauy) file=20C/vflx.mon.mean.nc;kindname="20C";climfield="meridional windstress";LSMASK=20C/land.nc;;
+cv10m) file=20C/vwnd.10m.mon.mean.nc;kindname="20C";climfield="10m meridional wind";LSMASK=20C/land.nc;;
 cv850) file=20C/vwnd850.nc;kindname="20C";climfield="850mb meridional wind";;
 cv700) file=20C/vwnd700.nc;kindname="20C";climfield="700mb meridional wind";;
 cv500) file=20C/vwnd500.nc;kindname="20C";climfield="500mb meridional wind";;
 cv300) file=20C/vwnd300.nc;kindname="20C";climfield="300mb meridional wind";;
 cv200) file=20C/vwnd200.nc;kindname="20C";climfield="200mb meridional wind";;
-cwspd) file=20C/wspd.mon.mean.nc;kindname="20C";climfield="10m wind speed";;
-cair|ctas)  file=20C/air.2m.mon.mean.nc;kindname="20C";climfield="2m temperature";;
-ctsfc) file=20C/air.sfc.mon.mean.nc;kindname="20C";climfield="surface temp";;
-ctmin|ctasmin)  file=20C/tmin.2m.mon.mean.nc;kindname="20C";climfield="Tmin";;
-ctmax|ctasmax)  file=20C/tmax.2m.mon.mean.nc;kindname="20C";climfield="Tmax";;
+cwspd) file=20C/wspd.mon.mean.nc;kindname="20C";climfield="10m wind speed";LSMASK=20C/land.nc;;
+cair|ctas)  file=20C/air.2m.mon.mean.nc;kindname="20C";climfield="2m temperature";LSMASK=20C/land.nc;;
+ctsfc) file=20C/air.sfc.mon.mean.nc;kindname="20C";climfield="surface temp";LSMASK=20C/land.nc;;
+ctmin|ctasmin)  file=20C/tmin.2m.mon.mean.nc;kindname="20C";climfield="Tmin";LSMASK=20C/land.nc;;
+ctmax|ctasmax)  file=20C/tmax.2m.mon.mean.nc;kindname="20C";climfield="Tmax";LSMASK=20C/land.nc;;
 ct850) file=20C/air850.nc;kindname="20C";climfield="850mb temperature";;
 ct700) file=20C/air700.nc;kindname="20C";climfield="700mb temperature";;
 ct500) file=20C/air500.nc;kindname="20C";climfield="500mb temperature";;
 ct300) file=20C/air300.nc;kindname="20C";climfield="300mb temperature";;
 ct200) file=20C/air200.nc;kindname="20C";climfield="200mb temperature";;
-cprate|cpr) file=20C/prate.mon.mean.nc;kindname="20C";climfield="precipitation";flipcolor=1;;
-clhtfl) file=20C/lhtfl.mon.mean.nc;kindname="20C";climfield="latent heat flux";;
+cprate|cpr) file=20C/prate.mon.mean.nc;kindname="20C";climfield="precipitation";flipcolor=1;LSMASK=20C/land.nc;;
+cevap) file=20C/evap.mon.mean.nc;kindname="20C";climfield="evaporation";LSMASK=20C/land.nc;;
+cpme) file=20C/pme.mon.mean.nc;kindname="20C";climfield="P-E";flipcolor=1;LSMASK=20C/land.nc;;
+clhtfl) file=20C/lhtfl.mon.mean.nc;kindname="20C";climfield="latent heat flux";LSMASK=20C/land.nc;;
 cq850) file=20C/shum850.nc;kindname="20C";climfield="850mb humidity";flipcolor=1;;
 cq700) file=20C/shum700.nc;kindname="20C";climfield="700mb humidity";flipcolor=1;;
 cq500) file=20C/shum500.nc;kindname="20C";climfield="500mb humidity";flipcolor=1;;
-cqrel850) file=20C/rhum850.nc;kindname="20C";climfield="850mb relative humidity";flipcolor=1;;
-cqrel700) file=20C/rhum700.nc;kindname="20C";climfield="700mb relative humidity";flipcolor=1;;
-cqrel500) file=20C/rhum500.nc;kindname="20C";climfield="500mb relative humidity";flipcolor=1;;
-csoil) file=20C/soilm.mon.mean.nc;kindname="20C";climfield="soil moisture";flipcolor=1;;
-cshtfl) file=20C/shtfl.mon.mean.nc;kindname="20C";climfield="sensible heat flux";;
+cshum2m) file=20C/shum.2m.mon.mean.nc;kindname="20C";climfield="spec. humidity";flipcolor=1;LSMASK=20C/land.nc;;
+crhum2m) file=20C/rhum.2m.mon.mean.nc;kindname="20C";climfield="rel. humidity";flipcolor=1;LSMASK=20C/land.nc;;
+cqrel850) file=20C/rhum850.nc;kindname="20C";climfield="850mb relative humidity";flipcolor=1;LSMASK=20C/land.nc;;
+cqrel700) file=20C/rhum700.nc;kindname="20C";climfield="700mb relative humidity";flipcolor=1;LSMASK=20C/land.nc;;
+cqrel500) file=20C/rhum500.nc;kindname="20C";climfield="500mb relative humidity";flipcolor=1;LSMASK=20C/land.nc;;
+csoil) file=20C/soilm.mon.mean.nc;kindname="20C";climfield="soil moisture";flipcolor=1;LSMASK=20C/land.nc;;
+cshtfl) file=20C/shtfl.mon.mean.nc;kindname="20C";climfield="sensible heat flux";LSMASK=20C/land.nc;;
+cdswrf) file=20C/dswrf.sfc.mon.mean.nc;kindname="20C";climfield="surface downward solar flux";LSMASK=20C/land.nc;;
 
 ncep_z20) file=NCEPData/ncep_z20.ctl;kindname="NCEP";climfield="Z20";map="set lon 120 290";;
 ncep_ucur0) file=NCEPData/ncep_ucur0.ctl;kindname="NCEP";climfield="U at 5m";map="set lon 120 290";;
@@ -845,13 +856,24 @@ era40_rv700) file=ERA40/era40_rv700.nc;kindname="ERA40";climfield="700mb relativ
 era40_hordiv700) file=ERA40/era40_hordiv700.nc;kindname="ERA40";climfield="700mb horizontal divergence";;
 era40_olr) file=ERA40/era40_olr.nc;kindname="ERA40";climfield="
 OLR";;
-erai_slp|erai_psl) file=ERA-interim/erai_msl.nc;kindname="ERA-int";climfield="MSL";LSMASK=ERA-interim/lsmask07.nc;;
+
+erai_prcp_daily) file=ERA-interim/erai_tp_daily.nc;kindname="ERA-int";climfield="pr";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_t2m_daily) file=ERA-interim/erai_t2m_daily.nc;kindname="ERA-int";climfield="T2m";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_t2m_daily_e) file=ERA-interim/erai_t2m_daily_extended.nc;kindname="ERA-int";climfield="T2m";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_slp_daily) file=ERA-interim/erai_msl_daily.nc;kindname="ERA-int";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_slp_daily_e) file=ERA-interim/erai_msl_daily_extended.nc;kindname="ERA-int";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_tmin_daily) file=ERA-interim/erai_tmin_daily.nc;kindname="ERA-int";climfield="Tmin";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_tmax_daily) file=ERA-interim/erai_tmax_daily.nc;kindname="ERA-int";climfield="Tmax";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+
+erai_slp|erai_psl|erai_msl) file=ERA-interim/erai_msl.nc;kindname="ERA-int";climfield="MSL";LSMASK=ERA-interim/lsmask07.nc;;
 erai_taux) file=ERA-interim/erai_ustrs.nc;kindname="ERA-int";climfield="taux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_tauy) file=ERA-interim/erai_vstrs.nc;kindname="ERA-int";climfield="tauy";LSMASK=ERA-interim/lsmask07.nc;;
 erai_u10m) file=ERA-interim/erai_u10.nc;kindname="ERA-int";climfield="u10";LSMASK=ERA-interim/lsmask07.nc;;
 erai_v10m) file=ERA-interim/erai_v10.nc;kindname="ERA-int";climfield="v10";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ts) file=ERA-interim/erai_ts.nc;kindname="ERA-int";climfield="Tsfc";LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2m|erai_tas) file=ERA-interim/erai_t2m.nc;kindname="ERA-int";climfield="T2m";LSMASK=ERA-interim/lsmask07.nc;;
+erai_tmin) file=ERA-interim/erai_tmin.nc;kindname="ERA-int";climfield="Tmin";LSMASK=ERA-interim/lsmask07.nc;;
+erai_tmax) file=ERA-interim/erai_tmax.nc;kindname="ERA-int";climfield="Tmax";LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2msst) file=ERA-interim/erai_t2msst.nc;kindname="ERA-int";climfield="T2m/SST";LSMASK=ERA-interim/lsmask07.nc;;
 erai_wspd) file=ERA-interim/erai_wspd.nc;kindname="ERA-int";climfield="wind speed";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ci) file=ERA-interim/erai_ci.nc;kindname="ERA-int";climfield="sea-ice cover";LSMASK=ERA-interim/lsmask07.nc;;
@@ -859,6 +881,7 @@ erai_snd) file=ERA-interim/erai_snd.nc;kindname="ERA-int";climfield="snow depth"
 erai_lhf) file=ERA-interim/erai_lhtfl.nc;kindname="ERA-int";climfield="latent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_shf) file=ERA-interim/erai_shtfl.nc;kindname="ERA-int";climfield="sensible heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_huss) file=ERA-interim/erai_huss.nc;kindname="ERA-int";climfield="spec humidity";LSMASK=ERA-interim/lsmask075.nc;;
+erai_evap) file=ERA-interim/erai_evap.nc;kindname="ERA-int";climfield="evaporation";LSMASK=ERA-interim/lsmask07.nc;;
 erai_pme) file=ERA-interim/erai_pme.nc;kindname="ERA-int";climfield="P-E";LSMASK=ERA-interim/lsmask07.nc;;
 erai_tp|erai_pr) file=ERA-interim/erai_tp.nc;kindname="ERA-int";climfield="precipitation";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ssr) file=ERA-interim/erai_ssr.nc;kindname="ERA-int";climfield="SSR";LSMASK=ERA-interim/lsmask07.nc;;
@@ -869,12 +892,6 @@ erai_u*) lev=${FORM_field#erai_u};file=ERA-interim/${FORM_field}.nc;kindname="ER
 erai_v*) lev=${FORM_field#erai_v};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="v$lev";;
 erai_w*) lev=${FORM_field#erai_w};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="w$lev";;
 erai_q*) lev=${FORM_field#erai_q};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="q$lev";;
-
-erai_prcp_daily) file=ERA-interim/erai_tp_daily.nc;kindname="ERA-int";climfield="pr";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
-erai_t2m_daily) file=ERA-interim/erai_t2m_daily.nc;kindname="ERA-int";climfield="T2m";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
-erai_slp_daily) file=ERA-interim/erai_msl_daily.nc;kindname="ERA-int";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
-erai_tmin_daily) file=ERA-interim/erai_tmin_daily.nc;kindname="ERA-int";climfield="Tmin";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
-erai_tmax_daily) file=ERA-interim/erai_tmax_daily.nc;kindname="ERA-int";climfield="Tmax";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 
 merra_slp) file=MERRA/merra_slp.nc;kindname="MERRA";climfield="SLP";LSMASK=MERRA/lsmask.nc;;
 merra_taux) file=MERRA/merra_taux.nc;kindname="MERRA";climfield="taux";LSMASK=MERRA/lsmask.nc;;
@@ -3241,456 +3258,6 @@ csm_prec_daily) file=ChallengeData/csm_prec_%%.ctl;kindname="ensemble Challenge"
 csm_psl_daily) file=ChallengeData/csm_psl_%%.ctl;kindname="ensemble Challenge";climfield="PSL";NPERYEAR=365;;
 csm_z500_daily) file=ChallengeData/csm_z501_%%.ctl;kindname="ensemble Challenge";climfield="Z500";NPERYEAR=365;;
 
-knmi_sst_1_1) file=KNMIModel/knmi_sst_1_1.ctl;kindname="stat model";climfield="+0 SST";;
-knmi_sst_1_2) file=KNMIModel/knmi_sst_1_2.ctl;kindname="stat model";climfield="+1 SST";;
-knmi_sst_1_3) file=KNMIModel/knmi_sst_1_3.ctl;kindname="stat model";climfield="+2 SST";;
-knmi_sst_1_4) file=KNMIModel/knmi_sst_1_4.ctl;kindname="stat model";climfield="+3 SST";;
-knmi_sst_1_5) file=KNMIModel/knmi_sst_1_5.ctl;kindname="stat model";climfield="+4 SST";;
-knmi_sst_1_6) file=KNMIModel/knmi_sst_1_6.ctl;kindname="stat model";climfield="+5 SST";;
-knmi_sst_1_7) file=KNMIModel/knmi_sst_1_7.ctl;kindname="stat model";climfield="+6 SST";;
-knmi_sst_1_8) file=KNMIModel/knmi_sst_1_8.ctl;kindname="stat model";climfield="+7 SST";;
-knmi_sst_1_9) file=KNMIModel/knmi_sst_1_9.ctl;kindname="stat model";climfield="+8 SST";;
-knmi_sst_1_10) file=KNMIModel/knmi_sst_1_10.ctl;kindname="stat model";climfield="+9 SST";;
-knmi_sst_1_11) file=KNMIModel/knmi_sst_1_11.ctl;kindname="stat model";climfield="+10 SST";;
-knmi_sst_1_12) file=KNMIModel/knmi_sst_1_12.ctl;kindname="stat model";climfield="+11 SST";;
-knmi_sst_1_jan) file=KNMIModel/knmi_sst_1_jan.ctl;kindname="stat model";climfield="jan SST";;
-knmi_sst_1_feb) file=KNMIModel/knmi_sst_1_feb.ctl;kindname="stat model";climfield="feb SST";;
-knmi_sst_1_mar) file=KNMIModel/knmi_sst_1_mar.ctl;kindname="stat model";climfield="mar SST";;
-knmi_sst_1_apr) file=KNMIModel/knmi_sst_1_apr.ctl;kindname="stat model";climfield="apr SST";;
-knmi_sst_1_may) file=KNMIModel/knmi_sst_1_may.ctl;kindname="stat model";climfield="may SST";;
-knmi_sst_1_jun) file=KNMIModel/knmi_sst_1_jun.ctl;kindname="stat model";climfield="jun SST";;
-knmi_sst_1_jul) file=KNMIModel/knmi_sst_1_jul.ctl;kindname="stat model";climfield="jul SST";;
-knmi_sst_1_aug) file=KNMIModel/knmi_sst_1_aug.ctl;kindname="stat model";climfield="aug SST";;
-knmi_sst_1_sep) file=KNMIModel/knmi_sst_1_sep.ctl;kindname="stat model";climfield="sep SST";;
-knmi_sst_1_oct) file=KNMIModel/knmi_sst_1_oct.ctl;kindname="stat model";climfield="oct SST";;
-knmi_sst_1_nov) file=KNMIModel/knmi_sst_1_nov.ctl;kindname="stat model";climfield="nov SST";;
-knmi_sst_1_dec) file=KNMIModel/knmi_sst_1_dec.ctl;kindname="stat model";climfield="dec SST";;
-
-knmi_sst_3_1) file=KNMIModel/knmi_sst_3_1.ctl;kindname="3-month ave stat model";climfield="+0 SST";;
-knmi_sst_3_2) file=KNMIModel/knmi_sst_3_2.ctl;kindname="3-month ave stat model";climfield="+1 SST";;
-knmi_sst_3_3) file=KNMIModel/knmi_sst_3_3.ctl;kindname="3-month ave stat model";climfield="+2 SST";;
-knmi_sst_3_4) file=KNMIModel/knmi_sst_3_4.ctl;kindname="3-month ave stat model";climfield="+3 SST";;
-knmi_sst_3_5) file=KNMIModel/knmi_sst_3_5.ctl;kindname="3-month ave stat model";climfield="+4 SST";;
-knmi_sst_3_6) file=KNMIModel/knmi_sst_3_6.ctl;kindname="3-month ave stat model";climfield="+5 SST";;
-knmi_sst_3_7) file=KNMIModel/knmi_sst_3_7.ctl;kindname="3-month ave stat model";climfield="+6 SST";;
-knmi_sst_3_8) file=KNMIModel/knmi_sst_3_8.ctl;kindname="3-month ave stat model";climfield="+7 SST";;
-knmi_sst_3_9) file=KNMIModel/knmi_sst_3_9.ctl;kindname="3-month ave stat model";climfield="+8 SST";;
-knmi_sst_3_10) file=KNMIModel/knmi_sst_3_10.ctl;kindname="3-month ave stat model";climfield="+9 SST";;
-knmi_sst_3_11) file=KNMIModel/knmi_sst_3_11.ctl;kindname="3-month ave stat model";climfield="+10 SST";;
-knmi_sst_3_12) file=KNMIModel/knmi_sst_3_12.ctl;kindname="3-month ave stat model";climfield="+11 SST";;
-knmi_sst_3_jan) file=KNMIModel/knmi_sst_3_jan.ctl;kindname="3-month ave stat model";climfield="jan SST";;
-knmi_sst_3_feb) file=KNMIModel/knmi_sst_3_feb.ctl;kindname="3-month ave stat model";climfield="feb SST";;
-knmi_sst_3_mar) file=KNMIModel/knmi_sst_3_mar.ctl;kindname="3-month ave stat model";climfield="mar SST";;
-knmi_sst_3_apr) file=KNMIModel/knmi_sst_3_apr.ctl;kindname="3-month ave stat model";climfield="apr SST";;
-knmi_sst_3_may) file=KNMIModel/knmi_sst_3_may.ctl;kindname="3-month ave stat model";climfield="may SST";;
-knmi_sst_3_jun) file=KNMIModel/knmi_sst_3_jun.ctl;kindname="3-month ave stat model";climfield="jun SST";;
-knmi_sst_3_jul) file=KNMIModel/knmi_sst_3_jul.ctl;kindname="3-month ave stat model";climfield="jul SST";;
-knmi_sst_3_aug) file=KNMIModel/knmi_sst_3_aug.ctl;kindname="3-month ave stat model";climfield="aug SST";;
-knmi_sst_3_sep) file=KNMIModel/knmi_sst_3_sep.ctl;kindname="3-month ave stat model";climfield="sep SST";;
-knmi_sst_3_oct) file=KNMIModel/knmi_sst_3_oct.ctl;kindname="3-month ave stat model";climfield="oct SST";;
-knmi_sst_3_nov) file=KNMIModel/knmi_sst_3_nov.ctl;kindname="3-month ave stat model";climfield="nov SST";;
-knmi_sst_3_dec) file=KNMIModel/knmi_sst_3_dec.ctl;kindname="3-month ave stat model";climfield="dec SST";;
-
-knmi_t2m_1_1) file=KNMIModel/knmi_t2m_1_1.ctl;kindname="stat model";climfield="+0 T2m";;
-knmi_t2m_1_2) file=KNMIModel/knmi_t2m_1_2.ctl;kindname="stat model";climfield="+1 T2m";;
-knmi_t2m_1_3) file=KNMIModel/knmi_t2m_1_3.ctl;kindname="stat model";climfield="+2 T2m";;
-knmi_t2m_1_4) file=KNMIModel/knmi_t2m_1_4.ctl;kindname="stat model";climfield="+3 T2m";;
-knmi_t2m_1_5) file=KNMIModel/knmi_t2m_1_5.ctl;kindname="stat model";climfield="+4 T2m";;
-knmi_t2m_1_6) file=KNMIModel/knmi_t2m_1_6.ctl;kindname="stat model";climfield="+5 T2m";;
-knmi_t2m_1_7) file=KNMIModel/knmi_t2m_1_7.ctl;kindname="stat model";climfield="+6 T2m";;
-knmi_t2m_1_8) file=KNMIModel/knmi_t2m_1_8.ctl;kindname="stat model";climfield="+7 T2m";;
-knmi_t2m_1_9) file=KNMIModel/knmi_t2m_1_9.ctl;kindname="stat model";climfield="+8 T2m";;
-knmi_t2m_1_10) file=KNMIModel/knmi_t2m_1_10.ctl;kindname="stat model";climfield="+9 T2m";;
-knmi_t2m_1_11) file=KNMIModel/knmi_t2m_1_11.ctl;kindname="stat model";climfield="+10 T2m";;
-knmi_t2m_1_12) file=KNMIModel/knmi_t2m_1_12.ctl;kindname="stat model";climfield="+11 T2m";;
-knmi_t2m_1_jan) file=KNMIModel/knmi_t2m_1_jan.ctl;kindname="stat model";climfield="jan T2m";;
-knmi_t2m_1_feb) file=KNMIModel/knmi_t2m_1_feb.ctl;kindname="stat model";climfield="feb T2m";;
-knmi_t2m_1_mar) file=KNMIModel/knmi_t2m_1_mar.ctl;kindname="stat model";climfield="mar T2m";;
-knmi_t2m_1_apr) file=KNMIModel/knmi_t2m_1_apr.ctl;kindname="stat model";climfield="apr T2m";;
-knmi_t2m_1_may) file=KNMIModel/knmi_t2m_1_may.ctl;kindname="stat model";climfield="may T2m";;
-knmi_t2m_1_jun) file=KNMIModel/knmi_t2m_1_jun.ctl;kindname="stat model";climfield="jun T2m";;
-knmi_t2m_1_jul) file=KNMIModel/knmi_t2m_1_jul.ctl;kindname="stat model";climfield="jul T2m";;
-knmi_t2m_1_aug) file=KNMIModel/knmi_t2m_1_aug.ctl;kindname="stat model";climfield="aug T2m";;
-knmi_t2m_1_sep) file=KNMIModel/knmi_t2m_1_sep.ctl;kindname="stat model";climfield="sep T2m";;
-knmi_t2m_1_oct) file=KNMIModel/knmi_t2m_1_oct.ctl;kindname="stat model";climfield="oct T2m";;
-knmi_t2m_1_nov) file=KNMIModel/knmi_t2m_1_nov.ctl;kindname="stat model";climfield="nov T2m";;
-knmi_t2m_1_dec) file=KNMIModel/knmi_t2m_1_dec.ctl;kindname="stat model";climfield="dec T2m";;
-
-knmi_t2m_3_1) file=KNMIModel/knmi_t2m_3_1.ctl;kindname="3-month ave stat model";climfield="+0 T2m";;
-knmi_t2m_3_2) file=KNMIModel/knmi_t2m_3_2.ctl;kindname="3-month ave stat model";climfield="+1 T2m";;
-knmi_t2m_3_3) file=KNMIModel/knmi_t2m_3_3.ctl;kindname="3-month ave stat model";climfield="+2 T2m";;
-knmi_t2m_3_4) file=KNMIModel/knmi_t2m_3_4.ctl;kindname="3-month ave stat model";climfield="+3 T2m";;
-knmi_t2m_3_5) file=KNMIModel/knmi_t2m_3_5.ctl;kindname="3-month ave stat model";climfield="+4 T2m";;
-knmi_t2m_3_6) file=KNMIModel/knmi_t2m_3_6.ctl;kindname="3-month ave stat model";climfield="+5 T2m";;
-knmi_t2m_3_7) file=KNMIModel/knmi_t2m_3_7.ctl;kindname="3-month ave stat model";climfield="+6 T2m";;
-knmi_t2m_3_8) file=KNMIModel/knmi_t2m_3_8.ctl;kindname="3-month ave stat model";climfield="+7 T2m";;
-knmi_t2m_3_9) file=KNMIModel/knmi_t2m_3_9.ctl;kindname="3-month ave stat model";climfield="+8 T2m";;
-knmi_t2m_3_10) file=KNMIModel/knmi_t2m_3_10.ctl;kindname="3-month ave stat model";climfield="+9 T2m";;
-knmi_t2m_3_11) file=KNMIModel/knmi_t2m_3_11.ctl;kindname="3-month ave stat model";climfield="+10 T2m";;
-knmi_t2m_3_12) file=KNMIModel/knmi_t2m_3_12.ctl;kindname="3-month ave stat model";climfield="+11 T2m";;
-knmi_t2m_3_jan) file=KNMIModel/knmi_t2m_3_jan.ctl;kindname="3-month ave stat model";climfield="jan T2m";;
-knmi_t2m_3_feb) file=KNMIModel/knmi_t2m_3_feb.ctl;kindname="3-month ave stat model";climfield="feb T2m";;
-knmi_t2m_3_mar) file=KNMIModel/knmi_t2m_3_mar.ctl;kindname="3-month ave stat model";climfield="mar T2m";;
-knmi_t2m_3_apr) file=KNMIModel/knmi_t2m_3_apr.ctl;kindname="3-month ave stat model";climfield="apr T2m";;
-knmi_t2m_3_may) file=KNMIModel/knmi_t2m_3_may.ctl;kindname="3-month ave stat model";climfield="may T2m";;
-knmi_t2m_3_jun) file=KNMIModel/knmi_t2m_3_jun.ctl;kindname="3-month ave stat model";climfield="jun T2m";;
-knmi_t2m_3_jul) file=KNMIModel/knmi_t2m_3_jul.ctl;kindname="3-month ave stat model";climfield="jul T2m";;
-knmi_t2m_3_aug) file=KNMIModel/knmi_t2m_3_aug.ctl;kindname="3-month ave stat model";climfield="aug T2m";;
-knmi_t2m_3_sep) file=KNMIModel/knmi_t2m_3_sep.ctl;kindname="3-month ave stat model";climfield="sep T2m";;
-knmi_t2m_3_oct) file=KNMIModel/knmi_t2m_3_oct.ctl;kindname="3-month ave stat model";climfield="oct T2m";;
-knmi_t2m_3_nov) file=KNMIModel/knmi_t2m_3_nov.ctl;kindname="3-month ave stat model";climfield="nov T2m";;
-knmi_t2m_3_dec) file=KNMIModel/knmi_t2m_3_dec.ctl;kindname="3-month ave stat model";climfield="dec T2m";;
-
-knmi_T2m_1_1) file=KNMIModel/knmi_T2m_1_1.ctl;kindname="stat model";climfield="+0 T2m";;
-knmi_T2m_1_2) file=KNMIModel/knmi_T2m_1_2.ctl;kindname="stat model";climfield="+1 T2m";;
-knmi_T2m_1_3) file=KNMIModel/knmi_T2m_1_3.ctl;kindname="stat model";climfield="+2 T2m";;
-knmi_T2m_1_4) file=KNMIModel/knmi_T2m_1_4.ctl;kindname="stat model";climfield="+3 T2m";;
-knmi_T2m_1_5) file=KNMIModel/knmi_T2m_1_5.ctl;kindname="stat model";climfield="+4 T2m";;
-knmi_T2m_1_6) file=KNMIModel/knmi_T2m_1_6.ctl;kindname="stat model";climfield="+5 T2m";;
-knmi_T2m_1_7) file=KNMIModel/knmi_T2m_1_7.ctl;kindname="stat model";climfield="+6 T2m";;
-knmi_T2m_1_8) file=KNMIModel/knmi_T2m_1_8.ctl;kindname="stat model";climfield="+7 T2m";;
-knmi_T2m_1_9) file=KNMIModel/knmi_T2m_1_9.ctl;kindname="stat model";climfield="+8 T2m";;
-knmi_T2m_1_10) file=KNMIModel/knmi_T2m_1_10.ctl;kindname="stat model";climfield="+9 T2m";;
-knmi_T2m_1_11) file=KNMIModel/knmi_T2m_1_11.ctl;kindname="stat model";climfield="+10 T2m";;
-knmi_T2m_1_12) file=KNMIModel/knmi_T2m_1_12.ctl;kindname="stat model";climfield="+11 T2m";;
-knmi_T2m_1_jan) file=KNMIModel/knmi_T2m_1_jan.ctl;kindname="stat model";climfield="jan T2m";;
-knmi_T2m_1_feb) file=KNMIModel/knmi_T2m_1_feb.ctl;kindname="stat model";climfield="feb T2m";;
-knmi_T2m_1_mar) file=KNMIModel/knmi_T2m_1_mar.ctl;kindname="stat model";climfield="mar T2m";;
-knmi_T2m_1_apr) file=KNMIModel/knmi_T2m_1_apr.ctl;kindname="stat model";climfield="apr T2m";;
-knmi_T2m_1_may) file=KNMIModel/knmi_T2m_1_may.ctl;kindname="stat model";climfield="may T2m";;
-knmi_T2m_1_jun) file=KNMIModel/knmi_T2m_1_jun.ctl;kindname="stat model";climfield="jun T2m";;
-knmi_T2m_1_jul) file=KNMIModel/knmi_T2m_1_jul.ctl;kindname="stat model";climfield="jul T2m";;
-knmi_T2m_1_aug) file=KNMIModel/knmi_T2m_1_aug.ctl;kindname="stat model";climfield="aug T2m";;
-knmi_T2m_1_sep) file=KNMIModel/knmi_T2m_1_sep.ctl;kindname="stat model";climfield="sep T2m";;
-knmi_T2m_1_oct) file=KNMIModel/knmi_T2m_1_oct.ctl;kindname="stat model";climfield="oct T2m";;
-knmi_T2m_1_nov) file=KNMIModel/knmi_T2m_1_nov.ctl;kindname="stat model";climfield="nov T2m";;
-knmi_T2m_1_dec) file=KNMIModel/knmi_T2m_1_dec.ctl;kindname="stat model";climfield="dec T2m";;
-
-knmi_T2m_3_1) file=KNMIModel/knmi_T2m_3_1.ctl;kindname="3-month ave stat model";climfield="+0 T2m";;
-knmi_T2m_3_2) file=KNMIModel/knmi_T2m_3_2.ctl;kindname="3-month ave stat model";climfield="+1 T2m";;
-knmi_T2m_3_3) file=KNMIModel/knmi_T2m_3_3.ctl;kindname="3-month ave stat model";climfield="+2 T2m";;
-knmi_T2m_3_4) file=KNMIModel/knmi_T2m_3_4.ctl;kindname="3-month ave stat model";climfield="+3 T2m";;
-knmi_T2m_3_5) file=KNMIModel/knmi_T2m_3_5.ctl;kindname="3-month ave stat model";climfield="+4 T2m";;
-knmi_T2m_3_6) file=KNMIModel/knmi_T2m_3_6.ctl;kindname="3-month ave stat model";climfield="+5 T2m";;
-knmi_T2m_3_7) file=KNMIModel/knmi_T2m_3_7.ctl;kindname="3-month ave stat model";climfield="+6 T2m";;
-knmi_T2m_3_8) file=KNMIModel/knmi_T2m_3_8.ctl;kindname="3-month ave stat model";climfield="+7 T2m";;
-knmi_T2m_3_9) file=KNMIModel/knmi_T2m_3_9.ctl;kindname="3-month ave stat model";climfield="+8 T2m";;
-knmi_T2m_3_10) file=KNMIModel/knmi_T2m_3_10.ctl;kindname="3-month ave stat model";climfield="+9 T2m";;
-knmi_T2m_3_11) file=KNMIModel/knmi_T2m_3_11.ctl;kindname="3-month ave stat model";climfield="+10 T2m";;
-knmi_T2m_3_12) file=KNMIModel/knmi_T2m_3_12.ctl;kindname="3-month ave stat model";climfield="+11 T2m";;
-knmi_T2m_3_jan) file=KNMIModel/knmi_T2m_3_jan.ctl;kindname="3-month ave stat model";climfield="jan T2m";;
-knmi_T2m_3_feb) file=KNMIModel/knmi_T2m_3_feb.ctl;kindname="3-month ave stat model";climfield="feb T2m";;
-knmi_T2m_3_mar) file=KNMIModel/knmi_T2m_3_mar.ctl;kindname="3-month ave stat model";climfield="mar T2m";;
-knmi_T2m_3_apr) file=KNMIModel/knmi_T2m_3_apr.ctl;kindname="3-month ave stat model";climfield="apr T2m";;
-knmi_T2m_3_may) file=KNMIModel/knmi_T2m_3_may.ctl;kindname="3-month ave stat model";climfield="may T2m";;
-knmi_T2m_3_jun) file=KNMIModel/knmi_T2m_3_jun.ctl;kindname="3-month ave stat model";climfield="jun T2m";;
-knmi_T2m_3_jul) file=KNMIModel/knmi_T2m_3_jul.ctl;kindname="3-month ave stat model";climfield="jul T2m";;
-knmi_T2m_3_aug) file=KNMIModel/knmi_T2m_3_aug.ctl;kindname="3-month ave stat model";climfield="aug T2m";;
-knmi_T2m_3_sep) file=KNMIModel/knmi_T2m_3_sep.ctl;kindname="3-month ave stat model";climfield="sep T2m";;
-knmi_T2m_3_oct) file=KNMIModel/knmi_T2m_3_oct.ctl;kindname="3-month ave stat model";climfield="oct T2m";;
-knmi_T2m_3_nov) file=KNMIModel/knmi_T2m_3_nov.ctl;kindname="3-month ave stat model";climfield="nov T2m";;
-knmi_T2m_3_dec) file=KNMIModel/knmi_T2m_3_dec.ctl;kindname="3-month ave stat model";climfield="dec T2m";;
-
-knmi_slp_1_1) file=KNMIModel/knmi_slp_1_1.ctl;kindname="stat model";climfield="+0 SLP";;
-knmi_slp_1_2) file=KNMIModel/knmi_slp_1_2.ctl;kindname="stat model";climfield="+1 SLP";;
-knmi_slp_1_3) file=KNMIModel/knmi_slp_1_3.ctl;kindname="stat model";climfield="+2 SLP";;
-knmi_slp_1_4) file=KNMIModel/knmi_slp_1_4.ctl;kindname="stat model";climfield="+3 SLP";;
-knmi_slp_1_5) file=KNMIModel/knmi_slp_1_5.ctl;kindname="stat model";climfield="+4 SLP";;
-knmi_slp_1_6) file=KNMIModel/knmi_slp_1_6.ctl;kindname="stat model";climfield="+5 SLP";;
-knmi_slp_1_7) file=KNMIModel/knmi_slp_1_7.ctl;kindname="stat model";climfield="+6 SLP";;
-knmi_slp_1_8) file=KNMIModel/knmi_slp_1_8.ctl;kindname="stat model";climfield="+7 SLP";;
-knmi_slp_1_9) file=KNMIModel/knmi_slp_1_9.ctl;kindname="stat model";climfield="+8 SLP";;
-knmi_slp_1_10) file=KNMIModel/knmi_slp_1_10.ctl;kindname="stat model";climfield="+9 SLP";;
-knmi_slp_1_11) file=KNMIModel/knmi_slp_1_11.ctl;kindname="stat model";climfield="+10 SLP";;
-knmi_slp_1_12) file=KNMIModel/knmi_slp_1_12.ctl;kindname="stat model";climfield="+11 SLP";;
-knmi_slp_1_jan) file=KNMIModel/knmi_slp_1_jan.ctl;kindname="stat model";climfield="jan SLP";;
-knmi_slp_1_feb) file=KNMIModel/knmi_slp_1_feb.ctl;kindname="stat model";climfield="feb SLP";;
-knmi_slp_1_mar) file=KNMIModel/knmi_slp_1_mar.ctl;kindname="stat model";climfield="mar SLP";;
-knmi_slp_1_apr) file=KNMIModel/knmi_slp_1_apr.ctl;kindname="stat model";climfield="apr SLP";;
-knmi_slp_1_may) file=KNMIModel/knmi_slp_1_may.ctl;kindname="stat model";climfield="may SLP";;
-knmi_slp_1_jun) file=KNMIModel/knmi_slp_1_jun.ctl;kindname="stat model";climfield="jun SLP";;
-knmi_slp_1_jul) file=KNMIModel/knmi_slp_1_jul.ctl;kindname="stat model";climfield="jul SLP";;
-knmi_slp_1_aug) file=KNMIModel/knmi_slp_1_aug.ctl;kindname="stat model";climfield="aug SLP";;
-knmi_slp_1_sep) file=KNMIModel/knmi_slp_1_sep.ctl;kindname="stat model";climfield="sep SLP";;
-knmi_slp_1_oct) file=KNMIModel/knmi_slp_1_oct.ctl;kindname="stat model";climfield="oct SLP";;
-knmi_slp_1_nov) file=KNMIModel/knmi_slp_1_nov.ctl;kindname="stat model";climfield="nov SLP";;
-knmi_slp_1_dec) file=KNMIModel/knmi_slp_1_dec.ctl;kindname="stat model";climfield="dec SLP";;
-
-knmi_slp_3_1) file=KNMIModel/knmi_slp_3_1.ctl;kindname="3-month ave stat model";climfield="+0 SLP";;
-knmi_slp_3_2) file=KNMIModel/knmi_slp_3_2.ctl;kindname="3-month ave stat model";climfield="+1 SLP";;
-knmi_slp_3_3) file=KNMIModel/knmi_slp_3_3.ctl;kindname="3-month ave stat model";climfield="+2 SLP";;
-knmi_slp_3_4) file=KNMIModel/knmi_slp_3_4.ctl;kindname="3-month ave stat model";climfield="+3 SLP";;
-knmi_slp_3_5) file=KNMIModel/knmi_slp_3_5.ctl;kindname="3-month ave stat model";climfield="+4 SLP";;
-knmi_slp_3_6) file=KNMIModel/knmi_slp_3_6.ctl;kindname="3-month ave stat model";climfield="+5 SLP";;
-knmi_slp_3_7) file=KNMIModel/knmi_slp_3_7.ctl;kindname="3-month ave stat model";climfield="+6 SLP";;
-knmi_slp_3_8) file=KNMIModel/knmi_slp_3_8.ctl;kindname="3-month ave stat model";climfield="+7 SLP";;
-knmi_slp_3_9) file=KNMIModel/knmi_slp_3_9.ctl;kindname="3-month ave stat model";climfield="+8 SLP";;
-knmi_slp_3_10) file=KNMIModel/knmi_slp_3_10.ctl;kindname="3-month ave stat model";climfield="+9 SLP";;
-knmi_slp_3_11) file=KNMIModel/knmi_slp_3_11.ctl;kindname="3-month ave stat model";climfield="+10 SLP";;
-knmi_slp_3_12) file=KNMIModel/knmi_slp_3_12.ctl;kindname="3-month ave stat model";climfield="+11 SLP";;
-knmi_slp_3_jan) file=KNMIModel/knmi_slp_3_jan.ctl;kindname="3-month ave stat model";climfield="jan SLP";;
-knmi_slp_3_feb) file=KNMIModel/knmi_slp_3_feb.ctl;kindname="3-month ave stat model";climfield="feb SLP";;
-knmi_slp_3_mar) file=KNMIModel/knmi_slp_3_mar.ctl;kindname="3-month ave stat model";climfield="mar SLP";;
-knmi_slp_3_apr) file=KNMIModel/knmi_slp_3_apr.ctl;kindname="3-month ave stat model";climfield="apr SLP";;
-knmi_slp_3_may) file=KNMIModel/knmi_slp_3_may.ctl;kindname="3-month ave stat model";climfield="may SLP";;
-knmi_slp_3_jun) file=KNMIModel/knmi_slp_3_jun.ctl;kindname="3-month ave stat model";climfield="jun SLP";;
-knmi_slp_3_jul) file=KNMIModel/knmi_slp_3_jul.ctl;kindname="3-month ave stat model";climfield="jul SLP";;
-knmi_slp_3_aug) file=KNMIModel/knmi_slp_3_aug.ctl;kindname="3-month ave stat model";climfield="aug SLP";;
-knmi_slp_3_sep) file=KNMIModel/knmi_slp_3_sep.ctl;kindname="3-month ave stat model";climfield="sep SLP";;
-knmi_slp_3_oct) file=KNMIModel/knmi_slp_3_oct.ctl;kindname="3-month ave stat model";climfield="oct SLP";;
-knmi_slp_3_nov) file=KNMIModel/knmi_slp_3_nov.ctl;kindname="3-month ave stat model";climfield="nov SLP";;
-knmi_slp_3_dec) file=KNMIModel/knmi_slp_3_dec.ctl;kindname="3-month ave stat model";climfield="dec SLP";;
-
-knmi_500_1_1) file=KNMIModel/knmi_500_1_1.ctl;kindname="stat model";climfield="+0 z500";;
-knmi_500_1_2) file=KNMIModel/knmi_500_1_2.ctl;kindname="stat model";climfield="+1 z500";;
-knmi_500_1_3) file=KNMIModel/knmi_500_1_3.ctl;kindname="stat model";climfield="+2 z500";;
-knmi_500_1_4) file=KNMIModel/knmi_500_1_4.ctl;kindname="stat model";climfield="+3 z500";;
-knmi_500_1_5) file=KNMIModel/knmi_500_1_5.ctl;kindname="stat model";climfield="+4 z500";;
-knmi_500_1_6) file=KNMIModel/knmi_500_1_6.ctl;kindname="stat model";climfield="+5 z500";;
-knmi_500_1_7) file=KNMIModel/knmi_500_1_7.ctl;kindname="stat model";climfield="+6 z500";;
-knmi_500_1_8) file=KNMIModel/knmi_500_1_8.ctl;kindname="stat model";climfield="+7 z500";;
-knmi_500_1_9) file=KNMIModel/knmi_500_1_9.ctl;kindname="stat model";climfield="+8 z500";;
-knmi_500_1_10) file=KNMIModel/knmi_500_1_10.ctl;kindname="stat model";climfield="+9 z500";;
-knmi_500_1_11) file=KNMIModel/knmi_500_1_11.ctl;kindname="stat model";climfield="+10 z500";;
-knmi_500_1_12) file=KNMIModel/knmi_500_1_12.ctl;kindname="stat model";climfield="+11 z500";;
-knmi_500_1_jan) file=KNMIModel/knmi_500_1_jan.ctl;kindname="stat model";climfield="jan z500";;
-knmi_500_1_feb) file=KNMIModel/knmi_500_1_feb.ctl;kindname="stat model";climfield="feb z500";;
-knmi_500_1_mar) file=KNMIModel/knmi_500_1_mar.ctl;kindname="stat model";climfield="mar z500";;
-knmi_500_1_apr) file=KNMIModel/knmi_500_1_apr.ctl;kindname="stat model";climfield="apr z500";;
-knmi_500_1_may) file=KNMIModel/knmi_500_1_may.ctl;kindname="stat model";climfield="may z500";;
-knmi_500_1_jun) file=KNMIModel/knmi_500_1_jun.ctl;kindname="stat model";climfield="jun z500";;
-knmi_500_1_jul) file=KNMIModel/knmi_500_1_jul.ctl;kindname="stat model";climfield="jul z500";;
-knmi_500_1_aug) file=KNMIModel/knmi_500_1_aug.ctl;kindname="stat model";climfield="aug z500";;
-knmi_500_1_sep) file=KNMIModel/knmi_500_1_sep.ctl;kindname="stat model";climfield="sep z500";;
-knmi_500_1_oct) file=KNMIModel/knmi_500_1_oct.ctl;kindname="stat model";climfield="oct z500";;
-knmi_500_1_nov) file=KNMIModel/knmi_500_1_nov.ctl;kindname="stat model";climfield="nov z500";;
-knmi_500_1_dec) file=KNMIModel/knmi_500_1_dec.ctl;kindname="stat model";climfield="dec z500";;
-
-knmi_500_3_1) file=KNMIModel/knmi_500_3_1.ctl;kindname="3-month ave stat model";climfield="+0 z500";;
-knmi_500_3_2) file=KNMIModel/knmi_500_3_2.ctl;kindname="3-month ave stat model";climfield="+1 z500";;
-knmi_500_3_3) file=KNMIModel/knmi_500_3_3.ctl;kindname="3-month ave stat model";climfield="+2 z500";;
-knmi_500_3_4) file=KNMIModel/knmi_500_3_4.ctl;kindname="3-month ave stat model";climfield="+3 z500";;
-knmi_500_3_5) file=KNMIModel/knmi_500_3_5.ctl;kindname="3-month ave stat model";climfield="+4 z500";;
-knmi_500_3_6) file=KNMIModel/knmi_500_3_6.ctl;kindname="3-month ave stat model";climfield="+5 z500";;
-knmi_500_3_7) file=KNMIModel/knmi_500_3_7.ctl;kindname="3-month ave stat model";climfield="+6 z500";;
-knmi_500_3_8) file=KNMIModel/knmi_500_3_8.ctl;kindname="3-month ave stat model";climfield="+7 z500";;
-knmi_500_3_9) file=KNMIModel/knmi_500_3_9.ctl;kindname="3-month ave stat model";climfield="+8 z500";;
-knmi_500_3_10) file=KNMIModel/knmi_500_3_10.ctl;kindname="3-month ave stat model";climfield="+9 z500";;
-knmi_500_3_11) file=KNMIModel/knmi_500_3_11.ctl;kindname="3-month ave stat model";climfield="+10 z500";;
-knmi_500_3_12) file=KNMIModel/knmi_500_3_12.ctl;kindname="3-month ave stat model";climfield="+11 z500";;
-knmi_500_3_jan) file=KNMIModel/knmi_500_3_jan.ctl;kindname="3-month ave stat model";climfield="jan z500";;
-knmi_500_3_feb) file=KNMIModel/knmi_500_3_feb.ctl;kindname="3-month ave stat model";climfield="feb z500";;
-knmi_500_3_mar) file=KNMIModel/knmi_500_3_mar.ctl;kindname="3-month ave stat model";climfield="mar z500";;
-knmi_500_3_apr) file=KNMIModel/knmi_500_3_apr.ctl;kindname="3-month ave stat model";climfield="apr z500";;
-knmi_500_3_may) file=KNMIModel/knmi_500_3_may.ctl;kindname="3-month ave stat model";climfield="may z500";;
-knmi_500_3_jun) file=KNMIModel/knmi_500_3_jun.ctl;kindname="3-month ave stat model";climfield="jun z500";;
-knmi_500_3_jul) file=KNMIModel/knmi_500_3_jul.ctl;kindname="3-month ave stat model";climfield="jul z500";;
-knmi_500_3_aug) file=KNMIModel/knmi_500_3_aug.ctl;kindname="3-month ave stat model";climfield="aug z500";;
-knmi_500_3_sep) file=KNMIModel/knmi_500_3_sep.ctl;kindname="3-month ave stat model";climfield="sep z500";;
-knmi_500_3_oct) file=KNMIModel/knmi_500_3_oct.ctl;kindname="3-month ave stat model";climfield="oct z500";;
-knmi_500_3_nov) file=KNMIModel/knmi_500_3_nov.ctl;kindname="3-month ave stat model";climfield="nov z500";;
-knmi_500_3_dec) file=KNMIModel/knmi_500_3_dec.ctl;kindname="3-month ave stat model";climfield="dec z500";;
-
-knmi_prc_1_1) file=KNMIModel/knmi_prc_1_1.ctl;kindname="stat model";climfield="+0 prcp";;
-knmi_prc_1_2) file=KNMIModel/knmi_prc_1_2.ctl;kindname="stat model";climfield="+1 prcp";;
-knmi_prc_1_3) file=KNMIModel/knmi_prc_1_3.ctl;kindname="stat model";climfield="+2 prcp";;
-knmi_prc_1_4) file=KNMIModel/knmi_prc_1_4.ctl;kindname="stat model";climfield="+3 prcp";;
-knmi_prc_1_5) file=KNMIModel/knmi_prc_1_5.ctl;kindname="stat model";climfield="+4 prcp";;
-knmi_prc_1_6) file=KNMIModel/knmi_prc_1_6.ctl;kindname="stat model";climfield="+5 prcp";;
-knmi_prc_1_7) file=KNMIModel/knmi_prc_1_7.ctl;kindname="stat model";climfield="+6 prcp";;
-knmi_prc_1_8) file=KNMIModel/knmi_prc_1_8.ctl;kindname="stat model";climfield="+7 prcp";;
-knmi_prc_1_9) file=KNMIModel/knmi_prc_1_9.ctl;kindname="stat model";climfield="+8 prcp";;
-knmi_prc_1_10) file=KNMIModel/knmi_prc_1_10.ctl;kindname="stat model";climfield="+9 prcp";;
-knmi_prc_1_11) file=KNMIModel/knmi_prc_1_11.ctl;kindname="stat model";climfield="+10 prcp";;
-knmi_prc_1_12) file=KNMIModel/knmi_prc_1_12.ctl;kindname="stat model";climfield="+11 prcp";;
-knmi_prc_1_jan) file=KNMIModel/knmi_prc_1_jan.ctl;kindname="stat model";climfield="jan prcp";;
-knmi_prc_1_feb) file=KNMIModel/knmi_prc_1_feb.ctl;kindname="stat model";climfield="feb prcp";;
-knmi_prc_1_mar) file=KNMIModel/knmi_prc_1_mar.ctl;kindname="stat model";climfield="mar prcp";;
-knmi_prc_1_apr) file=KNMIModel/knmi_prc_1_apr.ctl;kindname="stat model";climfield="apr prcp";;
-knmi_prc_1_may) file=KNMIModel/knmi_prc_1_may.ctl;kindname="stat model";climfield="may prcp";;
-knmi_prc_1_jun) file=KNMIModel/knmi_prc_1_jun.ctl;kindname="stat model";climfield="jun prcp";;
-knmi_prc_1_jul) file=KNMIModel/knmi_prc_1_jul.ctl;kindname="stat model";climfield="jul prcp";;
-knmi_prc_1_aug) file=KNMIModel/knmi_prc_1_aug.ctl;kindname="stat model";climfield="aug prcp";;
-knmi_prc_1_sep) file=KNMIModel/knmi_prc_1_sep.ctl;kindname="stat model";climfield="sep prcp";;
-knmi_prc_1_oct) file=KNMIModel/knmi_prc_1_oct.ctl;kindname="stat model";climfield="oct prcp";;
-knmi_prc_1_nov) file=KNMIModel/knmi_prc_1_nov.ctl;kindname="stat model";climfield="nov prcp";;
-knmi_prc_1_dec) file=KNMIModel/knmi_prc_1_dec.ctl;kindname="stat model";climfield="dec prcp";;
-
-knmi_prc_2_1) file=KNMIModel/knmi_prc_2_1.ctl;kindname="2-month ave stat model";climfield="+0 prcp";;
-knmi_prc_2_2) file=KNMIModel/knmi_prc_2_2.ctl;kindname="2-month ave stat model";climfield="+1 prcp";;
-knmi_prc_2_3) file=KNMIModel/knmi_prc_2_3.ctl;kindname="2-month ave stat model";climfield="+2 prcp";;
-knmi_prc_2_4) file=KNMIModel/knmi_prc_2_4.ctl;kindname="2-month ave stat model";climfield="+3 prcp";;
-knmi_prc_2_5) file=KNMIModel/knmi_prc_2_5.ctl;kindname="2-month ave stat model";climfield="+4 prcp";;
-knmi_prc_2_6) file=KNMIModel/knmi_prc_2_6.ctl;kindname="2-month ave stat model";climfield="+5 prcp";;
-knmi_prc_2_7) file=KNMIModel/knmi_prc_2_7.ctl;kindname="2-month ave stat model";climfield="+6 prcp";;
-knmi_prc_2_8) file=KNMIModel/knmi_prc_2_8.ctl;kindname="2-month ave stat model";climfield="+7 prcp";;
-knmi_prc_2_9) file=KNMIModel/knmi_prc_2_9.ctl;kindname="2-month ave stat model";climfield="+8 prcp";;
-knmi_prc_2_10) file=KNMIModel/knmi_prc_2_10.ctl;kindname="2-month ave stat model";climfield="+9 prcp";;
-knmi_prc_2_11) file=KNMIModel/knmi_prc_2_11.ctl;kindname="2-month ave stat model";climfield="+10 prcp";;
-knmi_prc_2_12) file=KNMIModel/knmi_prc_2_12.ctl;kindname="2-month ave stat model";climfield="+11 prcp";;
-knmi_prc_2_jan) file=KNMIModel/knmi_prc_2_jan.ctl;kindname="2-month ave stat model";climfield="jan prcp";;
-knmi_prc_2_feb) file=KNMIModel/knmi_prc_2_feb.ctl;kindname="2-month ave stat model";climfield="feb prcp";;
-knmi_prc_2_mar) file=KNMIModel/knmi_prc_2_mar.ctl;kindname="2-month ave stat model";climfield="mar prcp";;
-knmi_prc_2_apr) file=KNMIModel/knmi_prc_2_apr.ctl;kindname="2-month ave stat model";climfield="apr prcp";;
-knmi_prc_2_may) file=KNMIModel/knmi_prc_2_may.ctl;kindname="2-month ave stat model";climfield="may prcp";;
-knmi_prc_2_jun) file=KNMIModel/knmi_prc_2_jun.ctl;kindname="2-month ave stat model";climfield="jun prcp";;
-knmi_prc_2_jul) file=KNMIModel/knmi_prc_2_jul.ctl;kindname="2-month ave stat model";climfield="jul prcp";;
-knmi_prc_2_aug) file=KNMIModel/knmi_prc_2_aug.ctl;kindname="2-month ave stat model";climfield="aug prcp";;
-knmi_prc_2_sep) file=KNMIModel/knmi_prc_2_sep.ctl;kindname="2-month ave stat model";climfield="sep prcp";;
-knmi_prc_2_oct) file=KNMIModel/knmi_prc_2_oct.ctl;kindname="2-month ave stat model";climfield="oct prcp";;
-knmi_prc_2_nov) file=KNMIModel/knmi_prc_2_nov.ctl;kindname="2-month ave stat model";climfield="nov prcp";;
-knmi_prc_2_dec) file=KNMIModel/knmi_prc_2_dec.ctl;kindname="2-month ave stat model";climfield="dec prcp";;
-
-knmi_prc_3_1) file=KNMIModel/knmi_prc_3_1.ctl;kindname="3-month ave stat model";climfield="+0 prcp";;
-knmi_prc_3_2) file=KNMIModel/knmi_prc_3_2.ctl;kindname="3-month ave stat model";climfield="+1 prcp";;
-knmi_prc_3_3) file=KNMIModel/knmi_prc_3_3.ctl;kindname="3-month ave stat model";climfield="+2 prcp";;
-knmi_prc_3_4) file=KNMIModel/knmi_prc_3_4.ctl;kindname="3-month ave stat model";climfield="+3 prcp";;
-knmi_prc_3_5) file=KNMIModel/knmi_prc_3_5.ctl;kindname="3-month ave stat model";climfield="+4 prcp";;
-knmi_prc_3_6) file=KNMIModel/knmi_prc_3_6.ctl;kindname="3-month ave stat model";climfield="+5 prcp";;
-knmi_prc_3_7) file=KNMIModel/knmi_prc_3_7.ctl;kindname="3-month ave stat model";climfield="+6 prcp";;
-knmi_prc_3_8) file=KNMIModel/knmi_prc_3_8.ctl;kindname="3-month ave stat model";climfield="+7 prcp";;
-knmi_prc_3_9) file=KNMIModel/knmi_prc_3_9.ctl;kindname="3-month ave stat model";climfield="+8 prcp";;
-knmi_prc_3_10) file=KNMIModel/knmi_prc_3_10.ctl;kindname="3-month ave stat model";climfield="+9 prcp";;
-knmi_prc_3_11) file=KNMIModel/knmi_prc_3_11.ctl;kindname="3-month ave stat model";climfield="+10 prcp";;
-knmi_prc_3_12) file=KNMIModel/knmi_prc_3_12.ctl;kindname="3-month ave stat model";climfield="+11 prcp";;
-knmi_prc_3_jan) file=KNMIModel/knmi_prc_3_jan.ctl;kindname="3-month ave stat model";climfield="jan prcp";;
-knmi_prc_3_feb) file=KNMIModel/knmi_prc_3_feb.ctl;kindname="3-month ave stat model";climfield="feb prcp";;
-knmi_prc_3_mar) file=KNMIModel/knmi_prc_3_mar.ctl;kindname="3-month ave stat model";climfield="mar prcp";;
-knmi_prc_3_apr) file=KNMIModel/knmi_prc_3_apr.ctl;kindname="3-month ave stat model";climfield="apr prcp";;
-knmi_prc_3_may) file=KNMIModel/knmi_prc_3_may.ctl;kindname="3-month ave stat model";climfield="may prcp";;
-knmi_prc_3_jun) file=KNMIModel/knmi_prc_3_jun.ctl;kindname="3-month ave stat model";climfield="jun prcp";;
-knmi_prc_3_jul) file=KNMIModel/knmi_prc_3_jul.ctl;kindname="3-month ave stat model";climfield="jul prcp";;
-knmi_prc_3_aug) file=KNMIModel/knmi_prc_3_aug.ctl;kindname="3-month ave stat model";climfield="aug prcp";;
-knmi_prc_3_sep) file=KNMIModel/knmi_prc_3_sep.ctl;kindname="3-month ave stat model";climfield="sep prcp";;
-knmi_prc_3_oct) file=KNMIModel/knmi_prc_3_oct.ctl;kindname="3-month ave stat model";climfield="oct prcp";;
-knmi_prc_3_nov) file=KNMIModel/knmi_prc_3_nov.ctl;kindname="3-month ave stat model";climfield="nov prcp";;
-knmi_prc_3_dec) file=KNMIModel/knmi_prc_3_dec.ctl;kindname="3-month ave stat model";climfield="dec prcp";;
-
-knmi_prc_4_1) file=KNMIModel/knmi_prc_4_1.ctl;kindname="4-month ave stat model";climfield="+0 prcp";;
-knmi_prc_4_2) file=KNMIModel/knmi_prc_4_2.ctl;kindname="4-month ave stat model";climfield="+1 prcp";;
-knmi_prc_4_3) file=KNMIModel/knmi_prc_4_3.ctl;kindname="4-month ave stat model";climfield="+2 prcp";;
-knmi_prc_4_4) file=KNMIModel/knmi_prc_4_4.ctl;kindname="4-month ave stat model";climfield="+3 prcp";;
-knmi_prc_4_5) file=KNMIModel/knmi_prc_4_5.ctl;kindname="4-month ave stat model";climfield="+4 prcp";;
-knmi_prc_4_6) file=KNMIModel/knmi_prc_4_6.ctl;kindname="4-month ave stat model";climfield="+5 prcp";;
-knmi_prc_4_7) file=KNMIModel/knmi_prc_4_7.ctl;kindname="4-month ave stat model";climfield="+6 prcp";;
-knmi_prc_4_8) file=KNMIModel/knmi_prc_4_8.ctl;kindname="4-month ave stat model";climfield="+7 prcp";;
-knmi_prc_4_9) file=KNMIModel/knmi_prc_4_9.ctl;kindname="4-month ave stat model";climfield="+8 prcp";;
-knmi_prc_4_10) file=KNMIModel/knmi_prc_4_10.ctl;kindname="4-month ave stat model";climfield="+9 prcp";;
-knmi_prc_4_11) file=KNMIModel/knmi_prc_4_11.ctl;kindname="4-month ave stat model";climfield="+10 prcp";;
-knmi_prc_4_12) file=KNMIModel/knmi_prc_4_12.ctl;kindname="4-month ave stat model";climfield="+11 prcp";;
-knmi_prc_4_jan) file=KNMIModel/knmi_prc_4_jan.ctl;kindname="4-month ave stat model";climfield="jan prcp";;
-knmi_prc_4_feb) file=KNMIModel/knmi_prc_4_feb.ctl;kindname="4-month ave stat model";climfield="feb prcp";;
-knmi_prc_4_mar) file=KNMIModel/knmi_prc_4_mar.ctl;kindname="4-month ave stat model";climfield="mar prcp";;
-knmi_prc_4_apr) file=KNMIModel/knmi_prc_4_apr.ctl;kindname="4-month ave stat model";climfield="apr prcp";;
-knmi_prc_4_may) file=KNMIModel/knmi_prc_4_may.ctl;kindname="4-month ave stat model";climfield="may prcp";;
-knmi_prc_4_jun) file=KNMIModel/knmi_prc_4_jun.ctl;kindname="4-month ave stat model";climfield="jun prcp";;
-knmi_prc_4_jul) file=KNMIModel/knmi_prc_4_jul.ctl;kindname="4-month ave stat model";climfield="jul prcp";;
-knmi_prc_4_aug) file=KNMIModel/knmi_prc_4_aug.ctl;kindname="4-month ave stat model";climfield="aug prcp";;
-knmi_prc_4_sep) file=KNMIModel/knmi_prc_4_sep.ctl;kindname="4-month ave stat model";climfield="sep prcp";;
-knmi_prc_4_oct) file=KNMIModel/knmi_prc_4_oct.ctl;kindname="4-month ave stat model";climfield="oct prcp";;
-knmi_prc_4_nov) file=KNMIModel/knmi_prc_4_nov.ctl;kindname="4-month ave stat model";climfield="nov prcp";;
-knmi_prc_4_dec) file=KNMIModel/knmi_prc_4_dec.ctl;kindname="4-month ave stat model";climfield="dec prcp";;
-
-knmi_pr2_1_1) file=KNMIModel/knmi_pr2_1_1.ctl;kindname="stat model";climfield="+0 prcp";;
-knmi_pr2_1_2) file=KNMIModel/knmi_pr2_1_2.ctl;kindname="stat model";climfield="+1 prcp";;
-knmi_pr2_1_3) file=KNMIModel/knmi_pr2_1_3.ctl;kindname="stat model";climfield="+2 prcp";;
-knmi_pr2_1_4) file=KNMIModel/knmi_pr2_1_4.ctl;kindname="stat model";climfield="+3 prcp";;
-knmi_pr2_1_5) file=KNMIModel/knmi_pr2_1_5.ctl;kindname="stat model";climfield="+4 prcp";;
-knmi_pr2_1_6) file=KNMIModel/knmi_pr2_1_6.ctl;kindname="stat model";climfield="+5 prcp";;
-knmi_pr2_1_7) file=KNMIModel/knmi_pr2_1_7.ctl;kindname="stat model";climfield="+6 prcp";;
-knmi_pr2_1_8) file=KNMIModel/knmi_pr2_1_8.ctl;kindname="stat model";climfield="+7 prcp";;
-knmi_pr2_1_9) file=KNMIModel/knmi_pr2_1_9.ctl;kindname="stat model";climfield="+8 prcp";;
-knmi_pr2_1_10) file=KNMIModel/knmi_pr2_1_10.ctl;kindname="stat model";climfield="+9 prcp";;
-knmi_pr2_1_11) file=KNMIModel/knmi_pr2_1_11.ctl;kindname="stat model";climfield="+10 prcp";;
-knmi_pr2_1_12) file=KNMIModel/knmi_pr2_1_12.ctl;kindname="stat model";climfield="+11 prcp";;
-knmi_pr2_1_jan) file=KNMIModel/knmi_pr2_1_jan.ctl;kindname="stat model";climfield="jan prcp";;
-knmi_pr2_1_feb) file=KNMIModel/knmi_pr2_1_feb.ctl;kindname="stat model";climfield="feb prcp";;
-knmi_pr2_1_mar) file=KNMIModel/knmi_pr2_1_mar.ctl;kindname="stat model";climfield="mar prcp";;
-knmi_pr2_1_apr) file=KNMIModel/knmi_pr2_1_apr.ctl;kindname="stat model";climfield="apr prcp";;
-knmi_pr2_1_may) file=KNMIModel/knmi_pr2_1_may.ctl;kindname="stat model";climfield="may prcp";;
-knmi_pr2_1_jun) file=KNMIModel/knmi_pr2_1_jun.ctl;kindname="stat model";climfield="jun prcp";;
-knmi_pr2_1_jul) file=KNMIModel/knmi_pr2_1_jul.ctl;kindname="stat model";climfield="jul prcp";;
-knmi_pr2_1_aug) file=KNMIModel/knmi_pr2_1_aug.ctl;kindname="stat model";climfield="aug prcp";;
-knmi_pr2_1_sep) file=KNMIModel/knmi_pr2_1_sep.ctl;kindname="stat model";climfield="sep prcp";;
-knmi_pr2_1_oct) file=KNMIModel/knmi_pr2_1_oct.ctl;kindname="stat model";climfield="oct prcp";;
-knmi_pr2_1_nov) file=KNMIModel/knmi_pr2_1_nov.ctl;kindname="stat model";climfield="nov prcp";;
-knmi_pr2_1_dec) file=KNMIModel/knmi_pr2_1_dec.ctl;kindname="stat model";climfield="dec prcp";;
-
-knmi_pr2_2_1) file=KNMIModel/knmi_pr2_2_1.ctl;kindname="2-month ave stat model";climfield="+0 prcp";;
-knmi_pr2_2_2) file=KNMIModel/knmi_pr2_2_2.ctl;kindname="2-month ave stat model";climfield="+1 prcp";;
-knmi_pr2_2_3) file=KNMIModel/knmi_pr2_2_3.ctl;kindname="2-month ave stat model";climfield="+2 prcp";;
-knmi_pr2_2_4) file=KNMIModel/knmi_pr2_2_4.ctl;kindname="2-month ave stat model";climfield="+3 prcp";;
-knmi_pr2_2_5) file=KNMIModel/knmi_pr2_2_5.ctl;kindname="2-month ave stat model";climfield="+4 prcp";;
-knmi_pr2_2_6) file=KNMIModel/knmi_pr2_2_6.ctl;kindname="2-month ave stat model";climfield="+5 prcp";;
-knmi_pr2_2_7) file=KNMIModel/knmi_pr2_2_7.ctl;kindname="2-month ave stat model";climfield="+6 prcp";;
-knmi_pr2_2_8) file=KNMIModel/knmi_pr2_2_8.ctl;kindname="2-month ave stat model";climfield="+7 prcp";;
-knmi_pr2_2_9) file=KNMIModel/knmi_pr2_2_9.ctl;kindname="2-month ave stat model";climfield="+8 prcp";;
-knmi_pr2_2_10) file=KNMIModel/knmi_pr2_2_10.ctl;kindname="2-month ave stat model";climfield="+9 prcp";;
-knmi_pr2_2_11) file=KNMIModel/knmi_pr2_2_11.ctl;kindname="2-month ave stat model";climfield="+10 prcp";;
-knmi_pr2_2_12) file=KNMIModel/knmi_pr2_2_12.ctl;kindname="2-month ave stat model";climfield="+11 prcp";;
-knmi_pr2_2_jan) file=KNMIModel/knmi_pr2_2_jan.ctl;kindname="2-month ave stat model";climfield="jan prcp";;
-knmi_pr2_2_feb) file=KNMIModel/knmi_pr2_2_feb.ctl;kindname="2-month ave stat model";climfield="feb prcp";;
-knmi_pr2_2_mar) file=KNMIModel/knmi_pr2_2_mar.ctl;kindname="2-month ave stat model";climfield="mar prcp";;
-knmi_pr2_2_apr) file=KNMIModel/knmi_pr2_2_apr.ctl;kindname="2-month ave stat model";climfield="apr prcp";;
-knmi_pr2_2_may) file=KNMIModel/knmi_pr2_2_may.ctl;kindname="2-month ave stat model";climfield="may prcp";;
-knmi_pr2_2_jun) file=KNMIModel/knmi_pr2_2_jun.ctl;kindname="2-month ave stat model";climfield="jun prcp";;
-knmi_pr2_2_jul) file=KNMIModel/knmi_pr2_2_jul.ctl;kindname="2-month ave stat model";climfield="jul prcp";;
-knmi_pr2_2_aug) file=KNMIModel/knmi_pr2_2_aug.ctl;kindname="2-month ave stat model";climfield="aug prcp";;
-knmi_pr2_2_sep) file=KNMIModel/knmi_pr2_2_sep.ctl;kindname="2-month ave stat model";climfield="sep prcp";;
-knmi_pr2_2_oct) file=KNMIModel/knmi_pr2_2_oct.ctl;kindname="2-month ave stat model";climfield="oct prcp";;
-knmi_pr2_2_nov) file=KNMIModel/knmi_pr2_2_nov.ctl;kindname="2-month ave stat model";climfield="nov prcp";;
-knmi_pr2_2_dec) file=KNMIModel/knmi_pr2_2_dec.ctl;kindname="2-month ave stat model";climfield="dec prcp";;
-
-knmi_pr2_3_1) file=KNMIModel/knmi_pr2_3_1.ctl;kindname="3-month ave stat model";climfield="+0 prcp";;
-knmi_pr2_3_2) file=KNMIModel/knmi_pr2_3_2.ctl;kindname="3-month ave stat model";climfield="+1 prcp";;
-knmi_pr2_3_3) file=KNMIModel/knmi_pr2_3_3.ctl;kindname="3-month ave stat model";climfield="+2 prcp";;
-knmi_pr2_3_4) file=KNMIModel/knmi_pr2_3_4.ctl;kindname="3-month ave stat model";climfield="+3 prcp";;
-knmi_pr2_3_5) file=KNMIModel/knmi_pr2_3_5.ctl;kindname="3-month ave stat model";climfield="+4 prcp";;
-knmi_pr2_3_6) file=KNMIModel/knmi_pr2_3_6.ctl;kindname="3-month ave stat model";climfield="+5 prcp";;
-knmi_pr2_3_7) file=KNMIModel/knmi_pr2_3_7.ctl;kindname="3-month ave stat model";climfield="+6 prcp";;
-knmi_pr2_3_8) file=KNMIModel/knmi_pr2_3_8.ctl;kindname="3-month ave stat model";climfield="+7 prcp";;
-knmi_pr2_3_9) file=KNMIModel/knmi_pr2_3_9.ctl;kindname="3-month ave stat model";climfield="+8 prcp";;
-knmi_pr2_3_10) file=KNMIModel/knmi_pr2_3_10.ctl;kindname="3-month ave stat model";climfield="+9 prcp";;
-knmi_pr2_3_11) file=KNMIModel/knmi_pr2_3_11.ctl;kindname="3-month ave stat model";climfield="+10 prcp";;
-knmi_pr2_3_12) file=KNMIModel/knmi_pr2_3_12.ctl;kindname="3-month ave stat model";climfield="+11 prcp";;
-knmi_pr2_3_jan) file=KNMIModel/knmi_pr2_3_jan.ctl;kindname="3-month ave stat model";climfield="jan prcp";;
-knmi_pr2_3_feb) file=KNMIModel/knmi_pr2_3_feb.ctl;kindname="3-month ave stat model";climfield="feb prcp";;
-knmi_pr2_3_mar) file=KNMIModel/knmi_pr2_3_mar.ctl;kindname="3-month ave stat model";climfield="mar prcp";;
-knmi_pr2_3_apr) file=KNMIModel/knmi_pr2_3_apr.ctl;kindname="3-month ave stat model";climfield="apr prcp";;
-knmi_pr2_3_may) file=KNMIModel/knmi_pr2_3_may.ctl;kindname="3-month ave stat model";climfield="may prcp";;
-knmi_pr2_3_jun) file=KNMIModel/knmi_pr2_3_jun.ctl;kindname="3-month ave stat model";climfield="jun prcp";;
-knmi_pr2_3_jul) file=KNMIModel/knmi_pr2_3_jul.ctl;kindname="3-month ave stat model";climfield="jul prcp";;
-knmi_pr2_3_aug) file=KNMIModel/knmi_pr2_3_aug.ctl;kindname="3-month ave stat model";climfield="aug prcp";;
-knmi_pr2_3_sep) file=KNMIModel/knmi_pr2_3_sep.ctl;kindname="3-month ave stat model";climfield="sep prcp";;
-knmi_pr2_3_oct) file=KNMIModel/knmi_pr2_3_oct.ctl;kindname="3-month ave stat model";climfield="oct prcp";;
-knmi_pr2_3_nov) file=KNMIModel/knmi_pr2_3_nov.ctl;kindname="3-month ave stat model";climfield="nov prcp";;
-knmi_pr2_3_dec) file=KNMIModel/knmi_pr2_3_dec.ctl;kindname="3-month ave stat model";climfield="dec prcp";;
-
-knmi_pr2_4_1) file=KNMIModel/knmi_pr2_4_1.ctl;kindname="4-month ave stat model";climfield="+0 prcp";;
-knmi_pr2_4_2) file=KNMIModel/knmi_pr2_4_2.ctl;kindname="4-month ave stat model";climfield="+1 prcp";;
-knmi_pr2_4_3) file=KNMIModel/knmi_pr2_4_3.ctl;kindname="4-month ave stat model";climfield="+2 prcp";;
-knmi_pr2_4_4) file=KNMIModel/knmi_pr2_4_4.ctl;kindname="4-month ave stat model";climfield="+3 prcp";;
-knmi_pr2_4_5) file=KNMIModel/knmi_pr2_4_5.ctl;kindname="4-month ave stat model";climfield="+4 prcp";;
-knmi_pr2_4_6) file=KNMIModel/knmi_pr2_4_6.ctl;kindname="4-month ave stat model";climfield="+5 prcp";;
-knmi_pr2_4_7) file=KNMIModel/knmi_pr2_4_7.ctl;kindname="4-month ave stat model";climfield="+6 prcp";;
-knmi_pr2_4_8) file=KNMIModel/knmi_pr2_4_8.ctl;kindname="4-month ave stat model";climfield="+7 prcp";;
-knmi_pr2_4_9) file=KNMIModel/knmi_pr2_4_9.ctl;kindname="4-month ave stat model";climfield="+8 prcp";;
-knmi_pr2_4_10) file=KNMIModel/knmi_pr2_4_10.ctl;kindname="4-month ave stat model";climfield="+9 prcp";;
-knmi_pr2_4_11) file=KNMIModel/knmi_pr2_4_11.ctl;kindname="4-month ave stat model";climfield="+10 prcp";;
-knmi_pr2_4_12) file=KNMIModel/knmi_pr2_4_12.ctl;kindname="4-month ave stat model";climfield="+11 prcp";;
-knmi_pr2_4_jan) file=KNMIModel/knmi_pr2_4_jan.ctl;kindname="4-month ave stat model";climfield="jan prcp";;
-knmi_pr2_4_feb) file=KNMIModel/knmi_pr2_4_feb.ctl;kindname="4-month ave stat model";climfield="feb prcp";;
-knmi_pr2_4_mar) file=KNMIModel/knmi_pr2_4_mar.ctl;kindname="4-month ave stat model";climfield="mar prcp";;
-knmi_pr2_4_apr) file=KNMIModel/knmi_pr2_4_apr.ctl;kindname="4-month ave stat model";climfield="apr prcp";;
-knmi_pr2_4_may) file=KNMIModel/knmi_pr2_4_may.ctl;kindname="4-month ave stat model";climfield="may prcp";;
-knmi_pr2_4_jun) file=KNMIModel/knmi_pr2_4_jun.ctl;kindname="4-month ave stat model";climfield="jun prcp";;
-knmi_pr2_4_jul) file=KNMIModel/knmi_pr2_4_jul.ctl;kindname="4-month ave stat model";climfield="jul prcp";;
-knmi_pr2_4_aug) file=KNMIModel/knmi_pr2_4_aug.ctl;kindname="4-month ave stat model";climfield="aug prcp";;
-knmi_pr2_4_sep) file=KNMIModel/knmi_pr2_4_sep.ctl;kindname="4-month ave stat model";climfield="sep prcp";;
-knmi_pr2_4_oct) file=KNMIModel/knmi_pr2_4_oct.ctl;kindname="4-month ave stat model";climfield="oct prcp";;
-knmi_pr2_4_nov) file=KNMIModel/knmi_pr2_4_nov.ctl;kindname="4-month ave stat model";climfield="nov prcp";;
-knmi_pr2_4_dec) file=KNMIModel/knmi_pr2_4_dec.ctl;kindname="4-month ave stat model";climfield="dec prcp";;
-
 demeter_era40_t2m) file=DemeterData/era40_p2m_t.ctl;kindname="ERA40";climfield="T2m";;
 demeter_era40_tp) file=DemeterData/era40_tp.ctl;kindname="ERA40";climfield="precip";;
 demeter_era40_msl) file=DemeterData/era40_msl.ctl;kindname="ERA40";climfield="SLP";;
@@ -5425,6 +4992,19 @@ psl_mesr_20c3m)
 	fi
 	kindname="EC-EARTH yr$lead"
 	climfield=$var;;
+*_ecearth24*)
+	var=${FORM_field%%_*}
+	lead=${FORM_field##*_}
+	model=${FORM_field%_*}
+	model=${model#*_}
+	file="COMBINE/${var}_${model}_${lead}_%%.nc"
+	if [ $var = sst ]; then
+	   LSMASK=COMBINE/lsm_ocean.nc
+	else
+	   LSMASK=COMBINE/landsea1.25.nc
+	fi
+	kindname="EC-EARTH2.4${model#ecearth24} yr$lead"
+	climfield=$var;;
 
 *_ensdec_*) # eg "tas_ifs33r1_ensdec_1.nc"
 	var=`echo $FORM_field | sed -e 's/_.*//'`
@@ -5450,6 +5030,7 @@ echo "Cannot handle $FORM_field (yet)"
 [ -x ./myvinkfoot.cgi ] && exit;;
 
 esac
+###echo "FORM_field=$FORM_field<br>file=$file<br>NPERYEAR=$NPERYEAR<br>LSMASK=$LSMASK<br>"
 
 c=`echo $file | fgrep -c %`
 if [ $c -gt 0 ]; then

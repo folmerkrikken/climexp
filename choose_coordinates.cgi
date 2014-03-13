@@ -14,8 +14,8 @@ interpolated) intertype_i="selected";;
 esac
 
 case ${FORM_masktype:-all} in
-5lan) 5lan_checked="checked";lshidden=true;;
-5sea) 5sea_checked="checked";lshidden=true;;
+5lan) fivelan_checked="checked";lshidden=true;;
+5sea) fivesea_checked="checked";lshidden=true;;
 land) land_checked="checked";lshidden=false;;
 sea)  sea_checked="checked";lshidden=false;;
 notl) notl_checked="checked";lshidden=false;;
@@ -50,9 +50,9 @@ EOF
 	for maskmetadata in data/*.$EMAIL.poly
 	do
 		if [ -f $maskmetadata ]; then
-			file=`head -1 $maskmetadata`
+			this=`head -1 $maskmetadata`
 			name=`head -2 $maskmetadata | tail -n -1`
-			if [ "$file" = "$maskfile" -o \( -z "$maskfile" -a "$maskmetadata" = "$FORM_maskmetadata" \) ]; then
+			if [ "$this" = "$maskfile" -o \( -z "$maskfile" -a "$maskmetadata" = "$FORM_maskmetadata" \) ]; then
 				selected=selected
 			else
 				selected=""
@@ -111,8 +111,8 @@ if [ -n "$LSMASK" ]; then
 	cat << EOF
 <tr valign="baseline"><td>Considering:</td><td>
 <input type="radio" class="formradio" name ="masktype" value="all" $all_checked>everything
-<input type="radio" class="formradio" name ="masktype" value="5lan" $5lan_checked>land points
-<input type="radio" class="formradio" name ="masktype" value="5sea" $5sea_checked>sea points
+<input type="radio" class="formradio" name ="masktype" value="5lan" $fivelan_checked>land points
+<input type="radio" class="formradio" name ="masktype" value="5sea" $fivesea_checked>sea points
 <a href="javascript:hidden_info_switch('landsea');">show/hide more</a><br>
 <div id="landsea" style=$hiddenstyle_landsea>
 <input type="radio" class="formradio" name ="masktype" value="land" $land_checked>only land points

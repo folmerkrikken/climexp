@@ -1,0 +1,6 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas: map and time series</div> 
+
+At this moment the KNM Climate Change Atlas has the same two output possibilities as the <a href="http://www.climatechange2013.org/report/" target="_new">IPCC WG1 AR5</a> Annex I "Atlas": maps of the distribution of climate change signals from the ensemble and time series averaged over <a href="chooseareas.shtml">specific areas</a>. Other output forms, notably histograms, are planned for the near future.
+
+<!--#include virtual="help_footer.html"-->

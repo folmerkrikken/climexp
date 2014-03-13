@@ -220,7 +220,7 @@ if [ "$lwrite" = true ]; then
 fi
 title="$RANK$var $day$seriesmonth$plotyear$ylabel$station $titleclim$extrap$with"
 if [ -n "$FORM_pmin" ]; then
-  if [ ${FORM_pmin#-} = ${FORM_pmin} -a $FORM_pmin != 100 ]; then
+  if [ ${FORM_pmin#-} = ${FORM_pmin} -a $FORM_pmin != 100 -a $FORM_pmin != 0 ]; then
     title="$title p<${FORM_pmin}%"
   fi
 fi

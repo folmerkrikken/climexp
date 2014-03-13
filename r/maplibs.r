@@ -1,0 +1,17 @@
+library(RNetCDF)
+library(evd)
+library(ismev)
+###library(maps)
+###library(mapdata)
+
+source("r/netcdfinfo.r")
+source("r/netcdfread.r")
+source("r/netcdfreadclimexp.r")
+source("r/netcdfreadpat.r")
+source("r/reshapefield.r")
+###source("r/reshapepat.r")
+source("r/tvtclimexp.r")
+source("r/manipensemble.r")
+
+###source("r/bluered.r")
+###source("r/plotmap.r")

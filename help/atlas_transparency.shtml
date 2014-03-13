@@ -1,0 +1,7 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas transparency</div> 
+
+The default option is to use transparency to plot the time series. These plots look best. However, due to a bug in Adobe Reader, PDF files with transparency print very slowly in this program. Other PDF viewers work fine, as well as PNG files. If you use Adobe Reader to print the results as PDF files, turn transparency off.
+
+<p>In EPS files, transparency has been implemented as a ghostscript extension. These files will only be handled correctly in ghostscript.
+<!--#include virtual="help_footer.html"-->

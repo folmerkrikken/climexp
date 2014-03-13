@@ -19,6 +19,7 @@ begin
  fieldf(:,0:nlon/2-1) = field(lat|:,lon|nlon/2:nlon-1)
  fieldf(:,nlon/2:nlon-1) = field(lat|:,lon|0:nlon/2-1)
  fieldf(:,nlon) = field(lat|:,lon|nlon/2)
+ replace_ieeenan(prob,prob@_FillValue,0) ; to prevent infinite loop, thanks Julie!
  probf = new((/dimsizes(field&lat),dimsizes(lon)+1/),typeof(field))
  probf(:,0:nlon/2-1) = prob(lat|:,lon|nlon/2:nlon-1)
  probf(:,nlon/2:nlon-1) = prob(lat|:,lon|0:nlon/2-1)
@@ -93,7 +94,8 @@ begin
 
 ; RESOURCES FOR LIGHTER COLOURS
  sres = res
- sres@mpOutlineOn = False
+ ;;;sres@mpOutlineOn = False
+ sres@mpFillOn = False
  sres@cnLinesOn = False
  sres@cnLineLabelsOn = False
  sres@cnLevelSelectionMode = "ExplicitLevels"
@@ -106,7 +108,6 @@ begin
  sres@gsnCenterString = ""
  sres@gsnLeftString = ""
  sres@gsnRightString = ""
- sres@mpFillOn = False
 
  if (proj.eq."latlon") then
   if ( usefieldf ) then

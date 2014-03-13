@@ -1,0 +1,8 @@
+# Ashmore and Cartier Is.
+# from http://www.rjruss.info/2010/12/free-countries-of-world-in-polygon-kml.html
+123.5945028 -12.42570119
+123.59522627 -12.43593312
+123.57310876 -12.43417612
+123.57248864 -12.42394419
+123.5945028 -12.42570119
+

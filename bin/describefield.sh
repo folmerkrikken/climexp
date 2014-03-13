@@ -67,6 +67,7 @@ else
     ( ./bin/getunits $file < /dev/null > /dev/null 2>&1 ) &
   else
     ($describefile $file > /dev/null ) 2>&1 | tee $metadata
+    ###echo "./bin/getunits $file &gt; $metadata.eval<br>"
     ./bin/getunits $file > $metadata.eval
     touch -r $file $metadata
     touch -r $file $metadata.eval

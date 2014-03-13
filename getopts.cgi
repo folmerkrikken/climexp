@@ -50,6 +50,7 @@ fi
 [ -n "$FORM_fix" ] && corrargs="$corrargs $FORM_fix"
 [ -n "$FORM_lag" ] && corrargs="$corrargs lag $FORM_lag"
 [ -n "$FORM_minnum" ] && corrargs="$corrargs minnum $FORM_minnum"
+[ -n "$FORM_minfac" ] && corrargs="$corrargs minfac $FORM_minfac"
 [ -n "$FORM_begin" ] && corrargs="$corrargs begin $FORM_begin"
 [ -n "$FORM_end" ] && corrargs="$corrargs end $FORM_end"
 [ -n "$FORM_begin2" ] && corrargs="$corrargs begin2 $FORM_begin2"

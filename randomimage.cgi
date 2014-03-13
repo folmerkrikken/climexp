@@ -9,17 +9,23 @@ else
   word=5
 fi
 tmpfile=/tmp/start$$.txt
-list=`ls -t data/ | fgrep .png | egrep '(^[ghR])|(.*corr.*)' | egrep -v 'kml|tmp' `
+list=`ls -t data/ atlas/maps/*/rcp*/| fgrep .png | egrep '(^[dghrR])|(.*corr.*)' | egrep -v 'kml|tmp' `
 for file in $list
 do
   if [ -s data/$file ]
   then
-    file data/$file
-    size=`file data/$file | cut -d ' ' -f $word`
+    file=data/$file
+  else
+    file=`find atlas -name $file`
+  fi
+  if [ -s "$file"  -a "$file" != "data/randomimage.png" ]
+  then
+    file $file
+    size=`file $file | cut -d ' ' -f $word`
     echo "size=$size"
     if [ $size -le 904 ]
     then
-      cp data/$file data/randomimage.png
+      cp $file data/randomimage.png
       exit 0
     fi
   fi

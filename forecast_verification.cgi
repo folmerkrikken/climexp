@@ -669,6 +669,8 @@ esac
 
 case ${masktype:-all} in
 land) land_selected="selected";;
+5sea) sea5_selected="selected";;
+5lan) lan5_selected="selected";;
 sea)  sea_selected="selected";;
 notl) notl_selected="selected";;
 nots) nots_selected="selected";;
@@ -725,7 +727,7 @@ maprmse)        selected_maprmse="selected";;
 mapmae)         selected_mapmae="selected";;
 mapbrier)       selected_mapbrier="selected";;
 mapbriar)       selected_mapbriar="selected";;
-mapresolution)  ckecked_mapresolution="selected";;
+mapresolution)    selected_mapresolution="selected";;
 mapreliability) selected_mapreliability="selected";;
 mapuncertainty) selected_mapuncertainty="selected";;
 mapbss)         selected_mapbss="selected";;
@@ -741,6 +743,9 @@ mapdebug)       selected_mapdebug="selected";;
 likelihood)    selected_likelihood="selected";;
 deterministic) selected_deterministic="selected";;
 brierscore)    selected_brierscore="selected";;
+fairbrierscore)   selected_fairbrierscore="selected";;
+fairCRPSanalysis) selected_fairCRPSanalysis="selected";;
+rankhistogram)    selected_rankhistogram="selected";;
 reliability)   selected_reliability="selected";;
 rps)           selected_rps="selected";;
 rocrclim)      selected_rocrclim="selected";;
@@ -776,6 +781,9 @@ cat <<EOF
 <option value="deterministic" $selected_deterministic>Deterministic scores
  for the ensemble mean</option>
 <option value="brierscore" $selected_brierscore>Brier score</option>
+<option value="fairbrierscore" $selected_fairbrierscore>Fair Brier score</option>
+<option value="fairCRPSanalysis" $selected_fairCRPSanalysis>Fair CRPS analysis</option>
+<option value="rankhistogram" $selected_rankhistogram>Rank histogram analysis</option>
 <option value="reliability" $selected_reliability>Reliability diagram</option>
 <option value="rps" $selected_rps>Ranked Probability Score for terciles</option>
 <option value="rocprob" $selected_rocprob>ROC curve for members below threshold
@@ -802,7 +810,7 @@ fi
 ###echo "DEBUG: FORM_verif=$FORM_verif."
 case $FORM_verif in
 mapbrier|mapresolution|mapreliability|mapuncertainty|mapbss|maproc) needs_threshold=true;;
-brierscore|reliability|rocprob|rocthreshold) needs_threshold=true;;
+brierscore|fairbrierscore|fairCRPSanalysis|reliability|rocprob|rocthreshold) needs_threshold=true;;
 *) needs_threshold="";;
 esac
 if [ "$needs_threshold" = true ]; then

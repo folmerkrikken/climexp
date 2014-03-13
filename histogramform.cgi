@@ -75,6 +75,7 @@ cat <<EOF
 <input type="hidden" name="WMO" value="$WMO">
 <input type="hidden" name="STATION" value="$STATION">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
+<input type="hidden" name="begin2" value="$FORM_begin2">
 
 <div class="formheader">Plot</div>
 <div class="formbody">
@@ -91,6 +92,7 @@ justonemonth=true
 ONLYONE=true
 NAME=series
 DECOR=true
+INCLUDE_SQUARE=true
 . ./commonoptions.cgi
 
 echo "<tr><td>Change sign:"

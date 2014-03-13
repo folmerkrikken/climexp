@@ -92,6 +92,14 @@ fi
 . ./myvinkhead.cgi "Compute $var" "$kindname $climfield" "noindex,nofollow"
 
 echo `date` "$EMAIL ($REMOTE_ADDR) getfieldmoments $corrargs" | sed -e "s:$DIR/::g" >> log/log
+
+c=`echo $FORM_field | fgrep -c "mean_"`
+if [ $c != 0 -a \( $FORM_var = perc -o $FORM_var = sd \) ]; then
+    echo "Percentiles and s.d. of a multi-model mean field do not have a physical meaning."
+    . ./myvinkfoot.cgi
+    exit
+fi
+
 startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
 echo "Computing $var...<p>"

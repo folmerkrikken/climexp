@@ -1,0 +1,6 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas: Select a season (monthly data)</div> 
+The season is defined by a starting month and the duration of the season.
+This implies that for instance the boreal winter season December-February is selected by setting the starting month to "Dec" and the length of te season to "3". This season is counted towards the second year of the interval, so a 1986-2005 average would include the winter months from December 1985 up to February 2005.
+  
+<!--#include virtual="help_footer.html"-->

@@ -1,0 +1,36 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas datasets</div> 
+
+The following datasets are available in the KNMI Climate Change Atlas:
+<ul>
+<li>GCM: CMIP5 (IPCC AR5 Atlas subset)  This is the dataset used in the <a href="http://www.climatechange2013.org/report/" target="_new">IPCC WG1 AR5</a> Annex I "Atlas", fully described in Table 1. It uses only a single realisation of each model and weighs all models equally, where model realisations differing only in model parameter settings are treated as different models.
+<li>GCM: CMIP5 (full set). This includes multiple realisations of each model, downweighed such that the weight of each model is again the same. The algorithm is described in detail in <a href="http://iopscience.iop.org/1748-9326/8/1/014055" target=_new>van Oldenborgh et al, ERL, 2013</a>. Selecting this option gives slightly smoother PDFs at the expense of much more computer time.
+<li>GCM: CMIP5 extremes. This is the <a href="http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml" target=_new>ETCCDI extremes indices archive</a> at the <a href="http://www.ec.gc.ca/ccmac-cccma/default.asp?lang=En" target=_new>Canadian Centre for Climate Modelling and Analysis</a>. They have computed various indices of extremes from the daily CMIP5 data. The definitions of these indices are give <a href="http://etccdi.pacificclimate.org/list_27_indices.shtml" target=_new>here</a>. At the moment only the annual values are available, so for instance the maximum daily rainfall amount for each year (Rx1day) or the highest maximum temperature in a year (TXx). Note that some indices are zero in some regions (for instance ice days in the tropics), changes in these are zero, which display randomly as light blue or light yellow. The relative changes may give a better picture, as these give undefined (white) in these areas. Because pre-industrial control runs are not available, the natural variability is estimated from the intra-model spread of the full set, which for this dataset is not very slow and is recommended unless there is a specific need to use only one ensemble member per model.
+<li>GCM: CMIP3. This is the dataset used in the <a href="http://www.ipcc.ch/publications_and_data/ar4/wg1/en/contents.html" target=_new>IPCC AR4 report</a> that was published in 2007.
+<li>Reanalysis: ERA-interim. This is a high-quality reanalysis of the state of the atmosphere over the satellite era, from 1979 to the present. It uses all information available to reconstruct the weather and propagates this information using a high-resolution weather model.
+<li>Reanalysis: 20CR. This is a long reanalysis of the state of the atmosphere based only on sea surface temperature and air pressure observations to make it as homogeneous as possible. The fidelity to the historical weather is still dependent on the number of observations in the area.
+<li>Observations:
+<ul>
+<li>Temperature:
+<ul>
+<li>GISS 1200km interpolated: relatively low-resolution temperature dataset, more accurate over large spatial (more than 1000km) and temporal (annual and longer) time scales.
+<li>NCDC MOST: less interpolated dataset with other homogeneities, 5&deg; resolution.
+<li>HadCRUT4: dataset with most holes, with advanced SST corrections; area averages are less accurate due to the missing data.
+<li>CRU TS 3.10: fully interpolated dataset with high resolution (0.5&deg;), in areas without observations it gives climatology.
+</ul>
+<li>Precipitation:
+<ul>
+<li>GPCC v6: high-resolution reconstruction of precipitation, contains climatology in areas without observations.
+<li>NCDC anomalies: low-resolution (5&deg;) analysis with missing data.
+<li>CRU TS 3.10.01: high-resolution reconstruction of precipitation, contains climatology in areas without observations.
+</ul>
+<li>Sea-level pressure
+<ul>
+<li>UCAR ds010: subjective reconstruction based on old weather maps, Northern Hemisphere only
+<li>HadSLP2r: low-resolution (5&deg;) reconstruction.
+</ul>(The re-analysis pressure fields are in general more reliable.)
+</ul>
+</ul>
+The inclusion of additional datasets (RCMs) is planned for the near future.
+
+<!--#include virtual="help_footer.html"-->

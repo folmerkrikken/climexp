@@ -1,0 +1,6 @@
+<!--#include virtual="help_header.html"-->
+<div class="alineakop">Atlas variables</div> 
+
+The variables available depend on the dataset. I try to stick to the names as used in these datasets, for modern datasets these will be <a href="http://cf-pcmdi.llnl.gov" target="_new">CF</a> metadata standard names. P-E (net water flux) was home-computed as the difference between precipitation (pr) and evaporation, transpiration and sublimation (evspsbl). Note that similar variables in different datasets may have subtly different definitions, such as downward solar radiation versus net solar radiation. Please let me know if you need additional variables.
+
+<!--#include virtual="help_footer.html"-->
