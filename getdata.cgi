@@ -332,6 +332,7 @@ if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
     eval `egrep '^FORM_[a-z0-9]*=[a-z]*[-+0-9.]*;$' $def`
   fi
   case "$FORM_ndiff" in
+      2) n2=selected;;
       3) n3=selected;;
       5) n5=selected;;
       7) n7=selected;;
@@ -352,6 +353,7 @@ cat <<EOF
 <input type="hidden" name="wmo" value="$WMO">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
 using <select class="forminput" name="ndiff">
+<option $n2>2
 <option $n3>3
 <option $n5>5
 <option $n7>7

@@ -15,6 +15,9 @@ if [ -z "$EMAIL" ]; then
    echo "getstations: internal error: EMAIL undefined" 1>&2   
    EMAIL=someone@somewhere
 fi
+if [ $EMAIL = oldenbor@knmi.nl ]; then
+    lwrite=false
+fi
 if [ $EMAIL != someone@somewhere ]; then
   if [ -n "$FORM_name" ]; then
     FORM_NAME=`echo "$FORM_name" | tr ' ' '_'`
@@ -208,16 +211,16 @@ ditisheteinde
   fi
 
   listname=data/list_${FORM_climate}_${FORM_lon1:-$FORM_lon}:${FORM_lon2}_${FORM_lat1}:${FORM_lat2:-$FORM_lat}_${FORM_min}_${FORM_sum}_${FORM_month}_${FORM_elevmin}:${FORM_elevmax}_${FORM_dist}_${FORM_name}.txt
-  if [ 0 = 1 ]; then
+  if [ "$lwrite" = true ]; then
     echo "<pre>"
-    echo $DIR/bin/$prog $fortargs
+    echo ./bin/$prog $fortargs
     echo "</pre>"
   fi
   if [ -n "$FORM_yr1" -o -n "$FORM_yr2" ]; then
       echo "Selecting a period takes quite a bit longer.  Please be patient.<p>"
   fi
   if [ ! -z "$listname" ]; then
-    $DIR/bin/$prog $fortargs > "$listname"
+    ./bin/$prog $fortargs > "$listname"
   fi
 elif [ ${listname#data} = $listname ]; then
 # the list is not in the data directory, so it has been pre-made
@@ -246,7 +249,7 @@ if [ -z "$FORM_name" ]; then
 <table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>
 EOF
-    . $DIR/daily2longerform.cgi
+    . ./daily2longerform.cgi
 cat <<EOF
 <input type="submit" class="formbutton" value="make new set of time series">
 </td></tr></table>
