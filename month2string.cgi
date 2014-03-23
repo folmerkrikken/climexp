@@ -6,7 +6,7 @@ elif [ "$NPERYEAR" = 12 ]; then
 elif [ "$NPERYEAR" = 73 ]; then
   eval `$DIR/bin/month2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix | sed -e 's/monthly/5-daily/g'`
 elif [ "$NPERYEAR" = 1 ]; then
-  eval `$DIR/bin/month2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix | sed -e 's/monthly/yearly/g'`
+  eval `$DIR/bin/annual2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix | sed -e 's/monthly/yearly/g'`
 elif [ "$NPERYEAR" = 4 ]; then
   eval `$DIR/bin/season2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix`
 else
