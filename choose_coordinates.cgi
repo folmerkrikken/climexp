@@ -45,7 +45,7 @@ if [ "$SHOWMASK" = true ]; then
 	cat << EOF
 <tr><td>Mask:
 </td><td><select name=maskmetadata>
-<option value="">select a mask</option>
+<option value="">no mask</option>
 EOF
 	for maskmetadata in data/*.$EMAIL.poly
 	do

@@ -218,7 +218,7 @@ EOF
     outfile=${outfile}_su
   fi
   if [ -z "$ENSEMBLE" ]; then
-    if [ -f $outfile.nc ]; then
+    if [ -f $outfile.nc -a $outfile.nc -nt $file ]; then
 	  echo "Field already exists<br>"
     else
       if [ -n "$FORM_metadata" ]; then
@@ -253,7 +253,7 @@ EOF
       then
       	[ ! -s $ensfile ] && ensfile=data/$ensfile # I think
         ensout=`echo $outfile | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
-    	if [ -f $ensout.nc ]; then
+    	if [ -f $ensout.nc -a $ensout -nt $ensfile ]; then
 	      echo "Ensemble member $ii already exists<br>"
     	else
     	  if [ -n "$FORM_metadata" ]; then

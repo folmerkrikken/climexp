@@ -512,7 +512,8 @@ echo "<div class=\"formbody\"><input type=\"submit\" class=\"formbutton\" value=
 
 fi
 
-echo '<div class="note">R verification measures are kindly provided by the <a href="http://www.secam.ex.ac.uk/cat" target="_new">RCLIM</a> initiative</div>'
+echo '<div class="note">Verification measures in R have been kindly provided by the
+<A HREF="http://www1.secam.ex.ac.uk/?nav=695" target=_new>RCLIM initiative</A> and ongoing research on verification by the <a href="http://www.specs-fp7.eu/SPECS/Home.html" target=_new>EU project SPECS</a></div>'
 
 if [ -n "$FORM_field" ]; then
   if [ ${FORM_field#ukmo} != $FORM_field -o ${FORM_field#ens_ukmo} != $FORM_field ]; then
