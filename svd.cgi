@@ -140,6 +140,7 @@ do
   	echo "</pre>"
   fi
   . ./grads.cgi
+  dano=''
 done
 
 # right eigenvector
