@@ -27,6 +27,30 @@ fi
 if [ ${NPERYEAR:-12} != 12 ]; then
   if [ "${FORM_lag:-0}" != "0" ]; then
     indexmonth="${FORM_lag}$timescale-lag"
+    if [ ${FORM_sum:-1} != 1 -a $NPERYEAR -gt 12 ]; then
+      indexmonth="${FORM_sum}$timescale $indexmonth"
+      if [ -n "$seriesmonth" ]; then
+        seriesmonth="${FORM_sum}$timescale $seriesmonth"
+      else
+        seriesmonth="${FORM_sum}$timescale"
+      fi
+    fi
+  elif [ $NPERYEAR -gt 12 ]; then
+    if [ ${FORM_sum:-1} != 1 ]; then
+      indexmonth="${FORM_sum}$timescale"
+      if [ -n "$seriesmonth" ]; then
+        seriesmonth="${FORM_sum}$timescale $seriesmonth"
+      else
+        seriesmonth="${FORM_sum}$timescale"
+      fi
+    else
+      indexmonth=$timely
+      if [ -n "$seriesmonth" ]; then
+        seriesmonth="${FORM_sum}$timescale $seriesmonth"
+      else
+        seriesmonth="${FORM_sum}$timescale"
+      fi
+    fi
   fi
 fi
 if [ "$FORM_plottype" = "time-lon" ]; then
