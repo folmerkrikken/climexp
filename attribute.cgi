@@ -242,7 +242,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 		bottomtop=bottom
 	fi
 	if [ -n "$FORM_year" ]; then
-		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"$FORM_year\" w lines, \"$root.txt\" index 2 u 2:4 title \"$FORM_year in climate of $FORM_begin2\" w lines" 
+		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"$FORM_year\" w lines lt 1, \"$root.txt\" index 2 u 2:4 title \"$FORM_year in climate of $FORM_begin2\" w lines lt 3" 
 	else
 		plotformyear=""
 	fi
@@ -259,7 +259,7 @@ set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [${FORM_ylo}:${FORM_yhi}]
-plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit fit" with line$plotformyear
+plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit $FORM_assume fit" with line$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
 replot
@@ -314,7 +314,7 @@ set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [${FORM_ylo}:${FORM_yhi}]
-plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit fit" with line$plotformyear
+plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit $FORM_assume fit" with line$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
 replot

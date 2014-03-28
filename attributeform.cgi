@@ -47,14 +47,6 @@ if [ "$EMAIL" != somene@somewhere ]; then
   fi
 fi
 
-case ${FORM_plot:-hist} in
-qq) plot_qq="checked";;
-gumbel) plot_gumbel="checked";;
-log) plot_log="checked";;
-sqrtlog) sqrtplot_log="checked";;
-*) plot_hist="checked";;
-esac
-
 case ${FORM_fit:-none} in
 poisson) fit_poisson="checked";;
 gauss)   fit_gauss="checked";;
@@ -63,6 +55,12 @@ gumbel)  fit_gumbel="checked";;
 gev)     fit_gev="checked";;
 gpd)     fit_gpd="checked";;
 *)       fit_none="checked";;
+esac
+
+case $FORM_assume in
+scale) assume_scale=checked;;
+both)  assume_both=checked;;
+*)     assume_shift=checked;;
 esac
 
 if [ -n "$FORM_changesign" ]; then
@@ -97,6 +95,7 @@ elif [ $NPERYEAR -ge 12 ]; then
 else
     nperyears="1"
 fi
+
 save_nperyear=$NPERYEAR
 for NPERYEAR in $nperyears
 do
@@ -141,7 +140,7 @@ cat <<EOF
 <option value="0.3" $select03>constrain shape to &plusmn;0.3
 <option value="0.2" $select02>constrain shape to &plusmn;0.2
 </select> of GEV and GPD
-<tr><td>Assume:<td>The PDF <input type="radio" class="formradio" name="assume" value="shift">shifts, <input type="radio" class="formradio" name="assume" value="scale">scales or <input type="radio" class="formradio" name="assume" value="both">both with the covariate<td><a href="javascript:pop_page('help/assume.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+<tr><td>Assume:<td>The PDF <input type="radio" class="formradio" name="assume" value="shift" $assume_shift>shifts, <input type="radio" class="formradio" name="assume" value="scale" $assume_scale>scales or <input type="radio" class="formradio" name="assume" value="both" $assume_both>both with the covariate<td><a href="javascript:pop_page('help/assume.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 <tr><td>Compare:<td>return time in the counterfactual world of year <input type="$number" min=1 max=2500 step=1 class="forminput" name="begin2" $textsize4 value="$FORM_begin2">
 <tr><td>Leave out:<td>year <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$FORM_year"> and compute return time
 EOF

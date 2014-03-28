@@ -47,12 +47,14 @@ if [ -n "$masknetcdf" ]; then
 		echo "Please contact <a href="http://www.knmi.nl/~oldenbor/">me</a> about this. I need the following command:<br> $polycommand"
 		. ./myvinkfoot.cgi
 	fi
+
     cat <<EOF
 Download <a href="$masknetcdf">mask file</a>
 EOF
 	FORM_var=mask
 	oldfile=$file
 	file=$masknetcdf
+	oldnperyear=$NPERYEAR
 	NPERYEAR=1
     FORM_year=0001 # grads puts netcdf files without date on 1:1:1:0
     m=jan
@@ -62,6 +64,7 @@ EOF
 	CLIM=$climfield
 	. ./getfieldopts.cgi # set lat/lon etc
 	. ./grads.cgi
+	NPERYEAR=$oldnperyear
     station=$oldstation
     CLIM=$oldCLIM
     file=$oldfile
