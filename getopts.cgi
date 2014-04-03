@@ -57,7 +57,9 @@ fi
 [ -n "$FORM_end2" ] && corrargs="$corrargs end2 $FORM_end2"
 [ -n "$FORM_anomal" ] && corrargs="$corrargs anomal"
 [ -n "$FORM_log" ] && corrargs="$corrargs log"
-[ -n "$FORM_changesign" ] && corrargs="$corrargs changesign"
+if [ "$FORM_changesign" != "both" ]; then
+    [ -n "$FORM_changesign" ] && corrargs="$corrargs changesign"
+fi
 [ -n "$FORM_normsd" ] && corrargs="$corrargs normsd"
 [ -n "$FORM_sqrt" ] && corrargs="$corrargs sqrt"
 [ -n "$FORM_square" ] && corrargs="$corrargs square"

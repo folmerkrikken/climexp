@@ -523,8 +523,8 @@ EOF
       a1=1
       a2=$a
     fi
-    if [ ! -s $DIR/data/dummy.$NPERYEAR.dat ]; then
-      $DIR/bin/gen_time 1700 2200 $NPERYEAR > $DIR/data/dummy.$NPERYEAR.dat
+    if [ ! -s ./data/dummy.$NPERYEAR.dat ]; then
+      ./bin/gen_time 1700 2200 $NPERYEAR > ./data/dummy.$NPERYEAR.dat
     fi
     cat <<EOF
 <div class="formheader">Subtract influence of $index from $station $CLIM ($WMO)</div>
