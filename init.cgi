@@ -10,7 +10,7 @@ if [ -z "$init_done" ]; then
 ###   if [ $EMAIL = oldenbor@knmi.nl ]; then
 ###       echo "load=$load<br>"
 ###   fi
-   if [ ${load:-0} -gt 20 ]; then
+   if [ ${load:-0} -gt 20 -a `uname` != Darwin ]; then
        echo 
        echo "Server too busy (load $load &gt; 20), try again later"
        exit
