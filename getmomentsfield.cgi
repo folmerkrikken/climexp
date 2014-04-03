@@ -23,12 +23,16 @@ if [ -z "$FORM_var" ]; then
   . ./myvinkfoot.cgi
   exit
 fi
-if [ "$FORM_var" = "norm_rt" ]; then
+FORM_year=""
+if [ "$FORM_var" = "norm_rt" -o "$FORM_var" = "norm_z" ]; then
   FORM_year=$FORM_normyear
 elif [ "$FORM_var" = "pot_rt" ]; then
   FORM_year=$FORM_potyear
 elif [ "$FORM_var" = "gev_rt" ]; then
   FORM_year=$FORM_gevyear
+fi
+if [ "$FORM_changesign" = "both" -a -z "FORM_year" ]; then
+  FORM_changesign=""
 fi
 if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
   cat > ./prefs/$EMAIL.momentsfield.$NPERYEAR << EOF
@@ -61,6 +65,7 @@ perc) var="${FORM_perc}% percentile";;
 max)  var="maximum";;
 min)  var="minimum";;
 norm_rt)    var="Gauss return time of $FORM_year";;
+norm_z)     var="z-value of $FORM_year";;
 pot_scale)  var="scale parameter of GPD";;
 pot_shape)  var="shape parameter of GPD";;
 pot_return) var="$FORM_pot_return yr return value";;
@@ -76,7 +81,7 @@ esac
 corrargs="$FORM_var"
 if [ "$FORM_var" = "perc" ]; then
   corrargs="$corrargs $FORM_perc"
-elif [  "$FORM_var" = "pot_rt" -o "$FORM_var" = "gev_rt" -o "$FORM_var" = "norm_rt" ]; then
+elif [  "$FORM_var" = "pot_rt" -o "$FORM_var" = "gev_rt" -o "$FORM_var" = "norm_rt" -o "$FORM_var" = "norm_z" ]; then
   corrargs="$corrargs $FORM_year"
 fi
 if [ "${FORM_var#pot}" != "$FORM_var" ]; then
@@ -104,8 +109,14 @@ startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
 echo "Computing $var...<p>"
 # generate GrADS data file
-( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$.ctl;./bin/getmomentsfield $file $corrargs ./data/m$$.ctl) > /tmp/getmomentsfield$$.log ) 2>& 1
-if [ ! -s $DIR/data/m$$.dat -a ! -s  $DIR/data/m$$.grd ]; then
+( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$.nc;./bin/getmomentsfield $file $corrargs ./data/m$$.nc) > /tmp/getmomentsfield$$.log ) 2>& 1
+if [ "$FORM_changesign" = "both" -a \( "${FORM_var#pot_}" != "$FORM_var" -o "${FORM_var#gev_}" != "$FORM_var" \) ]; then
+    mv ./data/m$$.nc ./data/m$$p.nc
+    ( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$m.nc;./bin/getmomentsfield $file $corrargs ./data/m$$m.nc) >> /tmp/getmomentsfield$$.log ) 2>& 1
+    echo "NOT YET READY"
+    ./bin/merge_pm.py $FORM_var $FORM_year ./data/m$$p.nc ./data/m$$m.nc  ./data/m$$.nc
+fi
+if [ ! -s $DIR/data/m$$.nc -a ! -s $DIR/data/m$$.dat -a ! -s  $DIR/data/m$$.grd ]; then
   cat $DIR/wrong.html
   echo "<pre>"
   cat /tmp/getmomentsfield$$.log
@@ -127,12 +138,12 @@ fi
 if [ "$FORM_var" = "perc" ]; then
   RANK="${FORM_perc}%"
 fi
-file=data/m$$.ctl
+file=data/m$$.nc
 station=$kindname
 CLIM=$climfield
 if [ ${FORM_var%%_rt} != $FORM_var ]; then
   CLIM="$CLIM [yr]"
-elif [ $FORM_var = skew -a $FORM_var = kurt -a $FORM_var = sdm -o $FORM_var = pot_shape ]; then
+elif [ $FORM_var = skew -a $FORM_var = kurt -a $FORM_var = sdm -o $FORM_var = pot_shape -o $FORM_var = norm_z ]; then
   CLIM="$CLIM"
 elif [ "$FORM_standardunits" = standardunits ]; then
   CLIM="$CLIM [${NEWUNITS}]"
@@ -140,7 +151,9 @@ else
   CLIM="$CLIM [${UNITS}]"
 fi
 if [ ${FORM_var%%pot} != $FORM_var -o  ${FORM_var%%gev} != $FORM_var ]; then
-  if [ -n "$FORM_changesign" ]; then
+  if [ "$FORM_changesign" = "both" ]; then
+    CLIM="$CLIM\\both extremes"
+  elif [ -n "$FORM_changesign" ]; then
     CLIM="$CLIM\\low extremes"
   else
     CLIM="$CLIM\\high extremes"
@@ -155,6 +168,8 @@ elif [ $FORM_var = gev_return ]; then
   FORM_var="t$FORM_gev_return"
 elif [ ${FORM_var%%_rt} != $FORM_var ]; then
   FORM_var=${FORM_var}_${FORM_year}
+elif [ ${FORM_var} = norm_z ]; then
+  FORM_var=z_${FORM_year}
 fi
 datafile="data/m$$"
 . ./grads.cgi

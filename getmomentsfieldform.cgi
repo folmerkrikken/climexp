@@ -28,6 +28,7 @@ fi
 case "$FORM_var" in
 sd)         sd_checked="checked";;
 norm_rt)    norm_rt_checked="checked";;
+norm_z)     norm_z_checked="checked";;
 sdm)        sdm_checked="checked";;
 skew)       skew_checked="checked";;
 kurt)       kurt_checked="checked";;
@@ -76,7 +77,9 @@ case ${FORM_gev_return:-10} in
 *)  gev_t10_selected="selected";;
 esac
 
-if [ -n "$FORM_changesign" ]; then
+if [ "$FORM_changesign" = "both" ]; then
+  both_checked="checked"
+elif [ -n "$FORM_changesign" ]; then
   lower_checked="checked"
 else
   upper_checked="checked"
@@ -112,7 +115,7 @@ cat <<EOF
 ,<input type="radio" class="formradio" name="var" value="sd" $sd_checked>standard deviation
 (<input type="radio" class="formradio" name="var" value="sdm" $sdm_checked>/mean)
 <tr><td><td>
-<input type="radio" class="formradio" name="var" value="norm_rt" $norm_rt_checked>return time of year <input type="$number" min=1 max=2500 step=1 class="forminput" $textsize4 name="normyear" value="${FORM_year}"> in the context of the other years assuming a normal distribution
+<input type="radio" class="formradio" name="var" value="norm_rt" $norm_rt_checked>return time of year <input type="$number" min=1 max=2500 step=1 class="forminput" $textsize4 name="normyear" value="${FORM_year}"> in the context of the other years assuming a normal distribution, <input type="radio" class="formradio" name="var" value="norm_z" $norm_z_checked>z-value
 <tr><td><td>
 <input type="radio" class="formradio" name="var" value="skew" $skew_checked>skewness
 <input type="radio" class="formradio" name="var" value="kurt" $kurt_checked>kurtosis or
@@ -123,7 +126,7 @@ cat <<EOF
 <input type="radio" class="formradio" name="var" value="min" $min_checked>minimum value
 <input type="radio" class="formradio" name="var" value="max" $max_checked>maximum value
 <tr><td><td>&nbsp;
-<tr><td><td>Extreme value fits: <input type="radio" class="formradio" name="changesign" value="" $upper_checked>upper <input type="radio" class="formradio" name="changesign" value="on" $lower_checked>lower tail,
+<tr><td><td>Extreme value fits: <input type="radio" class="formradio" name="changesign" value="" $upper_checked>upper <input type="radio" class="formradio" name="changesign" value="on" $lower_checked>lower tail, or <input type="radio" class="formradio" name="changesign" value="both" $both_checked>both,
 <select class="forminput" name="restrain">
 <option value="0" $select00>do not constrain shape
 <option value="0.5" $select05>constrain shape to &plusmn;0.5
