@@ -227,27 +227,27 @@ prcp_trmm_1_lo) file=TRMMData/prcp_trmm_1_lo.nc;kindname="TRMM";climfield="preci
 ssmi_1) file=NCDCData/ssmi_1.ctl;kindname="NCDC SSMI/I";climfield="precipitation";flipcolor=1;;
 hulme) file=CRUData/hulme23.ctl;kindname="CRU";climfield="precipitation";flipcolor=1;;
 hulme-nino3) file=CRUData/hulme23-nino3.ctl;kindname="CRU";climfield="precipitation - nino3";flipcolor=1;;
-cru3_tmp) file=CRUData/cru3_tmp.ctl;kindname="CRU TS3";climfield="temperature";;
-cru3_tmp_10) file=CRUData/cru3_tmp_10.ctl;kindname="CRU TS3";climfield="temperature";;
-cru3_tmp_25) file=CRUData/cru3_tmp_25.ctl;kindname="CRU TS3";climfield="temperature";;
-cru3_tmx) file=CRUData/cru3_tmx.ctl;kindname="CRU TS3";climfield="Tmax";;
-cru3_tmx_10) file=CRUData/cru3_tmx_10.ctl;kindname="CRU TS3";climfield="Tmax";;
-cru3_tmx_25) file=CRUData/cru3_tmx_25.ctl;kindname="CRU TS3";climfield="Tmax";;
-cru3_tmn) file=CRUData/cru3_tmn.ctl;kindname="CRU TS3";climfield="Tmin";;
-cru3_tmn_10) file=CRUData/cru3_tmn_10.ctl;kindname="CRU TS3";climfield="Tmin";;
-cru3_tmn_25) file=CRUData/cru3_tmn_25.ctl;kindname="CRU TS3";climfield="Tmin";;
-cru3_dtr) file=CRUData/cru3_dtr.ctl;kindname="CRU TS3";climfield="Tmax-Tmin";;
-cru3_dtr_10) file=CRUData/cru3_dtr_10.ctl;kindname="CRU TS3";climfield="Tmax-Tmin";;
-cru3_dtr_25) file=CRUData/cru3_dtr_25.ctl;kindname="CRU TS3";climfield="Tmax-Tmin";;
-cru3_pre) file=CRUData/cru3_pre.ctl;kindname="CRU TS3";climfield="precipitation";flipcolor=1;;
-cru3_pre_10) file=CRUData/cru3_pre_10.ctl;kindname="CRU TS3";climfield="precipitation";flipcolor=1;;
-cru3_pre_25) file=CRUData/cru3_pre_25.ctl;kindname="CRU TS3";climfield="precipitation";flipcolor=1;;
-cru3_cld) file=CRUData/cru3_cld.ctl;kindname="CRU TS3";climfield="cloud fraction";flipcolor=1;;
-cru3_cld_10) file=CRUData/cru3_cld_10.ctl;kindname="CRU TS3";climfield="cloud fraction";flipcolor=1;;
-cru3_cld_25) file=CRUData/cru3_cld_25.ctl;kindname="CRU TS3";climfield="cloud fraction";flipcolor=1;;
-cru3_vap) file=CRUData/cru3_vap.ctl;kindname="CRU TS3";climfield="vapour pressure";flipcolor=1;;
-cru3_vap_10) file=CRUData/cru3_vap_10.ctl;kindname="CRU TS3";climfield="vapour pressure";flipcolor=1;;
-cru3_vap_25) file=CRUData/cru3_vap_25.ctl;kindname="CRU TS3";climfield="vapour pressure";flipcolor=1;;
+cru_tmp) file=CRUData/cru_ts3.21.1901.2012.tmp.dat.nc;kindname="CRU TS3.21";climfield="temperature";;
+cru_tmp_10) file=CRUData/cru_ts3.21.1901.2012.tmp.dat_1.nc;kindname="CRU TS3.21";climfield="temperature";;
+cru_tmp_25) file=CRUData/cru_ts3.21.1901.2012.tmp.dat_25.nc;kindname="CRU TS3.21";climfield="temperature";;
+cru_tmx) file=CRUData/cru_ts3.21.1901.2012.tmx.dat.nc;kindname="CRU TS3.21";climfield="Tmax";;
+cru_tmx_10) file=CRUData/cru_ts3.21.1901.2012.tmx.dat_1.nc;kindname="CRU TS3.21";climfield="Tmax";;
+cru_tmx_25) file=CRUData/cru_ts3.21.1901.2012.tmx.dat_25.nc;kindname="CRU TS3.21";climfield="Tmax";;
+cru_tmn) file=CRUData/cru_ts3.21.1901.2012.tmn.dat.nc;kindname="CRU TS3.21";climfield="Tmin";;
+cru_tmn_10) file=CRUData/cru_ts3.21.1901.2012.tmn.dat_1.nc;kindname="CRU TS3.21";climfield="Tmin";;
+cru_tmn_25) file=CRUData/cru_ts3.21.1901.2012.tmn.dat_25.nc;kindname="CRU TS3.21";climfield="Tmin";;
+cru_dtr) file=CRUData/cru_ts3.21.1901.2012.dtr.dat.nc;kindname="CRU TS3.21";climfield="Tmax-Tmin";;
+cru_dtr_10) file=CRUData/cru_ts3.21.1901.2012.dtr.dat_1.nc;kindname="CRU TS3.21";climfield="Tmax-Tmin";;
+cru_dtr_25) file=CRUData/cru_ts3.21.1901.2012.dtr.dat_25.nc;kindname="CRU TS3.21";climfield="Tmax-Tmin";;
+cru_pre) file=CRUData/cru_ts3.21.1901.2012.pre.dat.nc;kindname="CRU TS3.21";climfield="precipitation";flipcolor=1;;
+cru_pre_10) file=CRUData/cru_ts3.21.1901.2012.pre.dat_1.nc;kindname="CRU TS3.21";climfield="precipitation";flipcolor=1;;
+cru_pre_25) file=CRUData/cru_ts3.21.1901.2012.pre.dat_25.nc;kindname="CRU TS3.21";climfield="precipitation";flipcolor=1;;
+cru_cld) file=CRUData/cru_ts3.21.1901.2012.cld.dat.nc;kindname="CRU TS3.21";climfield="cloud fraction";flipcolor=1;;
+cru_cld_10) file=CRUData/cru_ts3.21.1901.2012.cld.dat_1.nc;kindname="CRU TS3.21";climfield="cloud fraction";flipcolor=1;;
+cru_cld_25) file=CRUData/cru_ts3.21.1901.2012.cld.dat_25.nc;kindname="CRU TS3.21";climfield="cloud fraction";flipcolor=1;;
+cru_vap) file=CRUData/cru_ts3.21.1901.2012.vap.dat.nc;kindname="CRU TS3.21";climfield="vapour pressure";flipcolor=1;;
+cru_vap_10) file=CRUData/cru_ts3.21.1901.2012.vap.dat_1.nc;kindname="CRU TS3.21";climfield="vapour pressure";flipcolor=1;;
+cru_vap_25) file=CRUData/cru_ts3.21.1901.2012.vap.dat_25.nc;kindname="CRU TS3.21";climfield="vapour pressure";flipcolor=1;;
 cru31_tmp) file=CRUData/cru_ts_3_10.1901.2009.tmp.dat.nc;kindname="CRU TS3.10";climfield="temperature";;
 cru31_tmp_10) file=CRUData/cru_ts_3_10_tmp_1.nc;kindname="CRU TS3.10";climfield="temperature";;
 cru31_tmp_25) file=CRUData/cru_ts_3_10_tmp_25.nc;kindname="CRU TS3.10";climfield="temperature";;
@@ -275,39 +275,39 @@ cru31_vap_25) file=CRUData/cru_ts_3_10_vap_25.nc;kindname="CRU TS3.10";climfield
 hadcruh_q) file=CRUData/CRU_blendnewjul08_q_7303cf.nc;kindname="HadCRUH";climfield="specific humidity";flipcolor=1;;
 hadcruh_rh) file=CRUData/CRU_blendnewjul08_RH_7303cf.nc;kindname="HadCRUH";climfield="relative humidity";flipcolor=1;;
 
-ensembles_05_tg) file=ENSEMBLES/tg_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
+ensembles_05_tg) file=ENSEMBLES/tg_0.50deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_tg) file=ENSEMBLES/tg_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
+ensembles_025_tg) file=ENSEMBLES/tg_0.25deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tg_mo) file=ENSEMBLES/tg_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="Tmean";map='set lon -30 50
+ensembles_05_tg_mo) file=ENSEMBLES/tg_0.25deg_reg_v10.0u_mo.nc;kindname="E-OBS 10.0";climfield="Tmean";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tn) file=ENSEMBLES/tn_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
+ensembles_05_tn) file=ENSEMBLES/tn_0.50deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_tn) file=ENSEMBLES/tn_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
+ensembles_025_tn) file=ENSEMBLES/tn_0.25deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmin";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tn_mo) file=ENSEMBLES/tn_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="Tmin";map='set lon -30 50
+ensembles_05_tn_mo) file=ENSEMBLES/tn_0.25deg_reg_v10.0u_mo.nc;kindname="E-OBS 10.0";climfield="Tmin";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tx) file=ENSEMBLES/tx_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
+ensembles_05_tx) file=ENSEMBLES/tx_0.50deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_tx) file=ENSEMBLES/tx_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
+ensembles_025_tx) file=ENSEMBLES/tx_0.25deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmax";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_tx_mo) file=ENSEMBLES/tx_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="Tmax";map='set lon -30 50
+ensembles_05_tx_mo) file=ENSEMBLES/tx_0.25deg_reg_v10.0u_mo.nc;kindname="E-OBS 10.0";climfield="Tmax";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_rr) file=ENSEMBLES/rr_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
+ensembles_05_rr) file=ENSEMBLES/rr_0.50deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_rr) file=ENSEMBLES/rr_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
+ensembles_025_rr) file=ENSEMBLES/rr_0.25deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_rr_mo) file=ENSEMBLES/rr_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="prcp";map='set lon -30 50
+ensembles_05_rr_mo) file=ENSEMBLES/rr_0.25deg_reg_v10.0u_mo.nc;kindname="E-OBS 10.0";climfield="prcp";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_pp) file=ENSEMBLES/pp_0.50deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
+ensembles_05_pp) file=ENSEMBLES/pp_0.50deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_pp) file=ENSEMBLES/pp_0.25deg_reg_v9.0u.nc;kindname="E-OBS 9.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
+ensembles_025_pp) file=ENSEMBLES/pp_0.25deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_pp_mo) file=ENSEMBLES/pp_0.25deg_reg_v9.0u_mo.nc;kindname="E-OBS 9.0";climfield="slp";map='set lon -30 50
+ensembles_05_pp_mo) file=ENSEMBLES/pp_0.25deg_reg_v10.0u_mo.nc;kindname="E-OBS 10.0";climfield="slp";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_elev) file=ENSEMBLES/elev_0.50deg_reg_v4.0.nc;kindname="E-OBS 9.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
+ensembles_05_elev) file=ENSEMBLES/elev_0.50deg_reg_v4.0.nc;kindname="E-OBS 10.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_elev) file=ENSEMBLES/elev_0.25deg_reg_v4.0.nc;kindname="E-OBS 9.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
+ensembles_025_elev) file=ENSEMBLES/elev_0.25deg_reg_v4.0.nc;kindname="E-OBS 10.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
 set lat 30 75';;
 scpdsi) file=CRUData/pdsi.penman.vegetat.snow.1901-2009.nc;kindname="CRU";climfield="scPDSI";;
 scpdsi_alpine) file=CRUData/scpdsi_alpine.ctl;kindname="CRU";climfield="scPDSI";map='set lon 4 19
