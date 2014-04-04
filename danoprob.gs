@@ -156,7 +156,10 @@ else
       clevs='0.0001 0.0005 0.001 0.005 0.01 0.05 0.1'
       flipped=7
     else
-      if ( substr(field,1,6) = pot_rt | substr(field,1,7) = norm_rt | substr(field,1,6) = gev_rt )
+      if ( substr(field,1,9) = bo_pot_rt | substr(field,1,10) = bo_norm_rt | substr(field,1,9) = bo_gev_rt )
+        clevs='-500 -200 -100 -50 -20 -10 10 20 50 100 200 500'
+    else
+      if ( substr(field,1,6) = pot_rt | substr(field,4,9) = pot_rt | substr(field,1,7) = norm_rt | substr(field,4,10) = norm_rt | substr(field,1,6) = gev_rt | substr(field,4,10) = gev_rt )
         clevs='10 20 50 100 200 500 1000 2000 5000 10000'
         flipped=3
       else
@@ -222,6 +225,7 @@ else
         say 'taking cmin,cmax,cint = 'cmin' 'cmax' 'cint
         'clear'
       endif
+    endif
     endif
   endif
 endif

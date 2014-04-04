@@ -32,7 +32,10 @@ elif [ "$FORM_var" = "gev_rt" ]; then
   FORM_year=$FORM_gevyear
 fi
 if [ "$FORM_changesign" = "both" -a -z "FORM_year" ]; then
-  FORM_changesign=""
+  . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
+  echo "PLotting both tails can only be done when computing a return time or z-value."
+  . ./myvinkfoot.cgi
+  exit
 fi
 if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
   cat > ./prefs/$EMAIL.momentsfield.$NPERYEAR << EOF
@@ -110,11 +113,12 @@ corrargs="$corrargs startstop $startstop"
 echo "Computing $var...<p>"
 # generate GrADS data file
 ( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$.nc;./bin/getmomentsfield $file $corrargs ./data/m$$.nc) > /tmp/getmomentsfield$$.log ) 2>& 1
-if [ "$FORM_changesign" = "both" -a \( "${FORM_var#pot_}" != "$FORM_var" -o "${FORM_var#gev_}" != "$FORM_var" \) ]; then
+if [ "$FORM_changesign" = "both" ]; then
     mv ./data/m$$.nc ./data/m$$p.nc
-    ( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$m.nc;./bin/getmomentsfield $file $corrargs ./data/m$$m.nc) >> /tmp/getmomentsfield$$.log ) 2>& 1
-    echo "NOT YET READY"
-    ./bin/merge_pm.py $FORM_var $FORM_year ./data/m$$p.nc ./data/m$$m.nc  ./data/m$$.nc
+    ( (echo ./bin/getmomentsfield $file $corrargs changesign ./data/m$$m.nc;./bin/getmomentsfield $file $corrargs changesign ./data/m$$m.nc) >> /tmp/getmomentsfield$$.log ) 2>& 1
+    ( (./bin/merge_pm.py $FORM_var $FORM_year ./data/m$$p.nc ./data/m$$m.nc  ./data/m$$.nc) >> /tmp/getmomentsfield$$.log 2>&1) 
+    FORM_var=bo_$FORM_var
+    rm data/m$$p.nc data/m$$m.nc data/m$$*.nc.tmp
 fi
 if [ ! -s $DIR/data/m$$.nc -a ! -s $DIR/data/m$$.dat -a ! -s  $DIR/data/m$$.grd ]; then
   cat $DIR/wrong.html

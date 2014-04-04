@@ -226,6 +226,9 @@ do
 	[ "$lwrite" = true ] && echo "title=$title<br>
 "
 	echo "$title" | tr '\\' ' ' | sed -e 's/>/\&gt;/g' -e 's/</\&lt;/g' > /tmp/grads_title_$$_$i.txt
+    if [ ${FORM_var#bo_} != ${FORM_var} ]; then
+        echo "Negative values denote positive return times of negative extremes" >> /tmp/grads_title_$$_$i.txt
+    fi
 	if [ -n "$FORM_notitleonplot" ]; then
 		drawtitle=""
 	else
@@ -640,7 +643,11 @@ elif [ "$FORM_mapformat" = png ]; then
 			if [ -x bin/fieldsignificance ]; then
 				x=${FORM_var%[0-9][0-9][0-9][0-9]}
 				if [ ${x%_rt_} != $x ]; then
-					pmin=all
+				    if [ ${x#bo_} != $x ]; then
+				        pmin=all_lo
+				    else
+    					pmin=all
+    				fi
 				else
 					pmin=${FORM_pmin:-10}
 				fi
@@ -650,7 +657,13 @@ elif [ "$FORM_mapformat" = png ]; then
 					echo "pmin=$pmin<br>"
 					echo "./bin/fieldsignificance $file $i $pmin lon1 ${FORM_lon1:--180} lon2 ${FORM_lon2:-180} lat1 ${FORM_lat1:--90} lat2 ${FORM_lat2:-90} > /tmp/fieldsignificance.log"
 				fi
+				[ $pmin = 'all_lo' ] && echo '<b>Low extremes:</b><br>'
 				( ./bin/fieldsignificance $file $i $pmin lon1 ${FORM_lon1:--180} lon2 ${FORM_lon2:-180} lat1 ${FORM_lat1:--90} lat2 ${FORM_lat2:-90} > /tmp/fieldsignificance.log ) 2>&1 | fgrep -v error 
+                if [ $pmin = 'all_lo' ]; then
+				    echo '<b>High extremes:</b><br>'
+                    pmin=all_hi
+    				( ./bin/fieldsignificance $file $i $pmin lon1 ${FORM_lon1:--180} lon2 ${FORM_lon2:-180} lat1 ${FORM_lat1:--90} lat2 ${FORM_lat2:-90} > /tmp/fieldsignificance.log ) 2>&1 | fgrep -v error 
+    			fi
 			fi
 		else
 			cat <<EOF > data/movie$$.html
