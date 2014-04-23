@@ -486,8 +486,8 @@ set term png $gnuplot_png_font_hires
 set output "$corrroot.png"
 replot
 EOF
-###    echo $DIR/bin/diamond2year "$corrroot.eps" "data/$TYPE$WMO${FORM_num}.dump$ext1"
-    $DIR/bin/diamond2year "$corrroot.eps" "data/$TYPE$WMO${FORM_num}.dump$ext1" > "${corrroot}_yr.eps"
+    ###echo $DIR/bin/diamond2year "$corrroot.eps" "data/$TYPE$WMO${FORM_num}.dump$ext1" ${FORM_xlo:--3e33} ${FORM_xhi:-3e33} ${FORM_ylo:--3e33} ${FORM_yhi:-3e33}
+    $DIR/bin/diamond2year "$corrroot.eps" "data/$TYPE$WMO${FORM_num}.dump$ext1" ${FORM_xlo:--3e33} ${FORM_xhi:-3e33} ${FORM_ylo:--3e33} ${FORM_yhi:-3e33} > "${corrroot}_yr.eps"
     echo "</pre>"
     rm $FIT_LOG
     if [ -n "$fitfunc" ]; then
