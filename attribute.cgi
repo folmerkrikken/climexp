@@ -242,7 +242,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 		bottomtop=bottom
 	fi
 	if [ -n "$FORM_year" ]; then
-		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"$FORM_year\" w lines lt 1, \"$root.txt\" index 2 u 2:4 title \"$FORM_year in climate of $FORM_begin2\" w lines lt 3" 
+		plotformyear=", \"$root.txt\" index 2 u 2:4 title \"$FORM_year\" w lines lt 4" 
 	else
 		plotformyear=""
 	fi
@@ -259,7 +259,11 @@ set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [${FORM_ylo}:${FORM_yhi}]
-plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit $FORM_assume fit" with line$plotformyear
+plot \\
+"$root.txt" index 0 u 2:3 notitle with points lt 3,\\
+"$root.txt" index 0 u 2:4 title "$FORM_fit $FORM_assume fit $FORM_begin2" with line lt 3,\\
+"$root.txt" index 1 u 2:3 notitle with points lt 1,\\
+"$root.txt" index 1 u 2:4 title "$FORM_fit $FORM_assume fit $FORM_year" with line lt 1$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
 replot
@@ -294,7 +298,7 @@ elif [ $FORM_assume = 'both' ]; then
 else
     echo "using an unknown assumption,"
 fi
-echo "referenced at $FORM_year (<a href=\"${root}.eps.gz\">eps</a>,  <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
+echo "referenced at $FORM_begin2 and $FORM_year (<a href=\"${root}.eps.gz\">eps</a>,  <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
