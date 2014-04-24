@@ -13,7 +13,7 @@ if [ "$EMAIL" != someone@somewhere ]; then
 fi
 
 if [ -n "$FORM_nperyearnew" ]; then
-  case $FORM_nperyearnew in
+  case "$FORM_nperyearnew" in
   "-1") sel_annual_shifted="selected";;
   1) sel_annual="selected";;
   4) sel_seasonal="selected";;
@@ -28,6 +28,10 @@ else
   elif [ "$NPERYEAR" = 366 -o "$NPERYEAR" = 365 -o "$NPERYEAR" = 360 ]; then
     sel_monthly="selected"
   fi
+fi
+if [ "$sel_annual_shifted" = selected -a "$sel_annual" = selected ]; then
+    ###echo "Something went wrong"
+    sel_annual=""
 fi
 
 case ${FORM_oper:-mean} in

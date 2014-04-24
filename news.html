@@ -1,3 +1,13 @@
+<tr><td>24-apr-2014</td><td>There was a possibility that your metadata for an uploaded file survived the nightly cleaning script whereas the data itself would not. When someone else re-used the number the metadata pointed to that other file. I added some checking and hope that is enough to kill this problem (thanks William).</td></tr>
+<tr><td>24-apr-2014</td><td>The CMIP5 sic (sea-ice concentration) fields were incomplete, re-running the scripts (Thanks Kenneth).</td></tr>
+<tr><td>14-apr-2014</td><td>Fixed a bug in the ERA-interim Tmin/Tmax fields. These accidentally only considered the minimum/maximum temperature over 6-12 UTC and 18-24 UTC, not the other half of the day.</td></tr>
+<tr><td>14-apr-2014</td><td>Fixed a big bug in the Berkeley TMIN/TMAX monthly gridded fields, which had the time axis off by four months since 8 March 2014 (thanks Rob).</td></tr>
+<tr><td>11-apr-2014</td><td>Updated CRU scPDSI to the version based on 3.21 (thanks Gerard).</td></tr>
+<tr><td>11-apr-2014</td><td>Added SPEI 3 and 6 months fields due to popular demand, they are now based on CRU 3.20 and run to 2011.</td></tr>
+<tr><td>11-apr-2014</td><td>Fixed bug in EMEP emission fields, now annual (thanks Stockton).</td></tr>
+<tr><td>07-apr-2014</td><td>Fixed a bug in handling annual data with a 360-day or 365-day calendar, which also affected the Climate Change Atlas (Thanks Dan).</td></tr>
+<tr><td>04-apr-2014</td><td>Added option to plot return times of low and high extremes in one plot (thanks Mark).</td></tr>
+<tr><td>03-apr-2014</td><td>Added option to plot z-values to normal distribution fit under "compute mean, s.d. or extremes".</td></tr>
 <tr><td>02-apr-2014</td><td>E-OBS upgraded to v10.0.</td></tr>
 <tr><td>02-apr-2014</td><td>CRU TS upgraded to 3.21 (thanks Harry).</td></tr>
 <tr><td>26-mar-2014</td><td>I think the GEV fit to extremes with trend now also works properly with the "scale" option (adjusting &mu; and &sigma; simultaneously). The numbers were correct but the plot was off.</td></tr>
