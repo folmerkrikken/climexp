@@ -33,7 +33,7 @@ elif [ "$FORM_var" = "gev_rt" ]; then
 fi
 if [ "$FORM_changesign" = "both" -a -z "FORM_year" ]; then
   . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
-  echo "PLotting both tails can only be done when computing a return time or z-value."
+  echo "Plotting both tails can only be done when computing a return time or z-value."
   . ./myvinkfoot.cgi
   exit
 fi
@@ -112,10 +112,13 @@ startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
 echo "Computing $var...<p>"
 # generate GrADS data file
+[ "$FORM_changesign" = "both" ] && echo "High extremes...<br>"
 ( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$.nc;./bin/getmomentsfield $file $corrargs ./data/m$$.nc) > /tmp/getmomentsfield$$.log ) 2>& 1
 if [ "$FORM_changesign" = "both" ]; then
     mv ./data/m$$.nc ./data/m$$p.nc
+    echo "<p>Low extremes...<br>"
     ( (echo ./bin/getmomentsfield $file $corrargs changesign ./data/m$$m.nc;./bin/getmomentsfield $file $corrargs changesign ./data/m$$m.nc) >> /tmp/getmomentsfield$$.log ) 2>& 1
+    echo "<p>Merging results...<p>"
     ( (./bin/merge_pm.py $FORM_var $FORM_year ./data/m$$p.nc ./data/m$$m.nc  ./data/m$$.nc) >> /tmp/getmomentsfield$$.log 2>&1) 
     FORM_var=bo_$FORM_var
     rm data/m$$p.nc data/m$$m.nc data/m$$*.nc.tmp
