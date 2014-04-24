@@ -6,11 +6,7 @@ if [ $scriptname = upload ]; then
 fi
 . ./getargs.cgi
 . ./checkemail.cgi
-#if [ "$EMAIL" = "someone@somewhere" ]; then
-#  . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
-#  echo "Anonymous users cannot upload their own series, please <a href=\"/registerform.cgi\">register or log in</a>."
-#  . ./myvinkfoot.cgi
-#fi
+
 TYPE=`basename $FORM_TYPE`
 STATION=`echo "$FORM_STATION" | tr ' <>&;%=' '_'`
 [ -z "$STATION" ] && STATION=no_name
@@ -30,13 +26,21 @@ TYPE="i"
 fi
 export DIR=`pwd`
 PROG=""
-i=0
-WMO=$scriptname$i
-while [ -f $DIR/data/$TYPE$WMO.dat \
-     -o -f $DIR/data/$TYPE${WMO}_00.dat ]
+i=-1
+numberinuse=true
+while [ $numberinuse = true ]
 do
-  i=$(($i + 1))
+  i=$((i+1))
   WMO=$scriptname$i
+  numberinuse=false
+  if [ -f ./data/$TYPE$WMO.dat -o -f ./data/$TYPE${WMO}_00.dat ]; then
+    numberinuse=true
+  else
+    metadata=`echo ./data/$TYPE${WMO}.*.inf | tr " " "\n" |head -1`
+    if [ -f $metadata ]; then
+      numberinuse=true
+    fi
+  fi
 done
 
 if [ -n "$FORM_data" ]; then
