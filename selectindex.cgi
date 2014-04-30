@@ -48,6 +48,14 @@ href="wipefeet.cgi?http://lwf.ncdc.noaa.gov/oa/climate/research/sst/sst.html" ta
 (1950-now, NOAA/ESRL/PSD)</div>
 <td><a href="wipefeet.cgi?http://www.cdc.noaa.gov/people/klaus.wolter/MEI/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=TAOData/tao_wwv&STATION=WWV&TYPE=i&id=$EMAIL">Warm Water Volume</a>
+(5&deg;S-5&deg;N, 120&deg;E-80&deg;W, 1980-now, PMEL/TAO)</div>
+<td><a href="wipefeet.cgi?http://www.pmel.noaa.gov/tao/elnino/wwv/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=BMRCData/wwv_poama&STATION=WWV&TYPE=i&id=$EMAIL">WWV</a>
+(5&deg;S-5&deg;N, 120&deg;E-80&deg;W, 1960-now, POAMA/PEODAS)</div>
+<td><a href="wipefeet.cgi?http://poama.bom.gov.au/ocean_monitoring.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
 <tr><td>NAO<td><div class="kalelink"><a href="getindices.cgi?WMO=CRUData/nao&STATION=NAO-Gibraltar&TYPE=i&id=$EMAIL">NAO Gibraltar-Stykkisholmur</a> (1821-now, Jones)</div>
 <td><a href="wipefeet.cgi?http://www.cru.uea.ac.uk/cru/data/nao/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
