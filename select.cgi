@@ -222,6 +222,23 @@ Longitude:
 EOF
 fi
 
+if [ "$EMAIL" = "oldenbor@knmi.nl" -o $EMAIL = "schrier@knmi.nl" ]; then # add more later, not foolproof but OK for the moment
+    extended=false
+    if [ "${FORM_field#era}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc ]; then
+        extended=true
+        extension="operational analyses"
+    fi
+    if [ "${FORM_field#ensembles_025}" != "${FORM_field}" -a -s ${file%u.nc}e.nc ]; then
+        extended=true
+        extension="SYNOPs"
+    fi
+    if [ $extended = true ]; then
+        echo "<div class=\"alineakop\"><a name=\"extend\">Analyse $kindname $climfield extended with $extension</a></div>"
+        echo "(Please contact <a href=\"http://www.knmi.nl/~oldenbor/\">me</a> if you need an up-to-date version)<br>"
+        echo "<a href=\"select.cgi?id=$EMAIL&field=${FORM_field}_e\">extended version</a>"
+    fi
+fi
+
 echo "<div class=\"alineakop\"><a name=\"download\">Download $kindname $climfield</a></div>"
 
 ###echo "FORM_field=$FORM_field<br>"
@@ -239,7 +256,7 @@ elif [ "${FORM_field#era}" != "${FORM_field}" -o "${FORM_field#ecmwf}" != "${FOR
 elif [ "${FORM_field#demeter}" != "${FORM_field}" -o "${FORM_field#ens_demeter}" != "${FORM_field}" ]; then
   echo "Please download the data from the ECMWF <a href=\"http://www.ecmwf.int/research/demeter/\" target="_new">DEMETER</a> website."
 elif [ "${FORM_field#ensembles}" != "${FORM_field}" -o "${FORM_field#ens_demeter}" != "${FORM_field}" ]; then
-  echo "Please download the data from the <a href=\"http://www.ecad.eu/download/ensembles/ensembles.php/\" target="_new">ENSEMBLES</a> website."
+  echo "Please download the data from the <a href=\"http://www.ecad.eu/download/ensembles/ensembles.php\" target="_new">E-OBS</a> website."
 elif [ ${file#IPCCData} != $file -o ${file#ESSENCE} != $file ]; then
   model=`echo $FORM_field | sed -e 's/^[^_]*_//' -e 's/_[^_]*$//'`
   ###echo "model=$model<br>"
