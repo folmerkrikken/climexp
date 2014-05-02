@@ -104,10 +104,11 @@ if [ ! \( -s $sfile -a -f $sfile \) ]; then
     exit
 fi
 
-cat <<EOF
-<font color=#ff2222>Test version under development, may or may not give correct answers
-today. Use with extreme caution and please report problems.</font><p>
-EOF
+if [ "$FORM_assume" != 'both' ]; then
+    echo '<font color=#ff2222>I think it works now, please report problems.</font><p>'
+else
+    echo '<font color=#ff2222>Fitting position and scale independently is unfinsihed and untested. Use at own risk.</font><p>'
+fi
 
 if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
 	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"

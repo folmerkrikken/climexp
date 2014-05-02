@@ -92,6 +92,8 @@ if [ $NPERYEAR -ge 360 ]; then
     nperyears="1 12 $NPERYEAR"
 elif [ $NPERYEAR -ge 12 ]; then
     nperyears="1 12"
+elif [ $NPERYEAR -ge 4 ]; then
+    nperyears="1 4"
 else
     nperyears="1"
 fi
@@ -132,7 +134,7 @@ cat <<EOF
 <input type="radio" class="formradio" name="fit" value="gumbel" $fit_gumbel>Block maxima and fit Gumbel distribution<br>
 <input type="radio" class="formradio" name="fit" value="gev" $fit_gev>Block maxima and fit GEV<br>
 <input type="radio" class="formradio" name="fit" value="gpd" $fit_gpd>Peak over threshold
-<input type="$number" class="forminput" name="dgt" value="${FORM_dgt:-80}" $textsize3>% and fit GPD <font color=#ff2222>does not work yet</font>
+<input type="$number" class="forminput" name="dgt" value="${FORM_dgt:-80}" $textsize3>% and fit GPD
 <select class="forminput" name="restrain">
 <option value="0" $select00>do not constrain shape
 <option value="0.5" $select05>constrain shape to &plusmn;0.5

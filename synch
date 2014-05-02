@@ -1,0 +1,31 @@
+#!/bin/csh -f
+if ( "$1" == "" ) then
+  set dest = bhlclim.knmi.nl:climexp/
+  set machine = bhlclim.knmi.nl
+else
+  set dest = ${1}:climexp/
+  set machine = $1
+endif
+if ( $HOST == bvlclim.knmi.nl ) then
+  scp news.html zuidzee.knmi.nl:climexp/
+  ssh zuidzee.knmi.nl "head -3 climexp/news.html >! WWW/news.html"
+else if ( $HOST == bhw330.knmi.nl ) then
+  head -3 news.html >! $HOME/WWW/news.html
+  echo "No synching from my workstation!"
+  exit
+else
+  echo "No synching from my $HOST !"
+  exit
+endif
+
+(rm *~ bin/*~)||true
+set rsync = 'rsync -v -e ssh'
+$rsync -L * ${dest}
+$rsync -L templates/* ${dest}/templates/
+$rsync -L bin/[a-c]* ${dest}bin/
+$rsync -L bin/[d-f]* ${dest}bin/
+$rsync -L bin/[g-z]* --exclude gnuplot ${dest}bin/
+$rsync -L etc/* ${dest}etc/
+$rsync -L help/* ${dest}help/
+$rsync -L SREX/*.txt ${dest}SREX/
+$rsync -L countries/*.txt ${dest}countries/
