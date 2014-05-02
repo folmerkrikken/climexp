@@ -18,6 +18,11 @@ else
   exit
 endif
 
+mv plot_atlas_form.py aap.py
+echo '#\!/home/oldenbor/bin/python' > plot_atlas_form.py
+tail -n +2 aap.py >> plot_atlas_form.py
+chmod +x plot_atlas_form.py
+
 (rm *~ bin/*~)||true
 set rsync = 'rsync -v -e ssh'
 $rsync -L * ${dest}
