@@ -98,14 +98,16 @@ else
     nperyears="1"
 fi
 
+if [ "$EMAIL" != "someone@somewhere" -a -f ./prefs/$EMAIL.series ]; then
+    series=`cat ./prefs/$EMAIL.series | head -1`
+fi
 save_nperyear=$NPERYEAR
 for NPERYEAR in $nperyears
 do
-. ./selecttimeseries.cgi | sed \
--e 's;="'$series'";="'$series'" checked;' \
--e 's/checkbox\" class=\"formcheck\" name/radio\" class=\"formradio\" name=\"timeseries\" value/' \
--e 's/value=\"myindex[0-9]*\"//' \
-#-e '/sunlength/d'
+    . ./selecttimeseries.cgi | sed \
+    -e 's;="'$series'";="'$series'" checked;' \
+    -e 's/checkbox\" class=\"formcheck\" name/radio\" class=\"formradio\" name=\"timeseries\" value/' \
+    -e 's/value=\"myindex[0-9]*\"//'
 done
 NPERYEAR=$save_nperyear
 

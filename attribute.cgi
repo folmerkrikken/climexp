@@ -75,6 +75,8 @@ n=0
 
 if [ $EMAIL != someone@somewhere ]; then
 	. ./save_commonoptions.cgi
+	# across all time scales, so without suffix NPERYEAR
+	echo "$FORM_timeseries" | head -1 > ./prefs/$EMAIL.series
 	case $FORM_fit in
 	    gev|gumbel) FORM_plot=gumbel;;
 	    gpd|gauss) FORM_plot=sqrtlog;;
