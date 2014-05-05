@@ -222,7 +222,14 @@ Longitude:
 EOF
 fi
 
-if [ "$EMAIL" = "oldenbor@knmi.nl" -o $EMAIL = "schrier@knmi.nl" ]; then # add more later, not foolproof but OK for the moment
+if [ "$EMAIL" = "oldenbor@knmi.nl" \
+  -o "$EMAIL" = "schrier@knmi.nl" \
+  -o "$EMAIL" = "pascal.yiou@lsce.ipsl.fr" \
+  -o "$EMAIL" = "robert.vautard@lsce.ipsl.fr" \
+  -o "$EMAIL" = "mathias.hauser@env.ethz.ch" \
+  -o "$EMAIL" = "rene.orth@env.ethz.ch" \
+  -o "$EMAIL" = "sonia.seneviratne@env.ethz.ch" \
+  ]; then # add more later, not foolproof but OK for the moment
     extended=false
     if [ "${FORM_field#era}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc ]; then
         extended=true
