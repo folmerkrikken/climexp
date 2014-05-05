@@ -13,7 +13,7 @@ if [ -z "$EMAIL" ]; then
 		EMAIL="$QUERY_STRING"
 	fi
 fi
-EMAIL=`echo "$EMAIL" | tr -cd '[:alnum:]@.-_'`
+EMAIL=`echo "$EMAIL" | tr -cd '[:alnum:]@.-_' | fgrep -v "/"`
 EMAIL=${EMAIL#id=}
 ###echo "EMAIL=$EMAIL<br>"
 [ -n "FORM_WMO" ] && FORM_WMO=`echo "$FORM_WMO" | sed -e 's/%%%/+++/' -e 's/%%/++/'`

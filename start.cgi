@@ -3,10 +3,14 @@ echo 'Content-Type: text/html'
 echo
 echo
 
+[ "$REMOTE_ADDR" = "134.17.128.149" ] && exit
+[ "$REMOTE_ADDR" = "134.17.132.13" ] && exit
+[ "$REMOTE_ADDR" = "81.94.205.66" ] && exit
 . ./getargs.cgi
 . ./init.cgi
 # in order not to break bookmarks to this entry point allow QUERY_STRING (with some checking)
 [ -z "$EMAIL" ] && EMAIL=`echo "$QUERY_STRING" | tr -cd '[:alnum:]@.-_'`
+EMAIL=`echo "$EMAIL" | fgrep -v '/' | egrep -v '(@|\.|-)sexy(@|\.|-)|(@|\.|-)sex(@|\.|-)|(@|\.|-)porn(@|\.|-)|(@|\.|-)porno(@|\.|-)|youtube.com|fynalcut.com'`
 # do not allow / in email address
 . ./searchengine.cgi
 if [ -z "$EMAIL" ]; then
