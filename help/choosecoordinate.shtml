@@ -17,6 +17,13 @@ available.
 these coordinates.  Only whole grid points are supported at the
 moment, the option [half-way between grid points]. 
 
+<p>The coordinates should be entered in ascending order, so -60&deg;E to 
+-30&deg;E defines an area of 30&deg; longitude, but -30&deg;E to -60&deg;E 
+defines an arrea of 330&deg; longitude. As a convenience, the latitudes are 
+swapped if they are entered in the wrong order.
 
+<p>The actual coordinates used are always mentioned in the caption of the next 
+page. These are normalised to be in ascending order and give the boundaries of 
+the grid boxes used in the computation.
 
 <!--#include virtual="help_footer.html"-->
