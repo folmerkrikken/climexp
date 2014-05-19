@@ -199,14 +199,19 @@ def get_file_list(exp, params):
             fileName = 'CMIP5/annual/{FORM_var}/{FORM_var}_{type}_modmean_{exp}_000.nc'.format(exp=exp, **paramsDict)
             files.append(fileName)
         else:
-            # we know that p goes to 3...
-            maskFile1 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p1{res}.nc".format(exp=exp, **paramsDict)
-            maskFile2 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p2{res}.nc".format(exp=exp, **paramsDict)
-            maskFile3 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p3{res}.nc".format(exp=exp, **paramsDict)
+            if exp == 'rcp45to85':
+                explist = [ 'rcp45', 'rcp60', 'rcp85']
+            else:
+                explist = [ exp ]
+            for e in explist:
+                # we know that p goes to 3...
+                maskFile1 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{e}_r*i1p1{res}.nc".format(e=e, **paramsDict)
+                maskFile2 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{e}_r*i1p2{res}.nc".format(e=e, **paramsDict)
+                maskFile3 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{e}_r*i1p3{res}.nc".format(e=e, **paramsDict)
 
-            files += glob.glob(maskFile1)
-            files += glob.glob(maskFile2)
-            files += glob.glob(maskFile3)
+                files += glob.glob(maskFile1)
+                files += glob.glob(maskFile2)
+                files += glob.glob(maskFile3)
 
     elif params.FORM_dataset == 'CMIP5extone':
 
@@ -214,16 +219,21 @@ def get_file_list(exp, params):
         if params.FORM_plotvar == 'mean':
             files.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_onemean_{exp}_000.nc".format(exp=exp, **paramsDict))
         else:
-            # we know that p goes to 3...
-            maskFiles = []
-            maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_[!EH]*_{exp}_r1i1p1{res}.nc".format(exp=exp, **paramsDict))
-            maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_HadGEM2-CC_{exp}_r8i1p?{res}.nc".format(exp=exp, **paramsDict))
-            maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_HadGEM2-ES_{exp}_r2i1p?{res}.nc".format(exp=exp, **paramsDict))
-            maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_GISS*_{exp}_r1i1p2{res}.nc".format(exp=exp, **paramsDict))
-            maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_GISS*_{exp}_r1i1p3{res}.nc".format(exp=exp, **paramsDict))
+            if exp == 'rcp45to85':
+                explist = [ 'rcp45', 'rcp60', 'rcp85']
+            else:
+                explist = [ exp ]
+            for e in explist:
+                # we know that p goes to 3...
+                maskFiles = []
+                maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_[!EH]*_{e}_r1i1p1{res}.nc".format(e=e, **paramsDict))
+                maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_HadGEM2-CC_{e}_r8i1p?{res}.nc".format(e=e, **paramsDict))
+                maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_HadGEM2-ES_{e}_r2i1p?{res}.nc".format(e=e, **paramsDict))
+                maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_GISS*_{e}_r1i1p2{res}.nc".format(e=e, **paramsDict))
+                maskFiles.append("CMIP5/annual/{FORM_var}/{FORM_var}_{type}_GISS*_{e}_r1i1p3{res}.nc".format(e=e, **paramsDict))
 
-            for mask in maskFiles:
-                files += glob.glob(mask)
+                for mask in maskFiles:
+                    files += glob.glob(mask)
 
     elif params.FORM_dataset == 'CMIP3':
 

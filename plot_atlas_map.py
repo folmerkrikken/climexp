@@ -207,6 +207,8 @@ class PlotAtlasMap:
             os.makedirs(root)
             
         ifiles = 0
+        ###self.logOut.info('self.files = %s<br>' % self.files[:5])
+        ###self.logOut.info('len(self.files) = %i<br>' % len(self.files))
         for fileName in self.files:
             self.log.debug('')
             if self.params.FORM_end1 < self.params.FORM_begin1:
@@ -368,6 +370,9 @@ class PlotAtlasMap:
             if doit or lwrite:      
                 # (re)generate quantfile 
 
+                ###self.logOut.info('self.outfiles = %s<br>' % self.outfiles[:5])
+                ###self.logOut.info('len(self.outfiles) = %i<br>' % len(self.outfiles))
+
                 for outfile in self.outfiles:
                     self.log.debug('')
                     infile = os.path.join(self.tempDir, '%s_%s' % (self.xvar, os.path.basename(outfile)))
@@ -387,8 +392,8 @@ class PlotAtlasMap:
                 infiles.sort()
                 self.logOut.info("Generating quantiles of signal ...<br>")
 
-                self.log.debug('infiles = %s' % infiles[:5])
-                self.log.debug('len(infiles) = %i' % len(infiles))
+                ###self.logOut.info('infiles = %s<br>' % infiles[:5])
+                ###self.logOut.info('len(infiles) = %i<br>' % len(infiles))
 
                 if not infiles:
                     raise PlotMapError("Cannot find data.")
@@ -534,7 +539,7 @@ class PlotAtlasMap:
                 # take median to represent to s.d.
                 self.sdfile = os.path.join(self.tempDir, '%s%s_%s' % ('sd_',self.xvar, os.path.basename(outfile)))
                 cmd = "ncks -v p50 {noisefile} {sdfile}".format(noisefile=noisefile, sdfile=self.sdfile)
-                self.log.debug("cmd = '%s'" % cmd)
+                ###self.log.debug("cmd = '%s'" % cmd)
                 cmdOutput = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
                 cmd = "ncrename -v p50,sd {sdfile}".format(noisefile=noisefile, sdfile=self.sdfile)
                 self.log.debug("cmd = '%s'" % cmd)
@@ -564,7 +569,7 @@ class PlotAtlasMap:
                 self.logOut.info("Using intramodel variability to estimate natural variability for the hatching.<br>")
                 self.sdfile = os.path.join(self.tempDir, 'sd_var.nc')
                 cmd = "ncks -v sd {quantfile} {sdfile}".format(quantfile=self.quantfile, sdfile=self.sdfile)
-                self.logOut.info(cmd)
+                ###self.logOut.info(cmd)
                 subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
             else:
                 # check whether the full ensemble has been run for these parameters
