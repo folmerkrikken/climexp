@@ -411,7 +411,7 @@ Output:
     {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone' ] %}
         
         {% if ((not FORM_rcp26) and (not FORM_rcp45) and (not FORM_rcp60) and (not FORM_rcp85)) %}
-            {% set FORM_rcp45 = 'checked' %}
+            {% set FORM_rcp45 = 'on' %}
         {% endif %}
 
         <input type=checkbox class=formcheck name=rcp26 {{ 'checked' if FORM_rcp26 }}>RCP2.6
