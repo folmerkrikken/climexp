@@ -297,11 +297,11 @@ pngfile=${root}.png
 getpngwidth
 echo "<div class=\"bijschrift\">$title"
 if [ $FORM_assume = 'shift' ]; then
-    echo "with the effects of $station linearly subtracted from the position parameter a,"
+    echo "with the effects of $covstation linearly subtracted from the position parameter a,"
 elif [ $FORM_assume = 'scale' ]; then
-    echo "with the effects of $station scaling the position and scale parameters parameter a,b, "
+    echo "with the effects of $covstation scaling the position and scale parameters parameter a,b, "
 elif [ $FORM_assume = 'both' ]; then
-    echo "with the effects of $station linearly subtracted from the position parameter a and independently from the scale parameter b,"
+    echo "with the effects of $covstation linearly subtracted from the position parameter a and independently from the scale parameter b,"
 else
     echo "using an unknown assumption,"
 fi
