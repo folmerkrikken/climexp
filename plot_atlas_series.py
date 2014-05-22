@@ -195,7 +195,7 @@ class PlotAtlasSeries:
                 # deduce model from 'filename' and get path to 'lsmask'
                 model, LSMASK = get_model(self.params, filename, self.typeVar)
 
-                if dataset in ['CMIP5ext', 'CMIP5extone']:
+                if self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
                     # the following routines use the averaging period, set it to annual
                     # they were already written to the form and saved to the defaults file
                     self.params.FORM_mon = 1
