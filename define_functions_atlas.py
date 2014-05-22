@@ -237,7 +237,7 @@ class DefineVar:
             self.cnlevels = "(/-80.-40.,-20.,-10.,-5.,-2.5,0.,2.5,5.,10.,20.,40.,80./)"
             self.notimeseries = True
 
-        elif var in ['cdd','cwd','csdi','tn10p','tn90p','tx10p','tx90p']:
+        elif var in ['cdd','altcdd','cwd','altcwd','csdi','tn10p','tn90p','tx10p','tx90p']:
             self.type = 'yr'
             if var in ['tn10p','tn90p','tx10p','tx90p']:
                 self.varname = var[:-1].upper() + 'p'
@@ -246,9 +246,9 @@ class DefineVar:
             else:
                 self.varname = var.upper()
                 self.Varname = var.upper()
-            if var == 'cdd':
+            if var in ['cdd','altcdd']:
                 self.rgbcbar = 'prm.txt'
-            elif var == 'cwd':
+            elif var in ['cwd','altcwd']:
                 self.rgbcbar = 'pr.txt'
             elif var in ['csdi', 'tn10p', 'tx10p']:
                 self.rgbcbar = 'tasmm.txt'

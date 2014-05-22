@@ -195,6 +195,11 @@ class PlotAtlasSeries:
                 # deduce model from 'filename' and get path to 'lsmask'
                 model, LSMASK = get_model(self.params, filename, self.typeVar)
 
+                if dataset in ['CMIP5ext', 'CMIP5extone']:
+                    # the following routines use the averaging period, set it to annual
+                    # they were already written to the form and saved to the defaults file
+                    self.params.FORM_mon = 1
+                    self.params.FORM_sum = 12
                 if self.params.FORM_dataset == '20CR':
                     basename = "c{var}".format(var=self.params.FORM_var)
                 if self.params.FORM_dataset == 'obs':
@@ -468,9 +473,11 @@ s/5.000 UL/5.000 UL 1 .setopacityalpha/"""
 
         mon = int(self.params.FORM_mon)
         ave = int(self.params.FORM_sum)
-        sname = month2string(mon) + '-' + month2string(((mon+ave-2)%12)+1)
+        if self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
+            sname = ''
+        else:
+            sname = ' ' + month2string(mon) + '-' + month2string(((mon+ave-2)%12)+1)
         s3 = adjust_winter(mon, ave)
-
 
         if self.params.FORM_anomaly == 'on':
             anom1 = self.params.FORM_anom1
@@ -530,7 +537,7 @@ var=var, rel=rel, region_extension=self.region_extension, anom1=anom1, anom2=ano
         else:
             change = ""
 
-        plottitle = "{relative}{Varname} {change}{regionname} {sname}".format(relative=relative, Varname=defVar.Varname, regionname=self.regionname, change=change, sname=sname)
+        plottitle = "{relative}{Varname} {change}{regionname}{sname}".format(relative=relative, Varname=defVar.Varname, regionname=self.regionname, change=change, sname=sname)
         if anom1 != '0':
             plottitle += ' wrt {anom1}-{anom2}'.format(anom1=anom1, anom2=anom2)
         datasetname = define_dataset(self.params.FORM_dataset,FORM_field)

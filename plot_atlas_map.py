@@ -281,11 +281,20 @@ class PlotAtlasMap:
             else:
                 reffile = "KNMIData/time12.dat"
         elif self.params.FORM_regr == 'co2eq45':
-            reffile = "CDIACData/RCP45_CO2EQ_mo.dat"
+            if self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
+                reffile = "CDIACData/RCP45_CO2EQ.dat"
+            else:
+                reffile = "CDIACData/RCP45_CO2EQ_mo.dat"                
         elif self.params.FORM_regr == 'co2eq85':
-            reffile = "CDIACData/RCP85_CO2EQ_mo.dat"
+            if self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
+                reffile = "CDIACData/RCP85_CO2EQ.dat"
+            else:
+                reffile = "CDIACData/RCP85_CO2EQ_mo.dat"
         elif self.params.FORM_regr == 'obstglobal':
-            reffile = "NASAData/giss_al_gl_m_4yrlo.dat"
+            if self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
+                reffile = "NASAData/giss_al_gl_a_4yrlo.dat"
+            else:
+                reffile = "NASAData/giss_al_gl_m_4yrlo.dat"
         elif self.params.FORM_regr == 'modtglobal':
             raise PlotMapError("Reference 'modtglobal' not yet implemented")
         else:

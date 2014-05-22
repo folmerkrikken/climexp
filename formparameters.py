@@ -355,8 +355,8 @@ cmip5_var_values = [['tas', 'near-surface temperature'],
               ['rsds', 'downward solar radiation at the surface'],
               ['psl', 'air pressure at sea-level']]
 
-cmip5_extreme_values = [['cdd','CDD: maximum length of dry spell'],
-              ['cwd','CWD: maximum length of wet spell'],
+cmip5_extreme_values = [['altcdd','CDD: maximum length of dry spell'],
+              ['altcwd','CWD: maximum length of wet spell'],
               ['csdi','CSDI: cold spell duration index'],
               ['dtr','DTR: daily temperature range'],
               ['fd','FD: number of frost days'],
@@ -496,6 +496,7 @@ class FormParameters:
 
         # defaults
         self.EMAIL = 'someone@somewhere'
+        self.FORM_resubmitted = ""
         self.FORM_region = 'srex'
         self.FORM_srex = 'world'
         self.FORM_country = ''
@@ -562,6 +563,7 @@ class FormParameters:
 
         # overwrite with actual values
         pat = re.compile('[^-._A-Za-z0-9]')
+        self.FORM_resubmitted = form.getfirst('region', "")
         self.FORM_region = form.getfirst('region', self.FORM_region)
         self.FORM_region = pat.sub('',self.FORM_region)
         self.FORM_srex = form.getfirst('srex', self.FORM_srex)
@@ -618,6 +620,12 @@ class FormParameters:
         self.FORM_obs_pr = pat.sub('',self.FORM_obs_pr)
         self.FORM_obs_psl = form.getfirst('obs_psl', self.FORM_obs_psl)
         self.FORM_obs_psl = pat.sub('',self.FORM_obs_psl)
+        if self.FORM_resubmitted:
+            # ignore defaults
+            self.FORM_rcp26 = ""
+            self.FORM_rcp45 = ""
+            self.FORM_rcp60 = ""
+            self.FORM_rcp85 = ""
         self.FORM_rcp26 = form.getfirst('rcp26', self.FORM_rcp26)
         self.FORM_rcp26 = pat.sub('',self.FORM_rcp26)
         self.FORM_rcp45 = form.getfirst('rcp45', self.FORM_rcp45)
