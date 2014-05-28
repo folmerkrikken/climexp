@@ -129,7 +129,7 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <td>&nbsp;
 
 <tr><td>SIOD<td><div class="kalelink"><a href="getindices.cgi?WMO=JAMSTECData/siod&STATION=SIOD&TYPE=i&id=$EMAIL">SIOD</a> based on HadISST (1958-2007), home-computed from <a href="getindices.cgi?WMO=UKMOData/hadisst1_siod&STATION=HadISST1_SIOD&TYPE=i&id=$EMAIL">HadISST1</a> (1870-now), <a href="getindices.cgi?WMO=NCDCData/siod_ersst&STATION=ERSST_SIOD&TYPE=i&id=$EMAIL">ERSST</a> (1854-now)</div>
-<td><a href="wipefeet.cgi?http://www.jamstec.go.jp/res/ress/behera/siod.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<td><a href="wipefeet.cgi?http://www.jamstec.go.jp/res/ress/behera/SIOD.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>MJO<td><div class="kalelink">
 <a href="getindices.cgi?WMO=NCEPData/cpc_mjo01_mean12&STATION=MJO_01&TYPE=i&id=$EMAIL">1</a> (80&deg;E),
