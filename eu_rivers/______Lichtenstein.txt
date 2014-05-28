@@ -1,4 +1,4 @@
-# RBD_F1v3.0 river basin __ __ unknown (Lichtenstein)
+# RBD_F1v3.0 river basin __ __ Lichtenstein (Lichtenstein)
 # data from <a href="http://www.eea.europa.eu/data-and-maps/data/wise-Basin-basin-districts-rbds">EEA</a>
 9.607038970104465 47.060772016563504
 9.602806036300105 47.061897011150819

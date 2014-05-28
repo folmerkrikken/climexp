@@ -1,4 +1,4 @@
-# RBD_F1v3.0 river basin __ __ unknown (Vatican City)
+# RBD_F1v3.0 river basin __ __ Vatican City (Vatican City)
 # data from <a href="http://www.eea.europa.eu/data-and-maps/data/wise-Basin-basin-districts-rbds">EEA</a>
 12.454511965207635 41.900222987470038
 12.45451188959489 41.900222989320305
