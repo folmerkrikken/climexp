@@ -33,14 +33,16 @@ def handleBasin(Basin):
     countryname = '__' # default, some fields do not have the CTY_ID
     for country in countries:
         countryname = getText(country.childNodes)
-    legals = Basin.getElementsByTagName('ogr:LGE_ID')
-    legalname = '__'
-    for legal in legals:
-        legalname = getText(legal.childNodes)
+    languages = Basin.getElementsByTagName('ogr:LGE_ID')
+    languagename = '__'
+    for language in languages:
+        languagename = getText(language.childNodes)
     orgnames = Basin.getElementsByTagName('ogr:NAME')
     for orgname in orgnames:
         fullname = getText(orgname.childNodes)
-    filename = countryname + "_" + legalname + "_" + unidecode(Basinname.replace(" ","_")) + ".txt"
+    if Basinname == 'unknown':
+        Basinname = fullname
+    filename = countryname + "_" + unidecode(Basinname.replace(" ","_")) + ".txt"
     filename = filename.replace("/","_") # :-(
     # there are duplicate names...
     i = 0
@@ -49,9 +51,14 @@ def handleBasin(Basin):
         filename = filename.split('.')[0] + ".%i.txt" % i
     print filename
     file = open(filename,"w")
-    file.write("# RBD_F1v3.0 river basin " + countryname + " " + legalname + " " + \
-        Basinname.encode('ascii', 'xmlcharrefreplace') + \
-        " (" + fullname.encode('ascii', 'xmlcharrefreplace') + ")\n")
+    if languagename == "__":
+        file.write("# RBD_F1v3.0 river basin " + countryname + " " + \
+            Basinname.encode('ascii', 'xmlcharrefreplace') + \
+            "\n")
+    else:
+        file.write("# RBD_F1v3.0 river basin " + countryname + " " + \
+            Basinname.encode('ascii', 'xmlcharrefreplace') + \
+            " (" + languagename + ": " + fullname.encode('ascii', 'xmlcharrefreplace') + ")\n")
     file.write('# data from <a href="http://www.eea.europa.eu/data-and-maps/data/wise-Basin-basin-districts-rbds">EEA</a>\n')
     latlons = handlePolygon(Basin)
     for latlon in latlons:

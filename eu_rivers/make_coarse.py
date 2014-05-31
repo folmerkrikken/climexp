@@ -1,0 +1,36 @@
+#!/usr/bin/python
+
+import sys
+
+oldx = [3e33, 3e33]
+x = [3e33, 3e33]
+delta = 0.02
+lastblank = True
+
+file = open(sys.argv[1],"r")
+new = open(sys.argv[1].replace(".txt","") + "_coarse.txt","w")
+for line in file:
+    if line[0:1] == "#":
+        new.write(line)
+    elif line == "\n":
+        oldx = [3e33, 3e33]
+        if not lastblank:
+            lastblank = True
+            new.write("\n")
+    else:
+        s = line.split(" ")
+        x[0] = float(s[0])
+        x[1] = float(s[1])
+        if oldx[0] == 3e33:
+            new.write("# thinned points to be at least %f degrees apart\n" % delta)
+            oldx[0] = x[0]
+            oldx[1] = x[1]
+        d = abs(x[0]-oldx[0]) + abs(x[1]-oldx[1])
+        if d > delta:
+            new.write("{x} {y}\n".format(x=oldx[0], y=oldx[1]))
+            lastblank = False
+            oldx[0] = x[0]
+            oldx[1] = x[1]
+
+if oldx[0] != 3e33:
+    new.write("{x} {y}\n".format(x=oldx[0], y=oldx[1]))
