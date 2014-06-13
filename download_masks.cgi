@@ -12,9 +12,9 @@ else
 	for file in $FORM_set/*.txt
 	do
 		if [ ${file%kaal.txt} = $file ]; then
-			echo '<li><a href=$file>'`head -1 $file | sed -e 's/^# *//'`'</a>'
+			echo "<li><a href=$file>"`head -1 "$file" | tr -d '?' | sed -e 's/^# *//'`'</a>'
 		fi
 	done
 	echo '</ul>'
 fi
-./myvinkfoot.cgi
+. ./myvinkfoot.cgi
