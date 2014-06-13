@@ -39,7 +39,7 @@ if [ -z "$FORM_field" ]; then
   [ ${FORM_minfac:-75} != 75 ] && WMO=${WMO}_${FORM_minfac}
   STATION="$FORM_station"
   export TYPE=$FORM_type
-  NAME=$FORM_name
+  NAME="$FORM_name ${FORM_nfilter}${month} ${FORM_hilo} ${FORM_filtertype}"
   export file=`basename $FORM_file`
   PROG="filtermonthseries.sh ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $DIR/data/$file $corrargs"
   . $DIR/getdata.cgi
