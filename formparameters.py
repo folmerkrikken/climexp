@@ -441,7 +441,7 @@ obs_tasmin_values = [['cru_tmn', 'CRU TS 3.21']]
 
 obs_tasmax_values = [['cru_tmx', 'CRU TS 3.21']]
 
-obs_pr_values = [['gpcc_05', 'GPCC v6'],
+obs_pr_values = [['gpcc_25_n1', 'GPCC v6'],
                  ['prca', 'NCDC anomalies'],
                  ['cru_pre', 'CRU TS 3.21']]
 
@@ -512,7 +512,7 @@ class FormParameters:
         self.FORM_obs_tas = 'giss_temp_1200'
         self.FORM_obs_tasmin = 'cru_tmn'
         self.FORM_obs_tasmax = 'cru_tmx'
-        self.FORM_obs_pr = 'gpcc_05'
+        self.FORM_obs_pr = 'gpcc_25_n1'
         self.FORM_obs_psl = 'hadslp2r'
         self.FORM_measure = 'diff'
         self.FORM_regr = 'time'
@@ -550,7 +550,7 @@ class FormParameters:
         self.REMOTE_ADDR = os.environ["REMOTE_ADDR"]
 
         # overwrite with values last time the form was called
-        if self.EMAIL != "someone@somwhere" and self.EMAIL != "":
+        if self.EMAIL != "someone@somwehere" and self.EMAIL != "":
             prefs = "prefs/" + self.EMAIL + ".atlas"
             if os.path.exists(prefs):
                 with open(prefs, 'r') as f:

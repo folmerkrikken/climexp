@@ -131,7 +131,7 @@ try:
     if params.DO_ACTION:
 
         # if nominous, save in defaults file for next visit
-        if params.EMAIL != "someone@somwhere" and params.EMAIL != "":
+        if params.EMAIL != "someone@somewhere" and params.EMAIL != "":
             prefs = "prefs/" + params.EMAIL + ".atlas"
             with open(prefs, 'w') as f:
                 for v in vars(params):
