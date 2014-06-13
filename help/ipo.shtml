@@ -5,12 +5,12 @@ The IPO was introduced by Power et al (1999) as the second EOF of SST in the Pac
 
 <p>The resulting patterns are very similar to the decadal component of ENSO and the PDO, as far as I know the question whether there is independent physics beyond the low-frequency component of ENSO is not settled. The pattern is much wider than the interannual ENSO pattern in the meridional direction. It differs from the Pacific Decadal Oscillation (PDO) in that it is symmetric about the equator (as far as there are observations in the Southern Hemisphere).
 
-<div class="bijschrift">Pattern of the IPO in the ERSST v3b dataset</div>
+<div class="bijschrift">Pattern of the IPO in the ERSST v3b dataset, Fig.10a of van Oldenborgh et al.</div>
 <img src="regr_eof_pac_obs_2-5_s.png" alt="IPO pattern" width=50%>
 
 <ul>
 <li>Power S, Casey T, Folland C, Colman A, Mehta V (1999) Interdecadal modulation of the impact of ENSO on Australia. Clim Dyn 15:319-324. doi:10.1007/s003820050284
-<li>van Oldenborgh G J, Doblas Reyes F J, Wouters B, Hazeleger W (2012) Decadal prediction skill in a multi-model ensemble. Clim Dyn 38:1263-1280 doi:10.1007/s00382-012-1313-4
+<li>van Oldenborgh G J, Doblas Reyes F J, Wouters B, Hazeleger W (2012) Decadal prediction skill in a multi-model ensemble. Clim Dyn 38:1263-1280, doi:10.1007/s00382-012-1313-4, <a href="http://www.knmi.nl/publications/fulltexts/verification_grl.pdf">PDF</a>
 </ul>
 
 <!--#include virtual="help_footer.html"-->
