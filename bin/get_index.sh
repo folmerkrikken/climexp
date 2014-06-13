@@ -24,6 +24,8 @@ then
 	if [ ! -s $outfile -o $outfile -ot $file ]; then
 		[ $lwrite = true ] && echo "# $DIR/bin/$PROG $*"
 		$DIR/bin/$PROG $*
+	else
+	    cat $outfile
 	fi
 else
 	i=0
