@@ -71,7 +71,7 @@ fi
 case $file in
 IPCCData*) url="wipefeet.cgi?http://www-pcmdi.llnl.gov/ipcc/about_ipcc.php";;
 ESSENCE*)  url="http://www.knmi.nl/~sterl/Essence/";;
-ERA*)      url="wipefeet.cgi?http://www.ecmwf.int/research/era/";;
+ERA*)      url="wipefeet.cgi?http://www.ecmwf.int/en/research/climate-reanalysis";;
 Demeter*)  url="wipefeet.cgi?http://data.ecmwf.int/data";;
 ECMWF*)    url="wipefeet.cgi?http://www.ecmwf.int";;
 NCEPNCAR*) url="wipefeet.cgi?http://www.cdc.noaa.gov/cdc/reanalysis/reanalysis.shtml";;
