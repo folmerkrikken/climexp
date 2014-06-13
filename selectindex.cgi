@@ -155,6 +155,9 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPNCAR40/nqbo&STATION=CDC_QBO&TYPE=i&id=$EMAIL">QBO</a> (1958-now, Cathy Smith, CDC)</div>
 <td><a href="wipefeet.cgi?http://www.cdc.noaa.gov/ClimateIndices/List/#QBO" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>&nbsp;<td><div class="kalelink">reconstruction at <a href="getindices.cgi?WMO=BernData/qbo_3&STATION=QBO_3&TYPE=i&id=$EMAIL">3</a>, <a href="getindices.cgi?WMO=BernData/qbo_5&STATION=QBO_5&TYPE=i&id=$EMAIL">5</a>, <a href="getindices.cgi?WMO=BernData/qbo_10&STATION=QBO_10&TYPE=i&id=$EMAIL">10</a>, <a href="getindices.cgi?WMO=BernData/qbo_30&STATION=QBO_30&TYPE=i&id=$EMAIL">30</a>, <a href="getindices.cgi?WMO=BernData/qbo_50&STATION=QBO_50&TYPE=i&id=$EMAIL">50</a>, <a href="getindices.cgi?WMO=BernData/qbo_90&STATION=QBO_90&TYPE=i&id=$EMAIL">90</a> hPa (Stefan Br&ouml;nnimann)</div>
+<td><a href="wipefeet.cgi?http://onlinelibrary.wiley.com/doi/10.1029/2007GL031354/abstract" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
 <tr><td>AAO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/cpc_aao&STATION=CPC_AAO&TYPE=i&id=$EMAIL">Antarctic Oscillation</a> (1979-now, CPC/NCEP)</div>
 <td><a href="wipefeet.cgi?http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/aao/aao.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
