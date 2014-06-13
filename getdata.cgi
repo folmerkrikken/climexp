@@ -79,7 +79,14 @@ if [ -n "$extraargs" ]; then
   WMO=$WMO`echo $extraargs | tr ' ' '_'`_$NPERYEAR
 fi
 TYPE=`basename "$TYPE"`
-if [ -n "$PROG" -a \( -z "$ROBOT" -o "$PROG" = getindices \) ];then
+# if the output file exists and is newer than teh input file skip this step
+if [ -n "$file" -a -s $file -a -s ./data/$TYPE$WMO.dat -a ./data/$TYPE$WMO.dat -nt $file ]; then
+    [ "$lwrite" = true ] && echo "Skipping generating the data, already there"
+    skipit=true
+else
+    skipit=false
+fi
+if [ $skipit = true -o -n "$PROG" -a \( -z "$ROBOT" -o "$PROG" = getindices \) ];then
   echo "Retrieving data $FROM ...<p>"
   if [ "$NPERYEAR" -ge 360 -o -n "$kill" ]; then
     echo "<small>If it takes too long you can abort the job <a href=\"killit.cgi?id=$EMAIL&pid=$$\" target=\"_new\">here</a> (using the [back] button of the browser does <it>not</it> kill the data extraction job)</small><p>"
@@ -121,16 +128,20 @@ EOF
 	exit
   fi
 else
-  if [ -z "$PROG" ]; then
-    if [ 0 = 1 ]; then
-      echo "PROG unset, data should be there"
-      echo '<pre>'
-      echo "TYPE=$TYPE"
-      echo "WMO=$WMO"
-      ls -l data/$TYPE$WMO.dat 2>&1
-      echo '</pre>'
+    if [ -z "$PROG" -o $skipit = true ]; then
+        if [ 0 = 1 ]; then
+            if [ -z "$PROG" ]; then
+                echo "PROG unset, data should be there"
+            else
+                echo "skipit = true, data should be there"
+            fi
+            echo '<pre>'
+            echo "TYPE=$TYPE"
+            echo "WMO=$WMO"
+            ls -l data/$TYPE$WMO.dat 2>&1
+            echo '</pre>'
+        fi
     fi
-  fi
 fi
 if [ ! -s ./data/$TYPE$WMO.dat ]; then
   if [ -n "$ROBOT" ]; then
