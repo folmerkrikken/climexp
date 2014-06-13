@@ -98,11 +98,12 @@ EOF
 fi
 
 if [ "${WMO#corr}" = "$WMO" -a "${WMO#sign}" = "$WMO" ]; then
-    ###echo $DIR/bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 $DIR/data/$TYPE$WMO.dat
-    ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > $DIR/${base}a.plt
-    fgrep -v "# repeat last"  $DIR/${base}a.plt > $DIR/${base}a.txt
-	###title="anomalies of $station $NAME$period"
-    $DIR/bin/gnuplot << EOF
+    if [ ! -s $DIR/${base}a.eps.gz -o ! -s $DIR/${base}a.png -o ! -s $DIR/${base}a.plt -o $DIR/${base}a.plt -ot $DIR/data/$TYPE$WMO.dat ]; then
+        ###echo $DIR/bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 $DIR/data/$TYPE$WMO.dat
+        ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > $DIR/${base}a.plt
+        fgrep -v "# repeat last"  $DIR/${base}a.plt > $DIR/${base}a.txt
+	    ###title="anomalies of $station $NAME$period"
+        $DIR/bin/gnuplot << EOF
 set size .7057,.4
 ###set title "$title"
 set ylabel "$ylabel"
@@ -118,8 +119,8 @@ EOF
 ###gs -q -r100 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -dNOPAUSE -sDEVICE=ppmraw -sOutputFile=$DIR/${base}a.ppm $DIR/${base}a.eps -c quit
 ###(pnmcrop $DIR/${base}a.ppm | pnmtopng > $DIR/${base}a.png) > /dev/null 2>&1
 ###rm $DIR/${base}a.ppm
-    gzip -f $DIR/${base}a.eps
-
+        gzip -f $DIR/${base}a.eps
+    fi
     if [ ${NPERYEAR:-12} -gt 1 ]; then
 		wrt="with respect to the above annual cycle"
     else
