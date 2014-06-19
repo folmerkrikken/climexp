@@ -86,7 +86,7 @@ if [ -n "$file" -a -s $file -a -s ./data/$TYPE$WMO.dat -a ./data/$TYPE$WMO.dat -
 else
     skipit=false
 fi
-if [ $skipit = true -o -n "$PROG" -a \( -z "$ROBOT" -o "$PROG" = getindices \) ];then
+if [ $skipit = false -a -n "$PROG" -a \( -z "$ROBOT" -o "$PROG" = getindices \) ];then
   echo "Retrieving data $FROM ...<p>"
   if [ "$NPERYEAR" -ge 360 -o -n "$kill" ]; then
     echo "<small>If it takes too long you can abort the job <a href=\"killit.cgi?id=$EMAIL&pid=$$\" target=\"_new\">here</a> (using the [back] button of the browser does <it>not</it> kill the data extraction job)</small><p>"
