@@ -775,7 +775,7 @@ class PlotAtlasMap:
             os.makedirs(folder)
 
         region_extension = get_region_extension(self.params)
-        root = "{root}_{region_extension}".format(root=root, region_extension=region_extension)
+        root = "{root}_{plotvar}_{region_extension}".format(root=root, plotvar=self.params.FORM_plotvar,region_extension=region_extension)
         var = self.params.FORM_var
         normsd = self.params.FORM_normsd
 
