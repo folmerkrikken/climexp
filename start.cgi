@@ -9,13 +9,12 @@ echo
 . ./getargs.cgi
 . ./init.cgi
 # in order not to break bookmarks to this entry point allow QUERY_STRING (with some checking)
-[ -z "$EMAIL" ] && EMAIL=`echo "$QUERY_STRING" | tr -cd '[:alnum:]@.-_'`
-EMAIL=`echo "$EMAIL" | fgrep -v '/' | egrep -v '(@|\.|-)sexy(@|\.|-)|(@|\.|-)sex(@|\.|-)|(@|\.|-)porn(@|\.|-)|(@|\.|-)porno(@|\.|-)|youtube.com|fynalcut.com'`
 # do not allow / in email address
 . ./searchengine.cgi
 if [ -z "$EMAIL" ]; then
   . ./myvinkhead.cgi "No email address given" "" "noindex,nofollow"
   echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
+  EMAIL=someone@somewhere
   . ./myvinkfoot.cgi
   exit
 fi
@@ -23,6 +22,7 @@ c=`fgrep -c "^$EMAIL " ./log/list`
 if [ $c = 0 ]; then
   . ./myvinkhead.cgi "User $EMAIL unknown" "" "noindex,follow"
   echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
+  EMAIL=someone@somewhere
   . ./myvinkfoot.cgi
 else
   FORM_username=`fgrep "$EMAIL" ./log/list|cut -f 2 -d ' '|tail -1|sed -e 's/+/ /g'`
