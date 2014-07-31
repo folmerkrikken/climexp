@@ -13,7 +13,8 @@ if [ -z "$EMAIL" ]; then
 		EMAIL="$QUERY_STRING"
 	fi
 fi
-EMAIL=`echo "$EMAIL" | tr -cd '[:alnum:]@.-_' | fgrep -v "/"`
+EMAIL=`echo "$EMAIL" | fgrep -v '/' `
+EMAIL=`echo "$EMAIL" | tr -cd '[:alnum:]@.-_' | fgrep -v "/" | egrep -v '(@|\.|-)sexy(@|\.|-)|(@|\.|-)sex(@|\.|-)|(@|\.|-)porn(@|\.|-)|(@|\.|-)porno(@|\.|-)|youtube.com|fynalcut.com|shop.*ru$|della-marta'`
 EMAIL=${EMAIL#id=}
 ###echo "EMAIL=$EMAIL<br>"
 [ -n "FORM_WMO" ] && FORM_WMO=`echo "$FORM_WMO" | sed -e 's/%%%/+++/' -e 's/%%/++/'`
