@@ -121,7 +121,7 @@ if [ "$FORM_changesign" = "both" ]; then
     echo "<p>Merging results...<p>"
     ( (./bin/merge_pm.py $FORM_var $FORM_year ./data/m$$p.nc ./data/m$$m.nc  ./data/m$$.nc) >> /tmp/getmomentsfield$$.log 2>&1) 
     FORM_var=bo_$FORM_var
-    rm data/m$$p.nc data/m$$m.nc data/m$$*.nc.tmp
+    rm data/m$$p.nc data/m$$m.nc data/m$$*.nc.tmp data/m$$*.nc.m.tmp
 fi
 if [ ! -s $DIR/data/m$$.nc -a ! -s $DIR/data/m$$.dat -a ! -s  $DIR/data/m$$.grd ]; then
   cat $DIR/wrong.html
