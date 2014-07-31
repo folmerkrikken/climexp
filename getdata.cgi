@@ -2,7 +2,7 @@
 . ./init.cgi
 # should be sourced from one of the get* scripts
 debug=false
-if [ "$EMAIL" = oldenbor@knmi.nl ]; then
+if [ "$EMAIL" = oldenbor@knmi.nl -o $REMOTE_ADDR = 127.0.0.1 ]; then
     debug=false # true
 fi
 if [ -z "$myvinkhead" ]; then
@@ -80,7 +80,7 @@ if [ -n "$extraargs" ]; then
 fi
 TYPE=`basename "$TYPE"`
 # if the output file exists and is newer than teh input file skip this step
-if [ -n "$file" -a -s $file -a -s ./data/$TYPE$WMO.dat -a ./data/$TYPE$WMO.dat -nt $file ]; then
+if [ -n "$file" -a -s "$file" -a -s ./data/$TYPE$WMO.dat -a ./data/$TYPE$WMO.dat -nt "$file" ]; then
     [ "$lwrite" = true ] && echo "Skipping generating the data, already there"
     skipit=true
 else

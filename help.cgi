@@ -9,7 +9,7 @@ echo
 
 cat <<EOF
 I am building a help system for the Climate Explorer.
-New users are adviced to study the <a href="examp.cgi?id=$EMAIL">examples</a>.  There is also a <a href="http://www.knmi.nl/publications/fulltexts/the_climate_explorer.pdf">presentation</a> available that gives an overview of the system.
+New users are adviced to study the <a href="examp.cgi?id=$EMAIL">examples</a>.  There is also a <a href="http://www.knmi.nl/publications/fulltexts/the_climate_explorer.pdf">presentation</a> available that gives an overview of the system. <a href="http://www.knmi.nl/publications/showAbstract.php?id=9861" target=_new>Trouet and van Oldenborgh</a> (TRR, 2013) gives a useful overview and manual for paleo-climatologists and others who try to understand the influence of climate on their time series.
 
 <p>In the Climate Explorer pages, the <a href="help.cgi?id=$EMAIL"><img src="images/info-i.gif" alt="help" border="0"></a> symbol indicates a help pop-up.  Below an alphabetical list of these pop-ups is given.  Please contact <a href="http://www.knmi.nl/~oldenbor/">me</a> if the help text is confusing, or missing in a place where it is needed.
 
