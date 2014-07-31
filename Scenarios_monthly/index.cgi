@@ -3,16 +3,10 @@ echo 'Content-Type: text/html'
 echo
 echo
 
-eval `bin/proccgi $*`
-EMAIL=$FORM_id
-# in order not to break bookmarks to this entry point allow QUERY_STRING (with some checking)
-[ -z "$FORM_id" ] && FORM_id=`echo "$QUERY_STRING" | tr -cd '[:alnum:]@.-_'`
-# do not allow / in email address
-EMAIL="${FORM_id#*/}"
-[ "$EMAIL" != "$QUERY_STRING" ] && EMAIL=""
-[ -z "$EMAIL" ] && EMAIL=someone@somewhere
+. ../init.cgi
+. ../getargs.cgi
 
-(cd ..; . ./myrijkshead_nl.cgi "Transformatie tijdreeksen" "" "index,follow")
+(cd ..; . ./myrijkshead_nl.cgi "Transformatie tijdreeksen KNMI'06" "" "index,follow")
 
 cat <<EOF
 <div class="datumtijd">28-nov-2008</div>
