@@ -13,7 +13,7 @@ the default longitude range is from 180&deg;W to 180&deg;E
 360&deg; to the longitude.  I try to map everything to a common range,
 but this sometimes fails.
 
-<p>Degrees south and west should be indicated by negative numbers.
+<p>Degrees south and west should be indicated by negative numbers. Note that ranges should always be from negative to positive, so from south to north and west to east. A range -10&deg;N to -20&deg;N will often not work as it goes from north to south. A range -10&degW to -20&deg;W will give a plot almost circling the earth, which is probably not what you want.
 
 <p>A small region will select a high-resolution background map. for a
 large region a low-resolution version is used.
@@ -25,6 +25,6 @@ time-lat plot.  The other spatial dimension then indicates a range
 over which the values are averaged
 
 <br><i>This feature currently does not work corectly, contact <a
-href="http://ww.knmi.nl~oldenbor/">me</a> if yo need it now</i>.
+href="http://www.knmi.nl~oldenbor/">me</a> if you need it now</i>.
 
 <!--#include virtual="help_footer.html"-->
