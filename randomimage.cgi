@@ -9,7 +9,7 @@ else
   word=5
 fi
 tmpfile=/tmp/start$$.txt
-list=`ls -t data/ atlas/maps/*/rcp*/| fgrep .png | egrep '(^[dghrR])|(.*corr.*)' | egrep -v 'kml|tmp' `
+list=`ls -t data/ atlas/maps/*/rcp*/| fgrep .png | egrep '(^[dghrRw])|(.*corr.*)' | egrep -v 'kml|tmp' `
 for file in $list
 do
   if [ -s data/$file ]
