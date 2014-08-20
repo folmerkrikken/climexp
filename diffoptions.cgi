@@ -1,15 +1,16 @@
 #!/bin/sh
 # for pretty colours in emacs...
 
-if [ -n "$NPERYEAR" ]; then
+if [ -z "$NPERYEAR" ]; then
   NPERYEAR=12 # I hope
 fi
 
 if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
-# read defaults if they exist
-  if [ -f ./prefs/$EMAIL.diffoptions.$NPERYEAR ]; then
-    eval `egrep '^FORM_[a-z0-9]*=[-+a-zA-Z0-9.: "]*;$' ./prefs/$EMAIL.diffoptions.$NPERYEAR`
-  fi
+    # read defaults if they exist
+    def=./prefs/$EMAIL.diffoptions.$NPERYEAR
+    if [ -f $def ]; then
+        eval `egrep '^FORM_[a-z0-9]*=[-+a-zA-Z0-9.: "]*;$' $def`
+    fi
 fi
 
 case ${FORM_month:--1} in
