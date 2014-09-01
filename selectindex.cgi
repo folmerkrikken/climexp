@@ -224,7 +224,7 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <td><a href="wipefeet.cgi?http://www.pol.ac.uk/psmsl/author_archive/jevrejeva_etal_gsl//" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>Radiation<td><div class="kalelink"><a href="getindices.cgi?WMO=CDIACData/maunaloa_f&STATION=Mauna_Loa_CO2&TYPE=i&id=$EMAIL">Mauna Loa
-CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=CDIACData/maunaloa_log&STATION=log_Mauna_Loa_CO2&TYPE=i&id=$EMAIL">logarithm</a>, <a href="getindices.cgi?WMO=CDIACData/co2_annual&STATION=CO2&TYPE=i&id=$EMAIL&NPERYEAR=1">annual mean 1000-now</a>, <a href="getindices.cgi?WMO=CDIACData/co2_log&STATION=log_CO2&TYPE=i&id=$EMAIL&NPERYEAR=1">logarithm</a></div>
+CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=CDIACData/maunaloa_log&STATION=log_Mauna_Loa_CO2&TYPE=i&id=$EMAIL">logarithm</a>, <a href="getindices.cgi?WMO=CDIACData/co2_monthly&STATION=CO2&TYPE=i&id=$EMAIL">annual mean 1000-now</a>, <a href="getindices.cgi?WMO=CDIACData/co2_log&STATION=log_CO2&TYPE=i&id=$EMAIL">logarithm</a></div>
 <td><a href="wipefeet.cgi?http://www.esrl.noaa.gov/gmd/ccgg/trends/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=CDIACData/co2&STATION=CO2&TYPE=i&id=$EMAIL">Global marine CO<sub>2</sub> concentrations</a> (1980-now, NOAA)</div>
