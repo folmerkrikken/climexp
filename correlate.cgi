@@ -547,7 +547,7 @@ EOF
                 i=$((i+1))
                 # not very elegant
                 ai=`echo $a | tr ' ' '\n' | head -1`
-                a=`echo $a | tr ' ' '\n' | tail +2`
+                a=`echo $a | tr ' ' '\n' | tail -n +2`
                 echo "<input type=\"hidden\" name=\"a$i\" value=\"$ai\">"
             fi
         done
@@ -558,7 +558,7 @@ EOF
             i=$((i+1))
             # not very elegant
             ai=`echo $a | tr ' ' '\n' | head -1`
-            a=`echo $a | tr ' ' '\n' | tail +2`
+            a=`echo $a | tr ' ' '\n' | tail -n +2`
             echo "<input type=\"hidden\" name=\"a$i\" value=\"$ai\">"
         done
     fi
