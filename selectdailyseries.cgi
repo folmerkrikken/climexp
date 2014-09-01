@@ -145,10 +145,13 @@ yet been homogenised. Homogenised daily precipitation series are available <a hr
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=tn">minimum temperature</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=tx">maximum temperature</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=t1">min 10cm temperature</a><br>
+<a href="getdutchstations.cgi?id=$EMAIL&TYPE=td">max dew point temp</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=dr">precipitation duration</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=rh">precipitation (0-24)</a><br>
+<a href="getdutchstations.cgi?id=$EMAIL&TYPE=rr">precipitation (8-8)</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=precip_raw_1910-2009">precipitation (8-8) 1910-2009</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=precip_raw_1951-2009">precipitation (8-8) 1951-2009</a><br>
+<a href="getdutchstations.cgi?id=$EMAIL&TYPE=rx">max hourly precip (0-24)</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=ev">Makking evaporation</a><br>
 </td><td>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=pg">mean surface pressure</a><br>

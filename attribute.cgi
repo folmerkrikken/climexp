@@ -11,6 +11,7 @@ TYPE=$FORM_TYPE
 NPERYEAR=$FORM_NPERYEAR
 STATION=$FORM_STATION
 NAME=$FORM_NAME
+FORM_dgt=${FORM_dgt%%%}
 FORM_dgt=${FORM_dgt}%
 [ -z "$FORM_assume" ] && FORM_assume=shift
 
@@ -36,7 +37,7 @@ if [ $TYPE = set ]; then
 	corrargs="file $WMO $NAME"
 	WMO=`basename $WMO .txt`
 else
-	corrargs="$DIR/data/$TYPE$WMO.dat"
+	corrargs="./data/$TYPE$WMO.dat"
 fi
 if [ -z "$FORM_timeseries" ]; then
     . ./myvinkhead.cgi "Trends in return times of extremes" "Error" "noindex,nofollow"
@@ -71,7 +72,12 @@ esac
 probfile=data/attribute_prob_$$.txt
 corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume plot $probfile"
 n=0
-. $DIR/getopts.cgi
+c1=`echo ./data/$TYPE$WMO.dat | fgrep -c '%%'`
+c2=`echo ./data/$TYPE$WMO.dat | fgrep -c '++'`
+if [ $c1 != 0 -o $c2 != 0 ]; then
+  ENSEMBLE=true
+fi
+. ./getopts.cgi
 
 if [ $EMAIL != someone@somewhere ]; then
 	. ./save_commonoptions.cgi
@@ -87,7 +93,9 @@ FORM_nbin=$FORM_nbin;
 FORM_changesign=$FORM_changesign;
 FORM_restrain=$FORM_restrain;
 FORM_assume=$FORM_assume;
+FORM_dgt=$FORM_dgt;
 FORM_year=$FORM_year;
+FORM_xyear=$FORM_xyear;
 FORM_begin2=$FORM_begin2;
 FORM_decor=$FORM_decor;
 FORM_fit=$FORM_fit;
@@ -109,21 +117,37 @@ fi
 if [ "$FORM_assume" != 'both' ]; then
     echo '<font color=#ff2222>I think it works now, please report problems.</font><p>'
 else
-    echo '<font color=#ff2222>Fitting position and scale independently is unfinsihed and untested. Use at own risk.</font><p>'
+    echo '<font color=#ff2222>Fitting position and scale independently is unfinished and untested. Use at own risk.</font><p>'
 fi
 
-if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
-	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"
+if [ -n "$FORM_year" ]; then
+    corrargs="$corrargs end2 $FORM_year"
+else
+    if [ -n "$FORM_xyear" ]; then
+        echo "Error: the year for which to evaluate the value"
+        . ./myvinkfoot.cgi
+        exit
+    fi
 fi
-
-[ -n "$FORM_year" ] && corrargs="$corrargs end2 $FORM_year"
 echo `date` "$EMAIL ($REMOTE_ADDR) attribute $corrargs" >> log/log
 startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
 root=data/h${TYPE}${WMO}_$$
 
+if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
+	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"
+    echo "<small>If it takes too long you can abort the job <a href=\"killit.cgi?id=$EMAIL&pid=$$\" target=\"_new\">here</a> (using the [back] button of the browser does <it>not</it> kill the job)</small><p>"
+    cat | sed -e "s:$DIR::g" > pid/$$.$EMAIL <<EOF
+$REMOTE_ADDR
+attribute $corrargs
+@
+EOF
+    export SCRIPTPID=$$
+    export FORM_EMAIL=$EMAIL
+fi
+
 [ "$lwrite" = true ] && echo bin/attribute $corrargs
-($DIR/bin/attribute $corrargs > $root.txt) 2>&1 && true
+($DIR/bin/attribute $corrargs > $root.txt) 2>&1
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 if [ $TYPE = set ]; then
@@ -184,7 +208,7 @@ if [ "$FORM_plot" = "hist" ]; then
 		title="$title (detrend)"
 	fi
 
-	./bin/gnuplot << EOF
+	cat <<EOF > $root.gnuplot
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
 set output "$root.png"
@@ -198,7 +222,7 @@ set output "$root.eps"
 replot
 quit
 EOF
-
+	./bin/gnuplot < $root.gnuplot
 fi
 
 if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; then
@@ -254,7 +278,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	    fittext="$fittext >${FORM_dgt}"
 	fi
 
-	cat > /tmp/histogram$$.gnuplot << EOF
+	cat > $root.gnuplot << EOF
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
 set output "${root}.png"
@@ -278,18 +302,16 @@ quit
 EOF
 	if [ "$lwrite" = true ]; then
 		echo '<pre>'
-		cat /tmp/histogram$$.gnuplot
+		cat $root.gnuplot
 		echo '</pre>'
 	fi
-	./bin/gnuplot < /tmp/histogram$$.gnuplot 2>&1
+	./bin/gnuplot < $root.gnuplot 2>&1
 	if [ ! -s ${root}.png ]; then
-		cp /tmp/histogram$$.gnuplot data/
 		echo "Something went wrong while making the plot."
-		echo "The plot command are <a href=\"data/histogram$$.gnuplot\">here</a>."
+		echo "The plot command are <a href=\"$root.gnuplot\">here</a>."
 		. ./myvinkfoot.cgi
 		exit
 	fi
-	rm /tmp/histogram$$.gnuplot
 fi
 
 gzip -f $root.eps
@@ -305,7 +327,7 @@ elif [ $FORM_assume = 'both' ]; then
 else
     echo "using an unknown assumption,"
 fi
-echo "referenced at $FORM_begin2 and $FORM_year (<a href=\"${root}.eps.gz\">eps</a>,  <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
+echo "referenced at $FORM_begin2 and $FORM_year (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
@@ -313,7 +335,7 @@ if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
 	root=${root}un
 	if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" ]; then
 		ylabel=$ylabel_save
-		cat > /tmp/histogram$$.gnuplot << EOF
+		cat > $root.gnuplot << EOF
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
 set output "${root}.png"
@@ -333,29 +355,27 @@ quit
 EOF
 		if [ "$lwrite" = true ]; then
 			echo '<pre>'
-			cat /tmp/histogram$$.gnuplot
+			cat $root.gnuplot
 			echo '</pre>'
 		fi
-		./bin/gnuplot < /tmp/histogram$$.gnuplot 2>&1
+		./bin/gnuplot < $root.gnuplot 2>&1
 		if [ ! -s ${root}.png ]; then
-			cp /tmp/histogram$$.gnuplot data/
 			echo "Something went wrong while making the plot."
-			echo "The plot commands are <a href=\"data/histogram$$.gnuplot\">here</a>."
+			echo "The plot commands are <a href=\"$root.gnuplot\">here</a>."
 			. ./myvinkfoot.cgi
 			exit
 		fi
-		rm /tmp/histogram$$.gnuplot
 	else
     	echo "Not yet ready"  
 	fi
 	gzip -f $root.eps
 	pngfile=${root}.png
 	getpngwidth
-	echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
+	echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
 	echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 fi
 
-cat > /tmp/cdf$$.gnuplot << EOF
+cat > ${root}_cdf.gnuplot << EOF
 set size 0.7,0.4
 set term png $gnuplot_png_font_hires
 set output "${root}_cdf.png"
@@ -376,30 +396,28 @@ quit
 EOF
 if [ "$lwrite" = true ]; then
     echo '<pre>'
-    cat /tmp/cdf$$.gnuplot
+    cat ${root}_cdf.gnuplot
     echo '</pre>'
 fi
-./bin/gnuplot < /tmp/cdf$$.gnuplot 2>&1
+./bin/gnuplot < ${root}_cdf.gnuplot 2>&1
 if [ ! -s ${root}_cdf.png ]; then
-    cp /tmp/cdf$$.gnuplot data/
     echo "Something went wrong while making the plot."
-    echo "The plot commands are <a href=\"data/cdf$$.gnuplot\">here</a>."
+    echo "The plot commands are <a href=\"${root}_cdf.gnuplot\">here</a>."
     . ./myvinkfoot.cgi
     exit
 fi
-rm /tmp/cdf$$.gnuplot
 gzip -f ${root}_cdf.eps
 pngfile=${root}_cdf.png
 getpngwidth
-echo "<div class=\"bijschrift\">CDF of the return time of $FORM_year $title in the climates of $FORM_year and of $FORM_begin2 (<a href=\"${root}_cdf.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_cdf.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>)</div>"
+echo "<div class=\"bijschrift\">CDF of the return time of $FORM_year $title in the climates of $FORM_year and of $FORM_begin2 (<a href=\"${root}_cdf.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_cdf.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>, <a href=\"${root}_cdf.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}_cdf.png\" alt=\"CDF of the return time of $FORM_year\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 ###xtics=`fgrep '#@' $probfile | sed -e 's/^#@ //'`
-cat > /tmp/cdfdiff$$.gnuplot << EOF
+cat > ${root}_cdfdiff.gnuplot << EOF
 set size 0.7,0.4
 set term png $gnuplot_png_font_hires
 set output "${root}_cdfdiff.png"
-set title "ratio of return times in climates of $FORM_year and $FORM_begin2"
+set title "ratio of return times in climates of $FORM_begin2 and $FORM_year"
 set xlabel "ratio [1]"
 set ylabel "CDF"
 set datafile missing '-999.900'
@@ -419,19 +437,17 @@ if [ "$lwrite" = true ]; then
     cat /tmp/cdfdiff$$.gnuplot
     echo '</pre>'
 fi
-./bin/gnuplot < /tmp/cdfdiff$$.gnuplot 2>&1
+./bin/gnuplot < ${root}_cdfdiff.gnuplot 2>&1
 if [ ! -s ${root}_cdfdiff.png ]; then
-    cp /tmp/cdfdiff$$.gnuplot data/
     echo "Something went wrong while making the plot."
-    echo "The plot commands are <a href=\"data/cdfdiff$$.gnuplot\">here</a>."
+    echo "The plot commands are <a href=\"${root}_cdfdiff.gnuplot\">here</a>."
     . ./myvinkfoot.cgi
     exit
 fi
-rm /tmp/cddiff$$.gnuplot
 gzip -f ${root}_cdfdiff.eps
 pngfile=${root}_cdfdiff.png
 getpngwidth
-echo "<div class=\"bijschrift\">CDF of the ratio of the return times of $FORM_year $title in the climates of $FORM_year and of $FORM_begin2 (<a href=\"${root}_cdfdiff.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_cdfdiff.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>)</div>"
+echo "<div class=\"bijschrift\">CDF of the ratio of the return times of $FORM_year $title in the climates of $FORM_year and of $FORM_begin2 (<a href=\"${root}_cdfdiff.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_cdfdiff.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>, <a href=\"${root}_cdfdiff.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}_cdfdiff.png\" alt=\"CDF of the difference in return times of $FORM_year and $FORM_begin2\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 . ./myvinkfoot.cgi

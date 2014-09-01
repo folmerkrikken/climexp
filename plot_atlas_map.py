@@ -237,7 +237,16 @@ class PlotAtlasMap:
                     season = ""
                 else:
                     season = "mon %(FORM_mon)s ave %(FORM_sum)s" % paramsDict
-                cmd = 'difffield {filename} {filename} {season} begin2 {begin1} end2 {end1} begin {begin2} end {end2} %(FORM_normsd)s {standardunits} {difffile}'.format(filename=fileName, difffile=difffile, season=season, begin1=begin1, end1=end1, begin2=begin2, end2=end2, standardunits=varObj.standardunits) % paramsDict
+
+                # for variables that count the number of days, 
+                # do not consider in relative differences denominators < 1
+                # and in normal differences points where both fields are < 1
+                if self.params.FORM_var in ['fd','id', 'gsl', 'r1mm', 'r10mm', 'r20mm']:
+                    mindata = 'dgt 1'
+                else:
+                    mindata = ''
+                    
+                cmd = 'difffield {filename} {filename} {season} begin2 {begin1} end2 {end1} begin {begin2} end {end2} %(FORM_normsd)s {mindata} {standardunits} {difffile}'.format(filename=fileName, difffile=difffile, season=season, begin1=begin1, end1=end1, begin2=begin2, end2=end2, standardunits=varObj.standardunits, mindata=mindata) % paramsDict
 
                 if lwrite:
                     self.logOut.info('%s <br>' % cmd)

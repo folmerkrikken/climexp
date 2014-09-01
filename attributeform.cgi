@@ -45,6 +45,8 @@ if [ "$EMAIL" != somene@somewhere ]; then
   if [ -s $def ]; then
     eval `egrep '^FORM_[a-z0-9]*=[a-zA-Z]*[-+0-9.%]*;$' $def`
   fi
+  FORM_dgt=${FORM_dgt%%%}
+  FORM_dgt=${FORM_dgt%%%}
 fi
 
 case ${FORM_fit:-none} in
@@ -136,7 +138,7 @@ cat <<EOF
 <input type="radio" class="formradio" name="fit" value="gumbel" $fit_gumbel>Block maxima and fit Gumbel distribution<br>
 <input type="radio" class="formradio" name="fit" value="gev" $fit_gev>Block maxima and fit GEV<br>
 <input type="radio" class="formradio" name="fit" value="gpd" $fit_gpd>Peak over threshold
-<input type="$number" class="forminput" name="dgt" value="${FORM_dgt:-80}" $textsize3>% and fit GPD
+<input type="$number" class="forminput" name="dgt" value="${FORM_dgt:-80}" $textsize6>% and fit GPD
 <select class="forminput" name="restrain">
 <option value="0" $select00>do not constrain shape
 <option value="0.5" $select05>constrain shape to &plusmn;0.5
@@ -145,8 +147,8 @@ cat <<EOF
 <option value="0.2" $select02>constrain shape to &plusmn;0.2
 </select> of GEV and GPD
 <tr><td>Assume:<td>The PDF <input type="radio" class="formradio" name="assume" value="shift" $assume_shift>shifts, <input type="radio" class="formradio" name="assume" value="scale" $assume_scale>scales or <input type="radio" class="formradio" name="assume" value="both" $assume_both>both with the covariate<td><a href="javascript:pop_page('help/assume.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
-<tr><td>Compare:<td>return time in the counterfactual world of year <input type="$number" min=1 max=2500 step=1 class="forminput" name="begin2" $textsize4 value="$FORM_begin2">
-<tr><td>Leave out:<td>year <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$FORM_year"> and compute return time
+<tr><td>Return time:<td>year <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$FORM_year"> (with value <input type="text" class="forminput" name="xyear" $textsize6 value="$FORM_xyear">)
+<tr><td>Compare:<td>return time if it had occurred in year <input type="$number" min=1 max=2500 step=1 class="forminput" name="begin2" $textsize4 value="$FORM_begin2">
 EOF
 
 if [ -n "$ENSEMBLE" ]; then

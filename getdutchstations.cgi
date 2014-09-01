@@ -18,6 +18,7 @@ tg) FORM_climate="mean_temperature";;
 tn) FORM_climate="min_temperature";;
 tx) FORM_climate="max_temperature";;
 t1) FORM_climate="min_surface_temperature";;
+td) FORM_climate="max_dew_point_temperature";;
 ng) FORM_climate="cloud_cpver";;
 qq) FORM_climate="global_radiation";;
 sq) FORM_climate="sunshine_duration";;
@@ -25,6 +26,7 @@ sp) FORM_climate="sunshine_fraction";;
 dr) FORM_climate="precipitation_duration";;
 rd) FORM_climate="precipitation";;
 rh) FORM_climate="precipitation";;
+rr) FORM_climate="precipitation";;
 ev) FORM_climate="Makking_evaporation";;
 pg) FORM_climate="mean_surface_pressure";;
 pn) FORM_climate="minimum_surface_pressure";;
@@ -45,6 +47,7 @@ precip_raw_1910-2009) FORM_climate="raw precipitation";;
 precip_hom_1910-2009) FORM_climate="homogenised precipitation";;
 precip_raw_1951-2009) FORM_climate="raw precipitation";;
 precip_hom_1951-2009) FORM_climate="homogenised precipitation";;
+rx) FORM_climate="max hourly precipitation";;
 esac
 
 listname=KNMIData/list_${TYPE}.txt

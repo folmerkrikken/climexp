@@ -75,7 +75,9 @@ cat <<EOF
 <input type="hidden" name="WMO" value="$WMO">
 <input type="hidden" name="STATION" value="$STATION">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
+<input type="hidden" name="extraargs" value="$FORM_extraargs">
 <input type="hidden" name="begin2" value="$FORM_begin2">
+<input type="hidden" name="assume" value="$FORM_assume">
 
 <div class="formheader">Plot</div>
 <div class="formbody">
@@ -106,7 +108,7 @@ echo "<input type=\"radio\" class=\"formradio\" name=\"fit\" value=\"gamma\" $fi
 echo "<input type=\"radio\" class=\"formradio\" name=\"fit\" value=\"gumbel\" $fit_gumbel>Gumbel"
 echo "<input type=\"radio\" class=\"formradio\" name=\"fit\" value=\"gev\" $fit_gev>GEV<br>"
 echo "<input type=\"radio\" class=\"formradio\" name=\"fit\" value=\"gpd\" $fit_gpd>GPD, threshold"
-echo "<input type=\"$number\" class=\"forminput\" name=\"dgt\" value=\"${FORM_dgt:-80}\" $textsize3>%"
+echo "<input type=\"$number\" class=\"forminput\" name=\"dgt\" value=\"${FORM_dgt:-80}\" $textsize6>%"
 echo "<select class=\"forminput\" name=\"restrain\">"
 echo "<option value=\"0\" $select00>do not constrain shape"
 echo "<option value=\"0.5\" $select05>constrain shape to &plusmn;0.5"
@@ -114,7 +116,7 @@ echo "<option value=\"0.4\" $select04>constrain shape to &plusmn;0.4"
 echo "<option value=\"0.3\" $select03>constrain shape to &plusmn;0.3"
 echo "<option value=\"0.2\" $select02>constrain shape to &plusmn;0.2"
 echo "</select>"
-echo "<tr><td>Leave out year:<td><input type=\"$number\" min=1 max=2500 step=1 class=\"forminput\" name=\"year\" $textsize4 value=\"$FORM_year\"> and compute return time"
+echo "<tr><td>Return time:<td>year <input type=\"$number\" min=1 max=2500 step=1 class=\"forminput\" name=\"year\" $textsize4 value=\"$FORM_year\"> or value <input type=\"text\" class=\"forminput\" name=\"xyear\" $textsize6 value=\"$FORM_xyear\">"
 if [ -n "$ENSEMBLE" ]; then
 cat <<EOF
 <tr><td>Ensemble members:

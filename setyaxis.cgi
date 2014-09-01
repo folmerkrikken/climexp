@@ -1,22 +1,25 @@
 #!/bin/sh
 # to be sourced from getdata.cgi, correlate.cgi
-
 if [ "$TYPE" = "p" ]; then
-  if [ -z "$FORM_sum" -o "$FORM_sum" = "1" -o "$FORM_operation" = "selecting" ]; then
-    ylabel="[mm/month]"
-  elif [ "$FORM_sum" -eq "12" ]; then
-    ylabel="[mm/year]"
+  if [ $NPERYEAR = 12 ]; then
+    if [ -z "$FORM_sum" -o "$FORM_sum" = "1" -o "$FORM_operation" = "selecting" ]; then
+      ylabel="[mm/month]"
+    elif [ "$FORM_sum" -eq "12" ]; then
+      ylabel="[mm/year]"
+    else
+      ylabel="[mm/season]"
+    fi
   else
-    ylabel="[mm/season]"
+    ylabel="[$UNITS]"
   fi
   setyrange="set yrange [0:]"
   setformaty="set format y \"%5.0f\""
 elif [ "$TYPE" = "t" ]; then
-  ylabel="Celsius"
+  ylabel="[Celsius]"
   setformaty="set format y \"%5.1f\""
   setyrange=
 else
-  ylabel="$UNITS"
+  ylabel="[$UNITS]"
   setformaty="set format y \"%5.2f\""
   setyrange=
 fi

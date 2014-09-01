@@ -20,5 +20,6 @@ heat|HEAT750) field_type='Heat content';;
 rhum|shum) field_type="Humidity";;
 snow) field_type="Snow";;
 time*) field_type="Time";;
+fd*) field_type="frost days";;
 *) echo "getfieldtype: please ask <a href=\"http://www.knmi.nl/~oldenbor/\">me</a> to add \"$VAR\" to the lists in getfieldtype";field_type="$VAR";;
 esac

@@ -13,7 +13,7 @@ j=0
 while [ `ps $EOFID | wc -l` -gt 1 ]
 do
   if [ $j -gt 30 ]; then
-    echo "Still computing, $i/$1<p>" 1>&2
+    echo "Computing eigenvalues, $i/$1<p>" 1>&2
     i=$(($i+1))
     j=0
   fi

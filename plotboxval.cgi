@@ -65,6 +65,7 @@ if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
   12) sum_12=selected;;
   15) sum_15=selected;;
   18) sum_18=selected;;
+  20) sum_20=selected;;
   24) sum_24=selected;;
   30) sum_30=selected;;
   60) sum_60=selected;;
@@ -163,7 +164,11 @@ EOF
     cat <<EOF
 <select class="forminput" name="sum">
 <option $sum_1>1
+<option $sum_2>2
+<option $sum_7>7
+<option $sum_10>10
 <option $sum_15>15
+<option $sum_20>20
 <option $sum_30>30
 <option $sum_60>60
 <option $sum_90>90

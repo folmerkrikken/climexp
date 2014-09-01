@@ -12,6 +12,12 @@ NPERYEAR=$FORM_NPERYEAR
 STATION=$FORM_STATION
 NAME=$FORM_NAME
 FORM_dgt=${FORM_dgt}%
+extraargs="$FORM_extraargs"
+if [ -n "$extraargs" ]; then
+  NPERYEAR=`echo "$extraargs" | cut -f 1 -d '_'`
+  extraname=`echo "$extraargs " | cut -f 2- -d '_' | tr '_' ' '`
+fi
+. ./nperyear2timescale.cgi
 
 # check email address
 . ./checkemail.cgi
@@ -32,7 +38,11 @@ if [ -z "$FORM_hist" ]; then
 	FORM_hist=none
 fi
 if [ $TYPE = set ]; then
-	corrargs="file $WMO $NAME"
+    if [ -n "$extraargs" ]; then
+    	corrargs="file $WMO ${NAME}_${extraargs}"
+    else
+    	corrargs="file $WMO $NAME"
+	fi
 	WMO=`basename $WMO .txt`
 else
 	corrargs="$DIR/data/$TYPE$WMO.dat"
@@ -49,9 +59,12 @@ FORM_nbin=$FORM_nbin;
 FORM_changesign=$FORM_changesign;
 FORM_restrain=$FORM_restrain;
 FORM_year=$FORM_year;
+FORM_xyear=$FORM_xyear;
+FORM_assume=$FORM_assume;
 FORM_begin2=$FORM_begin2;
 FORM_decor=$FORM_decor;
 FORM_fit=$FORM_fit;
+FORM_dgt=$FORM_dgt;
 FORM_xlo=$FORM_xlo;
 FORM_xhi=$FORM_xhi;
 FORM_ylo=$FORM_ylo;
@@ -60,33 +73,51 @@ EOF
 fi
 
 if [ $FORM_plot = "qq" ]; then
-	. ./myvinkhead.cgi "Quantile-quantile plot" "$FORM_CLIM $station" "noindex,nofollow"
+	. ./myvinkhead.cgi "Quantile-quantile plot" "$timescale $extraname$FORM_CLIM $station" "noindex,nofollow"
 elif [ $FORM_plot = "gumbel" ]; then
-	. ./myvinkhead.cgi "Gumbel plot" "$FORM_CLIM $station" "noindex,nofollow"
+	. ./myvinkhead.cgi "Gumbel plot" "$timescale $extraname$FORM_CLIM $station" "noindex,nofollow"
 else
-	. ./myvinkhead.cgi "Histogram" "$FORM_CLIM $station" "noindex,nofollow"
+	. ./myvinkhead.cgi "Histogram" "$timescale $extraname$FORM_CLIM $station" "noindex,nofollow"
 fi
 
 if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
 	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"
+    echo "<small>If it takes too long you can abort the job <a href=\"killit.cgi?id=$EMAIL&pid=$$\" target=\"_new\">here</a> (using the [back] button of the browser does <it>not</it> kill the histogram job)</small><p>"
+    cat | sed -e "s:$DIR::g" > pid/$$.$EMAIL <<EOF
+$REMOTE_ADDR
+histogram $corrargs
+@
+EOF
+    export SCRIPTPID=$$
+    export FORM_EMAIL=$EMAIL
 fi
 
-[ -n "$FORM_year" ] && corrargs="$corrargs end2 $FORM_year"
+if [ -n "$FORM_year" ]; then
+    corrargs="$corrargs end2 $FORM_year"
+    if [ -n "$FORM_xyear" ]; then
+        echo "Error: specify either the year for which to evaluate the return time or a value, but not both"
+        . ./myvinkfoot.cgi
+        exit
+    fi
+fi
 echo `date` "$EMAIL ($REMOTE_ADDR) histogram $corrargs" >> log/log
 startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
 root=data/h${TYPE}${WMO}_$$
 
 [ "$lwrite" = true ] && echo bin/histogram $corrargs
-($DIR/bin/histogram $corrargs > $root.txt) 2>&1 && true
+(./bin/histogram $corrargs > $root.txt) 2>&1
+[ -f pid/$$.$EMAIL ] && rm pid/$$.$EMAIL
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
+. ./month2string.cgi
 if [ $TYPE = set ]; then
-	eval `./bin/getunits ./data/${NAME}*.dat`
+    file=`ls -t /data/${NAME}*.dat|head -1`
+	eval `./bin/getunits $file`
 else
 	eval `./bin/getunits ./data/$TYPE$WMO.dat`
 fi
-. ./month2string.cgi
+###echo "NPERYEAR=$NPERYEAR<br>"
 . ./setyaxis.cgi
 echo "<tr><th colspan="3">$seriesmonth $station $VAR [$UNITS]</th></tr>"
 tail -n +2 "$root.txt" | grep '<tr>' | sed -e 's/#//'
@@ -103,9 +134,25 @@ if [ $c -lt 20 ]; then
 fi
 
 ylabel_save=$ylabel
-[ -n "$FORM_log" ] && ylabel="log $ylabel"
-[ -n "$FORM_sqrt" ] && ylabel="sqrt $ylabel"
-[ -n "$FORM_square" ] && ylabel="${ylabel}^2"
+ylo_save=$FORM_ylo
+yhi_save=$FORM_yhi
+ylo=$FORM_ylo
+yhi=$FORM_yhi
+if [ -n "$FORM_log" ]; then
+    ylabel="log $ylabel"
+    [ -n "$FORM_ylo" -a "$FORM_ylo" != "0" ] && ylo=`echo "l($ylo)/l(10)" | bc -l`
+    [ -n "$FORM_yhi" -a "$FORM_yhi" != "0" ] && yhi=`echo "l($yhi)/l(10)" | bc -l`
+fi
+if [ -n "$FORM_sqrt" ]; then
+    ylabel="sqrt $ylabel"
+    [ -n "$FORM_ylo" ] && ylo=`echo "sqrt($ylo)" | bc -l`
+    [ -n "$FORM_yhi" ] && yhi=`echo "sqrt($yhi)" | bc -l`
+fi
+if [ -n "$FORM_square" ]; then
+    ylabel="${ylabel}^2"
+    [ -n "$FORM_ylo" ] && ylo=`echo "$ylo * $ylo" | bc -l`
+    [ -n "$FORM_yhi" ] && yhi=`echo "$yhi * $yhi" | bc -l`
+fi
 
 if [ -s "$startstop" ]; then
 	yrstart=`head -1 $startstop`
@@ -246,8 +293,14 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	fi
 	if [ -n "$FORM_year" ]; then
 		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"$FORM_year\" w lines"
+	elif [ -n "$FORM_xyear" ]; then
+		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"$FORM_xyear\" w lines"
 	else
 		plotformyear=""
+	fi
+	fit=$FORM_fit
+	if [ $fit = "gpd" ]; then
+	    fit="${FORM_dgt} $fit"
 	fi
 	
 	cat > /tmp/histogram$$.gnuplot << EOF
@@ -261,8 +314,8 @@ set datafile missing '-999.900'
 set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
-set yrange [${FORM_ylo}:${FORM_yhi}]
-plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit fit" with line$plotformyear
+set yrange [${ylo}:${yhi}]
+plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$fit fit" with line$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
 replot
@@ -293,8 +346,17 @@ echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" 
 if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
 	./bin/untransform ${FORM_log:-false} ${FORM_sqrt:-false} ${FORM_square:-false} < $root.txt > ${root}un.txt
 	root=${root}un
+	if [ -n "$FORM_year" ]; then
+		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"$FORM_year\" w lines"
+	elif [ -n "$FORM_xyear" ]; then
+		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"$FORM_xyear\" w lines"
+	else
+		plotformyear=""
+	fi
 	if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" ]; then
 		ylabel=$ylabel_save
+		ylo=$ylo_save
+		yhi=$yhi_save
 		cat > /tmp/histogram$$.gnuplot << EOF
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
@@ -306,8 +368,8 @@ set datafile missing '-999.900'
 set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
-set yrange [${FORM_ylo}:${FORM_yhi}]
-plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit fit" with line$plotformyear
+set yrange [${ylo}:${yhi}]
+plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$fit fit" with line$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
 replot
@@ -328,7 +390,7 @@ EOF
 		fi
 		rm /tmp/histogram$$.gnuplot
 	else
-    	echo "Not yet ready"  
+    	echo "Not yet ready for plot = $FORM_plot, only gumbel or log"  
 	fi
 	gzip -f $root.eps
 	pngfile=${root}.png

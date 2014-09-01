@@ -5,7 +5,11 @@ export DIR=`pwd`
 
 WMO="$FORM_WMO"
 TYPE="$FORM_TYPE"
-[ -z "$TYPE" ] && TYPE=`basename $0 .cgi | cut -b 9-10`
+if [ -z "$TYPE" ]; then
+    scriptname=`basename $0 .cgi`
+    scriptname=${scriptname%.cgi} 
+    TYPE=${scriptname#getdutch}
+fi
 STATION="$FORM_STATION"
 NPERYEAR=366
 extraargs="$FORM_extraargs"
@@ -20,12 +24,15 @@ tg) NAME="mean temperature";;
 tn) NAME="min temperature";;
 tx) NAME="max temperature";;
 t1) NAME="min surface temperature";;
+td) NAME="max dew point temperature";;
 ng) NAME="cloud cover";;
 qq) NAME="global radiation";;
 sq) NAME="sunshine duration";;
 sp) NAME="sunshine fraction";;
 dr) NAME="precipitation duration";;
 rh) NAME="precipitation";;
+rr) NAME="precipitation";;
+rx) NAME="max hourly precipitation";;
 rd) NAME="precipitation";;
 pg) NAME="mean surface pressure";;
 px) NAME="maximum surface pressure";;

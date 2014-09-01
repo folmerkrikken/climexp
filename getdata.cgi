@@ -143,7 +143,18 @@ else
         fi
     fi
 fi
-if [ ! -s ./data/$TYPE$WMO.dat ]; then
+c1=`echo $WMO | fgrep -c '++'`
+c2=`echo $WMO | fgrep -c '%%'`
+if [ $c1 -gt 0 -o $c2 -gt 0 ]; then
+  ENSEMBLE=true
+  firstfile=`echo ./data/$TYPE$WMO.dat | sed -e 's/%%%/000/' -e 's/+++/000/' -e 's/%%/00/' -e 's/++/00/'`
+  if [ ! -s $firstfile ]; then
+    firstfile=`echo ./data/$TYPE$WMO.dat | sed -e 's/%%%/001/' -e 's/+++/001/' -e 's/%%/01/' -e 's/++/01/'`
+  fi
+else
+  firstfile=./data/$TYPE$WMO.dat
+fi
+if [ ! -s $firstfile ]; then
   if [ -n "$ROBOT" ]; then
     echo "For search engines this data is not retrieved."
   else
@@ -155,7 +166,7 @@ if [ ! -s ./data/$TYPE$WMO.dat ]; then
   UNITS="unknown"
   NEWUNITS="unknown"
 else
-  eval `./bin/getunits ./data/$TYPE$WMO.dat`
+  eval `./bin/getunits $firstfile`
 fi
 if [ -z "$VAR" ]; then
 # something went wrong
@@ -171,17 +182,12 @@ if [ "$TYPE" = "i" -a "$EMAIL" != "someone@somewhere" ]; then
   fi
 fi
 ###echo "<div class=\"alineakop\">Timeseries</div>"
-c1=`echo $WMO | fgrep -c '++'`
-c2=`echo $WMO | fgrep -c '%%'`
-if [ $c1 -gt 0 -o $c2 -gt 0 ]; then
-  ENSEMBLE=true
-fi
 
 ###echo '<p>Converting data...'
 ###echo "$DIR/bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > $DIR/data/$TYPE$WMO.txt"
-if [ -s $DIR/data/$TYPE$WMO.dat ]; then
-  if [ \( ! -s $DIR/data/$TYPE$WMO.txt \) -o $DIR/data/$TYPE$WMO.dat -nt $DIR/data/$TYPE$WMO.txt ]; then
-    $DIR/bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > $DIR/data/$TYPE$WMO.txt
+if [ -s $firstfile ]; then
+  if [ \( ! -s ./data/$TYPE$WMO.txt \) -o ./data/$TYPE$WMO.dat -nt ./data/$TYPE$WMO.txt ]; then
+    ( ./bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > ./data/$TYPE$WMO.txt ) 2>&1
     c=`cat $DIR/data/$TYPE$WMO.txt | fgrep -v '#' | wc -l`
     if [ $c -eq 0 ]; then
       echo "No valid data were found.  Please check your choices on the previous page.<br>"
@@ -243,12 +249,12 @@ EOF
   STATION=`echo $STATION | tr '+' '%'`
 else
 # robots, other errors.
-  echo "<p>Cannot locate $TYPE$WMO.dat"
+  echo "<p>Cannot locate $TYPE$WMO.dat ($firstfile)"
 ###  echo "<p>Here a plot of the data would be shown"
 fi
 
-if [ -s $DIR/data/$TYPE$WMO.dat -a "$WMO" != "time" ]; then
-  . $DIR/plot_anomalies.cgi
+if [ -s ./data/$TYPE$WMO.dat -a "$WMO" != "time" ]; then
+  . ./plot_anomalies.cgi
 fi
 
 if [ -n "$ROBOT" ]; then

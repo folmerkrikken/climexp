@@ -13,7 +13,7 @@ cat << EOF
 <div class="menulink"><a href="plotboxautocorr.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">Autocorrelations</a></div>
 <div class="menulink"><a href="plotboxhist.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">Statistical properties</a></div>
 <div class="menulink"><a href="plotboxfieldcorr.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">Correlate with a field</a></div>
-<div class="menulink"><a href="histogramform.cgi?id=${EMAIL}&TYPE=set&WMO=${listname}&STATION=${shortclimate}&NAME=${prog}&NPERYEAR=${NPERYEAR}">Plot and fit combined distribution</a></div>
+<div class="menulink"><a href="histogramform.cgi?id=${EMAIL}&TYPE=set&WMO=${listname}&STATION=${shortclimate}&NAME=${prog}&NPERYEAR=${NPERYEAR}&extraargs=${extraargs}">Plot and fit combined distribution</a></div>
 <div class="menulink"><a href="listbox.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&extraargs=${extraargs}">Make a list suitable for uploading</a></div>
 EOF
 ###  echo "<div class="menulink"><a href=\"averageseries.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&location=${location}\">Compute a simple scaled average</a> (no area-weighting)"

@@ -127,3 +127,4 @@ fi
 [ -n "$startstop" ] && corrargs="$corrargs startstop $startstop"
 [ -n "$FORM_restrain" ] && corrargs="$corrargs restrain $FORM_restrain"
 [ -n "$FORM_normalization" ] && corrargs="$corrargs normalization $FORM_normalization"
+[ -n "$FORM_xyear" ] && corrargs="$corrargs xyear $FORM_xyear"
