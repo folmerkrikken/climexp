@@ -351,7 +351,7 @@ set nomultiplot
 EOF
       done
     fi
-###    echo "n = $n, FORM_sum = $FORM_sum, FORM_sum2 = $FORM_sum2"
+    [ "$lwrite" = true ] && echo "n = $n, FORM_sum = $FORM_sum, FORM_sum2 = $FORM_sum2"
     if [ $n -le 1 -a -z "$FORM_sum" -a -z "$FORM_sum2" ]; then
       a=`awk '{print -$15}' $DIR/data/$TYPE$WMO${FORM_num}.cor | tr '\n' ':'`
       if [ ! -s $DIR/data/dummy.$NPERYEAR.dat ]; then
@@ -414,7 +414,7 @@ EOF
       while [ $i -lt $n ]
       do
         i=$(($i+1))
-        echo "<input type=\"number\" step=any name=\"a$i\" size=\"10\" style=\"width: 11em;\" value=\""`tail -$((n-i+1)) data/$TYPE$WMO${FORM_num}.dump$ext1 | head -1 | cut -b '7-' | tr -d ' '`"\">"
+        echo "<input type=\"number\" step=any name=\"a$i\" size=\"10\" style=\"width: 11em;\" value=\""`tail -$((n-i+1)) data/$TYPE$WMO${FORM_num}.dump$ext1 | head -1 | cut -b '7-' | tr ',' '.' | tr -d ' '`"\">"
       done
       echo "<input type=\"submit\" class=\"formbutton\" value=\"and create new timeseries\">"
       echo "</form>"
@@ -514,26 +514,55 @@ set output "$corrroot.trc.png"
 replot
 EOF
     echo "</pre>"
-    a=-`awk '{print $15}' $DIR/data/$TYPE$WMO${FORM_num}.cor`
-# the numbers for the predefined indices are ordered before the rest...
-    if [ -n "$FORM_soi" -o -n "$FORM_nao" -o -n "$FORM_nino12" -o -n "$FORM_nino3" -o -n "$FORM_nino4" -o -n "$FORM_nino34" -o -n "$FORM_time" ]; then
-      a1=$a
-      a2=1
-    else
-      a1=1
-      a2=$a
-    fi
-    if [ ! -s ./data/dummy.$NPERYEAR.dat ]; then
-      ./bin/gen_time 1700 2200 $NPERYEAR > ./data/dummy.$NPERYEAR.dat
-    fi
     cat <<EOF
 <div class="formheader">Subtract influence of $index from $station $CLIM ($WMO)</div>
 <div class="formbody">
 <form action="addseries.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="corrargs" value="$DIR/data/dummy.$NPERYEAR.dat file ${corrargs%%startstop*}">
+EOF
+    if [ ! -s ./data/dummy.$NPERYEAR.dat ]; then
+        ./bin/gen_time 1 2300 $NPERYEAR > ./data/dummy.$NPERYEAR.dat
+    fi
+    a=`awk '{print '-' $15}' $DIR/data/$TYPE$WMO${FORM_num}.cor`
+    [ "$lwrite" = true ] && echo "n=$n<br>"
+    if [ $n = 1 ]; then
+        if [ -n "$FORM_soi" -o -n "$FORM_nao" -o -n "$FORM_nino12" -o -n "$FORM_nino3" -o -n "$FORM_nino4" -o -n "$FORM_nino34" -o -n "$FORM_time" ]; then
+            a1=$a
+            a2=1
+        else
+            a1=1
+            a2=$a
+        fi
+        cat <<EOF
 <input type="hidden" name="a1" value="$a1">
 <input type="hidden" name="a2" value="$a2">
+EOF
+    else
+        # the numbers for the predefined indices are ordered before the rest...
+        i=0
+        for index in "FORM_soi" "FORM_nao" "FORM_nino12" "FORM_nino3" "FORM_nino4" "FORM_nino34" "FORM_time"
+        do
+            if [ -n "${!index}" ]; then
+                i=$((i+1))
+                # not very elegant
+                ai=`echo $a | tr ' ' '\n' | head -1`
+                a=`echo $a | tr ' ' '\n' | tail +2`
+                echo "<input type=\"hidden\" name=\"a$i\" value=\"$ai\">"
+            fi
+        done
+        i=$((i+1))
+        echo "<input type=\"hidden\" name=\"a$i\" value=\"1\">"
+        while [ -n "$a" ]
+        do
+            i=$((i+1))
+            # not very elegant
+            ai=`echo $a | tr ' ' '\n' | head -1`
+            a=`echo $a | tr ' ' '\n' | tail +2`
+            echo "<input type=\"hidden\" name=\"a$i\" value=\"$ai\">"
+        done
+    fi
+cat <<EOF
 <input type="submit" class="formbutton" value="Make new series">
 </form>
 </div>

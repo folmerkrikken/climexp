@@ -37,4 +37,6 @@ if [ -z "$init_done" ]; then
    export LD_LIBRARY_PATH=/home/oldenbor/lib:/usr/local/free/lib:$LD_LIBRARY_PATH
    # for a few routines this seems needed
    export PATH=./bin:/sw/bin:/usr/local/bin:/usr/local/free/bin:$PATH
+   # finally, avoid commas instead of decimal points :-(
+   export LANG=C
 fi
