@@ -1,0 +1,48 @@
+#!/bin/sh
+file=`echo "$1" | sed -e 's/\.\.//g'`
+c=`echo $file | egrep -c '\+\+|%%'`
+[ -z "$TYPE" ] && TYPE=i
+###echo "file=$file<br>"
+###echo "c=$c<br>"
+if [ "$c" = 0 ]; then
+	if [ -s ./$file.dat ]; then
+		cat ./$file.dat
+	elif [ -s $DIR/$file.nc ]; then
+		netcdf2dat ./$file.nc
+	fi
+else
+	i=0
+	ntime=0
+	while [ 1 ]
+	do
+		fi=`printf '%03i' $i`
+		ensfile=`echo $file | sed -e "s/+++/$fi/" -e "s/%%%/$fi/"`
+		if [ $ensfile = $file ]; then
+			fi=`printf '%02i' $i`
+			ensfile=`echo $file | sed -e "s/++/$fi/" -e "s/%%/$fi/"`
+		fi
+		###echo "# checking for $ensfile"
+	    ncfile=data/$TYPE`basename $ensfile`.nc
+	    datfile=data/$TYPE`basename $ensfile.dat`
+		if [ -f $ensfile.dat ]; then
+			echo "# data/i`basename $ensfile`.dat"
+			cp -p $ensfile.dat $datfile
+			if [ -s $ensfile.nc ]; then
+			    cp -p $ensfile.nc $ncfile
+			fi
+		elif [ -f $ensfile.nc ]; then
+		    # make a netcdf copy for faster I/O
+		    # eventually only use the netcdf, but I first have to check everything works
+			cp -p $ensfile.nc $ncfile
+			netcdf2dat $ensfile.nc > $datfile
+			echo "# $ncfile"
+			ntime=$((ntime+1))
+			if [ $((ntime%100)) = 0 ]; then
+			    echo "Copying file $ntime<p>" 1>&2
+			fi
+		elif [ $i -ge 1 ]; then
+			exit
+		fi
+		i=$((i+1))
+	done
+fi
