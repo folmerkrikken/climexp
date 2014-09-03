@@ -92,10 +92,12 @@ EOF
 
 justonemonth=true
 ONLYONE=true
+save_name=$NAME
 NAME=series
 DECOR=true
 INCLUDE_SQUARE=true
 . ./commonoptions.cgi
+NAME=$save_name
 
 echo "<tr><td>Change sign:"
 echo "<td><input type=\"checkbox\" class=\"formcheck\" name=\"changesign\" $changesign_checked>study the low extremes<td><a href=\"javascript:pop_page('help/changesign.shtml',284,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"

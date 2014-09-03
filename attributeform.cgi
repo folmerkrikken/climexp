@@ -14,19 +14,17 @@ NPERYEAR="$FORM_NPERYEAR"
 . ./nosearchengine.cgi
 
 if [ $TYPE = set ]; then
-  . ./myvinkhead.cgi "Cannot handle set of stations" "$station stations" "noindex,nofollow"
-  . ./myvinkfoot.cgi
-  exit
+  . ./myvinkhead.cgi "Trends in return times of extremes" "$station stations" "noindex,nofollow"
 else
   . ./myvinkhead.cgi "Trends in return times of extremes" "$station $NAME ($WMO)" "noindex,nofollow"
 fi
 
 cat <<EOF
 Compute the return times of an extreme in the distribution of the other values and in the 
-counterfactual world of another year, assuming that the PDF or scales shifts with the covariate.
+counterfactual world of another year, assuming that the PDF shifts or scales with the covariate.
 
 <font color=#ff2222>Test version under development, may or may not give correct answers
-today. Use with extreme caution and please report problems.</font><p>
+today. Use with caution and please report problems.</font><p>
 EOF
 
 DIR=`pwd`
@@ -85,6 +83,7 @@ cat <<EOF
 <input type="hidden" name="WMO" value="$WMO">
 <input type="hidden" name="STATION" value="$STATION">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
+<input type="hidden" name="extraargs" value="$FORM_extraargs">
 <input type="hidden" name="nbin" value="$FORM_nbin">
 <div class="formheader">Covariate series</div>
 EOF
@@ -121,12 +120,14 @@ EOF
 
 justonemonth=true
 ONLYONE=true
+save_name=$NAME
 NAME=series
 ###DECOR=true
 INCLUDE_SQUARE=true
 NORANGE=true
 NOFILTERS=true
 . ./commonoptions.cgi
+NAME=$save_name
 
 cat <<EOF
 <tr><td>Demand at least<td><input type="$number" step=any name="minfac" value="$FORM_minfac" $textsize2>% valid points

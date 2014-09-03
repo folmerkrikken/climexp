@@ -14,6 +14,11 @@ NAME=$FORM_NAME
 FORM_dgt=${FORM_dgt%%%}
 FORM_dgt=${FORM_dgt}%
 [ -z "$FORM_assume" ] && FORM_assume=shift
+extraargs=$FORM_extraargs
+if [ -n "$extraargs" ]; then
+  NPERYEAR=`echo "$extraargs" | cut -f 1 -d '_'`
+  extraname=`echo "$extraargs " | cut -f 2- -d '_' | tr '_' ' '`
+fi
 
 # check email address
 . ./checkemail.cgi
@@ -34,7 +39,11 @@ if [ -z "$FORM_hist" ]; then
 	FORM_hist=none
 fi
 if [ $TYPE = set ]; then
-	corrargs="file $WMO $NAME"
+    if [ -n "$extraargs" ]; then
+    	corrargs="file $WMO ${NAME}_${extraargs}"
+    else
+    	corrargs="file $WMO $NAME"
+	fi
 	WMO=`basename $WMO .txt`
 else
 	corrargs="./data/$TYPE$WMO.dat"
@@ -151,11 +160,14 @@ fi
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 if [ $TYPE = set ]; then
-	eval `./bin/getunits ./data/${NAME}*.dat`
-elif [ $NPERYEAR -gt 12 ]; then
-	eval `./bin/getunits.sh ./data/$TYPE$WMO.dat`
+    f=`ls -t ./data/${NAME}*$FORM_extraargs.dat|head -1`
 else
-	eval `./bin/getunits ./data/$TYPE$WMO.dat`
+    f=./data/$TYPE$WMO.dat
+fi
+if [ $NPERYEAR -gt 12 ]; then
+	eval `./bin/getunits.sh $f`
+else
+	eval `./bin/getunits $f`
 fi
 . ./month2string.cgi
 . ./setyaxis.cgi
