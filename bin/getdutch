@@ -1,11 +1,23 @@
 #!/bin/sh
 WMO=$1
 outfile=$2
-TYPE=`basename $0 | cut -b 9-10`
-infile=KNMIData/$TYPE$WMO.gz
+TYPE=`basename $0`
+TYPE=${TYPE#getdutch}
+if [ ${TYPE#precip} = $TYPE ]; then
+    infile=KNMIData/$TYPE$WMO.gz
+else
+    infile=KNMIData/precip${WMO}${TYPE#precip}.gz
+fi
+if [ ! -s $infile ]; then
+    infile=${infile%.gz}.dat
+fi
 if [ -z "$outfile" -o ! -s "$outfile" -o "$outfile" -ot $infile ]; then
     # stdout is the same as outfile...
-    gunzip -c $infile
+    if [ ${infile%.gz} != $infile ]; then
+        gunzip -c $infile
+    else
+        cat $infile
+    fi
 fi
 if [ -n "$outfile" ]; then
     ncfile=${outfile%.dat}.nc
