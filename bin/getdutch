@@ -11,6 +11,13 @@ fi
 if [ ! -s $infile ]; then
     infile=${infile%.gz}.dat
 fi
+if [ ! -s $infile ]; then
+    infile=$infile.gz
+fi
+if [ ! -s $infile ]; then
+    echo "$0: cannot locate ${infile%.gz} or $infile" 1>&2
+    exit -1
+fi
 if [ -z "$outfile" -o ! -s "$outfile" -o "$outfile" -ot $infile ]; then
     # stdout is the same as outfile...
     if [ ${infile%.gz} != $infile ]; then
