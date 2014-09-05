@@ -1,5 +1,5 @@
 # West Indian Ocean small island region (sea points only)
 52 -25
-52  -5
-75  -5
+52   5
+75   5
 75 -25
