@@ -1,0 +1,75 @@
+#!/bin/sh
+# wrapper for the Fortran gdcndata/acedata programs that retrieves the GDCN/ECA&D data from their 
+# format
+# usually it is expected that the output goes to stdout, but in case it is called from readsetseries
+# (two arguments, first one 11 chars plus newline, contains at least one digit) it is written in the
+# second argument
+###echo "This is $0 with arguments $*"
+script=`basename $0`
+if [ ${script#gdcn} != $script ]; then
+    dir=GDCNData
+elif [ ${script#eca} != $script -o ${script#beca} != $script ]; then
+    dir=ECAData
+elif [ ${script#get} != $script ]; then
+    dir=NCDCData
+else
+    echo "$0: cannot determine database from name" 1>&2
+    exit -1
+fi    
+prog=./$dir/$script
+case $script in
+    gdcnprcp*|*ecaprcp|getprcp*) TYPE=p;eca=rr;var=prcp;version=v2;;
+    gdcntemp|*ecatemp|gettemp*) TYPE=t;eca=tg;var=tavg;version=v3;;
+    gdcntmax|*ecatmax|getmax) TYPE=x;eca=tx;var=tmax;version=v3;;
+    gdcntmin|*ecatmin|getmin) TYPE=n;eca=tn;var=tmin;version=v3;;
+    gdcnsnow) TYPE=w;;
+    gdcnsnwd) TYPE=d;;
+    *ecapres|getslp) TYPE=s;eca=pp;version=v2;var=slp;;
+    *) TYPE=i;;
+esac
+if [ ${script#beca} != $script ]; then
+    eca=b$eca # blended
+fi
+WMO=""
+# if it is called with two arguments and the second one has letters in it I think it is a ID, filename pair and not lat/lon
+if [ -n "$2" -a -z "$3" ]; then
+    c=`echo $1 $2 | egrep -c '[A-Z]|[a-z]'`
+    if [ $c = 1 ]; then
+        WMO=$1
+    fi
+fi
+if [ -z "$WMO" ]; then
+    $prog $*
+else
+    if [ $dir = GDCNData ]; then
+        infile=./$dir/ghcnd/$WMO.dly.gz
+    elif [ $dir = ECAData ]; then
+        id=`printf %6.6i $WMO`
+        infile=./$dir/data/${eca}$id.dat.gz
+    elif [ $dir = NCDCData ]; then
+        if [ $version = v2 ]; then
+            infile=./$dir/$version.$var
+        elif [ $version = v3 ]; then
+            infile=./$dir/ghcnm/ghcnm.$var.$version.qca.dat
+        else
+            echo "$0: unknown GHCN-M version $version" 1>&2
+            exit -1
+        fi
+    else
+        echo "$0: error: unknown dataset" 1>&2
+        exit -1
+    fi
+    outfile=$2
+    if [ ! -s $outfile -o $outfile -ot $infile ]; then
+        ###echo "$prog $WMO > $outfile<br>" 1>&2
+        $prog $WMO > $outfile
+    fi
+    ncfile=${outfile%.dat}.nc
+    if [ ! -s $ncfile -o $ncfile -ot $outfile ]; then
+        if [ -s $outfile ]; then
+            ###echo "dat2nc $outfile $TYPE $WMO $ncfile<br>" 1>&2
+            dat2nc $outfile $TYPE $WMO $ncfile.$$
+            mv $ncfile.$$ $ncfile
+        fi
+    fi
+fi

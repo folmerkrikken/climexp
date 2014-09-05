@@ -18,18 +18,18 @@ if [ ! -s $infile ]; then
     echo "$0: cannot locate ${infile%.gz} or $infile" 1>&2
     exit -1
 fi
-if [ -z "$outfile" -o ! -s "$outfile" -o "$outfile" -ot $infile ]; then
-    # stdout is the same as outfile...
+if [ -z "$outfile" -o ! -s "$outfile" -o "$outfile" -ot "$infile" ]; then
     if [ ${infile%.gz} != $infile ]; then
-        gunzip -c $infile
+        gunzip -c $infile > $outfile
     else
-        cat $infile
+        cp $infile $outfile
     fi
 fi
 if [ -n "$outfile" ]; then
     ncfile=${outfile%.dat}.nc
     if [ ! -s $ncfile -o $ncfile -ot $infile ]; then
-        maybefile=${infile%.gz}.nc
+        maybefile=${infile%.gz}
+        maybefile=${maybefile%.dat}.nc
         if [ -s $maybefile ]; then
             cp $maybefile $ncfile
         else
