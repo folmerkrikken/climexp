@@ -14,10 +14,15 @@ cat <<EOF
 Het omzetten van een historische neerslag- of temperatuurreeks op dagbasis in een reeks die
  past bij het klimaat onder
 &eacute;&eacute;n van de vier KNMI'14 klimaatscenario's voor een bepaalde tijdshorizon.
-<p>
-Via het menu hieronder kan er gekozen worden uit verschillende klimaatscenario's, stations
+
+<p>Via het menu hieronder kan er gekozen worden uit verschillende klimaatscenario's, stations
 en tijdhorizonten. Het is ook
 mogelijk eigen historische tijdreeksen in te voeren.
+
+<p>Voorbeeld van [i]'tjes: een pop-up <a href="javascript:pop_page('KNMI14/helpfile.html',568,480)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+<br>of een hele pagina <a href="http://www.klimaatscenarios.nl"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+<br>je kan ze ook links zetten <a href="http://www.klimaatscenarios.nl"><img align="left" src="images/info-i.gif" alt="help" border="0"></a>
+
 <p>
 <div class=formheader>Transformeer neerslagtijdreeks</div>
 <div class=formbody>
