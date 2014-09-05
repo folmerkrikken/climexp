@@ -104,7 +104,11 @@ EOF
     echo "TYPE = $TYPE<br>"
     echo "WMO = $WMO<br>"
   fi
-  (./bin/$PROG $wmo > ./data/$TYPE$WMO.dat.$$ ) 2>&1
+  if [ "$makenetcdf" = true ]; then
+      (./bin/$PROG $wmo ./data/$TYPE$WMO.dat ) 2>&1
+  else
+      (./bin/$PROG $wmo > ./data/$TYPE$WMO.dat.$$ ) 2>&1
+  fi
   return=$?
   return=0
   if [ "$return" != 0 ]; then
@@ -118,7 +122,7 @@ EOF
   fi
   rm -f pid/$$.$EMAIL
   # in case two people retrieve the same data at the same time - make atomic
-  mv $DIR/data/$TYPE$WMO.dat.$$ $DIR/data/$TYPE$WMO.dat
+  [ -s $DIR/data/$TYPE$WMO.dat.$$ ] && mv $DIR/data/$TYPE$WMO.dat.$$ $DIR/data/$TYPE$WMO.dat
   fgrep 'annot locate' $DIR/data/$TYPE$WMO.dat
   if [ $? = 0 ]; then
 	echo '<pre>'

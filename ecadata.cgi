@@ -50,5 +50,6 @@ else
 fi
 export DIR=`pwd`
 FROM="from <a href="http://www.ecad.eu/" target="_new">ECA&amp;D v1.1 database</a>"
+makenetcdf=true
 
 . $DIR/getdata.cgi
