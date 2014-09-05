@@ -37,18 +37,36 @@ cat <<EOF
 
 <div class="formheader">Plot options</div>
 <div class="formbody">
-<input type="radio" name="var" value="hime" checked>mean<br>
-<input type="radio" name="var" value="hisd">standard deviation<br>
-<input type="radio" name="var" value="hisk">skewness<br>
-&chi;<sup>2</sup> of a fit to a 
-<input type="radio" name="var" value="higa">Gaussian<br>
-return time of year <input type="text" class="forminput" name="year" size="4">, <input type="$number" class="forminput" name="threshold" textsize2 value="${FORM_threshold:-90}">%, <input type="radio" class="formradio" name="changesign" value="" $upper_checked>upper <input type="radio" class="formradio" name="changesign" value="on" $lower_checked>lower tail, fitted with a
-<ul>
-<li><input type="radio" name="var" value="higr">Gaussian (<input type="radio" name="var" value="higR">2.5% lower limit)<br>
-<li><input type="radio" name="var" value="hipr">GPD with threshold <input type="text" class="forminput" name="dgt" size="4">%, <select class="forminput" name="restrain"><option value="0" $select00>do not constrain shape<option value="0.6" $select06>constrain shape to &plusmn;0.6<option value="0.4" $select04>constrain shape to &plusmn;0.4</select> (<input type="radio" name="var" value="hipR">2.5% lower limit)
-</ul>
-<br>Only show stations with at least
+<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<tr><td>Variable:
+<td><input type="radio" name="var" value="hime" checked>mean
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hisd">standard deviation
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hisk">skewness
+<tr><td>Fit:
+<td><input type="radio" name="var" value="higa">Gaussian and plot &chi;<sup>2</sup> 
+<tr><td>Return time:
+<td>year <input type="text" class="forminput" name="year" size="4">, <input type="radio" class="formradio" name="changesign" value="" $upper_checked>upper <input type="radio" class="formradio" name="changesign" value="on" $lower_checked>lower tail
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="higr">Gaussian fit, plot mean value
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="higR">same, plot lower limit of 95% CI
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hipr">GPD fit with threshold <input type="text" class="forminput" name="dgt" size="4">%,<br>&nbsp;&nbsp;&nbsp;
+<select class="forminput" name="restrain">
+<option value="0" $select00>do not constrain shape
+<option value="0.5" $select05>constrain shape to &plusmn;0.5
+<option value="0.4" $select04>constrain shape to &plusmn;0.4
+<option value="0.3" $select03>constrain shape to &plusmn;0.3
+<option value="0.2" $select02>constrain shape to &plusmn;0.2
+</select>, plot mean value
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hipR">same, plot lower limit of 95% CI
+<tr><td>Minimum length:
+<td>require at least
 <input type="text" name="minnum" size="3"> valid years/months
+</table>
 </div>
 <p><div class="formheader">Common options</div>
 <div class="formbody">

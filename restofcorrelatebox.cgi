@@ -20,7 +20,5 @@ export FORM_EMAIL=$EMAIL
 (./bin/stationlist $corrargs)
 rm pid/$$.$FORM_email
 
-echo "<a name=\"plotoptions\"><div class=\"formheader\">Plot options</div></a>"
-
 . $DIR/plotparams.cgi
 
