@@ -59,7 +59,7 @@ fi
 
 # generate form
 cat <<EOF
-<div class="formheader">Plot options</div>
+<a name=\"plotoptions\"></a><div class="formheader">Plot options</div>
 <div class="formbody">
 <form action="plotstations.cgi" method="post">
 <input type="hidden" name="EMAIL" value="$EMAIL">

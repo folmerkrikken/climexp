@@ -6,9 +6,11 @@ echo
 . ./getargs.cgi
 TYPE="$FORM_TYPE"
 WMO="$FORM_WMO"
+listname=$WMO
 STATION="$FORM_STATION"
 station=` echo "$STATION" | tr '_' ' '`
 NAME="$FORM_NAME"
+prog=$NAME
 NPERYEAR="$FORM_NPERYEAR"
 
 . ./nosearchengine.cgi

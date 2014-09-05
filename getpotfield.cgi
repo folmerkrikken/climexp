@@ -310,7 +310,7 @@ EOF
 export SCRIPTPID=$$
 export FORM_EMAIL
 export UDUNITS_PATH=$DIR/grads/udunits.dat
-(/usr/local/free/bin/R --vanilla < /tmp/R$$.r > /tmp/R$$.log ) 2>&1
+(./bin/R --vanilla < /tmp/R$$.r > /tmp/R$$.log ) 2>&1
 # pnmtopng chatters to stderr
 rm pid/$$.$FORM_EMAIL
 

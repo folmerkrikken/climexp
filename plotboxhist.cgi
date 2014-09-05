@@ -52,12 +52,17 @@ return time of year <input type="text" class="forminput" name="year" size="4">, 
 </div>
 <p><div class="formheader">Common options</div>
 <div class="formbody">
+<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
 EOF
 
-cat $DIR/common1options.html
+justonemonth=true
+ONLYONE=true
+NAME=series
+. ./commonoptions.cgi
 
 cat << EOF
-<input type="submit" class="formbutton" value="Submit">
+<tr><td colspan="2"><input type="submit" class="formbutton" value="Compute">
+</table>
 </div>
 EOF
 

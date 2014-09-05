@@ -7,10 +7,12 @@ echo
 export DIR=`pwd`
 . ./getargs.cgi
 WMO=$FORM_WMO
+listname=$WMO
 TYPE=$FORM_TYPE
 NPERYEAR=$FORM_NPERYEAR
 STATION=$FORM_STATION
 NAME=$FORM_NAME
+prog=$NAME
 FORM_dgt=${FORM_dgt}%
 extraargs="$FORM_extraargs"
 if [ -n "$extraargs" ]; then

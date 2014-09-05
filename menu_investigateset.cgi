@@ -3,6 +3,7 @@
 [ -z "$shortclinate" ] && shortclimate=$FORM_shortclimate
 [ -z "$shortclimate" ] && shortclimate=$FORM_climate
 [ -z "$shortclimate" ] && shortclimate=$climate
+[ -z "$shortclimate" ] && shortclimate=$STATION
 [ -z "$listname" ] && listname=$FORM_listname
 [ -z "$extraargs" ] && extraargs=$FORM_extraargs
 cat << EOF

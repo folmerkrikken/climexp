@@ -17,6 +17,10 @@ fi
 EMAIL=$FORM_email
 . ./checkemail.cgi
 
+if [ "$EMAIL" = oldenbor@knmi.nl ]; then
+    lwrite=false # true
+fi
+
 # real work
 if [ "$FORM_type" = plot ]; then
   . ./save_plotfieldoptions.cgi
@@ -91,16 +95,16 @@ FORM_num=$$
 if [ "$FORM_var" != 'runc' -a "$FORM_var" != 'zdif' -a "$FORM_var" != 'bdif' ]; then
   FORM_runwindow=""
 fi
-. $DIR/getopts.cgi
+. ./getopts.cgi
 [ -n "$FORM_year" ] && corrargs="$corrargs end2 $FORM_year"
 FORM_threshold=$FORM_dgt
 FORM_dgt=""
 
 echo `date` "$FORM_email ($REMOTE_ADDR) correlatebox $corrargs" | sed -e  "s:$DIR/::g" >> log/log
 if [ $NPERYEAR -ge 12 ]; then
-  eval `$DIR/bin/month2string "$FORM_month" "$sumstring" "$FORM_lag" "$FORM_operation" $FORM_fix`
+  eval `./bin/month2string "$FORM_month" "$sumstring" "$FORM_lag" "$FORM_operation" $FORM_fix`
 elif [ $NPERYEAR -eq 4 ]; then
-  eval `$DIR/bin/season2string "$FORM_month" "$sumstring" "$FORM_lag" "$FORM_operation" $FORM_fix`
+  eval `./bin/season2string "$FORM_month" "$sumstring" "$FORM_lag" "$FORM_operation" $FORM_fix`
 fi
 ###title="Correlations of $seriesmonth $FORM_climate stations\with $indexmonth $index"
 
@@ -135,6 +139,7 @@ fi
 . ./title.cgi
 if [ "$FORM_type" = 'plot' ]; then
 title=`echo $title | sed -e 's/\\\\with.*//' \
+ -e 's/day //' \
  -e 's/val /value of /' \
  -e 's/frac /fractional anomaly of /'`
 fi

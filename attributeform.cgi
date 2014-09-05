@@ -6,9 +6,11 @@ echo
 . ./getargs.cgi
 TYPE="$FORM_TYPE"
 WMO="$FORM_WMO"
+listname=$WMO
 STATION="$FORM_STATION"
 station=` echo "$STATION" | tr '_' ' '`
 NAME="$FORM_NAME"
+prog=$NAME
 NPERYEAR="$FORM_NPERYEAR"
 
 . ./nosearchengine.cgi
@@ -20,11 +22,15 @@ else
 fi
 
 cat <<EOF
+<a href="javascript:pop_page('help/empirical_event_attribution.shtml',568,480)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+
 Compute the return times of an extreme in the distribution of the other values and in the 
 counterfactual world of another year, assuming that the PDF shifts or scales with the covariate.
 
 <font color=#ff2222>Test version under development, may or may not give correct answers
-today. Use with caution and please report problems.</font><p>
+today. Use with caution and please report problems.</font>
+A few examples are given in the <a href="javascript:pop_page('help/empirical_event_attribution.shtml',568,480)">in the help page</a>.
+<p>
 EOF
 
 DIR=`pwd`

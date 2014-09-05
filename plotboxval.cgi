@@ -50,32 +50,6 @@ if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
   zval) var_zval=checked;;
   *)    var_val=checked;;
   esac
-
-  case ${FORM_sum:-1} in
-  2) sum_2=selected;;
-  3) sum_3=selected;;
-  4) sum_4=selected;;
-  5) sum_5=selected;;
-  6) sum_6=selected;;
-  7) sum_7=selected;;
-  8) sum_8=selected;;
-  9) sum_9=selected;;
-  10) sum_10=selected;;
-  11) sum_11=selected;;
-  12) sum_12=selected;;
-  15) sum_15=selected;;
-  18) sum_18=selected;;
-  20) sum_20=selected;;
-  24) sum_24=selected;;
-  30) sum_30=selected;;
-  60) sum_60=selected;;
-  90) sum_90=selected;;
-  120) sum_120=selected;;
-  180) sum_180=selected;;
-  270) sum_270=selected;;
-  365) sum_365=selected;;
-  *) sum_1=selected;;
-  esac
 fi
 
 cat <<EOF
@@ -100,91 +74,76 @@ year: <input type="$number" class="forminput" name="year" $textsize4 value="$FOR
 EOF
 ###echo "NPERYEAR = $NPERYEAR"
 if [ $NPERYEAR -ge 12 ]; then
-  if [ $NPERYEAR = 12 ]; then
-      echo "starting month of season:"
-  else
-      echo "month:"
-  fi
-  echo "<select class=\"forminput\" name=\"month\">"
-  i=0
-  while [ $i -lt 12 ]
-  do
-      i=$((i+1))
-      if  $i = $FORM_month ]; then
-	  echo "<option value=\"$i\" selected>${months[$i]}"
-      else
-	  echo "<option value=\"$i\">${months[$i]}"
-      fi
-  done
-  echo "</select>"
-  if [ $NPERYEAR -ge 360 ]; then
-      if [ $NPERYEAR = 360 ]; then
-	  dpm=30
-      else
-	  dpm=31
-      fi
-      echo "day: <select class=\"forminput\" name=\"day\">"
-      i=0
-      while [ $i -lt $dpm ]
-      do
-	  i=$((i+1))
-	  if  $i = $FORM_day ]; then
-	      echo "<option value=\"$i\" selected>$i"
-	  else
-	      echo "<option value=\"$i\">$i"
-	  fi
-      done
-      echo "</select>"
-  fi
-  if [ $NPERYEAR = 12 ]; then
-      echo "<br>length of season"
-  else
-      echo "<br>average over"
-  fi
-  if [ $NPERYEAR -eq 12 ]; then
-    cat <<EOF
-<select class="forminput" name="sum">
-<option $sum_1>1
-<option $sum_2>2
-<option $sum_3>3
-<option $sum_4>4
-<option $sum_5>5
-<option $sum_6>6
-<option $sum_7>7
-<option $sum_8>8
-<option $sum_9>9
-<option $sum_10>10
-<option $sum_11>11
-<option $sum_12>12
-<option $sum_18>18
-<option $sum_24>24
-</select>months
-EOF
-  elif [ $NPERYEAR -ge 360 -a $NPERYEAR -le 366 ]; then
-    cat <<EOF
-<select class="forminput" name="sum">
-<option $sum_1>1
-<option $sum_2>2
-<option $sum_7>7
-<option $sum_10>10
-<option $sum_15>15
-<option $sum_20>20
-<option $sum_30>30
-<option $sum_60>60
-<option $sum_90>90
-<option $sum_120>120
-<option $sum_180>180
-<option $sum_270>270
-<option $sum_365>365
-</select>days
-EOF
-  else
-    cat <<EOF
+    if [ $NPERYEAR = 12 ]; then
+        echo "starting month of season:"
+    else
+        echo "month:"
+    fi
+    echo "<select class=\"forminput\" name=\"month\">"
+    i=0
+    while [ $i -lt 12 ]
+    do
+        i=$((i+1))
+        if [ $i = $FORM_month ]; then
+	        echo "<option value=\"$i\" selected>${months[$i]}"
+        else
+	        echo "<option value=\"$i\">${months[$i]}"
+        fi
+    done
+    echo "</select>"
+    if [ $NPERYEAR -ge 360 ]; then
+        if [ $NPERYEAR = 360 ]; then
+	        dpm=30
+        else
+	        dpm=31
+        fi
+        echo "day: <select class=\"forminput\" name=\"day\">"
+        i=0
+        while [ $i -lt $dpm ]
+        do
+	        i=$((i+1))
+	        if [ $i = $FORM_day ]; then
+	            echo "<option value=\"$i\" selected>$i"
+	        else
+	            echo "<option value=\"$i\">$i"
+	        fi
+        done
+        echo "</select>"
+    fi
+    if [ $NPERYEAR = 12 ]; then
+        echo "<br>length of season"
+    else
+        echo "<br>average over"
+    fi
+    if [ $NPERYEAR -eq 12 ]; then
+        echo "<select class=\"forminput\" name=\"sum\">"
+        for sum in 1 2 3 4 5 6 7 8 9 10 11 12 18 24 60
+        do
+            if [ $sum = $FORM_sum ]; then
+                echo "<option selected>$sum"
+            else
+                echo "<option>$sum"
+            fi
+        done
+        echo "</select>months"
+    elif [ $NPERYEAR -ge 360 -a $NPERYEAR -le 366 ]; then
+        echo "<select class=\"forminput\" name=\"sum\">"
+        for sum in 1 2 3 4 5 6 7 10 9 10 15 20 30 60 90 120 180 365
+        do
+            if [ $sum = $FORM_sum ]; then
+                echo "<option selected>$sum"
+            else
+                echo "<option>$sum"
+            fi
+        done
+        echo "</select>months"
+    else
+        cat <<EOF
 <input type="text" class="forminput" name="sum" size=4>periods
 EOF
-  fi
+    fi
 elif [ $NPERYEAR -eq 4 ]; then
-cat <<EOF
+    cat <<EOF
 starting season: <select class="forminput" name="month">
 <option value="1">DJF
 <option value="2">MAM

@@ -7,10 +7,12 @@ echo
 export DIR=`pwd`
 . ./getargs.cgi
 WMO=$FORM_WMO
+listname=$WMO
 TYPE=$FORM_TYPE
 NPERYEAR=$FORM_NPERYEAR
 STATION=$FORM_STATION
 NAME=$FORM_NAME
+prog=$NAME
 FORM_dgt=${FORM_dgt%%%}
 FORM_dgt=${FORM_dgt}%
 [ -z "$FORM_assume" ] && FORM_assume=shift
@@ -124,7 +126,11 @@ if [ ! \( -s $sfile -a -f $sfile \) ]; then
 fi
 
 if [ "$FORM_assume" != 'both' ]; then
-    echo '<font color=#ff2222>I think it works now, please report problems.</font><p>'
+    if [ "$FORM_fit" = "gpd" -a $NPERYEAR -gt 12 ]; then
+        echo '<font color=#ff2222>The GPD(T) still has bugs for daily data. Please cross-check the results with other methods.</font><p>'
+    else
+        echo '<font color=#ff2222>I think it works now, please report problems.</font><p>'
+    fi
 else
     echo '<font color=#ff2222>Fitting position and scale independently is unfinished and untested. Use at own risk.</font><p>'
 fi
@@ -156,7 +162,7 @@ EOF
 fi
 
 [ "$lwrite" = true ] && echo bin/attribute $corrargs
-($DIR/bin/attribute $corrargs > $root.txt) 2>&1
+(./bin/attribute $corrargs > $root.txt) 2>&1
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 if [ $TYPE = set ]; then

@@ -46,6 +46,7 @@ else
   PROG="pipe.sh $PROG $extraargs"
 fi
 export DIR=`pwd`
+file=GDCNData/ghcnd/$WMO.dly.gz # to check whether the output is up-to-date
 FROM="from <a href=\"ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/\" target=\"_new\">GHCN-D v2 database</a>"
 
 . ./getdata.cgi
