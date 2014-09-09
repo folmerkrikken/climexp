@@ -22,14 +22,33 @@ if [ "$EMAIL" = oldenbor@knmi.nl ]; then
 fi
 
 # real work
-if [ "$FORM_type" = plot ]; then
-  . ./save_plotfieldoptions.cgi
-else
-  . ./save_commonoptions.cgi
+if [ $EMAIL != someone@somewhere ]; then
+    if [ "$FORM_type" = plot ]; then
+      . ./save_plotfieldoptions.cgi
+    else
+      . ./save_commonoptions.cgi
+    fi
+    if [ -n "$FORM_var" ]; then
+        if [ "$FORM_type" = histogram ]; then
+            . ./save_statistical.cgi
+        else
+            . ./save_variable.cgi
+        fi
+    fi
 fi
-if [ -n "$FORM_var" ]; then
-  . ./save_variable.cgi
+
+if [ "$FORM_type" = histogram ]; then
+    if [ ${FORM_var%r} != FORM_var -o ${FORM_var%R} != FORM_var ]; then
+        # return time
+        if [ -z "$FORM_year" -o ${FORM_year:-0} -lt -2000 -o ${FORM_year:-0} -gt 2300 ]; then
+            . ./myvinkhead.cgi "Map of stations" "Error"
+            echo "Cannot compute the return time without the year being defined"
+            . ./myvinkfoot.cgi
+            exit
+        fi
+    fi
 fi
+
 # common options
 forbidden='!`;|&'
 

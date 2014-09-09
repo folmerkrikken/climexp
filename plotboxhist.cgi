@@ -25,6 +25,40 @@ fi
 
 . ./myvinkhead.cgi "Plot statistical properties" "$timescale $extraname$climate stations" "noindex,nofollow"
 
+if [ $EMAIL != someone@somewhere ]; then
+    def=prefs/$EMAIL.statistical.$NPERYEAR
+    if [ -s $def ]; then
+        eval `egrep '^FORM_[a-z]*=[0-9a-zA-Z]*;$' $def`
+    fi
+fi
+
+case ${FORM_var:-mean} in
+    hime) hime=checked;;
+    hisd) hisd=checked;;
+    hisk) hisk=checked;;
+    higa) higa=checked;;
+    higr) higr=checked;;
+    higR) higR=checked;;
+    hipr) hipr=checked;;
+    hipR) hipR=checked;;
+    hivr) hivr=checked;;
+    hivR) hivR=checked;;
+esac
+
+if [ -n "$FORM_changesign" ]; then
+    lower_checked=checked
+else
+    upper_checked=checked
+fi
+
+case ${FORM_restrain:-0} in
+    0.5) select05=selected;;
+    0.4) select04=selected;;
+    0.3) select03=selected;;
+    0.2) select02=selected;;
+    *)   select00=selected;;
+esac
+
 cat <<EOF
 <form action="correlatebox.cgi" method="POST">
 <input type="hidden" name="email" value="$email">
@@ -39,27 +73,27 @@ cat <<EOF
 <div class="formbody">
 <table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Variable:
-<td><input type="radio" name="var" value="hime" checked>mean
+<td><input type="radio" name="var" value="hime" $hime>mean
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hisd">standard deviation
+<td><input type="radio" name="var" value="hisd" $hisd>standard deviation
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hisk">skewness
+<td><input type="radio" name="var" value="hisk" $hisk>skewness
 <tr><td>Fit:
-<td><input type="radio" name="var" value="higa">Gaussian and plot &chi;<sup>2</sup> 
+<td><input type="radio" name="var" value="higa" $higa>Gaussian and plot &chi;<sup>2</sup> 
 <tr><td>Return time:
-<td>year <input type="text" class="forminput" name="year" size="4">, <input type="radio" class="formradio" name="changesign" value="" $upper_checked>upper <input type="radio" class="formradio" name="changesign" value="on" $lower_checked>lower tail
+<td>year <input type="text" class="forminput" name="year" size="4" value="$FORM_year">, <input type="radio" class="formradio" name="changesign" value="" $upper_checked>upper <input type="radio" class="formradio" name="changesign" value="on" $lower_checked>lower tail
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="higr">Gaussian fit, plot best fit
+<td><input type="radio" name="var" value="higr" $higr>Gaussian fit, plot best fit
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="higR">same, plot lower limit of 95% CI
+<td><input type="radio" name="var" value="higR" $higR>same, plot lower limit of 95% CI
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hipr">GPD fit with threshold <input type="text" class="forminput" name="dgt" size="4">%, plot best fit
+<td><input type="radio" name="var" value="hipr" $hipr>GPD fit with threshold <input type="text" class="forminput" name="dgt" size="4">%, plot best fit
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hipR">same, plot lower limit of 95% CI
+<td><input type="radio" name="var" value="hipR" $hipR>same, plot lower limit of 95% CI
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hivr">GEV fit, plot best fit
+<td><input type="radio" name="var" value="hivr" $hivr>GEV fit, plot best fit
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hivR">same, plot lower limit of 95% CI
+<td><input type="radio" name="var" value="hivR" $hivR>same, plot lower limit of 95% CI
 <tr><td>GPD, GEV:
 <td><select class="forminput" name="restrain">
 <option value="0" $select00>do not constrain shape
@@ -70,7 +104,7 @@ cat <<EOF
 </select>
 <tr><td>Minimum length:
 <td>require at least
-<input type="text" name="minnum" size="3"> valid years/months
+<input type="text" name="minnum" size="3" value="$FORM_minnum"> valid years/months
 </table>
 </div>
 <p><div class="formheader">Common options</div>
