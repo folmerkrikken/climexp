@@ -118,5 +118,6 @@ Threshold:
 <option value="n" $typecut_n>normal 1971-2000
 </select>
 </td></tr><tr><td>Minimum:</td><td><input  type="$number" step=any min=0 max=100 step=1 class="forminput" name="minfac" size="3" style="width: 4em;" value="$FORM_minfac">% valid data
+</td></tr><tr><td>First apply:</td><td><input  type="$number" step=any min=1 max=100 step=1 class="forminput" name="sum" size="3" style="width: 4em;" value="${FORM_sum:-1}">-$month running mean
 </td></tr><tr><td colspan="2">
 EOF

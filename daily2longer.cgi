@@ -1,5 +1,5 @@
 #!/bin/sh
-# make a time series with a longer time scale than the origibal
+# make a time series with a longer time scale than the original
 
 export DIR=`pwd`
 . ./getargs.cgi
@@ -10,7 +10,8 @@ export file=data/$TYPE$WMO.dat
 if [ -z "$FORM_oper" ]; then
   FORM_oper="mean"
 fi
-
+[ -z "$NPERYEAR" ] && NPERYEAR=$FORM_NPERYEAR
+. ./nperyear2timescale.cgi
 . ./save_daily2longer.cgi
 
 if [ "$FORM_oper" = sd ]; then
@@ -45,6 +46,11 @@ if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
 fi
 if [ -n "$FORM_minfac" ]; then
     corrargs="$corrargs minfac $FORM_minfac"
+fi
+if [ -n "FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
+    corrargs="$corrargs ave $FORM_sum"
+    WMO=${WMO}_$FORM_sum$ave
+    NAME="${FORM_sum}-$month mean"
 fi
 
 PROG="daily2longer.sh $corrargs"

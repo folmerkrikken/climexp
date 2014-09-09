@@ -12,6 +12,9 @@ extraargs="${FORM_nperyearnew}_${FORM_oper}"
 if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
   extraargs="${extraargs}_${FORM_lgt}_${FORM_cut}${FORM_typecut}"
 fi
+if [ -n "FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
+    extraargs="${extraargs}_ave_${FORM_sum}"
+fi
 
 NPERYEAR=$FORM_NPERYEAR
 . ./save_daily2longer.cgi
