@@ -10,11 +10,15 @@ datafile=data/`basename "$FORM_datafile"`
 type="$FORM_type"
 station=`echo "$FORM_station" | tr '/' '_'`
 
+if [ 0 = 0 ]; then
+tmpfile=${datafile%.dat}.nc
+else
 tmpfile=data/ncseries.nc
 i=0
 while [ -s $tmpfile ]; do
     tmpfile=data/ncseries$((i++)).nc
 done
+fi
 logfile=/tmp/dat2nc$$.log
 
 . ./myvinkhead.cgi "Download netcdf time series" "$station" "$type"

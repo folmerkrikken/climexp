@@ -218,6 +218,8 @@ higr) var="return time of $FORM_year in normal fit\\";;
 higR) var="2.5% lower bound on return time of $FORM_year in normal fit\\";;
 hipr) var="return time of $FORM_year in GPD fit, threshold ${FORM_threshold}%\\";;
 hipR) var="2.5% lower bound on return time of $FORM_year in GPD fit, threshold ${FORM_threshold}%\\";;
+hivr) var="return time of $FORM_year in GEV fit\\";;
+hivR) var="2.5% lower bound on return time of $FORM_year in GEV fit\\";;
 "") var="corr";;
 *) var="$FORM_var";;
 esac

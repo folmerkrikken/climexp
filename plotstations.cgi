@@ -191,7 +191,7 @@ if [ "$lwrite" = true ]; then
   echo "FORM_oper = $FORM_oper<br>"
   echo "Computing legend<br>"
 fi
-if [ "$FORM_oper" = "higr" -o "$FORM_oper" = "higR" -o "$FORM_oper" = "hipr" -o "$FORM_oper" = "hipR" ]; then
+if [ "$FORM_oper" = "hivr" -o "$FORM_oper" = "hivR" -o "$FORM_oper" = "higr" -o "$FORM_oper" = "higR" -o "$FORM_oper" = "hipr" -o "$FORM_oper" = "hipR" ]; then
   if [ $FORM_col = 'colour' -o "$FORM_col" = "flipcolour" ]; then
     FORM_cmax=return
 # coordinate with plotbox.gs ...

@@ -92,7 +92,7 @@ ditisheteinde
       if [ -z "$FORM_lat1" -o -z "$FORM_lon1" -o \
            -z "$FORM_lat2" -o -z "$FORM_lon2" ]; then
         . ./myvinkhead.cgi "Search station data" ""
-        echo '<div class="alineakop>Error</div>'
+        echo '<div class="alineakop">Error</div>'
         echo 'Please specify both latitude and longitude'
         . ./myvinkfoot.cgi
         exit

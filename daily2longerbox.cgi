@@ -3,7 +3,6 @@
 . ./getargs.cgi
 export DIR=`pwd`
 
-NPERYEAR=$FORM_nperyearnew
 FORM_climate="$FORM_TYPE"
 FORM_email="$EMAIL" #...
 FORM_EMAIL="$EMAIL" #...
@@ -14,7 +13,9 @@ if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
   extraargs="${extraargs}_${FORM_lgt}_${FORM_cut}${FORM_typecut}"
 fi
 
+NPERYEAR=$FORM_NPERYEAR
 . ./save_daily2longer.cgi
+NPERYEAR=$FORM_nperyearnew
 format=new
 . ./getstations.cgi
 

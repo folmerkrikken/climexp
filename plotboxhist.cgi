@@ -49,20 +49,25 @@ cat <<EOF
 <tr><td>Return time:
 <td>year <input type="text" class="forminput" name="year" size="4">, <input type="radio" class="formradio" name="changesign" value="" $upper_checked>upper <input type="radio" class="formradio" name="changesign" value="on" $lower_checked>lower tail
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="higr">Gaussian fit, plot mean value
+<td><input type="radio" name="var" value="higr">Gaussian fit, plot best fit
 <tr><td>&nbsp;
 <td><input type="radio" name="var" value="higR">same, plot lower limit of 95% CI
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hipr">GPD fit with threshold <input type="text" class="forminput" name="dgt" size="4">%,<br>&nbsp;&nbsp;&nbsp;
-<select class="forminput" name="restrain">
+<td><input type="radio" name="var" value="hipr">GPD fit with threshold <input type="text" class="forminput" name="dgt" size="4">%, plot best fit
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hipR">same, plot lower limit of 95% CI
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hivr">GEV fit, plot best fit
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hivR">same, plot lower limit of 95% CI
+<tr><td>GPD, GEV:
+<td><select class="forminput" name="restrain">
 <option value="0" $select00>do not constrain shape
 <option value="0.5" $select05>constrain shape to &plusmn;0.5
 <option value="0.4" $select04>constrain shape to &plusmn;0.4
 <option value="0.3" $select03>constrain shape to &plusmn;0.3
 <option value="0.2" $select02>constrain shape to &plusmn;0.2
-</select>, plot mean value
-<tr><td>&nbsp;
-<td><input type="radio" name="var" value="hipR">same, plot lower limit of 95% CI
+</select>
 <tr><td>Minimum length:
 <td>require at least
 <input type="text" name="minnum" size="3"> valid years/months
