@@ -1,6 +1,8 @@
 #!/bin/sh
 . ./init.cgi
-lwrite=false
+if [ "$id" = oldenbor@knmi.nl ]; then
+    lwrite=true
+fi
 
 hiresmap=true
 if [ "$hiresmap" = true ]; then
@@ -192,7 +194,7 @@ if [ "$lwrite" = true ]; then
   echo "Computing legend<br>"
 fi
 if [ "$FORM_oper" = "hivr" -o "$FORM_oper" = "hivR" -o "$FORM_oper" = "higr" -o "$FORM_oper" = "higR" -o "$FORM_oper" = "hipr" -o "$FORM_oper" = "hipR" ]; then
-  if [ $FORM_col = 'colour' -o "$FORM_col" = "flipcolour" ]; then
+  if [ $FORM_col = 'colour' -o "$FORM_col" = "flipcolour" -o $FORM_col = 'color' -o "$FORM_col" = "flipcolor" ]; then
     FORM_cmax=return
 # coordinate with plotbox.gs ...
     legenda="\

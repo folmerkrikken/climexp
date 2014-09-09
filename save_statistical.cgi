@@ -5,6 +5,7 @@ if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
 FORM_var=$FORM_var;
 FORM_year=$FORM_year;
 FORM_changesign=$FORM_changesign;
+FORM_dgt=$FORM_dgt;
 FORM_restrain=$FORM_restrain;
 FORM_minnum=$FORM_minnum;
 EOF

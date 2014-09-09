@@ -87,7 +87,7 @@ cat <<EOF
 <tr><td>&nbsp;
 <td><input type="radio" name="var" value="higR" $higR>same, plot lower limit of 95% CI
 <tr><td>&nbsp;
-<td><input type="radio" name="var" value="hipr" $hipr>GPD fit with threshold <input type="text" class="forminput" name="dgt" size="4">%, plot best fit
+<td><input type="radio" name="var" value="hipr" $hipr>GPD fit with threshold <input type="text" class="forminput" name="dgt" size="4" value="${FORM_dgt:-80}">%, plot best fit
 <tr><td>&nbsp;
 <td><input type="radio" name="var" value="hipR" $hipR>same, plot lower limit of 95% CI
 <tr><td>&nbsp;

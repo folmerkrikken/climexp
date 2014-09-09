@@ -116,7 +116,11 @@ if ( var = sign )
   v=sig
 else
   if ( col = flipcolor | col = flipcolour | col = br )
-    v=-val
+    if ( scaletype = return )
+      v=val
+    else
+      v=-val
+    endif
   else
     v=val
   endif
