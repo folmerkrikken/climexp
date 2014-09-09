@@ -49,7 +49,7 @@ if [ -n "$FORM_minfac" ]; then
 fi
 if [ -n "FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
     corrargs="$corrargs ave $FORM_sum"
-    WMO=${WMO}_$FORM_sum$ave
+    WMO=${WMO}_${FORM_sum}v
     NAME="${FORM_sum}-$month mean"
 fi
 

@@ -86,6 +86,10 @@ if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
       outfile=${outfile}_$FORM_lgt$FORM_cut
   fi    
 fi
+if [ -n "$FORM_sum" ]; then
+    corrargs="$corrargs ave $FORM_sum"
+    outfile=${outfile}_${FORM_sum}v
+fi
 
 if [ -n "$ENSEMBLE" ]; then
     c=`echo $file | fgrep -c '%%%'`
