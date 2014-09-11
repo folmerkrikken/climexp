@@ -220,6 +220,9 @@ hipr) var="return time of $FORM_year in GPD fit, threshold ${FORM_threshold}%\\"
 hipR) var="2.5% lower bound on return time of $FORM_year in GPD fit, threshold ${FORM_threshold}%\\";;
 hivr) var="return time of $FORM_year in GEV fit\\";;
 hivR) var="2.5% lower bound on return time of $FORM_year in GEV fit\\";;
+atr1) var="return time of $FORM_year";;
+atr2) var="return time in climate of $FORM_begin2";;
+atra) var="ratio of return times";; 
 "") var="corr";;
 *) var="$FORM_var";;
 esac

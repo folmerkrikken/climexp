@@ -1,11 +1,11 @@
 #!/bin/sh
 . ./init.cgi
+export DIR=`pwd`
+. ./getargs.cgi
 echo 'Content-Type: text/html'
 echo
 echo
 
-export DIR=`pwd`
-. ./getargs.cgi
 WMO=$FORM_WMO
 listname=$WMO
 TYPE=$FORM_TYPE
@@ -47,6 +47,8 @@ if [ $TYPE = set ]; then
     	corrargs="file $WMO $NAME"
 	fi
 	WMO=`basename $WMO .txt`
+elif [ $TYPE = setmap ]; then
+    corrargs="" # the filename will be filled in by stationlist
 else
 	corrargs="./data/$TYPE$WMO.dat"
 fi
@@ -81,7 +83,8 @@ time)      covstation="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
            ;;
 esac
 probfile=data/attribute_prob_$$.txt
-corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume plot $probfile"
+corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume"
+[ "$FORM_TYPE" != "setmap" ] && corrargs="$corrargs dump $probfile"
 n=0
 c1=`echo ./data/$TYPE$WMO.dat | fgrep -c '%%'`
 c2=`echo ./data/$TYPE$WMO.dat | fgrep -c '++'`
@@ -92,29 +95,27 @@ fi
 
 if [ $EMAIL != someone@somewhere ]; then
 	. ./save_commonoptions.cgi
-	# across all time scales, so without suffix NPERYEAR
-	echo "$FORM_timeseries" | head -1 > ./prefs/$EMAIL.series
-	case $FORM_fit in
-	    gev|gumbel) FORM_plot=gumbel;;
-	    gpd|gauss) FORM_plot=sqrtlog;;
-	esac
-	cat > ./prefs/$EMAIL.histogramoptions <<EOF
-FORM_plot=$FORM_plot;
-FORM_nbin=$FORM_nbin;
-FORM_changesign=$FORM_changesign;
-FORM_restrain=$FORM_restrain;
-FORM_assume=$FORM_assume;
-FORM_dgt=$FORM_dgt;
-FORM_year=$FORM_year;
-FORM_xyear=$FORM_xyear;
-FORM_begin2=$FORM_begin2;
-FORM_decor=$FORM_decor;
-FORM_fit=$FORM_fit;
-FORM_xlo=$FORM_xlo;
-FORM_xhi=$FORM_xhi;
-FORM_ylo=$FORM_ylo;
-FORM_yhi=$FORM_yhi;
-EOF
+    . ./save_histogramoptions.cgi
+fi
+
+if [ -n "$FORM_year" ]; then
+    corrargs="$corrargs end2 $FORM_year"
+else
+    if [ -n "$FORM_xyear" ]; then
+        . ./myvinkhead.cgi "Trends in return times of extremes" "$CLIM $station" "noindex,nofollow"
+        echo "Error: the year for which to evaluate the value"
+        . ./myvinkfoot.cgi
+        exit
+    fi
+fi
+
+if [ "$FORM_TYPE" = "setmap" ]; then
+    # send the arguments via the environment, 
+    # much more convenient than a 4-letter variable
+    export attribute_args=$corrargs
+    FORM_type=attribute
+    . ./correlatebox.cgi
+    exit
 fi
 
 . ./myvinkhead.cgi "Trends in return times of extremes" "$CLIM $station" "noindex,nofollow"
@@ -135,15 +136,6 @@ else
     echo '<font color=#ff2222>Fitting position and scale independently is unfinished and untested. Use at own risk.</font><p>'
 fi
 
-if [ -n "$FORM_year" ]; then
-    corrargs="$corrargs end2 $FORM_year"
-else
-    if [ -n "$FORM_xyear" ]; then
-        echo "Error: the year for which to evaluate the value"
-        . ./myvinkfoot.cgi
-        exit
-    fi
-fi
 echo `date` "$EMAIL ($REMOTE_ADDR) attribute $corrargs" >> log/log
 startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"

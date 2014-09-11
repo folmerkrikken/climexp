@@ -81,6 +81,12 @@ case ${FORM_restrain:-0} in
 *)   select00=selected;;
 esac
 
+case ${FORM_var:-atr1} in
+    atr2) atr2=checked;;
+    atra) atra=checked;;
+    *) atr1=checked;;
+esac
+
 cat <<EOF
 <form action="attribute.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
@@ -91,6 +97,10 @@ cat <<EOF
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
 <input type="hidden" name="extraargs" value="$FORM_extraargs">
 <input type="hidden" name="nbin" value="$FORM_nbin">
+<input type="hidden" name="climate" value="$timescale $extraname$climate">
+<input type="hidden" name="prog" value="$prog">
+<input type="hidden" name="listname" value="$listname">
+<input type="hidden" name="type" value="aatribute">
 <div class="formheader">Covariate series</div>
 EOF
 
@@ -165,9 +175,27 @@ cat <<EOF
 <input type="$number" min=0 step=1 class="forminput" name="nens2" $textsize2 value="$FORM_nens2">
 EOF
 fi
-cat <<EOF
+if [ "$TYPE" != setmap ]; then
+    cat <<EOF
 <tr><td>Plot range:<td>X <input type="$number" step=any class="forminput" name="xlo" size="4" style="width: 5em;" value="$FORM_xlo">:<input type="$number" step=any class="forminput" name="xhi" size="4" style="width: 5em;" value="$FORM_xhi">,
 Y <input type="$number" step=any class="forminput" name="ylo" size="4" style="width: 5em;" value="$FORM_ylo">:<input type="$number" step=any class="forminput" name="yhi" size="4" style="width: 5em;" value="$FORM_yhi">
+<input type="hidden" name="var" value="$FORM_var">
+EOF
+else
+    cat <<EOF
+<tr><td>Plot variable:<td>
+<input type="radio" class="formradio" name="var" value="atr1" $atr1>Return time at the time of the event
+<tr><td>&nbsp;<td>
+<input type="radio" class="formradio" name="var" value="atr2" $atr2>Return time if it had occurred at the other time
+<tr><td>&nbsp;<td>
+<input type="radio" class="formradio" name="var" value="atra" $atra>Ratio of the two
+<input type="hidden" name="xlo" value="$FORM_xlo">
+<input type="hidden" name="xhi" value="$FORM_xhi">
+<input type="hidden" name="ylo" value="$FORM_ylo">
+<input type="hidden" name="yhi" value="$FORM_yhi">
+EOF
+fi    
+cat <<EOF
 <tr><td colspan="2"><input type="submit" class="formbutton" value="Compute">
 </table>
 </div>

@@ -130,80 +130,113 @@ ditisheteinde
   format=new
   if [ "$FORM_climate" = "precipitation" ]; then
     prog=getprcp
+    type=p
   elif [ "$FORM_climate" = "precipitation_all" ]; then
     prog=getprcpall
+    type=p
   elif [ "$FORM_climate" = "temperature" ]; then
     prog=gettemp
+    type=t
   elif [ "$FORM_climate" = "min_temperature" ]; then
     prog=getmin
+    type=n
   elif [ "$FORM_climate" = "max_temperature" ]; then
     prog=getmax
   elif [ "$FORM_climate" = "temperature_all" ]; then
     prog=gettempall
+    type=t
   elif [ "$FORM_climate" = "min_temperature_all" ]; then
     prog=getminall
+    type=n
   elif [ "$FORM_climate" = "max_temperature_all" ]; then
     prog=getmaxall
+    type=x
   elif [ "$FORM_climate" = "sealevel_pressure" ]; then
     prog=getslp
   elif [ "$FORM_climate" = "sealevel" ]; then
     prog=getsealevel
+    type=l
   elif [ "$FORM_climate" = "sealev" ]; then
     prog=getsealev
+    type=l
   elif [ "$FORM_climate" = "runoff" ]; then
     prog=getrunoff
+    type=r
   elif [ "$FORM_climate" = "streamflow" ]; then
     prog=getusrunoff
+    type=r
   elif [ "$FORM_climate" = "streamflowdaily" ]; then
     prog=getdailyusrunoff
+    type=r
   elif [ "$FORM_climate" = "ecaprcp" ]; then
     prog=ecaprcp
+    type=p
   elif [ "$FORM_climate" = "ecatemp" ]; then
     prog=ecatemp
+    type=t
   elif [ "$FORM_climate" = "ecatmin" ]; then
     prog=ecatmin
+    type=n
   elif [ "$FORM_climate" = "ecatmax" ]; then
     prog=ecatmax
+    type=x
   elif [ "$FORM_climate" = "ecatave" ]; then
     prog=ecatave
-  elif [ "$FORM_climate" = "ecatdif" ]; then
-    prog=ecatdif
+    type=t
   elif [ "$FORM_climate" = "ecapres" ]; then
     prog=ecapres
+    type=s
   elif [ "$FORM_climate" = "ecasnow" ]; then
     prog=ecasnow
+    type=d
   elif [ "$FORM_climate" = "ecaclou" ]; then
     prog=ecaclou
+    type=c
   elif [ "$FORM_climate" = "becaprcp" ]; then
     prog=becaprcp
+    type=p
   elif [ "$FORM_climate" = "becatemp" ]; then
     prog=becatemp
+    type=t
   elif [ "$FORM_climate" = "becatmin" ]; then
     prog=becatmin
+    type=n
   elif [ "$FORM_climate" = "becatmax" ]; then
     prog=becatmax
+    type=x
   elif [ "$FORM_climate" = "becapres" ]; then
     prog=becapres
+    type=s
   elif [ "$FORM_climate" = "becasnow" ]; then
     prog=becasnow
+    type=d
   elif [ "$FORM_climate" = "becaclou" ]; then
     prog=becaclou
+    type-c
   elif [ "$FORM_climate" = "gdcnprcp" ]; then
     prog=gdcnprcp
+    type=p
   elif [ "$FORM_climate" = "gdcnprcpall" ]; then
     prog=gdcnprcpall
+    type=p
   elif [ "$FORM_climate" = "gdcnsnow" ]; then
     prog=gdcnsnow
+    type=f
   elif [ "$FORM_climate" = "gdcnsnwd" ]; then
     prog=gdcnsnwd
+    type=d
   elif [ "$FORM_climate" = "gdcntmin" ]; then
     prog=gdcntmin
+    type=n
   elif [ "$FORM_climate" = "gdcntmax" ]; then
     prog=gdcntmax
+    type=x
   elif [ "$FORM_climate" = "eu_sealevel_pressure" ]; then
     prog=geteuslp
+    type=s
   elif [ "$FORM_climate" = "snow" ]; then
     prog=getsnow
+    type=d
   else
     echo "<div class=\"alineakop\">Error</div>The database for $FORM_climate is not (yet?) available"
     . ./myvinkfoot.cgi
@@ -236,13 +269,11 @@ fi
 
 if [ -z "$FORM_name" ]; then
   location=`echo $location|tr ' ' '_'`
-###  echo "NPERYEAR = $NPERYEAR"
+  TYPE="$FORM_climate"
+  WMO="$prog"
+  NAME=`basename "$listname"`
   if [ "$NPERYEAR" = 366 ]; then
     echo "<form action=\"daily2longerbox.cgi\" method=\"POST\">"
-    EMAIL="$FORM_email"
-    TYPE="$FORM_climate"
-    WMO="$prog"
-    NAME=`basename "$listname"`
     cat <<EOF
 <div class="formheader"><a href="javascript:pop_page('help/lowerresolutionset.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Create a new set of station data</div>
 <div class="formbody">
@@ -257,6 +288,45 @@ cat <<EOF
 </form>
 EOF
   fi
+  if [ $EMAIL != someone@somewhere ]; then
+    def=prefs/$EMAIL.setoper.$NPERYEAR
+    if [ -s $def ]; then
+        eval `egrep '^FORM_[A-Za-z0-9]*=[a-zA-Z_]*[-+0-9.]*;$' $def`
+    fi  
+  fi
+  
+  case ${FORM_setoper:-mean} in
+    min) minselected=selected;;
+    max) maxselected=selected;;
+    num) numsleected=selected;;
+    *) meanselected=selected;;
+  esac
+  
+  cat <<EOF
+<form action="average_set.cgi" method="POST">
+<input type="hidden" name="EMAIL" value="$EMAIL">
+<input type="hidden" name="TYPE" value="$TYPE">
+<input type="hidden" name="type" value="$type">
+<input type="hidden" name="WMO" value="$WMO">
+<input type="hidden" name="STATION" value="series $location">
+<input type="hidden" name="NAME" value="$NAME">
+<input type="hidden" name="extraargs" value="$FORM_extraargs">
+<input type="hidden" name="NPERYEAR" value="$NPERYEAR">
+<div class="formheader"><a href="javascript:pop_page('help/averageseries.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Aggregate this set of time series</div>
+<div class="formbody">
+<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<tr><td>Type:
+<td><select class="forminput" name="setoper">
+<option value="mean" $meanselected>unweighted mean
+<option value="min" $minselected>minimum
+<option value="max" $maxselected>maximum
+<option value="num" $numselected>number with data
+</select>
+<tr><td colspan=2><input type="submit" class="formbutton" value="make new set of time series">
+</td></tr></table>
+</div>
+</form>
+EOF
 fi
 if [ 1 = 0 ]; then
 echo '<pre>'

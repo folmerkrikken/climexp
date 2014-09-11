@@ -11,11 +11,10 @@ EOF
 [ -z "$EMAIL" ] && EMAIL=someone@somewhere
 ###sed -e "s/EMAIL/$EMAIL/" ./menu_standard.html
 sed -e "s/EMAIL/$EMAIL/" ./menu_choose.html
-if [ -n "$STATION" ]; then
-  . ./menu_investigate.cgi
-fi
 if [ -n "$listname" -o -n "$FORM_listname" ]; then
   . ./menu_investigateset.cgi
+elif [ -n "$STATION" ]; then
+  . ./menu_investigate.cgi
 fi
 ###echo "FORM_field=$FORM_field"
 if [ -n "$field2" ]; then

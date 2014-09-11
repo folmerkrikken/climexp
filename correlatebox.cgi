@@ -1,20 +1,21 @@
 #!/bin/sh
-echo 'Content-Type: text/html'
-. ./expires.cgi
-echo
-echo
-
-export DIR=`pwd`
-. ./getargs.cgi
+if [ "$FORM_type" != attribute ]; then
+    export DIR=`pwd`
+    . ./getargs.cgi
+    NPERYEAR=$FORM_NPERYEAR
+    echo 'Content-Type: text/html'
+    . ./expires.cgi
+    echo
+    echo
+fi
 export EMAIL
-NPERYEAR=$FORM_NPERYEAR
+
 if [ -z "$FORM_NPERYEAR" ]; then
-  echo "internal error: NPERYEAR not set"
-  NPERYEAR=12
+    echo "internal error: NPERYEAR not set"
+    NPERYEAR=12
 fi
 
 # check email address
-EMAIL=$FORM_email
 . ./checkemail.cgi
 
 if [ "$EMAIL" = oldenbor@knmi.nl ]; then
@@ -31,7 +32,7 @@ if [ $EMAIL != someone@somewhere ]; then
     if [ -n "$FORM_var" ]; then
         if [ "$FORM_type" = histogram ]; then
             . ./save_statistical.cgi
-        else
+        elif [ "$FORM_type" != attribute ]; then
             . ./save_variable.cgi
         fi
     fi
@@ -93,7 +94,7 @@ else
   fullprog=$FORM_prog
 fi
 
-if [ "$FORM_type" = 'plot' -o "$FORM_type" = 'histogram' ]; then
+if [ "$FORM_type" = 'plot' -o "$FORM_type" = 'histogram' -o "$FORM_type" = attribute ]; then
   corrargs="$FORM_listname $plotlist $fullprog $FORM_var"
 elif [ -z "$FORM_timeseries" -a -n "$FORM_field" ]; then
   if [ "$FORM_intertype" = "nearest" ]; then
@@ -105,7 +106,7 @@ elif [ "$index" = time ]; then
   corrargs="$FORM_listname $plotlist $fullprog $FORM_var time"
 elif [ -z "$FORM_timeseries" -a -z "$FORM_field" ]; then
   corrargs="$FORM_listname $plotlist $fullprog au$FORM_var"
-else
+elif [ $FORM_type != attribute ]; then
   corrargs="$FORM_listname $plotlist $fullprog $FORM_var file $sfile"
 fi
 # prevent getopts from switching to running correlations
@@ -114,8 +115,10 @@ FORM_num=$$
 if [ "$FORM_var" != 'runc' -a "$FORM_var" != 'zdif' -a "$FORM_var" != 'bdif' ]; then
   FORM_runwindow=""
 fi
-. ./getopts.cgi
-[ -n "$FORM_year" ] && corrargs="$corrargs end2 $FORM_year"
+if [ "$FORM_type" != attribute ]; then # for attribute this has been done in attribute.cgi
+    . ./getopts.cgi
+    [ -n "$FORM_year" ] && corrargs="$corrargs end2 $FORM_year"
+fi
 FORM_threshold=$FORM_dgt
 FORM_dgt=""
 
