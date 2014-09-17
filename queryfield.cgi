@@ -881,6 +881,8 @@ erai_tmin_daily) file=ERA-interim/erai_tmin_daily.nc;kindname="ERA-int";climfiel
 erai_tmin_daily_e) file=ERA-interim/erai_tmin_daily_extended.nc;kindname="ERA-int+";climfield="Tmin";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmax_daily) file=ERA-interim/erai_tmax_daily.nc;kindname="ERA-int";climfield="Tmax";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmax_daily_e) file=ERA-interim/erai_tmax_daily_extended.nc;kindname="ERA-int+";climfield="Tmax";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_evap_daily) file=ERA-interim/erai_evap_daily.nc;kindname="ERA-int";climfield="evap";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_rsds_daily) file=ERA-interim/erai_rsds_daily.nc;kindname="ERA-int";climfield="rsds";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 
 erai_slp|erai_psl|erai_msl) file=ERA-interim/erai_msl.nc;kindname="ERA-int";climfield="MSL";LSMASK=ERA-interim/lsmask07.nc;;
 erai_taux) file=ERA-interim/erai_ustrs.nc;kindname="ERA-int";climfield="taux";LSMASK=ERA-interim/lsmask07.nc;;
