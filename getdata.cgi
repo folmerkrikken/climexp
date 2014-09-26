@@ -170,19 +170,18 @@ if [ ! -s $firstfile ]; then
   UNITS="unknown"
   NEWUNITS="unknown"
 else
-  if [ $NPERYEAR -ge 360 ]; then
     # speed up subsequent operations
     ncfile=${firstfile%.dat}.nc
     if [ ! -s $ncfile -o $ncfile -ot $firstfile ]; then
-      [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
-      dat2nc $firstfile ${TYPE:-i} "$STATION" $ncfile
+        [ -f $ncfile ] && rm $ncfile
+        [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
+        dat2nc $firstfile ${TYPE:-i} "$STATION" $ncfile
     fi
-  fi
-  eval `./bin/getunits $firstfile`
-  if [ -z "$VAR" ]; then
-  # something went wrong
-    echo `date`" $REMOTE_ADDR error: getunits failed for ./data/$TYPE$WMO.dat" 1>&2
-  fi
+    eval `./bin/getunits $firstfile`
+    if [ -z "$VAR" ]; then
+    # something went wrong
+        echo `date`" $REMOTE_ADDR error: getunits failed for ./data/$TYPE$WMO.dat" 1>&2
+    fi
 fi
 
 if [ "$TYPE" = "i" -a "$EMAIL" != "someone@somewhere" ]; then

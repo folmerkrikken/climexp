@@ -14,7 +14,7 @@ WMO=`basename "$FORM_NAME" .txt`_$FORM_setoper
 STATION="$FORM_STATION"
 TYPE="$FORM_type"
 NAME="${FORM_setoper} $FORM_TYPE"
-prog=$FORM_TYPE
+prog=$FORM_WMO
 if [ -n "$FORM_extraargs" ]; then
     prog=${prog}_$FORM_extraargs
 fi

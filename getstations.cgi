@@ -9,7 +9,11 @@ echo
 export DIR=`pwd`
 # printenv
 if [ -z "$EMAIL" ]; then
-  . ./getargs.cgi
+    . ./getargs.cgi
+    save_preferences=true
+else
+    # do not save the preferences if not called directly
+    save_preferences=false
 fi
 if [ -z "$EMAIL" ]; then
    echo "getstations: internal error: EMAIL undefined" 1>&2   
@@ -18,7 +22,7 @@ fi
 if [ $EMAIL = oldenbor@knmi.nl ]; then
     lwrite=false
 fi
-if [ $EMAIL != someone@somewhere ]; then
+if [ $save_preferences = true -a $EMAIL != someone@somewhere ]; then
   if [ -n "$FORM_name" ]; then
     FORM_NAME=`echo "$FORM_name" | tr ' ' '_'`
   fi
@@ -322,7 +326,7 @@ EOF
 <option value="max" $maxselected>maximum
 <option value="num" $numselected>number with data
 </select>
-<tr><td colspan=2><input type="submit" class="formbutton" value="make new set of time series">
+<tr><td colspan=2><input type="submit" class="formbutton" value="make time series">
 </td></tr></table>
 </div>
 </form>
