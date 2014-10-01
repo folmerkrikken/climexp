@@ -119,6 +119,7 @@ if [ "$FORM_TYPE" = "setmap" ]; then
 fi
 
 . ./myvinkhead.cgi "Trends in return times of extremes" "$CLIM $station" "noindex,nofollow"
+[ $TYPE != "set" -a $TYPE != "setmap" ] && listname="" # otherwise we get the wrong menu
 
 if [ ! \( -s $sfile -a -f $sfile \) ]; then
     echo "Error: cannot locate covariate series $sfile"

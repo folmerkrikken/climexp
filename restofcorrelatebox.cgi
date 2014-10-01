@@ -21,8 +21,8 @@ if [ "$lwrite" = true ]; then
     echo "./bin/stationlist $corrargs<br>"
     [ -n "$attribute_args" ] && echo "attribute_args=$attribute_args<br>"
 fi
-(./bin/stationlist $corrargs)
+(./bin/stationlist $corrargs) 2> /tmp/correlatebox_err_$$.log
 rm pid/$$.$FORM_email
 
-. $DIR/plotparams.cgi
+. ./plotparams.cgi
 

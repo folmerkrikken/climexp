@@ -1,6 +1,6 @@
 <!--#include virtual="help_header.html"-->
 <div class="alineakop">GHCN-D v2 daily station data</div> 
-The GHCN-D dataset from NCDC/NOAA collects daily station data
+The <a href="" target=_new>GHCN-D dataset</a> from NCDC/NOAA collects daily station data
 from around the world.  The coverage is a bit uneven, as some countries
 still are reluctant to freely share daily data (this is improving steadily).  In January 2009 the dataset contained 43408 precipitation series and 23717
 temperature series with lengths varying from 1 to 176 years.
@@ -15,11 +15,8 @@ quality control, but for precipitation this is harder as the natural
 variability is also very large.  There is therefore an option to leave
 out the GTS data.
 
-<p>The GHCN-D data (formerly known as GDCN) can be obtained from <a
-href="ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/"
-target="_new">ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/</a>.  The
-data are updated daily there, the Climate Explorer makes a copy about
-once a month.
+<p>The data are updated daily there, the Climate Explorer makes a copy about
+once a month. An update can be made on request to make the copy up-to-date.
 
 <div class="alineakop">precipitation</div>
 Some stations will give the 0-24 hour accumulated precipitation, but

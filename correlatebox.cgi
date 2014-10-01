@@ -39,7 +39,7 @@ if [ $EMAIL != someone@somewhere ]; then
 fi
 
 if [ "$FORM_type" = histogram ]; then
-    if [ ${FORM_var%r} != FORM_var -o ${FORM_var%R} != FORM_var ]; then
+    if [ ${FORM_var%r} != $FORM_var -o ${FORM_var%R} != $FORM_var ]; then
         # return time
         if [ -z "$FORM_year" -o ${FORM_year:-0} -lt -2000 -o ${FORM_year:-0} -gt 2300 ]; then
             . ./myvinkhead.cgi "Map of stations" "Error"

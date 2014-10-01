@@ -41,16 +41,16 @@ if [ -n "$FORM_year2" ]; then
     if [ "$FORM_lon1" != "$FORM_lon2" ]; then
       if [ -z "$FORM_lat2" ]; then
         if [ -z "$FORM_lat1" ]; then
-	  FORM_var="ave($FORM_var,lat=$FORM_lon1,lat=$FORM_lon2)"
-	  FORM_lon2=$FORM_lon1
-	  plotyear="${FORM_lon1}-${FORM_lon2}E"
-	else
-	  plotyear="${FORM_lat1}N"
-	fi
+          FORM_var="ave($FORM_var,lat=$FORM_lon1,lat=$FORM_lon2)"
+          FORM_lon2=$FORM_lon1
+          plotyear="${FORM_lon1}-${FORM_lon2}E"
+        else
+          plotyear="${FORM_lat1}N"
+        fi
       elif [ "$FORM_lat1" != "$FORM_lat2" ]; then
         echo "Error: specifiy at most 3 latitudes and longitudes"
         . ./myvinkfoot.cgi
-	exit
+        exit
       else
         ploytear="${FORM_lat1}N"
       fi
@@ -81,14 +81,15 @@ if [ "$FORM_movie" = "yes" ]; then
 fi
 if [ $NPERYEAR != 0 ]; then
     if [ -z "$FORM_year" -o -z "$FORM_month" -a ${NPERYEAR:-12} -gt 1 ]; then
-	echo "Error: please specify year and month to plot"
-	. ./myvinkfoot.cgi
-	exit
+        echo "Error: please specify year and month to plot"
+        . ./myvinkfoot.cgi
+        exit
     fi
 fi 
 
 if [ "$NPERYEAR" = 1 ]; then
   m=jan
+  m2=dec
 elif [ "$NPERYEAR" = 4 ]; then
   case $FORM_month in 
   1 ) m=jan;;
@@ -148,14 +149,14 @@ date2=$m2$FORM_year2
 endmonth=$(($FORM_month + $FORM_plotsum - 1))
 if [ -z "$FORM_year2" ]; then
     if [ $endmonth -gt 12 ]; then
-	plotyear="$(($FORM_year + 1))\\"
+        plotyear="$(($FORM_year + 1))\\"
     else
-	plotyear="$FORM_year\\"
+        plotyear="$FORM_year\\"
     fi
 fi
 sumstring=${FORM_plotsum},${FORM_plotsum}
 
-echo "date = $date<br>"
+echo "date = $date $date2<br>"
 station=$kindname
 CLIM=$climfield
 

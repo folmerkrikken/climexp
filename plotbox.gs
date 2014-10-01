@@ -231,7 +231,7 @@ if ( col = color | col = colour | col = flipcolor | col = flipcolour )
                       if ( v > -0.8*maxcol-offset )
                         linecol = 11
                       else
-                        if ( v > -0.8*maxcol-offset )
+                        if ( v > -1*maxcol-offset )
                           linecol = 4
                         else
                           linecol = 14

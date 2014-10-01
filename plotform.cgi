@@ -317,6 +317,9 @@ cat <<EOF
 <input type="hidden" name="movie" value="no" checked>
 <table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Time:<td>From year: <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$y1">
+EOF
+if [ $NPERYEAR -ge 12 ]; then
+    cat <<EOF
 month: <select class="forminput" name="month">
 <option value="1" $s1>Jan
 <option value="2" $s2>Feb
@@ -332,7 +335,13 @@ month: <select class="forminput" name="month">
 <option value="12" $s12>Dec
 </select>
 <br>
+EOF
+fi
+cat <<EOF
 to year: <input type="$number" min=1 max=2500 step=1 class="forminput" name="year2" size="4" style="width: 5em;" value="$y2">
+EOF
+if [ $NPERYEAR -ge 12 ]; then
+    cat <<EOF
 month: <select class="forminput" name="month2">
 <option value="1" $ss1>Jan
 <option value="2" $ss2>Feb
@@ -369,6 +378,7 @@ month
 <input type="$number" min=1 max=2500 step=1 class="forminput" name="climyear1" size="4" style="width: 5em;">:
 <input type="$number" min=1 max=2500 step=1 class="forminput" name="climyear2" size="4" style="width: 5em;"> (default: all data)
 EOF
+fi
 
 intable=TRUE
 NEWUNITS=$UNITS # to kill the unit-changing option, which has not been implemented

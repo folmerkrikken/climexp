@@ -2,60 +2,62 @@
 # to be sourced from other scripts
 
 # retrieve last values as defaults
-if [ -n "$DIR" ]; then
-  def=$DIR/prefs/$EMAIL.plotstations
-else
-  def=prefs/$EMAIL.plotstations
-fi
-if [ -s $def ]; then
-  eval `egrep '^FORM_[a-z0-9]*=[a-zA-Z]*[-+0-9.]*;$' $def`
-fi
+if [ $EMAIL != someone@somewhere ]; then
+    if [ -n "$DIR" ]; then
+        def=$DIR/prefs/$EMAIL.plotstations
+    else
+        def=./prefs/$EMAIL.plotstations
+    fi
+    if [ -s $def ]; then
+        eval `egrep '^FORM_[a-z0-9]*=[a-zA-Z]*[-+0-9.]*;$' $def`
+    fi
 
-if [ "$FORM_var" = "sign" ]; then
-  var_sign="checked"
-else
-  var_val="checked"
-fi
+    if [ "$FORM_var" = "sign" ]; then
+        var_sign="checked"
+    else
+        var_val="checked"
+    fi
 
-if [ "$FORM_value" = "on" ]; then
-  value="checked"
-fi
-if [ "$FORM_code" = "on" ]; then
-  code="checked"
-fi
-if [ "$FORM_name" = "on" ]; then
-  name="checked"
-fi
+    if [ "$FORM_value" = "on" ]; then
+        value="checked"
+    fi
+    if [ "$FORM_code" = "on" ]; then
+        code="checked"
+    fi
+    if [ "$FORM_name" = "on" ]; then
+        name="checked"
+    fi
 
-case "$FORM_col" in
-bw)         col_bw="checked";;
-flipbw)     col_flipbw="checked";;
-rb)         col_rb="checked";;
-br)         col_br="checked";;
-colour)     col_colour="checked";;
-flipcolour) col_flipcolour="checked";;
-color)      col_color="checked";;
-flipcolor)  col_flipcolor="checked";;
-*)          col_rb="checked";;
-esac
+    case "$FORM_col" in
+        bw)         col_bw="checked";;
+        flipbw)     col_flipbw="checked";;
+        rb)         col_rb="checked";;
+        br)         col_br="checked";;
+        colour)     col_colour="checked";;
+        flipcolour) col_flipcolour="checked";;
+        color)      col_color="checked";;
+        flipcolor)  col_flipcolor="checked";;
+        *)          col_rb="checked";;
+    esac
 
-case "$FORM_mproj" in
-latlon)   mproj_latlon="selected";;
-nps)      mproj_nps="selected";;
-sps)      mproj_sps="selected";;
-robinson) mproj_robinson="selected";;
-*)        mproj_default="selected";;
-esac
+    case "$FORM_mproj" in
+        latlon)   mproj_latlon="selected";;
+        nps)      mproj_nps="selected";;
+        sps)      mproj_sps="selected";;
+        robinson) mproj_robinson="selected";;
+        *)        mproj_default="selected";;
+    esac
 
-if [ -n "$FORM_nocbar" ]; then
-  nocbar_checked=checked
-fi
-if [ -n "$FORM_notitleonplot" ]; then
-  notitleonplot_checked=checked
-fi
-if [ -n "$FORM_nogrid" ]; then
-  nogrid_checked=checked
-fi
+    if [ -n "$FORM_nocbar" ]; then
+        nocbar_checked=checked
+    fi
+    if [ -n "$FORM_notitleonplot" ]; then
+        notitleonplot_checked=checked
+    fi
+    if [ -n "$FORM_nogrid" ]; then
+        nogrid_checked=checked
+    fi
+fi # nonimous user?
 
 # generate form
 cat <<EOF

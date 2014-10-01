@@ -184,11 +184,11 @@ EOF
 else
     cat <<EOF
 <tr><td>Plot variable:<td>
-<input type="radio" class="formradio" name="var" value="atr1" $atr1>Return time at the time of the event
+<input type="radio" class="formradio" name="var" value="atr1" $atr1>Return time at the time of the event,
 <tr><td>&nbsp;<td>
-<input type="radio" class="formradio" name="var" value="atr2" $atr2>Return time if it had occurred at the other time
+<input type="radio" class="formradio" name="var" value="atr2" $atr2>Return time if it had occurred at the other time,
 <tr><td>&nbsp;<td>
-<input type="radio" class="formradio" name="var" value="atra" $atra>Ratio of the two
+<input type="radio" class="formradio" name="var" value="atra" $atra>Log10(ratio) of the two.
 <input type="hidden" name="xlo" value="$FORM_xlo">
 <input type="hidden" name="xhi" value="$FORM_xhi">
 <input type="hidden" name="ylo" value="$FORM_ylo">
@@ -202,4 +202,6 @@ cat <<EOF
 </form>
 EOF
 
+FORM_listname=""
+listname="" # otherwise the menu goes te wrong way
 . ./myvinkfoot.cgi

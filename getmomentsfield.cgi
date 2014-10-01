@@ -112,9 +112,9 @@ startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
 echo "Computing $var...<p>"
 # generate GrADS data file
-[ "$FORM_changesign" = "both" ] && echo "High extremes...<br>"
+[ "${FORM_var%_rt}" != "$FORM_var" -a "$FORM_changesign" = "both" ] && echo "High extremes...<br>"
 ( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$.nc;./bin/getmomentsfield $file $corrargs ./data/m$$.nc) > /tmp/getmomentsfield$$.log ) 2>& 1
-if [ "$FORM_changesign" = "both" ]; then
+if [ "${FORM_var%_rt}" != "$FORM_var" -a "$FORM_changesign" = "both" ]; then
     mv ./data/m$$.nc ./data/m$$p.nc
     echo "<p>Low extremes...<br>"
     ( (echo ./bin/getmomentsfield $file $corrargs changesign ./data/m$$m.nc;./bin/getmomentsfield $file $corrargs changesign ./data/m$$m.nc) >> /tmp/getmomentsfield$$.log ) 2>& 1

@@ -81,6 +81,7 @@ elif [ $FORM_plot = "gumbel" ]; then
 else
 	. ./myvinkhead.cgi "Histogram" "$timescale $extraname$FORM_CLIM $station" "noindex,nofollow"
 fi
+[ $TYPE != "set" -a $TYPE != "setmap" ] && listname="" # otherwise we get the wrong menu
 
 if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
 	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"

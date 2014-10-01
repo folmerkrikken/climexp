@@ -123,11 +123,11 @@ FORM_col=$FORM_col;
 FORM_cmax=$cmax;
 FORM_greycut=$FORM_greycut;
 FORM_mproj=$mproj;
-FORM_nogrid=$FORM_nogrid
+FORM_nogrid=$FORM_nogrid;
 FORM_nocbar=$FORM_nocbar;
 FORM_notitleonplot=$FORM_notitleonplot;
-FORM_xlint=$FORM_xlint
-FORM_ylint=$FORM_ylint
+FORM_xlint=$FORM_xlint;
+FORM_ylint=$FORM_ylint;
 EOF
 fi
 
