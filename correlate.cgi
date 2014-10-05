@@ -481,7 +481,7 @@ set ylabel "$seriesmonth $CLIM $ylabel"
 set key left samplen -1
 $xrange
 $yrange
-plot "data/$TYPE$WMO${FORM_num}.dump$ext1" using 1:$y notitle $withlines, $axb title "$corrval"
+plot "data/$TYPE$WMO${FORM_num}.dump$ext1" using 1:$y notitle $withlines, $axb title "$corrval" with lines lt 4
 set term png $gnuplot_png_font_hires
 set output "$corrroot.png"
 replot
