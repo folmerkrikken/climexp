@@ -22,33 +22,33 @@ cat <<EOF
 <div class="kalelink">
 <table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
 <tr>
-<th align="left"><a href="javascript:pop_page('help/ghcn.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>GHCN (adjusted)</th>
-<th align="left"><a href="javascript:pop_page('help/ghcn.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>GHCN (all)</th>
+<th align="left">GHCN-M (adjusted)</th>
+<th align="left">GHCN-M (all)</th>
 <th align="left">other</th>
 </tr><tr>
 <td>
-<input type="radio" class="formradio" name="climate" value="precipitation" $climate_precipitation>precipitation 
+<input type="radio" class="formradio" name="climate" value="precipitation" $climate_precipitation>precipitation <a href="http://www.ncdc.noaa.gov/ghcnm/v2.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
-<input type="radio" class="formradio" name="climate" value="precipitation_all" $climate_precipitation_all>precipitation 
+<input type="radio" class="formradio" name="climate" value="precipitation_all" $climate_precipitation_all>precipitation <a href="http://www.ncdc.noaa.gov/ghcnm/v2.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
 <a href="javascript:pop_page('help/psmsl.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a><input type="radio" class="formradio" name="climate" value="sealev" $climate_sealev>PSMSL sealevel
 </td></tr><tr><td>
-<input type="radio" class="formradio" name="climate" value="temperature" $climate_temperature>mean temperature
+<input type="radio" class="formradio" name="climate" value="temperature" $climate_temperature>mean temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
-<input type="radio" class="formradio" name="climate" value="temperature_all" $climate_temperature_all>mean temperature
+<input type="radio" class="formradio" name="climate" value="temperature_all" $climate_temperature_all>mean temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
 <input type="radio" class="formradio" name="climate" value="sealevel" $climate_sealevel>sealevel (<a href="wipefeet.cgi?http://ilikai.soest.hawaii.edu/UHSLC/jasl.html"
 target="_new">JASL</a>)
 </td></tr><tr><td>
-<input type="radio" class="formradio" name="climate" value="min_temperature" $climate_min_temperature>minimum temperature
+<input type="radio" class="formradio" name="climate" value="min_temperature" $climate_min_temperature>minimum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
-<input type="radio" class="formradio" name="climate" value="min_temperature_all" $climate_min_temperature_all>minimum temperature
+<input type="radio" class="formradio" name="climate" value="min_temperature_all" $climate_min_temperature_all>minimum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
 <input type="radio" class="formradio" name="climate" value="runoff" $climate_runoff>world river discharge (<a href="wipefeet.cgi?http://www.RiVDis.sr.unh.edu/">RivDis</a>)
 </td></tr><tr><td>
-<input type="radio" class="formradio" name="climate" value="max_temperature" $climate_max_temperature>maximum temperature
+<input type="radio" class="formradio" name="climate" value="max_temperature" $climate_max_temperature>maximum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
-<input type="radio" class="formradio" name="climate" value="max_temperature_all" $climate_max_temperature_all>maximum temperature
+<input type="radio" class="formradio" name="climate" value="max_temperature_all" $climate_max_temperature_all>maximum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
 <input type="radio" class="formradio" name="climate" value="streamflow" $climate_streamflow>USA river discharge (<a href="wipefeet.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
 target="_new">HCDN</a>)
