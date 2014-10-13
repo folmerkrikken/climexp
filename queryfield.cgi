@@ -433,6 +433,7 @@ nodc_heat2000) file=NODCData/heat2000.ctl;kindname="NODC";climfield="0-2000m hea
 nodc_temp100) file=NODCData/temp100.ctl;kindname="NODC";climfield="0-100m mean temperature";;
 nodc_temp700) file=NODCData/temp700.ctl;kindname="NODC";climfield="0-700m mean temperature";;
 nodc_temp2000) file=NODCData/temp2000.ctl;kindname="NODC";climfield="0-2000m mean temperature";;
+heat700_jma) file=JMAData/heat700_jma;kindanme="JMA";climfield="0-700m heat content";;
 soda_heat750) file=SODAData/soda_750int.nc;kindanme="SODA";climfield="0-750m heat content";;
 grace_land) file=GRACEData/grace_land.nc;kindname="GRACE";climfield="LWE";;
 grace_ocean) file=GRACEData/grace_ocean.nc;kindname="GRACE";climfield="LWE";;
