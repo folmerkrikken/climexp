@@ -430,6 +430,9 @@ ssh) file=DEOSData/ssh_500_1x1_monthly.nc;kindname="DEOS/KNMI";climfield="sea le
 sshold) file=DEOSData/ssh.nc;kindname="old DEOS";climfield="sea level anomalies";;
 nodc_heat700) file=NODCData/heat700.ctl;kindname="NODC";climfield="0-700m heat content";;
 nodc_heat2000) file=NODCData/heat2000.ctl;kindname="NODC";climfield="0-2000m heat content";;
+nodc_temp100) file=NODCData/temp100.ctl;kindname="NODC";climfield="0-100m mean temperature";;
+nodc_temp700) file=NODCData/temp700.ctl;kindname="NODC";climfield="0-700m mean temperature";;
+nodc_temp2000) file=NODCData/temp2000.ctl;kindname="NODC";climfield="0-2000m mean temperature";;
 soda_heat750) file=SODAData/soda_750int.nc;kindanme="SODA";climfield="0-750m heat content";;
 grace_land) file=GRACEData/grace_land.nc;kindname="GRACE";climfield="LWE";;
 grace_ocean) file=GRACEData/grace_ocean.nc;kindname="GRACE";climfield="LWE";;
