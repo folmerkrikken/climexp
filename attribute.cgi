@@ -461,4 +461,44 @@ getpngwidth
 echo "<div class=\"bijschrift\">CDF of the ratio of the return times of $FORM_year $title in the climates of $FORM_year and of $FORM_begin2 (<a href=\"${root}_cdfdiff.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_cdfdiff.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>, <a href=\"${root}_cdfdiff.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}_cdfdiff.png\" alt=\"CDF of the difference in return times of $FORM_year and $FORM_begin2\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
+# FAR plot
+
+cat > ${root}_far.gnuplot << EOF
+set size 0.7,0.4
+set term png $gnuplot_png_font_hires
+set output "${root}_far.png"
+set title "FAR due to the trend from $FORM_begin2 to $FORM_year"
+set xlabel "FAR"
+set ylabel "CDF"
+set datafile missing '-999.900'
+set key $bottomtop
+set xrange [-0.5:1]
+set yrange [0:1]
+set ytics (0,0.1,0.25,0.5,0.75,0.9,1)
+plot "$probfile" u (1-1/\$4):1 notitle with lines lt 1
+set term postscript epsf color solid
+set output "${root}_far.eps"
+replot
+quit
+EOF
+if [ "$lwrite" = true ]; then
+    echo '<pre>'
+    cat /tmp/far$$.gnuplot
+    echo '</pre>'
+fi
+./bin/gnuplot < ${root}_far.gnuplot 2>&1
+if [ ! -s ${root}_far.png ]; then
+    echo "Something went wrong while making the plot."
+    echo "The plot commands are <a href=\"${root}_far.gnuplot\">here</a>."
+    . ./myvinkfoot.cgi
+    exit
+fi
+gzip -f ${root}_far.eps
+pngfile=${root}_far.png
+getpngwidth
+echo "<div class=\"bijschrift\">Fraction of Attributable Risk (FAR) of $FORM_year $title in the climate of $FORM_year due to the trend from $FORM_begin2 (<a href=\"${root}_far.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_far.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>, <a href=\"${root}_far.gnuplot\">plot script</a>)</div>"
+echo "<center><img src=\"${root}_far.png\" alt=\"FAR due to the trend from $FORM_begin2 to $FORM_year\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
+
+echo "<p>This is the Fraction of Attributable Risk (FAR) due to the trend. In order to interpret it as the FAR due to climate change a quantitative argument has to be added that connects the trend to anthropogenic factors, via a climate model or a scaling argument to a temperature trend that already has been attributed."
+
 . ./myvinkfoot.cgi
