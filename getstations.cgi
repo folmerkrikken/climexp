@@ -20,7 +20,7 @@ if [ -z "$EMAIL" ]; then
    EMAIL=someone@somewhere
 fi
 if [ $EMAIL = oldenbor@knmi.nl ]; then
-    lwrite=false
+    lwrite=true # false
 fi
 if [ $save_preferences = true -a $EMAIL != someone@somewhere ]; then
   if [ -n "$FORM_name" ]; then
@@ -85,10 +85,10 @@ if [ -z "$listname" ]; then
       -a -z "$FORM_lon1" -a -z "$FORM_lon2" \
       -a -z "$FORM_lat1" -a -z "$FORM_lat2" -a -n "$FORM_list" ]; then
     list=data/list$$.txt
-    forbidden='!`;&|'
-    cat << ditisheteinde | tr '\r' '\n' | tr $forbidden '?' > $list
+    forbidden='!`;&|#%\$'
+    cat << EOF | tr '\r' '\n' | tr $forbidden '?' > $list
 $FORM_list
-ditisheteinde
+EOF
     fortargs="list $list"
     . ./myvinkhead.cgi "Uploaded time series" "$timescale$FORM_climate station list"
   else
