@@ -499,6 +499,6 @@ getpngwidth
 echo "<div class=\"bijschrift\">Fraction of Attributable Risk (FAR) of $FORM_year $title in the climate of $FORM_year due to the trend from $FORM_begin2 (<a href=\"${root}_far.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_far.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>, <a href=\"${root}_far.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}_far.png\" alt=\"FAR due to the trend from $FORM_begin2 to $FORM_year\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
-echo "<p>This is the Fraction of Attributable Risk (FAR) due to the trend. In order to interpret it as the FAR due to climate change a quantitative argument has to be added that connects the trend to anthropogenic factors, via a climate model or a scaling argument to a temperature trend that already has been attributed."
+echo "<p>This is the Fraction of Attributable Risk (FAR) due to the trend. In order to interpret it as the FAR due to climate change a quantitative argument has to be added that connects the trend to anthropogenic factors, via a climate model or a scaling argument to a temperature trend that already has been attributed. The uncertainty estimate does not include the structural uncertainty in the statistical model due to the assumptions made on the previous page, so the true uncertainty is larger."
 
 . ./myvinkfoot.cgi
