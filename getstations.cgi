@@ -20,7 +20,7 @@ if [ -z "$EMAIL" ]; then
    EMAIL=someone@somewhere
 fi
 if [ $EMAIL = oldenbor@knmi.nl ]; then
-    lwrite=true # false
+    lwrite=false
 fi
 if [ $save_preferences = true -a $EMAIL != someone@somewhere ]; then
   if [ -n "$FORM_name" ]; then
