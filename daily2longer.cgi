@@ -52,6 +52,10 @@ if [ -n "FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
     WMO=${WMO}_${FORM_sum}v
     NAME="${FORM_sum}-$month mean"
 fi
+if [ -n "$FORM_addoption" ]; then
+    corrargs="$corrargs $FORM_addoption"
+    WMO=${WMO}_${FORM_addoption#add_}
+fi
 
 PROG="daily2longer.sh $corrargs"
 

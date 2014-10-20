@@ -11,5 +11,6 @@ FORM_cut=$FORM_cut;
 FORM_typecut=$FORM_typecut;
 FORM_minfac=$FORM_minfac;
 FORM_sum=$FORM_sum;
+FORM_addoption=$FORM_addoption;
 EOF
 fi
