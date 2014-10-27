@@ -86,7 +86,7 @@ if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
       outfile=${outfile}_$FORM_lgt$FORM_cut
   fi    
 fi
-if [ -n "$FORM_sum" ]; then
+if [ -n "$FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
     corrargs="$corrargs ave $FORM_sum"
     outfile=${outfile}_${FORM_sum}v
 fi
