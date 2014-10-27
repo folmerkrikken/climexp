@@ -8,7 +8,7 @@ if [ "$EMAIL" != someone@somewhere ]; then
     def=prefs/$EMAIL.daily2longeroptions.$NPERYEAR
   fi
   if [ -s $def ]; then
-    eval `egrep '^FORM_[a-z0-9]*=[-a-zA-Z]*[-+0-9.]*;$' $def`
+    eval `egrep '^FORM_[a-z0-9]*=[-a-zA-Z_]*[-+_0-9.]*;$' $def`
   fi
 fi
 
@@ -60,6 +60,13 @@ p) typecut_p="selected";;
 n) typecut_n="selected";;
 *) typecut_v="selected";;
 esac
+
+case ${FORM_addoption:-add_anom} in
+    add_clim) add_clim="checked";;
+    add_trend) add_trend="checked";;
+    add_damp) add_damp="checked";;
+    *) add_anom="checked";;
+esac    
 
 if [ -z "$FORM_field" ]; then
   other="time series"
@@ -118,6 +125,12 @@ Threshold:
 <option value="n" $typecut_n>normal 1971-2000
 </select>
 </td></tr><tr><td>Minimum:</td><td><input  type="$number" step=any min=0 max=100 step=1 class="forminput" name="minfac" size="3" style="width: 4em;" value="$FORM_minfac">% valid data
-</td></tr><tr><td>First apply:</td><td><input  type="$number" step=any min=1 max=100 step=1 class="forminput" name="sum" size="3" style="width: 4em;" value="${FORM_sum:-1}">-$month running mean
+</td></tr><tr><td>First apply:</td><td><input  type="$number" min=1 max=100 step=1 class="forminput" name="sum" size="3" style="width: 4em;" value="${FORM_sum:-1}">-$month running mean
+</td></tr><tr><td>Missing data:</td><td>
+<input  type="radio" class="formradio" name="addoption" value="add_anom" $add_anom>ignore, 
+<input  type="radio" class="formradio" name="addoption" value="add_clim" $add_clim>climatology,
+<input  type="radio" class="formradio" name="addoption" value="add_trend" $add_trend>trend<!--, 
+<input  type="radio" class="formradio" name="addoption" value="add_damp" $add_damp>damped persistence-->.
+
 </td></tr><tr><td colspan="2">
 EOF

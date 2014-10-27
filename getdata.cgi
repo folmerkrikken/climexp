@@ -445,21 +445,22 @@ EOF
 	fi # supported variable: temperature or precipitation
 fi # daily data
 
-cat <<EOF
+if [ $NPERYEAR -gt 1 ]; then
+    cat <<EOF
 <p><div class='formheader'><a href="javascript:pop_page('help/lowerresolutionseries.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Create a lower resolution time series</div>
 <div class='formbody'>
 <form action="daily2longer.cgi" method="POST">
 <table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
 EOF
-. ./daily2longerform.cgi
-cat << EOF
+    . ./daily2longerform.cgi
+    cat << EOF
 <tr><td colspan=2><input type="submit" class="formbutton" value="make new time series">
 </td></tr>
 </table>
 </form>
 </div>
 EOF
-
+fi # NPERYEAR > 1
 
 if [ $NPERYEAR = 1 ]; then
 cat <<EOF
