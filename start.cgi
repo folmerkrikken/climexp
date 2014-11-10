@@ -48,9 +48,9 @@ if [ "$EMAIL" != someone@somewhere ]; then
   fi
 else
   echo "<div class=\"alineakop\">Welcome, anonymous user</div>"
-  randomimage=pa61223.png
+  randomimage=imageoftheweek.png # pa61223.png
 
-	cat <<EOF
+        cat <<EOF
 Please enter the KNMI Climate Explorer, a research tool to investigate the climate.  This web site collects a lot of climate data and analysis tools.  Please verify yourself that the data you use is good enough for your purpose, and report errors back.  In publications the original data source should be cited, a link to a web page describing the data is always provided.
 
 <p>Start by selecting a class of climate data from the right-hand menu.  After you have selected the time series or fields of interest, you will be able to investigate it, correlate it to other data, and generate derived data from it.
@@ -68,12 +68,12 @@ fi
 . ./check_ie.cgi
 
 if [ ${REMOTE_ADDR#145.23} != $REMOTE_ADDR -a ${REMOTE_ADDR#145.23.248} = $REMOTE_ADDR -a $HTTP_HOST = climexp.knmi.nl ]; then
-	echo "<p><font color=\"#FF0000\">KNMI users are advised to use the URL <a href=\"http://bhlclim.knmi.nl/start.cgi?id=$EMAIL\">bhlclim.knmi.nl</a></font>"
+        echo "<p><font color=\"#FF0000\">KNMI users are advised to use the URL <a href=\"http://bhlclim.knmi.nl/start.cgi?id=$EMAIL\">bhlclim.knmi.nl</a></font>"
 fi
 
 if [ "$EMAIL" != someone@somewhere ]; then
-	###. ./headlines.cgi
-	touch ./prefs/$EMAIL.news
+        ###. ./headlines.cgi
+        touch ./prefs/$EMAIL.news
 fi
 
 pngfile=$randomimage
