@@ -6,6 +6,7 @@
 [ -z "$shortclimate" ] && shortclimate=$STATION
 [ -z "$listname" ] && listname=$FORM_listname
 [ -z "$extraargs" ] && extraargs=$FORM_extraargs
+shortclimate=`echo "$shortclimate" | tr '_' ' '`
 cat << EOF
 <div class="menukopje">Investigate this set of time series spatially</div>
 <div class="menulink"><a href="plotbox.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&extraargs=${extraargs}">Make a map</a>/<a href="box2kml.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">export kml</a></div>
