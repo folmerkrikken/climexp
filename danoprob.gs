@@ -294,6 +294,14 @@ endif
 'set rgb 85 234 234 234'
 'set rgb 90 247 247 247'
 * end lightcolour defs
+if ( flipped = 9 )
+say 'blue - red - grey colourbar'
+rbcols1='set rbcols 11  3 10  7 12  8  2  6  9 14  4 50'
+else
+if ( flipped = 8 )
+say 'red - blue - grey colourbar'
+rbcols1='set rbcols  9  6  2  8 12  7 10  3 11  4 14 50'
+else
 if ( flipped = 7 )
 rbcols1='set rbcols 6 2 8 12 7 10 3 50'
 else
@@ -335,6 +343,8 @@ endif
 endif
 endif
 endif
+endif
+endif
 *
 *	set clevs
 *
@@ -347,7 +357,7 @@ if ( clevs != NULL )
 setclevs='set clevs 'clevs
 else
 if ( scale = lin )
-if ( flipped = 0 | flipped = 1 | flipped = 6 )
+if ( flipped = 0 | flipped = 1 | flipped = 6 | flipped = 8 | flipped = 9 )
 ***say 'set clevs -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' 0 '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval
 setclevs='set clevs -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' 0 '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval
 else
@@ -506,7 +516,7 @@ if ( shadingtype = shadedcontour )
 *
 if ( cint != '' )
 ***say 'set clevs 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax
-if ( flipped = 0 | flipped = 1 | flipped = 6 )
+if ( flipped = 0 | flipped = 1 | flipped = 6 | flipped = 8 | flipped = 9 )
 setclevs='set clevs 'cmin-5*cint' 'cmin-4*cint' 'cmin-3*cint' 'cmin-3*cint' 'cmin-2*cint' 'cmin-cint' 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax' 'cmax+cint' 'cmax+2*cint' 'cmax+3*cint' 'cmax+4*cint' 'cmax+5*cint
 else
 setclevs='set clevs 'cmin-5*cint' 'cmin-4*cint' 'cmin-3*cint' 'cmin-3*cint' 'cmin-2*cint' 'cmin-cint' 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+5*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax' 'cmax+cint' 'cmax+2*cint' 'cmax+3*cint' 'cmax+4*cint' 'cmax+5*cint
@@ -520,7 +530,7 @@ endif
 setclevs='set clevs 'clevs
 else
 if ( scale = lin )
-if ( flipped = 0 | flipped = 1 | flipped = 6 )
+if ( flipped = 0 | flipped = 1 | flipped = 6 | flipped = 8 | flipped = 9 )
 ***say 'set clevs -'2*maxval' -'1.8*maxval' -'1.6*maxval' -'1.4*maxval' -'1.2*maxval' -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval' '1.2*maxval' '1.4*maxval' '1.6*maxval' '1.8*maxval' '2*maxval
 setclevs='set clevs -'3*maxval' -'2.8*maxval' -'2.6*maxval' -'2.4*maxval' -'2.2*maxval' -'2*maxval' -'1.8*maxval' -'1.6*maxval' -'1.4*maxval' -'1.2*maxval' -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval' '1.2*maxval' '1.4*maxval' '1.6*maxval' '1.8*maxval' '2*maxval' '2.2*maxval' '2.4*maxval' '2.6*maxval' '2.8*maxval' '3*maxval
 else
