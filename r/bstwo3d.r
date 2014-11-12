@@ -44,6 +44,7 @@
 
 bstwo3d <- function(data1,data2,nbins,u,threshold=TRUE) {
     data1[data1 == -999.9] <- NA
+    data2[data2 == -999.9] <- NA
 
     if (threshold)
         thresh <- u
