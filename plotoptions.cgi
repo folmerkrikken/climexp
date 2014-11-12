@@ -32,6 +32,8 @@ case "$FORM_colourscale" in
 1) colourscale_1="selected";;
 3) colourscale_3="selected";;
 2) colourscale_2="selected";;
+9) colourscale_9="selected";;
+8) colourscale_8="selected";;
 *) colourscale_0="selected";;
 esac
 
@@ -161,16 +163,14 @@ echo "<select class=forminput name=maskout><option value=mask $mask_selected>mas
 fi
 echo "<td><a href=\"javascript:pop_page('help/contour.shtml',852,450)\"><img src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
 echo '<tr><td>Colours:<td>' 
-#<input type="radio" class="formradio" name="colourscale" value="0" $colourscale_0>blue-grey-red
-#<input type="radio" class="formradio" name="colourscale" value="1" $colourscale_1>red-grey-blue
-#<input type="radio" class="formradio" name="colourscale" value="3" $colourscale_3>grey-blue-red
-#<input type="radio" class="formradio" name="colourscale" value="2" $colourscale_2>grey-red-blue
 cat <<EOF
 <select class="forminput" name="colourscale">
 <option value="0" $colourscale_0>blue-grey-red
 <option value="1" $colourscale_1>red-grey-blue
 <option value="3" $colourscale_3>grey-blue-red
 <option value="2" $colourscale_2>grey-red-blue
+<option value="9" $colourscale_9>blue-red-grey
+<option value="8" $colourscale_8>red-blue-grey
 </select>
 EOF
 echo "<td><a href=\"javascript:pop_page('help/colours.shtml',284,450)\"><img src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
