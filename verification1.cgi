@@ -265,7 +265,7 @@ elif [ -n "$PROG" ]; then
 # Make a temp file with R command (R does not accept input redirection)
   if [ -z "$makemap" ]; then
     cat > /tmp/R$$.r <<EOF
-library("SpecsVerification", lib.loc="./r")
+library("SpecsVerification")
 dyn.load("./r/rkillfile.so")
 .Fortran("rkillfile")
 dyn.load("./r/rkeepalive.so")
@@ -279,13 +279,17 @@ $PROG($args)
 q("no")
 EOF
   else
+    # rpacks is a symlink to ~/Library/R/x.y/library on the Mac
     cat > /tmp/R$$.r  <<EOF
+.libPaths("./rpacks")
+.libPaths()
+library("RNetCDF")
 dyn.load("./r/rkillfile.so")
 .Fortran("rkillfile")
 dyn.load("./r/rkeepalive.so")
 .Fortran("rkeepalive",i=as.integer(0),n=as.integer(0))
 source("./r/maplibs.r")
-library("SpecsVerification", lib.loc="./r")
+library("SpecsVerification")
 source("./r/applyfieldclimexp.r")
 source("./r/$PROG.r")
 infobs<-netcdfinfo("$obsfile")
