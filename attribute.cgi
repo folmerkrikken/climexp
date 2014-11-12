@@ -119,7 +119,7 @@ if [ "$FORM_TYPE" = "setmap" ]; then
 fi
 
 . ./myvinkhead.cgi "Trends in return times of extremes" "$CLIM $station" "noindex,nofollow"
-[ $TYPE != "set" -a $TYPE != "setmap" ] && listname="" # otherwise we get the wrong menu
+[ $TYPE != "set" -a $TYPE != "setmap" ] && listname="" && FORM_listname="" # otherwise we get the wrong menu
 
 if [ ! \( -s $sfile -a -f $sfile \) ]; then
     echo "Error: cannot locate covariate series $sfile"
@@ -170,7 +170,7 @@ else
 fi
 . ./month2string.cgi
 . ./setyaxis.cgi
-echo "<tr><th colspan="4">$seriesmonth $STATION $VAR [$UNITS] dependent on $covstation</th></tr>"
+echo "<tr><th colspan="4">$seriesmonth $station $VAR [$UNITS] dependent on $covstation</th></tr>"
 tail -n +2 "$root.txt" | grep '<tr>' | sed -e 's/#//'
 echo '</table>'
 [ "$lwrite" = true ] && wc -l $root.txt|awk '{print $1}'

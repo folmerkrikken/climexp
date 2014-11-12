@@ -30,6 +30,8 @@ elif [ "$FORM_var" = "pot_rt" ]; then
   FORM_year=$FORM_potyear
 elif [ "$FORM_var" = "gev_rt" ]; then
   FORM_year=$FORM_gevyear
+elif [ "$FORM_var" = "rank" ]; then
+  FORM_year=$FORM_rankyear
 fi
 if [ "$FORM_changesign" = "both" -a -z "FORM_year" ]; then
   . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
@@ -78,13 +80,14 @@ gev_scale)  var="scale parameter of GEV";;
 gev_shape)  var="shape parameter of GEV";;
 gev_return) var="$FORM_gev_return yr return value";;
 gev_rt)     var="GEV return time of $FORM_year";;
+rank)       var="Rank of $FORM_year";;
 *)    var="UNKNOWN";;
 esac
 
 corrargs="$FORM_var"
 if [ "$FORM_var" = "perc" ]; then
   corrargs="$corrargs $FORM_perc"
-elif [  "$FORM_var" = "pot_rt" -o "$FORM_var" = "gev_rt" -o "$FORM_var" = "norm_rt" -o "$FORM_var" = "norm_z" ]; then
+elif [  "$FORM_var" = "pot_rt" -o "$FORM_var" = "gev_rt" -o "$FORM_var" = "norm_rt" -o "$FORM_var" = "norm_z" -o "$FORM_var" = "rank" ]; then
   corrargs="$corrargs $FORM_year"
 fi
 if [ "${FORM_var#pot}" != "$FORM_var" ]; then
@@ -112,7 +115,7 @@ startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
 echo "Computing $var...<p>"
 # generate GrADS data file
-[ "${FORM_var%_rt}" != "$FORM_var" -a "$FORM_changesign" = "both" ] && echo "High extremes...<br>"
+[ \( "${FORM_var%_rt}" != "$FORM_var" -o "${FORM_var}" = "rank" \) -a "$FORM_changesign" = "both" ] && echo "High extremes...<br>"
 ( (echo ./bin/getmomentsfield $file $corrargs ./data/m$$.nc;./bin/getmomentsfield $file $corrargs ./data/m$$.nc) > /tmp/getmomentsfield$$.log ) 2>& 1
 if [ "${FORM_var%_rt}" != "$FORM_var" -a "$FORM_changesign" = "both" ]; then
     mv ./data/m$$.nc ./data/m$$p.nc

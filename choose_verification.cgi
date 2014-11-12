@@ -36,7 +36,7 @@ cat << EOF
 <input type="radio" name="verif" value="rocrclim" $checked_rocrclim>Plot ROC curve for number of ensemble members below threshold,
 <input type="radio" name="verif" value="rocprob" $checked_rocprob>alternative<br>
 <!--<input type="radio" name="verif" value="rocdeb" $checked_rocdeb>alternative2-->
-<input type="radio" name="verif" value="rocthreshold" $checked_rocthreshold>Plot ROC curve varying the model threshold<br>
+<!--<input type="radio" name="verif" value="rocthreshold" $checked_rocthreshold>Plot ROC curve varying the model threshold<br>-->
 <input type="radio" name="verif" value="debug" $checked_debug>Only compute the observations/forecasts table
 </div>
 EOF

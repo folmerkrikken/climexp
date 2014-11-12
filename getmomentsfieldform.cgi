@@ -49,6 +49,7 @@ gev_shape)  gev_shape_checked="checked";;
 gev_return) gev_return_checked="checked";;
 gev_return_diff) gev_return_diff_checked="checked";;
 gev_rt)     gev_rt_checked=checked;;
+rank)       rank_checked=checked;;
 *)          mean_checked="checked";;
 esac
 
@@ -188,9 +189,6 @@ cat <<EOF
 GEV
 <tr><td><td>
 <input type="radio" class="formradio" name="var" value="gev_return" $gev_return_checked>value for return time 
-<!--
-<input type="$number" class="forminput" $textsize4 name="gev_return" value="${FORM_gev_return:-100}">years/months
--->
 <select class="forminput" name="gev_return">
 <option $gev_t10_selected>10
 <option $gev_t20_selected>20
@@ -205,30 +203,8 @@ GEV
 </select>years/months
 <tr><td><td>
 <input type="radio" class="formradio" name="var" value="gev_rt" $gev_rt_checked>return time of year <input type="$number" min=1 max=2500 step=1 class="forminput" $textsize4 name="gevyear" value="${FORM_year}"> in the context of the other years
-EOF
-if [ 1 = 0 ]; then
-if [ $EMAIL = someone@somewhere ]; then
-  echo "Sorry, only available when you <a href=\"registerform.cgi\">register or log in</a><br>"
-else
-  for pat in data/R*.$EMAIL.pat
-  do
-    if [ -s $pat ]; then
-      units=`egrep '^units=' $pat | tr '\`;<>&#' ' ' | sed -e 's/units=//'`
-      if [ "$units" = "$UNITS" -o "$units" = "$NEWUNITS" ]; then
-        name=`egrep '^name=' $pat | tr '\`;<>&#' ' ' | sed -e 's/name=//'`
-        echo "&nbsp;&nbsp;&nbsp;<input type=radio class=formradio name=pot_pattern value=\"$pat\">$name<br>"
-      fi
-    else
-      echo "First generate a return value pattern<br>"
-    fi
-  done
-fi
-fi
-cat <<EOF
-<!-- </div> hidden -->
-<!--
-<tr><td><td><input type="checkbox" class="formcheck" name="pot_tv" $tv_checked>Define peaks wrt 10-yr low-pass filtered data
--->
+<tr><td><td>&nbsp;
+<tr><td><td><input type="radio" class="formradio" name="var" value="rank" $rank_checked>Rank of year <input type="$number" min=1 max=2500 step=1 class="forminput" $textsize4 name="rankyear" value="${FORM_year}"> in the context of the other years
 <tr><td><td>&nbsp;
 <tr><td>
 Demand: <td>at least <input type="$number" step=any class="forminput" name="minfac" $textsize2 value="$FORM_minfac">% valid points
