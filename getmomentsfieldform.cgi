@@ -50,6 +50,7 @@ gev_return) gev_return_checked="checked";;
 gev_return_diff) gev_return_diff_checked="checked";;
 gev_rt)     gev_rt_checked=checked;;
 rank)       rank_checked=checked;;
+time)       time_checked=checked;;
 *)          mean_checked="checked";;
 esac
 
@@ -205,6 +206,7 @@ GEV
 <input type="radio" class="formradio" name="var" value="gev_rt" $gev_rt_checked>return time of year <input type="$number" min=1 max=2500 step=1 class="forminput" $textsize4 name="gevyear" value="${FORM_year}"> in the context of the other years
 <tr><td><td>&nbsp;
 <tr><td><td><input type="radio" class="formradio" name="var" value="rank" $rank_checked>Rank of year <input type="$number" min=1 max=2500 step=1 class="forminput" $textsize4 name="rankyear" value="${FORM_year}"> in the context of the other years
+<tr><td><td><input type="radio" class="formradio" name="var" value="timex" $time_checked>Year of highest/lowest value
 <tr><td><td>&nbsp;
 <tr><td>
 Demand: <td>at least <input type="$number" step=any class="forminput" name="minfac" $textsize2 value="$FORM_minfac">% valid points
