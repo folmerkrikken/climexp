@@ -81,6 +81,7 @@ gev_shape)  var="shape parameter of GEV";;
 gev_return) var="$FORM_gev_return yr return value";;
 gev_rt)     var="GEV return time of $FORM_year";;
 rank)       var="Rank of $FORM_year";;
+timex)      var="Year of extreme";;
 *)    var="UNKNOWN";;
 esac
 
