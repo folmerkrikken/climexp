@@ -689,7 +689,7 @@ nvs600) file=NCEPNCAR40/vs600.ctl;kindname="NCEP/NCAR";climfield="700mb-500mb ve
 nvs350) file=NCEPNCAR40/vs350.ctl;kindname="NCEP/NCAR";climfield="500mb-200mb vertical shear";;
 nlhtfl) file=NCEPNCAR40/lhtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="latent heat flux";;
 nshtfl) file=NCEPNCAR40/shtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="sensible heat flux";;
-nolr) file=NCEPNCAR40/ulwrftop.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
+nolr) file=NCEPNCAR40/ulwrf.ntat.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
 npme) file=NCEPNCAR40/pme.ctl;kindname="NCEP/NCAR";climfield="P-E";flipcolor=1;;
 nnsr) file=NCEPNCAR40/nswrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net solar radiation";;
 nnlr) file=NCEPNCAR40/nlwrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net longwave radiation";;
