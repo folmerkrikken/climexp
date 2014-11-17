@@ -21,7 +21,8 @@ if [ -n "$field2" ]; then
   FORM_field=$field1
   kindname=$kindname1
   climfield=$climfield1
-  . ./menu_investigatefield.cgi | tr '_' ' '
+  . ./menu_investigatefield.cgi | tr '_' ' ' \
+    | sed -e 's/field /field_/' -e 's/field1 /field1_/' -s 's/form /form_'
   FORM_field=$field2
   kindname=$kindname2
   climfield=$climfield2
