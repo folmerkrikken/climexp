@@ -165,12 +165,6 @@ tempa) file=NCDCData/temp_anom.ctl;kindname="NCDC v3";climfield="T2m anom";LSMAS
 tempa_old) file=NCDCData/temp_anom_old.ctl;kindname="NCDC v2";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 ncdc_temp) file=NCDCData/t_anom.ctl;kindname="NCDC v3";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 ncdc_temp_old) file=NCDCData/t_anom.ctl;kindname="NCDC v2";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
-temp) file=CRUData/hadcrut.ctl;kindname="HadCRUT";climfield="SST/T2m anom";;
-tempv) file=CRUData/hadcrutv.ctl;kindname="HadCRUTv";climfield="SST/T2m anom";;
-hadcrut2) file=CRUData/hadcrut2.ctl;kindname="HadCRUT2";climfield="SST/T2m anom";;
-hadcrut2v) file=CRUData/hadcrut2v.ctl;kindname="HadCRUT2v";climfield="SST/T2m anom";;
-hadcrut3) file=CRUData/HadCRUT3_ce.nc;kindname="HadCRUT3";climfield="SST/T2m anom";;
-hadcrut3v) file=CRUData/HadCRUT3v_ce.nc;kindname="HadCRUT3v";climfield="SST/T2m anom";;
 ###hadcrut4) file=UKMOData/hadcrut4_median.nc;kindname="HadCRUT4";climfield="SST/T2m anom";;
 hadcrut4) file=UKMOData/HadCRUT.4.3.0.0.median.nc;kindname="HadCRUT4.3";climfield="SST/T2m anom";;
 crutem1) file=CRUData/crutem1.ctl;kindname="CRUTEM1";climfield="T2m anom";;
@@ -695,7 +689,7 @@ nvs600) file=NCEPNCAR40/vs600.ctl;kindname="NCEP/NCAR";climfield="700mb-500mb ve
 nvs350) file=NCEPNCAR40/vs350.ctl;kindname="NCEP/NCAR";climfield="500mb-200mb vertical shear";;
 nlhtfl) file=NCEPNCAR40/lhtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="latent heat flux";;
 nshtfl) file=NCEPNCAR40/shtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="sensible heat flux";;
-nolr) file=NCEPNCAR40/ulwrftop.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
+nolr) file=NCEPNCAR40/ulwrf.ntat.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
 npme) file=NCEPNCAR40/pme.ctl;kindname="NCEP/NCAR";climfield="P-E";flipcolor=1;;
 nnsr) file=NCEPNCAR40/nswrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net solar radiation";;
 nnlr) file=NCEPNCAR40/nlwrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net longwave radiation";;
