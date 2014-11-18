@@ -31,6 +31,11 @@ else
   . ./myvinkhead.cgi "Field-field correlations" "$kindname1 $climfield1 with $kindname2 $climfield2" "noindex,nofollow"
 fi
 
+if [ $FORM_maskout != mask -a $FORM_colourscale -gt 9 ]; then
+    echo "Drawing non-significant areas $FORM_maskout is not possible with the new colour scales, masking them out instead.<br>"
+    FORM_maskout=mask
+fi
+
 prog="$DIR/bin/correlatefieldfield $file1 $file2"
 # TAO fields are very sparse
 if [ "$kindname1" = "TAO" -o "$kindname2" = "TAO" ]; then

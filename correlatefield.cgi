@@ -18,6 +18,11 @@ prog="./bin/correlatefield $file"
 ###echo "FORM_nens1,2 = $FORM_nens1,$FORM_nens2<br>"
 ###echo "corrargs = $corrargs<br>"
 
+if [ $FORM_maskout != mask -a $FORM_colourscale -gt 9 ]; then
+    echo "Drawing non-significant areas $FORM_maskout is not possible with the new colour scales, masking them out instead.<br>"
+    FORM_maskout=mask
+fi
+
 # process options related to fields only
 . ./getfieldopts.cgi
 startstop="/tmp/startstop$$.txt"
