@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ $EMAIL = oldenbor@knmi.nl ]; then
-    lwrite=true # false
+    lwrite=false # true
 fi
 
 flipcolor=0

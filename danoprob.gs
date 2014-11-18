@@ -258,6 +258,46 @@ else
   'set geotiff 'file
   endif
 endif
+if ( flipped = 10 | flipped = 11 )
+'set rgb 50 248 248 248'
+'set rgb 34  49  54 149'
+'set rgb 24  69 117 180'
+'set rgb 31 116 217 233'
+'set rgb 23 171 217 233'
+'set rgb 30 224 243 248'
+'set rgb 27 254 224 144'
+'set rgb 32 253 174  97'
+'set rgb 28 244 109  67'
+'set rgb 22 215  48  39'
+'set rgb 26 165   0  38'
+* no light colours for the new schemes...
+else
+if ( flipped = 13 | flipped = 18 )
+'set rgb 50 248 248 248'
+'set rgb 21 255 247 236'
+'set rgb 22 254 232 200'
+'set rgb 23 253 212 158'
+'set rgb 24 253 187 132'
+'set rgb 25 252 141  89'
+'set rgb 26 239 101  72'
+'set rgb 27 215  48  31'
+'set rgb 28 179   0   0'
+'set rgb 29 127   0   0'
+'set rgb 30  63   0   0'
+else
+if ( flipped = 12 | flipped = 19 )
+'set rgb 50 248 248 248'
+'set rgb 21 255 247 251'
+'set rgb 22 236 231 242'
+'set rgb 23 208 209 230'
+'set rgb 24 166 189 219'
+'set rgb 25 116 169 207'
+'set rgb 26  54 144 192'
+'set rgb 27   5 112 176'
+'set rgb 28   4  90 141'
+'set rgb 29   2  56  88'
+'set rgb 30   0   0  40'
+else
 'set rgb 50 222 222 222'
 * insert output from ligtcolour below
 * factor 2
@@ -294,13 +334,25 @@ endif
 'set rgb 85 234 234 234'
 'set rgb 90 247 247 247'
 * end lightcolour defs
+endif
+endif
+endif
+
 if ( flipped = 9 )
 say 'blue - red - grey colourbar'
 rbcols1='set rbcols 11  3 10  7 12  8  2  6  9 14  4 50'
 else
+if ( flipped = 19 )
+say 'new blue - grey colourbar'
+rbcols1='set rbcols  1 30 29 28 27 26 25 24 23 22 21 50'
+else
 if ( flipped = 8 )
 say 'red - blue - grey colourbar'
 rbcols1='set rbcols  9  6  2  8 12  7 10  3 11  4 14 50'
+else
+if ( flipped = 18 )
+say 'new red - grey colourbar'
+rbcols1='set rbcols  1 30 29 28 27 26 25 24 23 22 21 50'
 else
 if ( flipped = 7 )
 rbcols1='set rbcols 6 2 8 12 7 10 3 50'
@@ -320,11 +372,19 @@ rbcols1='set rbcols 50 11  3 10  7 12  8  2  6  9 14  4'
 rbcols2='set rbcols 70 61 53 60 57 62 58 52 56 59 64 54'
 rbcols3='set rbcols 90 81 73 80 77 82 78 72 76 79 84 74'
 else
+if ( flipped = 13 ) 
+say 'new grey - red colourbar'
+rbcols1='set rbcols 50 21 22 23 24 25 26 27 28 29 30 1'
+else
 if ( flipped = 2 ) 
 say 'grey - red - blue colourbar'
 rbcols1='set rbcols 50  9  6  2  8 12  7 10  3 11  4 14'
 rbcols2='set rbcols 70 59 56 52 58 62 57 60 53 61 54 64'
 rbcols3='set rbcols 90 79 76 72 78 82 77 80 73 81 74 84'
+else
+if ( flipped = 12 ) 
+say 'grey - blue colourbar'
+rbcols1='set rbcols 50 21 22 23 24 25 26 27 28 29 30 1'
 else
 if ( flipped = 1 )
 say 'red - grey - blue colourbar'
@@ -332,10 +392,24 @@ rbcols1='set rbcols  6  2  8 12  7 50 10  3 11  4 14'
 rbcols2='set rbcols 56 52 58 62 57 70 60 53 61 54 64'
 rbcols3='set rbcols 76 72 78 82 77 90 80 73 81 74 84'
 else
+if ( flipped = 11 )
+say 'new red - grey - blue colourbar'
+rbcols1='set rbcols 26 22 28 32 27 50 30 23 31 24 34'
+else
+if ( flipped = 0 )
 say 'blue - grey - red colourbar'
 rbcols1='set rbcols 14  4 11  3 10 50  7 12  8  2  6'
 rbcols2='set rbcols 64 54 61 53 60 70 57 62 58 52 56'
 rbcols3='set rbcols 84 74 81 73 80 90 77 82 78 72 76'
+else
+say 'new blue - grey - red colourbar'
+rbcols1='set rbcols 34 24 31 23 30 50 27 32 28 22 26'
+endif
+endif
+endif
+endif
+endif
+endif
 endif
 endif
 endif

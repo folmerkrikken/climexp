@@ -13,7 +13,7 @@ fi
 . ./queryfield.cgi
 
 . ./myvinkhead.cgi "Field correlations" "$station $NAME with $kindname $climfield" "noindex,nofollow"
-prog="$DIR/bin/correlatefield $file"
+prog="./bin/correlatefield $file"
 
 ###echo "FORM_nens1,2 = $FORM_nens1,$FORM_nens2<br>"
 ###echo "corrargs = $corrargs<br>"
@@ -46,10 +46,10 @@ export SCRIPTPID=$$
 export FORM_EMAIL
 # generate GrADS data file
 id=`date "+%Y%m%d_%H%M"`_$$
-[ "$lwrite" = true ] && $prog $corrargs $DIR/data/g$id.ctl
+[ "$lwrite" = true ] && echo $prog $corrargs $DIR/data/g$id.ctl
 ( (echo $prog $corrargs $DIR/data/g$id.ctl; $prog $corrargs $DIR/data/g$id.ctl) > /tmp/correlatefield$id.log ) 2>&1
 if [ ! -s $DIR/data/g$id.dat -a ! -s  $DIR/data/g$id.grd ]; then
-  cat $DIR/wrong.html
+  cat ./wrong.html
   cat /tmp/correlatefield$id.log | sed -e 's/$/<br>/'
   rm /tmp/correlatefield$id.log
   echo "</body></html>"
