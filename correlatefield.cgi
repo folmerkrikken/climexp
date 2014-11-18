@@ -13,10 +13,15 @@ fi
 . ./queryfield.cgi
 
 . ./myvinkhead.cgi "Field correlations" "$station $NAME with $kindname $climfield" "noindex,nofollow"
-prog="$DIR/bin/correlatefield $file"
+prog="./bin/correlatefield $file"
 
 ###echo "FORM_nens1,2 = $FORM_nens1,$FORM_nens2<br>"
 ###echo "corrargs = $corrargs<br>"
+
+if [ $FORM_maskout != mask -a $FORM_colourscale -gt 9 ]; then
+    echo "Drawing non-significant areas $FORM_maskout is not possible with the new colour scales, masking them out instead.<br>"
+    FORM_maskout=mask
+fi
 
 # process options related to fields only
 . ./getfieldopts.cgi
@@ -46,10 +51,10 @@ export SCRIPTPID=$$
 export FORM_EMAIL
 # generate GrADS data file
 id=`date "+%Y%m%d_%H%M"`_$$
-[ "$lwrite" = true ] && $prog $corrargs $DIR/data/g$id.ctl
+[ "$lwrite" = true ] && echo $prog $corrargs $DIR/data/g$id.ctl
 ( (echo $prog $corrargs $DIR/data/g$id.ctl; $prog $corrargs $DIR/data/g$id.ctl) > /tmp/correlatefield$id.log ) 2>&1
 if [ ! -s $DIR/data/g$id.dat -a ! -s  $DIR/data/g$id.grd ]; then
-  cat $DIR/wrong.html
+  cat ./wrong.html
   cat /tmp/correlatefield$id.log | sed -e 's/$/<br>/'
   rm /tmp/correlatefield$id.log
   echo "</body></html>"

@@ -627,10 +627,8 @@ elif [ "$FORM_mapformat" = png ]; then
 			echo "<div class=\"bijschrift\">"
 			cat /tmp/grads_title_$$_$i.txt
 			rm /tmp/grads_title_$$_$i.txt
-			echo "(eps: <a href=\"$f.eps.gz\">colour</a>,"
-			echo "<a href=\"makebw.cgi?color=${flipcolor}&file=$f.eps.gz&format=eps\">B/W</a>"
-			echo "pdf: <a href=\"ps2pdf.cgi?file=$f.eps.gz\">colour</a>,"
-			echo "<a href=\"makebw.cgi?color=${flipcolor}&file=$f.eps.gz&format=pdf\">B/W</a>)</div>"
+			echo "(<a href=\"$f.eps.gz\">eps</a>,"
+			echo "<a href=\"ps2pdf.cgi?file=$f.eps.gz\">pdf</a>)</div>"
 			if [ -s $f.png ]; then
 				if [ "$hiresmap" = true ]; then
 					pngfile=$f.png

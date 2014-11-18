@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ $EMAIL = oldenbor@knmi.nl ]; then
-    lwrite=true # false
+    lwrite=false # true
 fi
 
 flipcolor=0
@@ -29,6 +29,11 @@ if [ $field1 = $field2 ]; then
   . ./myvinkhead.cgi "Field lag correlations" "$kindname1 $climfield1 lag $FORM_lag" "noindex,nofollow"
 else
   . ./myvinkhead.cgi "Field-field correlations" "$kindname1 $climfield1 with $kindname2 $climfield2" "noindex,nofollow"
+fi
+
+if [ $FORM_maskout != mask -a $FORM_colourscale -gt 9 ]; then
+    echo "Drawing non-significant areas $FORM_maskout is not possible with the new colour scales, masking them out instead.<br>"
+    FORM_maskout=mask
 fi
 
 prog="$DIR/bin/correlatefieldfield $file1 $file2"

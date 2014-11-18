@@ -29,12 +29,18 @@ lighter) lighter_selected="selected";;
 esac
 
 case "$FORM_colourscale" in
+0) colourscale_0="selected";;
 1) colourscale_1="selected";;
 3) colourscale_3="selected";;
 2) colourscale_2="selected";;
 9) colourscale_9="selected";;
 8) colourscale_8="selected";;
-*) colourscale_0="selected";;
+11) colourscale_11="selected";;
+13) colourscale_13="selected";;
+12) colourscale_12="selected";;
+19) colourscale_19="selected";;
+18) colourscale_18="selected";;
+*) colourscale_10="selected";;
 esac
 
 case "$FORM_shadingtype" in
@@ -171,6 +177,12 @@ cat <<EOF
 <option value="2" $colourscale_2>grey-red-blue
 <option value="9" $colourscale_9>blue-red-grey
 <option value="8" $colourscale_8>red-blue-grey
+<option value="10" $colourscale_10>new blue-grey-red
+<option value="11" $colourscale_11>new red-grey-blue
+<option value="13" $colourscale_13>new grey-red
+<option value="12" $colourscale_12>new grey-blue
+<option value="18" $colourscale_18>new red-grey
+<option value="19" $colourscale_19>new blue-grey
 </select>
 EOF
 echo "<td><a href=\"javascript:pop_page('help/colours.shtml',284,450)\"><img src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
