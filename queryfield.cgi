@@ -270,7 +270,7 @@ cru31_vap_25) file=CRUData/cru_ts_3_10_vap_25.nc;kindname="CRU TS3.10";climfield
 hadcruh_q) file=CRUData/CRU_blendnewjul08_q_7303cf.nc;kindname="HadCRUH";climfield="specific humidity";flipcolor=1;;
 hadcruh_rh) file=CRUData/CRU_blendnewjul08_RH_7303cf.nc;kindname="HadCRUH";climfield="relative humidity";flipcolor=1;;
 
-ensembles_05_tg) file=ENSEMBLES/tg_0.50deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
+ensembles_05_tg_mo) file=ENSEMBLES/tg_0.50deg_reg_v10.0u_extended.nc;kindname="CRU TS/E-OBS 10.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
 ensembles_025_tg) file=ENSEMBLES/tg_0.25deg_reg_v10.0u.nc;kindname="E-OBS 10.0";climfield="Tmean";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
