@@ -206,7 +206,7 @@ else
             endif
           endif
 * make the range symmetric if close to it
-          if ( flipped < 2 )
+          if ( flipped = 0 | flipped = 1 | flipped = 10 | flipped = 11 )
             say 'Symmetric colourbar 'flipped
             s = cmax+cmin
             if ( s < 0 )
@@ -258,6 +258,7 @@ else
   'set geotiff 'file
   endif
 endif
+* "new" colours from http://www.colorbrewer2.org
 if ( flipped = 10 | flipped = 11 )
 'set rgb 50 248 248 248'
 'set rgb 34  49  54 149'
@@ -274,29 +275,21 @@ if ( flipped = 10 | flipped = 11 )
 else
 if ( flipped = 13 | flipped = 18 )
 'set rgb 50 248 248 248'
-'set rgb 21 255 247 236'
-'set rgb 22 254 232 200'
-'set rgb 23 253 212 158'
-'set rgb 24 253 187 132'
-'set rgb 25 252 141  89'
-'set rgb 26 239 101  72'
-'set rgb 27 215  48  31'
-'set rgb 28 179   0   0'
-'set rgb 29 127   0   0'
-'set rgb 30  63   0   0'
+'set rgb 21 254 240 217'
+'set rgb 22 253 212 158'
+'set rgb 23 253 187 132'
+'set rgb 24 252 141 89'
+'set rgb 25 227 74 51'
+'set rgb 26 179 0 0'
 else
 if ( flipped = 12 | flipped = 19 )
 'set rgb 50 248 248 248'
-'set rgb 21 255 247 251'
-'set rgb 22 236 231 242'
-'set rgb 23 208 209 230'
-'set rgb 24 166 189 219'
-'set rgb 25 116 169 207'
-'set rgb 26  54 144 192'
-'set rgb 27   5 112 176'
-'set rgb 28   4  90 141'
-'set rgb 29   2  56  88'
-'set rgb 30   0   0  40'
+'set rgb 21 241 238 246'
+'set rgb 22 208 209 230'
+'set rgb 23 166 189 219'
+'set rgb 24 116 169 207'
+'set rgb 25 43 140 190'
+'set rgb 26 4 90 141'
 else
 'set rgb 50 222 222 222'
 * insert output from ligtcolour below
@@ -344,7 +337,7 @@ rbcols1='set rbcols 11  3 10  7 12  8  2  6  9 14  4 50'
 else
 if ( flipped = 19 )
 say 'new blue - grey colourbar'
-rbcols1='set rbcols  1 30 29 28 27 26 25 24 23 22 21 50'
+rbcols1='set rbcols  26 25 24 23 22 21 50'
 else
 if ( flipped = 8 )
 say 'red - blue - grey colourbar'
@@ -352,7 +345,7 @@ rbcols1='set rbcols  9  6  2  8 12  7 10  3 11  4 14 50'
 else
 if ( flipped = 18 )
 say 'new red - grey colourbar'
-rbcols1='set rbcols  1 30 29 28 27 26 25 24 23 22 21 50'
+rbcols1='set rbcols 26 25 24 23 22 21 50'
 else
 if ( flipped = 7 )
 rbcols1='set rbcols 6 2 8 12 7 10 3 50'
@@ -374,7 +367,7 @@ rbcols3='set rbcols 90 81 73 80 77 82 78 72 76 79 84 74'
 else
 if ( flipped = 13 ) 
 say 'new grey - red colourbar'
-rbcols1='set rbcols 50 21 22 23 24 25 26 27 28 29 30 1'
+rbcols1='set rbcols 50 21 22 23 24 25 26'
 else
 if ( flipped = 2 ) 
 say 'grey - red - blue colourbar'
@@ -384,7 +377,7 @@ rbcols3='set rbcols 90 79 76 72 78 82 77 80 73 81 74 84'
 else
 if ( flipped = 12 ) 
 say 'grey - blue colourbar'
-rbcols1='set rbcols 50 21 22 23 24 25 26 27 28 29 30 1'
+rbcols1='set rbcols 50 21 22 23 24 25 26'
 else
 if ( flipped = 1 )
 say 'red - grey - blue colourbar'
@@ -424,14 +417,18 @@ endif
 *
 if ( cint != '' )
 ***say 'set clevs 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+5*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax
+if ( flipped > 11 )
+setclevs='set clevs 'cmin' 'cmin+2*cint' 'cmin+4*cint' 'cmin+6*cint' 'cmin+8*cint' 'cmax
+else
 setclevs='set clevs 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+5*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax
+endif
 else
 if ( clevs != NULL )
 ***say 'clevs were already set at 'clevs
 setclevs='set clevs 'clevs
 else
 if ( scale = lin )
-if ( flipped = 0 | flipped = 1 | flipped = 6 | flipped = 8 | flipped = 9 )
+if ( flipped = 0 | flipped = 1 | flipped = 6 | flipped = 8 | flipped = 9 | flipped = 10 | flipped = 11 )
 ***say 'set clevs -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' 0 '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval
 setclevs='set clevs -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' 0 '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval
 else

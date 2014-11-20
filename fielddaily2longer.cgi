@@ -104,6 +104,12 @@ else
     testfile=$outfile
 fi
 
+if [ "$FORM_addoption" = add_trend -o "$FORM_addoption" = add_clim ]; then
+    echo "Due to a problem with a software license (don''t ask) the option $FORM_addoption cannot be computed today"
+    . ./myvinkfoot.cgi
+    exit
+fi
+
 [ "$lwrite" = true ] && echo "c=$c<br>file=$file<br>testfile = $testfile<br>outfile=$outfile<br>"
 if [ ! -s $testfile.ctl -o $testfile.ctl -ot $file ]; then
     if [ -s $testfile.ctl ]; then
