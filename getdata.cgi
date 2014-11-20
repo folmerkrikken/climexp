@@ -201,8 +201,9 @@ if [ -s $firstfile ]; then
     ( ./bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > ./data/$TYPE$WMO.txt ) 2>&1
     c=`cat $DIR/data/$TYPE$WMO.txt | fgrep -v '#' | wc -l`
     if [ $c -eq 0 ]; then
+      mv data/$TYPE$WMO.dat data/$TYPE$WMO.dat.wrong
       echo "No valid data were found.  Please check your choices on the previous page.<br>"
-      echo "Having a look at the <a href=\"data/$TYPE$WMO.dat\">raw data</a> might help."
+      echo "Having a look at the <a href=\"data/$TYPE$WMO.dat.wrong\">raw data</a> might help."
       if [ "${PROG#get_index}" != "$PROG" ]; then
       	echo "<p>Often, this is caused by selecting an area without data, for instance a sea area in a dataset with only land data or the other way around."
       	echo "You can make a map of the mean values in the region (<a href=\"http://127.0.0.1:81/getmomentsfieldform.cgi?id=$EMAIL&field=$FORM_field\">Compute mean, s.d. or extremes</a>) to determine where the dataset has data."
