@@ -202,6 +202,7 @@ if [ -s $firstfile ]; then
     c=`cat $DIR/data/$TYPE$WMO.txt | fgrep -v '#' | wc -l`
     if [ $c -eq 0 ]; then
       mv data/$TYPE$WMO.dat data/$TYPE$WMO.dat.wrong
+      [ -f data/$TYPE$WMO.nc ] && rm data/$TYPE$WMO.nc
       echo "No valid data were found.  Please check your choices on the previous page.<br>"
       echo "Having a look at the <a href=\"data/$TYPE$WMO.dat.wrong\">raw data</a> might help."
       if [ "${PROG#get_index}" != "$PROG" ]; then

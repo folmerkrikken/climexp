@@ -33,7 +33,7 @@ do
   i=$((i+1))
   WMO=$scriptname$i
   numberinuse=false
-  if [ -f ./data/$TYPE$WMO.dat -o -f ./data/$TYPE${WMO}_00.dat ]; then
+  if [ -f ./data/$TYPE$WMO.dat -o -f ./data/$TYPE$WMO.nc -o -f ./data/$TYPE${WMO}_00.dat -o -f ./data/$TYPE${WMO}_00.nc ]; then
     numberinuse=true
   else
     metadata=`echo ./data/$TYPE${WMO}.*.inf | tr " " "\n" |head -1`
