@@ -434,7 +434,7 @@ set ylabel "CDF"
 set datafile missing '-999.900'
 set key $bottomtop
 set logscale x
-set xrange [0.01:100]
+set xrange [0.001:1000]
 set yrange [0:1]
 set ytics (0,0.1,0.25,0.5,0.75,0.9,1)
 plot "$probfile" u 4:1 notitle with lines lt 1
