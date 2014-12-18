@@ -64,6 +64,7 @@ esac
 case ${FORM_addoption:-add_anom} in
     add_clim) add_clim="checked";;
     add_trend) add_trend="checked";;
+    add_persist) add_persist="checked";;
     add_damp) add_damp="checked";;
     *) add_anom="checked";;
 esac    
@@ -129,7 +130,8 @@ Threshold:
 </td></tr><tr><td>Missing data:</td><td>
 <input  type="radio" class="formradio" name="addoption" value="add_anom" $add_anom>ignore, 
 <input  type="radio" class="formradio" name="addoption" value="add_clim" $add_clim>climatology,
-<input  type="radio" class="formradio" name="addoption" value="add_trend" $add_trend>trend<!--, 
+<input  type="radio" class="formradio" name="addoption" value="add_trend" $add_trend>trend, 
+<input  type="radio" class="formradio" name="addoption" value="add_persist" $add_persist>persistence<!--, 
 <input  type="radio" class="formradio" name="addoption" value="add_damp" $add_damp>damped persistence-->.
 
 </td></tr><tr><td colspan="2">
