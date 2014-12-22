@@ -189,7 +189,7 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 -->
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=YorkData/had4_krig_v2_0_0&STATION=CowtanWay_global_temperature&TYPE=i&id=$EMAIL">HadCRUT4 filled in with kriging</a> (1850-now, Cowtan and Way)</div>
-<td><a href="wipefeet.cgi?"http://www-users.york.ac.uk/~kdc3/papers/coverage2013/series.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<td><a href="wipefeet.cgi?http://www-users.york.ac.uk/~kdc3/papers/coverage2013/series.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink">1850-now <a href="getindices.cgi?WMO=BerkeleyData/t2m_land_ocean_best&STATION=Berkeley_land_ocean_temperature&TYPE=i&id=$EMAIL">Land-ocean temperature</a>, 1750-now <a href="getindices.cgi?WMO=BerkeleyData/t2m_land_best&STATION=Berkeley_land_temperature&TYPE=i&id=$EMAIL">land temperature</a> Berkeley</div>
 <td><a href="wipefeet.cgi?http://www.berkeleyearth.org" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>

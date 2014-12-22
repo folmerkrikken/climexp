@@ -5,7 +5,7 @@
 # necessary to be in compliance with EU privacy regulations...
 #
 # more strict checking than proccgi:
-QUERY_STRING=`echo $QUERY_STRING | tr -cd '[:alnum:]?:/._=#-'`
+QUERY_STRING=`echo $QUERY_STRING | tr -cd '[:alnum:]?:/._=#~-'`
 [ -z "$SERVER_NAME" ] && echo "QUERY_STRING=$QUERY_STRING"
 c=`echo $QUERY_STRING | egrep -c 'games|sex|gossip|fake|[^a-z]sms|\.net|\.com|\.se'`
 [ -z "$SERVER_NAME" ] && echo "c=$c"
