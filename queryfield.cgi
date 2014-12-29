@@ -178,7 +178,6 @@ ncrutem3) file=CRUData/CRUTEM3_nobs_ce.nc;kindname="CRUTEM3";climfield="number o
 crutem3v) file=CRUData/CRUTEM3v_ce.nc;kindname="CRUTEM3v";climfield="T2m anom";;
 crutem4) file=CRUData/CRUTEM.4.3.0.0.anomalies.nc;kindname="CRUTEM4.3";climfield="T2m anom";;
 crutem4v) file=CRUData/CRUTEM.4.3.0.0.variance_adjusted.nc;kindname="CRUTEM4.3v";climfield="T2m anom";;
-crutem3_hadsst2) file=CRUData/crutem3_hadsst2.ctl;kindname="CRUTEM3+HadSST2";climfield="T2m/SST anom";;
 giss_temp_250) file=NASAData/giss_temp_both_250.nc;kindname="GISS 250";climfield="T2m/SST anom";LSMASK=NASAData/lsmask.nc;;
 giss_temp_land_250) file=NASAData/giss_temp_land_250.nc;kindname="GISS 250";climfield="T2m anom";LSMASK=NASAData/lsmask.nc;;
 giss_temp_1200) file=NASAData/giss_temp_both_1200.nc;kindname="GISS 1200";climfield="T2m/SST anom";LSMASK=NASAData/lsmask.nc;;
@@ -366,7 +365,7 @@ hadslp1.0) file=UKMOData/hadslp1_0.ctl;kindname="HadSLP1.0";climfield="SLP";;
 hadslp2r) file=UKMOData/hadslp2r.ctl;kindname="HadSLP2r";climfield="SLP";;
 hadslp2.0) file=UKMOData/hadslp2_0.ctl;kindname="HadSLP2.0";climfield="SLP";;
 hadsst2) file=UKMOData/hadsst2.ctl;kindname="HadSST2";climfield="SSTa";;
-hadsst3) file=UKMOData/HadSST.3.1.0.0.median.nc;kindname="HadSST3100";climfield="SSTa";;
+hadsst3) file=UKMOData/HadSST.3.1.1.0.median.nc;kindname="HadSST3110";climfield="SSTa";;
 hadisst1) file=UKMOData/hadisst1.ctl;kindname="HadISST1";climfield="SST";;
 hadisst1_ice) file=UKMOData/HadISST_ice.nc;kindname="HadISST1";climfield="ice";;
 gisst22) file=UKMOData/gisst22_sst.ctl;kindname="GISST2.2";climfield="SST";;
