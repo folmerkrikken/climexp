@@ -44,9 +44,6 @@ if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
   WMO=${WMO}$FORM_lgt$FORM_cut$FORM_typecut
   NAME="$NAME $FORM_lgt$FORM_cut$FORM_typecut"
 fi
-if [ -n "$FORM_minfac" ]; then
-    corrargs="$corrargs minfac $FORM_minfac"
-fi
 if [ -n "$FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
     corrargs="$corrargs ave $FORM_sum"
     WMO=${WMO}_${FORM_sum}v
@@ -55,6 +52,10 @@ fi
 if [ -n "$FORM_addoption" ]; then
     corrargs="$corrargs $FORM_addoption"
     WMO=${WMO}_${FORM_addoption#add_}
+fi
+if [ -n "$FORM_minfac" ]; then
+    corrargs="$corrargs minfac $FORM_minfac"
+    WMO=${WMO}_${FORM_minfac}
 fi
 
 PROG="daily2longer.sh $corrargs"
