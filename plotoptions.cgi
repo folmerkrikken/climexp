@@ -171,18 +171,18 @@ echo "<td><a href=\"javascript:pop_page('help/contour.shtml',852,450)\"><img src
 echo '<tr><td>Colours:<td>' 
 cat <<EOF
 <select class="forminput" name="colourscale">
-<option value="0" $colourscale_0>blue-grey-red
-<option value="1" $colourscale_1>red-grey-blue
-<option value="3" $colourscale_3>grey-blue-red
-<option value="2" $colourscale_2>grey-red-blue
-<option value="9" $colourscale_9>blue-red-grey
-<option value="8" $colourscale_8>red-blue-grey
-<option value="10" $colourscale_10>new blue-grey-red
-<option value="11" $colourscale_11>new red-grey-blue
-<option value="13" $colourscale_13>new grey-red
-<option value="12" $colourscale_12>new grey-blue
-<option value="18" $colourscale_18>new red-grey
-<option value="19" $colourscale_19>new blue-grey
+<option value="10" $colourscale_10>blue-grey-red
+<option value="11" $colourscale_11>red-grey-blue
+<option value="13" $colourscale_13>grey-red
+<option value="12" $colourscale_12>grey-blue
+<option value="18" $colourscale_18>red-grey
+<option value="19" $colourscale_19>blue-grey
+<option value="0" $colourscale_0>old blue-grey-red
+<option value="1" $colourscale_1>old red-grey-blue
+<option value="3" $colourscale_3>old grey-blue-red
+<option value="2" $colourscale_2>old grey-red-blue
+<option value="9" $colourscale_9>old blue-red-grey
+<option value="8" $colourscale_8>old red-blue-grey
 </select>
 EOF
 echo "<td><a href=\"javascript:pop_page('help/colours.shtml',284,450)\"><img src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
