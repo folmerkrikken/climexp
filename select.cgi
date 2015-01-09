@@ -198,6 +198,24 @@ if [ -n "$ENSEMBLE" ]; then
 EOF
 fi
 
+if [ "$EMAIL" != someone@somewhere ]; then
+    prefs=prefs/$EMAIL.anomalies
+    if [ -s $prefs ]; then
+        eval `egrep '^FORM_[a-z0-9]*=[-+.@/a-zA-Z0-9]*;$' $prefs`
+    fi
+fi
+cat <<EOF
+<p><div class="formheader">Compute anomalies</div>
+<div class='formbody'>
+<form action="fieldanomalies.cgi" method="POST">
+<input type="hidden" name="EMAIL" value="$EMAIL">
+<input type="hidden" name="field" value="$FORM_field">
+<input type="$number" min=1 max=2500 step=1 name="climyear1" size="4"  style="width: 5em;" value="${FORM_climyear1:-1981}">-<input type="$number" min=1 max=2500 step=1 name="climyear2" size="4" style="width: 5em;" value="${FORM_climyear2:-2010}">
+<input type="submit" class="formbutton" value="Generate anomaly field">
+</form>
+</div>
+EOF
+
 if [ -n "$NY" -a "$NY" != 1 ]; then
   cat <<EOF
 <p><div class="formheader">Compute zonal mean</div>
