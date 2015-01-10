@@ -204,7 +204,9 @@ if [ "$EMAIL" != someone@somewhere ]; then
         eval `egrep '^FORM_[a-z0-9]*=[-+.@/a-zA-Z0-9]*;$' $prefs`
     fi
 fi
-cat <<EOF
+
+if [ $NPERYEAR = 12 ]; then
+    cat <<EOF
 <p><div class="formheader">Compute anomalies</div>
 <div class='formbody'>
 <form action="fieldanomalies.cgi" method="POST">
@@ -215,6 +217,7 @@ cat <<EOF
 </form>
 </div>
 EOF
+fi
 
 if [ -n "$NY" -a "$NY" != 1 ]; then
   cat <<EOF
