@@ -237,7 +237,11 @@ EOF
 fi
 
 if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; then
-	title="$seriesmonth $CLIM $station"
+    if [ -n "$FORM_normsd" -a \( -n "$ENSEMBLE" -o $TYPE = set \) ]; then
+	    title="$seriesmonth $CLIM normalised $station"
+    else
+	    title="$seriesmonth $CLIM $station"
+	fi
 	if [ -n "$yrstart" ]; then
 		title="$title ${yrstart}:${yrstop}"
 	elif [ -n "$FORM_end" ]; then

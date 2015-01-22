@@ -73,6 +73,10 @@ if [ -n "$FORM_changesign" ]; then
   changesign_checked="checked"
 fi
 
+if [ -n "$FORM_normsd" ]; then
+  normsd_checked="checked"
+fi
+
 case ${FORM_restrain:-0} in
 0.5) select05=selected;;
 0.4) select04=selected;;
@@ -163,7 +167,15 @@ cat <<EOF
 <option value="0.3" $select03>constrain shape to &plusmn;0.3
 <option value="0.2" $select02>constrain shape to &plusmn;0.2
 </select> of GEV and GPD
-<tr><td>Assume:<td>The PDF <input type="radio" class="formradio" name="assume" value="shift" $assume_shift>shifts, <input type="radio" class="formradio" name="assume" value="scale" $assume_scale>scales or <input type="radio" class="formradio" name="assume" value="both" $assume_both>both with the covariate<td><a href="javascript:pop_page('help/assume.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+<tr><td>Assume:<td>the PDF <input type="radio" class="formradio" name="assume" value="shift" $assume_shift>shifts, <input type="radio" class="formradio" name="assume" value="scale" $assume_scale>scales or <input type="radio" class="formradio" name="assume" value="both" $assume_both>both with the covariate<td><a href="javascript:pop_page('help/assume.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+EOF
+if [ -n "$ENSEMBLE" -o $TYPE = set ]; then
+    cat <<EOF
+<tr><td>Normalise:
+<td><input type="checkbox" class="formcheck" name="normsd" $normsd_checked>all series to the same mean<td><a href="javascript:pop_page('help/normaliseseries.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+EOF
+fi
+cat <<EOF
 <tr><td>Return time:<td>year <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$FORM_year"> (with value <input type="text" class="forminput" name="xyear" $textsize6 value="$FORM_xyear">)
 <tr><td>Compare:<td>return time if it had occurred in year <input type="$number" min=1 max=2500 step=1 class="forminput" name="begin2" $textsize4 value="$FORM_begin2">
 EOF
