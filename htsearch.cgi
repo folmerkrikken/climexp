@@ -2,7 +2,7 @@
 # according to the manual, setting the environment variable should work
 # but it does not for me.  The third method in the FAQ does work
 . ./getargs.cgi
-export CONFIG_DIR=/data/climexp/climexp/htdig/
+export CONFIG_DIR=/data/storage/climexp/htdig/
 unset REQUEST_METHOD
 ###debug=true
 if [ -n "$debug" ]; then
