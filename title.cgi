@@ -43,7 +43,7 @@ if [ ${NPERYEAR:-12} != 12 ]; then
       else
         seriesmonth="${FORM_sum}$timescale"
       fi
-    else
+    elif [ ${FORM_sum:-1} != 1 ]; then
       indexmonth=$timely
       if [ -n "$seriesmonth" ]; then
         seriesmonth="${FORM_sum}$timescale $seriesmonth"

@@ -106,9 +106,10 @@ elif [ "$index" = time ]; then
   corrargs="$FORM_listname $plotlist $fullprog $FORM_var time"
 elif [ -z "$FORM_timeseries" -a -z "$FORM_field" ]; then
   corrargs="$FORM_listname $plotlist $fullprog au$FORM_var"
-elif [ $FORM_type != attribute ]; then
+elif [ "$FORM_type" != attribute ]; then
   corrargs="$FORM_listname $plotlist $fullprog $FORM_var file $sfile"
 fi
+
 # prevent getopts from switching to running correlations
 # if these have not been selected explicitly
 FORM_num=$$
