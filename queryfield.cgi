@@ -218,6 +218,7 @@ prcp_trmm_lo) file=TRMMData/prcp_trmm_lo.nc;kindname="TRMM+GPCC";climfield="prec
 prcp_trmm_1) file=TRMMData/prcp_trmm_1.nc;kindname="TRMM";climfield="precipitation";flipcolor=11;;
 prcp_trmm_1_lo) file=TRMMData/prcp_trmm_1_lo.nc;kindname="TRMM";climfield="precipitation";flipcolor=11;LSMASK=TRMMData/lsmask_trmm_1.nc;;
 cmorph_daily_05) file=NCEPData/cmorph_daily_05.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
+cmorph_daily) file=NCEPData/cmorph_daily.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
 ssmi_1) file=NCDCData/ssmi_1.ctl;kindname="NCDC SSMI/I";climfield="precipitation";flipcolor=11;;
 hulme) file=CRUData/hulme23.ctl;kindname="CRU";climfield="precipitation";flipcolor=11;;
 hulme-nino3) file=CRUData/hulme23-nino3.ctl;kindname="CRU";climfield="precipitation - nino3";flipcolor=11;;
