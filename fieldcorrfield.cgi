@@ -60,7 +60,19 @@ else
   NO_CO2=true
   NO_CSM=true
 fi
-
+if [ $NPERYEAR -ge 360 ]; then
+    daily=daily
+elif [ $NPERYEAR = 12 ]; then
+    daily=""
+else
+    # only user-defined fields
+    NO_OBS=true
+    NO_REA=true
+    NO_SEA=true
+    NO_CO2=true
+    anotherfield="a user-defined field"
+fi
+    
 . ./myvinkhead.cgi "Pointwise correlations with $anotherfield" "$kindname $climfield" "noindex,nofollow"
 
 cat << EOF
@@ -72,7 +84,7 @@ EOF
 if [ -z "$NO_OBS" ]; then
   echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="4">Observations</th></tr>'
-  sed -e "s/EMAIL/$EMAIL/" selectfield_obs.html 
+  sed -e "s/EMAIL/$EMAIL/" select${daily}field_obs.html 
   echo '</table>'
 fi
 hiddenstyle_erainterim="style=\"display: none;\""
@@ -89,13 +101,13 @@ if [ -z "$NO_REA" ]; then
     -e "s/hiddenstyle_ncepncar/$hiddenstyle_ncepncar/" \
     -e "s/hiddenstyle_ncepdoe/$hiddenstyle_ncepdoe/" \
     -e "s/hiddenstyle_20c/$hiddenstyle_20c/" \
-    ./selectfield_rea.html
+    ./select${daily}field_rea.html
   echo '</table>'
 fi
 if [ -z "$NO_SEA" ]; then
   echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="13">Seasonal forecasts ensemble means</th></tr>'
-  cat $DIR/selectfield_sea.html
+  cat $DIR/select${daily}field_sea.html
   echo '</table>'
 fi
 if [ -z "$NO_CSM" ]; then
