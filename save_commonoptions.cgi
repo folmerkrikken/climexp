@@ -31,6 +31,7 @@ FORM_dlt=$FORM_dlt;
 FORM_log=$FORM_log;
 FORM_sqrt=$FORM_sqrt;
 FORM_square=$FORM_square;
+FORM_twothird=$FORM_twothird;
 FORM_rank=$FORM_rank;
 FORM_conting=$FORM_conting;
 FORM_decor=$FORM_decor;

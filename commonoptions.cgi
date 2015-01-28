@@ -202,6 +202,9 @@ fi
 if [ -n "$FORM_square" ]; then
   square_checked="checked"
 fi
+if [ -n "$FORM_twothird" ]; then
+  square_twothird="checked"
+fi
 if [ -n "$FORM_rank" ]; then
   rank_checked="checked"
 fi
@@ -548,6 +551,7 @@ fi
 echo "<tr><td>Apply: <td><input type=\"checkbox\" class=\"formcheck\" name=\"log\" $log_checked>logarithm, "
 printf "<input type=\"checkbox\" name=\"sqrt\" class=\"formcheck\" $sqrt_checked>sqrt"
 [ -n "$INCLUDE_SQUARE" ] && echo ", <input type=\"checkbox\" name=\"square\" class=\"formcheck\" $square_checked>square"
+[ -n "$INCLUDE_TWOTHIRD" ] && echo ", <input type=\"checkbox\" name=\"twothird\" class=\"formcheck\" $thwothird_checked>power 2/3"
 echo " to $NAME $station"
 echo "<td><a href=\"javascript:pop_page('help/logsqrt.shtml',286,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
 if [ -z "$ONLYONE" -a -z "$norun" ]; then
