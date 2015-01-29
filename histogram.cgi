@@ -13,6 +13,7 @@ NPERYEAR=$FORM_NPERYEAR
 STATION=$FORM_STATION
 NAME=$FORM_NAME
 prog=$NAME
+FORM_dgt=${FORM_dgt%%%}
 FORM_dgt=${FORM_dgt}%
 extraargs="$FORM_extraargs"
 if [ -n "$extraargs" ]; then
@@ -46,8 +47,10 @@ if [ $TYPE = set ]; then
     	corrargs="file $WMO $NAME"
 	fi
 	WMO=`basename $WMO .txt`
+elif [ $TYPE = setmap ]; then
+    corrargs="" # the filename will be filled in by stationlist
 else
-	corrargs="$DIR/data/$TYPE$WMO.dat"
+	corrargs="./data/$TYPE$WMO.dat"
 fi
 corrargs="$corrargs $FORM_nbin fit $FORM_fit hist $FORM_plot"
 n=0
@@ -55,23 +58,7 @@ n=0
 
 if [ $EMAIL != someone@somewhere ]; then
 	. ./save_commonoptions.cgi
-	cat > ./prefs/$EMAIL.histogramoptions <<EOF
-FORM_plot=$FORM_plot;
-FORM_nbin=$FORM_nbin;
-FORM_changesign=$FORM_changesign;
-FORM_restrain=$FORM_restrain;
-FORM_year=$FORM_year;
-FORM_xyear=$FORM_xyear;
-FORM_assume=$FORM_assume;
-FORM_begin2=$FORM_begin2;
-FORM_decor=$FORM_decor;
-FORM_fit=$FORM_fit;
-FORM_dgt=$FORM_dgt;
-FORM_xlo=$FORM_xlo;
-FORM_xhi=$FORM_xhi;
-FORM_ylo=$FORM_ylo;
-FORM_yhi=$FORM_yhi;
-EOF
+    . ./save_histogramoptions.cgi
 fi
 
 if [ $FORM_plot = "qq" ]; then
@@ -113,15 +100,28 @@ root=data/h${TYPE}${WMO}_$$
 [ -f pid/$$.$EMAIL ] && rm pid/$$.$EMAIL
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
+ok=false
+n=1
+while [ $ok != true ]; do # sometimes the most recent series does not have data...
+    if [ $TYPE = set ]; then
+        f=`ls -t ./data/${NAME}*$FORM_extraargs.dat|head -n $n | tail -n 1`
+    else
+        f=./data/$TYPE$WMO.dat
+    fi
+    if [ $NPERYEAR -gt 12 ]; then
+        eval `./bin/getunits.sh $f`
+    else
+        eval `./bin/getunits $f`
+    fi
+    if [ $NPERYEAR = 0 ]; then
+        n=$((n+1))
+    else
+        ok=true
+    fi
+done
 . ./month2string.cgi
-if [ $TYPE = set ]; then
-    file=`ls -t /data/${NAME}*.dat|head -1`
-	eval `./bin/getunits $file`
-else
-	eval `./bin/getunits ./data/$TYPE$WMO.dat`
-fi
-###echo "NPERYEAR=$NPERYEAR<br>"
 . ./setyaxis.cgi
+
 echo "<tr><th colspan="3">$seriesmonth $station $VAR [$UNITS]</th></tr>"
 tail -n +2 "$root.txt" | grep '<tr>' | sed -e 's/#//'
 echo '</table>'
@@ -155,6 +155,11 @@ if [ -n "$FORM_square" ]; then
     ylabel="${ylabel}^2"
     [ -n "$FORM_ylo" ] && ylo=`echo "$ylo * $ylo" | bc -l`
     [ -n "$FORM_yhi" ] && yhi=`echo "$yhi * $yhi" | bc -l`
+fi
+if [ -n "$FORM_twothird" ]; then
+    ylabel="${ylabel}^(2/3)"
+    [ -n "$FORM_ylo" ] && ylo=`echo "exp(2/3*l($ylo)" | bc -l`
+    [ -n "$FORM_yhi" ] && yhi=`echo "exp(2/3*l($yhi)" | bc -l`
 fi
 
 if [ -s "$startstop" ]; then

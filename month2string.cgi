@@ -26,6 +26,6 @@ else
 fi
 if [ -n "$FORM_sel" ]; then
     if [ -n "$FORM_sum" ]; then
-	seriesmonth="$seriesmonth ${FORM_sum}-${period} ave"
+	    seriesmonth="$seriesmonth ${FORM_sum}-${period} ave"
     fi
 fi

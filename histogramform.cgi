@@ -98,6 +98,7 @@ save_name=$NAME
 NAME=series
 DECOR=true
 INCLUDE_SQUARE=true
+INCLUDE_TWOTHIRD=true
 . ./commonoptions.cgi
 NAME=$save_name
 

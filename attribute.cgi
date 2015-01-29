@@ -170,6 +170,7 @@ else
 fi
 . ./month2string.cgi
 . ./setyaxis.cgi
+
 echo "<tr><th colspan="4">$seriesmonth $station $VAR [$UNITS] dependent on $covstation</th></tr>"
 tail -n +2 "$root.txt" | grep '<tr>' | sed -e 's/#//'
 echo '</table>'
@@ -185,9 +186,30 @@ if [ $c -lt 20 ]; then
 fi
 
 ylabel_save=$ylabel
-[ -n "$FORM_log" ] && ylabel="log $ylabel"
-[ -n "$FORM_sqrt" ] && ylabel="sqrt $ylabel"
-[ -n "$FORM_square" ] && ylabel="${ylabel}^2"
+ylo_save=$FORM_ylo
+yhi_save=$FORM_yhi
+ylo=$FORM_ylo
+yhi=$FORM_yhi
+if [ -n "$FORM_log" ]; then
+    ylabel="log $ylabel"
+    [ -n "$FORM_ylo" -a "$FORM_ylo" != "0" ] && ylo=`echo "l($ylo)/l(10)" | bc -l`
+    [ -n "$FORM_yhi" -a "$FORM_yhi" != "0" ] && yhi=`echo "l($yhi)/l(10)" | bc -l`
+fi
+if [ -n "$FORM_sqrt" ]; then
+    ylabel="sqrt $ylabel"
+    [ -n "$FORM_ylo" ] && ylo=`echo "sqrt($ylo)" | bc -l`
+    [ -n "$FORM_yhi" ] && yhi=`echo "sqrt($yhi)" | bc -l`
+fi
+if [ -n "$FORM_square" ]; then
+    ylabel="${ylabel}^2"
+    [ -n "$FORM_ylo" ] && ylo=`echo "$ylo * $ylo" | bc -l`
+    [ -n "$FORM_yhi" ] && yhi=`echo "$yhi * $yhi" | bc -l`
+fi
+if [ -n "$FORM_twothird" ]; then
+    ylabel="${ylabel}^(2/3)"
+    [ -n "$FORM_ylo" ] && ylo=`echo "exp(2/3*l($ylo)" | bc -l`
+    [ -n "$FORM_yhi" ] && yhi=`echo "exp(2/3*l($yhi)" | bc -l`
+fi
 
 if [ -s "$startstop" ]; then
 	yrstart=`head -1 $startstop`
