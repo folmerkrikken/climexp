@@ -26,26 +26,34 @@ if [ "$myname" = "corfield_obs" ]; then
   NO_REA=true
   NO_SEA=true
   NO_CO2=true
-  NO_CSM=true
+  NO_AR5=true
   NO_USE=true
   anotherfield="an observation field"
 elif [ "$myname" = "corfield_rea" ]; then
   NO_OBS=true
   NO_SEA=true
   NO_CO2=true
-  NO_CSM=true
+  NO_AR5=true
   NO_USE=true
   anotherfield="a reanalysis field"
 elif [ "$myname" = "corfield_sea" ]; then
   NO_OBS=true
   NO_REA=true
   NO_CO2=true
-  NO_CSM=true
+  NO_AR5=true
   NO_USE=true
   anotherfield="a seasonal forecast field"
 elif [ "$myname" = "corfield_co2" ]; then
   NO_OBS=true
   NO_REA=true
+  NO_AR5=true
+  NO_SEA=true
+  NO_USE=true
+  anotherfield="a scenario run"
+elif [ "$myname" = "corfield_cmip5" ]; then
+  NO_OBS=true
+  NO_REA=true
+  NO_CO2=true
   NO_SEA=true
   NO_USE=true
   anotherfield="a scenario run"
@@ -54,12 +62,11 @@ elif [ "$myname" = "corfield_use" ]; then
   NO_REA=true
   NO_SEA=true
   NO_CO2=true
-  NO_CSM=true
   anotherfield="a user-defined field"
 else
   NO_SEA=true
   NO_CO2=true
-  NO_CSM=true
+  NO_AR5=true
   anotherfield="a field"
 fi
 
@@ -89,7 +96,7 @@ probmask=true
 NX=100
 NY=100
 intable=true
-. $DIR/plotoptions.cgi
+. ./plotoptions.cgi
 echo "</table>"
 echo '</div>'
 

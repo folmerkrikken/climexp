@@ -18,7 +18,7 @@ cat <<EOF
 <div class="menulink"><a href="corfield_obs.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">only observations</a></div>
 <div class="menulink"><a href="corfield_rea.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">only reanalyses</a></div>
 <div class="menulink"><a href="corfield_sea.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">only seasonal forecasts</a></div>
-<div class="menulink"><a href="corfield_co2.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">only scenario runs</a></div>
+<div class="menulink"><a href="corfield_cmip5.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">only scenario runs</a></div>
 <div class="menulink"><a href="corfield_use.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">only user-defined fields</a></div>
 </div>
 <div class="menulink"><a href="verificationform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Verify against another time series</a></div>

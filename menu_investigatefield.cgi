@@ -19,7 +19,6 @@ cat <<EOF
 <div class="menulink"><a href="fieldcorrfield_rea.cgi?id=$EMAIL&field=$FORM_field">only reanalyses</a></div>
 <div class="menulink"><a href="fieldcorrfield_sea.cgi?id=$EMAIL&field=$FORM_field">only seasonal hindcasts</a></div>
 <div class="menulink"><a href="fieldcorrfield_dec.cgi?id=$EMAIL&field=$FORM_field">only decadal hindcasts</a></div>
-<div class="menulink"><a href="fieldcorrfield_co2.cgi?id=$EMAIL&field=$FORM_field">only CMIP3+ scenario runs</a></div>
 <div class="menulink"><a href="fieldcorrfield_cmip5.cgi?id=$EMAIL&field=$FORM_field">only CMIP5 scenario runs</a></div>
 <div class="menulink"><a href="fieldcorrfield_use.cgi?id=$EMAIL&field=$FORM_field">only user-defined fields</a></div>
 </div>
@@ -28,7 +27,6 @@ cat <<EOF
 <div class="menulink"><a href="fieldcorrfield1_rea.cgi?id=$EMAIL&field=$FORM_field">only reanalyses</a></div>
 <div class="menulink"><a href="fieldcorrfield1_sea.cgi?id=$EMAIL&field=$FORM_field">only seasonal hindcasts</a></div>
 <div class="menulink"><a href="fieldcorrfield1_dec.cgi?id=$EMAIL&field=$FORM_field">only decadal hindcasts</a></div>
-<div class="menulink"><a href="fieldcorrfield1_co2.cgi?id=$EMAIL&field=$FORM_field">only CMIP3+ scenario runs</a></div>
 <div class="menulink"><a href="fieldcorrfield1_cmip5.cgi?id=$EMAIL&field=$FORM_field">only CMIP5 scenario runs</a></div>
 <div class="menulink"><a href="fieldcorrfield1_use.cgi?id=$EMAIL&field=$FORM_field">only user-defined fields</a></div>
 </div>
@@ -36,7 +34,6 @@ cat <<EOF
 <div class="menulink"><a href="svdform_obs.cgi?id=$EMAIL&field=$FORM_field">only observations</a></div>
 <div class="menulink"><a href="svdform_rea.cgi?id=$EMAIL&field=$FORM_field">only reanalyses</a></div>
 <div class="menulink"><a href="svdform_sea.cgi?id=$EMAIL&field=$FORM_field">only seasonal hindcasts</a></div>
-<div class="menulink"><a href="svdform_co2.cgi?id=$EMAIL&field=$FORM_field">only CMIP3+ scenario runs</a></div>
 <div class="menulink"><a href="svdform_cmip5.cgi?id=$EMAIL&field=$FORM_field">only CMIP5 scenario runs</a></div>
 <div class="menulink"><a href="svdform_use.cgi?id=$EMAIL&field=$FORM_field">only user-defined fields</a></div>
 </div>

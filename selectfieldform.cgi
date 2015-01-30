@@ -26,14 +26,21 @@ if [ $NPERYEAR = 12 ]; then
     ENSEMBLE=true
     echo '</table>'
   fi
-  if [ -z "$NO_CSM" ]; then
+  if [ -z "$NO_CO2" ]; then
     echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
     echo '<tr><th colspan="15">Scenario runs</th></tr>'
     fgrep -v getindices $DIR/selectfield_ipcc.html
     echo '</table>'
     ENSEMBLE=true
   fi
-elif [ $NPERYEAR = 360 -o $NPERYEAR = 366 -o $NPERYEAR = 366 ]; then
+  if [ -z "$NO_AR5" ]; then
+    echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+    echo '<tr><th colspan="15">Scenario runs</th></tr>'
+    fgrep -v getindices $DIR/selectfield_cmip5.html
+    echo '</table>'
+    ENSEMBLE=true
+  fi
+elif [ $NPERYEAR = 360 -o $NPERYEAR = 365 -o $NPERYEAR = 366 ]; then
   if [ -z "$NO_OBS" ]; then
     echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
     cat selectdailyfield_obs.html
