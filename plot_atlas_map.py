@@ -325,7 +325,10 @@ class PlotAtlasMap:
         ifiles = 0
         ###self.logOut.info("self.files = {files}<br>".format(files=self.files))
         for filename in self.files:
-            regrfile = '{root}/regr_{basename}_{regr}_{begin_fit}-{end_fit}_{season}.nc'.format(
+            # in principle the {rel} is not necessary here, but later on the 
+            # error gets the non-unique name "sd". A bit more time wasted for the user.
+            regrfile = '{root}/{rel}regr_{basename}_{regr}_{begin_fit}-{end_fit}_{season}.nc'.format(
+                rel=self.rel,
                 root=root,     
                 basename=os.path.splitext(os.path.basename(filename))[0],
                 regr=self.params.FORM_regr, 
@@ -776,7 +779,7 @@ class PlotAtlasMap:
             raise PlotMapError("Cannot find {plotfile}".format(plotfile=self.plotfile))
 
         #root = atlas/maps/$dir/`basename $plotfile .nc`
-        root = 'atlas/maps/{dir}/{basename}'.format(dir=self.dir, basename=os.path.splitext(os.path.basename(self.plotfile))[0])
+        root = 'atlas/maps/{dir}/{rel}{basename}'.format(dir=self.dir, rel=self.rel, basename=os.path.splitext(os.path.basename(self.plotfile))[0])
 
         folder = os.path.split(root)[0]
         if not os.path.exists(folder):
