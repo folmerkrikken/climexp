@@ -216,7 +216,7 @@ EOF
     type=d
   elif [ "$FORM_climate" = "becaclou" ]; then
     prog=becaclou
-    type-c
+    type=c
   elif [ "$FORM_climate" = "gdcnprcp" ]; then
     prog=gdcnprcp
     type=p
