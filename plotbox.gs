@@ -59,6 +59,7 @@ endif
 'set clevs 0'
 # black map lines
 'set map 1'
+'set grads off'
 'd null'
 *
 *  next the stations
