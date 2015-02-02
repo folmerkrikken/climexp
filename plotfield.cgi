@@ -89,7 +89,7 @@ fi
 
 if [ "$NPERYEAR" = 1 ]; then
   m=jan
-  m2=dec
+  [ -n "$FORM_year2" ] && m2=dec
 elif [ "$NPERYEAR" = 4 ]; then
   case $FORM_month in 
   1 ) m=jan;;
