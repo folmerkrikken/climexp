@@ -218,6 +218,7 @@ lsmask=yes
 echo '<tr><td>&nbsp;'
 ONLYONE=true
 NAME=field
+INCLUDE_TWOTHIRD=true
 . ./commonoptions.cgi
 
 echo "<tr><td>"
