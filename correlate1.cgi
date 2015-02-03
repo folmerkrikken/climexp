@@ -64,16 +64,28 @@ fi
 CLIM=index
 forbidden='!`;&|'
 case $FORM_timeseries in
-nino12)    station="NINO12";sfile="$DIR/NCEPData/nino2.dat";;
-nino3)     station="NINO3";sfile="$DIR/NCEPData/nino3.dat";;
-nino34)    station="NINO3.4";sfile="$DIR/NCEPData/nino5.dat";;
-nino4)     station="NINO4";sfile="$DIR/NCEPData/nino4.dat";;
-soi)       station="SOI";sfile="$DIR/CRUData/soi.dat";;
-nao)       station="NAO-Gibraltar";sfile="$DIR/CRUData/nao.dat";;
-sunspots)  station="sunspots";sfile="$DIR/SIDCData/sunspots.dat";;
-time)      station="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
-*)         station=`head -2 $FORM_timeseries | tail -1 | tr '_' ' '`
-           sfile=$DIR/`head -1 $FORM_timeseries | tr $forbidden '?'`
+  nino12)    station="NINO12";sfile="$DIR/NCEPData/nino2.dat";;
+  nino3)     station="NINO3";sfile="$DIR/NCEPData/nino3.dat";;
+  nino34)    station="NINO3.4";sfile="$DIR/NCEPData/nino5.dat";;
+  nino4)     station="NINO4";sfile="$DIR/NCEPData/nino4.dat";;
+  soi)       station="SOI";sfile="$DIR/CRUData/soi.dat";;
+  nao)       station="NAO-Gibraltar";sfile="$DIR/CRUData/nao.dat";;
+  sunspots)  station="sunspots";sfile="$DIR/SIDCData/sunspots.dat";;
+  co2)       index="CO2"
+             if [ ${NPERYEAR:-12} = 12 ]; then
+                sfile="$DIR/CDIACData/co2_monthly.dat"
+             elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
+                sfile="$DIR/CDIACData/co2_annual.dat"
+             fi;;
+  gmst)      index="GMST"
+             if [ ${NPERYEAR:-12} = 12 ]; then
+                sfile="$DIR/NASAData/giss_al_gl_m.dat"
+             elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
+                sfile="$DIR/NASAData/giss_al_gl_a_4yrlo.dat"
+             fi;;
+  time)      station="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
+  *)         station=`head -2 $FORM_timeseries | tail -1 | tr '_' ' '`
+             sfile=$DIR/`head -1 $FORM_timeseries | tr $forbidden '?'`
 	   TYPE=`basename $sfile | cut -b 1`
 	   case $TYPE in
 	   t) CLIM="temperature";;

@@ -77,6 +77,9 @@ nino4)     covstation="NINO4";sfile="$DIR/NCEPData/nino4.dat";;
 soi)       covstation="SOI";sfile="$DIR/CRUData/soi.dat";;
 nao)       covstation="NAO-Gibraltar";sfile="$DIR/CRUData/nao.dat";;
 sunspots)  covstation="sunspots";sfile="$DIR/SIDCData/sunspots.dat";;
+co2)       covstation="CO2 concentration";sfile="$DIR/CDIACData/co2_annual.dat";;
+gmst)      covstation="Global mean surface temperature (smoothed)"
+            sfile="$DIR/NASAData/giss_al_gl_a_4yrlo.dat";;
 time)      covstation="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
 *)         covstation=`head -2 $FORM_timeseries | tail -1 | tr '_' ' '`
            sfile=$DIR/`head -1 $FORM_timeseries | tr '\`#;' '?'`

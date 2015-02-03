@@ -9,12 +9,17 @@
 echo "<table class=\"realtable\" width=451 border=0 cellpadding=0 cellspacing=0>"
 echo "<tr><th><a href=\"javascript:pop_page('help/systemseries.shtml',568,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>System-defined ${timescale}timeseries</th></tr><tr><td>"
 if [ -z "$NPERYEAR" -o "$NPERYEAR" = 12 ]; then
-echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino12\">NINO1+2"
-echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino3\">NINO3"
-echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino34\">NINO3.4"
-echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino4\">NINO4"
-echo "<input type=\"checkbox\" class=\"formcheck\" name=\"soi\">SOI"
-echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nao\">NAO"
+    ###echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino12\">NINO1+2"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino3\">NINO3"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino34\">NINO3.4"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino4\">NINO4"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"soi\">SOI"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nao\">NAO"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"co2\">CO2"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"gmst\">GMST"
+elif [ $NPERYEAR = 1 -o $NPERYEAR = -1 ]; then
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"co2\">CO2"
+    echo "<input type=\"checkbox\" class=\"formcheck\" name=\"gmst\">GMST"
 fi
 echo "<input type=\"checkbox\" class=\"formcheck\" name=\"time\">time"
 echo "</td></tr><tr><th><a href=\"javascript:pop_page('help/userseries.shtml',568,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>User-defined ${timescale}timeseries</th></tr><tr><td>"

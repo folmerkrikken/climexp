@@ -6,6 +6,17 @@ n=0
 [ -n "$FORM_nino34" ] && corrargs="$corrargs nino3.4" && let n=n+1 && index="$index NINO3.4"
 [ -n "$FORM_nino4" ] && corrargs="$corrargs nino4"    && let n=n+1 && index="$index NINO4"
 [ -n "$FORM_nao" ] && corrargs="$corrargs nao"        && let n=n+1 && index="$index NAO"
+if [ ${NPERYEAR:-12} = 12 ]; then
+[ -n "$FORM_co2" ] && corrargs="$corrargs file CDIACData/co2_monthly.dat" \
+                                                      && let n=n+1 && index="$index CO2"
+[ -n "$FORM_gmst" ] && corrargs="$corrargs file NASAData/giss_al_gl_m.dat" \
+                                                      && let n=n+1 && index="$index GMST"
+elif [ $NPERYEAR = 1 -o $NPERYEAR = -1 ]; then
+[ -n "$FORM_co2" ] && corrargs="$corrargs file CDIACData/co2_annual.dat" \
+                                                      && let n=n+1 && index="$index CO2"
+[ -n "$FORM_gmst" ] && corrargs="$corrargs file NASAData/giss_al_gl_a_4yrlo.dat" \
+                                                      && let n=n+1 && index="$index smoothed_GMST"
+fi
 [ -n "$FORM_time" ] && corrargs="$corrargs time"      && let n=n+1 && index="$index time"
 
 if [ -n "$EMAIL" -a $EMAIL != someone@somewhere ]; then
@@ -18,6 +29,8 @@ if [ -n "$EMAIL" -a $EMAIL != someone@somewhere ]; then
   [ -n "$FORM_nino34" ] && echo nino34 >> $prefs
   [ -n "$FORM_nino4" ] &&  echo nino4  >> $prefs
   [ -n "$FORM_nao" ] &&    echo nao    >> $prefs
+  [ -n "$FORM_co2" ] &&    echo co2    >> $prefs
+  [ -n "$FORM_gmst" ] &&   echo gmst   >> $prefs
   [ -n "$FORM_time" ] &&   echo time   >> $prefs
 fi
 
