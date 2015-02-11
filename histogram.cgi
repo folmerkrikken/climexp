@@ -279,6 +279,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	if [ -n "$FORM_detrend" ]; then
 		title="$title (detrend)"
 	fi
+	title="$title (${FORM_ci}% CI)"
 	xtics=`fgrep '#@' $root.txt | sed -e 's/^#@ //'`
 	if [ -n "$FORM_xlo" ]; then
 		case $FORM_plot in

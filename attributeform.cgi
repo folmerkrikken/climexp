@@ -190,8 +190,8 @@ EOF
 fi
 if [ "$TYPE" != setmap ]; then
     cat <<EOF
-<tr><td>Plot range:<td>X <input type="$number" step=any class="forminput" name="xlo" size="4" style="width: 5em;" value="$FORM_xlo">:<input type="$number" step=any class="forminput" name="xhi" size="4" style="width: 5em;" value="$FORM_xhi">,
-Y <input type="$number" step=any class="forminput" name="ylo" size="4" style="width: 5em;" value="$FORM_ylo">:<input type="$number" step=any class="forminput" name="yhi" size="4" style="width: 5em;" value="$FORM_yhi">
+<tr><td>Plot range:<td>X <input type="$number" step=any class="forminput" name="xlo" $textsize4 value="$FORM_xlo">:<input type="$number" step=any class="forminput" name="xhi" $textsize4 value="$FORM_xhi">,
+Y <input type="$number" step=any class="forminput" name="ylo" $textsize4 value="$FORM_ylo">:<input type="$number" step=any class="forminput" name="yhi" $textsize4 value="$FORM_yhi">
 <input type="hidden" name="var" value="$FORM_var">
 EOF
 else
@@ -209,6 +209,7 @@ else
 EOF
 fi    
 cat <<EOF
+<tr><td>Confidence interval:<td><input type="$number" step=any class="forminput" name="ci" $textsize4 value="${FORM_ci:-95}">%
 <tr><td colspan="2"><input type="submit" class="formbutton" value="Compute">
 </table>
 </div>

@@ -129,3 +129,4 @@ fi
 [ -n "$FORM_restrain" ] && corrargs="$corrargs restrain $FORM_restrain"
 [ -n "$FORM_normalization" ] && corrargs="$corrargs normalization $FORM_normalization"
 [ -n "$FORM_xyear" ] && corrargs="$corrargs xyear $FORM_xyear"
+[ -n "$FORM_ci" ] && corrargs="$corrargs confidenceinterval $FORM_ci"
