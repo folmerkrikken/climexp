@@ -64,7 +64,19 @@ if [ -n "$FORM_timeseries" ]; then
   soi)       index="SOI";sfile="$DIR/CRUData/soi.dat";;
   nao)       index="NAO-Gibraltar";sfile="$DIR/CRUData/nao.dat";;
   sunspots)  index="sunspots";sfile="$DIR/SIDCData/sunspots.dat";;
-  time)      index="time";sfile="$DIR/KNMIData/time.dat";;
+  co2)       index="CO2"
+             if [ ${NPERYEAR:-12} = 12 ]; then
+                sfile="$DIR/CDIACData/co2_monthly.dat"
+             elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
+                sfile="$DIR/CDIACData/co2_annual.dat"
+             fi;;
+  gmst)      index="GMST"
+             if [ ${NPERYEAR:-12} = 12 ]; then
+                sfile="$DIR/NASAData/giss_al_gl_m.dat"
+             elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
+                sfile="$DIR/NASAData/giss_al_gl_a_4yrlo.dat"
+             fi;;
+  time)      index="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
   *)         sfile=$DIR/`head -1 $FORM_timeseries | tr $forbidden '?'`
 	     TYPE=`basename $sfile | cut -b 1`
 	     case $TYPE in
