@@ -220,9 +220,9 @@ prcp_trmm_1_lo) file=TRMMData/prcp_trmm_1_lo.nc;kindname="TRMM";climfield="preci
 cmorph_daily_05) file=NCEPData/cmorph_daily_05.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
 cmorph_daily) file=NCEPData/cmorph_daily.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
 cmorph_monthly) file=NCEPData/cmorph_monthly.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;;
-knmi_radar_daily) file=KNMIRadarData/radar_sum.nc;kindname="KNMI radar";climfield="precipitation";flipcolor=11;map='set lon 3 7.5
+knmi_radar_daily) file=KNMIRadarData/radar_sum.nc;kindname="KNMI radar";climfield="precipitation";flipcolor=11;NPERYEAR=366;map='set lon 3 7.5
 set lat 50.5 54';;
-knmi_radar_maxhourly) file=KNMIRadarData/radar_max.nc;kindname="KNMI radar";climfield="max hourly precip";flipcolor=11;map='set lon 3 7.5
+knmi_radar_maxhourly) file=KNMIRadarData/radar_max.nc;kindname="KNMI radar";climfield="max hourly precip";flipcolor=11;NPERYEAR=366;map='set lon 3 7.5
 set lat 50.5 54';;
 ssmi_1) file=NCDCData/ssmi_1.ctl;kindname="NCDC SSMI/I";climfield="precipitation";flipcolor=11;;
 hulme) file=CRUData/hulme23.ctl;kindname="CRU";climfield="precipitation";flipcolor=11;;
