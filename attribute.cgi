@@ -166,6 +166,8 @@ if [ $TYPE = set ]; then
 else
     f=./data/$TYPE$WMO.dat
 fi
+###echo "f=$f<br>"
+###./bin/getunits $f
 if [ $NPERYEAR -gt 12 ]; then
 	eval `./bin/getunits.sh $f`
 else

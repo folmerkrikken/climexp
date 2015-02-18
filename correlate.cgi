@@ -28,7 +28,7 @@ CLIM=`echo "$FORM_CLIMATE" | tr '[:upper:]' '[:lower:]'`
 station=`echo $STATION | tr '_%' ' +'`
 NAME=$FORM_NAME
 # common options
-sfile="$DIR/data/$TYPE$WMO.dat"
+sfile="./data/$TYPE$WMO.dat"
 corrargs=$sfile
 c1=`echo $WMO | fgrep -c "++"`
 c2=`echo $WMO | fgrep -c "%%"`
@@ -41,7 +41,7 @@ if [ 0 = 1 ]; then
 fi
 # field?
 if [ ${FORM_field:-none} != none ]; then
-    . $DIR/correlatefield.cgi
+    . ./correlatefield.cgi
   exit
 fi
 # no field...
@@ -50,7 +50,7 @@ startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs bootstrap startstop $startstop"
 
 echo `date` "$EMAIL ($REMOTE_ADDR) correlate $corrargs" | sed -e  "s:$DIR/::g" >> log/log
-corrargs="$corrargs plot $DIR/data/$TYPE$WMO${FORM_num}.cor dump $DIR/data/$TYPE$WMO${FORM_num}.dump"
+corrargs="$corrargs plot ./data/$TYPE$WMO${FORM_num}.cor dump ./data/$TYPE$WMO${FORM_num}.dump"
 . ./myvinkhead.cgi "Time series correlations" "$CLIM $station with $index" "noindex,nofollow"
 
 if [ -n "$FORM_runcorr" -a -n "$FORM_runwindow" ]; then
@@ -70,7 +70,8 @@ if [ -s "$startstop" ]; then
   rm $startstop
 fi
 
-. $DIR/setyaxis.cgi
+eval `./bin/getunits $sfile`
+. ./setyaxis.cgi
 
 if [ -z "$FORM_conting" ]; then
   if [ -n "$FORM_dgt" ]; then
