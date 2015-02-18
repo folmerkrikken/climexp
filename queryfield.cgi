@@ -770,6 +770,7 @@ cfsr_tsr) file=CFSR/cfsr_swrf_toa.nc;kindname=CFSR;climfield="net SW TOA";LSMASK
 cfsr_ttr) file=CFSR/cfsr_ulwrf_toa.nc;kindname=CFSR;climfield="net LW TOA";LSMASK=CFSR/lsmask_f.nc;;
 
 cslp|cpsl|cprmsl) file=20C/prmsl.mon.mean.nc;kindname="20C";climfield="SLP";LSMASK=unknown;;
+cslp_extended) file=20C/prmsl.mon.mean_extended.nc;kindname="20C+";climfield="SLP";LSMASK=unknown;;
 cz850) file=20C/hgt850.nc;kindname="20C";climfield="850mb height";;
 cz700) file=20C/hgt700.nc;kindname="20C";climfield="700mb height";;
 cz500) file=20C/hgt500.nc;kindname="20C";climfield="500mb height";;
