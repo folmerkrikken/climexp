@@ -54,7 +54,7 @@ else
 fi
 corrargs="$corrargs $FORM_nbin fit $FORM_fit hist $FORM_plot"
 n=0
-. $DIR/getopts.cgi
+. ./getopts.cgi
 
 if [ $EMAIL != someone@somewhere ]; then
 	. ./save_commonoptions.cgi

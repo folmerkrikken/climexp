@@ -1,10 +1,12 @@
 #!/bin/sh
 # across all time scales, so without suffix NPERYEAR
 echo "$FORM_timeseries" | head -1 > ./prefs/$EMAIL.series
-case $FORM_fit in
-    gev|gumbel) FORM_plot=gumbel;;
-    gpd|gauss) FORM_plot=sqrtlog;;
-esac
+if [ -z "$FORM_plot" ]; then
+    case $FORM_fit in
+        gev|gumbel) FORM_plot=gumbel;;
+        gpd|gauss) FORM_plot=sqrtlog;;
+    esac
+fi
 cat > ./prefs/$EMAIL.histogramoptions <<EOF
 FORM_plot=$FORM_plot;
 FORM_nbin=$FORM_nbin;
