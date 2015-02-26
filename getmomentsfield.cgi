@@ -107,9 +107,7 @@ echo `date` "$EMAIL ($REMOTE_ADDR) getfieldmoments $corrargs" | sed -e "s:$DIR/:
 
 c=`echo $FORM_field | fgrep -c "mean_"`
 if [ $c != 0 -a \( $FORM_var = perc -o $FORM_var = sd \) ]; then
-    echo "Percentiles and s.d. of a multi-model mean field do not have a physical meaning."
-    . ./myvinkfoot.cgi
-    exit
+    echo "Warning: percentiles and s.d. of a multi-model mean field do not have a physical meaning. Proceed at your own risk."
 fi
 
 startstop="/tmp/startstop$$.txt"
