@@ -30,6 +30,7 @@ if [ ${infile%.ctl} != "$infile" ]; then
 fi
 
 iens=0
+cdo="cdo -r -f nc4 -z zip"
 echo "$EMAIL ($REMOTE_ADDR) cdo fieldanomalies $infile $file" >> log/log
 if [ -z "$ENSEMBLE" ]; then
     if [ -s $file -a $file -nt $infile ]; then
@@ -38,9 +39,9 @@ if [ -z "$ENSEMBLE" ]; then
         echo "Computing anomalies using <a href="https://code.zmaw.de/projects/cdo">cdo</a> ...<p>"
         climfile=${file%_anom.nc}_clim.nc
         tmpfile=${file%_anom.nc}_tmp.nc
-        cdo seldate,${FORM_climyear1}-01-01,${FORM_climyear2}-12-31 $infile $tmpfile
-        cdo ymonavg $tmpfile $climfile
-        cdo ymonsub $infile $climfile $file
+        $cdo seldate,${FORM_climyear1}-01-01,${FORM_climyear2}-12-31 $infile $tmpfile
+        $cdo ymonavg $tmpfile $climfile
+        $cdo ymonsub $infile $climfile $file
         rm $tmpfile $climfile
     fi
 else
@@ -56,9 +57,9 @@ else
             echo "not yet ready $ensinfile $ensfile"
             climfile=${file%_anom.nc}_clim.nc
             tmpfile=${file%_anom.nc}_tmp.nc
-            cdo seldate,${FORM_climyear1}-01-01,${FORM_climyear2}-12-31 $ensinfile $tmpfile
-            cdo ymonavg $tmpfile $climfile
-            cdo ymonsub $ensinfile $climfile $ensfile
+            $cdo seldate,${FORM_climyear1}-01-01,${FORM_climyear2}-12-31 $ensinfile $tmpfile
+            $cdo ymonavg $tmpfile $climfile
+            $cdo ymonsub $ensinfile $climfile $ensfile
             rm $tmpfile $climfile
             if [ ! -s $ensfile ]; then
                 echo "Something went wrong in the anomaly routine."
