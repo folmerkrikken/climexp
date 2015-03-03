@@ -16,7 +16,7 @@ file=${file%.ctl}_zonalmean.nc
 file=data/`basename $file`
 
 if [ ${infile%.ctl} != "$infile" ]; then
-    ncfile=/tmp/`basename $infile .ctl`.nc
+    ncfile=data/`basename $infile .ctl`.nc
     bin/grads2nc $infile $ncfile
     infile=$ncfile
 fi

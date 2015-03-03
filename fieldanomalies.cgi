@@ -24,7 +24,7 @@ file=${file%.ctl}_${FORM_climyear1}_${FORM_climyear2}_anom.nc
 file=data/`basename $file`
 
 if [ ${infile%.ctl} != "$infile" ]; then
-    ncfile=/tmp/`basename $infile .ctl`.nc
+    ncfile=data/`basename $infile .ctl`.nc
     bin/grads2nc $infile $ncfile
     infile=$ncfile
 fi
