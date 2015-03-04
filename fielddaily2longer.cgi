@@ -111,7 +111,7 @@ if [ ! -s $testfile.ctl -o $testfile.ctl -ot $file ]; then
        rm `echo $outfile.dat | sed -e 's/%%%/???/' -e 's/%%/??/'`
     fi
     [ "$lwrite" = true ] && echo "daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl"
-    echo "daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl" >> log/log
+    echo `date` "$EMAIL ($REMOTE_ADDR) daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl" >> log/log
     (./bin/daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl) 2>&1
 fi
 
