@@ -40,11 +40,14 @@ EOF
   outfile=data/${outfile}_${FORM_nfilter}yr_${FORM_hilo}_${FORM_filtertype}
   [ -n "$FORM_minfac" -a "$FORM_minfac" != 75 ] outfile=${outfile}_${FORM_minfac}
   if [ -z "$ENSEMBLE" ]; then
-    if [ -f $outfile.ctl ]; then
-	echo "Field already exists<br>"
+    if [ -f $outfile.nc ]; then
+	  echo "Field already exists<br>"
     else
-      ###echo ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.ctl
-      ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.ctl 2>& 1
+      ###echo ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.nc
+      # note that my routine does not yet produce compressed netcdf4
+      tmpfile=data/aap$$.nc
+      ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $tmpfile 2>&1
+      cdo -r -f nc4 -z zip copy $tmpfile $outfile.nc
     fi
   else
     i=0
@@ -55,8 +58,12 @@ EOF
       if [ -f $ensfile -o -f data/$ensfile ]
       then
         ensout=`echo $outfile | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
-        ###echo ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.ctl
-        ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.ctl 2>&1
+        ###echo ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.nc
+        ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs 
+        # note that my routine does not yet produce compressed netcdf4
+        tmpfile=data/aap$$.nc
+        ./bin/filteryearfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $tmpfile 2>&1
+        cdo -r -f nc4 -z zip copy $tmpfile $ensout.nc
       fi
       i=$(($i + 1))
       ii=`printf %02i $i`
@@ -65,7 +72,7 @@ EOF
   fi
   infofile=$outfile.$EMAIL.info
   cat > $infofile <<EOF
-$outfile.ctl
+$outfile.nc
 NPERYEAR=$NPERYEAR
 LSMASK=$LSMASK
 ${kindname} ${FORM_nfilter}yr ${FORM_hilo}

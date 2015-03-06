@@ -56,12 +56,16 @@ EOF
   outfile=data/${outfile}_${FORM_nfilter}${yr}_${FORM_hilo}_${FORM_filtertype}
   [ -n "$FORM_minfac" -a "$FORM_minfac" != 75 ] && outfile=${outfile}_${FORM_minfac}
   if [ -z "$ENSEMBLE" ]; then
-    if [ -f $outfile.ctl -a $outfile.ctl -nt $file ]; then
+    if [ -f $outfile.nc -a $outfile.nc -nt $file ]; then
 	  echo "Field already exists<br>"
     else
-      [ -f $outfile.ctl ] && rm $outfile.???
-      ###echo ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.ctl
-      ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.ctl 2>& 1
+      [ -f $outfile.nc ] && rm $outfile.nc
+      ###echo ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.nc
+      # note that my routine does not yet produce compressed netcdf4
+      tmpfile=data/aap$$.nc
+      ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $tmpfile 2>&1
+      cdo -r -f nc4 -z zip copy $tmpfile $outfile.nc
+      rm $tmpfile
     fi
   else
     i=0
@@ -72,10 +76,13 @@ EOF
       if [ -f $ensfile -o -f data/$ensfile ]
       then
         ensout=`echo $outfile | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
-        if [ ! -s $ensout.ctl -o $ensout.ctl -ot $ensefile ]; then
-          [ -f $ensout.ctl ] && rm $ensout.???
-          ###echo ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.ctl
-          ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.ctl 2>&1
+        if [ ! -s $ensout.nc -o $ensout.nc -ot $ensefile ]; then
+          [ -f $ensout.nc ] && rm $ensout.nc
+          ###echo ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.nc
+          # note that my routine does not yet produce compressed netcdf4
+          tmpfile=data/aap$$.nc
+          ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $tmpfile 2>&1
+          cdo -r -f nc4 -z zip copy $tmpfile $ensout.nc
         fi
       fi
       i=$(($i + 1))
@@ -85,7 +92,7 @@ EOF
   fi
   infofile=$outfile.$EMAIL.info
   cat > $infofile <<EOF
-$outfile.ctl
+$outfile.nc
 NPERYEAR=$NPERYEAR
 LSMASK=$LSMASK
 ${kindname} ${FORM_nfilter}${yr} ${FORM_hilo}
