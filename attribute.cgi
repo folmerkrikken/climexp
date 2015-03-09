@@ -86,8 +86,9 @@ time)      covstation="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
            ;;
 esac
 probfile=data/attribute_prob_$$.txt
+obsplotfile=data/attribute_obsplot_$$.txt
 corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume"
-[ "$FORM_TYPE" != "setmap" ] && corrargs="$corrargs dump $probfile"
+[ "$FORM_TYPE" != "setmap" ] && corrargs="$corrargs dump $probfile obsplot $obsplotfile"
 n=0
 c1=`echo ./data/$TYPE$WMO.dat | fgrep -c '%%'`
 c2=`echo ./data/$TYPE$WMO.dat | fgrep -c '++'`
@@ -291,6 +292,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 		title="$title (detrend)"
 	fi
 	title="$title (${FORM_ci}% CI)"
+
 	xtics=`fgrep '#@' $root.txt | sed -e 's/^#@ //'`
 	if [ -n "$FORM_xlo" ]; then
 		case $FORM_plot in
@@ -308,8 +310,10 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	fi
 	if [ -n "$FORM_changesign" ]; then
 		bottomtop=top
+		plus="-"
 	else
 		bottomtop=bottom
+		plus="+"
 	fi
 	if [ -n "$FORM_year" ]; then
 		plotformyear=", \"$root.txt\" index 2 u 2:4 title \"observed $FORM_year\" w lines lt 4" 
@@ -320,6 +324,54 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	if [ $FORM_fit = gpd ]; then
 	    fittext="$fittext >${FORM_dgt}"
 	fi
+	
+	if [ -s $obsplotfile ]; then
+    	cat > ${root}_obsplot.gnuplot << EOF
+set size 0.7,0.5
+set term png $gnuplot_png_font_hires
+set output "${root}_obsplot.png"
+set title "$title"
+set xlabel "covariate"
+set ylabel "$ylabel"
+set datafile missing '-999.900'
+plot \
+"$obsplotfile" index 0 notitle with points lt 3,\\
+"$obsplotfile" index 1 notitle with points lt 4,\\
+"$obsplotfile" index 2 notitle with line lt 1 lw 3,\\
+"$obsplotfile" index 3 notitle with errorbars lt 1 lw 3,\\
+"$obsplotfile" index 2 using 1:(\$2+\$3) notitle with line lt 1,\\
+"$obsplotfile" index 2 using 1:(\$2+2*\$3) notitle with line lt 1
+set term postscript epsf color solid
+set output "${root}_obsplot.eps"
+replot
+quit
+EOF
+	    if [ "$lwrite" = true ]; then
+		    echo '<pre>'
+		    cat ${root}_obsplot.gnuplot
+		    echo '</pre>'
+	    fi
+    	./bin/gnuplot < ${root}_obsplot.gnuplot 2>&1
+	    if [ ! -s ${root}_obsplot.png ]; then
+		    echo "Something went wrong while making the plot."
+		    echo "The plot command are <a href=\"${root}_obsplot.gnuplot\">here</a>."
+		    . ./myvinkfoot.cgi
+		    exit
+	    fi
+        gzip -f ${root}_obsplot.eps
+        pngfile=${root}_obsplot.png
+        getpngwidth
+        if [ $FORM_fit = gpd ]; then
+            plotvariable=threshold
+        elif [ $FORM_fit = gauss ]; then
+            plotvariable="mean"
+        else
+            plotvariable="position parameter"
+        fi
+        echo "<div class=\"bijschrift\">Fitted points, value in $FORM_year,  $plotvariable a, a${plus}b and a${plus}2b"
+        echo "(<a href=\"${root}_obsplot.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_obsplot.eps.gz\">pdf</a>, <a href=\"${obsplotfile}\">raw data</a>, <a href=\"${root}_obsplot.gnuplot\">plot script</a>)</div>"
+        echo "<center><img src=\"${root}_obsplot.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
+    fi
 
 	cat > $root.gnuplot << EOF
 set size 0.7,0.7
@@ -351,7 +403,7 @@ EOF
 	./bin/gnuplot < $root.gnuplot 2>&1
 	if [ ! -s ${root}.png ]; then
 		echo "Something went wrong while making the plot."
-		echo "The plot command are <a href=\"$root.gnuplot\">here</a>."
+		echo "The plot commands are <a href=\"$root.gnuplot\">here</a>."
 		. ./myvinkfoot.cgi
 		exit
 	fi
