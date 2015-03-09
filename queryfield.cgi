@@ -661,7 +661,7 @@ nwspd) file=NCEPNCAR40/nwindspeed.ctl;kindname="NCEP/NCAR";climfield="10m wind s
 nt2m)  file=NCEPNCAR40/nt2m.ctl;kindname="R2";climfield="2m temperature";LSMASK=NCEPNCAR40/lsmask.nc;;
 nair)  file=NCEPNCAR40/air.2m.mon.mean.nc;kindname="NCEP/NCAR";climfield="2m temperature";LSMASK=NCEPNCAR40/lsmask.nc;;
 nt2m_daily)  file=NCEPNCAR40/air.2m.gauss.daily.nc;kindname="NCEP/NCAR";climfield="2m temperature";LSMASK=NCEPNCAR40/lsmask.nc;NPERYEAR=366;;
-ntsfc) file=NCEPNCAR40/skt.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="surface temp";;
+ntsfc) file=NCEPNCAR40/skt.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="surface temp";LSMASK=NCEPNCAR40/lsmask.nc;;
 nt850) file=NCEPNCAR40/t850.nc;kindname="NCEP/NCAR";climfield="850mb temperature";;
 nt700) file=NCEPNCAR40/t700.nc;kindname="NCEP/NCAR";climfield="700mb temperature";;
 nt500) file=NCEPNCAR40/t500.nc;kindname="NCEP/NCAR";climfield="500mb temperature";;
