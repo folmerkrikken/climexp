@@ -68,6 +68,8 @@ case ${FORM_sum:-1} in
 10) sum_10_selected="selected";;
 11) sum_11_selected="selected";;
 12) sum_12_selected="selected";;
+13) sum_13_selected="selected";;
+14) sum_14_selected="selected";;
 15) sum_15_selected="selected";;
 20) sum_20_selected="selected";;
 25) sum_25_selected="selected";;
@@ -363,6 +365,10 @@ elif [ $NPERYEAR -ge 12 ]; then
 	echo "<option $sum_10_selected>10"
 	echo "<option $sum_11_selected>11"
 	echo "<option $sum_12_selected>12"
+	if [ $EMAIL = oldenbor@knmi.nl ]; then
+	    echo "<option $sum_13_selected>13"
+	    echo "<option $sum_14_selected>14"
+	fi
   #echo "<option>13"
   #echo "<option>18"
   #echo "<option>24"

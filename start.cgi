@@ -67,10 +67,6 @@ fi
 
 . ./check_ie.cgi
 
-if [ ${REMOTE_ADDR#145.23} != $REMOTE_ADDR -a ${REMOTE_ADDR#145.23.248} = $REMOTE_ADDR -a $HTTP_HOST = climexp.knmi.nl ]; then
-        echo "<p><font color=\"#FF0000\">KNMI users are advised to use the URL <a href=\"http://bhlclim.knmi.nl/start.cgi?id=$EMAIL\">bhlclim.knmi.nl</a></font>"
-fi
-
 if [ "$EMAIL" != someone@somewhere ]; then
         ###. ./headlines.cgi
         touch ./prefs/$EMAIL.news
