@@ -357,7 +357,14 @@ class PlotAtlasMap:
                     ###self.logOut.info("cmd = '%s'" % cmd)
                     subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
                 
-        self.quantfile = '{quantroot}/quant_{rel}regr_%(FORM_var)s_{typeVar}_%(FORM_begin_fit)s-%(FORM_end_fit)s_{season}.nc'.format(quantroot=self.quantroot, rel=self.rel, typeVar=self.typeVar, season=self.season) % paramsDict
+        self.quantfile = '{quantroot}/quant_{rel}regr_{basename}_{regr}_{begin_fit}-{end_fit}_{season}.nc'.format(
+            quantroot=self.quantroot,
+            rel=self.rel, 
+            basename=os.path.splitext(os.path.basename(filename))[0],
+            regr=self.params.FORM_regr, 
+            begin_fit=self.params.FORM_begin_fit, 
+            end_fit=self.params.FORM_end_fit,
+            season=self.season)
         self.log.debug('quantfile = %s' % self.quantfile)
         if self.params.FORM_plotvar == 'mean':
             self.plotfile = regrfile # the last one of the previous loop
@@ -778,7 +785,6 @@ class PlotAtlasMap:
         if 'NetCDF' not in resultProcess:
             raise PlotMapError("Cannot find {plotfile}".format(plotfile=self.plotfile))
 
-        #root = atlas/maps/$dir/`basename $plotfile .nc`
         root = 'atlas/maps/{dir}/{rel}{basename}'.format(dir=self.dir, rel=self.rel, basename=os.path.splitext(os.path.basename(self.plotfile))[0])
 
         folder = os.path.split(root)[0]
