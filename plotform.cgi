@@ -270,6 +270,8 @@ cat <<EOF
 <option $sum_10_selected>10
 <option $sum_11_selected>11
 <option $sum_12_selected>12
+<option $sum_13_selected>13
+<option $sum_14_selected>14
 EOF
 if [ $NPERYEAR -gt 12 ]; then
 cat <<EOF
@@ -370,6 +372,8 @@ average over <select class="forminput" name="plotsum">
 <option $sum_10_selected>10
 <option $sum_11_selected>11
 <option $sum_12_selected>12
+<option $sum_13_selected>13
+<option $sum_14_selected>14
 </select>
 month
 </td></tr><tr><td>Anomalies:</td><td>
