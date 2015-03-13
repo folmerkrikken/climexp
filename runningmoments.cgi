@@ -39,10 +39,11 @@ FORM_num=$$
 
 . ./myvinkhead.cgi "Running $moments" "$station $NAME" "noindex,nofollow"
 
+eval `./bin/getunits ./data/$TYPE$WMO.dat`
 for FORM_moment in $moments
 do
 
-corrargs="$DIR/data/$TYPE$WMO.dat $FORM_moment"
+corrargs="./data/$TYPE$WMO.dat $FORM_moment"
 . ./getopts.cgi
 echo `date` "$FORM_EMAIL ($REMOTE_ADDR) runningmoments $corrargs" | sed -e "s@$DIR/@@g" >> log/log
 if [ -z "$FORM_separate" ]; then
@@ -112,7 +113,11 @@ if [ -n "$FORM_sum" ]; then
   ylabel="$seriesmonth $ylabel"
 fi
 
-title="Running $FORM_moment of $seriesmonth$CLIM $station ($WMO)"
+title="${FORM_runwindow}-yr running $FORM_moment of $seriesmonth$CLIM $station"
+c=`echo "$title" | wc -c | tr -d ' '`
+if [ $c -lt 60 ]; then
+    title="$title ($WMO)"
+fi
 if [ -n "$ndiff" ]; then
   title="$title ($ndiff-yr running mean)"
 else
