@@ -863,6 +863,34 @@ erai_v*) lev=${FORM_field#erai_v};file=ERA-interim/${FORM_field}.nc;kindname="ER
 erai_w*) lev=${FORM_field#erai_w};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="w$lev";;
 erai_q*) lev=${FORM_field#erai_q};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="q$lev";;
 
+era20c_slp|era20c_psl|era20c_msl) file=ERA-20C/era20c_msl_%%.nc;kindname="ERA-20C";climfield="MSL";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_taux) file=ERA-20C/era20c_ustrs_%%.nc;kindname="ERA-20C";climfield="taux";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_tauy) file=ERA-20C/era20c_vstrs_%%.nc;kindname="ERA-20C";climfield="tauy";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_u10m) file=ERA-20C/era20c_u10_%%.nc;kindname="ERA-20C";climfield="u10";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_v10m) file=ERA-20C/era20c_v10_%%.nc;kindname="ERA-20C";climfield="v10";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_ts) file=ERA-20C/era20c_ts_%%.nc;kindname="ERA-20C";climfield="Tsfc";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_t2m|era20c_tas) file=ERA-20C/era20c_t2m_%%.nc;kindname="ERA-20C";climfield="T2m";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_tmin) file=ERA-20C/era20c_tmin_%%.nc;kindname="ERA-20C";climfield="Tmin";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_tmax) file=ERA-20C/era20c_tmax_%%.nc;kindname="ERA-20C";climfield="Tmax";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_t2msst) file=ERA-20C/era20c_t2msst_%%.nc;kindname="ERA-20C";climfield="T2m/SST";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_wspd) file=ERA-20C/era20c_wspd_%%.nc;kindname="ERA-20C";climfield="wind speed";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_ci) file=ERA-20C/era20c_ci_%%.nc;kindname="ERA-20C";climfield="sea-ice cover";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_snd) file=ERA-20C/era20c_snd_%%.nc;kindname="ERA-20C";climfield="snow depth";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_lhf) file=ERA-20C/era20c_lhtfl_%%.nc;kindname="ERA-20C";climfield="latent heat flux";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_shf) file=ERA-20C/era20c_shtfl_%%.nc;kindname="ERA-20C";climfield="sensible heat flux";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_huss) file=ERA-20C/era20c_huss_%%.nc;kindname="ERA-20C";climfield="spec humidity";LSMASK=ERA-20C/lsmask075_%%.nc;;
+era20c_evap) file=ERA-20C/era20c_evap_%%.nc;kindname="ERA-20C";climfield="evaporation";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_pme) file=ERA-20C/era20c_pme_%%.nc;kindname="ERA-20C";climfield="P-E";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_tp|era20c_pr) file=ERA-20C/era20c_tp_%%.nc;kindname="ERA-20C";climfield="precipitation";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_ssr) file=ERA-20C/era20c_ssr_%%.nc;kindname="ERA-20C";climfield="SSR";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_str) file=ERA-20C/era20c_str_%%.nc;kindname="ERA-20C";climfield="STR";LSMASK=ERA-20C/lsmask64.nc;;
+era20c_z*) lev=${FORM_field#era20c_z};file=ERA-20C/${FORM_field}_%%.nc;kindname="ERA-20C";climfield="z$lev";;
+era20c_t*) lev=${FORM_field#era20c_t};file=ERA-20C/${FORM_field}_%%.nc;kindname="ERA-20C";climfield="t$lev";;
+era20c_u*) lev=${FORM_field#era20c_u};file=ERA-20C/${FORM_field}_%%.nc;kindname="ERA-20C";climfield="u$lev";;
+era20c_v*) lev=${FORM_field#era20c_v};file=ERA-20C/${FORM_field}_%%.nc;kindname="ERA-20C";climfield="v$lev";;
+era20c_w*) lev=${FORM_field#era20c_w};file=ERA-20C/${FORM_field}_%%.nc;kindname="ERA-20C";climfield="w$lev";;
+era20c_q*) lev=${FORM_field#era20c_q};file=ERA-20C/${FORM_field}_%%.nc;kindname="ERA-20C";climfield="q$lev";;
+
 merra_slp) file=MERRA/merra_slp.nc;kindname="MERRA";climfield="SLP";LSMASK=MERRA/lsmask.nc;;
 merra_taux) file=MERRA/merra_taux.nc;kindname="MERRA";climfield="taux";LSMASK=MERRA/lsmask.nc;;
 merra_tauy) file=MERRA/merra_tauy.nc;kindname="MERRA";climfield="tauy";LSMASK=MERRA/lsmask.nc;;
