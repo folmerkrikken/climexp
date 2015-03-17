@@ -29,6 +29,7 @@ else
     hiddenstyle_era40="style=\"display: none;\""
     hiddenstyle_ncepncar="style=\"display: none;\""
     hiddenstyle_ncepdoe="style=\"display: none;\""
+    hiddenstyle_20c="style=\"display: none;\""
     hiddenstyle_era20c="style=\"display: none;\""
 fi
 if [ -s prefs/$EMAIL.field.12 ]; then
