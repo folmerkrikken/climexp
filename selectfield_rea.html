@@ -502,53 +502,7 @@ The complete set is available under "external data"</a>
 </tr>
 </table>
 </div>
-<tr><th width=120px><a href="javascript:hidden_info_switch('ncepdoe');">show/hide</a></th>
-<th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?ftp://nomad3.ncep.noaa.gov/pub/reanalysis-2/month/flx/" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>NCEP/DOE R2 1979-now.<br>
-The complete set is available under "external data"</a></div></th>
-</tr>
-<tr><td colspan=8>
-<div id="ncepdoe" hiddenstyle_ncepdoe>
-<table width=100% border=0 cellspacing=0 cellpadding=0>
-<tr>
-<th width=116px><small>variable \ level</small></th>
-<th><small>surface</small></th>
-<th><small>2m/10m</small></th>
-<th><small>850mb</small></th>
-<th><small>700mb</small></th>
-<th><small>500mb</small></th>
-<th><small>300mb</small></th>
-<th><small>200mb</small></th>
-</tr>
-<tr><td align="right">temperature</td>
-<td&nbsp;</td>
-<td><input type="radio" class="formradio" name="field" value="nt2m"></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td align="right">precipitation / sensible heat flux / OLR</td>
-<td><input type="radio" class="formradio" name="field" value="nprcp"></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td align="right">surface downward solar/longwave radiation</td>
-<td><input type="radio" class="formradio" name="field" value="ndswrfsfc"></td>
-<td><input type="radio" class="formradio" name="field" value="ndlwrfsfc"></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</table>
-</div>
-<tr><th width=120px><a href="javascript:hidden_info_switch('20c');">show/hide</a></th><th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_ReanV2.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>Twentieth Century Reanalysis</a>1878-2010<br>
+<tr><th width=120px><a href="javascript:hidden_info_switch('20c');">show/hide</a></th><th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_ReanV2.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>Twentieth Century Reanalysis 1878-2010<br>
 The complete set will become available under "external data"</div></th>
 </tr>
 <tr><td colspan=8>
@@ -639,6 +593,105 @@ The complete set will become available under "external data"</div></th>
 <tr><td align="right">surface net solar/longwave radiation</td>
 <td><input type="radio" class="formradio" name="field" value="cnsr"></td>
 <td><input type="radio" class="formradio" name="field" value="cnlr"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div>
+<tr><th width=120px><a href="javascript:hidden_info_switch('era20c');">show/hide</a></th><th colspan="7"><div class="kalelink"><a href="wipefeet.cgi?http://apps.ecmwf.int/datasets/data/era20cm-edmo/" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>ERA-20C 1900-2010<br>
+Just a few fields for now</div></th>
+</tr>
+<tr><td colspan=8>
+<div id="era20c" hiddenstyle_era20c>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr>
+<th width=116px><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_msl"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_z850"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_z700"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_z500"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_z300"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_z200"></td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_ts"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_t2m"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_t850"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_t700"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_t500"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_t300"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_t200"></td>
+</tr>
+<tr><td align="right">min/max 2m temperature</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_tmin"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_tmax"></td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+<td>&nbsp</td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_taux"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_u10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_u850"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_u700"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_u500"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_u300"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_u200"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_tauy"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_v10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_v850"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_v700"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_v500"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_v300"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_v200"></td>
+</tr>
+<tr><td align="right">latent heat flux / sensible heat flux / humidity</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_lhtfl"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_shtfl"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_q850"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_q700"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_q500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">soil moisture / evaporation / relative humidity</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_soil"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_evap"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_qrel850"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_qrel700"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_qrel500"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation / P-E</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_prate"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_pme"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">surface net solar/longwave radiation</td>
+<td><input type="radio" class="formradio" name="field" value="era20c_nsr"></td>
+<td><input type="radio" class="formradio" name="field" value="era20c_nlr"></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
