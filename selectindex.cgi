@@ -262,6 +262,9 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 <td>&nbsp;
 -->
 
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/TSI_TIM_Reconstruction&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL&NPERYEAR=1">Annual reconstructed solar constant</a> (1610-2013) 
+<td><a href="wipefeet.cgi?http://lasp.colorado.edu/home/sorce/data/tsi-data/#historical_TSI" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=FUBData/tsi_wls_mon&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL">Reconstructed solar constant</a> (1882-2008, FUB), <a href="getindices.cgi?WMO=FUBData/tsi_wls_ann&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL&NPERYEAR=1">annual</a> (1610-2008) 
 <td><a href="wipefeet.cgi?http://www.geo.fu-berlin.de/en/met/ag/strat/forschung/SOLARIS/Input_data/CMIP5_solar_irradiance.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
