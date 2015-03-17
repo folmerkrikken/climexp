@@ -282,7 +282,7 @@ EOF
       fi
       i=$((i+1))
       ii=`printf $format $i`
-      ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii: -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
+      ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
     done    
   fi
   infofile=$outfile.$EMAIL.info
