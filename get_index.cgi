@@ -165,6 +165,20 @@ else
 	PROG="get_index.sh $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 dipole $FORM_dipole"
 fi
 PROG="$PROG minfac $FORM_minfac $FORM_intertype $FORM_noisemodel $mask $NOMISSING $FORM_standardunits"
+#
+# try to make the site a bit more student-proof
+#
+shortprog=`echo $PROG | cut -b 1-80`
+count=`ps axuw | fgrep "$shortprog" | fgrep -v fgrep | wc -l | tr -d '[:space:]'`
+if [ "$count" != 0 ]; then
+    echo 'Content-Type: text/html'
+    echo 
+    . ./myvinkhead.cgi "Try again later" "Multiple attempts to compute the same quantity"
+    echo "The exact same computation is already running, started either by you or another user. It does not make much sense to compute it twice."
+    echo "Please try again after the original computation is finished. This can take up to 15 minutes for daily data."
+    . ./myvinkfoot.cgi
+    exit
+fi
 
 export WMO
 export file
@@ -179,7 +193,7 @@ if [ "$FORM_gridpoints" != true ]; then
   if [ $n -gt 10 -a $outfile -nt $file ]; then
     PROG=""
   fi
-  . $DIR/getdata.cgi
+  . ./getdata.cgi
 else
   STATION=""
   FORM_field=`basename $FORM_field`
