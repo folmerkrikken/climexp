@@ -40,8 +40,8 @@ if [ ${NPERYEAR:-12} -gt 1 ]; then
     fi
     yrstart=`head -1 $startstop`
     yrstop=`tail -1 $startstop`
-    if [ $yrstart = '9999' ]; then
-    	echo "No data in requested interval ${FORM_climyear1}:${FORM_climyear2}, using all data for climatology"
+    if [ $yrstart = '9999' -o $yrstart = $yrstop ]; then
+    	echo "Not enough data in requested interval ${FORM_climyear1}:${FORM_climyear2}, using all data for climatology"
 		###echo "./bin/climatology ./data/$TYPE$WMO.dat startstop $startstop"
 		(./bin/climatology ./data/$TYPE$WMO.dat startstop $startstop > ${base}_yr.plt) 2>&1
 		sort ${base}_yr.plt | egrep -v '^200[12]' > ${base}_yr.txt
@@ -49,6 +49,8 @@ if [ ${NPERYEAR:-12} -gt 1 ]; then
     	yrstop=`tail -1 $startstop`
 	    computed="computed with all data available"
     	period=""
+    	FORM_climyear1=""
+    	FORM_climyear2=""
 	elif [ -n "$FORM_climyear1" -o -n "$FORM_climyear2" ]; then
     	computed="computed over the period ${yrstart}:${yrstop}"
     	period=" (${yrstart}:${yrstop})"
