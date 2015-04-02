@@ -4,18 +4,28 @@ echo
 echo
 
 . ./getargs.cgi
-TYPE="$FORM_TYPE"
-WMO="$FORM_WMO"
-listname=$WMO
-STATION="$FORM_STATION"
-station=` echo "$STATION" | tr '_' ' '`
-NAME="$FORM_NAME"
-prog=$NAME
-NPERYEAR="$FORM_NPERYEAR"
+
+if [ -n "$FORM_field" ]; then
+    . ./queryfield.cgi
+    TYPE=field
+    station="$flimfield"
+    NAME="$kindname"
+else
+    TYPE="$FORM_TYPE"
+    WMO="$FORM_WMO"
+    listname=$WMO
+    STATION="$FORM_STATION"
+    station=` echo "$STATION" | tr '_' ' '`
+    NAME="$FORM_NAME"
+    prog=$NAME
+    NPERYEAR="$FORM_NPERYEAR"
+fi
 
 . ./nosearchengine.cgi
 
-if [ $TYPE = set ]; then
+if [ $TYPE = field ]; then
+  . ./myvinkhead.cgi "Trends in return times of extremes" "$kindname $climfield" "noindex,nofollow"
+elif [ $TYPE = set ]; then
   . ./myvinkhead.cgi "Trends in return times of extremes" "$station stations" "noindex,nofollow"
 else
   . ./myvinkhead.cgi "Trends in return times of extremes" "$station $NAME ($WMO)" "noindex,nofollow"
@@ -34,8 +44,8 @@ A few examples are given in the <a href="javascript:pop_page('help/empirical_eve
 EOF
 
 DIR=`pwd`
-c1=`echo "$WMO" | fgrep -c '%%'`
-c2=`echo "$WMO" | fgrep -c '++'`
+c1=`echo "$WMO $file" | fgrep -c '%%'`
+c2=`echo "$WMO $file" | fgrep -c '++'`
 if [ $c1 -gt 0 -o $c2 -gt 0 ]; then
   ENSEMBLE=true
 fi
@@ -94,6 +104,7 @@ esac
 cat <<EOF
 <form action="attribute.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
+<input type="hidden" name="field" value="$FORM_field">
 <input type="hidden" name="NAME" value="$NAME">
 <input type="hidden" name="TYPE" value="$TYPE">
 <input type="hidden" name="WMO" value="$WMO">
@@ -188,13 +199,13 @@ cat <<EOF
 <input type="$number" min=0 step=1 class="forminput" name="nens2" $textsize2 value="$FORM_nens2">
 EOF
 fi
-if [ "$TYPE" != setmap ]; then
+if [ "$TYPE" != setmap -a "$TYPE" != field ]; then
     cat <<EOF
 <tr><td>Plot range:<td>X <input type="$number" step=any class="forminput" name="xlo" $textsize4 value="$FORM_xlo">:<input type="$number" step=any class="forminput" name="xhi" $textsize4 value="$FORM_xhi">,
 Y <input type="$number" step=any class="forminput" name="ylo" $textsize4 value="$FORM_ylo">:<input type="$number" step=any class="forminput" name="yhi" $textsize4 value="$FORM_yhi">
 <input type="hidden" name="var" value="$FORM_var">
 EOF
-else
+elif [ "$TYPE" != field ]; then
     cat <<EOF
 <tr><td>Plot variable:<td>
 <input type="radio" class="formradio" name="var" value="atr1" $atr1>Return time at the time of the event,
@@ -210,6 +221,11 @@ EOF
 fi    
 cat <<EOF
 <tr><td>Confidence interval:<td><input type="$number" step=any class="forminput" name="ci" $textsize4 value="${FORM_ci:-95}">%
+EOF
+if [ $TYPE = field ]; then
+    . ./plotoptions.cgi
+fi
+cat <<EOF
 <tr><td colspan="2"><input type="submit" class="formbutton" value="Compute">
 </table>
 </div>

@@ -27,20 +27,28 @@ fi
 
 lwrite=false
 if [ $EMAIL = oldenbor@knmi.nl ]; then
-	lwrite=false # true
+	lwrite=false # true # false
 fi
 
-if [ $TYPE = set ]; then
+if [ -n "$FORM_field" ]; then
+    TYPE=field
+    . ./queryfield.cgi
+    CLIM="field"
+    station="$kindname $climfield"
+elif [ $TYPE = set ]; then
 	CLIM="stations"
+    station=`echo $FORM_STATION | tr '_' ' '`
 else
 	CLIM=`echo "$FORM_NAME"  | tr '[:upper:]' '[:lower:]'`
+    station=`echo $FORM_STATION | tr '_' ' '`
 fi
-station=`echo $FORM_STATION | tr '_' ' '`
 # common options
 if [ -z "$FORM_hist" ]; then
 	FORM_hist=none
 fi
-if [ $TYPE = set ]; then
+if [ $TYPE = field ]; then
+    corrargs=$file
+elif [ $TYPE = set ]; then
     if [ -n "$extraargs" ]; then
     	corrargs="file $WMO ${NAME}_${extraargs}"
     else
@@ -88,10 +96,12 @@ esac
 probfile=data/attribute_prob_$$.txt
 obsplotfile=data/attribute_obsplot_$$.txt
 corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume"
-[ "$FORM_TYPE" != "setmap" ] && corrargs="$corrargs dump $probfile obsplot $obsplotfile"
+if [ $TYPE != field -a $TYPE != setmap ]; then
+    corrargs="$corrargs dump $probfile obsplot $obsplotfile"
+fi
 n=0
-c1=`echo ./data/$TYPE$WMO.dat | fgrep -c '%%'`
-c2=`echo ./data/$TYPE$WMO.dat | fgrep -c '++'`
+c1=`echo ./data/$TYPE$WMO.dat $file | fgrep -c '%%'`
+c2=`echo ./data/$TYPE$WMO.dat $file | fgrep -c '++'`
 if [ $c1 != 0 -o $c2 != 0 ]; then
   ENSEMBLE=true
 fi
@@ -119,6 +129,11 @@ if [ "$FORM_TYPE" = "setmap" ]; then
     export attribute_args=$corrargs
     FORM_type=attribute
     . ./correlatebox.cgi
+    exit
+fi
+
+if [ "$FORM_TYPE" = "field" ]; then
+    . ./attributefield.cgi
     exit
 fi
 

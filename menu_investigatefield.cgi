@@ -12,6 +12,7 @@ fi
 cat <<EOF
 <div class="menulink"><a href="difffieldform.cgi?id=$EMAIL&field=$FORM_field">Plot difference with a field</a></div>
 <div class="menulink"><a href="getmomentsfieldform.cgi?id=$EMAIL&field=$FORM_field">Compute mean, s.d. or extremes</a></div>
+<div class="menulink"><a href="attributeform.cgi?id=$EMAIL&field=$FORM_field">Trends in extremes</a></div>
 <div class="menulink"><a href="eofform.cgi?id=$EMAIL&field=$FORM_field">Make EOFs</a></div>
 <div class="menulink"><a href="fieldcorrseries.cgi?id=$EMAIL&field=$FORM_field">Correlate with a time series</a></div>
 <div class="menulink"><a href="fieldcorrfield.cgi?id=$EMAIL&field=$FORM_field">Pointwise correlations with a field</a>
