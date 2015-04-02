@@ -29,6 +29,7 @@ if [ $EMAIL != someone@somewhere ]; then
        11) m11=selected;;
        12) m12=selected;;
        13) m13=selected;;
+       14) m14=selected;;
        15) m15=selected;;
        18) m18=selected;;
        24) m24=selected;;
@@ -104,6 +105,7 @@ filter<br>cut-off value
 <option $m11>11
 <option $m12>12
 <option $m13>13
+<option $m14>14
 <option $m15>15
 <option $m18>18
 <option $m24>24
