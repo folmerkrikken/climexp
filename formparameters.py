@@ -390,6 +390,7 @@ dataset_values = [['CMIP5one', 'GCM: CMIP5 (IPCC AR5 Atlas subset)'],
 #                 ['RT2b', 'RCM: ENSEMBLES (Europe) GCM-driven'],
 #                 ['RT3', 'RCM: ENSEMBLES (Europe) ERA40-driven'],
                  ['ERAi', 'ERA-interim reanalysis'],
+                 ['ERA20C', 'ERA-20C reanalysis'],
                  ['20CR', '20C reanalysis'],
                  ['obs', 'Observations']]
 
@@ -435,6 +436,16 @@ cmip3_var_values = [['tas', 'near-surface temperature'],
               ['psl', 'air pressure at sea-level']]
 
 erai_var_values =[['t2m', 'near-surface temperature'],
+              ['tmin', 'minimum near-surface temperature'],
+              ['tmax', 'maximum near-surface temperature'],
+              ['tp', 'precipitation'],
+              ['evap', 'evaporation, transpiration, sublimation'],
+              ['pme', 'P-E, net water flux'],
+              ['huss', 'specific humidity near the surface'],
+              ['ssr', 'net solar radiation at the surface'],
+              ['msl', 'air pressure at sea-level']]
+
+era20c_var_values =[['t2m', 'near-surface temperature'],
               ['tmin', 'minimum near-surface temperature'],
               ['tmax', 'maximum near-surface temperature'],
               ['tp', 'precipitation'],
@@ -762,6 +773,8 @@ class FormParameters:
             self.yr1, self.yr2 = 1960, 2000
         elif self.FORM_dataset == '20CR':
             self.yr1, self.yr2 = 1878, 2010
+        elif self.FORM_dataset == 'ERA20C':
+            self.yr1, self.yr2 = 1900, 2010
         elif self.FORM_dataset in ['ERAi']:
             self.yr1 = 1979
             self.yr2 = thisYear

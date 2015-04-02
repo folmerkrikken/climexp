@@ -1,4 +1,4 @@
-#!/home/oldenbor/bin/python
+#!/usr/bin/python
 
 """
 script to produce maps and time series analogous
@@ -34,7 +34,7 @@ import settings
 from subprocess import CalledProcessError
 from formparameters import FormParameters, region_values, \
     srex_values, country_values, mon_values, dataset_values, \
-    cmip5_var_values, cmip5_extreme_values, cmip3_var_values, erai_var_values, c20cr_var_values, obs_var_values, \
+    cmip5_var_values, cmip5_extreme_values, cmip3_var_values, erai_var_values, era20c_var_values, c20cr_var_values, obs_var_values, \
     output_values, sum_values, regr_values, \
     scenario_cmip5_values, obs_tas_values, obs_tasmax_values, obs_tasmin_values, obs_pr_values, \
     obs_psl_values, measure_values, plotvar_values 
@@ -108,6 +108,7 @@ print template.render(params.__dict__,
                       cmip5_extreme_values=cmip5_extreme_values,
                       cmip3_var_values=cmip3_var_values,
                       erai_var_values=erai_var_values,
+                      era20c_var_values=era20c_var_values,
                       c20cr_var_values=c20cr_var_values,
                       obs_var_values=obs_var_values,
                       scenario_cmip5_values=scenario_cmip5_values,

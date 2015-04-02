@@ -149,6 +149,10 @@ Variable:
     {% for var_val in erai_var_values %}
         <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
     {% endfor %}
+{% elif FORM_dataset == 'ERA20C' %}
+    {% for var_val in era20c_var_values %}
+        <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
+    {% endfor %}
 {% elif FORM_dataset == '20CR' %}
     {% for var_val in c20cr_var_values %}
         <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
@@ -186,7 +190,7 @@ Output:
 
     {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3', 'RT2b'] %}
         Scenario:
-    {% elif FORM_dataset in ['ERAi', '29CR'] %}
+    {% elif FORM_dataset in ['ERAi', 'ERA20C', '20CR'] %}
         (Re)analysis:
     {% elif FORM_dataset == 'obs' %}
         Observations:
@@ -228,6 +232,10 @@ Output:
 
     {% if FORM_dataset == 'ERAi' %}
         </td><td>ERA-interim reanalysis
+    {% endif %}
+
+    {% if FORM_dataset == 'ERA20C' %}
+        </td><td>ERA-20C reanalysis
     {% endif %}
 
     {% if FORM_dataset == '20CR' %}
@@ -445,6 +453,10 @@ Output:
 
     {% if FORM_dataset == 'ERAi' %}
         ERA-interim reanalysis
+    {% endif %}
+
+    {% if FORM_dataset == 'ERA20C' %}
+        ERA-20C reanalysis
     {% endif %}
 
     {% if FORM_dataset == '20CR' %}

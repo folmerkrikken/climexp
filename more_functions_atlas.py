@@ -289,6 +289,18 @@ def get_file_list(exp, params):
             print "get_file_list: error: cannot find %s<br>" % FORM_field
         files = [file]
 
+    elif params.FORM_dataset == 'ERA20C':
+        dirName = '{FORM_dataset}'.format(**paramsDict)
+        FORM_field = 'era20c_%(FORM_var)s' % paramsDict
+        os.environ['FORM_field'] = FORM_field
+        output = subprocess.check_output("./call_queryfield.cgi", shell = True)
+        file = re.search(r"file=(.*)\s", output)
+        if file:
+            file = file.groups()[0]
+        else:
+            print "get_file_list: error: cannot find %s<br>" % FORM_field
+        files = [file]
+
     elif params.FORM_dataset == '20CR':
         dirName = '{FORM_dataset}'.format(**paramsDict)
         FORM_field = 'c%(FORM_var)s' % paramsDict
@@ -391,7 +403,7 @@ def get_model(params, filename, typeVar):
                 print '<b>Cannot find mask file %s</b><br>' % trylsmask
                 raise PlotSeriesError('<b>Cannot find mask file %s</b><br>' % trylsmask)
 
-    elif params.FORM_dataset in ['CMIP3', 'ERAi', '20CR', 'obs']:
+    elif params.FORM_dataset in ['CMIP3', 'ERAi', 'ERA20C', '20CR', 'obs']:
 
         ensfile = re.sub(r'_0[0-9]_', '_%%_', os.path.basename(filename))
         ensfile = ensfile.replace("_144.nc","")
@@ -415,6 +427,8 @@ def get_model(params, filename, typeVar):
                     model = model[:i]
                 elif params.FORM_dataset == 'ERAi':
                     model = 'erai'
+                elif params.FORM_dataset == 'ERA20C':
+                    model = 'era20c'
                 elif params.FORM_dataset == '20CR':
                     model = 'c'
                 elif params.FORM_dataset == 'obs':
@@ -540,6 +554,8 @@ def define_dataset(dataset,field):
         datasetname = 'CMIP3'
     elif dataset == 'ERAi':
         datasetname = 'ERA-interim'
+    elif dataset == 'ERA20C':
+        datasetname = 'ERA-20C'
     elif dataset == '20CR':
         datasetname = '20CR'
     elif dataset == 'obs':
