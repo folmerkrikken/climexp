@@ -178,7 +178,17 @@ fi
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 if [ $TYPE = set ]; then
-    f=`ls -t ./data/${NAME}*$FORM_extraargs.dat|head -1`
+    while [ -z "$f" ]; do
+        if [ -z "$FORM_extraargs" ]; then
+            f=`ls -t ./data/${NAME}*[0-9].dat|head -1`
+        else
+            f=`ls -t ./data/${NAME}*$FORM_extraargs.dat|head -1`
+        fi
+        if [ ! -s $f ]; then
+            rm -f $f ${f%.dat}.nc
+            f=""
+        fi
+    done
 else
     f=./data/$TYPE$WMO.dat
 fi
@@ -230,6 +240,9 @@ if [ -n "$FORM_twothird" ]; then
     ylabel="${ylabel}^(2/3)"
     [ -n "$FORM_ylo" ] && ylo=`echo "exp(2/3*l($ylo)" | bc -l`
     [ -n "$FORM_yhi" ] && yhi=`echo "exp(2/3*l($yhi)" | bc -l`
+fi
+if [ "$ylabel" != "$ylabel_save" ]; then
+    sety2label="set y2label \"$ylabel_save\""
 fi
 
 if [ -s "$startstop" ]; then
@@ -395,6 +408,7 @@ set output "${root}.png"
 set title "$title"
 set xlabel "return period [yr]"
 set ylabel "$ylabel"
+$sety2label
 set datafile missing '-999.900'
 set key $bottomtop
 $xtics
@@ -439,51 +453,6 @@ else
 fi
 echo "referenced at $FORM_begin2 and $FORM_year (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
-
-if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
-	./bin/untransform ${FORM_log:-false} ${FORM_sqrt:-false} ${FORM_square:-false} < $root.txt > ${root}un.txt
-	root=${root}un
-	if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" ]; then
-		ylabel=$ylabel_save
-		cat > $root.gnuplot << EOF
-set size 0.7,0.7
-set term png $gnuplot_png_font_hires
-set output "${root}.png"
-set title "$title"
-set xlabel "return period [yr]"
-set ylabel "$ylabel"
-set datafile missing '-999.900'
-set key $bottomtop
-$xtics
-set xrange [${xlo}:${xhi}]
-set yrange [${FORM_ylo}:${FORM_yhi}]
-plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$FORM_fit $FORM_assume fit" with line$plotformyear
-set term postscript epsf color solid
-set output "${root}.eps"
-replot
-quit
-EOF
-		if [ "$lwrite" = true ]; then
-			echo '<pre>'
-			cat $root.gnuplot
-			echo '</pre>'
-		fi
-		./bin/gnuplot < $root.gnuplot 2>&1
-		if [ ! -s ${root}.png ]; then
-			echo "Something went wrong while making the plot."
-			echo "The plot commands are <a href=\"$root.gnuplot\">here</a>."
-			. ./myvinkfoot.cgi
-			exit
-		fi
-	else
-    	echo "Not yet ready"  
-	fi
-	gzip -f $root.eps
-	pngfile=${root}.png
-	getpngwidth
-	echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
-	echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
-fi
 
 cat > ${root}_cdf.gnuplot << EOF
 set size 0.7,0.4
