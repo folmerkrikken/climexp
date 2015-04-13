@@ -52,7 +52,7 @@ cmip5*|thor*) # expecting cmip5_var_Amon_model_exp
 	   fi
 	fi
 	###echo "dataset=$dataset var=$var type=$type model=$model exp=$exp rip=$rip lead=$lead ip=$ip ensave=$ensave<br>"
-	if [ $type = Amon -o $type = Lmon -o $type = Omon -o $type = OImon ]; then
+	if [ $type = Amon -o $type = Lmon -o $type = Omon -o $type = OImon -o $type = LImon ]; then
 	   dir=monthly
 	   NPERYEAR=12
 	elif [ $type = yr ]; then
