@@ -3,7 +3,7 @@
 . ./myvinkhead.cgi "Trends in extremes" "$kindname $climfield" "noindex,nofollow"
 
 if [ $EMAIL = oldenbor@knmi.nl ]; then
-    lwrite=false # true
+    lwrite=true
 fi
 
 if [ "$FORM_assume" != 'both' ]; then
@@ -64,10 +64,15 @@ dano="" # otherwise it just gets longer and onger
 
 insideloop=
 FORM_var=ratio
+if [ -z "$FORM_cmin" ]; then
+    cmin_was_nil=true
+    FORM_cmin="-100"
+fi
+if [ -z "$FORM_cmin" ]; then
+    cmax_was_nil=true
+    FORM_cmax="100"
+fi
 id=${root}_$FORM_var
 . ./grads.cgi
-
-
-echo "REST NOT YET READY"
 
 . ./myvinkfoot.cgi
