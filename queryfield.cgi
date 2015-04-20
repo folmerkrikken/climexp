@@ -351,8 +351,10 @@ gpccall_25) file=GPCCData/gpcc_25_combined.nc;kindname="GPCC V6+monitoring";clim
 gpccall_25_n1) file=GPCCData/gpcc_25_n1_combined.nc;kindname="GPCC V6+monitoring";climfield="precipitation";flipcolor=11;;
 gpcc) file=GPCCData/gpcc_10_mon.nc;kindname="GPCC monitoring";climfield="precipitation";flipcolor=11;;
 gpcc_n1) file=GPCCData/gpcc_10_n1_mon.nc;kindname="GPCC monitoring";climfield="precipitation";flipcolor=11;;
-ngpcc_mon) file=GPCCData/ngpcc_10_mon.nc;kindname="GPCC monitoring";climfield="#gauges";;
-ngpcc) file=GPCCData/full_data_v6_statio_10.nc;kindname="GPCC V6";climfield="#gauges";;
+ngpcc) file=GPCCData/ngpcc_10.ctl;kindname="GPCC monitoring";climfield="#gauges";;
+ngpcc_05) file=GPCCData/full_data_v6_statio_05.nc;kindname="GPCC V6";climfield="#gauges";;
+ngpcc_10) file=GPCCData/full_data_v6_statio_10.nc;kindname="GPCC V6";climfield="#gauges";;
+ngpcc_25) file=GPCCData/full_data_v6_statio_25.nc;kindname="GPCC V6";climfield="#gauges";;
 gpcp) file=GPCPData/gpcp.ctl;kindname="GPCP v2";climfield="precipitation";flipcolor=11;;
 gpcp_21) file=GPCPData/gpcp_21.ctl;kindname="GPCP v2.1";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_22) file=GPCPData/gpcp_22.ctl;kindname="GPCP v2.2";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
@@ -452,6 +454,9 @@ luge_past) file=McGillData/glpast_1700-2007_05.nc;kindname="LUGE";climfield="pas
 en3_sos) file=UKMOData/salt_EN3_v2a_ObjectiveAnalysis_5m.nc;kindname="EN3";climfield="SSS";;
 en3_osc*) depth=${FORM_field#en3_osc};file=UKMOData/salt_EN3_v2a_ObjectiveAnalysis_sal${depth}.nc;kindname="EN3";climfield="sal${depth}";;
 en3_ohc*) depth=${FORM_field#en3_ohc};file=UKMOData/temp_EN3_v2a_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN3";climfield="ohc${depth}";;
+en4_sos) file=UKMOData/salt_EN.4.0.2_ObjectiveAnalysis_5m.nc;kindname="EN4";climfield="SSS";;
+en4_osc*) depth=${FORM_field#en4_osc};file=UKMOData/salt_EN.4.0.2_ObjectiveAnalysis_sal${depth}.nc;kindname="EN4";climfield="sal${depth}";;
+en4_ohc*) depth=${FORM_field#en4_ohc};file=UKMOData/temp_EN.4.0.2_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN4";climfield="ohc${depth}";;
 bmrc_d20) file=BMRCData/d20.nc;kindname="PEODAS";climfield="D20";;
 
 sos_u)     file="SOS/u_mean12.ctl";kindname="KNMI ERS";climfield="u";;
