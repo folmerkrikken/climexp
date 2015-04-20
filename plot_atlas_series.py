@@ -181,7 +181,7 @@ class PlotAtlasSeries:
     
             if self.params.FORM_normsd and varObj.norelative == True:
                 self.params.FORM_normsd = ""
-                self.logOut.info("Ignoring request for stive changes for this variable.<br>")
+                self.logOut.info("Ignoring request for relative changes for this variable.<br>")
 
             if self.params.FORM_anomaly == 'on':
                 if not self.params.FORM_anom1:
