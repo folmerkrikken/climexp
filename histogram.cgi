@@ -161,6 +161,9 @@ if [ -n "$FORM_twothird" ]; then
     [ -n "$FORM_ylo" ] && ylo=`echo "exp(2/3*l($ylo)" | bc -l`
     [ -n "$FORM_yhi" ] && yhi=`echo "exp(2/3*l($yhi)" | bc -l`
 fi
+if [ "$ylabel" != "$ylabel_save" ]; then
+    sety2label="set y2label \"$ylabel_save\""
+fi
 
 if [ -s "$startstop" ]; then
 	yrstart=`head -1 $startstop`
@@ -312,18 +315,23 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	    fit="${FORM_dgt} $fit"
 	fi
 	
-	cat > /tmp/histogram$$.gnuplot << EOF
+	cat > $root.gnuplot << EOF
 set size 0.7,0.7
-set term png $gnuplot_png_font_hires
-set output "${root}.png"
 set title "$title"
 set xlabel "return period [yr]"
 set ylabel "$ylabel"
+$sety2label
 set datafile missing '-999.900'
 set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [${ylo}:${yhi}]
+set term unknown
+plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$fit fit" with line$plotformyear
+set yrange [GPVAL_Y_MIN:GPVAL_Y_MAX]
+set y2range [GPVAL_Y_MIN:GPVAL_Y_MAX]
+set term png $gnuplot_png_font_hires
+set output "${root}.png"
 plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$fit fit" with line$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
@@ -332,24 +340,22 @@ quit
 EOF
 	if [ "$lwrite" = true ]; then
 		echo '<pre>'
-		cat /tmp/histogram$$.gnuplot
+		cat $root.gnuplot
 		echo '</pre>'
 	fi
-	./bin/gnuplot < /tmp/histogram$$.gnuplot 2>&1
+	./bin/gnuplot < $root.gnuplot 2>&1
 	if [ ! -s ${root}.png ]; then
-		cp /tmp/histogram$$.gnuplot data/
 		echo "Something went wrong while making the plot."
-		echo "The plot command are <a href=\"data/histogram$$.gnuplot\">here</a>."
+		echo "The plot command are <a href=\"$root.gnuplot\">here</a>."
 		. ./myvinkfoot.cgi
 		exit
 	fi
-	rm /tmp/histogram$$.gnuplot
 fi
 
 gzip -f $root.eps
 pngfile=${root}.png
 getpngwidth
-echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>,  <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
+echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>,  <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
@@ -366,10 +372,8 @@ if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
 		ylabel=$ylabel_save
 		ylo=$ylo_save
 		yhi=$yhi_save
-		cat > /tmp/histogram$$.gnuplot << EOF
+		cat > $root.gnuplot << EOF
 set size 0.7,0.7
-set term png $gnuplot_png_font_hires
-set output "${root}.png"
 set title "$title"
 set xlabel "return period [yr]"
 set ylabel "$ylabel"
@@ -378,6 +382,8 @@ set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [${ylo}:${yhi}]
+set term png $gnuplot_png_font_hires
+set output "${root}.png"
 plot "$root.txt" index 0 u 2:3 notitle with points, "$root.txt" index 0 u 2:4 title "$fit fit" with line$plotformyear
 set term postscript epsf color solid
 set output "${root}.eps"
@@ -386,25 +392,23 @@ quit
 EOF
 		if [ "$lwrite" = true ]; then
 			echo '<pre>'
-			cat /tmp/histogram$$.gnuplot
+			cat $root.gnuplot
 			echo '</pre>'
 		fi
-		./bin/gnuplot < /tmp/histogram$$.gnuplot 2>&1
+		./bin/gnuplot < $root.gnuplot 2>&1
 		if [ ! -s ${root}.png ]; then
-			cp /tmp/histogram$$.gnuplot data/
 			echo "Something went wrong while making the plot."
-			echo "The plot command are <a href=\"data/histogram$$.gnuplot\">here</a>."
+			echo "The plot command are <a href=\"$root.gnuplot\">here</a>."
 			. ./myvinkfoot.cgi
 			exit
 		fi
-		rm /tmp/histogram$$.gnuplot
 	else
     	echo "Not yet ready for plot = $FORM_plot, only gumbel or log"  
 	fi
 	gzip -f $root.eps
 	pngfile=${root}.png
 	getpngwidth
-	echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
+	echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
 	echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 fi
 
