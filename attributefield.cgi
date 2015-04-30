@@ -47,32 +47,74 @@ if [ ! -s $outfile ]; then
 fi
 file=$outfile
 insideloop=true
-FORM_var=alpha # trend
+root=attributefield`date "+%Y%m%d_%H%M"`_${$}
+
+# plot trend parameter
+FORM_var=alpha
 id=${root}_$FORM_var
 . ./grads.cgi
 dano="" # otherwise it just gets longer and onger
 
+# plot return time in the current climate
 FORM_var=rt$FORM_year
+if [ -n "$FORM_cmin" ]; then
+    cmin_was_set="$FORM_cmin"
+    FORM_cmin=""
+fi
+if [ -n "$FORM_cmax" ]; then
+    cmax_was_set="$FORM_cmax"
+    FORM_cmax=""
+fi
 id=${root}_$FORM_var
 . ./grads.cgi
 dano="" # otherwise it just gets longer and onger
 
+# plot return time in a previous climate
 FORM_var=rt$FORM_begin2
 id=${root}_$FORM_var
 . ./grads.cgi
 dano="" # otherwise it just gets longer and onger
 
-insideloop=
+[ -n "$cmin_was_set ] && FORM_cmin="$cmin_was_set"
+[ -n "$cmax_was_set ] && FORM_cmax="$cmax_was_set"
+
+# plot ratio of return times.
+# note that this variable includes ±1e20 for "infinite" which should be plotted as defined
+# but try not to let this set the scale of the colourbar
 FORM_var=ratio
 if [ -z "$FORM_cmin" ]; then
     cmin_was_nil=true
     FORM_cmin="-100"
 fi
-if [ -z "$FORM_cmin" ]; then
+if [ -z "$FORM_cmax" ]; then
     cmax_was_nil=true
     FORM_cmax="100"
 fi
 id=${root}_$FORM_var
 . ./grads.cgi
+dano="" # otherwise it just gets longer and longer
+
+[ -n "$cmin_was_nil" ] && FORM_cmin=""
+[ -n "$cmax_was_nil" ] && FORM_cmax=""
+
+# and finally plot the FAR due to the trend
+insideloop=
+FORM_var="1-1/ratio"
+if [ -z "$FORM_cmin" ]; then
+    cmin_was_nil=true
+    FORM_cmin="0"
+fi
+if [ -z "$FORM_cmax" ]; then
+    cmax_was_nil=true
+    FORM_cmax="1"
+fi
+id=${root}_far
+. ./grads.cgi
+dano="" # otherwise it just gets longer and onger
+
+
+cat <<EOF
+Download the <a href="$outfile">netcdf file</a> with all results.
+EOF
 
 . ./myvinkfoot.cgi
