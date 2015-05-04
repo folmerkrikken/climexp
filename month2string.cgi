@@ -9,6 +9,8 @@ elif [ "$NPERYEAR" = 1 ]; then
   eval `$DIR/bin/annual2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix | sed -e 's/monthly/yearly/g'`
 elif [ "$NPERYEAR" = 4 ]; then
   eval `$DIR/bin/season2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix`
+elif [ "$NPERYEAR" = 2 ]; then
+  eval `$DIR/bin/halfyear2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix`
 else
   echo "warning: could not determine value of NPERYEAR = $NPERYEAR<br>"
   eval `$DIR/bin/month2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix | sed -e 's/monthly/separately/g'`

@@ -276,6 +276,28 @@ fi
 echo "<tr><td>"
 if [ $NPERYEAR = 1 ]; then
   echo "<input type=hidden name=month value=1>"
+elif [ $NPERYEAR = 2 ]; then
+  echo "Starting season: <td>"
+  echo "<select class="forminput" name=\"month\">"
+  if [ -z "$justonemonth" ]; then
+	echo "<option value=\"1:$NPERYEAR\" $month_all_selected>all"
+  fi
+  echo "<option value=\"1\" $month_1_selected>Oct-Mar"
+  echo "<option value=\"2\" $month_2_selected>Apr-Sep"
+  echo "<option value=\"0\" $month_0_selected>together"
+  echo "</select>"
+  if [ -z "$ONLYONE" ]; then
+	  echo "of <select class=\"forminput\" name=\"fix\">"
+	  echo "<option value=\"fix1\" $fix1_selected>$timeseries"
+	  echo "<option value=\"fix2\" $fix2_selected>$index selected above"
+  fi
+  echo "</select><td><a href=\"javascript:pop_page('help/selectseason2.shtml',568,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
+  echo "<tr><td>Season:<td><select class=\"forminput\" name=\"operation\"><option $averaging_selected>averaging<option $selecting_selected>selecting</select> over"
+  echo "<select class=\"forminput\" name=\"sum\">"
+  echo "<option $sum_1_selected>1"
+  echo "<option $sum_2_selected>2"
+  echo "</select>half years"
+  [ -z "$ONLYONE" ] && echo " of the $timeseries"
 elif [ $NPERYEAR = 4 ]; then
   echo "Starting season: <td>"
   echo "<select class="forminput" name=\"month\">"
