@@ -44,7 +44,7 @@ Choose a dataset and press this button</td></tr>
 <tr><td>&nbsp;
 <td><input type="radio" class="formradio" name="CLASS" value="NCEP_NCAR_reanalysis">NCEP/NCAR Reanalysis-1 atmospheric data 1948-now (see also <a href="/selectfield_rea.cgi?id=$EMAIL">here</a>)<td><a href="wipefeet.cgi?http://www.cdc.noaa.gov/cdc/reanalysis/reanalysis.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 <tr><td>&nbsp;
-<td><input type="radio" class="formradio" name="CLASS" value="20th_century_reanalysis">20th Century Reanalysis surface data (1908-1958)<td><a href="wipefeet.cgi?http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_Rean.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<td><input type="radio" class="formradio" name="CLASS" value="20th_century_reanalysis">20th Century Reanalysis surface data (1908-1958)<td><a href="wipefeet.cgi?http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_ReanV2c.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 <tr><td>Ocean re-analyses
 <td><input type="radio" class="formradio" name="CLASS" value="SODA">0.5&deg; SODA ocean re-analysis 2.0.2-2.0.3 1958-2004 <td><a href="wipefeet.cgi?http://apdrc.soest.hawaii.edu/datadoc/soda_pop2.0.2.htm" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 <tr><td>&nbsp;

@@ -108,7 +108,7 @@ NCEP_NCAR_reanalysis) r1_selected=selected
          file=prs
          flatten=mv;;
 20th_century_reanalysis) c20_selected=selected
-         path=http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/20thC_ReanV2/
+         path=http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/20thC_ReanV2c/
 	 level=lev;longitude=lon;latitude=lat
          file=monolevel
          flatten=mv;;
