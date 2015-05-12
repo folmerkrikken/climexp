@@ -203,7 +203,7 @@ fi
 . ./setyaxis.cgi
 
 echo "<tr><th colspan="4">$seriesmonth $station $VAR [$UNITS] dependent on $covstation</th></tr>"
-tail -n +2 "$root.txt" | grep '<tr>' | sed -e 's/#//'
+tail -n +2 "$root.txt" | grep '<tr>' | sed -e 's/# //'
 echo '</table>'
 [ "$lwrite" = true ] && wc -l $root.txt|awk '{print $1}'
 c=`wc -l $root.txt|awk '{print $1}'`
@@ -403,8 +403,6 @@ EOF
 
 	cat > $root.gnuplot << EOF
 set size 0.7,0.7
-set term png $gnuplot_png_font_hires
-set output "${root}.png"
 set title "$title"
 set xlabel "return period [yr]"
 set ylabel "$ylabel"
@@ -414,6 +412,16 @@ set key $bottomtop
 $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [${FORM_ylo}:${FORM_yhi}]
+set term unknown
+plot \\
+"$root.txt" index 0 u 2:3 notitle with points lt 3,\\
+"$root.txt" index 0 u 2:4 title "$fittext $FORM_assume fit $FORM_begin2" with line lt 3,\\
+"$root.txt" index 1 u 2:3 notitle with points lt 1,\\
+"$root.txt" index 1 u 2:4 title "$fittext $FORM_assume fit $FORM_year" with line lt 1$plotformyear
+set yrange [GPVAL_Y_MIN:GPVAL_Y_MAX]
+set y2range [GPVAL_Y_MIN:GPVAL_Y_MAX]
+set term png $gnuplot_png_font_hires
+set output "${root}.png"
 plot \\
 "$root.txt" index 0 u 2:3 notitle with points lt 3,\\
 "$root.txt" index 0 u 2:4 title "$fittext $FORM_assume fit $FORM_begin2" with line lt 3,\\
