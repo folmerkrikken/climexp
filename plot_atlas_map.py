@@ -127,17 +127,13 @@ class PlotAtlasMap:
                 self.params.FORM_plotvar = 'xmean'
                 if self.params.FORM_dataset == 'CMIP5extone':
                     self.params.FORM_dataset = 'CMIP5ext' # to compute the sd of nat. var.
-        self.log.debug('get_file_list:')
         (self.typeVar, self.dir, self.files) = get_file_list(self.params.FORM_scenario_cmip5, self.params)
+        ###self.logOut.info('self.files = %s<br>' % self.files[:5])
+        ###self.logOut.info('len(self.files) = %i<br>' % len(self.files))
         self.params.FORM_plotvar = save_plotvar
         self.params.FORM_dataset = save_dataset
         if meanfile != "":
             self.files.append(meanfile[0])
-
-        self.log.debug('  self.typeVar = %s', self.typeVar)
-        self.log.debug('  self.dir = %s', self.dir)
-        self.log.debug('  self.files = %s', self.files)
-        self.log.debug('')
 
         # Next compute difference / regression data
         if self.params.FORM_dataset in ['CMIP5one','CMIP5extone']:
@@ -196,7 +192,6 @@ class PlotAtlasMap:
 
         # Set number of files
         nfiles = len(self.files)
-        ###self.logOut.info('nfiles = %i <br>' % len(self.files))
         varObj = DefineVar(self.params.FORM_var, self.params.FORM_normsd)
 
         root = 'atlas/diff/{dir}/{season}'.format(dir=self.dir, season=self.season)
@@ -424,7 +419,7 @@ class PlotAtlasMap:
                 ###self.logOut.info('len(infiles) = %i<br>' % len(infiles))
 
                 if not infiles:
-                    raise PlotMapError("Cannot find data.")
+                    raise PlotMapError("Cannot find infiles.")
 
                 cmd = "bin/quantiles_field {infiles} {quantfile}".format(infiles=' '.join(infiles), quantfile=self.quantfile)
                 ###self.logOut.info("cmd = '%s'" % cmd)
@@ -549,7 +544,7 @@ class PlotAtlasMap:
                 self.logOut.info("Generating median of variability...<br>")
 
                 if not infiles:
-                    raise PlotMapError("Cannot find data.")
+                    raise PlotMapError("Cannot find regression data.")
 
                 noisefile = os.path.join(self.tempDir, '%s%s_%s' % ('quant_d',self.xvar, os.path.basename(outfile)))
                 cmd = "bin/quantiles_field {infiles} {noisefile}".format(infiles=' '.join(infiles), noisefile=noisefile)

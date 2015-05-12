@@ -270,6 +270,7 @@ class PlotAtlasSeries:
                         if not os.path.isdir(countrydir):
                             os.makedirs(countrydir)
                         command = "polygon2mask {filename} countries/{country}.txt {maskfile}".format(filename=filename, country=country, maskfile=maskfile)
+                        ###self.logOut.info(command)
                         subprocess.call(command, shell=True, stderr=subprocess.STDOUT)
                         if not os.path.exists(maskfile) or os.path.getsize(maskfile) == 0:
                             # most likely there were no grid points in the polygons - skip

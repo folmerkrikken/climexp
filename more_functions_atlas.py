@@ -104,7 +104,15 @@ def get_file_list(exp, params):
     Output:
         (typeVar, dir ,files)
     """
-    
+
+    log = logging.getLogger('get_file_list')
+    log.setLevel(logging.DEBUG)
+
+    hdlr = logging.StreamHandler(sys.stdout)
+    hdlr.setFormatter(logging.Formatter('%(name)s: %(message)s'))
+    log.addHandler(hdlr)
+    del hdlr
+
     files = []
     paramsDict = params.__dict__
     res = ''
@@ -146,7 +154,8 @@ def get_file_list(exp, params):
         typeVar = 'A1'
         paramsDict['type'] = typeVar
         paramsDict['res'] = res
-    
+
+
     if params.FORM_dataset == 'CMIP5':
 
         dirName = '{FORM_dataset}/{exp}'.format(exp=exp, **paramsDict)
@@ -154,14 +163,21 @@ def get_file_list(exp, params):
             fileName = 'CMIP5/monthly/{FORM_var}/{FORM_var}_{type}_modmean_{exp}_000.nc'.format(exp=exp, **paramsDict)
             files.append(fileName)
         else:
-            # we know that p goes to 3...
-            maskFile1 = "CMIP5/monthly/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p1{res}.nc".format(exp=exp, **paramsDict)
-            maskFile2 = "CMIP5/monthly/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p2{res}.nc".format(exp=exp, **paramsDict)
-            maskFile3 = "CMIP5/monthly/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p3{res}.nc".format(exp=exp, **paramsDict)
+            if exp == 'rcp45to85':
+                explist = [ 'rcp45', 'rcp60', 'rcp85']
+            else:
+                explist = [ exp ]
+            for e in explist:
+                # we know that p goes to 3...
+                maskFiles = []
+                maskFiles.append("CMIP5/monthly/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p1{res}.nc".format(exp=e, **paramsDict))
+                maskFiles.append("CMIP5/monthly/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p2{res}.nc".format(exp=e, **paramsDict))
+                maskFiles.append("CMIP5/monthly/{FORM_var}/{FORM_var}_{type}_*_{exp}_r*i1p3{res}.nc".format(exp=e, **paramsDict))
 
-            files += glob.glob(maskFile1)
-            files += glob.glob(maskFile2)
-            files += glob.glob(maskFile3)
+                ###log.info('maskFiles = %s<br>' % maskFiles)
+
+                for mask in maskFiles:
+                    files += glob.glob(mask)
 
     elif params.FORM_dataset == 'CMIP5one':
 
@@ -208,7 +224,7 @@ def get_file_list(exp, params):
                 maskFile1 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{e}_r*i1p1{res}.nc".format(e=e, **paramsDict)
                 maskFile2 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{e}_r*i1p2{res}.nc".format(e=e, **paramsDict)
                 maskFile3 = "CMIP5/annual/{FORM_var}/{FORM_var}_{type}_*_{e}_r*i1p3{res}.nc".format(e=e, **paramsDict)
-
+                
                 files += glob.glob(maskFile1)
                 files += glob.glob(maskFile2)
                 files += glob.glob(maskFile3)
