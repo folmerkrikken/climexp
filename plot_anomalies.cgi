@@ -125,11 +125,12 @@ EOF
     fi
     pngfile=${base}a.png
     getpngwidth
+    datafile=`echo ${base}a.txt | tr '+' '%'`
     cat << EOF 
 <div class="bijschrift">Anomalies $wrt $period
 (<a href="${base}a.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=${base}a.eps.gz">pdf</a>,
 <a href="${base}a.txt">raw data</a>, 
-<a href="dat2nc.cgi?datafile=${base}a.txt&type=$TYPE&station=$STATION&id=$EMAIL">netcdf</a>)</div>
+<a href="dat2nc.cgi?datafile=${datafile}&type=$TYPE&station=$STATION&id=$EMAIL">netcdf</a>)</div>
 <center>
 <img src="${base}a.png" alt="anomalies" width="$halfwidth" border=0 class="realimage" hspace=0 vspace=0>
 </center>
