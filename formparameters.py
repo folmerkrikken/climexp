@@ -496,15 +496,15 @@ scenario_cmip5_values = [['rcp26', 'Historical + RCP2.6'],
 obs_tas_values = [['giss_temp_1200', 'GISTEMP 1200'],
                   ['ncdc_temp', 'NCDC MOST'],
                   ['hadcrut4', 'HadCRUT4.2.0.0'],
-                  ['cru_tmp', 'CRU TS 3.21']]
+                  ['cru_tmp', 'CRU TS 3.22']]
 
-obs_tasmin_values = [['cru_tmn', 'CRU TS 3.21']]
+obs_tasmin_values = [['cru_tmn', 'CRU TS 3.22']]
 
-obs_tasmax_values = [['cru_tmx', 'CRU TS 3.21']]
+obs_tasmax_values = [['cru_tmx', 'CRU TS 3.22']]
 
 obs_pr_values = [['gpcc_25_n1', 'GPCC v6'],
                  ['prca', 'NCDC anomalies'],
-                 ['cru_pre', 'CRU TS 3.21']]
+                 ['cru_pre', 'CRU TS 3.22']]
 
 obs_psl_values = [['trenberthslp', 'UCAR ds010 (NH only)'],
                   ['hadslp2r', 'HadSLP2r']]
