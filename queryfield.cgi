@@ -228,12 +228,18 @@ ssmi_1) file=NCDCData/ssmi_1.ctl;kindname="NCDC SSMI/I";climfield="precipitation
 hulme) file=CRUData/hulme23.ctl;kindname="CRU";climfield="precipitation";flipcolor=11;;
 hulme-nino3) file=CRUData/hulme23-nino3.ctl;kindname="CRU";climfield="precipitation - nino3";flipcolor=11;;
 cru_tmp) file=CRUData/cru_ts3.22.1901.2013.tmp.dat.nc;kindname="CRU TS3.22";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmp_st0) file=CRUData/cru_ts3.22.1901.2013.tmp.st0.nc;kindname="CRU TS3.22 st0";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmp_stn) file=CRUData/cru_ts3.22.1901.2013.tmp.stn.nc;kindname="CRU TS3.22 stn";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
 cru_tmp_10) file=CRUData/cru_ts3.22.1901.2013.tmp.dat_1.nc;kindname="CRU TS3.22";climfield="temperature";LSMASK=CRUData/lsmask_10.nc;;
 cru_tmp_25) file=CRUData/cru_ts3.22.1901.2013.tmp.dat_25.nc;kindname="CRU TS3.22";climfield="temperature";LSMASK=CRUData/lsmask_25.nc;;
 cru_tmx) file=CRUData/cru_ts3.22.1901.2013.tmx.dat.nc;kindname="CRU TS3.22";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmx_st0) file=CRUData/cru_ts3.22.1901.2013.tmpdtr.st0.nc;kindname="CRU TS3.22 st0";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmx_stn) file=CRUData/cru_ts3.22.1901.2013.tmpdtr.stn.nc;kindname="CRU TS3.22 stn";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
 cru_tmx_10) file=CRUData/cru_ts3.22.1901.2013.tmx.dat_1.nc;kindname="CRU TS3.22";climfield="Tmax";LSMASK=CRUData/lsmask_10.nc;;
 cru_tmx_25) file=CRUData/cru_ts3.22.1901.2013.tmx.dat_25.nc;kindname="CRU TS3.22";climfield="Tmax";LSMASK=CRUData/lsmask_25.nc;;
 cru_tmn) file=CRUData/cru_ts3.22.1901.2013.tmn.dat.nc;kindname="CRU TS3.22";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmn_st0) file=CRUData/cru_ts3.22.1901.2013.tmpdtr.st0.nc;kindname="CRU TS3.22 st0";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmn_stn) file=CRUData/cru_ts3.22.1901.2013.tmpdtr.stn.nc;kindname="CRU TS3.22 stn";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
 cru_tmn_10) file=CRUData/cru_ts3.22.1901.2013.tmn.dat_1.nc;kindname="CRU TS3.22";climfield="Tmin";LSMASK=CRUData/lsmask_10.nc;;
 cru_tmn_25) file=CRUData/cru_ts3.22.1901.2013.tmn.dat_25.nc;kindname="CRU TS3.22";climfield="Tmin";LSMASK=CRUData/lsmask_25.nc;;
 cru_dtr) file=CRUData/cru_ts3.22.1901.2013.dtr.dat.nc;kindname="CRU TS3.22";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_05.nc;;
