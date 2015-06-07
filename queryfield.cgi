@@ -204,7 +204,7 @@ ersstv3b) file=NCDCData/ersstv3b.ctl;kindname="ERSST v3b2";climfield="SST";;
 ersstv4) file=NCDCData/ersstv4.nc;kindname="ERSST v4";climfield="SST";;
 dasilva_ssta) file=DaSilvaData/dasilva_sst_anom.cdf;kindname="Da Silva";climfield="SSTa";;
 ssmi_sst) file=SSMIData/ssmi_sst.ctl;kindname="SSMI";climfield="SST";;
-tlt) file=UAHData/tlt.nc;kindname="UAH MSU v5.6";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
+tlt_60b2) file=UAHData/tlt_60b2.nc;kindname="UAH MSU v6.0beta2";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
 tlt_56) file=UAHData/tlt_56.nc;kindname="UAH MSU v5.6";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
 tlt_55) file=UAHData/tlt_55.nc;kindname="UAH MSU v5.5";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
 rss_tlt) file=SSMIData/rss_tlt.nc;kindname="RSS MSU 3.3";climfield="Tlt";;
@@ -413,6 +413,9 @@ mohmat42) file="UKMOData/mohmat42.ctl";kindname="MOHMAT 4.2";climfield="Tair";;
 mohmat43) file="UKMOData/mohmat43.ctl";kindname="MOHMAT 4.3";climfield="Tair";;
 mohmat43a) file="UKMOData/MOHMAT43_anm56xx_corrected.nc";kindname="MOHMAT 4.3";climfield="Tair anom";;
 hadmat1) file="UKMOData/HadMAT1_anm56jan2002wrtM5_corrected.nc";kindname="HadMAT1";climfield="Tair anom";;
+hadnmat2) file="UKMOData/HadNMAT2.nc";kindname="HadNMAT2";climfield="Tair night";;
+hadnmat2a) file="UKMOData/HadNMAT2a.nc";kindname="HadNMAT2";climfield="Tair night anom";;
+hadnmat2u) file="UKMOData/HadNMAT2u.nc";kindname="HadNMAT2";climfield="Tair night uncert";;
 
 loclouds) file=ISCCPData/isccp_lo.ctl;kindname="ISCCP";climfield="low clouds";flipcolor=11;;
 midclouds) file=ISCCPData/isccp_mi.ctl;kindname="ISCCP";climfield="medium clouds";flipcolor=11;;
