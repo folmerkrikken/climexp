@@ -1,4 +1,5 @@
 #!/bin/sh
+. ./init.cgi
 . ./nosearchenginewithheader.cgi
 echo "Content-type: text/html"
 echo
@@ -32,22 +33,22 @@ case $scriptname in
 grads2nc)
   mime="x-netcdf"
   outfile=$DIR/data/$tmpfile.nc
-  if [ -f $outfile.gz -a $outfile.gz -ot $DIR/$file ]; then
-    rm $outfile.gz
+  if [ -f $outfile -a $outfile -ot $DIR/$file ]; then
+    rm $outfile
   fi
-  if [ ! -f $outfile.gz ]; then
+  if [ ! -f $outfile ]; then
     export UDUNITS_PATH=$DIR/etc/udunits.dat
     ncfile=`echo $tmpfile | sed -e 's/++/__/' -e 's/%%/__/' -e 's/@/_/'`
     ###echo "<br>cd `pwd`;$DIR/bin/grads2nc $tmpfile.ctl $ncfile -q<br>"
     $DIR/bin/grads2nc $tmpfile.ctl $ncfile.nc > /tmp/grads2nc$$.log 2>&1
     echo 'compressing <p>'
-    cdo -r -f nc4 -z zip $ncfile.nc $outfile
+    cdo -r -f nc4 -z zip copy $ncfile.nc $outfile
   fi
   ;;
 grads2hdf)
   mime="x-hdf"
   outfile=$DIR/data/$tmpfile.hdf
-  if [ ! -f $outfile.gz ]; then  
+  if [ ! -f $outfile ]; then  
     export GADDIR=$DIR/grads
     export GASCRP=$GADDIR
     export UDUNITS_PATH=$GADDIR/udunits.dat
@@ -80,7 +81,7 @@ EOF
   ;;
 esac
 
-if [ ! -f $outfile.gz ]; then
+if [ ! -f $outfile ]; then
   echo 'Something went wrong in the netCDF/HDF/HDF5 generation routine.  Please send the following cryptic output to <a href="mailto:oldenborgh@knmi.nl">me</a> and I will try to fix it.<pre>'
   cat /tmp/grads2nc$$.log
   . ./myvinkfoot.cgi
