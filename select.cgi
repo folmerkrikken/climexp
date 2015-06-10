@@ -385,7 +385,7 @@ else
       echo "<a href=\"getdat.cgi?file=$file\">.dat</a>"
       size=`ls -l $datfile | awk '{print $5/1048576}'`
     fi
-    echo "files (size $size MB)<br>Alternatively, you can generate a gzipped <a href=\"grads2nc.cgi?$args\">netCDF</a> file of the same size."
+    echo "files (size $size MB)<br>Alternatively, you can generate a <a href=\"grads2nc.cgi?$args\">netCDF</a> file of the same size."
   else
     size=`ls -l $file | awk '{print $5/1048576}'`
     echo "a <a href=\"$file\">netcdf file</a> (size $size MB)."

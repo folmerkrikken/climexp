@@ -40,9 +40,8 @@ grads2nc)
     ncfile=`echo $tmpfile | sed -e 's/++/__/' -e 's/%%/__/' -e 's/@/_/'`
     ###echo "<br>cd `pwd`;$DIR/bin/grads2nc $tmpfile.ctl $ncfile -q<br>"
     $DIR/bin/grads2nc $tmpfile.ctl $ncfile.nc > /tmp/grads2nc$$.log 2>&1
-    mv $ncfile.nc $outfile
     echo 'compressing <p>'
-    gzip $outfile
+    cdo -r -f nc4 -z zip $ncfile.nc $outfile
   fi
   ;;
 grads2hdf)
@@ -57,8 +56,8 @@ grads2hdf)
 run lats4d.gs -q -i $tmpfile -o $tmpfile
 EOF
     mv $tmpfile.nc $outfile
-    echo 'compressing <p>'
-    gzip $outfile
+    ###echo 'compressing <p>'
+    ###gzip $outfile
   fi
   ;;
 grads2hdf5)
@@ -75,8 +74,8 @@ EOF
     $DIR/bin/h4toh5 $tmpfile.hdf
     rm $tmpfile.hdf
     mv $tmpfile.h5 $outfile
-    echo 'compressing <p>'
-    gzip $outfile
+    ###echo 'compressing <p>'
+    ###gzip $outfile
   fi
   ;;
 esac
@@ -92,8 +91,7 @@ rm -f /tmp/$tmpfile.ctl
 rm -f /tmp/$datfile
 
 cat<<EOF
-The requested file has been generated and is available <a href="data/`basename $outfile.gz`">here</a>.
-<br>Note that some browsers sometimes decompress the file without stripping the .gz suffix.
+The requested file has been generated and is available <a href="data/`basename $outfile`">here</a>.
 
 EOF
 cd $DIR
