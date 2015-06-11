@@ -37,7 +37,7 @@ href="wipefeet.cgi?http://hadobs.metoffice.gov.uk/hadisst/" target="_new"><img s
 href="wipefeet.cgi?http://lwf.ncdc.noaa.gov/oa/climate/research/sst/sst.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=CRUData/soi&STATION=SOI&TYPE=i&id=$EMAIL">SOI</a>
-(1866-2006, Jones)</div>
+(1866-now, Jones)</div>
 <td><a href="wipefeet.cgi?http://www.cru.uea.ac.uk/cru/data/soi.htm" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/cpc_soi&STATION=SOI&TYPE=i&id=$EMAIL">SOI</a>
@@ -351,19 +351,19 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 
 <tr><td>Land ice</td><td><div class="kalelink">GRACE <a href="getindices.cgi?WMO=GRACEData/data_grs&STATION=Greenland_mass&TYPE=i&id=$EMAIL">Greenland</a>, <a href="getindices.cgi?WMO=GRACEData/data_ant&STATION=Antarctica_mass&TYPE=i&id=$EMAIL">Antarctica</a> mass changes,  (2003-2013, TU Delft)</td><td>&nbsp;</a>
 
-<tr><td>India<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/ALLIN&STATION=All-India_Rainfall&TYPE=p&id=$EMAIL">All-India Rainfall</a> (1871-2006, 29 subdivision, 2880000 km2, IITM)</div>
+<tr><td>India<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/ALLIN&STATION=All-India_Rainfall&TYPE=p&id=$EMAIL">All-India Rainfall</a> (1871-2012, 29 subdivision, 2880000 km2, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/HOMIN&STATION=Homogeneous_India_RAINFALL&TYPE=p&id=$EMAIL">Homogeneous India Rainfall</a> (1871-2006, 14 subdivisions, 1596970 km2, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/HOMIN&STATION=Homogeneous_India_RAINFALL&TYPE=p&id=$EMAIL">Homogeneous India Rainfall</a> (1871-2012, 14 subdivisions, 1596970 km2, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/CORIN&STATION=Core-Monsoon_India_Rainfall&TYPE=p&id=$EMAIL">Core-Monsoon India Rainfall</a> (1871-1999, 7 subdivisions, 776942 km2, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=p">Indian rainfall per region</a> (<a href="IITMData/ismreg.png" target="_new">map</a>, 1871-2006, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=p">Indian rainfall per region</a> (<a href="IITMData/ismreg.png" target="_new">map</a>, 1871-2012, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=subdiv&type=p">Indian rainfall per subdivision</a> (<a href="IITMData/india-subdiv-rev1.png" target="_new">map</a>, 1871-2006, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=subdiv&type=p">Indian rainfall per subdivision</a> (<a href="IITMData/india-subdiv-rev1.png" target="_new">map</a>, 1871-2012, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=n">Indian minimum temperature per region</a> (1871-2003, IITM)</div>
