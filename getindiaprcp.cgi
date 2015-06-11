@@ -2,7 +2,7 @@
 
 . ./getargs.cgi
 WMO="$FORM_WMO"
-STATION="$FORM_STATON"
+STATION="$FORM_STATION"
 TYPE=p
 NAME="Precipitation"
 NPERYEAR=12
