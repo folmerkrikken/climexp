@@ -366,10 +366,10 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=subdiv&type=p">Indian rainfall per subdivision</a> (<a href="IITMData/india-subdiv-rev1.png" target="_new">map</a>, 1871-2012, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=n">Indian minimum temperature per region</a> (1871-2003, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=n">Indian minimum temperature per region</a> (1871-2007, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=x">Indian maximum temperature per region</a> (1871-2003, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=x">Indian maximum temperature per region</a> (1871-2007, IITM)</div>
 <td><a href="wipefeet.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink">yearly <a href="getindices.cgi?WMO=LDGOData/AIR&STATION=All_India_Rainfall&TYPE=p&id=$EMAIL">All India Rainfall</a> (1813-1998, LDGO archive)</div>
