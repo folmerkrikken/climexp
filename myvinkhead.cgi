@@ -5,15 +5,20 @@ myvinkhead="done"
 if [ -n "$3" ]; then
   robot="<meta name=\"robots\" content=\""$3"\">"
 fi
+if [ -n "$absolute_paths" ]; then
+    prefix="http://climexp.knmi.nl/"
+else
+    prefix=""  
+fi
 if [ -f images/logo_climexp.png ]; then
     cat <<EOF
 <html>
 <head>
 <!-- beheerder: Geert Jan van Oldenborgh -->
-<link rel="stylesheet" href="styles/rccstyle.css" type="text/css">
+<link rel="stylesheet" href="${prefix}styles/rccstyle.css" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<script language="javascript" src="library/javascript/hidden_info_switch.js"></script>
-<script language="javascript" src="library/javascript/pop_page.js"></script> 
+<script language="javascript" src="${prefix}library/javascript/hidden_info_switch.js"></script>
+<script language="javascript" src="${prefix}library/javascript/pop_page.js"></script> 
 $extrahead
 $robot
 <link rel="shortcut icon" href="/favicon.ico"> 
@@ -46,7 +51,7 @@ else # for linux the old lay-out
 <html>
 <head>
 <!-- beheerder: Geert Jan van Oldenborgh -->
-<link rel="stylesheet" href="styles/vinkstyle.css" type="text/css">
+<link rel="stylesheet" href="${prefix}styles/vinkstyle.css" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 $extrahead
 $robot
