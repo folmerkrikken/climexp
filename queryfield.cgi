@@ -444,6 +444,7 @@ thw_depth) file=NSIDCData/thw_depth.ctl;kindname=NSIDC;climfield="thaw depth";NP
 frz_depth_m) file=NSIDCData/frz_depth_m.ctl;kindname=NSIDC;climfield="freeze depth";map='set mproj nps';;
 thw_depth_m) file=NSIDCData/thw_depth_m.ctl;kindname=NSIDC;climfield="thaw depth";map='set mproj nps';;
 camsopi) file=NCEPData/camsopi.nc;kindname="CAMSOPI";climfield="prcp";;
+camsopi_perc) file=NCEPData/camsopi_perc.nc;kindname="CAMSOPI";climfield="perc";;
 noaa_olr) file=NOAAData/olr.mon.mean.nc;kindname="NOAA";climfield="OLR";;
 msla) file=CLSData/msla_merged_1deg.ctl;kindname="CLS merged";climfield="sea level anomalies";;
 ssh) file=DEOSData/ssh_500_1x1_monthly.nc;kindname="DEOS/KNMI";climfield="sea level anomalies";;
