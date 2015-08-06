@@ -56,6 +56,10 @@ href="wipefeet.cgi?http://lwf.ncdc.noaa.gov/oa/climate/research/sst/sst.html" ta
 (5&deg;S-5&deg;N, 120&deg;E-80&deg;W, 1960-now, POAMA/PEODAS)</div>
 <td><a href="wipefeet.cgi?http://poama.bom.gov.au/ocean_monitoring.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/cpc_eq_heat300&STATION=eq_heat300&TYPE=i&id=$EMAIL">temperature averaged to 300m</a>
+(130&deg;E-80&deg;W, 1979-now, GODAS)</div>
+<td><a href="wipefeet.cgi?http://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ocean/index/heat_content_index.txt" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
 <tr><td>NAO<td><div class="kalelink"><a href="getindices.cgi?WMO=CRUData/nao&STATION=NAO-Gibraltar&TYPE=i&id=$EMAIL">NAO Gibraltar-Stykkisholmur</a> (1821-now, Jones)</div>
 <td><a href="wipefeet.cgi?http://www.cru.uea.ac.uk/cru/data/nao/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
