@@ -3,16 +3,23 @@
 # plus a check on the state of the server
 if [ -z "$init_done" ]; then
 
-   line=`uptime`
-   load=${line##*averages: } # Mac OSX
-   load=${load##*average: }  # linux
-   load=${load%%.*}
+    if [ -z "$use_uptime" ] ;then
+        line=`uptime`
+        load=${line##*averages: } # Mac OSX
+        load=${load##*average: }  # linux
+        load=${load%%.*}
+        maxload=20
+    else
+        load=`ps axuw | fgrep -c .cgi`
+        maxload=7 # 1 is the grep, we have 4 cores
+    fi
 ###   if [ $EMAIL = oldenbor@knmi.nl ]; then
 ###       echo "load=$load<br>"
 ###   fi
-   if [ ${load:-0} -gt 20 -a `uname` != Darwin ]; then
+   if [ ${load:-0} -gt $maxload -a `uname` != Darwin ]; then
        echo 
-       echo "Server too busy (load $load &gt; 20), try again later"
+       echo "Server too busy (load $load &gt; $maxload), try again later"
+       echo `date` "Server too busy, load $load > $maxload" >> log/log
        exit
    fi
 
