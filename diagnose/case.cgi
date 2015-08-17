@@ -117,7 +117,7 @@ case $var in
         climyear1=1981
         climyear2=2010
         ;;
-  tlt)  field=tlt_60b2
+  tlt)  field=tlt_60
         name=tlt_uah
         mproj=latlon
         colour=10
