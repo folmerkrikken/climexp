@@ -147,7 +147,12 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
 	   fi
 	else
 	   kindname="$model $exp"
-	   if [ $type = Amon -o $type = Lmon ]; then
+	   if [ $type = atmos ]; then
+	        case $model in
+	            ECEARTH23) trylsmask=KNMI14Data/sftlf_ns.nc;;
+	            *) trylsmask="noidea";;
+	        esac
+	   elif [ $type = Amon -o $type = Lmon ]; then
 	       case $model in
 				EC-EARTH) trylsmask=CMIP5/monthly/sftlf.nc;;
 				FIO-ESM)  trylsmask=CMIP5/fixed/sftlf.FIO-ESM.nc;;
