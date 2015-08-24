@@ -33,7 +33,7 @@ do
 			20) mon=winter;;
 		esac
 
-		for var in tlt # tg tg_f tn tn_f tx tx_f rr rr_f # sst sst_f sst_w sst_w_f z500 z500_f z500sh z500sh_f slp slp_f ice ice_f ice_n ice_n_f ice_s t2m t2m_f t2mw t2mw_f tlt snow snow_f prcp prcp_frac pr pr_frac ice_s_f o3nh o3nh_f o3sh o3sh_f 
+		for var in rr rr_f # tlt # tg tg_f tn tn_f tx tx_f sst sst_f sst_w sst_w_f z500 z500_f z500sh z500sh_f slp slp_f ice ice_f ice_n ice_n_f ice_s t2m t2m_f t2mw t2mw_f tlt snow snow_f prcp prcp_frac pr pr_frac ice_s_f o3nh o3nh_f o3sh o3sh_f 
 		do
 			i=$mon
 			. ./case.cgi

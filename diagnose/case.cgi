@@ -377,7 +377,7 @@ case $var in
         climyear2=2010
         ;;
   rr|rr_f)
-        field=ensembles_05_rr_mo
+        field=ensembles_025_rr_mo
         name=rr_eobs
         mproj=latlon
         gxout=grfill
