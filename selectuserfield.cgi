@@ -2,7 +2,7 @@
 
 echo '<p><b><a name="field_user">user-defined</a>: </b><br>'
 
-for userfile in data/*.$EMAIL.info data/*zonalmean.info
+for userfile in data/*.$EMAIL.info
 do
   if [ -f $userfile ]; then
     N=`head -2 $userfile | tail -1 | tr -d '[=A-Z ]'`

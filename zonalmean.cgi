@@ -67,7 +67,7 @@ fi
 eval `bin/getunits.sh $file`
 ENSEMBLE=""
 kindname="zonal mean $kindname"
-FORM_field=data/`basename $file .nc`.info
+FORM_field=data/`basename $file .nc`.$EMAIL.info
 cat > $FORM_field <<EOF
 $file
 NPERYEAR=$NPERYEAR
