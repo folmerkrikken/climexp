@@ -14,11 +14,12 @@ if [ ${FORM_field#Rapid} != $FORM_field ]; then
 else
 NPERYEAR=12 # default
 case $FORM_field in
-cmip5*|thor*) # expecting cmip5_var_Amon_model_exp
+cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
 	field=$FORM_field
 	dataset=${field%%_*}
 	field=${field#cmip5_}
 	field=${field#thor_}
+	field=${field#knmi14_}
 	var=${field%%_*}
 	field=${field#*_}
 	type=${field%%_*}
@@ -52,8 +53,13 @@ cmip5*|thor*) # expecting cmip5_var_Amon_model_exp
 	   fi
 	fi
 	###echo "dataset=$dataset var=$var type=$type model=$model exp=$exp rip=$rip lead=$lead ip=$ip ensave=$ensave<br>"
-	if [ $type = Amon -o $type = Lmon -o $type = Omon -o $type = OImon -o $type = LImon ]; then
-	   dir=monthly
+	if [ "${type%mon}" != "$type" ]; then
+	    if [ $dataset = knmi14 ]; then
+	            dir=mon
+	            type=atmos
+	        else
+	            dir=monthly
+	        fi
 	   NPERYEAR=12
 	elif [ $type = yr ]; then
 	    dir=annual
@@ -65,9 +71,11 @@ cmip5*|thor*) # expecting cmip5_var_Amon_model_exp
 	case $dataset in
 	     cmip5) datasetname=CMIP5;decdir=CMIP5/decadal;;
 	     thor) datasetname=THOR;decdir=THOR;;
+	     knmi14) datasetname=KNMI14;;
 	     *) echo "unknown dataset $dataset"; exit -1;;
 	esac
-	if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs ]; then
+	if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
+	     $var = tp ]; then
 	    flipcolor=11
 	fi
 	if [ $exp = decadal ]; then
@@ -85,7 +93,11 @@ cmip5*|thor*) # expecting cmip5_var_Amon_model_exp
 	      file=$decdir/${var}_${type}_${model}_yr${lead}_${ip}_ave.nc
 	   fi
 	else
-	   	if [ -z "$rip" ]; then
+	    if [ $dataset = knmi14 ]; then
+	        file=${var}_${datasetname}_${model}_${exp}_186001-210012_%%.nc
+	        file=KNMI14Data/output/KNMI/$model/$exp/$dir/$type/$var/$file
+	        ###echo "file=$file"
+	   	elif [ -z "$rip" ]; then
 	   		file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_000.nc
 			if [ -e $file -o -L $file ]; then
 	    		file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_%%%.nc
