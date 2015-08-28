@@ -44,9 +44,9 @@ si) FORM_climate="circulation-independent_global_shortwave_radiation";;
 sr) FORM_climate="circulation-dependent_global_shortwave_radiation";;
 temp_hom) FORM_climate="homogenised_temperature";;
 precip_raw_1910-2009) FORM_climate="raw precipitation";;
-precip_hom_1910-2009) FORM_climate="homogenised precipitation";;
+precip_hom_1910-now) FORM_climate="homogenised precipitation";;
 precip_raw_1951-2009) FORM_climate="raw precipitation";;
-precip_hom_1951-2009) FORM_climate="homogenised precipitation";;
+precip_hom_1951-now) FORM_climate="homogenised precipitation";;
 rx) FORM_climate="max hourly precipitation";;
 esac
 
