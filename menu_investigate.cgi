@@ -11,6 +11,14 @@ if [ "${NPERYEAR:-12}" = '12' ]; then
   cat << EOF
 <div class="menulink">View per <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=month">month</a>, <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=season">season</a>, <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=half">half year</a> or full year (<a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=yr0">Jan-Dec</a> or <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=yr1">Jul-Jun</a>)</div>
 EOF
+elif [ "${NPERYEAR:-12}" -ge 360 ]; then
+  cat << EOF
+<div class="menulink">View last 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=30&climyear1=1980&climyear2=2010">30</a>, 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=90&climyear1=1980&climyear2=2010">90</a>, 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=360&climyear1=1980&climyear2=2010">360</a>
+days</class>
+EOF
 fi
 cat <<EOF
 <div class="menulink"><a href="corseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Correlate with other time series</a></div>

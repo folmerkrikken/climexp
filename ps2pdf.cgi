@@ -6,6 +6,6 @@ echo
 . ./getargs.cgi
 epsfile=data/`basename $FORM_file .gz`
 pdffile=${epsfile%.eps}.pdf
-gunzip -c $epsfile.gz > $epsfile
-convert $epsfile $pdffile
+[ ! -s $epsfile ] && gunzip -c $epsfile.gz > $epsfile
+epstopdf $epsfile
 cat $pdffile
