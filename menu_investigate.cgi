@@ -16,7 +16,7 @@ elif [ "${NPERYEAR:-12}" -ge 360 ]; then
 <div class="menulink">View last 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=30&climyear1=1980&climyear2=2010">30</a>, 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=90&climyear1=1980&climyear2=2010">90</a>, 
-<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=360&climyear1=1980&climyear2=2010">360</a>
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=366&climyear1=1980&climyear2=2010">366</a>
 days</div>
 EOF
 fi
