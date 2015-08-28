@@ -23,11 +23,16 @@ if [ -n "$FORM_dy" -a "${FORM_dy#0}" = "$FORM_dy" ]; then
     [ $FORM_dy -le 9 ] && FORM_dy=0$FORM_dy
 fi
 enddate="$FORM_yr$FORM_mo$FORM_dy"
-[ -z "$enddate" ] && enddate=last
+if [ -z "$enddate" ]; then
+    enddate=last
+    last="Last "
+else
+    ending=" ending at $enddate"
+fi
 
 . ./nosearchengine.cgi
 
-. ./myvinkhead.cgi "Last $nday days of $station $name" "" "noindex,nofollow"
+. ./myvinkhead.cgi "$last$nday days of $station $name" "" "noindex,nofollow"
 
 if [ -n "$FORM_climyear1" -a -z "$FORM_climyear2" ]; then
     echo "Error: provide begin and end year of reference period"
@@ -62,7 +67,7 @@ lastdate=$((lastdate+1))
 firstdate=`fgrep -v '#' $root.txt | head -n 1 | cut -b 1-8`
 ###echo firstdate,lastdate = $firstdate,$lastdate
 
-echo "<div class=\"bijschrift\"> Last $nday days of $name observations at $station with climatology $computed"
+echo "<div class=\"bijschrift\">$last$nday days of $name observations at $station$ending with climatology $computed"
 echo "(<a href=\"$root.eps\">eps</a>, <a href="ps2pdf.cgi?file=$root.eps">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
 
 ./bin/gnuplot << EOF
@@ -96,18 +101,19 @@ echo "<center><img src=\"$pngfile\" alt=\"last $nday days of $name at $station\"
 cat <<EOF
 <div class="formbody">
 <form action="plotdaily.cgi" method="POST">
-Replot with end date
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="TYPE" value="$TYPE">
 <input type="hidden" name="WMO" value="$WMO">
 <input type="hidden" name="STATION" value="$STATION">
 <input type="hidden" name="NAME" value="$NAME">
-<input type="hidden" name="nday" value="$nday">
+Replot 
+<input type="$number" min="1" max="1000" step=1 name="nday" $textsize3 value="$nday">
+days with end date
 <input type="$number" min="1" max="2400" step=1 name="yr" $textsize4 value="$FORM_yr">
 <input type="$number" min="1" max="12" step=1 name="mo" $textsize2 value="$FORM_mo">
 <input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$FORM_dy">
 and climatology
-<input type="$number" min="1" max="2400" step=1 name="climyear1" $textsize4 value="$FORM_climyear1"> - <input type="$number" min="1" max="2400" step=1 name="climyear2" $textsize4 value="$FORM_climyear2">
+<input type="$number" min="1" max="2400" step=1 name="climyear1" $textsize4 value="$FORM_climyear1">-<input type="$number" min="1" max="2400" step=1 name="climyear2" $textsize4 value="$FORM_climyear2">
 
 <input type="submit" class="formbutton" value="plot">
 </div>
