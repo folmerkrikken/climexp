@@ -50,7 +50,7 @@ else
 fi
 
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
-root=data/plot${nday}daily$TYPE$WMO$KIND
+root=data/plot${nday}daily$TYPE$WMO$KIND$FORM_climyear1$FORM_climyear2
 
 echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend" >> log/log
 (./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend > $root.txt) 2>&1
@@ -103,11 +103,12 @@ Replot with end date
 <input type="hidden" name="STATION" value="$STATION">
 <input type="hidden" name="NAME" value="$NAME">
 <input type="hidden" name="nday" value="$nday">
-<input type="hidden" name="climyear1" value="$FORM_climyear1">
-<input type="hidden" name="climyear2" value="$FORM_climyear2">
 <input type="$number" min="1" max="2400" step=1 name="yr" $textsize4 value="$FORM_yr">
 <input type="$number" min="1" max="12" step=1 name="mo" $textsize2 value="$FORM_mo">
 <input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$FORM_dy">
+and climatology
+<input type="$number" min="1" max="2400" step=1 name="climyear1" $textsize4 value="$FORM_climyear1"> - <input type="$number" min="1" max="2400" step=1 name="climyear2" $textsize4 value="$FORM_climyear2">
+
 <input type="submit" class="formbutton" value="plot">
 </div>
 EOF
