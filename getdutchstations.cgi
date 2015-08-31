@@ -52,6 +52,7 @@ esac
 
 listname=KNMIData/list_${TYPE}.txt
 prog="getdutch$TYPE"
+type=$TYPE
 NPERYEAR=366
 if [ "$TYPE" = sw -o "$TYPE" = si -o "$TYPE" = sr -o "$TYPE" = temp_hom ]; then
   NPERYEAR=12
