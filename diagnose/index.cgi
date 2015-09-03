@@ -3,9 +3,8 @@ echo "Content-Type: text/html"
 echo
 echo
 
-PATH=/usr/local/bin:$PATH
-export LANG=
-eval `./bin/proccgi $*`
+(cd ..; . ./init.cgi)
+(cd ..; . ./getargs.cgi)
 
 c=`dirname "$SCRIPT_FILENAME" | egrep -c 'halfjaaroverzicht|biannual_overview'`
 if [ $c = 1 ]; then

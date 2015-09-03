@@ -175,7 +175,7 @@ fi
 
 [ "$lwrite" = true ] && echo bin/attribute $corrargs
 (./bin/attribute $corrargs > $root.txt) 2>&1
-grep 'bootstrap' $root.txt | sed -e 's/#//'
+grep 'bootstrap|' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 if [ $TYPE = set ]; then
     while [ -z "$f" ]; do
@@ -210,7 +210,7 @@ c=`wc -l $root.txt|awk '{print $1}'`
 [ "$lwrite" = true ] && echo "c=$c<p>"
 if [ $c -lt 20 ]; then
 	echo "<p>Something went wrong, c=$c"
-	echo 'Please send <a href="mailto:http://www.knmi.nl/~oldenbor/">me</a> the following command and I will try to fix it.<p>'
+	echo 'Please send <a href="mailto:mailto:oldenborgh@knmi.nl">me</a> the following command and I will try to fix it.<p>'
 	echo bin/attribute $corrargs
 	. ./myvinkfoot.cgi
 	exit

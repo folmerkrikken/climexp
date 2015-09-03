@@ -14,7 +14,7 @@ if [ ${REMOTE_ADDR#145.23} = $REMOTE_ADDR \
   -a $REMOTE_ADDR != 127.0.0.1 \
   ]; then
     echo "$EMAIL ($REMOTE_ADDR) Select THOR hindcast" >> log/log
-    echo "Access denied. Please contact <a href=\"www.knmi.nl/~oldenbor/\">me</a> if you think you should have access to these data"
+    echo "Access denied. Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you think you should have access to these data"
     . ./myvinkfoot.cgi
     exit
 fi

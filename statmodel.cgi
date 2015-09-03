@@ -120,7 +120,7 @@ fi
 eval `./bin/month2string "$FORM_month" "$FORM_sum" ave`
 
 cat <<EOF
-<small>Verification is under active development and may still contain bugs.  Please report problems back to <a href="http://www.knmi.nl/~oldenbor/">me</a>.</small><p>
+<small>Verification is under active development and may still contain bugs.  Please report problems back to <a href="imailto:oldenborgh@knmi.nl">me</a>.</small><p>
 EOF
 if [ -s $table ]; then
   echo "Using cached data<br>"

@@ -32,7 +32,7 @@ if [ -z "$ENSEMBLE" ]; then
     ./bin/geowind $file $gwest.ctl $gsouth.ctl $vort.ctl
   fi
   if [ \( ! -s $gwest.ctl \) -o \( ! -s $gsouth.ctl \) -o \( ! -s $vort.ctl \) ]; then
-    echo "Something went wrong.  Please send the following line to <a href="http://www.knmi.nl/~oldenbor/">me</a> and I'll try to fix it."
+    echo "Something went wrong.  Please send the following line to <a href="mailto:oldenborgh@knmi.nl">me</a> and I'll try to fix it."
     echo ./bin/geowind $file $gwest.ctl $gsouth.ctl $vort.ctl
     . ./myvinkfoot.cgi
     exit
@@ -66,7 +66,7 @@ else
         ./bin/geowind $ensfile $ensgwest.ctl $ensgsouth.ctl $ensvort.ctl > /dev/null
       fi
       if [ \( ! -s $ensgwest.ctl \) -o \( ! -s $ensgsouth.ctl \) -o \( ! -s $ensvort.ctl \) ]; then
-        echo "Something went wrong.  Please send the following line to <a href="http://www.knmi.nl/~oldenbor/">me</a> and I'll try to fix it.<p>"
+        echo "Something went wrong.  Please send the following line to <a href="mailto:oldenborgh@knmi.nl">me</a> and I'll try to fix it.<p>"
         echo ./bin/geowind $ensfile $ensgwest.ctl $ensgsouth.ctl $ensvort.ctl
         . ./myvinkfoot.cgi
         exit

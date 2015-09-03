@@ -45,7 +45,7 @@ definition, lading to the second definition included here.
 
 <p>The indices differ on the monhly and interannua time scales, but agree very well on longer time scales.
 
-<p>If you would like to add another definition, please contact <a href="http://www.knmi.nl/~oldenbor">me</a>.
+<p>If you would like to add another definition, please contact <a href="mailto:oldenborgh@knmi.nl">me</a>.
 EOF
 
 . ./myvinkfoot.cgi

@@ -271,7 +271,7 @@ if [ "$EMAIL" = "oldenbor@knmi.nl" \
     fi
     if [ $extended = true ]; then
         echo "<div class=\"alineakop\"><a name=\"extend\">Analyse $kindname $climfield extended with $extension</a></div>"
-        echo "(Please contact <a href=\"http://www.knmi.nl/~oldenbor/\">me</a> if you need an up-to-date version)<br>"
+        echo "(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
         echo "<a href=\"select.cgi?id=$EMAIL&field=${FORM_field}_e\">extended version</a>"
     fi
 fi
@@ -316,7 +316,7 @@ elif [ "${FORM_field#rutgers}" != "${FORM_field}" ]; then
 elif [  "${FORM_field#cmip5_yr}" != "${FORM_field}" ]; then
     echo "Please download the CMIP5 fields from the <a href=\"http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml\">CCCMA ETCCDI site</a>."
 elif [  "${FORM_field#cmip5}" != "${FORM_field}" ]; then
-    echo "Please download the CMIP5 fields from the Earth System Grid servers, eg at <a href=\"http://cmip-pcmdi.llnl.gov/cmip5/data_getting_started.html\">PCMDI</a>. Contact <a href="http://www.knmi.nl/~oldenbor/">me</a> if you need access via this site."
+    echo "Please download the CMIP5 fields from the Earth System Grid servers, eg at <a href=\"http://cmip-pcmdi.llnl.gov/cmip5/data_getting_started.html\">PCMDI</a>. Contact <a href="mailto:oldenborgh@knmi.nl">me</a> if you need access via this site."
 else
   download=OK
 fi

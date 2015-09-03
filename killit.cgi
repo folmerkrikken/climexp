@@ -44,7 +44,7 @@ else
 fi
 
 cat <<EOF
-<p><address><a href="http://www.knmi.nl/~oldenbor">G. J. van Oldenborgh</a>, KNMI, 14-jan-2005</address>
+<p><address><a href="mailto:oldenborgh@knmi.nl">G. J. van Oldenborgh</a>, KNMI, 14-jan-2005</address>
 </body>
 </html>
 EOF

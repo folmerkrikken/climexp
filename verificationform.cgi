@@ -31,7 +31,7 @@ fi
 . ./myvinkhead.cgi "Verify time series hindcasts" "$station $NAME"
 
 cat <<EOF
-Verification is under active development and may still contain bugs.  Please report problems back to <a href="http://www.knmi.nl/~oldenbor/">me</a>.
+Verification is under active development and may still contain bugs.  Please report problems back to <a href="mailto:oldenborgh@knmi.nl">me</a>.
 EOF
 if [ "$NEWUNITS" != "$UNITS" ]; then
   echo "Converting $VAR from $UNITS to $NEWUNITS"

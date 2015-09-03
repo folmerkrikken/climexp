@@ -130,7 +130,7 @@ c=`wc -l $root.txt|awk '{print $1}'`
 [ "$lwrite" = true ] && echo "c=$c<p>"
 if [ $c -lt 20 ]; then
 	echo "<p>Something went wrong, c=$c"
-	echo 'Please send <a href="mailto:http://www.knmi.nl/~oldenbor/">me</a> the following command and I will try to fix it.<p>'
+	echo 'Please send <a href="mailto:mailto:oldenborgh@knmi.nl">me</a> the following command and I will try to fix it.<p>'
 	echo bin/histogram $corrargs
 	. ./myvinkfoot.cgi
 	exit

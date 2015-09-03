@@ -44,7 +44,7 @@ station=`echo "$STATION" | tr '_' ' '`
 if [ -n "$masknetcdf" ]; then
 	if [ ! -s "$masknetcdf" ]; then
 		echo "Something went wrong, cannot locate gridded mask file $masknetcdf"
-		echo "Please contact <a href="http://www.knmi.nl/~oldenbor/">me</a> about this. I need the following command:<br> $polycommand"
+		echo "Please contact <a href="mailto:oldenborgh@knmi.nl">me</a> about this. I need the following command:<br> $polycommand"
 		. ./myvinkfoot.cgi
 	fi
 
@@ -164,7 +164,7 @@ if [ ! -s $firstfile ]; then
   else
     # something went wrong
     echo `date`" $REMOTE_ADDR error: could not find ./data/$TYPE$WMO.dat" 1>&2
-    echo "Something went wrong.  Please contact <a href=\"http://www.knmi.nl/~oldenbor\">me</a>"
+    echo "Something went wrong.  Please contact <a href=\"mailto:oldenborgh@knmi.nl">me</a>"
   fi
   VAR="unknown"
   UNITS="unknown"

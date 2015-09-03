@@ -50,7 +50,7 @@ echo `date` "$FORM_EMAIL ($REMOTE_ADDR) $FORM_verif $corrargs" | sed -e  "s:$DIR
 
 . ./myvinkhead.cgi "Time series $FORM_verif" "$station $VAR against $index" "noindex,nofollow"
 cat <<EOF
-Verification is under active development and may still contain bugs.  Please report problems back to <a href="http://www.knmi.nl/~oldenbor/">me</a>.<p>
+Verification is under active development and may still contain bugs.  Please report problems back to <a href="mailto:oldenborgh@knmi.nl">me</a>.<p>
 Extracting data...<p>
 EOF
 corrargs="$DIR/data/$TYPE$WMO.dat $corrargs"

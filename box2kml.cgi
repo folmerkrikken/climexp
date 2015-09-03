@@ -27,7 +27,7 @@ kml=data/climexp$$.kml
 bin/stationlist $listname $plotlist $prog list
 if [ ! -s $plotlist ]; then
     . ./myvinkhead.cgi "Error" "No data were generated"
-    echo "Sorry, something went wrong. Please contact <a href=\"http://www.knmi.nl/~oldenbor/\">me</a> to solve this."
+    echo "Sorry, something went wrong. Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> to solve this."
     . ./myvinkfoot.cgi
     exit
 fi
@@ -37,7 +37,7 @@ echo `date`" $EMAIL ($REMOTE_ADDR) list2kml $plotlist $climate $EMAIL $prog $ext
 
 if [ ! -s $kml ]; then
     . ./myvinkhead.cgi "Error" "No KML was generated"
-    echo "Sorry, something went wrong. Please contact <a href=\"http://www.knmi.nl/~oldenbor/\">me</a> to solve this."
+    echo "Sorry, something went wrong. Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> to solve this."
     . ./myvinkfoot.cgi
     exit
 fi

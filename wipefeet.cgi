@@ -25,7 +25,7 @@ Content-Type: text/html
 </head>
 <BODY BGCOLOR="#FFFFFF">
 You are leaving the Climate Explorer. You are being forwarded to <a
-href="$QUERY_STRING">$QUERY_STRING</a>. If this link no longer works, please notify <a href="http://www.knmi.nl/~oldenbor/">the Climate Explorer maintainer</a>.
+href="$QUERY_STRING">$QUERY_STRING</a>. If this link no longer works, please notify <a href="mailto:oldenborgh@knmi.nl">the Climate Explorer maintainer</a>.
 
 <p>Have a nice day.
 
