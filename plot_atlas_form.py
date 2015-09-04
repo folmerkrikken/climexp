@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/oldenbor/bin/python
 
 """
 script to produce maps and time series analogous

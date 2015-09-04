@@ -16,7 +16,7 @@ fi
 EMAIL=`echo "$EMAIL" | fgrep -v '/' `
 EMAIL=`echo "$EMAIL" | tr -cd '[:alnum:]@.-_' | fgrep -v "/" | egrep -v '(@|\.|-)sexy(@|\.|-)|(@|\.|-)sex(@|\.|-)|(@|\.|-)porn(@|\.|-)|(@|\.|-)porno(@|\.|-)|youtube.com|fynalcut.com|shop.*ru$|della-marta'`
 EMAIL=${EMAIL#id=}
-[ $EMAIL = FORM_EMAIL ] && EMAIL=""
+[ "$EMAIL" = FORM_EMAIL ] && EMAIL=""
 ###echo "EMAIL=$EMAIL<br>"
 [ -n "FORM_WMO" ] && FORM_WMO=`echo "$FORM_WMO" | sed -e 's/%%%/+++/' -e 's/%%/++/'`
 [ -n "FORM_wmo" ] && FORM_wmo=`echo "$FORM_wmo" | sed -e 's/%%%/+++/' -e 's/%%/++/'`

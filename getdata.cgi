@@ -44,7 +44,7 @@ station=`echo "$STATION" | tr '_' ' '`
 if [ -n "$masknetcdf" ]; then
 	if [ ! -s "$masknetcdf" ]; then
 		echo "Something went wrong, cannot locate gridded mask file $masknetcdf"
-		echo "Please contact <a href="mailto:oldenborgh@knmi.nl">me</a> about this. I need the following command:<br> $polycommand"
+		echo "Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> about this. I need the following command:<br> $polycommand"
 		. ./myvinkfoot.cgi
 	fi
 
@@ -164,7 +164,7 @@ if [ ! -s $firstfile ]; then
   else
     # something went wrong
     echo `date`" $REMOTE_ADDR error: could not find ./data/$TYPE$WMO.dat" 1>&2
-    echo "Something went wrong.  Please contact <a href=\"mailto:oldenborgh@knmi.nl">me</a>"
+    echo "Something went wrong.  Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a>"
   fi
   VAR="unknown"
   UNITS="unknown"
@@ -207,7 +207,7 @@ if [ -s $firstfile ]; then
       echo "Having a look at the <a href=\"data/$TYPE$WMO.dat.wrong\">raw data</a> might help."
       if [ "${PROG#get_index}" != "$PROG" ]; then
       	echo "<p>Often, this is caused by selecting an area without data, for instance a sea area in a dataset with only land data or the other way around."
-      	echo "You can make a map of the mean values in the region (<a href=\"http://127.0.0.1:81/getmomentsfieldform.cgi?id=$EMAIL&field=$FORM_field\">Compute mean, s.d. or extremes</a>) to determine where the dataset has data."
+      	echo "You can make a map of the mean values in the region (<a href=\"/getmomentsfieldform.cgi?id=$EMAIL&field=$FORM_field\">Compute mean, s.d. or extremes</a>) to determine where the dataset has data."
       	echo "<font color=\"#FF2222\">An unfixed bug in the area averaging routine sometimes also gives this. Please retry one or two times...</font>"
       fi
       . ./myvinkfoot.cgi  
