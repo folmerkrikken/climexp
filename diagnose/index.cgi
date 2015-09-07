@@ -3,8 +3,11 @@ echo "Content-Type: text/html"
 echo
 echo
 
-(cd ..; . ./init.cgi)
-(cd ..; . ./getargs.cgi)
+cwd=`pwd`
+cd ..
+. ./init.cgi
+. ./getargs.cgi
+cd $cwd
 
 c=`dirname "$SCRIPT_FILENAME" | egrep -c 'halfjaaroverzicht|biannual_overview'`
 if [ $c = 1 ]; then
@@ -396,7 +399,9 @@ fi
 echo '<table class="onelinetable" width=451 border=0 cellpadding=0 cellspacing=0><tr class="trcolor">'
 echo "<th colspan=3>$navigatie</th></tr><tr><td align=left>"
 
-if [ -s "$((FORM_year1-1))/${field}_${mon1}$((FORM_year1-1))$ext.png" ]; then
+file=$((FORM_year1-1))/${field}_${mon1}$((FORM_year1-1))$ext.png
+###echo "Looking for $file<br>"
+if [ -s "$file" ]; then
     echo "<a href=index.cgi?var=$var&mon1=$FORM_mon1&year1=$((FORM_year1-1))&anomalie=$anomalie&kort=$FORM_kort&expert=$FORM_expert&type=$FORM_type>$vorigjaar</a>"
 else
     echo "$vorigjaar"
