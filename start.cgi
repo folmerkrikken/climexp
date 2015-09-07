@@ -83,7 +83,7 @@ EOF
 
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 echo '<tr><th colspan="2">News</th></tr>'
-head -6 news.html
+head -6 news.html | sed -e "s/FORM_EMAIL/$EMAIL/"
 echo "<tr><td><a href=\"news.cgi?id=$EMAIL&all=all\">more...</a></td><td>&nbsp;</td></tr></table>"
 
 . ./myvinkfoot.cgi

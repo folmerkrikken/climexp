@@ -11,13 +11,15 @@ echo
 . ./myvinkhead.cgi "Select a monthly time series" "Climate indices"
 
 cat <<EOF
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCDCData/ersst_nino12a&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
+<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<tr><th colspan="3">Select a time series by clicking on the name
+<tr><td>ENSO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCDCData/ersst_nino12a&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3a&STATION=NINO3&TYPE=i&id=$EMAIL">NINO3</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a&STATION=NINO3.4&TYPE=i&id=$EMAIL">NINO3.4</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino4a&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>
 (1880-now, ERSST v4)</div>
 <td><a
-href="wipefeet.cgi?http://https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v4" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+href="wipefeet.cgi?https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v4" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=UKMOData/hadisst1_nino12a&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
 <a href="getindices.cgi?WMO=UKMOData/hadisst1_nino3a&STATION=NINO3&TYPE=i&id=$EMAIL">NINO3</a>,
@@ -27,14 +29,12 @@ href="wipefeet.cgi?http://https://www.ncdc.noaa.gov/data-access/marineocean-data
 <td><a
 href="wipefeet.cgi?http://hadobs.metoffice.gov.uk/hadisst/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
-<tr><th colspan="3">Select a time series by clicking on the name
-<tr><td>ENSO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/nino2&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/nino2&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
 <a href="getindices.cgi?WMO=NCEPData/nino3&STATION=NINO3&TYPE=i&id=$EMAIL">NINO3</a>,
 <a href="getindices.cgi?WMO=NCEPData/nino5&STATION=NINO3.4&TYPE=i&id=$EMAIL">NINO3.4</a>,
 <a href="getindices.cgi?WMO=NCEPData/nino4&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>
-(1856-now, Kaplan and Reynolds)</div>
-<td><a href="wipefeet.cgi?http://ingrid.ldgo.columbia.edu/SOURCES/.Indices/.nino/.KAPLAN/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a><br><a href="wipefeet.cgi?http://www.cpc.noaa.gov/data/indices/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+(1982-now, NCEP OI v2)</div>
+<td><a href="wipefeet.cgi?http://www.cpc.noaa.gov/data/indices/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=CRUData/soi&STATION=SOI&TYPE=i&id=$EMAIL">SOI</a>
 (1866-now, Jones)</div>
