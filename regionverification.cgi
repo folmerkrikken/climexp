@@ -205,10 +205,10 @@ fi
 if [ ${FORM_verif%persist} != $FORM_verif -o ${FORM_verif%nino34} != $FORM_verif ]; then
   if [ -z "$FORM_analysis" ];then
     # deduce from field name...
-    FORM_analysis=`echo $FORM_fielld1 | sed -e 's/^.*_//'`
+    FORM_analysis=`echo $FORM_field1 | sed -e 's/^.*_//'`
   fi
   if [ ${FORM_verif%nino34} != $FORM_verif ]; then
-    series="series NCEPData/nino5.dat"
+    series="series NCDCData/ersst_nino3.4a.dat"
     seriesname="nino34"
   fi
   table2=data/statmodel_${field2}_${seriesname}_${FORM_analysis}_${FORM_lon1}_${FORM_lon2}_${FORM_lat1}_${FORM_lat2}_${FORM_month}_${FORM_sum}_${FORM_begin}_${FORM_end}_${FORM_detrend}_${FORM_nens2}.nc

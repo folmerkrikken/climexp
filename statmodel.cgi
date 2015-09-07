@@ -50,7 +50,7 @@ else
 fi
 [ -z "$FORM_sum2" ] && FORM_sum2=${FORM_sum:-1}
 case "$FORM_timeseries" in
-    nino34) series="series NCEPData/nino5.dat $FORM_sum2";seriesname="Nino3.4,";;
+    nino34) series="series NCDCData/ersst_nino3.4a.dat $FORM_sum2";seriesname="Nino3.4,";;
     co2)    series="series CDIACData/maunaloa.dat $FORM_sum2";seriesname="CO2,";;
     *)      series="";seriesname="";;
 esac

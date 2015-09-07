@@ -64,10 +64,10 @@ fi
 CLIM=index
 forbidden='!`;&|'
 case $FORM_timeseries in
-  nino12)    station="NINO12";sfile="$DIR/NCEPData/nino2.dat";;
-  nino3)     station="NINO3";sfile="$DIR/NCEPData/nino3.dat";;
-  nino34)    station="NINO3.4";sfile="$DIR/NCEPData/nino5.dat";;
-  nino4)     station="NINO4";sfile="$DIR/NCEPData/nino4.dat";;
+  nino12)    station="NINO12";sfile="$DIR/NCDCData/nino12a.dat";;
+  nino3)     station="NINO3";sfile="$DIR/NCDCData/nino3a.dat";;
+  nino34)    station="NINO3.4";sfile="$DIR/NCDCData/nino3.4a.dat";;
+  nino4)     station="NINO4";sfile="$DIR/NCDCData/nino4a.dat";;
   soi)       station="SOI";sfile="$DIR/CRUData/soi.dat";;
   nao)       station="NAO-Gibraltar";sfile="$DIR/CRUData/nao.dat";;
   sunspots)  station="sunspots";sfile="$DIR/SIDCData/sunspots.dat";;
