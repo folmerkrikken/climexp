@@ -110,11 +110,12 @@ if [ -n "$FORM_plotanomaly" ]; then
 		[ -n "$FORM_climyear2" ] && args="$args end $FORM_climyear2"
 		[ -n "$FORM_plotsum" ] && args="$args ave $FORM_plotsum"
 		echo "<p>Computing anomalies..."
+		[ -f $anom_file ] && rm $anom_file
 		bin/fieldclim $args $anom_file
 		if [ ! -s "$anom_file" ]; then
 			echo "grads.cgi: error: failed to compute climatology<br>"
 			echo "bin/fieldclim $args $anom_file"
-			. ./myvinkfooter.cgi
+			. ./myvinkfoot.cgi
 			exit -1
 		fi
 	fi
