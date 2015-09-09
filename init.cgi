@@ -26,10 +26,15 @@ if [ -z "$init_done" ]; then
    init_done=done
 
 	function getpngwidth {
-		width=`file $pngfile | sed -e 's/^.*data, //' -e 's/ x .*$//'`
-		halfwidth=$((width/2))
-		if [ $((2*halfwidth )) != $width ]; then
-			halfwidth=${halfwidth}.5
+	    if [ -s $pngfile ]; then
+		    width=`file $pngfile | sed -e 's/^.*data, //' -e 's/ x .*$//'`
+		    halfwidth=$((width/2))
+		    if [ $((2*halfwidth )) != $width ]; then
+			    halfwidth=${halfwidth}.5
+		    fi
+		else
+		    width=0
+		    halfwidth=0
 		fi
 	}
    # set a standard TTF font for gnuplot.   GNUPLOT_DEFAULT_GDFONT is not used
