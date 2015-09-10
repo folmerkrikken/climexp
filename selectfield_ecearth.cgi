@@ -23,20 +23,20 @@ Choose a field and press this button</td></tr>
 <th>evsp<br>sbl
 <th>pme
 <th>ssr
-<th>u10
-<th>v10
+<th>uas
+<th>vas
 <th>psl
 <tr><td>KNMI'14 (16)
-<td><input type=radio class=formradio name=field value=knmi14_2t_Amon_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_tas_Amon_ECEARTH23_rcp85>
 <td>&nbsp;
 <td>&nbsp;
-<td><input type=radio class=formradio name=field value=knmi14_tp_Amon_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_pr_Amon_ECEARTH23_rcp85>
 <td>&nbsp;
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=knmi14_ssr_Amon_ECEARTH23_rcp85>
-<td><input type=radio class=formradio name=field value=knmi14_10u_Amon_ECEARTH23_rcp85>
-<td><input type=radio class=formradio name=field value=knmi14_10v_Amon_ECEARTH23_rcp85>
-<td><input type=radio class=formradio name=field value=knmi14_msl_Amon_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_uas_Amon_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_vas_Amon_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_psl_Amon_ECEARTH23_rcp85>
 
 </table>
 </form>
