@@ -33,7 +33,7 @@ href="wipefeet.cgi?http://hadobs.metoffice.gov.uk/hadisst/" target="_new"><img s
 <a href="getindices.cgi?WMO=NCEPData/nino3&STATION=NINO3&TYPE=i&id=$EMAIL">NINO3</a>,
 <a href="getindices.cgi?WMO=NCEPData/nino5&STATION=NINO3.4&TYPE=i&id=$EMAIL">NINO3.4</a>,
 <a href="getindices.cgi?WMO=NCEPData/nino4&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>
-(1982-now, NCEP OI v2)</div>
+(1856-1981 Kaplan, 1982-now NCEP OISSTv2)</div>
 <td><a href="wipefeet.cgi?http://www.cpc.noaa.gov/data/indices/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=CRUData/soi&STATION=SOI&TYPE=i&id=$EMAIL">SOI</a>
