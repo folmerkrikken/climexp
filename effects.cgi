@@ -29,19 +29,18 @@ cat | sed -e "s/FORM_EMAIL/$EMAIL/" <<EOF
 
 <p>For the four meteorological seasons we computed how El Ni&ntilde;o
 and La Ni&ntilde;a perturbed the average weather of the last century.
-We used observations from 1185 precipitation stations en 402
-temperature stations in the GHCN v2 database with at leats 40 years of
-data and at least 2&deg; apart to compute linear correlations with the
-Ni&ntilde;o3.4 index. Lighter colours denote correlations that are not
-significant at p&lt;0.05.</span>
+We used the GPCC V7 analysis of monthly mean precipitation and the 
+HadCRUT4 analysis of temperature, filled in by Cowtan & Way.</span>
 
 <div class="alineakop"><a name="precipitation"></a>Precipitation</div>
 
-Blue circles indicate that during El Ni&ntilde;o there was, on
-average, more rain than normal, red circles indicate drought during El
+Blue colours indicate that during El Ni&ntilde;o there was, on
+average, more rain than normal, red colours indicate drought during El
 Ni&ntilde;o.  La Ni&ntilde;a has the opposite effect in almost all
-locations.  The size of the circles is a measure of the strength of
-the relationship.
+locations. As a measure of the strength of the relationship we used the 
+correlation coefficient with the Ni&ntilde;o3.4 index. The square of this 
+number gives the fraction of the variance that is explained by this aspect
+of El Ni&ntilde;o.
 
 <div class="bijschrift"><b>March-May</b> In boreal spring the
 strongest effects are in the western Pacific Ocean: along the equator
@@ -53,7 +52,7 @@ of Europe it rains more on average during El Ni&ntilde;o.</div>
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_logprcp_MAM0.png" alt="Relationship between El Ni&ntilde;o and rainfall in March-May" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_gpcc_25_n1_MAM.png" alt="Relationship between El Ni&ntilde;o and rainfall in March-May" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
@@ -66,8 +65,8 @@ no means always.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_logprcp_JJA0.png" 
-alt="Relationship between El Ni&ntilde;o and rainfall in June-August" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_gpcc_25_n1_JJA.png" 
+alt="Relationship between El Ni&ntilde;o and rainfall in June-August" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
@@ -83,7 +82,7 @@ Uruguay.</div>
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_logprcp_SON0.png" alt="Relationship between El Ni&ntilde;o and rainfall in September-November" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_gpcc_25_n1_SON.png" alt="Relationship between El Ni&ntilde;o and rainfall in September-November" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
@@ -102,19 +101,18 @@ rest of the world.
 
 <Center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_logprcp_DJF0.png" 
-alt="Relationship between El Ni&ntilde;o and rainfall in December-February" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_gpcc_25_n1_DJF.png" 
+alt="Relationship between El Ni&ntilde;o and rainfall in December-February" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
 
 <div class="alineakop"><a name="temperature"></a>Temperature</div>
 
-In the temperature maps, red circles denote locations that on
+In the temperature maps, red colours denote locations that on
 average are warmer during El Ni&ntilde;o and cooler during La
-Ni&ntilde;a.  Blue circles are colder during El Ni&ntilde;o and/or
-warmer during La Ni&ntilde;a.  The size of the circles is a measure of
-the strength of the relationship.  The North America effects are
+Ni&ntilde;a.  Blue colours are colder during El Ni&ntilde;o and/or
+warmer during La Ni&ntilde;a.  Some North America effects are
 non-linear: the effect of La Ni&ntilde;a is not the opposite of the
 effect of El Ni&ntilde;o.
 
@@ -126,8 +124,8 @@ during La Ni&ntilde;a.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_temp_MAM.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in March-May" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_had4_krig_v2_MAM.png" 
+alt="Relationship between El Ni&ntilde;o and temperature in March-May" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
@@ -138,8 +136,8 @@ East-Asia and eastern Canada is often somewhat cooler than normal.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_temp_JJA.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in Jun-August" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_had4_krig_v2_JJA.png" 
+alt="Relationship between El Ni&ntilde;o and temperature in Jun-August" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
@@ -150,8 +148,8 @@ warmer during El Ni&ntilde;o.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_temp_SON.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in September-November" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_had4_krig_v2_SON.png" 
+alt="Relationship between El Ni&ntilde;o and temperature in September-November" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
@@ -164,8 +162,8 @@ weather than normal during El Ni&ntilde;o.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_temp_DJF.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in December-February" border=0 class="realimage" hspace=0 vspace=0>
+<img src="effects/nino34_had4_krig_v2_DJF.png" 
+alt="Relationship between El Ni&ntilde;o and temperature in December-February" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
@@ -185,7 +183,7 @@ are no effects on the number of cyclones over the Indian Ocean.
 <center>
 <div style="font-size:10px; width=451px;">
 <img src="effects/nino34_nstracks.png" 
-alt="Relationship between El Ni&ntilde;o and the number of tropical stroms" border=0 class="realimage" hspace=0 vspace=0>
+alt="Relationship between El Ni&ntilde;o and the number of tropical stroms" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
 </center>
