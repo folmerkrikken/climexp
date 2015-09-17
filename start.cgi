@@ -12,11 +12,11 @@ echo
 # do not allow / in email address
 . ./searchengine.cgi
 if [ -z "$EMAIL" ]; then
-  . ./myvinkhead.cgi "No email address given" "" "noindex,nofollow"
-  echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
+  ###. ./myvinkhead.cgi "No login id given" "" "noindex,nofollow"
+  ###echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
   EMAIL=someone@somewhere
-  . ./myvinkfoot.cgi
-  exit
+  ###. ./myvinkfoot.cgi
+  ###exit
 fi
 c=`fgrep -c "^$EMAIL " ./log/list`
 if [ $c = 0 ]; then
