@@ -27,10 +27,16 @@ if [ -z "$init_done" ]; then
 
 	function getpngwidth {
 	    if [ -s $pngfile ]; then
-		    width=`file $pngfile | sed -e 's/^.*data, //' -e 's/ x .*$//'`
-		    halfwidth=$((width/2))
-		    if [ $((2*halfwidth )) != $width ]; then
-			    halfwidth=${halfwidth}.5
+	        type=`file -b $pngfile`
+	        if [ "${type#PNG}" != "$type" ]; then
+                width=`echo $type | sed -e 's/^.*data, //' -e 's/ x .*$//'`
+	            halfwidth=$((width/2))
+		        if [ $((2*halfwidth )) != $width ]; then
+			        halfwidth=${halfwidth}.5
+		        fi
+		    else
+		        width=0
+		        halfwidth=0
 		    fi
 		else
 		    width=0
