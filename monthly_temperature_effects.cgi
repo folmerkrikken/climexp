@@ -12,7 +12,7 @@ cat | sed -e "s/FORM_EMAIL/$EMAIL/" <<EOF
          El Ni&ntilde;o</a> affects the
          weather in large parts of the world.  The effects depend
          strongly on the location and the season.  We have studied the
-         HadCRUT4 analyses of sea surface temperature and 2-meter
+         CRU TS 3.22 analyses of 2-meter
          temperature over land. As a measure of the strength of the 
          relationship we used the correlation coefficient with the 
          Ni&ntilde;o3.4 index. The square of this number gives the 
@@ -29,29 +29,29 @@ non-linear: the effect of La Ni&ntilde;a is not the opposite of the
 effect of El Ni&ntilde;o.
 <center>
 <div style="font-size:10px; width=451px;">
-<a href="effects/nino34_had4_krig_v2_jan.pdf"><img src="effects/nino34_had4_krig_v2_jan.png" alt="relationship between El Ni&ntilde;o and temperature in January" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_jan.pdf"><img src="effects/nino34_cru_tmp_25_jan.png" alt="relationship between El Ni&ntilde;o and temperature in January" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_feb.pdf"><img src="effects/nino34_had4_krig_v2_feb.png" alt="relationship between El Ni&ntilde;o and temperature in February" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_feb.pdf"><img src="effects/nino34_cru_tmp_25_feb.png" alt="relationship between El Ni&ntilde;o and temperature in February" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_mar.pdf"><img src="effects/nino34_had4_krig_v2_mar.png" alt="relationship between El Ni&ntilde;o and temperature in March" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_mar.pdf"><img src="effects/nino34_cru_tmp_25_mar.png" alt="relationship between El Ni&ntilde;o and temperature in March" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_apr.pdf"><img src="effects/nino34_had4_krig_v2_apr.png" alt="relationship between El Ni&ntilde;o and temperature in April" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_apr.pdf"><img src="effects/nino34_cru_tmp_25_apr.png" alt="relationship between El Ni&ntilde;o and temperature in April" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_may.pdf"><img src="effects/nino34_had4_krig_v2_may.png" alt="relationship between El Ni&ntilde;o and temperature in May" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_may.pdf"><img src="effects/nino34_cru_tmp_25_may.png" alt="relationship between El Ni&ntilde;o and temperature in May" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_jun.pdf"><img src="effects/nino34_had4_krig_v2_jun.png" alt="relationship between El Ni&ntilde;o and temperature in June" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_jun.pdf"><img src="effects/nino34_cru_tmp_25_jun.png" alt="relationship between El Ni&ntilde;o and temperature in June" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_jul.pdf"><img src="effects/nino34_had4_krig_v2_jul.png" alt="relationship between El Ni&ntilde;o and temperature in July" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_jul.pdf"><img src="effects/nino34_cru_tmp_25_jul.png" alt="relationship between El Ni&ntilde;o and temperature in July" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_aug.pdf"><img src="effects/nino34_had4_krig_v2_aug.png" alt="relationship between El Ni&ntilde;o and temperature in August" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_aug.pdf"><img src="effects/nino34_cru_tmp_25_aug.png" alt="relationship between El Ni&ntilde;o and temperature in August" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_sep.pdf"><img src="effects/nino34_had4_krig_v2_sep.png" alt="relationship between El Ni&ntilde;o and temperature in September" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_sep.pdf"><img src="effects/nino34_cru_tmp_25_sep.png" alt="relationship between El Ni&ntilde;o and temperature in September" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_oct.pdf"><img src="effects/nino34_had4_krig_v2_oct.png" alt="relationship between El Ni&ntilde;o and temperature in October" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_oct.pdf"><img src="effects/nino34_cru_tmp_25_oct.png" alt="relationship between El Ni&ntilde;o and temperature in October" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_nov.pdf"><img src="effects/nino34_had4_krig_v2_nov.png" alt="relationship between El Ni&ntilde;o and temperature in November" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_nov.pdf"><img src="effects/nino34_cru_tmp_25_nov.png" alt="relationship between El Ni&ntilde;o and temperature in November" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
-<a href="effects/nino34_had4_krig_v2_dec.pdf"><img src="effects/nino34_had4_krig_v2_dec.png" alt="relationship between El Ni&ntilde;o and temperature in December" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
+<a href="effects/nino34_cru_tmp_25_dec.pdf"><img src="effects/nino34_cru_tmp_25_dec.png" alt="relationship between El Ni&ntilde;o and temperature in December" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
 <br clear=all>
 </div>
 </center>

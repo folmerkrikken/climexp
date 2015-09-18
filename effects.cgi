@@ -30,7 +30,7 @@ cat | sed -e "s/FORM_EMAIL/$EMAIL/" <<EOF
 <p>For the four meteorological seasons we computed how El Ni&ntilde;o
 and La Ni&ntilde;a perturbed the average weather of the last century.
 We used the GPCC V7 analysis of monthly mean precipitation and the 
-HadCRUT4 analysis of temperature, filled in by Cowtan & Way.</span>
+CRU TS 3.22 analysis of temperature.</span>
 
 <div class="alineakop"><a name="precipitation"></a>Precipitation</div>
 
@@ -124,7 +124,7 @@ during La Ni&ntilde;a.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_had4_krig_v2_MAM.png" 
+<img src="effects/nino34_cru_tmp_25_MAM.png" 
 alt="Relationship between El Ni&ntilde;o and temperature in March-May" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
@@ -136,7 +136,7 @@ East-Asia and eastern Canada is often somewhat cooler than normal.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_had4_krig_v2_JJA.png" 
+<img src="effects/nino34_cru_tmp_25_JJA.png" 
 alt="Relationship between El Ni&ntilde;o and temperature in Jun-August" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
@@ -148,7 +148,7 @@ warmer during El Ni&ntilde;o.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_had4_krig_v2_SON.png" 
+<img src="effects/nino34_cru_tmp_25_SON.png" 
 alt="Relationship between El Ni&ntilde;o and temperature in September-November" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
@@ -162,7 +162,7 @@ weather than normal during El Ni&ntilde;o.
 
 <center>
 <div style="font-size:10px; width=451px;">
-<img src="effects/nino34_had4_krig_v2_DJF.png" 
+<img src="effects/nino34_cru_tmp_25_DJF.png" 
 alt="Relationship between El Ni&ntilde;o and temperature in December-February" border=0 width=430 class="realimage" hspace=0 vspace=0>
 <br clear=all>
 </div>
