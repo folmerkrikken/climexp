@@ -175,7 +175,7 @@ fi
 
 [ "$lwrite" = true ] && echo bin/attribute $corrargs
 (./bin/attribute $corrargs > $root.txt) 2>&1
-grep 'bootstrap|' $root.txt | sed -e 's/#//'
+grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 if [ $TYPE = set ]; then
     while [ -z "$f" ]; do
