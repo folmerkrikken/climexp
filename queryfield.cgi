@@ -56,8 +56,7 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
 	if [ "${type%mon}" != "$type" ]; then
 	    if [ $dataset = knmi14 ]; then
 	            dir=mon
-	            type2=atmos
-	            type=Amon
+	            type=atmos
 	        else
 	            dir=monthly
 	        fi
@@ -95,8 +94,8 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
 	   fi
 	else
 	    if [ $dataset = knmi14 ]; then
-	        file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
-	        file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type2/$type/$var/$file
+	        file=${var}_${datasetname}_${model}_${exp}_186001-210012_%%.nc
+	        file=KNMI14Data/output/KNMI/$model/$exp/$dir/$type/$var/$file
 	        ###echo "file=$file"
 	   	elif [ -z "$rip" ]; then
 	   		file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_000.nc
@@ -618,7 +617,7 @@ ndvi) file=UMDData/gimms_ndvi_mo.nc;kindname="GIMMS";climfield="ndvi";;
 ndvi_old) file=NASAData/ndvi.ctl;kindname="pathfinder";climfield="vegetation";;
 pdsi-old) file=UCARData/pdsi.ctl;kindname="UCAR";climfield="drought index";;
 pdsi) file=UCARData/pdsi.mon.mean.nc;kindname="UCAR";climfield="PDSI";;
-sc_pdsi) file=UCARData/pdsisc.monthly.maps.1850-2010.fawc=1.r2.5x2.5.ipe=2.nc;kindname="UCAR";climfield="scPDSI";;
+sc_pdsi) file=UCARData/pdsisc.monthly.maps.1850-now.fawc=1.r2.5x2.5.ipe=2.nc;kindname="UCAR";climfield="scPDSI";;
 mm05_z100) file=FUBData/mm05_z100.ctl;kindname="FUB";climfield="z100";map='set mproj nps';;
 mm05_z50) file=FUBData/mm05_z50.ctl;kindname="FUB";climfield="z50";map='set mproj nps';;
 mm05_z30) file=FUBData/mm05_z30.ctl;kindname="FUB";climfield="z30";map='set mproj nps';;
