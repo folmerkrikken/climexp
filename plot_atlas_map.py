@@ -880,7 +880,7 @@ class PlotAtlasMap:
         else:
             uncert = self.uncert # hatching if data available
 
-        force = True # false
+        force = False
 
         # log to Climate Explorer log file
         with open('log/log', 'a') as f:
@@ -1023,137 +1023,135 @@ class PlotAtlasMap:
                plot = danoprob(wks,res,plotvar,"shaded",%(cbar)s,rgbcbar,0,%(pmin)s,%(cmin)s,%(cmax)s,%(cint)s,"SH",%(uncert)s,prob,usefieldf)
               end if
               lres = True
-        """ % nclInputDict
+            """ % nclInputDict
 
-        self.log.debug('Write data to %s' % nclInputName)
-        with open(nclInputName, 'w') as f:
-            f.write(nclInputStr)
+            self.log.debug('Write data to %s' % nclInputName)
+            with open(nclInputName, 'w') as f:
+                f.write(nclInputStr)
 
-        if self.params.FORM_region != 'srex' or self.params.FORM_srex != 'world':
-            i = subregion
-            if self.params.FORM_region == 'box' or self.params.FORM_region == 'point' \
-                or ( self.params.FORM_region == 'srex' and reg.abbr[i] == ''):
-                if lwrite:
-                    self.logOut.info("using lon12,lat12<br>")
-                nclInputStr = """
-                ; ADD RECTANGLES
-                  xpts = (/%(lon1)s,%(lon1)s,%(lon2)s,%(lon2)s,%(lon1)s/)
-                  ypts = (/%(lat1)s,%(lat2)s,%(lat2)s,%(lat1)s,%(lat1)s/)
-                  do i = 0,3
-                   p(i) = gsn_add_polyline(wks,plot,xpts(i:i+1),ypts(i:i+1),lres)
-                  end do
-                  delete(xpts)
-                  delete(ypts)
-                """ % {'lon1': reg.lon1[i], 'lon2': reg.lon2[i], 'lat1': reg.lat1[i], 'lat2': reg.lat2[i]}
+            if self.params.FORM_region != 'srex' or self.params.FORM_srex != 'world':
+                i = subregion
+                if self.params.FORM_region == 'box' or self.params.FORM_region == 'point' \
+                    or ( self.params.FORM_region == 'srex' and reg.abbr[i] == ''):
+                    if lwrite:
+                        self.logOut.info("using lon12,lat12<br>")
+                    nclInputStr = """
+                    ; ADD RECTANGLES
+                      xpts = (/%(lon1)s,%(lon1)s,%(lon2)s,%(lon2)s,%(lon1)s/)
+                      ypts = (/%(lat1)s,%(lat2)s,%(lat2)s,%(lat1)s,%(lat1)s/)
+                      do i = 0,3
+                       p(i) = gsn_add_polyline(wks,plot,xpts(i:i+1),ypts(i:i+1),lres)
+                      end do
+                      delete(xpts)
+                      delete(ypts)
+                    """ % {'lon1': reg.lon1[i], 'lon2': reg.lon2[i], 'lat1': reg.lat1[i], 'lat2': reg.lat2[i]}
 
-                self.log.debug('Append data to %s' % nclInputName)
-                with open(nclInputName, 'a') as f:
-                    f.write(nclInputStr)
+                    self.log.debug('Append data to %s' % nclInputName)
+                    with open(nclInputName, 'a') as f:
+                        f.write(nclInputStr)
 
-            else:
-                if self.params.FORM_region == 'srex':
-                    polyfile = "SREX/%(abbr)s_kaal.txt" % {'abbr': reg.abbr[i]}
-                elif self.params.FORM_region == 'countries':
-                    polyfile = "countries/%(country)s_nan.txt" % {'country': reg.country[i]}
                 else:
-                    raise PlotMapError("NCL code for region %s not yet ready" % self.params.FORM_region)
+                    if self.params.FORM_region == 'srex':
+                        polyfile = "SREX/%(abbr)s_kaal.txt" % {'abbr': reg.abbr[i]}
+                    elif self.params.FORM_region == 'countries':
+                        polyfile = "countries/%(country)s_nan.txt" % {'country': reg.country[i]}
+                    else:
+                        raise PlotMapError("NCL code for region %s not yet ready" % self.params.FORM_region)
 
-                # polygon
-                nclInputStr = """
-                ; ADD POLYGONS - the "kaal" version does not have comments and repeats the first line at the end
-                   lonlat = asciiread("%(polyfile)s",(/1+%(npoly)s,2/),"float")
-                   do i = 0,%(npoly2)s
-                    p(i) = gsn_add_polyline(wks,plot,lonlat(i:i+1,0),lonlat(i:i+1,1),lres)
-                   end do
-                    delete(lonlat)
-                """ % {'polyfile': polyfile, 'npoly': reg.npoly[i], 'npoly2': (reg.npoly[i] - 1)}
+                    # polygon
+                    nclInputStr = """
+                    ; ADD POLYGONS - the "kaal" version does not have comments and repeats the first line at the end
+                       lonlat = asciiread("%(polyfile)s",(/1+%(npoly)s,2/),"float")
+                       do i = 0,%(npoly2)s
+                        p(i) = gsn_add_polyline(wks,plot,lonlat(i:i+1,0),lonlat(i:i+1,1),lres)
+                       end do
+                        delete(lonlat)
+                    """ % {'polyfile': polyfile, 'npoly': reg.npoly[i], 'npoly2': (reg.npoly[i] - 1)}
 
-                self.log.debug('Append data to %s' % nclInputName)
-                with open(nclInputName, 'a') as f:
-                    f.write(nclInputStr)
+                    self.log.debug('Append data to %s' % nclInputName)
+                    with open(nclInputName, 'a') as f:
+                        f.write(nclInputStr)
 
-        # TODO: implement this
-#        cat >> /tmp/nclinput$$.ncl <<EOF
-        nclInputDict = { 'plotvarname': plotvarname }
-        nclInputDict.update(reg.__dict__)
-        nclInputStr = """
-           draw(plot)
-          ; ADD PERCENTILE LABEL
-          ;txres = True
-          ;txres@txFontHeightF = 0.017
-          ;txres@txFontColor = 1 ; 0
-          ;txres@txBackgroundFillColor = "white" ; "black"
-          ;gsn_text_ndc(wks,"%(plotvarname)s",$labelx,$labely,txres)
+            # TODO: implement this
+    #        cat >> /tmp/nclinput$$.ncl <<EOF
+            nclInputDict = { 'plotvarname': plotvarname }
+            nclInputDict.update(reg.__dict__)
+            nclInputStr = """
+               draw(plot)
+              ; ADD PERCENTILE LABEL
+              ;txres = True
+              ;txres@txFontHeightF = 0.017
+              ;txres@txFontColor = 1 ; 0
+              ;txres@txBackgroundFillColor = "white" ; "black"
+              ;gsn_text_ndc(wks,"%(plotvarname)s",$labelx,$labely,txres)
 
-          frame(wks)
-          delete(wks)
-        end
-        """ % nclInputDict
+              frame(wks)
+              delete(wks)
+            end
+            """ % nclInputDict
 
-        self.log.debug('Append data to %s' % nclInputName)
-        with open(nclInputName, 'a') as f:
-            f.write(nclInputStr)
+            self.log.debug('Append data to %s' % nclInputName)
+            with open(nclInputName, 'a') as f:
+                f.write(nclInputStr)
 
-        ### TEMP
-#        with open(nclInputName) as f:
-#            nclLines = f.readlines()
+            ### TEMP
+    #        with open(nclInputName) as f:
+    #            nclLines = f.readlines()
 
-#        print '<br>File nclLines<br>'
-#        print '----------------<br>'
-#        print '<br>'.join(nclLines)
-#        print '\n'.join(nclLines)
-#        print '----------------<br>'
-        ##### TEMP
+    #        print '<br>File nclLines<br>'
+    #        print '----------------<br>'
+    #        print '<br>'.join(nclLines)
+    #        print '\n'.join(nclLines)
+    #        print '----------------<br>'
+            ##### TEMP
 
-        cmd = "ncl -Qn < {nclInputName}".format(nclInputName=nclInputName)
-        self.log.debug('Launch: %s' % cmd)
-        processOutput = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
-
-        for el in processOutput.split('\n'):
-            if 'EXPLICIT' not in el:
-                self.logOut.info(el + '<br>')
-
-
-        size = os.path.getsize('{root}.eps'.format(root=root))
-
-        if size < 100:
-
-            epsFilename = '{root}.eps'.format(root=root)
-
-            if os.path.exists(epsFilename):
-                self.log.debug('rm %s' % epsFilename)
-                os.remove(epsFilename)
-
-            self.logOut.info("postscript file too small, {size} bytes.<br>".format(size=size))
-
-            cmd = "cat -n {nclInputName}".format(nclInputName=nclInputName)
+            cmd = "ncl -Qn < {nclInputName}".format(nclInputName=nclInputName)
             self.log.debug('Launch: %s' % cmd)
             processOutput = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
 
-            # TODO: Instance of 'list' has no 'split' member
             for el in processOutput.split('\n'):
-                self.logOut.info(el + '<br>')
+                if 'EXPLICIT' not in el:
+                    self.logOut.info(el + '<br>')
 
-            raise PlotMapError("Something went wrong in the script:")
+
+            size = os.path.getsize('{root}.eps'.format(root=root))
+
+            if size < 100:
+
+                if os.path.exists(epsFilename):
+                    self.log.debug('rm %s' % epsFilename)
+                    os.remove(epsFilename)
+
+                self.logOut.info("postscript file too small, {size} bytes.<br>".format(size=size))
+
+                cmd = "cat -n {nclInputName}".format(nclInputName=nclInputName)
+                self.log.debug('Launch: %s' % cmd)
+                processOutput = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+
+                # TODO: Instance of 'list' has no 'split' member
+                for el in processOutput.split('\n'):
+                    self.logOut.info(el + '<br>')
+
+                raise PlotMapError("Something went wrong in the script:")
 
         # TODO: implement this
-        cmd = './bin/epstopdf {root}.eps'.format(root=root)
-        self.log.debug('Launch: %s' % cmd)
-        subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+        pdfFilename = '{root}.pdf'.format(root=root)
+        if force or not os.path.exists(pdfFilename) or (os.path.getsize(pdfFilename) == 0) or (os.path.getmtime(pdfFilename) < os.path.getmtime(epsFilename)):
+            cmd = './bin/epstopdf {root}.eps'.format(root=root)
+            self.log.debug('Launch: %s' % cmd)
+            subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
 
-        cmd = "gs -q -r180 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -dNOPAUSE -sDEVICE=ppmraw -sOutputFile={root}.pnm {root}.eps -c quit".format(root=root)
-        self.log.debug('Launch: %s' % cmd)
-        subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+        pngFilename = '{root}.png'.format(root=root)
+        if force or not os.path.exists(pngFilename) or (os.path.getsize(pngFilename) == 0) or (os.path.getmtime(pngFilename) < os.path.getmtime(epsFilename)):
+            cmd = "gs -q -r180 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -dNOPAUSE -sDEVICE=ppmraw -sOutputFile={root}.pnm {root}.eps -c quit".format(root=root)
+            self.log.debug('Launch: %s' % cmd)
+            subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+            cmd = "pnmcrop {root}.pnm | pnmtopng > {root}.png".format(root=root)
+            self.log.debug('Launch: %s' % cmd)
+            subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+            os.remove('{root}.pnm'.format(root=root))
 
-        cmd = "pnmcrop {root}.pnm | pnmtopng > {root}.png".format(root=root)
-        self.log.debug('Launch: %s' % cmd)
-        subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
-
-        os.remove('{root}.pnm'.format(root=root))
-
-        pngfile = '{root}.png'.format(root=root)
-        # TODO: check if this is correct. Ask geert-jan
-        halfwidth = util.getpngwidth(pngfile)
+        halfwidth = util.getpngwidth(pngFilename)
 
         return (root, title, halfwidth)
 
