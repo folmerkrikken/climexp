@@ -8,6 +8,7 @@ cd ..
 . ./init.cgi
 . ./getargs.cgi
 cd $cwd
+absolute_paths=true
 
 c=`dirname "$SCRIPT_FILENAME" | egrep -c 'halfjaaroverzicht|biannual_overview'`
 if [ $c = 1 ]; then
@@ -348,7 +349,6 @@ if [ "$FORM_anomalie" = ja ]; then
     fi
 fi
 
-absolute_paths=true
 if [ $NPERYEAR = 12 ]; then
     (cd ..; . ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
 elif [ $NPERYEAR = 4 ]; then
@@ -531,9 +531,9 @@ if [ $NPERYEAR = 12 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        (cd ..;. ./myvinkheader.cgi "$maandoverzicht_wereldweer" "$naam $tm $maa $yr")
+        (cd ..;. ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        (cd ..;. ./myvinkheader.cgi "$maandoverzicht_wereldweer" "$maa $naam $tm $yr")
+        (cd ..;. ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
 elif [ $NPERYEAR = 4 ]; then
     if [ "$prefix" != tsi ]; then
@@ -563,9 +563,9 @@ elif [ $NPERYEAR = 4 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        (cd ..;. ./myvinkheader.cgi "$seizoensoverzicht_wereldweer" "$naam $tm $maa $yr")
+        (cd ..;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        (cd ..;. ./myvinkheader.cgi "$seizoensoverzicht_wereldweer" "$maa $naam $tm $yr")
+        (cd ..;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
     ###echo "txtfile=$txtfile<br>"
     ###echo "mo,yr=$mo,$yr<br>"
@@ -593,9 +593,9 @@ elif [ $NPERYEAR = 2 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        (cd ..;. ./myvinkheader.cgi "$halfjaaroverzicht_wereldweer" "$naam $tm $maa $yr")
+        (cd ..;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        (cd ..;. ./myvinkheader.cgi "$halfjaaroverzicht_wereldweer" "$maa $naam $tm $yr")
+        (cd ..;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
     ###echo "txtfile=$txtfile<br>"
     ###echo "mo,yr=$mo,$yr<br>"
@@ -616,7 +616,7 @@ else # NPERYEAR = 1
     else
         yr=""
     fi
-    (cd ..;. ./myvinkheader.cgi "$jaaroverzicht_wereldweer" "$naam $tm $maa $yr")
+    (cd ..;. ./myvinkhead$langext.cgi "$jaaroverzicht_wereldweer" "$naam $tm $maa $yr")
 fi
 
 if [ $var != maunaloa_ch4 ]; then
