@@ -531,9 +531,9 @@ if [ $NPERYEAR = 12 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        . ./myvinkheader.cgi "$maandoverzicht_wereldweer" "$naam $tm $maa $yr"
+        (cd ..;. ./myvinkheader.cgi "$maandoverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        . ./myvinkheader.cgi "$maandoverzicht_wereldweer" "$maa $naam $tm $yr"
+        (cd ..;. ./myvinkheader.cgi "$maandoverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
 elif [ $NPERYEAR = 4 ]; then
     if [ "$prefix" != tsi ]; then
@@ -563,9 +563,9 @@ elif [ $NPERYEAR = 4 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        . ./myvinkheader.cgi "$seizoensoverzicht_wereldweer" "$naam $tm $maa $yr"
+        (cd ..;. ./myvinkheader.cgi "$seizoensoverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        . ./myvinkheader.cgi "$seizoensoverzicht_wereldweer" "$maa $naam $tm $yr"
+        (cd ..;. ./myvinkheader.cgi "$seizoensoverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
     ###echo "txtfile=$txtfile<br>"
     ###echo "mo,yr=$mo,$yr<br>"
@@ -593,9 +593,9 @@ elif [ $NPERYEAR = 2 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        . ./myvinkheader.cgi "$halfjaaroverzicht_wereldweer" "$naam $tm $maa $yr"
+        (cd ..;. ./myvinkheader.cgi "$halfjaaroverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        . ./myvinkheader.cgi "$halfjaaroverzicht_wereldweer" "$maa $naam $tm $yr"
+        (cd ..;. ./myvinkheader.cgi "$halfjaaroverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
     ###echo "txtfile=$txtfile<br>"
     ###echo "mo,yr=$mo,$yr<br>"
@@ -616,7 +616,7 @@ else # NPERYEAR = 1
     else
         yr=""
     fi
-    . ./myvinkheader.cgi "$jaaroverzicht_wereldweer" "$naam $tm $maa $yr"
+    (cd ..;. ./myvinkheader.cgi "$jaaroverzicht_wereldweer" "$naam $tm $maa $yr")
 fi
 
 if [ $var != maunaloa_ch4 ]; then
