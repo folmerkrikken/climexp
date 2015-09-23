@@ -6,19 +6,18 @@ if [ -n "$3" ]; then
   robot="<meta name=\"robots\" content=\""$3"\">"
 fi
 if [ -n "$absolute_paths" ]; then
-    prefix="http://climexp.knmi.nl/"
+    prfx="http://climexp.knmi.nl/"
 else
-    prefix=""  
+    prfx=""
 fi
-if [ -f images/logo_climexp.png ]; then
-    cat <<EOF
+cat <<EOF
 <html>
 <head>
 <!-- beheerder: Geert Jan van Oldenborgh -->
-<link rel="stylesheet" href="${prefix}styles/rccstyle.css" type="text/css">
+<link rel="stylesheet" href="${prfx}styles/rccstyle.css" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<script language="javascript" src="${prefix}library/javascript/hidden_info_switch.js"></script>
-<script language="javascript" src="${prefix}library/javascript/pop_page.js"></script> 
+<script language="javascript" src="${prfx}library/javascript/hidden_info_switch.js"></script>
+<script language="javascript" src="${prfx}library/javascript/pop_page.js"></script> 
 $extrahead
 $robot
 <link rel="shortcut icon" href="/favicon.ico"> 
@@ -29,8 +28,8 @@ a { text-decoration: none }
 </head>
 <body>
 EOF
-    . ./searchengine.cgi
-    sed -e "s/FORM_EMAIL/$EMAIL/" ./vinklude/rcc_pagehead.html 
+. ./searchengine.cgi
+sed -e "s/FORM_EMAIL/$EMAIL/" ./vinklude/rcc_pagehead.html 
 cat <<EOF
 <table border="0" width="762" cellspacing="0" cellpadding="0">
    <tr>
@@ -44,38 +43,6 @@ cat <<EOF
          <div class="subkop">$2</div>
 <div class="kalelink">
 EOF
-
-else # for linux the old lay-out
-
-    cat <<EOF
-<html>
-<head>
-<!-- beheerder: Geert Jan van Oldenborgh -->
-<link rel="stylesheet" href="${prefix}styles/vinkstyle.css" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-$extrahead
-$robot
-<link rel="shortcut icon" href="/favicon.ico"> 
-<title>Climate Explorer: $1</title>
-</head>
-<body>
-EOF
-    sed -e "s/FORM_EMAIL/$EMAIL/g" ./vinklude/research_pagehead.html 
-
-cat <<EOF
-<table border="0" width="762" cellspacing="0" cellpadding="0">
-   <tr>
-      <td width="80">&nbsp;</td>
-      <td width="451" valign=top>
-         <div id="printable" name="printable">
-         <!-- div -->
-<!-- Voeg hieronder de inhoud van de pagina in -->
-         <div class="rubriekkop">Climate Explorer</div>
-         <div class="hoofdkop">$1</div>
-         <div class="subkop">$2</div>
-<div class="kalelink">
-EOF
-fi # old lay-out
 
 # For safety only use type=number for Opera and mobile browsers
 # In Safari this is buggy, and AFAIK not used in Firefox & Internet Explorer
