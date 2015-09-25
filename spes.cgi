@@ -18,16 +18,16 @@ temperature=GCEcom
 precipitation=GPCCcom
 case "$FORM_var" in
     temp) dataset=$temperature;units="[&deg;C]";temp_selected=selected;varname="temperature ";;
-    *) dataset=$precipitation;unis="[mm/month]";prcp_selected=selected;varname="precipitation ";;
+    *) dataset=$precipitation;unis="[%]";prcp_selected=selected;varname="precipitation ";;
 esac
 
 prefix=$FORM_prefix
 case "$prefix" in
-    tercile_) tercile_selected=selected;plotname="Tercile summary plot";units="%";;
+    tercile_) tercile_selected=selected;plotname="Tercile summary plot";units=;;
     correlation_) correlation_selected=selected;plotname="Correlation of ensemble mean";units=;;
     crpss_) crpss_selected=selected;plotname="Probability skill score";units=;;
     rmsess_) rmsess_selected=selected;plotname="Deterministic skill score";units=;;
-    *) prefix=forecast_;forecast_selected=selected;plotname="Forecast anomalies";units="%";;
+    *) prefix=forecast_;forecast_selected=selected;plotname="Forecast anomalies";;
 esac
 
 firstdate=`ls SPES/plots/$dataset/ | tr " " "\n" | tail -1`
