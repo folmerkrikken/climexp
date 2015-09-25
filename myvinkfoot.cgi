@@ -37,8 +37,10 @@ cat <<EOF
    </tr>
 </table>
 EOF
-cat ./vinklude/bottom_en.html
-cat <<EOF
+if [ -z "$nobottom" ]; then
+    cat ./vinklude/bottom_en.html
+    cat <<EOF
 </body>
 </html>
 EOF
+fi
