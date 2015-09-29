@@ -11,10 +11,10 @@ all=$FORM_all
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
 if [ "$all" = "all" ]; then
   echo '<tr><th colspan="2">All news</th></tr>'
-  sed -e "s/FORM_EMAIL/$EMAIL/" news.html
+  sed -e "s/FORM_EMAIL/$EMAIL/g" news.html
 else
   echo '<tr><th colspan="2">Recent news</th></tr>'
-  head -20 news.html | sed -e "s/FORM_EMAIL/$EMAIL/"
+  head -20 news.html | sed -e "s/FORM_EMAIL/$EMAIL/g"
   echo "<tr><td><a href=\"news.cgi?id=$EMAIL&all=all\">more...</a></td></tr>"
 fi
 echo "</table>"
