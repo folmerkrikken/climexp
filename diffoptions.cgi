@@ -64,7 +64,61 @@ cat <<EOF
 <input type="radio" class="formradio" name="var" value="reldiff" $reldiff_checked>relative</td></tr>
 <tr>
 EOF
-if [ "$NPERYEAR" != 1 ]; then
+if [ "$NPERYEAR" = 1 ]; then
+  echo "<!-- no seasons -->"
+elif [ $NPERYEAR = 2 ]; then
+  echo "<td>Starting half year:</td>"
+  echo "<td><select class="forminput" name=\"month\">"
+  if [ -z "$justonemonth" ]; then
+    echo "<option value=\"1:2\" $month_all_selected>all"
+  else
+    echo "<option value=\"0\" $month_0_selected>together"
+  fi
+  echo "<option value=\"1\" $month_1_selected>October-March"
+  echo "<option value=\"2\" $month_2_selected>April-September"
+  if [ -z "$justonemonth" ]; then
+    echo "<option value=\"0\">together"
+  fi
+  echo "</select>,"
+  if [ $field_type = Precipitation ]; then
+    echo "summing over"
+  else
+    echo "averaging"
+  fi
+  echo "<select class="forminput" name=\"sum\">"
+  echo "<option $sum_1_selected>1"
+  echo "<option $sum_2_selected>2"
+  echo "</select>half years</td></tr>"
+elif [ $NPERYEAR = 4 ]; then
+  echo "<td>Starting season:</td>"
+  echo "<td><select class="forminput" name=\"month\">"
+  if [ -z "$justonemonth" ]; then
+    echo "<option value=\"1:12\" $month_all_selected>all"
+  else
+    echo "<option value=\"0\" $month_0_selected>together"
+  fi
+  echo "<option value=\"1\" $month_1_selected>DJF"
+  echo "<option value=\"2\" $month_2_selected>MAM"
+  echo "<option value=\"3\" $month_3_selected>JJA"
+  echo "<option value=\"4\" $month_4_selected>SON"
+  if [ -z "$justonemonth" ]; then
+    echo "<option value=\"0\">together:"
+    echo "<option value=\"0\" $month_0_selected>with seasons"
+    echo "<option value=\"-1\" $month_m1_selected>anomalies"
+  fi
+  echo "</select>,"
+  if [ $field_type = Precipitation ]; then
+    echo "summing over"
+  else
+    echo "averaging"
+  fi
+  echo "<select class="forminput" name=\"sum\">"
+  echo "<option $sum_1_selected>1"
+  echo "<option $sum_2_selected>2"
+  echo "<option $sum_3_selected>3"
+  echo "<option $sum_4_selected>4"
+  echo "</select>seasons</td></tr>"
+else
   echo "<td>Starting month:</td>"
   echo "<td><select class="forminput" name=\"month\">"
   if [ -z "$justonemonth" ]; then
