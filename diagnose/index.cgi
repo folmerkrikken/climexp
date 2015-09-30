@@ -354,9 +354,9 @@ if [ $NPERYEAR = 12 ]; then
 elif [ $NPERYEAR = 4 ]; then
     (cd ..;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
 elif [ $NPERYEAR = 2 ]; then
-    (cd ..;. ./myvinkheader$langext.cgi "$halfjaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
+    (cd ..;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
 else
-    (cd ..;. ./myvinkheader$langext.cgi "$jaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
+    (cd ..;. ./myvinkhead$langext.cgi "$jaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
 fi
 
 field=$var
