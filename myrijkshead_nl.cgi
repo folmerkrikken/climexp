@@ -18,7 +18,8 @@ $robot
 </head>
 <body>
 EOF
-sed -e 's@"/@"http://www.knmi.nl/@'  ./vinklude/header_algemeen.html
+cat ./vinklude/header_algemeen.html
+###sed -e 's@"/@"http://www.knmi.nl/@'  ./vinklude/header_algemeen.html
 cat <<EOF
 <table border="0" width="762" cellspacing="0" cellpadding="0">
    <tr>
