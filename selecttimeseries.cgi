@@ -25,17 +25,17 @@ echo "<input type=\"checkbox\" class=\"formcheck\" name=\"time\">time"
 echo "</td></tr><tr><th><a href=\"javascript:pop_page('help/userseries.shtml',568,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>User-defined ${timescale}timeseries</th></tr><tr><td>"
 forbidden='!`;&|'
 i=0
-for file in ./data/*$NPERYEAR.$EMAIL.inf
+for file in ./data/*${NPERYEAR#-}.$EMAIL.inf
 do
     # if no match it loops once with the unexpanded *.inf...
     if [ -s "$file" ]; then
-	let i=$i+1
-	datfile=`head -1 $file | tr $forbidden '?'`
-	st=`head -2 $file | tail -1 | tr '_' ' '`
-	wm=`tail -1 $file`
-	ty=`basename $datfile .dat`
-	ty=`basename $ty $wm`
-	echo "<input type=\"checkbox\" class=\"formcheck\" name=\"myindex$i\" value=\"$file\">$st ($ty$wm)<br>"
+        let i=$i+1
+        datfile=`head -1 $file | tr $forbidden '?'`
+        st=`head -2 $file | tail -1 | tr '_' ' '`
+        wm=`tail -1 $file`
+        ty=`basename $datfile .dat`
+        ty=`basename $ty $wm`
+        echo "<input type=\"checkbox\" class=\"formcheck\" name=\"myindex$i\" value=\"$file\">$st ($ty$wm)<br>"
     fi
 done
 echo "</td></tr></table>"
