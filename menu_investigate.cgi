@@ -10,14 +10,27 @@ EOF
 if [ "${NPERYEAR:-12}" = '12' ]; then
   cat << EOF
 <div class="menulink">View per <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=month">month</a>, <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=season">season</a>, <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=half">half year</a> or full year (<a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=yr0">Jan-Dec</a> or <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=yr1">Jul-Jun</a>)</div>
+<div class="menulink">View last 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=12&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">1</a>, 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=60&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">5</a>, 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=120&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">10</a>
+years</div>
 EOF
 elif [ "${NPERYEAR:-12}" -ge 360 ]; then
   cat << EOF
 <div class="menulink">View last 
-<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=30&climyear1=1981&climyear2=2010">30</a>, 
-<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=90&climyear1=1981&climyear2=2010">90</a>, 
-<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=366&climyear1=1981&climyear2=2010">366</a>
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=30&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">30</a>, 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=90&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">90</a>, 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=366&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">366</a>
 days</div>
+EOF
+elif [ "${NPERYEAR#-}" = 1 ]; then
+  cat << EOF
+<div class="menulink">View last 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=10&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">10</a>, 
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=20&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">20</a>,
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=50&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">50</a>
+years</div>
 EOF
 fi
 cat <<EOF

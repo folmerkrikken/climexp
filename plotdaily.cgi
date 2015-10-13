@@ -16,6 +16,7 @@ station=`echo "$STATION" | tr '_' ' '`
 NAME="$FORM_NAME"
 name=`echo "$NAME" | tr '_' ' '`
 nday="$FORM_nday"
+NPERYEAR="$FORM_NPERYEAR"
 if [ -n "$FORM_mo" -a "${FORM_mo#0}" = "$FORM_mo" ]; then
     [ $FORM_mo -le 9 ] && FORM_mo=0$FORM_mo
 fi
@@ -31,8 +32,8 @@ else
 fi
 
 . ./nosearchengine.cgi
-
-. ./myvinkhead.cgi "$last$nday days of $station $name" "" "noindex,nofollow"
+. ./nperyear2timescale.cgi
+. ./myvinkhead.cgi "$last$nday ${month}s of $station $name" "" "noindex,nofollow"
 
 if [ -n "$FORM_climyear1" -a -z "$FORM_climyear2" ]; then
     echo "Error: provide begin and end year of reference period"
@@ -67,9 +68,13 @@ lastdate=$((lastdate+1))
 firstdate=`fgrep -v '#' $root.txt | head -n 1 | cut -b 1-8`
 ###echo firstdate,lastdate = $firstdate,$lastdate
 
-echo "<div class=\"bijschrift\">$last$nday days of $name observations at $station$ending with climatology $computed"
+echo "<div class=\"bijschrift\">$last$nday ${month}s of $name observations at $station$ending with climatology $computed"
 echo "(<a href=\"$root.eps\">eps</a>, <a href="ps2pdf.cgi?file=$root.eps">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
-
+if [ "$NPERYEAR" -ge 360 ]; then
+    timefmt="'%Y%m%d'"
+else
+    timefmt="'%Y%m'"
+fi
 ./bin/gnuplot << EOF
 set size 0.8,0.6
 set datafile missing "-999.900"
@@ -78,8 +83,8 @@ set xzeroaxis
 set term png $gnuplot_png_font_hires
 set output "./$root.png"
 set xdata time
-set timefmt "%Y%m%d"
-set format x '%Y%m%d'
+set timefmt $timefmt
+set format x $timefmt
 set xrange ["$firstdate":"$lastdate"]
 set ylabel "$VAR [$UNITS]"
 set title "$name $station ($WMO)"
@@ -96,7 +101,7 @@ EOF
 
 pngfile="./$root.png"
 getpngwidth
-echo "<center><img src=\"$pngfile\" alt=\"last $nday days of $name at $station\" width="$halfwidth" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
+echo "<center><img src=\"$pngfile\" alt=\"last $nday ${months}s of $name at $station\" width="$halfwidth" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 cat <<EOF
 <div class="formbody">
@@ -106,12 +111,19 @@ cat <<EOF
 <input type="hidden" name="WMO" value="$WMO">
 <input type="hidden" name="STATION" value="$STATION">
 <input type="hidden" name="NAME" value="$NAME">
+<input type="hidden" name="NPERYEAR" value="$NPERYEAR">
 Replot 
 <input type="$number" min="1" max="1000" step=1 name="nday" $textsize3 value="$nday">
-days with end date
+${month}s with end date
 <input type="$number" min="1" max="2400" step=1 name="yr" $textsize4 value="$FORM_yr">
-<input type="$number" min="1" max="12" step=1 name="mo" $textsize2 value="$FORM_mo">
-<input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$FORM_dy">
+EOF
+if [ ${NPERYEAR:-12} -gt 1 ]; then
+    echo "<input type="$number" min="1" max="12" step=1 name="mo" $textsize2 value="$FORM_mo">"
+fi
+if [ ${NPERYEAR:-12} -gt 12 ]; then
+    echo "<input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$FORM_dy">"
+fi
+cat <<EOF
 and climatology
 <input type="$number" min="1" max="2400" step=1 name="climyear1" $textsize4 value="$FORM_climyear1">-<input type="$number" min="1" max="2400" step=1 name="climyear2" $textsize4 value="$FORM_climyear2">
 
