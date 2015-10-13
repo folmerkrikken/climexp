@@ -56,6 +56,8 @@ else
 fi
 
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
+###echo "./bin/getunits ./data/$TYPE$WMO.dat<br>"
+###echo "NEWUNITS=$NEWUNITS<br>"
 root=data/plot${nday}daily$TYPE$WMO$KIND$FORM_climyear1$FORM_climyear2
 
 echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend" >> log/log
@@ -75,6 +77,13 @@ if [ "$NPERYEAR" -ge 360 ]; then
 else
     timefmt="'%Y%m'"
 fi
+if [ "$NEWUNITS" = "mm/day" ]; then
+    above=3
+    below=1
+else
+    above=1
+    below=3
+fi
 ./bin/gnuplot << EOF
 set size 0.8,0.6
 set datafile missing "-999.900"
@@ -88,8 +97,8 @@ set format x $timefmt
 set xrange ["$firstdate":"$lastdate"]
 set ylabel "$VAR [$UNITS]"
 set title "$name $station ($WMO)"
-plot "./$root.txt" using 1:2:3 notitle with filledcurves above lt 1, \
-     "./$root.txt" using 1:2:3 notitle with filledcurves below lt 3, \
+plot "./$root.txt" using 1:2:3 notitle with filledcurves above lt $above, \
+     "./$root.txt" using 1:2:3 notitle with filledcurves below lt $below, \
      "./$root.txt" using 1:2 notitle with lines lt -1, \
      "./$root.txt" using 1:3 notitle with lines lt -1
 
