@@ -3,7 +3,7 @@
 # should be sourced from one of the get* scripts
 debug=false
 if [ "$EMAIL" = oldenbor@knmi.nl -o $REMOTE_ADDR = 127.0.0.1 ]; then
-    debug=false # true
+    debug=true
 fi
 if [ -z "$myvinkhead" ]; then
   echo 'Content-Type: text/html'

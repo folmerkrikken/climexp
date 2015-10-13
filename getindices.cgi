@@ -2,6 +2,7 @@
 
 export DIR=`pwd`
 
+. ./init.cgi
 . ./getargs.cgi
 STATION="$FORM_STATION"
 WMO="$FORM_WMO"
