@@ -63,11 +63,6 @@ EOF
 	fi
 fi
 
-if [ -n "$NPERYEAR" -a "$NPERYEAR" != 12 ]; then
-cat <<EOF
-<font color="#ff0000">Non-monthly fields are under development, some options do not work yet</font><br>
-EOF
-fi
 case $file in
 IPCCData*) url="wipefeet.cgi?http://www-pcmdi.llnl.gov/ipcc/about_ipcc.php";;
 ESSENCE*)  url="http://www.knmi.nl/~sterl/Essence/";;
