@@ -328,15 +328,15 @@ ensembles_025_tx_e) file=ENSEMBLES/tx_0.25deg_reg_v11.0e.nc;kindname="E-OBS 11.0
 set lat 30 75';;
 ensembles_025_tx_mo) file=ENSEMBLES/tx_0.25deg_reg_v11.0u_mo.nc;kindname="E-OBS 11.0";climfield="Tmax";map='set lon -30 50
 set lat 30 75';;
-ensembles_05_rr) file=ENSEMBLES/rr_0.50deg_reg_v11.0u.nc;kindname="E-OBS 11.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
+ensembles_05_rr) file=ENSEMBLES/rr_0.50deg_reg_v11.0u.nc;kindname="E-OBS 11.0";climfield="prcp";NPERYEAR=366;flipcolor=11;map='set lon -30 50
 set lat 30 75';;
-ensembles_05_rr_mo) file=ENSEMBLES/rr_0.50deg_reg_v11.0u_extended.nc;kindname="CRU TS/E-OBS 11.0";climfield="prcp";map='set lon -30 50
+ensembles_05_rr_mo) file=ENSEMBLES/rr_0.50deg_reg_v11.0u_extended.nc;kindname="CRU TS/E-OBS 11.0";climfield="prcp";flipcolor=11;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_rr) file=ENSEMBLES/rr_0.25deg_reg_v11.0u.nc;kindname="E-OBS 11.0";climfield="prcp";NPERYEAR=366;map='set lon -30 50
+ensembles_025_rr) file=ENSEMBLES/rr_0.25deg_reg_v11.0u.nc;kindname="E-OBS 11.0";climfield="prcp";NPERYEAR=366;flipcolor=11;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_rr_e) file=ENSEMBLES/rr_0.25deg_reg_v11.0e.nc;kindname="E-OBS 11.0+";climfield="prcp";NPERYEAR=366;map='set lon -30 50
+ensembles_025_rr_e) file=ENSEMBLES/rr_0.25deg_reg_v11.0e.nc;kindname="E-OBS 11.0+";climfield="prcp";NPERYEAR=366;flipcolor=11;map='set lon -30 50
 set lat 30 75';;
-ensembles_025_rr_mo) file=ENSEMBLES/rr_0.25deg_reg_v11.0u_mo.nc;kindname="E-OBS 11.0";climfield="prcp";map='set lon -30 50
+ensembles_025_rr_mo) file=ENSEMBLES/rr_0.25deg_reg_v11.0u_mo.nc;kindname="E-OBS 11.0";climfield="prcp";flipcolor=11;map='set lon -30 50
 set lat 30 75';;
 ensembles_05_pp) file=ENSEMBLES/pp_0.50deg_reg_v11.0u.nc;kindname="E-OBS 11.0";climfield="slp";NPERYEAR=366;map='set lon -30 50
 set lat 30 75';;
@@ -348,6 +348,14 @@ ensembles_05_elev) file=ENSEMBLES/elev_0.50deg_reg_v4.0.nc;kindname="E-OBS 11.0"
 set lat 30 75';;
 ensembles_025_elev) file=ENSEMBLES/elev_0.25deg_reg_v4.0.nc;kindname="E-OBS 11.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
 set lat 30 75';;
+
+prism_ppt) file=PRISMData/myprism_ppt_1950-2015_WUS_monthly.nc;kindname="PRISM";climfield="prcp";flipcolor=11;map='set lon 232 260
+set lat 28 50';;
+prism_tmax) file=PRISMData/myprism_tmax_1950-2015_WUS_monthly.nc;kindname="PRISM";climfield="prcp";map='set lon 232 260
+set lat 28 50';;
+prism_tmin) file=PRISMData/myprism_tmin_1950-2015_WUS_monthly.nc;kindname="PRISM";climfield="prcp";map='set lon 232 260
+set lat 28 50';;
+
 scpdsi) file=CRUData/pdsi.3.21.penman.snow.nc;kindname="CRU";climfield="scPDSI 3.21";;
 scpdsi_alpine) file=CRUData/scpdsi_alpine.ctl;kindname="CRU";climfield="scPDSI";map='set lon 4 19
 set lat 43 49
