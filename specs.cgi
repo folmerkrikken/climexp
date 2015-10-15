@@ -41,7 +41,7 @@ else
 fi
 
 cat <<EOF
-<form action="spes.cgi" method="post">
+<form action="specs.cgi" method="post">
 <input type=hidden name=id value="$EMAIL">
 <p><div class="formheader">Options</div>
 <div class="formbody">
