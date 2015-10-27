@@ -78,16 +78,16 @@ gpd)    FORM_plot=log;;
 esac
 
 case $FORM_timeseries in
-nino12)    covstation="NINO12";sfile="$DIR/NCDCData/ersst_nino12a.dat";;
-nino3)     covstation="NINO3";sfile="$DIR/NCDCData/ersst_nino3a.dat";;
-nino34)    covstation="NINO3.4";sfile="$DIR/NCDCData/ersst_nino3.4a.dat";;
-nino4)     covstation="NINO4";sfile="$DIR/NCDCData/ersst_nino4a.dat";;
-soi)       covstation="SOI";sfile="$DIR/CRUData/soi.dat";;
-nao)       covstation="NAO-Gibraltar";sfile="$DIR/CRUData/nao.dat";;
-sunspots)  covstation="sunspots";sfile="$DIR/SIDCData/sunspots.dat";;
-co2)       covstation="CO2 concentration";sfile="$DIR/CDIACData/co2_annual.dat";;
+nino12)    covstation="NINO12";sfile="NCDCData/ersst_nino12a.dat";;
+nino3)     covstation="NINO3";sfile="NCDCData/ersst_nino3a.dat";;
+nino34)    covstation="NINO3.4";sfile="NCDCData/ersst_nino3.4a.dat";;
+nino4)     covstation="NINO4";sfile="NCDCData/ersst_nino4a.dat";;
+soi)       covstation="SOI";sfile="CRUData/soi.dat";;
+nao)       covstation="NAO-Gibraltar";sfile="CRUData/nao.dat";;
+sunspots)  covstation="sunspots";sfile="SIDCData/sunspots.dat";;
+co2)       covstation="CO2 concentration";sfile="CDIACData/co2_annual.dat";;
 gmst)      covstation="Global mean surface temperature (smoothed)"
-            sfile="$DIR/NASAData/giss_al_gl_a_4yrlo.dat";;
+            sfile="NASAData/giss_al_gl_a_4yrlo.dat";;
 time)      covstation="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
 *)         covstation=`head -2 $FORM_timeseries | tail -1 | tr '_' ' '`
            sfile=$DIR/`head -1 $FORM_timeseries | tr '\`#;' '?'`
@@ -458,6 +458,11 @@ elif [ $FORM_assume = 'both' ]; then
     echo "with the effects of $covstation linearly subtracted from the position parameter a and independently from the scale parameter b,"
 else
     echo "using an unknown assumption,"
+fi
+if [ $FORM_assume = 'scale' -a -n "$FORM_anomal" ]; then
+    echo "It does not make sense to assume that he distribution scales with the covariate when taking anomalies"
+    . ./myvinkfoot.cgi
+    exit
 fi
 echo "referenced at $FORM_begin2 and $FORM_year (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
