@@ -234,9 +234,9 @@ prcp_trmm) file=TRMMData/prcp_trmm.nc;kindname="TRMM+GPCC";climfield="precipitat
 prcp_trmm_lo) file=TRMMData/prcp_trmm_lo.nc;kindname="TRMM+GPCC";climfield="precipitation";flipcolor=11;;
 prcp_trmm_1) file=TRMMData/prcp_trmm_1.nc;kindname="TRMM";climfield="precipitation";flipcolor=11;;
 prcp_trmm_1_lo) file=TRMMData/prcp_trmm_1_lo.nc;kindname="TRMM";climfield="precipitation";flipcolor=11;LSMASK=TRMMData/lsmask_trmm_1.nc;;
-cmorph_daily_05) file=NCEPData/cmorph_daily_05.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
-cmorph_daily) file=NCEPData/cmorph_daily.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
-cmorph_monthly) file=NCEPData/cmorph_monthly.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;;
+cmorph_daily_05) file=NCEPData/cmorph_daily_05.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;LSMASK=NCEPData/lsmask_05.nc;NPERYEAR=366;;
+cmorph_daily) file=NCEPData/cmorph_daily.nc;kindname="CMORPH";climfield="precipitation";flipcolor=11;LSMASK=NCEPData/lsmask_025.nc;NPERYEAR=366;;
+cmorph_monthly) file=NCEPData/cmorph_monthly.nc;kindname="CMORPH";climfield="precipitation";LSMASK=NCEPData/lsmask_025.nc;flipcolor=11;;
 knmi_radar_daily) file=KNMIRadarData/radar_sum.nc;kindname="KNMI radar";climfield="precipitation";flipcolor=11;NPERYEAR=366;map='set lon 3 7.5
 set lat 50.5 54';;
 knmi_radar_maxhourly) file=KNMIRadarData/radar_max.nc;kindname="KNMI radar";climfield="max hourly precip";flipcolor=11;NPERYEAR=366;map='set lon 3 7.5
