@@ -77,7 +77,7 @@ case $FORM_timeseries in
              elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
                 sfile="$DIR/CDIACData/co2_annual.dat"
              fi;;
-  gmst)      index="GMST"
+  gmst)      station="GMST"
              if [ ${NPERYEAR:-12} = 12 ]; then
                 sfile="$DIR/NASAData/giss_al_gl_m.dat"
              elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
