@@ -20,9 +20,15 @@ if [ -z "$EMAIL" ]; then
 fi
 c=`fgrep -c "^$EMAIL " ./log/list`
 if [ $c = 0 ]; then
-  . ./myvinkhead.cgi "User $EMAIL unknown" "" "noindex,follow"
-  echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
+  string=$EMAIL
+  if [ ${string#p.della} != $string ]; then
+    string=spam
+  fi
   EMAIL=someone@somewhere
+  id=someone@somewhere
+  FORM_id=someone@somewhere
+  . ./myvinkhead.cgi "User $string unknown" "" "noindex,follow"
+  echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
   . ./myvinkfoot.cgi
 else
   FORM_username=`fgrep "$EMAIL" ./log/list|cut -f 2 -d ' '|tail -1|sed -e 's/+/ /g'`
