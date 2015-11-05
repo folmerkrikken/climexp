@@ -27,6 +27,24 @@ case $var in
         climyear1=1981
         climyear2=2010
         ;;
+  slp_w|slp_w_f) field=nslp
+        name=slp_w_ncepncar
+        mproj=latlon
+        lon1=-180
+        lon2=180
+        colour=10
+        colour_f=10
+        cmax=15
+        cmaxsea=5
+        cmaxhalf=2.5
+        cmaxyr=1
+        c1=980
+        c2=1030
+        plotanomaly=on
+        plotanomalykind=absolute
+        climyear1=1981
+        climyear2=2010
+        ;;
   slpsh|slpsh_f) field=nslp
         name=slp_ncepncar_sh
         mproj=sps
@@ -430,7 +448,8 @@ case $var in
           [ -z "$cmaxyr" ] && echo "please define cmaxyr for $var" && exit -1
           c1=-$cmaxyr
           c2=$cmaxyr
-      elif [ \( $i = season -o $i = DJF -o $i = MAM -o $i = JJA -o $i = SON \) -a -n "$cmaxsea" ]; then
+      elif [ \( $i = season -o $i = DJF -o $i = JFM -o $i = FMA -o $i = MAM -o $i = AMJ \
+        -o $i = MJJ -o $i = JJA -o $i = JAS -o $i = ASO -o $i = SON -o $i = OND -o $i = NDJ \) -a -n "$cmaxsea" ]; then
           c1=-$cmaxsea
           c2=$cmaxsea
       else

@@ -3,11 +3,11 @@
 climexp=http://climexp.knmi.nl
 
 yrnow=`date +%Y`
-yr=2001
+yr=2014 # 2001
 while [ $yr -le $yrnow ]
 do
 	m=1
-	while [ $m -le 20 ]
+	while [ $m -le 32 ]
 	do
 
 		case $m in
@@ -31,9 +31,21 @@ do
 			18) mon=SON;;
 			19) mon=summer;;
 			20) mon=winter;;
+			21) mon=JFM;;
+			22) mon=FMA;;
+			23) mon=MAM;;
+			24) mon=AMJ;;
+			25) mon=MJJ;;
+			26) mon=JJA;;
+			27) mon=JAS;;
+			28) mon=ASO;;
+			29) mon=SON;;
+			30) mon=OND;;
+			31) mon=NDJ;;
+			32) mon=DJF;;
 		esac
 
-		for var in rr rr_f # tlt # tg tg_f tn tn_f tx tx_f sst sst_f sst_w sst_w_f z500 z500_f z500sh z500sh_f slp slp_f ice ice_f ice_n ice_n_f ice_s t2m t2m_f t2mw t2mw_f tlt snow snow_f prcp prcp_frac pr pr_frac ice_s_f o3nh o3nh_f o3sh o3sh_f 
+		for var in slp_w # rr rr_f # tlt # tg tg_f tn tn_f tx tx_f sst sst_f sst_w sst_w_f z500 z500_f z500sh z500sh_f slp slp_f ice ice_f ice_n ice_n_f ice_s t2m t2m_f t2mw t2mw_f tlt snow snow_f prcp prcp_frac pr pr_frac ice_s_f o3nh o3nh_f o3sh o3sh_f 
 		do
 			i=$mon
 			. ./case.cgi
@@ -83,6 +95,14 @@ do
 					mm=10
 					yy=$((yr-1))
 					sum=6
+				elif [ $m -le 32 ]; then
+					mm=$((m-20))
+					if [ $m -le 30 ]; then
+    					yy=$yr
+    				else
+    				    yy=$((yr-1))
+    				fi
+					sum=3
 				else
 					echo "error k,o0787b"; exit -1
 				fi
