@@ -11,7 +11,7 @@ if [ "$EMAIL" != somene@somewhere ]; then
 	fi
 fi
 
-base=data/$TYPE$WMO$FORM_climyear1$FORM_climyear2
+base=data/$TYPE${WMO}_$FORM_climyear1$FORM_climyear2
 if [ -n "$FORM_climyear1" -a -z "$FORM_climyear2" ]; then
 	echo "Error: provide begin and end year of reference period"
 	exit
