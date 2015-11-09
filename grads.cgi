@@ -118,7 +118,7 @@ if [ -n "$FORM_plotanomaly" ]; then
 			. ./myvinkfoot.cgi
 			exit -1
 		fi
-		echo "<p>Anoamlies are ready, calling Grads..."
+		echo "<p>Anomalies are ready, calling Grads..."
 	fi
 	clim="open $anom_file
 run clim ${FORM_var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $FORM_climyear2"
