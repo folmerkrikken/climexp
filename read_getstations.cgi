@@ -40,6 +40,7 @@ becasnow) climate_becasnow="checked";;
 becaclou) climate_becaclou="checked";;
 gdcnprcp) climate_gdcnprcp="checked";;
 gdcntemp) climate_gdcntemp="checked";;
+gdcntave) climate_gdcntave="checked";;
 gdcntmin) climate_gdcntmin="checked";;
 gdcntmax) climate_gdcntmax="checked";;
 gdcnpres) climate_gdcnpres="checked";;

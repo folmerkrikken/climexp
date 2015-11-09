@@ -34,6 +34,7 @@ case $PROG in
     gdcnsnwd) NAME="snow depth";char=d;;
     gdcntmax) NAME="maximum temperature";char=x;;
     gdcntmin) NAME="minimum temperature";char=n;;
+    gdcntave) NAME="average temperature";char=v;;
     *) echo "Content-Type: text/html"; echo; . ./myvinkhead.cgi "Error" "Unknown GHCN-D data type" ""; . ./myvinkfoot.cgi; exit;;
 esac
 TYPE=${char}gdcn$gts

@@ -235,6 +235,9 @@ EOF
   elif [ "$FORM_climate" = "gdcntmax" ]; then
     prog=gdcntmax
     type=x
+  elif [ "$FORM_climate" = "gdcntave" ]; then
+    prog=gdcntave
+    type=v
   elif [ "$FORM_climate" = "eu_sealevel_pressure" ]; then
     prog=geteuslp
     type=s

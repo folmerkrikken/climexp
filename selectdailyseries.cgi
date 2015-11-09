@@ -42,7 +42,7 @@ cat <<EOF
 </td><td>
 <input type="radio" class="formradio" name="climate" value="streamflowdaily" $climate_streamflowdaily>US runoff
 </td></tr><tr><td>
-&nbsp;
+<input type="radio" class="formradio" name="climate" value="gdcntave" $climate_gdcntave>average temperature
 </td><td>
 <input type="radio" class="formradio" name="climate" value="ecatemp" $climate_ecatemp>mean temperature
 </td><td>
