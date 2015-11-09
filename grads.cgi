@@ -111,13 +111,14 @@ if [ -n "$FORM_plotanomaly" ]; then
 		[ -n "$FORM_plotsum" ] && args="$args ave $FORM_plotsum"
 		echo "<p>Computing anomalies..."
 		[ -f $anom_file ] && rm $anom_file
-		bin/fieldclim $args $anom_file
+		bin/fieldclim $args $anom_file 2>&1
 		if [ ! -s "$anom_file" ]; then
 			echo "grads.cgi: error: failed to compute climatology<br>"
 			echo "bin/fieldclim $args $anom_file"
 			. ./myvinkfoot.cgi
 			exit -1
 		fi
+		echo "<p>Anoamlies are ready, calling Grads..."
 	fi
 	clim="open $anom_file
 run clim ${FORM_var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $FORM_climyear2"
@@ -140,6 +141,9 @@ run clim ${FORM_var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climye
 		FORM_var="${FORM_var:-corr}/clim${yy1}${yy2}-1"
 	else
 		FORM_var="${FORM_var:-corr}-clim${yy1}${yy2}"
+		if [ $NPERYEAR -gt 12 ]; then
+		    FORM_var=${FORM_var}"(time=$climtime)"
+		fi
 	fi
 fi
 
