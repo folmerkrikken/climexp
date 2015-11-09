@@ -4,7 +4,10 @@
 if [ -z "$EMAIL" ]; then
 	EMAIL=FORM_EMAIL
 fi
-if [ "$EMAIL" != somene@somewhere ]; then
+if [ $EMAIL = oldenbor@knmi.nl ]; then
+    lwrite=false # true
+fi
+if [ "$EMAIL" != someone@somewhere ]; then
 	def=./prefs/$EMAIL.plot_anomalies
 	if [ -s $def ]; then
 		eval `egrep '^FORM_[a-z0-9]*=[a-zA-Z]*[-+0-9.]*;$' $def`
@@ -32,7 +35,7 @@ fi
 if [ ${NPERYEAR:-12} -gt 1 ]; then
 	startstop=./data/$TYPE${WMO}_${FORM_climyear1}_${FORM_climyear2}.startstop
     if [ ! -s $startstop -o ! -s ${base}_yr.plt -o ${base}_yr.plt -ot ./data/$TYPE$WMO.dat ]; then
-    	###echo "./bin/climatology ./data/$TYPE$WMO.dat $beginend startstop $startstop"
+        [ "$lwrite" = true ] && echo "./bin/climatology ./data/$TYPE$WMO.dat $beginend startstop $startstop"
 		( ./bin/climatology ./data/$TYPE$WMO.dat $beginend startstop $startstop > ${base}_yr.plt ) 2>&1
     fi
     if [ ! -s ${base}_yr.txt -o ${base}_yr.txt -ot ${base}_yr.plt ]; then
