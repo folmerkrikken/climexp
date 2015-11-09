@@ -71,7 +71,7 @@ case $FORM_timeseries in
   soi)       station="SOI";sfile="$DIR/CRUData/soi.dat";;
   nao)       station="NAO-Gibraltar";sfile="$DIR/CRUData/nao.dat";;
   sunspots)  station="sunspots";sfile="$DIR/SIDCData/sunspots.dat";;
-  co2)       index="CO2"
+  co2)       station="CO2"
              if [ ${NPERYEAR:-12} = 12 ]; then
                 sfile="$DIR/CDIACData/co2_monthly.dat"
              elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
@@ -80,7 +80,7 @@ case $FORM_timeseries in
   gmst)      station="GMST"
              if [ ${NPERYEAR:-12} = 12 ]; then
                 sfile="$DIR/NASAData/giss_al_gl_m.dat"
-             elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
+             elif [ $NPERYEAR = 1 -o $NPERYEAR = -1 ]; then
                 sfile="$DIR/NASAData/giss_al_gl_a_4yrlo.dat"
              fi;;
   time)      station="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
