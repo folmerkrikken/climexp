@@ -178,6 +178,16 @@ rt2b_*)
 rt3_*) 
 	. ./ENSEMBLES_RCM/rt3.cgi;;
 	
+ecmwf4*)
+    mon=${FORM_field##*_}
+    var=${FORM_field#*_}
+    var=${var%_*}
+    file=ECMWF/S4/${var}_EMWF-S4_mem%%_monthly-means_FCmon${mon}.nc;
+    kindname="ECMWF S4"
+    climfield=$var
+    LSMASK=ECMWF/S4/lsmask07.nc
+    ;;
+
 tempa) file=NCDCData/temp_anom.ctl;kindname="NCDC v3";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 tempa_old) file=NCDCData/temp_anom_old.ctl;kindname="NCDC v2";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 ncdc_temp) file=NCDCData/t_anom.ctl;kindname="NCDC v3";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
