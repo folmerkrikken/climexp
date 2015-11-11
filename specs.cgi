@@ -16,8 +16,11 @@ EOF
 
 temperature=GCEcom
 precipitation=GPCCcom
+pressure=20CRslp
+
 case "$FORM_var" in
     temp) dataset=$temperature;units="[&deg;C]";temp_selected=selected;varname="temperature ";;
+    slpa) dataset=$pressure;units="[hPa]";slpa_selected=selected;varname="sea-level pressure ";;
     *) dataset=$precipitation;unis="[%]";prcp_selected=selected;varname="precipitation ";;
 esac
 
@@ -105,6 +108,7 @@ cat <<EOF
 <select class="forminput" name="var" onChange="this.form.submit()">
 <option value="temp" $temp_selected>Temperature</option>
 <option value="prcp" $prcp_selected>Precipitation</option>
+<option value="slpa" $slpa_selected>Sea-level pressure</option>
 </select>
 
 <tr><td>Show<td>
