@@ -287,18 +287,22 @@ library("RNetCDF")
 dyn.load("./r/rkillfile.so")
 .Fortran("rkillfile")
 dyn.load("./r/rkeepalive.so")
-.Fortran("rkeepalive",i=as.integer(0),n=as.integer(0))
+.Fortran("rkeepalive",i=as.integer(0),n=as.integer(4))
 source("./r/maplibs.r")
 library("SpecsVerification")
 source("./r/applyfieldclimexp.r")
 source("./r/$PROG.r")
 infobs<-netcdfinfo("$obsfile")
+.Fortran("rkeepalive",i=as.integer(1),n=as.integer(4))
 obs<-netcdfread("$obsfile",infobs\$vars[2],infobs\$vars[3],infobs\$vars[4])
+.Fortran("rkeepalive",i=as.integer(2),n=as.integer(4))
 infofcst<-netcdfinfo("$table")
+.Fortran("rkeepalive",i=as.integer(3),n=as.integer(4))
 if ( length(infofcst\$vars) == 4 )
   fcst<-netcdfread("$table",infofcst\$vars[2],infofcst\$vars[3],infofcst\$vars[4])
 if ( length(infofcst\$vars) == 5 )
   fcst<-netcdfreadclimexp("$table",infofcst\$vars[2],infofcst\$vars[3],infofcst\$vars[5])
+.Fortran("rkeepalive",i=as.integer(4),n=as.integer(4))
 ###save(file="./data/data1.RData",fcst$data)
 ###save(file="./data/data2.RData",obs$data)
 map<-$PROG($args)$comp
@@ -323,7 +327,18 @@ EOF
   export UDUNITS_PATH=$DIR/grads/udunits.dat
   cp /tmp/R$$.r data/
   echo "(<a href=data/R$$.r>R script being run</a>, <a href=r/$PROG.r>library routine</a>)<p>"
-  (R --vanilla < /tmp/R$$.r > /tmp/R$$.log ) 2>&1
+  (R --vanilla --ignore=$SCRIPTPID < /tmp/R$$.r > /tmp/R$$.log ) 2>&1 &
+  status=running
+  i=0
+  while [ $status = running ]; do
+    i=$((i+1))
+    sleep 3
+    if [ $((i%10)) = 0 ]; then
+        echo "R still $status $((i/10)) `date`<p>"
+    fi
+    c=`ps axuw | fgrep -v grep | fgrep -c "ignore=$SCRIPTPID"`
+    [ $c = 0 ] && status=ready
+  done
   # pnmtopng chatters to stderr
   rm pid/$$.$FORM_EMAIL
 
@@ -439,7 +454,7 @@ EOF
     #  data/R$$.nc
     # and rename the variable
     if [ -z "$myprog" ] ; then
-      ncrename -v data,$FORM_var data/R$$.nc
+      ncrename -v data,$FORM_var data/R$$.nc > /dev/null 2>&1
     fi
     file="data/R$$.nc"
   fi
