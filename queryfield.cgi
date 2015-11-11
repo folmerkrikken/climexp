@@ -180,10 +180,25 @@ rt3_*)
 	
 ecmwf4*)
     mon=${FORM_field##*_}
+    case $mon in
+        01) month=1Jan;;
+        02) month=1Feb;;
+        03) month=1Mar;;
+        04) month=1Apr;;
+        05) month=1May;;
+        06) month=1Jun;;
+        07) month=1Jul;;
+        08) month=1Aug;;
+        09) month=1Sep;;
+        10) month=1Oct;;
+        11) month=1Nov;;
+        12) month=1Dec;;
+        *) echo "$0: unknown field $FORM_field"; exit -1;;
+    esac
     var=${FORM_field#*_}
     var=${var%_*}
-    file=ECMWF/S4/${var}_EMWF-S4_mem%%_monthly-means_FCmon${mon}.nc;
-    kindname="ECMWF S4"
+    file=ECMWF/S4/${var}_ECMWF-S4_mem%%_monthly-means_FCmon${mon}.nc;
+    kindname="ECMWF S4 $month"
     climfield=$var
     LSMASK=ECMWF/S4/lsmask07.nc
     ;;
