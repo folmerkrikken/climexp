@@ -72,12 +72,6 @@ if [ -n "$FORM_pmin" ]; then
 		fi
 	fi
 fi
-# sum in GrADS?
-if [ -n "$FORM_plotsum" ]; then
-	if [ "$FORM_plotsum" -gt 1 ]; then
-		sum="run sum ${FORM_var:-corr} $FORM_plotsum"
-	fi
-fi
 # watch colourbar variable - may be empty
 if [ -n "$FORM_nocbar" -o "$FORM_mapformat" != png ]; then
 	FORM_cbar="off"
@@ -98,6 +92,15 @@ if [ -n "$FORM_yflip" ]; then
 	fi
 fi
 [ "$lwrite" = true ] && echo "FORM_yflip=$FORM_yflip<br>ylint=$ylint<br>"
+# sum in GrADS?
+var=$FORM_var
+if [ -n "$FORM_plotsum" ]; then
+	if [ "$FORM_plotsum" -gt 1 ]; then
+		###sum="run sum ${FORM_var:-corr} $FORM_plotsum"
+		FORM_var="ave(${FORM_var:-corr},t+0,t+$((FORM_plotsum-1)))"
+		echo "FORM_var=$FORM_var<br>"
+	fi
+fi
 # anomalies requested?
 if [ -n "$FORM_plotanomaly" ]; then
 	anom_file=${FORM_field}_anom$FORM_climyear1${FORM_climyear2}_${FORM_plotsum:-1}.ctl
@@ -121,7 +124,7 @@ if [ -n "$FORM_plotanomaly" ]; then
 		echo "<p>Anomalies are ready, calling Grads..."
 	fi
 	clim="open $anom_file
-run clim ${FORM_var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $FORM_climyear2"
+run clim ${var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $FORM_climyear2"
 	if [ -n "$FORM_climyear1" ]; then
 	# this should be coordinated with clim.gs
 		yy1=${FORM_climyear1#19}
