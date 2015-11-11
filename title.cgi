@@ -224,13 +224,21 @@ atr1) var="return time of $FORM_year";;
 atr2) var="return time in climate of $FORM_begin2";;
 atra) var="log10(ratio) of return times";; 
 "") var="corr";;
-*) var="$FORM_var";;
+*) var="${FORM_var%(*}";;
 esac
 
-if [ -z "$FORM_hour" ]; then
-  day="$FORM_day"
-else
-  day="${FORM_hour}Z$FORM_day"
+if [ -n "$FORM_day" ]; then
+    if [ -z "$FORM_hour" ]; then
+        day="$FORM_day"
+        if [ -n "$FORM_plotsum" ]; then
+            day=${day}-$((day+FORM_plotsum-1))
+        fi
+    else
+        day="${FORM_hour}Z$FORM_day"
+        if [ -n "$FORM_plotsum" ]; then
+            day=${day}-$((FORM_hour+FORM_plotsum-1))"Z$FORM_day"
+        fi
+    fi
 fi
 if [ "$lwrite" = true ]; then
   echo '<pre>'

@@ -133,7 +133,7 @@ run clim ${FORM_var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climye
 		yy2=""
 	fi
 	if [ $NPERYEAR != 12 ]; then
-		climtime="$day${mon}2000"
+		climtime="${date%????}2000"
 	fi
 	if [ "$FORM_plotanomalykind" = "logrelative" ]; then
 		FORM_var="log10(${FORM_var:-corr}/clim${yy1}${yy2})"
@@ -171,6 +171,7 @@ if [ "$lwrite" = true ]; then
 	echo "firstlag=$firstlag,lastlag=$lastlag<br>"
 	echo "mn=$mn, nm=$nm<br>"
 	echo "l=$l<br>"
+	echo "sumstring=$sumstring<br>"
 fi
 
 if [ $NPERYEAR = 1 ]; then

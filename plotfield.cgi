@@ -146,7 +146,9 @@ else
     date=${FORM_hour}Z$FORM_day$m$FORM_year
 fi
 date2=$m2$FORM_year2
-endmonth=$(($FORM_month + $FORM_plotsum - 1))
+if [ "$NPERYEAR" = 12 ]; then
+    endmonth=$(($FORM_month + $FORM_plotsum - 1))
+fi
 if [ -z "$FORM_year2" ]; then
     if [ $endmonth -gt 12 ]; then
         plotyear="$(($FORM_year + 1))\\"
@@ -154,8 +156,9 @@ if [ -z "$FORM_year2" ]; then
         plotyear="$FORM_year\\"
     fi
 fi
-sumstring=${FORM_plotsum},${FORM_plotsum}
-
+if [ $NPERYEAR -le 12 ]; then
+    sumstring=${FORM_plotsum},${FORM_plotsum}
+fi
 echo "date = $date $date2<br>"
 station=$kindname
 CLIM=$climfield
