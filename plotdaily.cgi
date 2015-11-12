@@ -58,7 +58,7 @@ fi
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
 ###echo "./bin/getunits ./data/$TYPE$WMO.dat<br>"
 ###echo "NEWUNITS=$NEWUNITS<br>"
-root=data/plot${nday}daily$TYPE$WMO$KIND$FORM_climyear1$FORM_climyear2
+root=data/plot${nday}last$TYPE$WMO$KIND${FORM_climyear1}${FORM_climyear2}_$enddate
 
 echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend" >> log/log
 (./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend > $root.txt) 2>&1
