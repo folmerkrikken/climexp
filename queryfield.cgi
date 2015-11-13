@@ -195,9 +195,15 @@ ecmwf4*)
         12) month=1Dec;;
         *) echo "$0: unknown field $FORM_field"; exit -1;;
     esac
-    var=${FORM_field#*_}
-    var=${var%_*}
-    file=ECMWF/S4/${var}_ECMWF-S4_mem%%_monthly-means_FCmon${mon}.nc;
+    if [ ${FORM_field#ecmwf4_ave} != $FORM_field ]; then
+        var=${FORM_field#ecmwf4_ave_}
+        var=${var%_*}
+        file=ECMWF/S4/${var}_ECMWF-S4_ave_monthly-means_FCmon${mon}.nc
+    else
+        var=${FORM_field#*_}
+        var=${var%_*}
+        file=ECMWF/S4/${var}_ECMWF-S4_mem%%_monthly-means_FCmon${mon}.nc
+    fi
     kindname="ECMWF S4 $month"
     climfield=$var
     LSMASK=ECMWF/S4/lsmask07.nc
