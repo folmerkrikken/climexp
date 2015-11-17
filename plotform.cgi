@@ -38,6 +38,9 @@ case ${FORM_plotsum:-1} in
 10) sum_10_selected=selected;;
 11) sum_11_selected=selected;;
 12) sum_12_selected=selected;;
+13) sum_13_selected=selected;;
+14) sum_14_selected=selected;;
+15) sum_15_selected=selected;;
 *) sum_1_selected=selected;;
 esac  
 
@@ -374,6 +377,7 @@ average over <select class="forminput" name="plotsum">
 <option $sum_12_selected>12
 <option $sum_13_selected>13
 <option $sum_14_selected>14
+<option $sum_15_selected>15
 </select>
 month
 </td></tr><tr><td>Anomalies:</td><td>
