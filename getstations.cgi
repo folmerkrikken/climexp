@@ -345,7 +345,7 @@ if [ "$format" = new ]; then
 	-e 's/====*//' \
 	-e 's/^# //' \
 	-e 's/ *$//' \
-	-e "s#\([-GHCNDECAWMONRCS Ss]*tation code: *\)\([0-9\.]*[0-9A-Z]*\) *\(.*\)\$#\1\2 (<a href=\"$prog.cgi\?id=$FORM_email\&WMO=\2\\&STATION=\3\&extraargs=$extraargs\">get data</a>)#" \
+	-e "s#\([-GHCNDECAWMONRCS Ss]*tation code: *\)\([0-9\.]*[-0-9A-Z]*\) *\(.*\)\$#\1\2 (<a href=\"$prog.cgi\?id=$FORM_email\&WMO=\2\\&STATION=\3\&extraargs=$extraargs\">get data</a>)#" \
 	-e "s#\(grid point: *\)\([0-9\._in-]*\) *\(.*\)\$#\1\2 (<a href=\"getindices.cgi\?WMO=data/grid${FORM_field}\2\&STATION=\3\&TYPE=i\&id=$FORM_email\&NPERYEAR=$NPERYEAR\">get data</a>)#" \
 	-e 's/$/<br>/' "$listname"
 else
