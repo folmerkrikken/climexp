@@ -68,33 +68,15 @@ else
   yy2=yr2
 endif
 
-* was 13, should be just an optimisation
-if ( nperyear < 13 )
-  if ( yr1 > 0 | yr2 > 0 )
-    'set time 7jan'yr1' 7dec'yr1
-    say 'define clim'yy1 yy2' = ave('field',t+0,time=7dec'yr2',1yr)'
-    'define clim'yy1 yy2' = ave('field',t+0,time=7dec'yr2',1yr)'
-    'modify clim'yy1 yy2' seasonal'
-  else
-    'q file'
-    nn=sublin(result,5)
-    nt=subwrd(nn,12)
-    'set t 1 'nperyear
-    say 'define clim = ave('field',t+0,t='nt',1yr)'
-    'define clim = ave('field',t+0,t='nt',1yr)'
-    'modify clim seasonal'
-  endif
-else
-  'set dfile 2'
-  'set t 1 'nperyear
-  ' q dims'
-  say result
-  if ( yr1 > 0 | yr2 > 0 )
+'set dfile 2'
+'set t 1 'nperyear
+' q dims'
+say result
+if ( yr1 > 0 | yr2 > 0 )
     say 'define clim'yy1 yy2' = 'field'.2'
     'define clim'yy1 yy2' = 'field'.2'
-  else
+else
     say 'define clim = 'field'.2'
     'define clim = 'field'.2'
-  endif
-  'set dfile 1'
 endif
+'set dfile 1'

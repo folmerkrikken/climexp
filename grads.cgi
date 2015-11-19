@@ -135,18 +135,13 @@ run clim ${var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $
 		yy1=""
 		yy2=""
 	fi
-	if [ $NPERYEAR != 12 ]; then
-		climtime="${date%????}2000"
-	fi
+	climtime="${date%????}2000"
 	if [ "$FORM_plotanomalykind" = "logrelative" ]; then
-		FORM_var="log10(${FORM_var:-corr}/clim${yy1}${yy2})"
+		FORM_var="log10(${FORM_var:-corr}/clim${yy1}${yy2}(time=$climtime))"
 	elif [ "$FORM_plotanomalykind" = "relative" ]; then
-		FORM_var="${FORM_var:-corr}/clim${yy1}${yy2}-1"
+		FORM_var="${FORM_var:-corr}/clim${yy1}${yy2}(time=$climtime)-1"
 	else
-		FORM_var="${FORM_var:-corr}-clim${yy1}${yy2}"
-		if [ $NPERYEAR -gt 12 ]; then
-		    FORM_var=${FORM_var}"(time=$climtime)"
-		fi
+		FORM_var="${FORM_var:-corr}-clim${yy1}${yy2}(time=$climtime)"
 	fi
 fi
 
