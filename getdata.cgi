@@ -103,6 +103,7 @@ EOF
     echo "file = $file<br>"
     echo "TYPE = $TYPE<br>"
     echo "WMO = $WMO<br>"
+    echo "PROG = $PROG<br>"
   fi
   if [ "$makenetcdf" = true ]; then
       (./bin/$PROG $wmo ./data/$TYPE$WMO.dat ) 2>&1
