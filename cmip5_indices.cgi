@@ -34,6 +34,10 @@ The following indices are available at this moment:
 <a href="getindices.cgi?WMO=CMIP5/Tglobal/global_tas_Amon_modmean_rcp85_000&STATION=CMIP5_RCP85_Tglobal&TYPE=i&id=$EMAIL">multi-model mean</a>,
 <a href="getindices.cgi?WMO=CMIP5/Tglobal/global_tas_Amon_mod_rcp85_%%%&STATION=CMIP5_RCP85_models_Tglobal&TYPE=i&id=$EMAIL">models</a>,
 <a href="getindices.cgi?WMO=CMIP5/Tglobal/global_tas_Amon_ens_rcp85_%%%&STATION=CMIP5_RCP85_members_Tglobal&TYPE=i&id=$EMAIL">members</a>
+<li>historicalNat:
+<a href="getindices.cgi?WMO=CMIP5/Tglobal/global_tas_Amon_modmean_historicalNat_000&STATION=CMIP5_historicalNat_Tglobal&TYPE=i&id=$EMAIL">multi-model mean</a>,
+<a href="getindices.cgi?WMO=CMIP5/Tglobal/global_tas_Amon_mod_historicalNat_%%%&STATION=CMIP5_historicalNat_models_Tglobal&TYPE=i&id=$EMAIL">models</a>,
+<a href="getindices.cgi?WMO=CMIP5/Tglobal/global_tas_Amon_ens_historicalNat_%%%&STATION=CMIP5_historicalNat_members_Tglobal&TYPE=i&id=$EMAIL">members</a>
 </ul>
 <br>(<a href="CMIP5/Tglobal/index.cgi?email=$EMAIL">download all files</a>)
 </div>
