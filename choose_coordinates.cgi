@@ -2,7 +2,7 @@
 
 def=./prefs/$EMAIL.coordinates
 if [ -s $def ]; then
-  eval `egrep '^FORM_[a-z0-9]*=[-+.@/a-zA-Z0-9]*;$' $def`
+  eval `egrep '^FORM_[a-z0-9]*=[-+.@/a-zA-Z0-9_]*;$' $def`
 fi
 
 [ "$FORM_lon1" = "$FORM_lon2" ] && FORM_lon2=""
