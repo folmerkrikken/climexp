@@ -42,6 +42,15 @@ station=`echo "$STATION" | tr '_' ' '`
 
 # if a mask has been used in the construction of the time series, plot it and enable its download
 if [ -n "$masknetcdf" ]; then
+    i=0
+    while [ ! -s "$masknetcdf" ]; do
+        i=$((i+1))
+        c=`ps axuw | fgrep polygon2mask | fgrep -v grep | wc -l`
+        if [ $c -gt 0 ]; then
+            [ $((i%10)) = 1 ] && echo "Computing mask...<p>"
+            sleep 3
+        fi
+    done
 	if [ ! -s "$masknetcdf" ]; then
 		echo "Something went wrong, cannot locate gridded mask file $masknetcdf"
 		echo "Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> about this. I need the following command:<br> $polycommand"
