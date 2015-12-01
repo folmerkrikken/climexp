@@ -84,8 +84,19 @@ fi
 if [ "$FORM_gridpoints" != field ]; then
 
 if [ -n "$FORM_maskmetadata" ]; then
+    FORM_maskmetadata=data/`basename $FORM_maskmetadata`
 	# using a polygon mask
 	maskfile=`head -1 $FORM_maskmetadata`
+	if [ ! -s $maskfile ]; then
+        echo "Content-Type: text/html"
+        echo
+        echo
+        . ./myvinkhead.cgi "Error" "Mask not found"
+        cat <<EOF
+Something went wrong, cannot locate $maskfile. Please reload it by following the link "add a mask to the list" on the previous page.
+EOF
+        . ./myvinkfoot.cgi
+	fi
 	basefile=`basename $maskfile .txt`
 	maskname=`head -2 $FORM_maskmetadata |tail -n -1`
 	masksp=`tail -n +1 $FORM_maskmetadata`
@@ -139,8 +150,10 @@ if [ -n "$FORM_maskmetadata" ]; then
 	# generate masknetcdf for this particular grid
 	basefield=`basename ${FORM_field}`
 	masknetcdf=data/mask_${basefile}_${basefield}.nc
-	if [ ! -f $masknetcdf -o $masknetcdf -ot $maskfile ]; then
-		# generate maskfile including the land/sea mask
+	size=`cat $masknetcdf | wc -c`
+	[ $size -lt 500 ] && rm $masknetcdf
+	if [ ! -s $masknetcdf -o $masknetcdf -ot $maskfile ]; then
+		# generate masknetcdf file including the land/sea mask
 		onefile=`echo $file | sed -e 's/%%%/000/' -e 's/%%/00/'`
 		if [ ! -s $onefile ]; then
 			onefile=`echo $file | sed -e 's/%%%/001/' -e 's/%%/01/'`
@@ -158,7 +171,7 @@ EOF
 		fi
 		polycommand="polygon2mask $onefile $maskfile $sp $mask $masknetcdf"
 		echo `date` "$EMAIL ($REMOTE_ADDR) $polycommand" >> log/log
-		$polycommand > /tmp/polygon2mask.log
+		($polycommand > /tmp/polygon2mask.log) 2>&1
 	fi
 	PROG="get_index.sh $file mask $masknetcdf"
 else

@@ -11,7 +11,7 @@ else
 	echo '<ul>'
 	for file in $FORM_set/*.txt
 	do
-		if [ ${file%kaal.txt} = $file ]; then
+		if [ ${file%kaal.txt} = $file -a ${file%nan.txt} = $file ]; then
 			echo "<li><a href=$file>"`head -1 "$file" | tr -d '?' | sed -e 's/^# *//'`'</a>'
 		fi
 	done
