@@ -129,13 +129,13 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=UWData/pdo_hadsst3&STATION=PDO_HadSST3&TYPE=i&id=$EMAIL">based on HadSST3</a> (1850-now), <a href="getindices.cgi?WMO=UWData/pdo_ersst&STATION=PDO_ERSST&TYPE=i&id=$EMAIL">based on ERSST</a> (1880-now)</div>
 <td>&nbsp;
 
+<!--
 <tr><td>IOD/IOZM<td><div class="kalelink"><a href="getindices.cgi?WMO=FRCGCData/dmi_hadisst&STATION=DMI_HadISST&TYPE=i&id=$EMAIL">DMI</a> based on HadISST (1958-2008)</div>
-<td><a href="wipefeet.cgi?http://www.jamstec.go.jp/frsgc/research/d1/iod/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<td><a href="wipefeet.cgi?http://www.jamstec.go.jp/frcgc/research/d1/iod/e/iod/about_iod.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+-->
+<tr><td>SIOD<td><div class="kalelink"><a href="getindices.cgi?WMO=JAMSTECData/siod&STATION=SIOD&TYPE=i&id=$EMAIL">SIOD</a>, <a href="getindices.cgi?WMO=JAMSTECData/seio&STATION=SEIO&TYPE=i&id=$EMAIL">SEIO</a>, <a href="getindices.cgi?WMO=JAMSTECData/wio&STATION=WIO&TYPE=i&id=$EMAIL">WIO</a> based on HadISST (1870-now), <a href="getindices.cgi?WMO=UKMOData/hadisst1_siod&STATION=HadISST1_SIOD&TYPE=i&id=$EMAIL">SIOD</a> home-computed from ERSST (1880-now), <a href="getindices.cgi?WMO=NCDCData/siod_ersst&STATION=ERSST_SIOD&TYPE=i&id=$EMAIL"><td><a href="wipefeet.cgi?http://www.jamstec.go.jp/frcgc/research/d1/iod/e/iod/about_iod.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=UKMOData/hadisst1_dmi&STATION=DMI_HadISST1&TYPE=i&id=$EMAIL">DMI</a>, <a href="getindices.cgi?WMO=UKMOData/hadisst1_seio&STATION=SEIO_HadISST1&TYPE=i&id=$EMAIL">SEIO</a>, <a href="getindices.cgi?WMO=UKMOData/hadisst1_wio&STATION=WIO_HadISST1&TYPE=i&id=$EMAIL">WIO</a> based on HadISST1</a> (1870-now), <a href="getindices.cgi?WMO=NCDCData/dmi_ersst&STATION=DMI_ERSST&TYPE=i&id=$EMAIL">DMI</a>, <a href="getindices.cgi?WMO=NCDCData/seio_ersst&STATION=SEIO_ERSST&TYPE=i&id=$EMAIL">SEIO</a>, <a href="getindices.cgi?WMO=NCDCData/wio_ersst&STATION=WIO_ERSST&TYPE=i&id=$EMAIL">WIO</a> based on ERSST</a> (1880-now)</div>
-<td>&nbsp;
-
-<tr><td>SIOD<td><div class="kalelink"><a href="getindices.cgi?WMO=JAMSTECData/siod&STATION=SIOD&TYPE=i&id=$EMAIL">SIOD</a> based on HadISST (1958-2007), home-computed from <a href="getindices.cgi?WMO=UKMOData/hadisst1_siod&STATION=HadISST1_SIOD&TYPE=i&id=$EMAIL">HadISST1</a> (1870-now), <a href="getindices.cgi?WMO=NCDCData/siod_ersst&STATION=ERSST_SIOD&TYPE=i&id=$EMAIL">ERSST</a> (1854-now)</div>
+<tr><td>IOD/IOZM<td><div class="kalelink"><a href="getindices.cgi?WMO=UKMOData/hadisst1_dmi&STATION=DMI_HadISST1&TYPE=i&id=$EMAIL">DMI</a>, <a href="getindices.cgi?WMO=UKMOData/hadisst1_seio&STATION=SEIO_HadISST1&TYPE=i&id=$EMAIL">SEIO</a>, <a href="getindices.cgi?WMO=UKMOData/hadisst1_wio&STATION=WIO_HadISST1&TYPE=i&id=$EMAIL">WIO</a> based on HadISST1</a> (1870-now), <a href="getindices.cgi?WMO=NCDCData/dmi_ersst&STATION=DMI_ERSST&TYPE=i&id=$EMAIL">DMI</a>, <a href="getindices.cgi?WMO=NCDCData/seio_ersst&STATION=SEIO_ERSST&TYPE=i&id=$EMAIL">SEIO</a>, <a href="getindices.cgi?WMO=NCDCData/wio_ersst&STATION=WIO_ERSST&TYPE=i&id=$EMAIL">WIO</a> based on ERSST</a> (1880-now)</div>
 <td><a href="wipefeet.cgi?http://www.jamstec.go.jp/res/ress/behera/SIOD.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>MJO<td><div class="kalelink">
