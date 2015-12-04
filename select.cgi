@@ -310,6 +310,9 @@ elif [ ${file#IPCCData} != $file -o ${file#ESSENCE} != $file ]; then
 elif [ "${FORM_field#rutgers}" != "${FORM_field}" ]; then
   echo "Rutgers University does not allow us to redistribute this file. "
   echo "Please contact <a href=\"wipefeet.cgi?http://climate.rutgers.edu/snowcover/docs.php?target=datareq\" target=\"_new\">Thomas Estilow</a> for access to these data."
+elif [ "${FORM_field#tamsat}" != "${FORM_field}" ]; then
+  echo "Reading University does not allow us to redistribute this file. "
+  echo "Please contact <a href=\"wipefeet.cgi?http://www.met.reading.ac.uk/~tamsat/about/\" target=\"_new\">their site</a> for access to these data."
 elif [  "${FORM_field#cmip5_yr}" != "${FORM_field}" ]; then
     echo "Please download the CMIP5 fields from the <a href=\"http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml\">CCCMA ETCCDI site</a>."
 elif [  "${FORM_field#cmip5}" != "${FORM_field}" ]; then
