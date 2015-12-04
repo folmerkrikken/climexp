@@ -51,6 +51,7 @@ case ${FORM_system:-choose} in
 choose) choose_selected=selected;;
 ecmwf2) ecmwf2_selected=selected;;
 ecmwf3) ecmwf3_selected=selected;;
+ecmwf4) ecmwf4_selected=selected;;
 ukmo)   ukmo_selected=selected;;
 cfs)    cfs_selected=selected;;
 echam4.5) echam_selected=selected;;
@@ -71,6 +72,7 @@ cat <<EOF
 <tr><td width=100>Forecast system</td>
 <td><select class="forminput" name="system" onchange="this.form.submit();">
 <option value="choose" $choose_selected>choose a seasonal forecast system</option>
+<option value="ecmwf4" $ecmwf4_selected>ECMWF S4</option>
 <option value="ecmwf3" $ecmwf3_selected>ECMWF S3</option>
 <option value="ecmwf2" $ecmwf2_selected>ECMWF S2</option>
 <option value="ukmo" $ukmo_selected>UKMO GloSea</option>
@@ -105,7 +107,9 @@ fi
 
 FORM_field=ens_${FORM_system}_t2m_feb
 . ./queryfield.cgi
+###echo "file=$file<br>"
 describefield=`./bin/describefield.sh $file`
+###echo "describefield=$describefield<br>"
 string=`echo $describefield | fgrep ensemble`
 nens1=`echo $string | awk '{print $4}'`
 nens2=`echo $string | awk '{print $6}'`
@@ -238,11 +242,26 @@ v10)  v10_selected=selected;;
 esac
 # does the combination system/variable exist?
 if [ -n "$FORM_var" -a "$FORM_var" != "choose" ]; then
-  c=`fgrep -c ens_${FORM_system}_${FORM_var} queryfield.cgi`
-  if [ $c = 0 ]; then
-    echo "Sorry, variable $FORM_var is not available in the $FORM_system data.  Choose another one"
-    FORM_var=""
-  fi
+    if [ $FORM_system = ecmwf4 ]; then
+        FORM_field=${FORM_system}_${FORM_var}_02
+        . ./queryfield.cgi
+        if [ -z "$file" ]; then
+            echo "Sorry, variable $FORM_var is not available in the $FORM_system data.  Choose another one"
+            FORM_var=""
+        fi
+        firstfile=`echo "$file" | tr '%' '0'`
+        if [ ! -s "$firstfile" ]; then
+            echo "Sorry, variable $FORM_var is not available in the $FORM_system data.  Choose another one"
+            FORM_var=""
+        fi
+        firstfile=`echo "$file" | tr '%' '0'`
+    else
+        c=`fgrep -c ens_${FORM_system}_${FORM_var} queryfield.cgi`
+        if [ $c = 0 ]; then
+            echo "Sorry, variable $FORM_var is not available in the $FORM_system data.  Choose another one"
+            FORM_var=""
+        fi
+    fi
 fi
 echo "<tr><td width=100>Variable</td>"
 echo "<td><select class=\"forminput\" name=\"var\" onchange=\"this.form.submit();\">"
