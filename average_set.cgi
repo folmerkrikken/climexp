@@ -10,7 +10,7 @@ NPERYEAR=$FORM_NPERYEAR
 if [ $EMAIL != someone@somewhere ]; then
     echo "FORM_setoper=$FORM_setoper;" > prefs/$EMAIL.setoper.$NPERYEAR
 fi
-WMO=`basename "$FORM_NAME" .txt`_$FORM_setoper
+WMO=`basename $FORM_NAME .txt`_$FORM_setoper
 STATION="$FORM_STATION"
 TYPE="$FORM_type"
 NAME="${FORM_setoper} $FORM_TYPE"

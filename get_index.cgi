@@ -212,17 +212,16 @@ else
   FORM_field=`basename $FORM_field`
   PROG="$PROG gridpoints $FORM_field"
   listname=data/grid_${FORM_field}_${FORM_lon1}:${FORM_lon2}_${FORM_lat1}:${FORM_lat2}_${FORM_masktype}.txt
-  if [ 0 = 1 ]; then
-    echo 'Content-Type: text/plain'
-    echo 
-    echo $listname
-    echo ./bin/$PROG
-    ./bin/$PROG
-    exit
-  fi
-  ./bin/$PROG > $listname
+  echo 'Content-Type: text/html'
+  echo 
+  echo
+  . ./myvinkhead.cgi "Set of grid points" "$timescale $kindname $climfield"
+  ###echo ./bin/$PROG
+  ( ./bin/$PROG > $listname ) 2>&1
   FORM_climate=`echo "$kindname $climfield" | tr ' ' '_'`
   prog="grid$FORM_field"
+  NAME=`basename $listname`
+  WMO=grid$WMO
   . ./getstations.cgi
 fi
 

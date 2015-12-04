@@ -35,7 +35,7 @@ if [ -n "$FORM_field" ]; then
     . ./queryfield.cgi
     CLIM="field"
     station="$kindname $climfield"
-elif [ $TYPE = set ]; then
+elif [ "$TYPE" = set ]; then
 	CLIM="stations"
     station=`echo $FORM_STATION | tr '_' ' '`
 else
@@ -46,16 +46,16 @@ fi
 if [ -z "$FORM_hist" ]; then
 	FORM_hist=none
 fi
-if [ $TYPE = field ]; then
+if [ "$TYPE" = field ]; then
     corrargs=$file
-elif [ $TYPE = set ]; then
+elif [ "$TYPE" = set ]; then
     if [ -n "$extraargs" ]; then
     	corrargs="file $WMO ${NAME}_${extraargs}"
     else
     	corrargs="file $WMO $NAME"
 	fi
 	WMO=`basename $WMO .txt`
-elif [ $TYPE = setmap ]; then
+elif [ "$TYPE" = setmap ]; then
     corrargs="" # the filename will be filled in by stationlist
 else
 	corrargs="./data/$TYPE$WMO.dat"
@@ -96,7 +96,7 @@ esac
 probfile=data/attribute_prob_$$.txt
 obsplotfile=data/attribute_obsplot_$$.txt
 corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume"
-if [ $TYPE != field -a $TYPE != setmap ]; then
+if [ "$TYPE" != field -a "$TYPE" != setmap ]; then
     corrargs="$corrargs dump $probfile obsplot $obsplotfile"
 fi
 n=0
@@ -138,7 +138,7 @@ if [ "$FORM_TYPE" = "field" ]; then
 fi
 
 . ./myvinkhead.cgi "Trends in return times of extremes" "$CLIM $station" "noindex,nofollow"
-[ $TYPE != "set" -a $TYPE != "setmap" ] && listname="" && FORM_listname="" # otherwise we get the wrong menu
+[ "$TYPE" != "set" -a "$TYPE" != "setmap" ] && listname="" && FORM_listname="" # otherwise we get the wrong menu
 
 if [ ! \( -s $sfile -a -f $sfile \) ]; then
     echo "Error: cannot locate covariate series $sfile"
@@ -177,10 +177,12 @@ fi
 (./bin/attribute $corrargs > $root.txt) 2>&1
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
-if [ $TYPE = set ]; then
-    while [ -z "$f" ]; do
+if [ "$TYPE" = set ]; then
+    i=0
+    while [ -z "$f" -a $i -lt 100 ]; do
+        i=$((i+1))
         if [ -z "$FORM_extraargs" ]; then
-            f=`ls -t ./data/${NAME}*[0-9].dat|head -1`
+            f=`ls -t ./data/${NAME}*[0-9ni].dat|head -1`
         else
             f=`ls -t ./data/${NAME}*$FORM_extraargs.dat|head -1`
         fi
@@ -293,7 +295,7 @@ EOF
 fi
 
 if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; then
-    if [ -n "$FORM_normsd" -a \( -n "$ENSEMBLE" -o $TYPE = set \) ]; then
+    if [ -n "$FORM_normsd" -a \( -n "$ENSEMBLE" -o "$TYPE" = set \) ]; then
 	    title="$seriesmonth $CLIM normalised $station"
     else
 	    title="$seriesmonth $CLIM $station"
