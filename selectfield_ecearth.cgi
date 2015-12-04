@@ -40,6 +40,12 @@ Choose a field and press this button</td></tr>
 
 </table>
 </form>
+
+<p><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E&STATION=Tdebilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">daily temperature at 52&deg;N, 5&deg;E</a>,
+<!--
+<p><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E_1-10nov&STATION=Tdebilt_EC-Earth_1-10nov23&TYPE=t&NPERYEAR=1&id=$EMAIL">1-10 November</a>,
+<p><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E_11-20nov&STATION=Tdebilt_EC-Earth_11-20nov23&TYPE=t&NPERYEAR=1&id=$EMAIL">11-20 November</a>.
+-->
 EOF
 
 . ./myvinkfoot.cgi
