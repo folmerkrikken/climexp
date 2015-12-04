@@ -5,22 +5,31 @@ export DIR=`pwd`
 . ./init.cgi
 . ./getargs.cgi
 STATION="$FORM_STATION"
-TYPE="$FORM_TYPE"
+export TYPE="$FORM_TYPE"
 NPERYEAR="$FORM_NPERYEAR"
 NAME="$FORM_NAME"
 
 root=`basename $FORM_datafile .txt`
 datafile=data/$root.txt
-if [ ! -s $datafile ]; then
+ensemblefile=`echo "$datafile" | tr '%' '+'`
+if [ $datafile != $ensemblefile ]; then
+    ENSEMBLE=true
+fi
+if [ ! -s $ensemblefile ]; then
     echo 'Content-Type: text/html'
     echo
-    . ./myvinkhead "Error" "analysing anomaly series"
-    echo "Cannot find textfile $datafile"
+    . ./myvinkhead.cgi "Error" "Analysing anomaly series"
+    echo "Cannot find file $ensemblefile<br>"
     . ./myvinkfoot.cgi
     exit
 fi
 
-cp $datafile data/$root.dat
-WMO=data/${root#$TYPE}
+if [ -z "$ENSEMBLE" ]; then
+    cp $datafile data/$root.dat
+else
+    bin/txt2dat $ensemblefile > data/$root.dat
+fi
+
 PROG=
+WMO=data/${root#$TYPE}
 . ./getdata.cgi
