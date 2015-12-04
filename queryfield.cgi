@@ -147,13 +147,9 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
 	   fi
 	else
 	   kindname="$model $exp"
-	   if [ $type = atmos ]; then
-	        case $model in
-	            ECEARTH23) trylsmask=KNMI14Data/sftlf_ns.nc;;
-	            *) trylsmask="noidea";;
-	        esac
-	   elif [ $type = Amon -o $type = Lmon ]; then
+       if [ $type = Amon -o $type = Lmon ]; then
 	       case $model in
+	            ECEARTH23) trylsmask=KNMI14Data/sftlf_ns.nc;;
 				EC-EARTH) trylsmask=CMIP5/monthly/sftlf.nc;;
 				FIO-ESM)  trylsmask=CMIP5/fixed/sftlf.FIO-ESM.nc;;
 				GISS-E2-H-CC) trylsmask=CMIP5/fixed/sftlf_fx_GISS-E2-H_historical_r0i0p0.nc;; # tmp
@@ -178,30 +174,33 @@ rt2b_*)
 rt3_*) 
 	. ./ENSEMBLES_RCM/rt3.cgi;;
 	
-ecmwf4*)
+ens_ecmwf4*|ecmwf4*)
+    FORM_field=${FORM_field#ens_}
     mon=${FORM_field##*_}
     case $mon in
-        01) month=1Jan;;
-        02) month=1Feb;;
-        03) month=1Mar;;
-        04) month=1Apr;;
-        05) month=1May;;
-        06) month=1Jun;;
-        07) month=1Jul;;
-        08) month=1Aug;;
-        09) month=1Sep;;
-        10) month=1Oct;;
-        11) month=1Nov;;
-        12) month=1Dec;;
+        01|jan) mon=01;month=1Jan;;
+        02|feb) mon=02;month=1Feb;;
+        03|mar) mon=03;month=1Mar;;
+        04|apr) mon=04;month=1Apr;;
+        05|may) mon=05;month=1May;;
+        06|jun) mon=06;month=1Jun;;
+        07|jul) mon=07;month=1Jul;;
+        08|aug) mon=08;month=1Aug;;
+        09|sep) mon=09;month=1Sep;;
+        10|oct) mon=10;month=1Oct;;
+        11|nov) mon=11;month=1Nov;;
+        12|dec) mon=12;month=1Dec;;
         *) echo "$0: unknown field $FORM_field"; exit -1;;
     esac
     if [ ${FORM_field#ecmwf4_ave} != $FORM_field ]; then
         var=${FORM_field#ecmwf4_ave_}
         var=${var%_*}
+        var=`echo "$var" | tr '[:lower:]' '[:upper:]'`
         file=ECMWF/S4/${var}_ECMWF-S4_ave_monthly-means_FCmon${mon}.nc
     else
         var=${FORM_field#*_}
         var=${var%_*}
+        var=`echo "$var" | tr '[:lower:]' '[:upper:]'`
         file=ECMWF/S4/${var}_ECMWF-S4_mem%%_monthly-means_FCmon${mon}.nc
     fi
     kindname="ECMWF S4 $month"
