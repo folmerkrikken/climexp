@@ -147,7 +147,7 @@ gzip -f $root.eps
 pngfile=$root.png
 getpngwidth
 echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, "
-echo "<a href=\"txt2dat.cgi?id=$EMAIL&WMO="`echo $root.txt | sed -e 's/++/@@/'`"&STATION=running_${FORM_moment}_of_$FORM_STATION\">analyze as time series</a>)</div>"
+echo "<a href=\"txt2dat.cgi?id=$EMAIL&WMO="`echo $root.txt | sed -e 's/+++/@@@/'`-e 's/++/@@/'`"&STATION=running_${FORM_moment}_of_$FORM_STATION\">analyze as time series</a>)</div>"
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_moment\" width=\"$halfwidth\"></center>"
 
 done
