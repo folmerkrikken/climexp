@@ -400,7 +400,7 @@ gpcp_21) file=GPCPData/gpcp_21.ctl;kindname="GPCP v2.1";climfield="precipitation
 gpcp_22) file=GPCPData/gpcp_22.ctl;kindname="GPCP v2.2";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_1dd) file=GPCPData/gpcp_1dd.ctl;kindname="GPCP";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
 gpcp_1dd_11) file=GPCPData/gpcp_1dd_11.ctl;kindname="GPCP v1.1";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
-gpcp_1dd_12) file=GPCPData/gpcp_1dd_12.ctl;kindname="GPCP v1.2";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
+gpcp_1dd_12) file=GPCPData/gpcp_1dd_12.ctl;kindname="GPCP v1.2";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/lsmask_10.nc;NPERYEAR=366;;
 cmap) file=NCEPData/cmap.ctl;kindname="CMAP";climfield="precipitation";flipcolor=11;;
 cmaperr) file=NCEPData/cmaperr.ctl;kindname="CMAP";climfield="relative error on precipitation";;
 cmapm) file=NCEPData/cmapm.ctl;kindname="CMAP incl model";climfield="precipitation";flipcolor=11;;
