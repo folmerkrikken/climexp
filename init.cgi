@@ -22,6 +22,17 @@ if [ -z "$init_done" ]; then
        echo `date` "Server too busy, load $load > $maxload" >> log/log
        exit
    fi
+    if [ -s log/attack-ip.txt ]; then
+        c=`fgrep -c $REMOTE_ADDR log/attack-ip.txt`
+        if [ $c != 0 ]; then
+            echo 'Content/type: text/plain'
+            echo
+            echo
+            echo "IP address $REMOTE_ADDR has been blacklisted" >> log/log
+            echo "IP address $REMOTE_ADDR has been blacklisted"
+            exit
+        fi
+    fi
 
    init_done=done
 
