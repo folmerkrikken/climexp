@@ -238,7 +238,7 @@ Longitude:
 EOF
 fi
 
-if [ "$EMAIL" = "oldenbor@knmi.nl" \
+if [ "$EMAIL" = "oldenborgh@knmi.nl" \
   -o "$EMAIL" = "schrier@knmi.nl" \
   -o "$EMAIL" = "pascal.yiou@lsce.ipsl.fr" \
   -o "$EMAIL" = "robert.vautard@lsce.ipsl.fr" \
