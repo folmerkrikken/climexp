@@ -404,7 +404,7 @@ class PlotAtlasMap:
 
                     if not os.path.exists(infile) or os.path.getsize(infile) == 0 or (os.path.getmtime(infile) < os.path.getmtime(outfile)):
                         if not os.path.exists(outfile) or os.path.getsize(outfile) == 0:
-                            raise PlotMapError("Cannot find {outfile}".format(outfile=outfile))
+                            raise PlotMapError("Cannot find file {outfile} with variable {xvar}".format(outfile=outfile,xvar=self.xvar))
                         
                         cmd = 'ncks -O -v {xvar} {outfile} {infile}'.format(xvar=self.xvar, outfile=outfile, infile=infile)
                         ###self.log.debug("cmd = '%s'" % cmd)
@@ -533,7 +533,7 @@ class PlotAtlasMap:
                     if outfile.find('mean_') == -1:
                         infile = os.path.join(self.tempDir, '%s_%s' % ('d'+self.xvar, os.path.basename(outfile)))
                         if not os.path.exists(outfile) or os.path.getsize(outfile) == 0:
-                            raise PlotMapError("Cannot find {outfile}".format(outfile=outfile))
+                            raise PlotMapError("Cannot find outfile {outfile} with variable d{xvar}".format(outfile=outfile,xvar=self.xvar))
                     
                         cmd = 'ncks -O -v d{xvar} {outfile} {infile}'.format(xvar=self.xvar, outfile=outfile, infile=infile)
                         ###self.logOut.info("cmd = '%s'" % cmd)
@@ -675,7 +675,7 @@ class PlotAtlasMap:
                 self.log.debug('polyRegionFile = %s', polyRegionFile)
 
                 if not os.path.exists(polyRegionFile) or os.path.getsize(polyRegionFile) == 0:
-                    errMsg = "internal error: cannot find file %s " % polyRegionFile
+                    errMsg = "internal error: cannot find region file %s " % polyRegionFile
                     errMsg += "region={region}, subregion={subregion}, lon1[{subregion}]={lon1_subregion}".format(region=region, subregion=subregion, lon1_subregion=reg.lon1[subregion])
                     raise PlotMapError(errMsg)
                 
@@ -686,6 +686,24 @@ class PlotAtlasMap:
                 reg.lon2[subregion] = float(xmax)
                 reg.lat1[subregion] = float(ymin)
                 reg.lat2[subregion] = float(ymax)
+
+        elif self.params.FORM_region == 'ipbes':
+            polyRegionFile = "IPBES/" + self.params.FORM_country + ".txt"
+            xmin, xmax, ymin, ymax = getboxfrompolygon(polyRegionFile)
+            reg = DefineRegion('world')
+            region = self.params.FORM_ipbes
+            reg.name[1] = self.params.FORM_ipbes
+            reg.country[1] = self.params.FORM_ipbes
+            cmd = "cat IPBES/{country}_nan.txt | fgrep -v '#' | wc -l".format(country=self.params.FORM_ipbes)
+            ###print "cmd = %s<br>" % cmd
+            string = subprocess.check_output(cmd, shell=True)
+            ###print "string = %s<br>" % string
+            reg.npoly[1] = int(string) - 1 # convention used for the simple polygons of the IPCC Atlas
+            subregion = 1
+            reg.lon1[subregion] = float(xmin)
+            reg.lon2[subregion] = float(xmax)
+            reg.lat1[subregion] = float(ymin)
+            reg.lat2[subregion] = float(ymax)
 
         elif self.params.FORM_region == 'countries':
             polyRegionFile = "countries/" + self.params.FORM_country + ".txt"
@@ -777,8 +795,8 @@ class PlotAtlasMap:
         self.log.debug("cmd = '%s'" % cmd)
         resultProcess = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
 
-        if 'NetCDF' not in resultProcess:
-            raise PlotMapError("Cannot find {plotfile}".format(plotfile=self.plotfile))
+        if 'NetCDF' not in resultProcess and 'Hierarchical' not in resultProcess:
+            raise PlotMapError("Cannot find plotfile {plotfile}".format(plotfile=self.plotfile))
 
         root = 'atlas/maps/{dir}/{rel}{basename}'.format(dir=self.dir, rel=self.rel, basename=os.path.splitext(os.path.basename(self.plotfile))[0])
 
@@ -1109,9 +1127,9 @@ class PlotAtlasMap:
             self.log.debug('Launch: %s' % cmd)
             processOutput = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
 
-            for el in processOutput.split('\n'):
-                if 'EXPLICIT' not in el:
-                    self.logOut.info(el + '<br>')
+###            for el in processOutput.split('\n'):
+###                if 'EXPLICIT' not in el:
+###                    self.logOut.info(el + '<br>')
 
 
             size = os.path.getsize('{root}.eps'.format(root=root))
