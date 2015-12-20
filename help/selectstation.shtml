@@ -7,7 +7,8 @@ There are four ways to select a set of stations from a dataset
   <li>By name: all stations with the substring given are selected.  Note
   that almost all stations names have been reduced to plain latin
   characters without accents, so searching for stations outside the UK
-  or US somtimes requires some phantasy.
+  or US somtimes requires some phantasy. You can also search by country
+  by starting the search string with '('
   <li>By approximate coordinates: <i>N</i> stations (default 10)
   around a point on the map are returned.  Please enter degrees west
   or south as negative numbers, if necessary with a decimal fraction

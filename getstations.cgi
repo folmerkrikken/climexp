@@ -21,7 +21,7 @@ if [ -z "$EMAIL" ]; then
    echo "getstations: internal error: EMAIL undefined" 1>&2   
    EMAIL=someone@somewhere
 fi
-if [ $EMAIL = oldenbor@knmi.nl ]; then
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
     lwrite=false
 fi
 if [ $save_preferences = true -a $EMAIL != someone@somewhere ]; then
@@ -75,13 +75,16 @@ if [ -z "$NPERYEAR" ]; then
 fi
 . ./nperyear2timescale.cgi
 if [ -n "$FORM_name" ]; then
-  FORM_name=`echo "$FORM_name" | tr ' ' '+'`
+  FORM_name=`echo "$FORM_name" | tr ' ' '_'`
 fi
 
 if [ -z "$listname" ]; then
   # not sourced from another script that already set a lot of things
   if [ -n "$FORM_name" ]; then
     fortargs=`echo "$FORM_name" | tr '[:lower:]' '[:upper:]'`
+    if [ -n "$FORM_min" ] ; then
+      fortargs="$fortargs min $FORM_min"
+    fi
     . ./myvinkhead.cgi "Found station data" "$timescale$FORM_climate station $fortargs"
   elif [ -z "$FORM_lon" -a -z "$FORM_lat" \
       -a -z "$FORM_lon1" -a -z "$FORM_lon2" \
@@ -278,45 +281,48 @@ fi
 
 if [ -z "$FORM_name" ]; then
     location=`echo $location|tr ' ' '_'`
-    TYPE="$FORM_climate"
-    WMO="$prog"
-    NAME=`basename "$listname"`
-    if [ "$FORM_gridpoints" != true ]; then
-        # when I have a set of grid ponts, the trick to append the options
-        # separated by underscores does not work as the name already has 
-        # underscores from FORM_field
-        if [ "$NPERYEAR" = 366 ]; then
-            echo "<form action=\"daily2longerbox.cgi\" method=\"POST\">"
-            cat <<EOF
+else
+    location=`echo "with string $FORM_name" | tr ' +' '__'`
+fi
+TYPE="$FORM_climate"
+WMO="$prog"
+NAME=`basename "$listname"`
+if [ "$FORM_gridpoints" != true ]; then
+    # when I have a set of grid ponts, the trick to append the options
+    # separated by underscores does not work as the name already has 
+    # underscores from FORM_field
+    if [ "$NPERYEAR" = 366 ]; then
+        echo "<form action=\"daily2longerbox.cgi\" method=\"POST\">"
+        cat <<EOF
 <div class="formheader"><a href="javascript:pop_page('help/lowerresolutionset.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Create a new set of station data</div>
 <div class="formbody">
 <table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>
 EOF
-            . ./daily2longerform.cgi
-            cat <<EOF
+        . ./daily2longerform.cgi
+        cat <<EOF
 <input type="submit" class="formbutton" value="make new set of time series">
 </td></tr></table>
 </div>
 </form>
 EOF
-        fi
     fi
-    if [ $EMAIL != someone@somewhere ]; then
-        def=prefs/$EMAIL.setoper.$NPERYEAR
-        if [ -s $def ]; then
-            eval `egrep '^FORM_[A-Za-z0-9]*=[a-zA-Z_]*[-+0-9.]*;$' $def`
-        fi  
-    fi
-  
-    case ${FORM_setoper:-mean} in
-        min) minselected=selected;;
-        max) maxselected=selected;;
-        num) numsleected=selected;;
-        *) meanselected=selected;;
-    esac
-  
-    cat <<EOF
+fi
+if [ $EMAIL != someone@somewhere ]; then
+    def=prefs/$EMAIL.setoper.$NPERYEAR
+    if [ -s $def ]; then
+        eval `egrep '^FORM_[A-Za-z0-9]*=[a-zA-Z_]*[-+0-9.]*;$' $def`
+    fi  
+fi
+
+case ${FORM_setoper:-mean} in
+    min) minselected=selected;;
+    max) maxselected=selected;;
+    num) numsleected=selected;;
+    *) meanselected=selected;;
+esac
+
+cat <<EOF
 <form action="average_set.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="TYPE" value="$TYPE">
@@ -341,7 +347,7 @@ EOF
 </div>
 </form>
 EOF
-fi
+
 if [ 1 = 0 ]; then
 echo '<pre>'
 cat $listname
