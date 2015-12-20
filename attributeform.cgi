@@ -154,6 +154,7 @@ ONLYONE=true
 save_name=$NAME
 NAME=series
 ###DECOR=true
+INCLUDE_CUBE=true
 INCLUDE_SQUARE=true
 INCLUDE_TWOTHIRD=true
 NORANGE=true

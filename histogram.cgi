@@ -26,7 +26,7 @@ fi
 . ./checkemail.cgi
 
 lwrite=false
-if [ $EMAIL = oldenbor@knmi.nl ]; then
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
 	lwrite=false # true
 fi
 
@@ -155,6 +155,11 @@ if [ -n "$FORM_square" ]; then
     ylabel="${ylabel}^2"
     [ -n "$FORM_ylo" ] && ylo=`echo "$ylo * $ylo" | bc -l`
     [ -n "$FORM_yhi" ] && yhi=`echo "$yhi * $yhi" | bc -l`
+fi
+if [ -n "$FORM_cube" ]; then
+    ylabel="${ylabel}^3"
+    [ -n "$FORM_ylo" ] && ylo=`echo "$ylo * $ylo * $ylo" | bc -l`
+    [ -n "$FORM_yhi" ] && yhi=`echo "$yhi * $yhi * $yhi" | bc -l`
 fi
 if [ -n "$FORM_twothird" ]; then
     ylabel="${ylabel}^(2/3)"

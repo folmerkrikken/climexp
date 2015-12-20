@@ -579,6 +579,7 @@ fi
 echo "<tr><td>Apply: <td><input type=\"checkbox\" class=\"formcheck\" name=\"log\" $log_checked>logarithm, "
 printf "<input type=\"checkbox\" name=\"sqrt\" class=\"formcheck\" $sqrt_checked>sqrt"
 [ -n "$INCLUDE_SQUARE" ] && echo ", <input type=\"checkbox\" name=\"square\" class=\"formcheck\" $square_checked>square"
+[ -n "$INCLUDE_CUBE" ] && echo ", <input type=\"checkbox\" name=\"cube\" class=\"formcheck\" $square_checked>cube"
 [ -n "$INCLUDE_TWOTHIRD" ] && echo ", <input type=\"checkbox\" name=\"twothird\" class=\"formcheck\" $twothird_checked>power 2/3"
 echo " to $NAME $station"
 echo "<td><a href=\"javascript:pop_page('help/logsqrt.shtml',286,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"

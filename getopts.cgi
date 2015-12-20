@@ -63,6 +63,7 @@ fi
 [ -n "$FORM_normsd" ] && corrargs="$corrargs normsd"
 [ -n "$FORM_sqrt" ] && corrargs="$corrargs sqrt"
 [ -n "$FORM_square" ] && corrargs="$corrargs square"
+[ -n "$FORM_cube" ] && corrargs="$corrargs cube"
 [ -n "$FORM_twothird" ] && corrargs="$corrargs twothird"
 [ -n "$FORM_rank" ] && corrargs="$corrargs rank" && RANK="rank "
 [ -n "$FORM_conting" ] && corrargs="$corrargs conting"
