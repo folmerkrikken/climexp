@@ -54,6 +54,7 @@ if [ $newfile = $file -o $newfile -nt $file -a -s $newfile ]; then
 else
   PROG=getindices
 fi
+###echo "newfile=$newfile" >> log/debug
+###echo "PROG=$PROG" >> log/debug
 export TYPE
-###echo "PROG=$PROG<br>"
 . $DIR/getdata.cgi
