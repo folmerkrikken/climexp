@@ -278,9 +278,12 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/TSI_TIM_Reconstruction&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL&NPERYEAR=1">Annual reconstructed solar constant</a> (1610-2013) 
 <td><a href="wipefeet.cgi?http://lasp.colorado.edu/home/sorce/data/tsi-data/#historical_TSI" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>&nbsp;<td><div class="kalelink">Lean <a href="getindices.cgi?WMO=NCDCData/tsi_ncdc_yearly&STATION=reconstructed_tsi&TYPE=i&id=$EMAIL&NPERYEAR=1">annual</a> (1610-now), <a href="getindices.cgi?WMO=NCDCData/tsi_ncdc_monthly&STATION=reconstructed_tsi&TYPE=i&id=$EMAIL">monthly</a> (1882-now) reconstructed total solar irradiance</a>
+<td><a href="wipefeet.cgi?ftp://data.ncdc.noaa.gov/cdr/solar-irradiance/tsi/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<!--
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=FUBData/tsi_wls_mon&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL">Reconstructed solar constant</a> (1882-2008, FUB), <a href="getindices.cgi?WMO=FUBData/tsi_wls_ann&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL&NPERYEAR=1">annual</a> (1610-2008) 
 <td><a href="wipefeet.cgi?http://www.geo.fu-berlin.de/en/met/ag/strat/forschung/SOLARIS/Input_data/CMIP5_solar_irradiance.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
-
+-->
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=SIDCData/sunspots&STATION=sunspots&TYPE=i&id=$EMAIL">Sunspots</a> (1749-now, SIDC),  <a href="getindices.cgi?WMO=SIDCData/sunspots2&STATION=signed_sunspots&TYPE=i&id=$EMAIL">with alternating signs</a></div>
 <td><a href="wipefeet.cgi?http://sidc.oma.be/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
@@ -353,7 +356,7 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 (1851-2008, Kerry Emanual)</div>
 <td><a href="wipefeet.cgi?http://wind.mit.edu/~emanuel/home.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink">Atlantic basin monthly <a href="getindices.cgi?WMO=CSUData/atlantic_monthly_ace&STATION=atl_ace&TYPE=i&id=$EMAIL">Accumulated Cyclone Energy Index</a>, <a href="getindices.cgi?WMO=CSUData/atlantic_monthly_ntc&STATION=atl_ntc&TYPE=i&id=$EMAIL">Net Tropical Cyclone Activity</a>, annual <a href="getindices.cgi?WMO=CSUData/atlantic_annual_ace&STATION=annual_atl_ace&TYPE=i&id=$EMAIL">ACE</a>, <a href="getindices.cgi?WMO=CSUData/atlantic_annual_ntc&STATION=annual_atl_ntc&TYPE=i&id=$EMAIL">NTC</a> (1851-2006, Phil Klotzbach)</div>
+<tr><td>&nbsp;<td><div class="kalelink">Atlantic basin monthly <a href="getindices.cgi?WMO=CSUData/atlantic_monthly_ace&STATION=atl_ace&TYPE=i&id=$EMAIL">Accumulated Cyclone Energy Index</a>, <a href="getindices.cgi?WMO=CSUData/atlantic_monthly_ntc&STATION=atl_ntc&TYPE=i&id=$EMAIL">Net Tropical Cyclone Activity</a>, annual <a href="getindices.cgi?WMO=CSUData/atlantic_annual_ace&STATION=annual_atl_ace&TYPE=i&id=$EMAIL">ACE</a>, <a href="getindices.cgi?WMO=CSUData/atlantic_annual_ntc&STATION=annual_atl_ntc&TYPE=i&id=$EMAIL">NTC</a> (1851-2006/2014, Phil Klotzbach)</div>
 <td>&nbsp;
 
 <tr><td>Snow cover</td><td><div class="kalelink"><a href="getindices.cgi?WMO=RutgersData/nh_snow&STATION=NH_snow_cover&TYPE=i&id=$EMAIL">Northern Hemisphere</a>, <a href="getindices.cgi?WMO=RutgersData/eurasia_snow&STATION=Eurasia_snow_cover&TYPE=i&id=$EMAIL">Eurasia</a>, <a href="getindices.cgi?WMO=RutgersData/namerica_snow&STATION=North_America_snow_cover&TYPE=i&id=$EMAIL">North America</a>, <a href="getindices.cgi?WMO=RutgersData/namerica2_snow&STATION=North_America_without_Greenland_snow_cover&TYPE=i&id=$EMAIL">North America without Greenland</a> snow cover (1966-now, Rutgers University)</td><td><a href="wipefeet.cgi?http://climate.rutgers.edu/snowcover/table_area.php?ui_set=2" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
