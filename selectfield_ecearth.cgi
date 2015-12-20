@@ -42,6 +42,8 @@ Choose a field and press this button</td></tr>
 </form>
 
 <p><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E&STATION=Tdebilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">daily temperature at 52&deg;N, 5&deg;E</a>,
+<p><a href="getindices.cgi?WMO=KNMI14Data/Pcumbria/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_NEngland&STATION=P_NEngland_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">daily precipitation in Northern England</a>,
+<p><a href="getindices.cgi?WMO=KNMI14Data/Pboulder/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_Boulder&STATION=P_Boulder_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">daily precipitation in Boulder, Colorado, USA</a>,
 <!--
 <p><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E_1-10nov&STATION=Tdebilt_EC-Earth_1-10nov23&TYPE=t&NPERYEAR=1&id=$EMAIL">1-10 November</a>,
 <p><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E_11-20nov&STATION=Tdebilt_EC-Earth_11-20nov23&TYPE=t&NPERYEAR=1&id=$EMAIL">11-20 November</a>.
