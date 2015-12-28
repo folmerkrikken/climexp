@@ -26,7 +26,7 @@ coordinates, elevation, and number of years with data.
 </th><th>
 <a href="javascript:pop_page('help/ecad.shtml',568,450)">blended ECA&amp;D</a>
 </th><th>
-<a href="wipefeet.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
+<a href="wipefoot.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
 target="_new">HCDN</a>
 </th></tr><tr><td>
 <a href="allstations.cgi?id=$EMAIL&climate=gdcnprcp&n=366">precipitation<br>

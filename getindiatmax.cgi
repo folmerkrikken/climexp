@@ -8,6 +8,6 @@ NAME="Tmax"
 NPERYEAR=12
 export DIR=`pwd`
 PROG=getindiatmax
-FROM="from <a href="wipefeet.cgi?http://www.tropmet.res.in/" target="_new">IITM</a>"
+FROM="from <a href="wipefoot.cgi?http://www.tropmet.res.in/" target="_new">IITM</a>"
 
 . $DIR/getdata.cgi

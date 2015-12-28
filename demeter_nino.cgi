@@ -16,7 +16,7 @@ cat <<EOF
 <tr>
 <th>&nbsp;</th>
 <th>analysis</th>
-<th colspan="7" align="left"><a href="wipefeet.cgi?http://www.ecmwf.int/research/demeter/" target="_new">DEMETER</a> 1958/1987- 2001</th>
+<th colspan="7" align="left"><a href="wipefoot.cgi?http://www.ecmwf.int/research/demeter/" target="_new">DEMETER</a> 1958/1987- 2001</th>
 </tr><tr>
 <th>Ensemble means</th>
 <th>ERA-40</th>

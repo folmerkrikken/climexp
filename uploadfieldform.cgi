@@ -40,7 +40,7 @@ cat <<EOF
 </table>
 </form>
 </div>
-The Climate Explorer only accepts fields as netcdf files with one 2D time-varying variable on a lat/lon, lev/lon or lev/lat grid. The netcdf should be reasonably <a href="wipefeet.cgi?http://cf-pcmdi.llnl.gov/" target=_new>CF</a>-compliant.
+The Climate Explorer only accepts fields as netcdf files with one 2D time-varying variable on a lat/lon, lev/lon or lev/lat grid. The netcdf should be reasonably <a href="wipefoot.cgi?http://cf-pcmdi.llnl.gov/" target=_new>CF</a>-compliant.
 
 EOF
 

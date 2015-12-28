@@ -37,20 +37,20 @@ cat <<EOF
 </td><td>
 <input type="radio" class="formradio" name="climate" value="temperature_all" $climate_temperature_all>mean temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
-<input type="radio" class="formradio" name="climate" value="sealevel" $climate_sealevel>sealevel (<a href="wipefeet.cgi?http://ilikai.soest.hawaii.edu/UHSLC/jasl.html"
+<input type="radio" class="formradio" name="climate" value="sealevel" $climate_sealevel>sealevel (<a href="wipefoot.cgi?http://ilikai.soest.hawaii.edu/UHSLC/jasl.html"
 target="_new">JASL</a>)
 </td></tr><tr><td>
 <input type="radio" class="formradio" name="climate" value="min_temperature" $climate_min_temperature>minimum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
 <input type="radio" class="formradio" name="climate" value="min_temperature_all" $climate_min_temperature_all>minimum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
-<input type="radio" class="formradio" name="climate" value="runoff" $climate_runoff>world river discharge (<a href="wipefeet.cgi?http://www.RiVDis.sr.unh.edu/">RivDis</a>)
+<input type="radio" class="formradio" name="climate" value="runoff" $climate_runoff>world river discharge (<a href="wipefoot.cgi?http://www.RiVDis.sr.unh.edu/">RivDis</a>)
 </td></tr><tr><td>
 <input type="radio" class="formradio" name="climate" value="max_temperature" $climate_max_temperature>maximum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
 <input type="radio" class="formradio" name="climate" value="max_temperature_all" $climate_max_temperature_all>maximum temperature <a href="http://www.ncdc.noaa.gov/ghcnm/v3.php" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 </td><td>
-<input type="radio" class="formradio" name="climate" value="streamflow" $climate_streamflow>USA river discharge (<a href="wipefeet.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
+<input type="radio" class="formradio" name="climate" value="streamflow" $climate_streamflow>USA river discharge (<a href="wipefoot.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
 target="_new">HCDN</a>)
 </td></tr><tr><td>
 &nbsp;
@@ -63,7 +63,7 @@ target="_new">HCDN</a>)
 </td><td>
 &nbsp;
 </td><td>
-<input type="radio" class="formradio" name="climate" value="snow" $climate_snow>N-America snowcourses (<a href="wipefeet.cgi?http://www.wcc.nrcs.usda.gov/snowcourse/" target="_new">NRCS</a>)
+<input type="radio" class="formradio" name="climate" value="snow" $climate_snow>N-America snowcourses (<a href="wipefoot.cgi?http://www.wcc.nrcs.usda.gov/snowcourse/" target="_new">NRCS</a>)
 </td></tr><tr><th colspan="3"><a href="javascript:pop_page('help/selectstation.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>Select stations
 </th></tr><tr><td colspan="3">
 <ul><li>stations with a name containing <input type="text" class="forminput" name="name" size=10 value="$FORM_NAME"></ul>

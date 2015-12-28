@@ -8,6 +8,6 @@ NAME="streamflow"
 NPERYEAR=366
 export DIR=`pwd`
 PROG=getdailyusrunoff
-FROM="from <a href="wipefeet.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html" target="_new">HCDN database</a>"
+FROM="from <a href="wipefoot.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html" target="_new">HCDN database</a>"
 
 . ./getdata.cgi

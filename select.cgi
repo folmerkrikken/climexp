@@ -64,13 +64,13 @@ EOF
 fi
 
 case $file in
-IPCCData*) url="wipefeet.cgi?http://www-pcmdi.llnl.gov/ipcc/about_ipcc.php";;
+IPCCData*) url="wipefoot.cgi?http://www-pcmdi.llnl.gov/ipcc/about_ipcc.php";;
 ESSENCE*)  url="http://www.knmi.nl/~sterl/Essence/";;
-ERA*)      url="wipefeet.cgi?http://www.ecmwf.int/en/research/climate-reanalysis";;
-Demeter*)  url="wipefeet.cgi?http://data.ecmwf.int/data";;
-ECMWF*)    url="wipefeet.cgi?http://www.ecmwf.int";;
-NCEPNCAR*) url="wipefeet.cgi?http://www.cdc.noaa.gov/cdc/reanalysis/reanalysis.shtml";;
-CMIP5_yr*) url="wipefeet.cgi?http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml";;
+ERA*)      url="wipefoot.cgi?http://www.ecmwf.int/en/research/climate-reanalysis";;
+Demeter*)  url="wipefoot.cgi?http://data.ecmwf.int/data";;
+ECMWF*)    url="wipefoot.cgi?http://www.ecmwf.int";;
+NCEPNCAR*) url="wipefoot.cgi?http://www.cdc.noaa.gov/cdc/reanalysis/reanalysis.shtml";;
+CMIP5_yr*) url="wipefoot.cgi?http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml";;
 CMIP5*)    url="showmetadata.cgi?EMAIL=$EMAIL&field=$FORM_field";;
 data*)     url="";;
 *)         url=`fgrep \"${FORM_field}\" selectfield_obs.html selectfield_rapid.html selectdailyfield*.html | sed -e 's/^.*href=\"//'  -e 's/\".*$//' -e "s/EMAIL/$EMAIL/"`;;
@@ -279,11 +279,11 @@ echo "<div class=\"alineakop\"><a name=\"download\">Download $kindname $climfiel
 if [ ${FORM_field#had} != $FORM_field -o ${FORM_field#mohmat} != $FORM_field ]; then
   echo "(c) Crown copyright 2006, data supplied by the Met Office."
   echo "The UKMO license does not allow us to redistribute this file. "
-  echo "Please consult their <a href="wipefeet.cgi?http://www.hadobs.org" target=\"_new\">website</a> for further information."
+  echo "Please consult their <a href="wipefoot.cgi?http://www.hadobs.org" target=\"_new\">website</a> for further information."
 elif [ ${FORM_field#ukmo} != $FORM_field -o ${FORM_field#ens_ukmo} != $FORM_field ]; then
   echo "(c) Crown copyright 2006, data supplied by the Met Office."
   echo "The UKMO does not allow us to redistribute this file. "
-  echo "Please consult their <a href="wipefeet.cgi?http://www.metoffice.gov.uk" target=\"_new\">website</a> for further information."
+  echo "Please consult their <a href="wipefoot.cgi?http://www.metoffice.gov.uk" target=\"_new\">website</a> for further information."
 elif [ "${FORM_field#era}" != "${FORM_field}" -o "${FORM_field#ecmwf}" != "${FORM_field}" -o "${FORM_field#ens_ecmwf}" != "${FORM_field}" ]; then
   echo "The ECMWF member states do not permit us to give you access to the raw data."
   echo "Please consult the ECMWF <a href=\"http://www.ecmwf.int/research/era/\" target="_new">ERA</a> or <a href=\"http://www.ecmwf.int/services/seasonal/\" target="_new">seasonal forecasting</a> website for further information."
@@ -304,15 +304,15 @@ elif [ ${file#IPCCData} != $file -o ${file#ESSENCE} != $file ]; then
   essence*) download=OK;;
   *) download=OK
   echo "Downloading is only allowed for non-commercial use. "
-  echo "Please consult the <a href=\"wipefeet.cgi?http://www-pcmdi.llnl.gov/ipcc/about_ipcc.php\" target=\"_new\">PCMDI website</a> for further information.<p>"
+  echo "Please consult the <a href=\"wipefoot.cgi?http://www-pcmdi.llnl.gov/ipcc/about_ipcc.php\" target=\"_new\">PCMDI website</a> for further information.<p>"
   ;;
   esac
 elif [ "${FORM_field#rutgers}" != "${FORM_field}" ]; then
   echo "Rutgers University does not allow us to redistribute this file. "
-  echo "Please contact <a href=\"wipefeet.cgi?http://climate.rutgers.edu/snowcover/docs.php?target=datareq\" target=\"_new\">Thomas Estilow</a> for access to these data."
+  echo "Please contact <a href=\"wipefoot.cgi?http://climate.rutgers.edu/snowcover/docs.php?target=datareq\" target=\"_new\">Thomas Estilow</a> for access to these data."
 elif [ "${FORM_field#tamsat}" != "${FORM_field}" ]; then
   echo "Reading University does not allow us to redistribute this file. "
-  echo "Please contact <a href=\"wipefeet.cgi?http://www.met.reading.ac.uk/~tamsat/about/\" target=\"_new\">their site</a> for access to these data."
+  echo "Please contact <a href=\"wipefoot.cgi?http://www.met.reading.ac.uk/~tamsat/about/\" target=\"_new\">their site</a> for access to these data."
 elif [  "${FORM_field#cmip5_yr}" != "${FORM_field}" ]; then
     echo "Please download the CMIP5 fields from the <a href=\"http://www.cccma.ec.gc.ca/data/climdex/climdex.shtml\">CCCMA ETCCDI site</a>."
 elif [  "${FORM_field#cmip5}" != "${FORM_field}" ]; then
