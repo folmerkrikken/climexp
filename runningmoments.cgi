@@ -129,7 +129,8 @@ if [ -n "$FORM_detrend" ]; then
   title="$title (detrend)"
 fi
 
-$DIR/bin/gnuplot << EOF
+./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,.4
 set term png $gnuplot_png_font_hires
 set output "$root.png"

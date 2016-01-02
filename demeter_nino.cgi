@@ -12,7 +12,7 @@ EOF
 . ./myvinkhead.cgi "Time series" "Demeter Ni&ntilde;o indices" "index,nofollow"
 
 cat <<EOF
-<table class="realtable" width=451 border='0' cellpadding='0' cellspacing='0'>
+<table class="realtable" width="100%" border='0' cellpadding='0' cellspacing='0'>
 <tr>
 <th>&nbsp;</th>
 <th>analysis</th>

@@ -228,6 +228,7 @@ if [ -n "$myprog" ]; then
     ($myprog > $txtfile) 2>&1
     area=`tail -1 $txtfile | cut -b 3-`
     ./bin/gnuplot <<EOF
+$gnuplot_init
 set size 0.6
 set size square
 set xrange [0:1]
@@ -514,7 +515,7 @@ if [ -n "$makemap" ]; then
   cat <<EOF
 <p><div class="formheader">Area</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
   intable=true
   . ./plotoptions.cgi

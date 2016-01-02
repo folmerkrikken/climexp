@@ -22,7 +22,7 @@ cat <<EOF
 <form action="getstations.cgi" method="POST">
 <div class="kalelink">
 <input type="hidden" name="email" value="$EMAIL">
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr>
 <th>
 <a href="javascript:pop_page('help/ghcnd.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>GHCN-D v2
@@ -135,7 +135,7 @@ At least <input type="$number" step=any class="forminput" name="dist" $textsize4
 </div>
 </form>
 
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr><th colspan="3"><a href="javascript:pop_page('help/dutchdailydata.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0">Dutch daily data</th></tr>
 <tr><td colspan="3">1901-now, <a
 href="http://www.knmi.nl/klimatologie/daggegevens/download.cgi?language=eng">KNMI Climatological Service</a>.  These series have not

@@ -225,18 +225,19 @@ if [ -s $firstfile ]; then
     fi
   fi
 ###  echo "Plotting data:"
-  echo '<div style="font-size:10px; width=451px;">'
   echo '<div class="bijschrift">'
   egrep '^#' data/$TYPE$WMO.dat | fgrep -v 'bin/' | egrep -v -i '(jan *feb)|(VRIJ WORDEN GEBRUIKT)|(CAN BE USED)|(ROYAL NETHERLANDS METEOROLOGICAL INSTITUTE)|(^# Searching )|(non-commercial )|(any commercial)|(intentionally)|(coauthors)|(1441-1453)' | grep -v '^ *$' | sed -e 's/^#//' -e 's/^.#//' -e 's/$/,/' -e 's/^ *, *//' | tr '_' ' ' | sed -e 's/antieke wrn/antieke_wrn/'
   [ -n "$UNITS" ] && plotunits="[$UNITS]"
   if [ \( ! -s $DIR/data/$TYPE$WMO.png \) -o \( ! -s $DIR/data/$TYPE$WMO.eps.gz \) -o $DIR/data/$TYPE$WMO.png -ot $DIR/data/$TYPE$WMO.dat ]; then
-    $DIR/bin/gnuplot << EOF
+    wmo_=`echo $WMO | tr '_' ' '`
+    ./bin/gnuplot << EOF
+$gnuplot_init
 set xzeroaxis
 set size .7057,.4
 set term postscript epsf color solid
 set output "$DIR/data/$TYPE$WMO.eps"
 set ylabel "$VAR $plotunits"
-plot "$DIR/data/$TYPE$WMO.txt" title "$NAME $station ($WMO)" with steps
+plot "$DIR/data/$TYPE$WMO.txt" title "$NAME $station ($wmo_)" with steps
 set term png $gnuplot_png_font_hires
 set out "$DIR/data/$TYPE$WMO.png"
 replot
@@ -264,7 +265,7 @@ EOF
 </div>
 <center>
 <img src="data/$TYPE$WMO.png" alt="time series" width="$halfwidth" border=0 class="realimage" hspace=0 vspace=0>
-<br clear=all>
+<br>
 </center>
 EOF
   name=`echo $NAME | tr ' +' '_%'`

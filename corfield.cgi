@@ -87,7 +87,7 @@ EOF
 cat <<EOF
 <div class="formheader">Plot options</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr valign="baseline"><td>Variable:<td>
 EOF
 . ./choosevariable.cgi

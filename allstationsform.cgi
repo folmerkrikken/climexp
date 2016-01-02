@@ -18,7 +18,7 @@ to transmit and display.  Alternatively, you can <a
 href="/selectstation.cgi?id=$EMAIL">search for stations</a> by name,
 coordinates, elevation, and number of years with data.
 
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr>
 <th align="left"><a href="javascript:pop_page('help/ghcn.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>GHCN (adjusted)</th><th align="left"><a href="javascript:pop_page('help/ghcn.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>GHCN (all)</th><th align="left">other</th>
 </tr><tr>

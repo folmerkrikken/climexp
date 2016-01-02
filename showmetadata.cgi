@@ -10,7 +10,7 @@ echo
 . ./myvinkhead.cgi "Metadata" "$kindname $climfield"
 
 cat <<EOF
-<table class="realtable" width=451 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" cellspacing=0 cellpadding=0>
 <tr><th colspan=2>Netcdf global metadata of first ensemble member
 EOF
 file0=`echo "$file" | tr '%' '0'`

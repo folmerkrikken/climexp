@@ -69,7 +69,7 @@ cat <<EOF
 <input type="hidden" name="STATION" value="$station">
 <input type="hidden" name="NAME" value="$NAME">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
-<table width=451 cellspacing=0 cellpadding=0 border=0>
+<table width="100%" cellspacing=0 cellpadding=0 border=0>
 <tr>
 <td>Order, type:
 <td><input type="$number" min=1 step=1 class="forminput" name="param" size="2" style="width: 4em;" value="${FORM_number:-6}">

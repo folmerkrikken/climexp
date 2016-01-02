@@ -13,7 +13,7 @@ cat <<EOF
 <form action="select.cgi" method="POST">
 <div class="kalelink">
 <input type="hidden" name="email" value="$EMAIL">
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <!--<tr><td colspan="11"><input type="submit" value="Select field"></td></tr>-->
 <tr>
 <th colspan="11"><a href="Ad">ERS reprocessed scattermometer</a> 0.5&deg;&times;0.5&deg;</th>

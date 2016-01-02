@@ -82,7 +82,7 @@ cat << EOF
 EOF
 
 if [ -z "$NO_OBS" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="4">Observations</th></tr>'
   sed -e "s/EMAIL/$EMAIL/" select${daily}field_obs.html 
   echo '</table>'
@@ -94,7 +94,7 @@ hiddenstyle_ncepdoe="style=\"display: none;\""
 hiddenstyle_20c="style=\"display: none;\""
 
 if [ -z "$NO_REA" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="8">Reanalyses</th></tr>'
   sed -e "s/hiddenstyle_erainterim/$hiddenstyle_erainterim/" \
     -e "s/hiddenstyle_era40/$hiddenstyle_era40/" \
@@ -105,13 +105,13 @@ if [ -z "$NO_REA" ]; then
   echo '</table>'
 fi
 if [ -z "$NO_SEA" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="13">Seasonal forecasts ensemble means</th></tr>'
   cat $DIR/select${daily}field_sea.html
   echo '</table>'
 fi
 if [ -z "$NO_CSM" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="15">Scenario runs</th></tr>'
   fgrep -v getindices $DIR/selectfield_ipcc.html
   echo '</table>'
@@ -121,7 +121,7 @@ if [ -z "$NO_USE" ]; then
 fi
 echo '<div class="formheader">Plot options</div>'
 echo '<div class="formbody">'
-echo "<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>"
+echo "<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>"
 echo "<tr valign="baseline"><td>Variable<td>"
 . ./choosevariable.cgi
 echo "<tr><td>Demand at least<td><input type=\"$number\" name=\"minfac\" value=\"$FORM_minfac\" $textsize2>% valid points"

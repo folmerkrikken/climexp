@@ -15,7 +15,7 @@ cat <<EOF
 <head>
 <!-- beheerder: Geert Jan van Oldenborgh -->
 <link rel="stylesheet" href="${prfx}styles/rccstyle.css" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script language="javascript" src="${prfx}library/javascript/hidden_info_switch.js"></script>
 <script language="javascript" src="${prfx}library/javascript/pop_page.js"></script> 
 $extrahead
@@ -31,10 +31,10 @@ EOF
 . ./searchengine.cgi
 sed -e "s/FORM_EMAIL/$EMAIL/" ./vinklude/rcc_pagehead.html 
 cat <<EOF
-<table border="0" width="762" cellspacing="0" cellpadding="0">
+<table border="0" width="95.25%" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="80">&nbsp;</td>
-      <td width="451" valign=top>
+      <td width="10%">&nbsp;</td>
+      <td width="56.375%" valign=top>
          <div id="printable" name="printable">
          <!-- div -->
 <!-- Voeg hieronder de inhoud van de pagina in -->

@@ -87,31 +87,31 @@ echo "<input type=\"hidden\" name=\"EMAIL\" value=\"$EMAIL\">"
 echo "<input type=\"hidden\" name=\"field1\" value=\"$FORM_field\">"
 
 if [ -z "$NO_OBS" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="3">Observations</th></tr>'
   sed -e "s/EMAIL/$EMAIL/" selectfield_obs.html 
   echo '</table>'
 fi
 if [ -z "$NO_REA" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="8">Reanalyses</th></tr>'
   cat selectfield_rea.html
   echo '</table>'
 fi
 if [ -z "$NO_SEA" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="13">Seasonal forecasts ensemble means</th></tr>'
   cat selectfield_sea.html
   echo '</table>'
 fi
 if [ -z "$NO_CO2" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="15">CMIP3+ scenario runs</th></tr>'
   fgrep -v getindices selectfield_ipcc.html
   echo '</table>'
 fi
 if [ -z "$NO_CMIP5" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="15">CMIP5 scenario runs</th></tr>'
   fgrep -v getindices selectfield_cmip5.html
   echo '</table>'
@@ -122,7 +122,7 @@ fi
 cat <<EOF
 <div class="formheader">Choose how to compute the SVDs</div>
 <div class="formbody">
-<table width=451>
+<table width="100%">
 <tr><td>Compute:<td>first <input type="$number" style="width: 4em;" min=1 max=13 step=1 name="nsvd" size="2" value="${FORM_nsvd:-4}"> SVDs (<input type="checkbox" class="formcheck" name="normsd" $normsd_checked>normalized to s.d.)<td><a href="javascript:pop_page('help/svdnormalise.shtml',426,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 <tr><td>Average:<td><input type="$number" min=1 step=1 class="forminput" name="avex" $textsize2 value="${FORM_avex:-1}">lon &times;<input type="$number" min=1 step=1 class="forminput" name="avey" $textsize2 value="${FORM_avey:-1}">lat grid points of the first field
 <tr><td>&nbsp;<td><input type="$number" min=1 step=1 class="forminput" name="altavex" $textsize2 value="${FORM_altavex:-1}">lon &times;<input type="$number" min=1 step=1 class="forminput" name="altavey" $textsize2 value="${FORM_altavey:-1}">lat grid points of second field

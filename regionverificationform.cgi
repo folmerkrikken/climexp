@@ -42,7 +42,7 @@ fi
 echo '<form action="regionverification.cgi" method="POST">'
 echo "<input type=\"hidden\" name=\"EMAIL\" value=\"$EMAIL\">"
 echo "<input type=\"hidden\" name=\"field1\" value=\"$FORM_field\">"
-echo "<table class=realtable width=451 border=0 cellspacing=0 cellpadding=0>"
+echo "<table class=realtable width=\"100%\" border=0 cellspacing=0 cellpadding=0>"
 echo "<tr><th colspan="4">Verifying $field_type field</th></tr>"
 egrep "[^A-Za-z]$field_type" selectfield_obs.html  | sed -e "s/FORM_EMAIL/$EMAIL/" -e "s/=\"$oldfield\"/=\"$oldfield\" checked/"
 fgrep "$field_type" selectfield_rea1.html | sed -e "s/EMAIL/$EMAIL/" -e "s/=\"$oldfield\"/=\"$oldfield\" checked/"
@@ -59,7 +59,7 @@ cat <<EOF
 
 <p><div class="formheader">Area</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 intable=true
 . ./plotoptions.cgi
@@ -72,7 +72,7 @@ cat <<EOF
 </table>
 <p><div class="formheader">Options</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 timeseries="forecast"
 index="observations"

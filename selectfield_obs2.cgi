@@ -7,7 +7,7 @@ echo
 
 . ./myvinkhead.cgi "Select a monthly field" "Observations" "index,follow"
 cat <<EOF
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="3">Select a field by following its link (<a href="selectfield_obs.cgi?id=$EMAIL">old list</a>)</td></tr>
 EOF
 

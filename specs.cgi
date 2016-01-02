@@ -48,7 +48,7 @@ cat <<EOF
 <input type=hidden name=id value="$EMAIL">
 <p><div class="formheader">Options</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Forecast<td>
 <select class="forminput" name="date" onChange="this.form.submit()">
 EOF
@@ -129,13 +129,13 @@ nobottom=true
 . ./myvinkfoot.cgi
 
 cat <<EOF
-<table border="0" width="762" cellspacing="0" cellpadding="0">
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="80">&nbsp;</td>
-      <td width="652" valign=top>
+      <td width="10%">&nbsp;</td>
+      <td width="81.5%" valign=top>
          <div id="printable" name="printable">
 <div class=bijschrift id=caption>$plotname $units of $nextseasonname $yy $varname made in early $analysismonth.</div>
-<img id="imageToSwap" src="SPES/plots/$dataset/$date/${dataset}_${prefix}$date.png" width="652" />
+<img id="imageToSwap" src="SPES/plots/$dataset/$date/${dataset}_${prefix}$date.png" width="100%" />
 <p>The development of this forecast system was supported by the EU-project <a href="http://www.specs-fp7.eu">SPECS</a>.
         </div>
       </td>

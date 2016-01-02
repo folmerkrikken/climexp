@@ -25,9 +25,9 @@ echo '<form action="statmodel.cgi" method="POST">'
 echo "<input type=\"hidden\" name=\"EMAIL\" value=\"$EMAIL\">"
 echo "<input type=\"hidden\" name=\"field1\" value=\"$FORM_field\">"
 cat <<EOF
-<table class=realtable width=451 border=0 cellspacing=0 cellpadding=0>
+<table class=realtable width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="2">Model paramaters</th></tr>
-<tr><td width=100>Forecast initial conditions:</td>
+<tr><td width="12.5%>Forecast initial conditions:</td>
 <td><select class="forminput" name="analysis">
 <option value="choose" $choose_selected>choose the forecast starting date</option>
 <option value="jan" $jan_selected>1 January</option>
@@ -43,7 +43,7 @@ cat <<EOF
 <option value="nov" $nov_selected>1 November</option>
 <option value="dec" $dec_selected>1 December</option>
 </select></td></tr>
-<tr><td width=100>Length of predictor season:</td>
+<tr><td width="12.5%">Length of predictor season:</td>
 <td><select class="forminput" name="sum2">
 <option $sum2_choose_selected>choose</option>
 <option $sum2_1_selected>1</option>
@@ -57,14 +57,14 @@ cat <<EOF
 <option $sum2_36_selected>36</option>
 <option $sum2_60_selected>60</option>
 </td></tr>
-<tr><td width=100>Persistence:</td><td><input type=checkbox class=formcheck name=persistence></td></tr>
-<tr><td width=100>Climatology:</td><td><input type=$number class=forminput $textsize2 name=onc> years running mean (0: all data)</td></tr>
-<tr><td width=100>Predictor time series:</td><td>
+<tr><td width="12.5%">Persistence:</td><td><input type=checkbox class=formcheck name=persistence></td></tr>
+<tr><td width="12.5%">Climatology:</td><td><input type=$number class=forminput $textsize2 name=onc> years running mean (0: all data)</td></tr>
+<tr><td width="12.5%">Predictor time series:</td><td>
 <input type=radio class=formradio name=timeseries value=none>none,,
 <input type=radio class=formradio name=timeseries value=nino34>Ni&ntilde;o3.4,
 <input type=radio class=formradio name=timeseries value=co2>CO2
 </td></tr>
-<tr><td width=100>Ensemble members:</td><td><input type=$number name=nfcstens $textsize2></td></tr>
+<tr><td width="12.5%">Ensemble members:</td><td><input type=$number name=nfcstens $textsize2></td></tr>
 </table>
 EOF
 ENSEMBLE=true
@@ -84,7 +84,7 @@ cat <<EOF
 
 <p><div class="formheader">Area</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 intable=true
 . ./plotoptions.cgi

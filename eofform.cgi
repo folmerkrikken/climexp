@@ -43,7 +43,7 @@ cat <<EOF
 <input type="hidden" name="field" value="$FORM_field">
 <div class="formheader">Choose how to compute the EOFs</div>
 <div class="formbody">
-<table width=451>
+<table width="100%">
 <tr><td>Compute:<td>first <input type="$number" min=1 max=13 step=1 name="neof" size="2" style="width: 4em;" value="${FORM_neof:-4}"> EOFs (<input type="checkbox" class="formcheck" name="normsd" $normsd_checked>normalized to s.d.)<td><a href="javascript:pop_page('help/eofnormalise.shtml',426,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 <tr><td>Average:<td><input type="$number" min=1 step=1 class="forminput" name="avex" $textsize2 value="${FORM_avex:-1}">lon &times;<input type="$number" min=1 step=1 class="forminput" name="avey" $textsize2 value="${FORM_avey:-1}">lat grid points
 <br>with at least <input type="$number" class="forminput" name="minfac" $textsize2 value="${FORM_minfac}">% valid points<td><a href="javascript:pop_page('help/eofaverage.shtml',426,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>

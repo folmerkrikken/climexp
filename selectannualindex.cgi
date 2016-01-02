@@ -12,7 +12,7 @@ echo
 cat <<EOF
 Please note that many of these time series have been derived from (very) indirect data and have large uncertainties. The Climate Explorer cannot currently represent the uncertainty margins, please consult the documentation of the time series to obtain these. You are encouraged to compare a few reconstructions of the same quantity and compare with instrumental data on the overlap period.
 <p>
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="3">Select a time series by clicking on the name
 
 <tr><td>ENSO<td><div class="kalelink"><a href="getindices.cgi?WMO=RapidData/enso_li&STATION=Li_ENSO&TYPE=i&id=$EMAIL&NPERYEAR=1">1,100 Year El Ni&ntilde;o/Southern Oscillation (ENSO) Index Reconstruction</a> (900-2002, Li et al 2011)</div>

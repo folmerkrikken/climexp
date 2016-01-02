@@ -70,7 +70,8 @@ fi
 ###echo ./bin/wave $corrargs $root.ctl
 (./bin/wave $corrargs $root.ctl > $root.log ) 2>&1
 
-bin/gnuplot <<EOF
+./bin/gnuplot <<EOF
+$gnuplot_init
 set term png $gnuplot_png_font_hires
 set size 0.5,0.5
 set out "${root}m.png"

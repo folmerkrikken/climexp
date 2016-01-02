@@ -104,6 +104,7 @@ if [ $FORM_which = period ]; then
     timeunits=`fgrep 'frequency in [' $root.txt | sed -e 's/^.*\[//' -e 's/\^..\].*//'`
     xlabel="period [$timeunits]"
     ./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.4
 set logscale x
 set term png $gnuplot_png_font_hires
@@ -146,6 +147,7 @@ else
   xlabel="lag [${units}]"
 
   ./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.4
 set zeroaxis
 set logscale x

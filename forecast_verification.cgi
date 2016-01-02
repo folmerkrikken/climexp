@@ -41,7 +41,7 @@ cat << EOF
 <form action="forecast_verification.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="internal" value="true">
-<table class=realtable width=451 border=0 cellspacing=0 cellpadding=0>
+<table class=realtable width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="2">Make you choices</th></tr>
 EOF
 
@@ -69,7 +69,7 @@ demeter3)            demeter3_selected=selected;;
    choose_selected=selected;;
 esac
 cat <<EOF
-<tr><td width=100>Forecast system</td>
+<tr><td width="12.5%">Forecast system</td>
 <td><select class="forminput" name="system" onchange="this.form.submit();">
 <option value="choose" $choose_selected>choose a seasonal forecast system</option>
 <option value="ecmwf4" $ecmwf4_selected>ECMWF S4</option>
@@ -167,7 +167,7 @@ nov) nov_selected=selected;;
 esac
 fi
 
-echo "<tr><td width=100>Forecast initial conditions</td>"
+echo "<tr><td width="12.5%">Forecast initial conditions</td>"
 echo "<td><select class=\"forminput\" name=\"analysis\" onchange=\"this.form.submit();\">"
 if [ "${FORM_system#demeter}" = $FORM_system ]; then
   cat <<EOF
@@ -263,7 +263,7 @@ if [ -n "$FORM_var" -a "$FORM_var" != "choose" ]; then
         fi
     fi
 fi
-echo "<tr><td width=100>Variable</td>"
+echo "<tr><td width="12.5%">Variable</td>"
 echo "<td><select class=\"forminput\" name=\"var\" onchange=\"this.form.submit();\">"
 echo "<option value=\"choose\" $choose_selected>choose a variable</option>"
 echo "<option value=\"t2m\" $t2m_selected>mean 2m temperature</option>"
@@ -315,7 +315,7 @@ fi
 
 VAR=$FORM_var
 . ./getfieldtype.cgi
-echo "<tr><td width=100>Observations</td>"
+echo "<tr><td width="12.5%">Observations</td>"
 echo "<td><select class=\"forminput\" name=\"field2\" onchange=\"this.form.submit();\">"
 tmpfile=/tmp/forecastverification$$
 [ -f $tmpfile ] && rm $tmpfile
@@ -478,7 +478,7 @@ if [ ${FORM_sum:-choose} != choose -a ${FORM_month:-choose} != choose ]; then
   fi
 fi
 
-echo "<tr><td width=100>Verification season</td>"
+echo "<tr><td width="12.5%">Verification season</td>"
 echo "<td><select class=\"forminput\" name=\"sum\" onchange=\"this.form.submit();\">"
 echo "<option $sum_choose_selected>choose</option>"
 echo "<option $sum_1_selected>1</option>"
@@ -624,7 +624,7 @@ esac
 ##echo "DEBUG: mobeg1,yrbeg1,moend1,yrend1=$mobeg1,$yrbeg1,$moend1,$yrend1"
 ##echo "DEBUG: mobeg2,yrbeg2,moend2,yrend2=$mobeg2,$yrbeg2,$moend2,$yrend2"
 ##echo "DEBUG: FORM_begin,FORM_end=$FORM_begin,$FORM_end."
-echo "<tr><td width=100>Verification period</td>"
+echo "<tr><td width="12.5%">Verification period</td>"
 echo "<td><input type=radio class=formradio name=period value=all $all_checked>all (${yr1}-${yr2})"
 echo "<input type=radio class=formradio name=period value=custom $custom_checked><select class=\"forminput\" name=\"begin\">"
 # the user can select years for there are observations but no forecasts
@@ -697,7 +697,7 @@ nots) nots_selected="selected";;
 esac
 
 cat <<EOF
-<tr><td width=100>Area</td>
+<tr><td width="12.5%">Area</td>
 <td><select class="forminput" name="region" onchange="this.form.submit();">
 <option $custom_selected>Custom</option>
 <option value="World" $world_selected>World (Europe-Africa centered)</option>
@@ -776,7 +776,7 @@ debug)         selected_debug="selected";;
 esac
 
 cat <<EOF
-<tr><td width=100>Measure</td>
+<tr><td width="12.5%">Measure</td>
 <td><select class="forminput" name="verif" onchange="this.form.submit();">
 <option value="choose" $selected_choose>== Select a measure to get a map</option>
 <option value="mapcorr" $selected_mapcorr>Correlation of the ensemble mean</option>

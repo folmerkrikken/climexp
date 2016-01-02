@@ -38,27 +38,33 @@ if [ -z "$ENSEMBLE" ]; then
     exit
   fi
 else
-  gwest=data/gwest_${FORM_field}_%%
-  gsouth=data/gsouth_${FORM_field}_%%
-  vort=data/vort_${FORM_field}_%%
+  c=`echo $file | fgrep -c '%%%'`
+  if [ $c = 1 ]; then
+    ss='%%%'
+    ensmax=1000
+    n=3
+  else
+    ss='%%'
+    ensmax=100
+    n=2
+  fi
+  gwest=data/gwest_${FORM_field}_$ss
+  gsouth=data/gsouth_${FORM_field}_$ss
+  vort=data/vort_${FORM_field}_$ss
   iens=0
-  while [ $iens -lt 100 ]; do
-    if [ $iens -lt 10 ]; then
-      ens=0$iens
-    else
-      ens=$iens
-    fi
-    ensfile=`echo $file | sed -e "s/\%\%/$ens/" -e "s/\+\+/$ens/"`
+  first=true
+  while [ $iens -lt $ensmax ]; do
+    ens=`printf %0${n}i $iens`
+    ensfile=`echo $file | sed -e "s/\%\%\%/$ens/" -e "s/\+\+\+/$ens/" -e "s/\%\%/$ens/" -e "s/\+\+/$ens/"`
     if [ -s $ensfile ]; then
       if [ -z "$computing" ]; then
         echo "Computing geostrophic winds...<p>"
         computing=done
       fi
-      ensgwest=`echo $gwest | sed -e "s/\%\%/$ens/"`
-      ensgsouth=`echo $gsouth | sed -e "s/\%\%/$ens/"`
-      ensvort=`echo $vort | sed -e "s/\%\%/$ens/"`    
+      ensgwest=`echo $gwest | sed -e "s/\%\%\%/$ens/" -e "s/\%\%/$ens/"`
+      ensgsouth=`echo $gsouth | sed -e "s/\%\%\%/$ens/" -e "s/\%\%/$ens/"`
+      ensvort=`echo $vort | sed -e "s/\%\%\%/$ens/" -e "s/\%\%/$ens/"`    
       if [ ! -s $ensvort.ctl ]; then
-        echo "$iens"
         [ -f $ensvort.ctl ] && rm $ensvort.???
         [ -f $ensgsouth.ctl ] && rm $ensgsouth.???
         [ -f $ensgwest.ctl ] && rm $ensgwest.???
@@ -71,9 +77,13 @@ else
         . ./myvinkfoot.cgi
         exit
       fi
+      first=false
     fi
     iens=$((iens + 1))
   done
+  if [ $first = true ]; then
+    echo "Could not find file $file ($ensfile)"
+  fi
 fi
 cat > $gwest.$EMAIL.info <<EOF
 $gwest.ctl

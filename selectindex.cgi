@@ -11,7 +11,7 @@ echo
 . ./myvinkhead.cgi "Select a monthly time series" "Climate indices"
 
 cat <<EOF
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="3">Select a time series by clicking on the name
 <tr><td>ENSO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCDCData/ersst_nino12a&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3a&STATION=NINO3&TYPE=i&id=$EMAIL">NINO3</a>,

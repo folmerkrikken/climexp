@@ -99,7 +99,7 @@ root=data/h${TYPE}${WMO}_$$
 (./bin/histogram $corrargs > $root.txt) 2>&1
 [ -f pid/$$.$EMAIL ] && rm pid/$$.$EMAIL
 grep 'bootstrap' $root.txt | sed -e 's/#//'
-echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
+echo '<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>'
 ok=false
 n=1
 while [ $ok != true ]; do # sometimes the most recent series does not have data...
@@ -201,6 +201,7 @@ if [ "$FORM_plot" = "hist" ]; then
 	fi
 
 	./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
 set output "$root.png"
@@ -249,6 +250,7 @@ if [ $FORM_plot = "qq" ]; then
 	fi
 
 	./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
 set output "${root}.png"
@@ -321,6 +323,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	fi
 	
 	cat > $root.gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.7
 set title "$title"
 set xlabel "return period [yr]"
@@ -378,6 +381,7 @@ if [ -n "$FORM_log" -o -n "$FORM_sqrt" -o -n "$FORM_square" ]; then
 		ylo=$ylo_save
 		yhi=$yhi_save
 		cat > $root.gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.7
 set title "$title"
 set xlabel "return period [yr]"

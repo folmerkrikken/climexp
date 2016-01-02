@@ -12,7 +12,7 @@ base_url=`dirname $SCRIPT_NAME`
 
 . ./myvinkhead.cgi "Select a daily time series" "Climate indices" "index,follow"
 cat <<EOF
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="3">Select a time series by clicking on the name
 <tr><td>ENSO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/nino2_daily&STATION=NINO12&TYPE=i&id=$EMAIL&NPERYEAR=366">NINO12</a>, <a href="getindices.cgi?WMO=NCEPData/nino3_daily&STATION=NINO3&TYPE=i&id=$EMAIL&NPERYEAR=366">NINO3</a>, <a href="getindices.cgi?WMO=NCEPData/nino5_daily&STATION=NINO3.4&TYPE=i&id=$EMAIL&NPERYEAR=366">NINO3.4</a>, <a href="getindices.cgi?WMO=NCEPData/nino4_daily&STATION=NINO4&TYPE=i&id=$EMAIL&NPERYEAR=366">NINO4</a> (1980-now, Reynolds)</div>
 <td><a href="wipefoot.cgi?http://www.cpc.noaa.gov/data/indices/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>

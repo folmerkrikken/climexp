@@ -152,7 +152,8 @@ if [ -n "$FORM_runcorr" -a -n "$FORM_runwindow" ]; then
     exit
   fi
   # plot the running correlations
-  $DIR/bin/gnuplot <<EOF
+  ./bin/gnuplot <<EOF
+$gnuplot_init
 set size 0.7,0.5
 set zeroaxis
 $xrange
@@ -314,7 +315,8 @@ if [ -z "$tmp" ]; then
           fi
 	fi
 
-        $DIR/bin/gnuplot << EOF
+        ./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,1
 set zeroaxis
 set xrange [1:24]
@@ -466,7 +468,8 @@ EOF
     fi
     echo "<pre>"
 ###    cat <<EOF
-    $DIR/bin/gnuplot << EOF 2>&1 | sed -e '/^ *$/d' -e '/====/d' | tail -$taillines
+    ./bin/gnuplot << EOF 2>&1 | sed -e '/^ *$/d' -e '/====/d' | tail -$taillines
+$gnuplot_init
 set size 0.7,0.93
 set size square
 set datafile missing '-999.9000'
@@ -499,8 +502,9 @@ EOF
     echo "<li>The distribution did not change over time"
     echo "</ol><p>Therefore, use with care."
     echo "<pre>"
-    $DIR/bin/getchance : 3 $DIR/data/$TYPE$WMO${FORM_num}.dump$ext1
-    $DIR/bin/gnuplot << EOF
+    ./bin/getchance : 3 $DIR/data/$TYPE$WMO${FORM_num}.dump$ext1
+    ./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.5
 $xrange
 set yrange [0:100]
@@ -622,7 +626,8 @@ else
 	    corr2='using 2:10'
 	    corr3='using 2:14'
 	fi
-        $DIR/bin/gnuplot << EOF
+        ./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.5
 set zeroaxis
 set title "$title"
@@ -641,7 +646,8 @@ set output "$corrroot.png"
 replot
 EOF
       else
-        $DIR/bin/gnuplot << EOF
+        ./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.5
 $xrange
 $yrange

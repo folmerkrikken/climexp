@@ -14,7 +14,7 @@ echo
 cat <<EOF
 These are the time series you are working with, they will be erased 3 days after last use.
 
-<p><table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<p><table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 EOF
 if [ "$EMAIL" != "someone@somewhere" ]; then
 # generate list of user-defined indices

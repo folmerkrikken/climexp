@@ -50,7 +50,7 @@ cat <<EOF
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
 <div class="formheader">Compute a spectrum or the autocorrelation of the time series</div>
 <div class="formbody">
-<table width=451>
+<table width="100%">
 <tr><td>Compute:<td><input type="radio" name="which" value="period" $period_checked>spectrum
 averaging <input type="$number" min=1 step=1 class="forminput" name="ave" value="$FORM_ave" size="2">bins of the periodogram
 <br><input type="radio" name="which" value="autocor" $autocor_checked>

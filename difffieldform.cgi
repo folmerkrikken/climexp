@@ -33,7 +33,7 @@ echo "<input type=\"hidden\" name=\"NPERYEAR\" value=\"$NPERYEAR\">"
 echo "<input type=\"hidden\" name=\"field1\" value=\"$FORM_field\">"
 echo "<input type=\"hidden\" name=\"field_type\" value=\"$field_type\">"
 
-echo "<table class=realtable border=0 width=451 cellspacing=0 cellpadding=0>"
+echo "<table class=realtable border=0 width="100%" cellspacing=0 cellpadding=0>"
 echo "<tr><th colspan="4">Select a second $field_type field</th></tr>"
 fgrep "$field_type" selectfield_obs.html | sed -e "s/EMAIL/$EMAIL/"
 fgrep "$field_type" selectfield_rea1.html
@@ -54,7 +54,7 @@ cat <<EOF
 
 <p><div class="formheader">Area</div>
 <div class="formbody">
-<table width=451>
+<table width="100%">
 EOF
 
 lsmask=yes

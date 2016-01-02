@@ -27,7 +27,7 @@ cat <<EOF
 <p>You can rate your interest on the scale of 1 (not interesting) to 5 (very important and interesting)
 <p>
 <form action="specs_questionnaire.cgi" method="POST">
-<table class="realtable" border=0 cellpadding=0 cellspacing=0 width=692>
+<table class="realtable" border=0 cellpadding=0 cellspacing=0 width="86.5%">
 <tr>
 <th colspan=2>User information</th>
 </tr><tr>
@@ -59,7 +59,7 @@ cat <<EOF
 </tr></table>
 </div class=formbody>
 <p>
-<table class="realtable" width=692 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="86.5%" border=0 cellspacing=0 cellpadding=0>
 <tr>
 <th>Seasonal events</th><th><span style="float:right;">not interesting ... very important&nbsp;&nbsp;</span></th>
 </tr><tr>

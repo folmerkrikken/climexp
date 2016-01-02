@@ -84,7 +84,9 @@ else
     above=1
     below=3
 fi
+wmo_=`echo "$WMO" | tr '_' ' '`
 ./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.8,0.6
 set datafile missing "-999.900"
 set zero 1e-40
@@ -96,7 +98,7 @@ set timefmt $timefmt
 set format x $timefmt
 set xrange ["$firstdate":"$lastdate"]
 set ylabel "$VAR [$UNITS]"
-set title "$name $station ($WMO)"
+set title "$name $station ($wmo_)"
 plot "./$root.txt" using 1:2:3 notitle with filledcurves above lt $above, \
      "./$root.txt" using 1:2:3 notitle with filledcurves below lt $below, \
      "./$root.txt" using 1:2 notitle with lines lt -1, \

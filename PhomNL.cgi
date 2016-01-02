@@ -12,7 +12,7 @@ base_url=`dirname $SCRIPT_NAME`
 
 . ./myvinkhead.cgi "Daily precipitation in the Netherlands" "Homogenised and raw data" "index,follow"
 cat <<EOF
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="2">Select a set of time series by clicking on the name
 <!--
 <tr>

@@ -152,7 +152,7 @@ cat <<EOF
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="field" value="$FORM_field">
 <input type="hidden" name="movie" value="no" checked>
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 if [ $NPERYEAR != 0 ]; then
     echo "<tr><td>Time:<td>year: <input type=$number min=1 max=2500 step=1 name="year" $textsize4 value=\"$y2\">"
@@ -322,7 +322,7 @@ cat <<EOF
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="field" value="$FORM_field">
 <input type="hidden" name="movie" value="no" checked>
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Time:<td>From year: <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$y1">
 EOF
 if [ $NPERYEAR -ge 12 ]; then

@@ -6,7 +6,7 @@
 . ./nperyear2timescale.cgi
 
 ###echo "<div class=\"formbody\">"
-echo "<table class=\"realtable\" width=451 border=0 cellpadding=0 cellspacing=0>"
+echo "<table class=\"realtable\" width=\"100%\" border=0 cellpadding=0 cellspacing=0>"
 echo "<tr><th><a href=\"javascript:pop_page('help/systemseries.shtml',568,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>System-defined ${timescale}timeseries</th></tr><tr><td>"
 if [ -z "$NPERYEAR" -o "$NPERYEAR" = 12 ]; then
     ###echo "<input type=\"checkbox\" class=\"formcheck\" name=\"nino12\">NINO1+2"

@@ -71,7 +71,7 @@ cat <<EOF
 <input type="hidden" name="listname" value="$FORM_listname">
 <input type="hidden" name="extraargs" value="$FORM_extraargs">
 <input type="hidden" name="oper" value="$oper">
-<table width=451 cellpadding=0 cellspacing=0 border=0>
+<table width="100%" cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td>Title:</td><td><input type="text" class="forminput" name="title" size="45" value="$title"></td>
 </tr><tr>

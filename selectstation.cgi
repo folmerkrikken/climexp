@@ -20,7 +20,7 @@ cat <<EOF
 <input type="hidden" name="email" value="$EMAIL">
 <a name="get"></a>
 <div class="kalelink">
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr>
 <th align="left">GHCN-M (adjusted)</th>
 <th align="left">GHCN-M (all)</th>

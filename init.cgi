@@ -36,26 +36,39 @@ if [ -z "$init_done" ]; then
 
    init_done=done
 
-	function getpngwidth {
-	    if [ -s $pngfile ]; then
-	        type=`file -b $pngfile`
-	        if [ "${type#PNG}" != "$type" ]; then
-                width=`echo $type | sed -e 's/^.*data, //' -e 's/ x .*$//'`
-	            halfwidth=$((width/2))
-		        if [ $((2*halfwidth )) != $width ]; then
-			        halfwidth=${halfwidth}.5
-		        fi
-		    else
-		        width=0
-		        halfwidth=0
-		    fi
-		else
-		    width=0
-		    halfwidth=0
-		fi
-	}
+    function getpngwidth {
+        use_exact_pixels=false
+        if [ $use_exact_pixels = true ]; then
+            if [ -s $pngfile ]; then
+                type=`file -b $pngfile`
+                if [ "${type#PNG}" != "$type" ]; then
+                    width=`echo $type | sed -e 's/^.*data, //' -e 's/ x .*$//'`
+                    halfwidth=$((width/2))
+                    if [ $((2*halfwidth )) != $width ]; then
+                        halfwidth=${halfwidth}.5
+                    fi
+                else
+                    width=0
+                    halfwidth=0
+                fi
+            else
+                width=0
+                halfwidth=0
+            fi
+        else
+            width="100%"
+            halfwidth="100%"
+        fi
+    }
    # set a standard TTF font for gnuplot.   GNUPLOT_DEFAULT_GDFONT is not used
    # if all is well, but is there as a fall-back.
+   export gnuplot_version=`./bin/gnuplot --version`
+   if [ "${gnuplot_version#gnuplot 5}" != "$gnuplot_version" ]; then
+      gnuplot_init="set colors classic"
+      setxzeroaxis="" # bug in gnuplot 5.0 patchlevel 0
+   else
+      setxzeroaxis="set xzeroaxis"
+   fi
    export GDFONTPATH=`pwd`/truetype
    export GNUPLOT_DEFAULT_GDFONT="DejaVuSansCondensed"
    export gnuplot_png_font_hires="size 1280,960 crop font DejaVuSansCondensed 15"

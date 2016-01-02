@@ -11,7 +11,7 @@ EOF
 cat <<EOF
 <div class="alineakop">NINO indices</div>
 
-<table class="realtable" width=451 border='0' cellpadding='0' cellspacing='0'>
+<table class="realtable" width="100%" border='0' cellpadding='0' cellspacing='0'>
 <tr>
 <th colspan="19">ECMWF System-3 ensemble mean</th>
 </tr><tr>
@@ -597,7 +597,7 @@ cat <<EOF
 
 <div class="alineakop">NAO indices</div>
 
-<table class="realtable" width=451 border='0' cellpadding='0' cellspacing='0'>
+<table class="realtable" width="100%" border='0' cellpadding='0' cellspacing='0'>
 <tr>
 <th colspan="19">System-1 ensemble mean</th>
 </tr><tr>

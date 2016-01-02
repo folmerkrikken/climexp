@@ -111,7 +111,7 @@ cat <<EOF
 <input type="hidden" name="field" value="$FORM_field">
 <div class="formheader">Make a map of the mean, s.d., percentile or extreme property</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Property:<td>
 <input type="radio" class="formradio" name="var" value="mean" $mean_checked>mean
 ,<input type="radio" class="formradio" name="var" value="sd" $sd_checked>standard deviation

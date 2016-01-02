@@ -10,7 +10,7 @@ cat <<EOF
 <div class="kalelink">
 <form action="select.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="9"><input type="submit" class="formbutton" value="Select field">
 Choose a field and press this button</td></tr>
 <tr><td colspan="9">ENSEMBLES RT2b Europe with GCM boundary conditions 1950-2100<a href="wipefoot.cgi?http://ensemblesrt3.dmi.dk" target="_new"><img src="images/info-i.gif" align="right" alt="more information" border="0"></a></td><tr>

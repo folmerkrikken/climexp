@@ -66,6 +66,7 @@ if [ ${NPERYEAR:-12} -gt 1 ]; then
     title="yearly cycle of $station $NAME$period"
     if [ \( ! -s ${base}_yr.png \) -o ${base}_yr.png -ot ./data/$TYPE$WMO.dat ]; then
 		./bin/gnuplot << EOF
+$gnuplot_init
 ###set title "$title"
 set datafile missing "0.300000E+34"
 set size 0.7057,.4
@@ -104,6 +105,7 @@ if [ "${WMO#corr}" = "$WMO" -a "${WMO#sign}" = "$WMO" ]; then
         fgrep -v "# repeat last"  ./${base}a.plt > ./${base}a.txt
 	    ###title="anomalies of $station $NAME$period"
         ./bin/gnuplot << EOF
+$gnuplot_init
 set size .7057,.4
 ###set title "$title"
 set ylabel "$ylabel"

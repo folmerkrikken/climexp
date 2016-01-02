@@ -15,7 +15,7 @@ EOF
 . ./myvinkhead.cgi "Ensemble members" "Time series" "nofollow,noindex"
 
 cat <<EOF
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th>number<th>ascii<th>netcdf<th>analyse separately
 EOF
 list=`cat data/$type$wmo.dat | tr '#' ' '`

@@ -57,7 +57,7 @@ cat <<EOF
 <form action="selectsectionform.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="oldclass" value="$CLASS">
-<table class=realtable width=451 border=0 cellspacing=0 cellpadding=0>
+<table class=realtable width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="2">Select a 2D field
 <tr><th colspan="2"><small>the metadata is fetched from the server, so the form may be slow at times
 EOF
@@ -68,7 +68,7 @@ EOF
 
 cat <<EOF
 <tr>
-<td width=100>Dataset:
+<td width="100%""12.5%">Dataset:
 <td><select class="forminput" name="CLASS" onchange="this.form.submit();">
 <option value="choose" $choose_selected>choose a dataset
 <option $demeter_selected>Demeter

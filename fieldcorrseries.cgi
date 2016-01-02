@@ -37,7 +37,7 @@ fi
 
 echo "<p><div class=\"formheader\">Plot options</div>"
 echo "<div class=\"formbody\">"
-echo "<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>"
+echo "<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>"
 echo "<tr><td>Variable<td>"
 . ./choosevariable.cgi
 echo "<tr><td>Demand at least<td><input type=\"$number\" name=\"minfac\" value=\"$FORM_minfac\" $textsize2>% valid points"

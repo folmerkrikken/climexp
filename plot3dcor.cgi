@@ -45,7 +45,8 @@ echo "<input type=\"submit\" value=\"replot\">"
 echo "</form>"
 echo "</div>"
 
-$DIR/bin/gnuplot << EOF
+./bin/gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.7
 set title "$tmp$title"
 set xrange [1:12]

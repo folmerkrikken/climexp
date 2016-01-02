@@ -13,7 +13,7 @@ This page allows access to remotely stored datasets.  Please select a 2D field f
 
 <form action="selectsectionform.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="13"><input type="submit" class="formbutton" value="Select dataset">
 Choose a dataset and press this button</td></tr>
 

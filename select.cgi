@@ -111,7 +111,7 @@ if [ ${NZ:-1} -le 1 ]; then
 <p><form action="get_index.cgi" method="POST">
 <div class="formheader">Get grid points, average area or generate subset</div>
 <div class="formbody">
-<table width="452" border=0 cellspacing=0 cellpadding=0>
+<table width="100%" border=0 cellspacing=0 cellpadding=0>
 <input type="hidden" name="email" value="$EMAIL">
 <input type="hidden" name="field" value="$FORM_field">
 EOF

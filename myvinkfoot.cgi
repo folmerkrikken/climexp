@@ -4,8 +4,8 @@ cat <<EOF
          </div>
 <!-- Insert the body of the page above this line -->
       </td>
-      <td width="11">&nbsp;</td>
-      <td width=220 valign=top>
+      <td width="1%">&nbsp;</td>
+      <td width="27.5%" valign=top>
 <!-- Voeg hieronder de lijst met links in -->
 EOF
 [ -z "$EMAIL" ] && EMAIL=someone@somewhere

@@ -59,7 +59,7 @@ esac
 cat <<EOF
 <p><div class="formheader">Difference options</div>
 <div class="formbody">
-<table width=451>
+<table width="100%">
 <tr><td>Difference:</td><td><input type="radio" class="formradio" name="var" value="diff" $diff_checked>absolute
 <input type="radio" class="formradio" name="var" value="reldiff" $reldiff_checked>relative</td></tr>
 <tr>

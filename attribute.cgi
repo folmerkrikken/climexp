@@ -176,7 +176,7 @@ fi
 [ "$lwrite" = true ] && echo bin/attribute $corrargs | sed -e 's@ data/@ /tmp/@g'
 (./bin/attribute $corrargs > $root.txt) 2>&1
 grep 'bootstrap' $root.txt | sed -e 's/#//'
-echo '<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>'
+echo '<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>'
 if [ "$TYPE" = set ]; then
     i=0
     while [ -z "$f" -a $i -lt 100 ]; do
@@ -283,6 +283,7 @@ if [ "$FORM_plot" = "hist" ]; then
 	fi
 
 	cat <<EOF > $root.gnuplot
+$gnuplot_init
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
 set output "$root.png"
@@ -362,6 +363,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	
 	if [ -s $obsplotfile ]; then
     	cat > ${root}_obsplot.gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.5
 set term png $gnuplot_png_font_hires
 set output "${root}_obsplot.png"
@@ -409,6 +411,7 @@ EOF
     fi
 
 	cat > $root.gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.7
 set title "$title"
 set xlabel "return period [yr]"
@@ -475,6 +478,7 @@ echo "referenced at $FORM_begin2 and $FORM_year (<a href=\"${root}.eps.gz\">eps<
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 cat > ${root}_cdf.gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.4
 set term png $gnuplot_png_font_hires
 set output "${root}_cdf.png"
@@ -513,6 +517,7 @@ echo "<center><img src=\"${root}_cdf.png\" alt=\"CDF of the return time of $FORM
 
 ###xtics=`fgrep '#@' $probfile | sed -e 's/^#@ //'`
 cat > ${root}_cdfdiff.gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.4
 set term png $gnuplot_png_font_hires
 set output "${root}_cdfdiff.png"
@@ -552,6 +557,7 @@ echo "<center><img src=\"${root}_cdfdiff.png\" alt=\"CDF of the difference in re
 # FAR plot
 
 cat > ${root}_far.gnuplot << EOF
+$gnuplot_init
 set size 0.7,0.4
 set term png $gnuplot_png_font_hires
 set output "${root}_far.png"

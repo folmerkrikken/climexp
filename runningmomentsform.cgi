@@ -55,7 +55,7 @@ cat <<EOF
 <input type="hidden" name="STATION" value="$STATION">
 <div class="formheader">Compute running mean, standard deviation, skewness, ...</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Running: <td> 
 <select name="moment">
 <option $mean_selected>mean

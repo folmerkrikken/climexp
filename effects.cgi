@@ -51,9 +51,8 @@ often stays drier than usual during El Ni&ntilde;o.  Even in our part
 of Europe it rains more on average during El Ni&ntilde;o.</div>
 
 <center>
-<div style="font-size:10px; width=451px;">
-<img src="effects/nino34_gpcc_25_n1_MAM.png" alt="Relationship between El Ni&ntilde;o and rainfall in March-May" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
+<img src="effects/nino34_gpcc_25_n1_MAM.png" alt="Relationship between El Ni&ntilde;o and rainfall in March-May" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </div>
 </center>
 
@@ -64,11 +63,9 @@ The Indian Monsoon is often weaker during El Ni&ntilde;o, although by
 no means always.
 
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="effects/nino34_gpcc_25_n1_JJA.png" 
-alt="Relationship between El Ni&ntilde;o and rainfall in June-August" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+alt="Relationship between El Ni&ntilde;o and rainfall in June-August" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <div class="bijschrift"><b>September-November</b> This season the
@@ -81,10 +78,8 @@ than normal during El Ni&ntilde;o in this season, as are Chili and
 Uruguay.</div>
 
 <center>
-<div style="font-size:10px; width=451px;">
-<img src="effects/nino34_gpcc_25_n1_SON.png" alt="Relationship between El Ni&ntilde;o and rainfall in September-November" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+<img src="effects/nino34_gpcc_25_n1_SON.png" alt="Relationship between El Ni&ntilde;o and rainfall in September-November" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <div class="bijschrift"><b>December-February</b> In boreal winter the
@@ -100,11 +95,9 @@ always coincident with the warming along the equator that affects the
 rest of the world.
 
 <Center>
-<div style="font-size:10px; width=451px;">
 <img src="effects/nino34_gpcc_25_n1_DJF.png" 
-alt="Relationship between El Ni&ntilde;o and rainfall in December-February" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+alt="Relationship between El Ni&ntilde;o and rainfall in December-February" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <div class="alineakop"><a name="temperature"></a>Temperature</div>
@@ -123,11 +116,9 @@ south-east of the U.S. and north-eastern Mexico are often warmer
 during La Ni&ntilde;a.
 
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="effects/nino34_cru_tmp_25_MAM.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in March-May" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+alt="Relationship between El Ni&ntilde;o and temperature in March-May" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <div class="bijschrift"><b>June-August</b> The heat signal is very
@@ -135,11 +126,9 @@ clear in India, West Africa and eastern South America.  Summer in
 East-Asia and eastern Canada is often somewhat cooler than normal.
 
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="effects/nino34_cru_tmp_25_JJA.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in Jun-August" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+alt="Relationship between El Ni&ntilde;o and temperature in Jun-August" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <div class="bijschrift"><b>September-November</b> The east coast of
@@ -147,11 +136,9 @@ Central and South America, India and southern Australia are often
 warmer during El Ni&ntilde;o.
 
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="effects/nino34_cru_tmp_25_SON.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in September-November" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+alt="Relationship between El Ni&ntilde;o and temperature in September-November" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <div class="bijschrift"><b>December-February</b> The effects of El
@@ -161,11 +148,9 @@ America, Australia and also southern Africa usually have warmer
 weather than normal during El Ni&ntilde;o.
 
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="effects/nino34_cru_tmp_25_DJF.png" 
-alt="Relationship between El Ni&ntilde;o and temperature in December-February" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+alt="Relationship between El Ni&ntilde;o and temperature in December-February" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <div class="alineakop"><a name="cyclones"></a>Tropical Cyclones</div>
@@ -181,17 +166,15 @@ northern Pacific Ocean the area with typhoons also shifts east.  Ther
 are no effects on the number of cyclones over the Indian Ocean.
 
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="effects/nino34_nstracks.png" 
-alt="Relationship between El Ni&ntilde;o and the number of tropical stroms" border=0 width=430 class="realimage" hspace=0 vspace=0>
-<br clear=all>
-</div>
+alt="Relationship between El Ni&ntilde;o and the number of tropical stroms" border=0 width="100%" class="realimage" hspace=0 vspace=0>
+<br>
 </center>
 
 <!-- Insert the body of the page above this line -->
       </td>
-      <td width="11">&nbsp;</td>
-      <td width=220 valign=top>
+      <td width="1%">&nbsp;</td>
+      <td width="27.5%" valign=top>
 <!-- Voeg hieronder de lijst met links in -->
          <div class="menukopje">Standard seasons</div>
          <div class="menulink">Precipitation, temperature and tropical storms</div>

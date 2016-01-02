@@ -53,7 +53,7 @@ EOF
 cat <<EOF
 <p><div class="formheader">Options</div>
 <div class="formbody">
-<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 timeseries="forecast"
 index="observations"

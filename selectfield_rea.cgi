@@ -9,7 +9,7 @@ echo
 cat <<EOF
 <form action="select.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="8"><input type="submit" class="formbutton" value="Select field"> Open a section, select a field and press this button</th></tr>
 EOF
 

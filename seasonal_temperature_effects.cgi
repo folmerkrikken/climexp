@@ -29,39 +29,37 @@ non-linear: the effect of La Ni&ntilde;a is not the opposite of the
 effect of El Ni&ntilde;o.
 
 <center>
-<div style="font-size:10px; width=451px;">
-<a href="effects/nino34_cru_tmp_25_JFM.pdf"><img src="effects/nino34_cru_tmp_25_JFM.png" alt="Relationship between El Ni&ntilde;o and temperature in January-March" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_FMA.pdf"><img src="effects/nino34_cru_tmp_25_FMA.png" alt="Relationship between El Ni&ntilde;o and temperature in February-April" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_MAM.pdf"><img src="effects/nino34_cru_tmp_25_MAM.png" alt="Relationship between El Ni&ntilde;o and temperature in March-May" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_AMJ.pdf"><img src="effects/nino34_cru_tmp_25_AMJ.png" alt="Relationship between El Ni&ntilde;o and temperature in April-June" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_MJJ.pdf"><img src="effects/nino34_cru_tmp_25_MJJ.png" alt="Relationship between El Ni&ntilde;o and temperature in May-July" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_JJA.pdf"><img src="effects/nino34_cru_tmp_25_JJA.png" alt="Relationship between El Ni&ntilde;o and temperature in June-August" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_JAS.pdf"><img src="effects/nino34_cru_tmp_25_JAS.png" alt="Relationship between El Ni&ntilde;o and temperature in July-September" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_ASO.pdf"><img src="effects/nino34_cru_tmp_25_ASO.png" alt="Relationship between El Ni&ntilde;o and temperature in August-October" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_SON.pdf"><img src="effects/nino34_cru_tmp_25_SON.png" alt="Relationship between El Ni&ntilde;o and temperature in September-November" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_OND.pdf"><img src="effects/nino34_cru_tmp_25_OND.png" alt="Relationship between El Ni&ntilde;o and temperature in October-December" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_NDJ.pdf"><img src="effects/nino34_cru_tmp_25_NDJ.png" alt="Relationship between El Ni&ntilde;o and temperature in November-January" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_DJF.pdf"><img src="effects/nino34_cru_tmp_25_DJF.png" alt="Relationship between El Ni&ntilde;o and temperature in December-February" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-</div>
+<a href="effects/nino34_cru_tmp_25_JFM.pdf"><img src="effects/nino34_cru_tmp_25_JFM.png" alt="Relationship between El Ni&ntilde;o and temperature in January-March" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_FMA.pdf"><img src="effects/nino34_cru_tmp_25_FMA.png" alt="Relationship between El Ni&ntilde;o and temperature in February-April" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_MAM.pdf"><img src="effects/nino34_cru_tmp_25_MAM.png" alt="Relationship between El Ni&ntilde;o and temperature in March-May" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_AMJ.pdf"><img src="effects/nino34_cru_tmp_25_AMJ.png" alt="Relationship between El Ni&ntilde;o and temperature in April-June" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_MJJ.pdf"><img src="effects/nino34_cru_tmp_25_MJJ.png" alt="Relationship between El Ni&ntilde;o and temperature in May-July" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_JJA.pdf"><img src="effects/nino34_cru_tmp_25_JJA.png" alt="Relationship between El Ni&ntilde;o and temperature in June-August" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_JAS.pdf"><img src="effects/nino34_cru_tmp_25_JAS.png" alt="Relationship between El Ni&ntilde;o and temperature in July-September" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_ASO.pdf"><img src="effects/nino34_cru_tmp_25_ASO.png" alt="Relationship between El Ni&ntilde;o and temperature in August-October" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_SON.pdf"><img src="effects/nino34_cru_tmp_25_SON.png" alt="Relationship between El Ni&ntilde;o and temperature in September-November" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_OND.pdf"><img src="effects/nino34_cru_tmp_25_OND.png" alt="Relationship between El Ni&ntilde;o and temperature in October-December" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_NDJ.pdf"><img src="effects/nino34_cru_tmp_25_NDJ.png" alt="Relationship between El Ni&ntilde;o and temperature in November-January" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_DJF.pdf"><img src="effects/nino34_cru_tmp_25_DJF.png" alt="Relationship between El Ni&ntilde;o and temperature in December-February" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
 </center>
 
 
 <!-- Insert the body of the page above this line -->
       </td>
-      <td width="11">&nbsp;</td>
-      <td width=220 valign=top>
+      <td width="1%">&nbsp;</td>
+      <td width="27.5%" valign=top>
 <!-- Voeg hieronder de lijst met links in -->
          <div class="menukopje">Standard seasons</div>
          <div class="menulink"><a href="effects.cgi?id=FORM_EMAIL">Precipitation, temperature and tropical storms</a></div>

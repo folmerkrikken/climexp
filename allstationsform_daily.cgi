@@ -17,7 +17,7 @@ to transmit and display.  Alternatively, you can <a
 href="selectdailyseries.cgi?id=$EMAIL">search for stations</a> by name,
 coordinates, elevation, and number of years with data.
 
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr>
 <th>
 <a href="javascript:pop_page('help/ghcnd.shtml',568,450)">GHCN-D v2</a>

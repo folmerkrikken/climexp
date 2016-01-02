@@ -57,25 +57,25 @@ echo "<input type=\"hidden\" name=\"EMAIL\" value=\"$EMAIL\">"
 echo "<input type=\"hidden\" name=\"field1\" value=\"$FORM_field\">"
 
 if [ -z "$NO_OBS" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="2">Observations</th></tr>'
   sed -e "s/EMAIL/$EMAIL/" selectfield_obs.html 
   echo '</table>'
 fi
 if [ -z "$NO_REA" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="8">Reanalyses</th></tr>'
   cat $DIR/selectfield_rea.html
   echo '</table>'
 fi
 if [ -z "$NO_SEA" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="13">Seasonal forecasts ensemble means</th></tr>'
   cat $DIR/selectfield_sea.html
   echo '</table>'
 fi
 if [ -z "$NO_CO2" ]; then
-  echo '<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>'
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
   echo '<tr><th colspan="15">Scenario runs</th></tr>'
   fgrep -v getindices $DIR/selectfield_ipcc.html
   echo '</table>'

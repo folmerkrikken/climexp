@@ -28,39 +28,37 @@ Ni&ntilde;o.  La Ni&ntilde;a has the opposite effect in almost all
 locations. 
 
 <center>
-<div style="font-size:10px; width=451px;">
-<a href="effects/nino34_gpcc_25_n1_JFM.pdf"><img src="effects/nino34_gpcc_25_n1_JFM.png" alt="Relationship between El Ni&ntilde;o and precipitation in January-March" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_FMA.pdf"><img src="effects/nino34_gpcc_25_n1_FMA.png" alt="Relationship between El Ni&ntilde;o and precipitation in February-April" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_MAM.pdf"><img src="effects/nino34_gpcc_25_n1_MAM.png" alt="Relationship between El Ni&ntilde;o and precipitation in March-May" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_AMJ.pdf"><img src="effects/nino34_gpcc_25_n1_AMJ.png" alt="Relationship between El Ni&ntilde;o and precipitation in April-June" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_MJJ.pdf"><img src="effects/nino34_gpcc_25_n1_MJJ.png" alt="Relationship between El Ni&ntilde;o and precipitation in May-July" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_JJA.pdf"><img src="effects/nino34_gpcc_25_n1_JJA.png" alt="Relationship between El Ni&ntilde;o and precipitation in June-August" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_JAS.pdf"><img src="effects/nino34_gpcc_25_n1_JAS.png" alt="Relationship between El Ni&ntilde;o and precipitation in July-September" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_ASO.pdf"><img src="effects/nino34_gpcc_25_n1_ASO.png" alt="Relationship between El Ni&ntilde;o and precipitation in August-October" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_SON.pdf"><img src="effects/nino34_gpcc_25_n1_SON.png" alt="Relationship between El Ni&ntilde;o and precipitation in September-November" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_OND.pdf"><img src="effects/nino34_gpcc_25_n1_OND.png" alt="Relationship between El Ni&ntilde;o and precipitation in October-December" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_NDJ.pdf"><img src="effects/nino34_gpcc_25_n1_NDJ.png" alt="Relationship between El Ni&ntilde;o and precipitation in November-January" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_gpcc_25_n1_DJF.pdf"><img src="effects/nino34_gpcc_25_n1_DJF.png" alt="Relationship between El Ni&ntilde;o and precipitation in December-February" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-</div>
+<a href="effects/nino34_gpcc_25_n1_JFM.pdf"><img src="effects/nino34_gpcc_25_n1_JFM.png" alt="Relationship between El Ni&ntilde;o and precipitation in January-March" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_FMA.pdf"><img src="effects/nino34_gpcc_25_n1_FMA.png" alt="Relationship between El Ni&ntilde;o and precipitation in February-April" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_MAM.pdf"><img src="effects/nino34_gpcc_25_n1_MAM.png" alt="Relationship between El Ni&ntilde;o and precipitation in March-May" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_AMJ.pdf"><img src="effects/nino34_gpcc_25_n1_AMJ.png" alt="Relationship between El Ni&ntilde;o and precipitation in April-June" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_MJJ.pdf"><img src="effects/nino34_gpcc_25_n1_MJJ.png" alt="Relationship between El Ni&ntilde;o and precipitation in May-July" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_JJA.pdf"><img src="effects/nino34_gpcc_25_n1_JJA.png" alt="Relationship between El Ni&ntilde;o and precipitation in June-August" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_JAS.pdf"><img src="effects/nino34_gpcc_25_n1_JAS.png" alt="Relationship between El Ni&ntilde;o and precipitation in July-September" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_ASO.pdf"><img src="effects/nino34_gpcc_25_n1_ASO.png" alt="Relationship between El Ni&ntilde;o and precipitation in August-October" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_SON.pdf"><img src="effects/nino34_gpcc_25_n1_SON.png" alt="Relationship between El Ni&ntilde;o and precipitation in September-November" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_OND.pdf"><img src="effects/nino34_gpcc_25_n1_OND.png" alt="Relationship between El Ni&ntilde;o and precipitation in October-December" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_NDJ.pdf"><img src="effects/nino34_gpcc_25_n1_NDJ.png" alt="Relationship between El Ni&ntilde;o and precipitation in November-January" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_gpcc_25_n1_DJF.pdf"><img src="effects/nino34_gpcc_25_n1_DJF.png" alt="Relationship between El Ni&ntilde;o and precipitation in December-February" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
 </center>
 
 
 <!-- Insert the body of the page above this line -->
       </td>
-      <td width="11">&nbsp;</td>
-      <td width=220 valign=top>
+      <td width="1%">&nbsp;</td>
+      <td width="27.5%" valign=top>
 <!-- Voeg hieronder de lijst met links in -->
          <div class="menukopje">Standard seasons</div>
          <div class="menulink"><a href="effects.cgi?id=FORM_EMAIL">Precipitation, temperature and tropical storms</a></div>

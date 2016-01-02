@@ -266,7 +266,7 @@ fi
 if [ -z "$ONLYONE" ]; then
 	echo "<p><div class=\"formheader\">Options</div>"
 	echo "<div class=\"formbody\">"
-	echo "<table style='width:451px' border='0' cellpadding='0' cellspacing='0'>"
+	echo "<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>"
 fi
 if [ "$whichvar" = true ]; then
 	echo "<tr><td>Variable:<td>"

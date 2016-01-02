@@ -28,39 +28,37 @@ warmer during La Ni&ntilde;a.  Some North America effects are
 non-linear: the effect of La Ni&ntilde;a is not the opposite of the
 effect of El Ni&ntilde;o.
 <center>
-<div style="font-size:10px; width=451px;">
-<a href="effects/nino34_cru_tmp_25_jan.pdf"><img src="effects/nino34_cru_tmp_25_jan.png" alt="relationship between El Ni&ntilde;o and temperature in January" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_feb.pdf"><img src="effects/nino34_cru_tmp_25_feb.png" alt="relationship between El Ni&ntilde;o and temperature in February" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_mar.pdf"><img src="effects/nino34_cru_tmp_25_mar.png" alt="relationship between El Ni&ntilde;o and temperature in March" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_apr.pdf"><img src="effects/nino34_cru_tmp_25_apr.png" alt="relationship between El Ni&ntilde;o and temperature in April" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_may.pdf"><img src="effects/nino34_cru_tmp_25_may.png" alt="relationship between El Ni&ntilde;o and temperature in May" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_jun.pdf"><img src="effects/nino34_cru_tmp_25_jun.png" alt="relationship between El Ni&ntilde;o and temperature in June" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_jul.pdf"><img src="effects/nino34_cru_tmp_25_jul.png" alt="relationship between El Ni&ntilde;o and temperature in July" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_aug.pdf"><img src="effects/nino34_cru_tmp_25_aug.png" alt="relationship between El Ni&ntilde;o and temperature in August" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_sep.pdf"><img src="effects/nino34_cru_tmp_25_sep.png" alt="relationship between El Ni&ntilde;o and temperature in September" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_oct.pdf"><img src="effects/nino34_cru_tmp_25_oct.png" alt="relationship between El Ni&ntilde;o and temperature in October" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_nov.pdf"><img src="effects/nino34_cru_tmp_25_nov.png" alt="relationship between El Ni&ntilde;o and temperature in November" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-<a href="effects/nino34_cru_tmp_25_dec.pdf"><img src="effects/nino34_cru_tmp_25_dec.png" alt="relationship between El Ni&ntilde;o and temperature in December" border=0 width=430 class="realimage" hspace=0 vspace=0></a>
-<br clear=all>
-</div>
+<a href="effects/nino34_cru_tmp_25_jan.pdf"><img src="effects/nino34_cru_tmp_25_jan.png" alt="relationship between El Ni&ntilde;o and temperature in January" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_feb.pdf"><img src="effects/nino34_cru_tmp_25_feb.png" alt="relationship between El Ni&ntilde;o and temperature in February" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_mar.pdf"><img src="effects/nino34_cru_tmp_25_mar.png" alt="relationship between El Ni&ntilde;o and temperature in March" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_apr.pdf"><img src="effects/nino34_cru_tmp_25_apr.png" alt="relationship between El Ni&ntilde;o and temperature in April" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_may.pdf"><img src="effects/nino34_cru_tmp_25_may.png" alt="relationship between El Ni&ntilde;o and temperature in May" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_jun.pdf"><img src="effects/nino34_cru_tmp_25_jun.png" alt="relationship between El Ni&ntilde;o and temperature in June" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_jul.pdf"><img src="effects/nino34_cru_tmp_25_jul.png" alt="relationship between El Ni&ntilde;o and temperature in July" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_aug.pdf"><img src="effects/nino34_cru_tmp_25_aug.png" alt="relationship between El Ni&ntilde;o and temperature in August" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_sep.pdf"><img src="effects/nino34_cru_tmp_25_sep.png" alt="relationship between El Ni&ntilde;o and temperature in September" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_oct.pdf"><img src="effects/nino34_cru_tmp_25_oct.png" alt="relationship between El Ni&ntilde;o and temperature in October" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_nov.pdf"><img src="effects/nino34_cru_tmp_25_nov.png" alt="relationship between El Ni&ntilde;o and temperature in November" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
+<a href="effects/nino34_cru_tmp_25_dec.pdf"><img src="effects/nino34_cru_tmp_25_dec.png" alt="relationship between El Ni&ntilde;o and temperature in December" border=0 width="100%" class="realimage" hspace=0 vspace=0></a>
+<br>
 </center>
 
 
 <!-- Insert the body of the page above this line -->
       </td>
-      <td width="11">&nbsp;</td>
-      <td width=220 valign=top>
+      <td width="1%">&nbsp;</td>
+      <td width="27.5%" valign=top>
 <!-- Voeg hieronder de lijst met links in -->
          <div class="menukopje">Standard seasons</div>
          <div class="menulink"><a href="effects.cgi?id=FORM_EMAIL">Precipitation, temperature and tropical storms</a></div>

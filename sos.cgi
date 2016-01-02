@@ -17,7 +17,7 @@ cat <<EOF
 <form action="select.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
 <div class="alineakop">Monthly gridded fields</div>
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="4">Straight averages (no interpolation)</th></tr>
 EOF
 
@@ -31,7 +31,7 @@ cat <<EOF
 <div class="alineakop">6-hourly gridded fields</div>
 <form action="select.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 EOF
 
 . ./select6hourlyfield_sos.cgi
@@ -45,7 +45,7 @@ cat <<EOF
 </div>
 
 <div class="alineakop">Along-track data</div>
-<table class="realtable" width=451 border=0 cellpadding=0 cellspacing=0>
+<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr><th colspan="3">ASCII data per year</th></tr>
 EOF
 for file in SOS/ers_stress/*.txt.bz2

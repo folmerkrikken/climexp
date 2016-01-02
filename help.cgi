@@ -13,7 +13,7 @@ New users are adviced to study the <a href="examp.cgi?id=$EMAIL">examples</a>.  
 
 <p>In the Climate Explorer pages, the <a href="help.cgi?id=$EMAIL"><img src="images/info-i.gif" alt="help" border="0"></a> symbol indicates a help pop-up.  Below an alphabetical list of these pop-ups is given.  Please contact <a href="mailto:oldenborgh@knmi.nl">me</a> if the help text is confusing, or missing in a place where it is needed.
 
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="2">Available help topics</a>
 EOF
 

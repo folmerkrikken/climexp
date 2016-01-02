@@ -21,10 +21,10 @@ EOF
 cat ./vinklude/header_algemeen.html
 ###sed -e 's@"/@"http://www.knmi.nl/@'  ./vinklude/header_algemeen.html
 cat <<EOF
-<table border="0" width="762" cellspacing="0" cellpadding="0">
+<table border="0" width="95.25%" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="80">&nbsp;</td>
-      <td width="451" valign=top>
+      <td width="10%">&nbsp;</td>
+      <td width="56.375%" valign=top>
          <div id="printable" name="printable">
          <!-- div -->
 <!-- Voeg hieronder de inhoud van de pagina in -->

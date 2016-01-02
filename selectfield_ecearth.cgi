@@ -12,7 +12,7 @@ cat <<EOF
 </div>
 <form action="select.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
-<table class="realtable" width=451 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr valign="baseline"><th colspan="14"><input type="submit" class="formbutton" value="Select field">
 Choose a field and press this button</td></tr>
 <tr><th>EC-Earth 2.3<br>RCP8.5
