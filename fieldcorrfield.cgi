@@ -24,6 +24,7 @@ if [ "$myname" = "fieldcorrfield_obs" ]; then
   NO_REA=true
   NO_SEA=true
   NO_CO2=true
+  NO_CM5=true
   NO_CSM=true
   NO_USE=true
   anotherfield="an observation field"
@@ -31,6 +32,7 @@ elif [ "$myname" = "fieldcorrfield_rea" ]; then
   NO_OBS=true
   NO_SEA=true
   NO_CO2=true
+  NO_CM5=true
   NO_CSM=true
   NO_USE=true
   anotherfield="a reanalysis field"
@@ -38,6 +40,7 @@ elif [ "$myname" = "fieldcorrfield_sea" ]; then
   NO_OBS=true
   NO_REA=true
   NO_CO2=true
+  NO_CM5=true
   NO_CSM=true
   NO_USE=true
   anotherfield="a seasonal forecast field"
@@ -45,19 +48,29 @@ elif [ "$myname" = "fieldcorrfield_co2" ]; then
   NO_OBS=true
   NO_REA=true
   NO_SEA=true
+  NO_CM5=true
   NO_USE=true
   anotherfield="a scenario run field"
+elif [ "$myname" = "fieldcorrfield_cmip5" ]; then
+  NO_OBS=true
+  NO_REA=true
+  NO_SEA=true
+  NO_CO2=true
+  NO_USE=true
+  anotherfield="a CMIP5 field"
 elif [ "$myname" = "fieldcorrfield_use" ]; then
   NO_OBS=true
   NO_REA=true
   NO_SEA=true
   NO_CO2=true
+  NO_CM5=true
   NO_CSM=true
   anotherfield="a user-defined field"
 else
   anotherfield="another field"
   NO_SEA=true
   NO_CO2=true
+  NO_CM5=true
   NO_CSM=true
 fi
 if [ $NPERYEAR -ge 360 ]; then
@@ -70,11 +83,14 @@ else
     NO_REA=true
     NO_SEA=true
     NO_CO2=true
+    NO_CM5=true
     anotherfield="a user-defined field"
 fi
     
 . ./myvinkhead.cgi "Pointwise correlations with $anotherfield" "$kindname $climfield" "noindex,nofollow"
 
+###echo "myname=$myname<br>"
+###echo "NO_OBS=$NO_OBS<br>"
 cat << EOF
 <form action="correlate1.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
@@ -110,10 +126,16 @@ if [ -z "$NO_SEA" ]; then
   cat $DIR/select${daily}field_sea.html
   echo '</table>'
 fi
-if [ -z "$NO_CSM" ]; then
+if [ -z "$NO_CO2" ]; then
   echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
-  echo '<tr><th colspan="15">Scenario runs</th></tr>'
+  echo '<tr><th colspan="15">CMIP3 runs</th></tr>'
   fgrep -v getindices $DIR/selectfield_ipcc.html
+  echo '</table>'
+fi
+if [ -z "$NO_CM5" ]; then
+  echo '<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
+  echo '<tr><th colspan="15">CMIP5 runs</th></tr>'
+  fgrep -v getindices $DIR/selectfield_cmip5.html
   echo '</table>'
 fi
 if [ -z "$NO_USE" ]; then 
