@@ -1,24 +1,6 @@
 #!/bin/sh
 
 . ./getargs.cgi
-# redirect old URL for search engines
-if [ -z "$EMAIL" -a -n "$QUERY_STRING" ]; then
-	email=`echo "$QUERY_STRING" | tr -d '<>&$;' | cut -f 1 -d '+'`
-	[ -z "$email" ] && email=someone@somewhere
-	wmo=`echo "$QUERY_STRING" | tr -d '<>&$;' | cut -f 2 -d '+'`
-	station=`echo "$QUERY_STRING" | tr -d '<>&$;' | cut -f 3 -d '+'`
-	cat <<EOF
-Status: 301 Moved Permanently
-Location: http://climexp.knmi.nl/${SCRIPT_NAME}?id=${email}&WMO=${wmo}&STATION=${station}
-Content-Type: text/html
-
-<html><head>
-</head><body>
-This page has moved to <a href="${SCRIPT_NAME}?id=${email}&WMO=${wmo}&STATION=${station}">a new URL</a>
-</body></html>
-EOF
-	exit
-fi
 
 ###echo "Content-Type: text/plain"; echo; set | fgrep FORM_ ; exit
 WMO="$FORM_WMO"

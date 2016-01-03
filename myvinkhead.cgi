@@ -6,7 +6,7 @@ if [ -n "$3" ]; then
   robot="<meta name=\"robots\" content=\""$3"\">"
 fi
 if [ -n "$absolute_paths" ]; then
-    prfx="http://climexp.knmi.nl/"
+    prfx="https://climexp.knmi.nl/"
 else
     prfx=""
 fi
