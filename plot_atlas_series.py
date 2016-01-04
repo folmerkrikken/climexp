@@ -818,13 +818,11 @@ plot \\\n""".format(yr1s=yr1s, yr2s=yr2s)
         else:
             ensembletext = ""
         self.logOut.info("""
-<table width=600 border=0 cellspacing=0 cellpadding=0>
-<tr><td>
 <div class='bijschrift'>
 {plottitle}. {ensembletext}(<a href='{pngImg}'>png</a>, <a href='{epsImg}'>eps</a>, <a href='{pdfImg}'>pdf</a>, <a href='{plotfile}'>plotscript</a>, <a href='plotfile2zip.cgi?plotfile={plotfile}'>all data</a>, <a href='{quantfile}'>means</a>)
-<center><img src='{pngImg}' alt='' width=405 /></center>'
 </div>
-</td></tr></table>
+<p>
+<center><img src='{pngImg}' alt='' width="100%" /></center>'
 """.format(plottitle=plottitle, ensembletext=ensembletext, pngImg=pngfile, epsImg=epsfile, pdfImg=epsfile.rstrip('.eps')+'.pdf', plotfile=plotfile, quantfile=quantfile))
 
 

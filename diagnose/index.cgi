@@ -396,7 +396,7 @@ if [ "$anomalie" = ja -a \( "$var" = prcp_gpcc -o "$var" = prcp_cmorph \) ]; the
   units=""
 fi
 
-echo '<table class="onelinetable" width=451 border=0 cellpadding=0 cellspacing=0><tr class="trcolor">'
+echo '<table class="onelinetable" width="100%" border=0 cellpadding=0 cellspacing=0><tr class="trcolor">'
 echo "<th colspan=3>$navigatie</th></tr><tr><td align=left>"
 
 file=$((FORM_year1-1))/${field}_${mon1}$((FORM_year1-1))$ext.png
@@ -460,6 +460,8 @@ if [ ! -s $pngfile ]; then
         fi
     fi
 else
+    fixedwidth=false
+    if [ $fixedwidth = true ]; then
         width=`file $pngfile | sed -e 's/^.*data, //' -e 's/ x .*$//'`
         if [ $width -gt 455 ]; then
             halfwidth=$((width/2))
@@ -470,14 +472,15 @@ else
             halfwidth=$width
         fi
         ###echo "width=$width, halfwidth=$halfwidth<br>"
+    else
+        halfwidth="100%"
+    fi
     cat <<EOF
 <div class="bijschrift">$naam $units $dezemaand $FORM_year1, $anomalienaam ($source: <a href="$url" target="_new">$bron</a>).</div>
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="$pngfile" alt="$naam $dezemaand $year1 $anomalienaam" border=0 class="realimage" width="$halfwidth" hspace=0 vspace=0>
-<br clear=all>
+<br>
 </center>
-</div>
 EOF
 fi
 
@@ -620,7 +623,7 @@ else # NPERYEAR = 1
 fi
 
 if [ $var != maunaloa_ch4 ]; then
-    echo '<table class="onelinetable" width=451 border=0 cellpadding=0 cellspacing=0><tr class="trcolor">'
+    echo '<table class="onelinetable" width="100%" border=0 cellpadding=0 cellspacing=0><tr class="trcolor">'
     echo "<th align=left colspan=3>$navigatie</th></tr><tr><td>&nbsp</td><td align=center>"
     if [ "$prefix" = tsi -a $NPERYEAR != 1 ]; then
         naam="$dezemaand $naam"
@@ -685,35 +688,37 @@ if [ $var != maunaloa_ch4 ]; then
 else # variables without 1975-now series
     pngfile=i${var}.png
 fi
-width=`file $pngfile | sed -e 's/^.*data, //' -e 's/ x .*$//'`
-if [ $width -gt 455 ]; then
-    halfwidth=$((width/2))
-    if [ $((2*halfwidth )) != $width ]; then
-        halfwidth=${halfwidth}.5
+fixedwidth=false
+if [ $fixedwidth = true ]; then
+    width=`file $pngfile | sed -e 's/^.*data, //' -e 's/ x .*$//'`
+    if [ $width -gt 455 ]; then
+        halfwidth=$((width/2))
+        if [ $((2*halfwidth )) != $width ]; then
+            halfwidth=${halfwidth}.5
+        fi
+    else
+        halfwidth=$width
     fi
 else
-    halfwidth=$width
+    halfwidth="100%"
 fi
-
 cat <<EOF
 <div class="bijschrift">$naam $units $extra ($source: <a href="$url" target="_new">$bron</a>).</div>
 <center>
-<div style="font-size:10px; width=451px;">
 <img src="$pngfile" alt="$naam" border=0 class="realimage" width="$halfwidth" hspace=0 vspace=0>
-<br clear=all>
+<br>
 </center>
-</div>
 EOF
 
 if [ "$naam" = "wereldgemiddelde temperatuur" \
   -o "$naam" = "wereldgemiddelde landtemperatuur" \
   -o "$naam" = "global mean temperature" \
   -o "$naam" = "global mean land temperature" ]; then
-    echo '<table class="onelinetable" width=451 border=0 cellpadding=0 cellspacing=0><tr class="trcolor"><td>'
+    echo '<table class="onelinetable" width="100%" border=0 cellpadding=0 cellspacing=0><tr class="trcolor"><td>'
     echo "$alternatieve_reeksen: "
     if [ "$naam" = "wereldgemiddelde temperatuur" \
       -o "$naam" = "global mean temperature" ]; then
-        vars="giss_al_gl_m hadcrut4110_ns_avg ncdc_gl erai_t2msst_gl"
+        vars="giss_al_gl_m hadcrut4_ns_avg ncdc_gl erai_t2msst_gl"
     else
         vars="giss_land crutem4gl ncdc_gl_land erai_t2m_landnoice"
     fi
@@ -725,6 +730,7 @@ if [ "$naam" = "wereldgemiddelde temperatuur" \
         else
             bewaar=$var
             var=$alt
+            ###echo "calling database with var=\"$var\""
             . ./database.cgi
             echo "<a href=index.cgi?var=$var&mon1=$FORM_mon1&year1=$FORM_year1&anomalie=$FORM_anomalie&kort=$FORM_kort&expert=$FORM_expert&type=$FORM_type>$bron</a>"
             var=$bewaar

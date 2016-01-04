@@ -2,7 +2,7 @@
 
 <div class="kalelink">
 <form id="climexp_form" action="plot_atlas_form.py" method="POST">
-<table class="realtable" width=600 border=0 cellspacing=0 cellpadding=0>
+<table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 
 {# select a region - standard or custom
    except the top few the same as the AR5 Atlas #}
@@ -32,6 +32,20 @@ Type:
 {% else %}
     {# save the variable in a hidden variable #}
     <input type=hidden name=srex value="{{FORM_srex}}">
+{% endif %}
+
+{% if FORM_region == 'ipbes' %}
+    </td></tr><tr><td>
+    IPBES:
+    </td><td>
+    <select class=forminput name=srex>
+    {% for ipbes_val in ipbes_values %}
+        <option value={{ipbes_val[0]}} {{ 'selected' if FORM_ipbes == ipbes_val[0] }} >{{ipbes_val[1]}}</option>
+    {% endfor %}
+    </select>
+{% else %}
+    {# save the variable in a hidden variable #}
+    <input type=hidden name=ipbes value="{{FORM_ipbes}}">
 {% endif %}
 
 {% if FORM_region == 'countries' %}
@@ -551,8 +565,8 @@ Output:
          </div>
 <!-- Insert the body of the page above this line -->
       </td>
-<td width="11">&nbsp;</td>
-      <td width=220 valign=top>
+<td width="1%">&nbsp;</td>
+      <td width="27.5%" valign=top>
 Users are strongly advised to study the <a href="javascript:pop_page('help/atlas.shtml',450,450)">short introduction</a>. Specific help is available under the <a href="javascript:pop_page('help/atlas.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a> icons.
 
       <div class="menukopje">Further information</div>
@@ -567,10 +581,10 @@ Users are strongly advised to study the <a href="javascript:pop_page('help/atlas
       </td>
    </tr>
 </table>
-<table border="0" width="911" cellspacing="0" cellpadding="0">
+<table border="0" width="95.25%" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="80">&nbsp;</td>
-      <td width="832" valign=top>
+      <td width="10%">&nbsp;</td>
+      <td width="56.375%" valign=top>
          <div id="printable" name="printable">
          <!-- div -->
 <!-- Voeg hieronder de inhoud van de pagina in -->

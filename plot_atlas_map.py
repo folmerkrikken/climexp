@@ -174,12 +174,10 @@ class PlotAtlasMap:
             if self.ensemble or self.params.FORM_dataset == '20CR':
                 self.logOut.info("Please note that tropical cyclones (hurricanes, typhoons) are not well-simulated by these models. In areas where these occur the map is not reliable.")
         htmlStr = """
-<table width=600 border=0 cellspacing=0 cellpadding=0>
-<tr><td>
 <div class="bijschrift">{title}. The hatching represents areas where the signal is smaller than one standard deviation of natural variability (<a href="{root}.eps">eps</a>, <a href="{root}.pdf">pdf</a>, <a href="{plotfile}">netcdf</a>)</div>
-<center><img src="{root}.png" alt="{title}" width={halfwidth}><br clear=all></center>
-</td></tr></table>        
-        """.format(root=root, title=title, plotfile=self.plotfile, halfwidth=halfwidth)
+<p>
+<center><img src="{root}.png" alt="{title}" width="100%"><br></center>
+        """.format(root=root, title=title, plotfile=self.plotfile)
         self.logOut.info(htmlStr)
 
 #        self.log.debug('Use temporary folder: %s' % self.tempDir)

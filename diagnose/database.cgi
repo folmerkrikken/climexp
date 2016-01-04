@@ -228,7 +228,7 @@ case "$var" in
 		name=HadCRUT3_global_temperature
 		climexpseries=UKMOData/$var
 		units=[Celsius];;
-	hadcrut4110_ns_avg)
+	hadcrut4_ns_avg)
 		if [ "$FORM_lang" = nl ]; then			
 			naam="wereldgemiddelde temperatuur"
 		else
@@ -522,7 +522,7 @@ case "$var" in
 		climexpfield="ensembles_05_pp_mo"
 		anomalie=ja;;
 	*) . ./myvinkheader.cgi "Maandoverzicht wereld" "fout"
-		echo "variabele $FORM_var is onbekend"
+		echo "variabele \"$var\" is onbekend"
 		. ./myvinkfooter.cgi
 		exit;;
 esac
