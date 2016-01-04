@@ -32,18 +32,13 @@ while [ $status = 0 ]; do
             ls -l `echo $file | cut -b 1-15`*
             exit
         fi
-        cat $file >> IPBES_$region.txt
-        echo >> IPBES_$region.txt
-        echo >> IPBES_$region.txt
-        cat ${file%.txt}_nan.txt >> IPBES_${region}_nan.txt
-        echo >> IPBES_${region}_nan.txt
-        echo >> IPBES_${region}_nan.txt
-        cat $file >> IPBES_$subregion.txt
-        echo >> IPBES_$subregion.txt
-        echo >> IPBES_$subregion.txt
-        cat ${file%.txt}_nan.txt >> IPBES_${subregion}_nan.txt
-        echo >> IPBES_${subregion}_nan.txt
-        echo >> IPBES_${subregion}_nan.txt
+        for myregion in IPBES_$region IPBES_$subregion
+        do
+            cat $file >> $myregion.txt
+            echo >> $myregion.txt
+            cat ${file%.txt}_nan.txt >> ${myregion}_nan.txt
+            echo "NaN  NaN" >> ${myregion}_nan.txt
+        done
         lastregion=$region
         lastsubregion=$subregion
     fi
