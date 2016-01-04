@@ -12,6 +12,7 @@ from util import month2string
 
 # Region: Predefined (srex)
 region_values = [['srex', 'IPCC WG1'],
+                 ['ipbes', 'IPBES'],
                  ['countries', 'countries'],
                  ['point', 'place'],
                  ['box', 'box']]
@@ -248,6 +249,9 @@ country_values = [['Afghanistan', 'Afghanistan'],
                ['Pitcairn_Is.', 'Pitcairn Islands'],
                ['Poland', 'Poland'],
                ['Portugal', 'Portugal'],
+               ['Portugal_without_islands', '&nbsp; Portugal without islands'],
+               ['Portugal_Azores', '&nbsp; Azores'],
+               ['Portugal_Madeira', '&nbsp; Madeira'],
                ['Puerto_Rico', 'Puerto Rico'],
                ['Qatar', 'Qatar'],
                ['Romania', 'Romania'],
@@ -274,6 +278,8 @@ country_values = [['Afghanistan', 'Afghanistan'],
                ['Somaliland', 'Somaliland'],
                ['South_Africa', 'South Africa'],
                ['Spain', 'Spain'],
+               ['Spain_Europe', '&nbsp; Spain (Europe)'],
+               ['Spain_Canary_islands', '&nbsp; Spain Canary Islands'],
                ['Sri_Lanka', 'Sri Lanka'],
                ['St._Barthelemy', 'St. Barthelemy'],
                ['St._Kitts_and_Nevis', 'St. Kitts and Nevis'],
@@ -367,6 +373,30 @@ country_values = [['Afghanistan', 'Afghanistan'],
                ['Yemen', 'Yemen'],
                ['Zambia', 'Zambia'],
                ['Zimbabwe', 'Zimbabwe']]
+
+ipbes_values = [['IPBES_Africa', 'IPBES Africa'],
+               ['IPBES_Americas', 'IPBES Americas'],
+               ['IPBES_Asia', 'IPBES Asia'],
+               ['IPBES_Europe_and_Central_Asia', 'IPBES Europe and Central Asia'],
+               ['IPBES_Caribbean', 'IPBES Caribbean'],
+               ['IPBES_Central_Africa', 'IPBES Central Africa'],
+               ['IPBES_Central_Asia', 'IPBES Central Asia'],
+               ['IPBES_Central_Europe', 'IPBES Central Europe'],
+               ['IPBES_East_Africa_and_adjacent_islands', 'IPBES East Africa and adjacent islands'],
+               ['IPBES_Eastern_Europe', 'IPBES Eastern Europe'],
+               ['IPBES_Mesoamerica', 'IPBES Mesoamerica'],
+               ['IPBES_North-East_Asia', 'IPBES North-East Asia'],
+               ['IPBES_North_Africa', 'IPBES North Africa'],
+               ['IPBES_North_America', 'IPBES North America'],
+               ['IPBES_Oceania', 'IPBES Oceania'],
+               ['IPBES_South-East_Asia', 'IPBES South-East Asia'],
+               ['IPBES_South_America', 'IPBES South America'],
+               ['IPBES_South_Asia', 'IPBES South Asia'],
+               ['IPBES_Southern_Africa', 'IPBES Southern Africa'],
+               ['IPBES_West_Africa', 'IPBES West Africa'],
+               ['IPBES_Western_Asia', 'IPBES Western Asia'],
+               ['IPBES_Western_Europe', 'IPBES Western Europe']]
+
 
 mon_values = [['1', 'Jan'],
               ['2', 'Feb'],
@@ -495,15 +525,15 @@ scenario_cmip5_values = [['rcp26', 'Historical + RCP2.6'],
 obs_tas_values = [['giss_temp_1200', 'GISTEMP 1200'],
                   ['ncdc_temp', 'NCDC MOST'],
                   ['hadcrut4', 'HadCRUT4.2.0.0'],
-                  ['cru_tmp', 'CRU TS 3.22']]
+                  ['cru_tmp', 'CRU TS 3.23']]
 
-obs_tasmin_values = [['cru_tmn', 'CRU TS 3.22']]
+obs_tasmin_values = [['cru_tmn', 'CRU TS 3.23']]
 
-obs_tasmax_values = [['cru_tmx', 'CRU TS 3.22']]
+obs_tasmax_values = [['cru_tmx', 'CRU TS 3.23']]
 
 obs_pr_values = [['gpcc_25_n1', 'GPCC v6'],
                  ['prca', 'NCDC anomalies'],
-                 ['cru_pre', 'CRU TS 3.22']]
+                 ['cru_pre', 'CRU TS 3.23']]
 
 obs_psl_values = [['trenberthslp', 'UCAR ds010 (NH only)'],
                   ['hadslp2r', 'HadSLP2r']]
@@ -559,6 +589,7 @@ class FormParameters:
         self.FORM_resubmitted = ""
         self.FORM_region = 'srex'
         self.FORM_srex = 'world'
+        self.FORM_ipbes = ''
         self.FORM_country = ''
         self.FORM_masktype = 'all'
         self.FORM_mon = '1'
@@ -628,6 +659,8 @@ class FormParameters:
         self.FORM_region = pat.sub('',self.FORM_region)
         self.FORM_srex = form.getfirst('srex', self.FORM_srex)
         self.FORM_srex = pat.sub('',self.FORM_srex)
+        self.FORM_ipbes = form.getfirst('ipbes', self.FORM_ipbes)
+        self.FORM_ipbes = pat.sub('',self.FORM_ipbes)
         self.FORM_country = form.getfirst('country', self.FORM_country)
         self.FORM_country = pat.sub('',self.FORM_country)
         self.FORM_lon = form.getfirst('lon', self.FORM_lon)
@@ -857,6 +890,7 @@ class FormParameters:
                      "# Select a region",
                      "FORM_region           = '%s'" % self.FORM_region,
                      "FORM_srex             = '%s'" % self.FORM_srex,
+                     "FORM_ipbes            = '%s'" % self.FORM_ipbes,
                      "FORM_country          = '%s'" % self.FORM_country,
                      "",
                      "FORM_lon1             = '%s'" % self.FORM_lon1,
