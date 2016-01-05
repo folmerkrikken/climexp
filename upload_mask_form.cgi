@@ -66,7 +66,7 @@ South Pole:
 <li><a href="upload_mask.cgi?id=$EMAIL&field=$FORM_field&set=countries">235 countries</a>
 <a href="http://www.rjruss.info/2010/12/free-countries-of-world-in-polygon-kml.html" target="_new"><img align=right src="images/info-i.gif" alt="help" border="0"></a>
 <a href="download_masks.cgi?id=$EMAIL&field=$FORM_field&set=countries"><img align=right src="images/download.gif" alt="download" border="0"></a>
-<li><a href="upload_mask.cgi?id=$EMAIL&field=$FORM_field&set=IPBES">22 <font color="#ff0000">preliminary</font> IPBES regions</a>
+<li><a href="upload_mask.cgi?id=$EMAIL&field=$FORM_field&set=IPBES">22 IPBES regions</a>
 <a href="http://ipbes.net" target="_new"><img align=right src="images/info-i.gif" alt="help" border="0"></a>
 <a href="download_masks.cgi?id=$EMAIL&field=$FORM_field&set=IPBES"><img align=right src="images/download.gif" alt="download" border="0"></a>
 </ul>

@@ -259,9 +259,14 @@ class PlotAtlasSeries:
                             args = "{lon1_subregion} {lon2_subregion} {lat1_subregion}  {lat2_subregion}".format(lon1_subregion=reg.lon1[subregion],
                                     lon2_subregion=reg.lon2[subregion],lat1_subregion=reg.lat1[subregion],lat2_subregion=reg.lat2[subregion], LSMASK=LSMASK, lsmask_subregion=reg.lsmask[subregion])
 
-                elif self.params.FORM_region == 'countries':
+                elif self.params.FORM_region in ['countries','ipbes']:
 
-                    country = self.params.FORM_country
+                    if self.params.FORM_region == 'countries':
+                        country = self.params.FORM_country
+                        countries = 'countries'
+                    else:
+                        country = self.params.FORM_ipbes
+                        countries = 'IPBES'
                     self.regionname = country
                     maskfile = 'country_masks/{country}/mask_{model}_{country}.nc'.format(country=country, model=model)
 
@@ -269,7 +274,7 @@ class PlotAtlasSeries:
                         countrydir = "country_masks/{country}".format(country=country)
                         if not os.path.isdir(countrydir):
                             os.makedirs(countrydir)
-                        command = "polygon2mask {filename} countries/{country}.txt {maskfile}".format(filename=filename, country=country, maskfile=maskfile)
+                        command = "polygon2mask {filename} {countries}/{country}.txt {maskfile}".format(filename=filename, countries=countries, country=country, maskfile=maskfile)
                         ###self.logOut.info(command)
                         subprocess.call(command, shell=True, stderr=subprocess.STDOUT)
                         if not os.path.exists(maskfile) or os.path.getsize(maskfile) == 0:
@@ -539,6 +544,7 @@ var=var, rel=rel, region_extension=self.region_extension, anom1=anom1, anom2=ano
             change = ""
 
         plottitle = "{relative}{Varname} {change}{regionname}{sname}".format(relative=relative, Varname=defVar.Varname, regionname=self.regionname, change=change, sname=sname)
+        plottitle = plottitle.replace('_',' ') # also avoids subscripts in gnuplot 5
         if anom1 != '0':
             plottitle += ' wrt {anom1}-{anom2}'.format(anom1=anom1, anom2=anom2)
         datasetname = define_dataset(self.params.FORM_dataset,FORM_field)
@@ -556,8 +562,14 @@ var=var, rel=rel, region_extension=self.region_extension, anom1=anom1, anom2=ano
         with open('log/log', 'a') as f:
             f.write('{datetime} {EMAIL} ({REMOTE_ADDR}) plot_atlas_series {title} {FORM_begin}:{FORM_end}\n'.format(datetime=strftime("%a %b %d %H:%M:%S %Z %Y", gmtime()), title=plottitle, **paramsDict))
         if not os.path.exists(epsfile) or os.path.getsize(epsfile) == 0:
+            # update when gnuplot is upgraded to gnuplot 5 on linux...
+            if sys.platform == 'darwin':
+                gnuplot_init = 'set colors classic'
+            else:
+                gnuplot_init = ''
             plotFileStr = """#!/usr/bin/env gnuplot
-            # {region_extension} {var} {sname} ref{anom1}-{anom2} {scenarios}
+# {region_extension} {var} {sname} ref{anom1}-{anom2} {scenarios}
+{gnuplot_init}
 set size 0.75,0.6
 set term postscript epsf color solid "Helvetica" 13
 set out "{epsfile}"
@@ -574,7 +586,7 @@ set y2tics out
 set xzeroaxis lw 4
 set ylabel "{units}"
 ###set style fill solid
-plot \\\n""".format(range=rangeVal, region_extension=self.region_extension, var=var, sname=sname, scenarios=scenarios, anom1=anom1, anom2=anom2, plottitle=plottitle,
+plot \\\n""".format(range=rangeVal, region_extension=self.region_extension, var=var, sname=sname, scenarios=scenarios, anom1=anom1, anom2=anom2, gnuplot_init=gnuplot_init, plottitle=plottitle,
      epsfile=epsfile, Varname=defVar.Varname,
      units=defVar.units, xtics=xtics, **paramsDict)
 

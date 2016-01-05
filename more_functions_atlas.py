@@ -538,7 +538,9 @@ def get_region_extension(params):
 
     if params.FORM_region == 'srex':
         region_extension = params.FORM_srex
-    if params.FORM_region == 'countries':
+    elif params.FORM_region == 'ipbes':
+        region_extension = params.FORM_ipbes
+    elif params.FORM_region == 'countries':
         region_extension = params.FORM_country
     elif params.FORM_region == 'point':
         region_extension = "%(FORM_lat)sN_%(FORM_lon)sE" % paramsDict

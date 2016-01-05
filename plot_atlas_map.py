@@ -686,7 +686,7 @@ class PlotAtlasMap:
                 reg.lat2[subregion] = float(ymax)
 
         elif self.params.FORM_region == 'ipbes':
-            polyRegionFile = "IPBES/" + self.params.FORM_country + ".txt"
+            polyRegionFile = "IPBES/" + self.params.FORM_ipbes + ".txt"
             xmin, xmax, ymin, ymax = getboxfrompolygon(polyRegionFile)
             reg = DefineRegion('world')
             region = self.params.FORM_ipbes
@@ -1069,6 +1069,8 @@ class PlotAtlasMap:
                 else:
                     if self.params.FORM_region == 'srex':
                         polyfile = "SREX/%(abbr)s_kaal.txt" % {'abbr': reg.abbr[i]}
+                    elif self.params.FORM_region == 'ipbes':
+                        polyfile = "IPBES/%(ipbes)s_nan.txt" % {'ipbes': reg.country[i]}
                     elif self.params.FORM_region == 'countries':
                         polyfile = "countries/%(country)s_nan.txt" % {'country': reg.country[i]}
                     else:
@@ -1129,10 +1131,12 @@ class PlotAtlasMap:
 ###                if 'EXPLICIT' not in el:
 ###                    self.logOut.info(el + '<br>')
 
+            if os.path.exists(epsFilename):
+                size = os.path.getsize('{root}.eps'.format(root=root))
+            else:   
+                size=0
 
-            size = os.path.getsize('{root}.eps'.format(root=root))
-
-            if size < 100:
+            if size < 2500:
 
                 if os.path.exists(epsFilename):
                     self.log.debug('rm %s' % epsFilename)
