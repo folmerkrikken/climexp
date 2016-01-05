@@ -64,7 +64,7 @@ if [ -z "$init_done" ]; then
    # if all is well, but is there as a fall-back.
    export gnuplot_version=`./bin/gnuplot --version`
    if [ "${gnuplot_version#gnuplot 5}" != "$gnuplot_version" ]; then
-      gnuplot_init="set colors classic"
+      export gnuplot_init="set colors classic"
       setxzeroaxis="" # bug in gnuplot 5.0 patchlevel 0
    else
       setxzeroaxis="set xzeroaxis"
