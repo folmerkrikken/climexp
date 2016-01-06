@@ -59,9 +59,12 @@ eval `./bin/getunits ./data/$TYPE$WMO.dat`
 ###echo "./bin/getunits ./data/$TYPE$WMO.dat<br>"
 ###echo "NEWUNITS=$NEWUNITS<br>"
 root=data/plot${nday}last$TYPE$WMO$KIND${FORM_climyear1}${FORM_climyear2}_$enddate
+if [ $FORM_anom = zero ]; then
+    anom=anom
+fi
 
-echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend" >> log/log
-(./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend > $root.txt) 2>&1
+echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend $anom" >> log/log
+(./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend $anom > $root.txt) 2>&1
 lastdate=`tail -n 1 $root.txt | cut -b 1-8`
 [ -z "$FORM_yr" ] && FORM_yr=`echo "$lastdate" | cut -b 1-4`
 [ -z "$FORM_mo" ] && FORM_mo=`echo "$lastdate" | cut -b 5-6`
@@ -114,6 +117,12 @@ pngfile="./$root.png"
 getpngwidth
 echo "<center><img src=\"$pngfile\" alt=\"last $nday ${months}s of $name at $station\" width="$halfwidth" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
+if [ $FORM_anom = zero ]; then
+    zero_checked=checked
+else
+    range_checked=checked
+fi
+
 cat <<EOF
 <div class="formbody">
 <form action="plotdaily.cgi" method="POST">
@@ -123,8 +132,9 @@ cat <<EOF
 <input type="hidden" name="STATION" value="$STATION">
 <input type="hidden" name="NAME" value="$NAME">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
-Replot 
-<input type="$number" min="1" max="1000" step=1 name="nday" $textsize3 value="$nday">
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
+<tr><td>Replot: 
+<td><input type="$number" min="1" max="1000" step=1 name="nday" $textsize3 value="$nday">
 ${month}s with end date
 <input type="$number" min="1" max="2400" step=1 name="yr" $textsize4 value="$FORM_yr">
 EOF
@@ -135,10 +145,16 @@ if [ ${NPERYEAR:-12} -gt 12 ]; then
     echo "<input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$FORM_dy">"
 fi
 cat <<EOF
-and climatology
+<tr><td>Compare with:
+<td>
+<input type=radio class=formradio name="anom" value="range" $range_checked>climatology
 <input type="$number" min="1" max="2400" step=1 name="climyear1" $textsize4 value="$FORM_climyear1">-<input type="$number" min="1" max="2400" step=1 name="climyear2" $textsize4 value="$FORM_climyear2">
-
+<br>
+<input type=radio class=formradio name="anom" value="zero" $zero_checked>zero, data are already anomalies
+<tr><td>
 <input type="submit" class="formbutton" value="plot">
+</table>
+</form>
 </div>
 EOF
 
