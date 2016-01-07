@@ -112,7 +112,7 @@ set ylabel "$ylabel"
 set term postscript epsf color solid
 set zeroaxis
 set output "./${base}a.eps"
-plot "./${base}a.plt" title "$NAME $station ($WMO) anomalies$period" with steps
+plot "./${base}a.plt" title "$NAME $station anomalies$period" with steps
 set term png $gnuplot_png_font_hires
 set out "./${base}a.png"
 replot
