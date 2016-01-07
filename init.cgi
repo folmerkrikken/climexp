@@ -13,9 +13,6 @@ if [ -z "$init_done" ]; then
         load=`ps axuw | fgrep -c .cgi`
         maxload=7 # 1 is the grep, we have 4 cores
     fi
-###   if [ $EMAIL = oldenbor@knmi.nl ]; then
-###       echo "load=$load<br>"
-###   fi
    if [ ${load:-0} -gt $maxload -a `uname` != Darwin ]; then
        echo 
        echo "Server too busy (load $load &gt; $maxload), try again later"
