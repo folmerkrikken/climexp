@@ -62,6 +62,7 @@ fi
 root=data/${FORM_which}${TYPE}${WMO}m${FORM_month}s${FORM_sum}d${FORM_detrend}f${FORM_diff}${FORM_ndiff}a${FORM_anomal}e${FORM_ensanom}$FORM_begin-$FORM_end$FORM_ave
 
 if [ $FORM_which = period ]; then
+  echo '<font color=\"#ff2222\">The spectrum routine often produces nonsense results. Please handle with caution...</font><p>'
   if [ ! -s $root.txt ]; then
     echo "Computing spectrum and significances. This may take a while...<p>"
     ###echo "bin/spectrum $corrargs <p>"
@@ -78,8 +79,9 @@ if [ $FORM_which = period ]; then
     cat $root.out
   fi
   if [ ! -s $root$a.png ]; then
-    if [ -n "$FORM_sum" ]; then
-      eval `$DIR/bin/month2string "$FORM_month" "$FORM_sum" 0`
+    if [ -n "$FORM_sum$FORM_sel" ]; then
+      sumstring=$FORM_sel
+      . ./month2string.cgi
       seriesmonth="$seriesmonth "
     fi
     if [ -n "$ENSEMBLE" -o -n "$FORM_ave" -a "$FORM_ave" != "1" ]; then
@@ -122,10 +124,11 @@ EOF
 else
   # autocorrelation function requested
   echo "#$DIR/bin/autocor $corrargs" > $root.txt
-  ($DIR/bin/autocor $corrargs >> $root.txt )2>&1
+  (./bin/autocor $corrargs >> $root.txt )2>&1
   echo "The horizontal lines give the 95% significance for a single point in the case of white noise, assuming all measurements are independent."
   if [ -n "$FORM_sum$FORM_month" ]; then
-    eval `$DIR/bin/month2string "$FORM_month" "$FORM_sum" 0`
+    sumstring=$FORM_sel
+    . ./month2string.cgi
     seriesmonth="$seriesmonth "
   fi
   title="Autocorrelation of $seriesmonth$CLIM $station ($WMO)"
@@ -143,9 +146,12 @@ else
   elif [ -n "$FORM_begin" ]; then
     title="$title beginning $FORM_begin"
   fi
+  if [ -n "$FORM_detrend" ]; then
+      title="$title (detrend)"
+  fi
+  title=`echo $title | tr '_' ' '`
   units=`fgrep '# lag in' $root.txt | cut -b 10-11`
   xlabel="lag [${units}]"
-
   ./bin/gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.4
