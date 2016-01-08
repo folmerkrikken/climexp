@@ -28,9 +28,8 @@ else
   echo "bin/averagefield_ensemble $ensfile mean $file" >> log/log
   ### echo bin/averagefield_ensemble $ensfile mean $file
   tmpfile=data/aap$$.nc
-  bin/averagefield_ensemble $ensfile mean $tmpfile
-  cdo -r -f nc4 -z zip copy $tmpfile $file
-  rm $tmpfile
+  ( bin/averagefield_ensemble $ensfile mean $tmpfile ) 2>&1
+  mv $tmpfile $file
   if [ ! -s $file ]; then
     echo "Something went wrong in the averaging routine."
     echo "Most likely, the fields are too large. Please first select the region you are interested in and then average."
