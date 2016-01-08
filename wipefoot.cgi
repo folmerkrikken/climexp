@@ -9,12 +9,11 @@ QUERY_STRING=`echo $QUERY_STRING | tr -cd '[:alnum:]?:/._=#~-'`
 [ -z "$SERVER_NAME" ] && echo "QUERY_STRING=$QUERY_STRING"
 c=`echo $QUERY_STRING | egrep -c 'games|sex|gossip|fake|[^a-z]sms|\.net|\.com|\.se'`
 [ -z "$SERVER_NAME" ] && echo "c=$c"
-if [ \( $c = 0 \
+if [ $c = 0 \
     -o "$QUERY_STRING" = "http://www.ssmi.com/sst/microwave_oi_sst_data_description.html" \
     -o  "$QUERY_STRING" = "http://www.remss.com/msu/msu_data_description.html" \
-    \) -a "${HTTP_REFERER#http://$SERVER_NAME}" != "${HTTP_REFERER}" \
-       -a "${HTTP_REFERER#http://$SERVER_NAME/wipefoot}" = "${HTTP_REFERER}" ]; then
-    echo "wipefeet to $QUERY_STRING" >> log/log
+   ]; then
+    echo "wipefoot to $QUERY_STRING" >> log/log
     cat << EOF
 Content-Type: text/html
 
@@ -35,5 +34,5 @@ EOF
 else
     echo "Content-Type: text/plain"
     echo
-    echo "This redirection is not allowed."
+    echo "This redirection is not allowed, c=$c"
 fi
