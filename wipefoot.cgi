@@ -13,7 +13,7 @@ if [ \( $c = 0 \
     -o "$QUERY_STRING" = "http://www.ssmi.com/sst/microwave_oi_sst_data_description.html" \
     -o  "$QUERY_STRING" = "http://www.remss.com/msu/msu_data_description.html" \
     \) -a "${HTTP_REFERER#http://$SERVER_NAME}" != "${HTTP_REFERER}" \
-       -a "${HTTP_REFERER#http://$SERVER_NAME/wipefeet}" = "${HTTP_REFERER}" ]; then
+       -a "${HTTP_REFERER#http://$SERVER_NAME/wipefoot}" = "${HTTP_REFERER}" ]; then
     echo "wipefeet to $QUERY_STRING" >> log/log
     cat << EOF
 Content-Type: text/html
