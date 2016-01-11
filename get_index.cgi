@@ -171,7 +171,7 @@ EOF
 		fi
 		polycommand="polygon2mask $onefile $maskfile $sp $mask $masknetcdf"
 		echo `date` "$EMAIL ($REMOTE_ADDR) $polycommand" >> log/log
-		$polycommand > /tmp/polygon2mask.log &
+		($polycommand > /tmp/polygon2mask.log) 2>&1 &
 	fi
 	PROG="get_index.sh $file mask $masknetcdf"
 else

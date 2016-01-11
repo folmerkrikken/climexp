@@ -43,17 +43,32 @@ station=`echo "$STATION" | tr '_' ' '`
 # if a mask has been used in the construction of the time series, plot it and enable its download
 if [ -n "$masknetcdf" ]; then
     i=0
-    while [ ! -s "$masknetcdf" ]; do
+    c=1
+    while [ ! -s "$masknetcdf" -a $c != 0 -a $i -lt 100 ]; do
         i=$((i+1))
         c=`ps axuw | fgrep polygon2mask | fgrep -v grep | wc -l`
+        if [ "$debug" = true ]; then
+            ps axuw | fgrep polygon2mask | fgrep -v grep
+            echo "<br>i,c = '$i,$c<br>"
+        fi
         if [ $c -gt 0 ]; then
             [ $((i%10)) = 1 ] && echo "Computing mask...<p>"
             sleep 3
         fi
     done
 	if [ ! -s "$masknetcdf" ]; then
-		echo "Something went wrong, cannot locate gridded mask file $masknetcdf"
+		echo "Something went wrong, cannot locate gridded mask file $masknetcdf<br>"
 		echo "Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> about this. I need the following command:<br> $polycommand"
+		if [ "$debug" = true ]; then
+            echo "<br>"
+            ls -l "$masknetcdf"
+            echo "<br>i,c = $i,$c<br>"
+            date
+            echo "<br>"
+            ps axuw | fgrep polygon2mask
+            echo "<br>"
+            ps axuw | fgrep polygon2mask | fgrep -v grep | wc -l
+		fi
 		. ./myvinkfoot.cgi
 	fi
 
