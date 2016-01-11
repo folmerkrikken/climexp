@@ -52,6 +52,8 @@ class PlotAtlasSeries:
         # Set temporary folder
         self.tempDir = tempfile.mkdtemp()
         self.log.debug('Use temporary folder: %s' % self.tempDir)
+        
+        self.maskfile = None
 
         # set flag for ensembles
         if self.params.FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3']:
@@ -246,6 +248,7 @@ class PlotAtlasSeries:
                     if reg.abbr[subregion]:
                         # the region is defined by a mask
                         maskfile = 'srex_masks/{abbr_subregion}/mask_{model}_{abbr_subregion}.nc'.format(abbr_subregion=reg.abbr[subregion], model=model)
+                        self.maskfile = maskfile
 
                         if not os.path.exists(maskfile) or os.path.getsize(maskfile) == 0:
                             raise PlotSeriesError("error: cannot locate maskfile {maskfile}".format(maskfile=maskfile))
@@ -269,6 +272,7 @@ class PlotAtlasSeries:
                         countries = 'IPBES'
                     self.regionname = country
                     maskfile = 'country_masks/{country}/mask_{model}_{country}.nc'.format(country=country, model=model)
+                    self.maskfile = maskfile
 
                     if not os.path.exists(maskfile) or os.path.getsize(maskfile) == 0:
                         countrydir = "country_masks/{country}".format(country=country)
@@ -290,6 +294,7 @@ class PlotAtlasSeries:
 
                     if not os.path.exists(maskfile) or os.path.getsize(maskfile) == 0:
                         raise PlotSeriesError("error: cannot locate uploaded maskfile {maskfile}".format(maskfile=maskfile))
+                    self.maskfile = maskfile
                 
                     args = "mask {maskfile}".format(maskfile=maskfile)
                 else:
@@ -829,13 +834,19 @@ plot \\\n""".format(yr1s=yr1s, yr2s=yr2s)
             ensembletext = "On the left, for each scenario one line per model is shown plus the multi-model mean, on the right percentiles of the whole dataset: the box extends from 25% to 75%, the whiskers from 5% to 95% and the horizontal line denotes the median (50%)."
         else:
             ensembletext = ""
+
+        if self.maskfile:
+            masktext = ", <a href='{maskdir}'>masks</a>".format(maskdir=os.path.dirname(self.maskfile))
+        else:
+            masktext = ""
+         
         self.logOut.info("""
 <div class='bijschrift'>
-{plottitle}. {ensembletext}(<a href='{pngImg}'>png</a>, <a href='{epsImg}'>eps</a>, <a href='{pdfImg}'>pdf</a>, <a href='{plotfile}'>plotscript</a>, <a href='plotfile2zip.cgi?plotfile={plotfile}'>all data</a>, <a href='{quantfile}'>means</a>)
+{plottitle}. {ensembletext}(<a href='{pngImg}'>png</a>, <a href='{epsImg}'>eps</a>, <a href='{pdfImg}'>pdf</a>, <a href='{plotfile}'>plotscript</a>, <a href='plotfile2zip.cgi?plotfile={plotfile}'>all data</a>, <a href='{quantfile}'>means</a>{masktext})
 </div>
 <p>
 <center><img src='{pngImg}' alt='' width="100%" /></center>'
-""".format(plottitle=plottitle, ensembletext=ensembletext, pngImg=pngfile, epsImg=epsfile, pdfImg=epsfile.rstrip('.eps')+'.pdf', plotfile=plotfile, quantfile=quantfile))
+""".format(plottitle=plottitle, ensembletext=ensembletext, pngImg=pngfile, epsImg=epsfile, pdfImg=epsfile.rstrip('.eps')+'.pdf', plotfile=plotfile, quantfile=quantfile,masktext=masktext))
 
 
         return timeSeries
