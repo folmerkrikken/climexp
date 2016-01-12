@@ -214,6 +214,7 @@ else
         while [ -s $ensfile ]; do
             ncfile=${ensfile%.dat}.nc
             if [ ! -s $ncfile -o $ncfile -ot $ensfile ]; then
+                [ -f $ncfile ] && rm $ncfile
                 echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
                 [ "$lwrite" = true ] && dat2nc $ensfile ${TYPE:-i} "$STATION" $ncfile
             fi
