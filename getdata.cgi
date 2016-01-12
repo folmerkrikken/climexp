@@ -1,9 +1,9 @@
 #!/bin/sh
 . ./init.cgi
 # should be sourced from one of the get* scripts
-debug=false
+lwrite=false
 if [ "$EMAIL" = oldenbor@knmi.nl -o $REMOTE_ADDR = 127.0.0.1 ]; then
-    debug=false # true
+    lwrite=false # true
 fi
 if [ -z "$myvinkhead" ]; then
   echo 'Content-Type: text/html'
@@ -47,7 +47,7 @@ if [ -n "$masknetcdf" ]; then
     while [ ! -s "$masknetcdf" -a $c != 0 -a $i -lt 100 ]; do
         i=$((i+1))
         c=`ps axuw | fgrep polygon2mask | fgrep -v grep | wc -l`
-        if [ "$debug" = true ]; then
+        if [ "$lwrite" = true ]; then
             ps axuw | fgrep polygon2mask | fgrep -v grep
             echo "<br>i,c = '$i,$c<br>"
         fi
@@ -59,7 +59,7 @@ if [ -n "$masknetcdf" ]; then
 	if [ ! -s "$masknetcdf" ]; then
 		echo "Something went wrong, cannot locate gridded mask file $masknetcdf<br>"
 		echo "Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> about this. I need the following command:<br> $polycommand"
-		if [ "$debug" = true ]; then
+		if [ "$lwrite" = true ]; then
             echo "<br>"
             ls -l "$masknetcdf"
             echo "<br>i,c = $i,$c<br>"
@@ -122,7 +122,7 @@ $PROG
 @
 EOF
   fi
-  if [ "$debug" = true ]; then
+  if [ "$lwrite" = true ]; then
     echo "./bin/$PROG $wmo<br>"
     echo "file = $file<br>"
     echo "TYPE = $TYPE<br>"
@@ -215,8 +215,8 @@ else
             ncfile=${ensfile%.dat}.nc
             if [ ! -s $ncfile -o $ncfile -ot $ensfile ]; then
                 [ -f $ncfile ] && rm $ncfile
-                echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
-                [ "$lwrite" = true ] && dat2nc $ensfile ${TYPE:-i} "$STATION" $ncfile
+                [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
+                dat2nc $ensfile ${TYPE:-i} "$STATION" $ncfile
             fi
             i=$((i+1))
             ii=`printf %02i $i`
@@ -347,7 +347,7 @@ if [ ! -f $inffile -a -f data/$WMO.$NPERYEAR.$EMAIL.inf ]; then
     inffile=data/$WMO.$NPERYEAR.$EMAIL.inf
     type=""
 fi
-if [ "$debug" = true ]; then
+if [ "$lwrite" = true ]; then
     echo "inffile=$inffile<br>"
     ls -l $inffile 2>& 1
     echo "<br>"
