@@ -59,7 +59,7 @@ else
     arg3="3"
     a=h
 fi
-root=data/${FORM_which}${TYPE}${WMO}m${FORM_month}s${FORM_sum}d${FORM_detrend}f${FORM_diff}${FORM_ndiff}a${FORM_anomal}e${FORM_ensanom}$FORM_begin-$FORM_end$FORM_ave
+root=data/${FORM_which}${TYPE}${WMO}m${FORM_month}s${FORM_sum}d${FORM_detrend}f${FORM_diff}${FORM_ndiff}a${FORM_anomal}e${FORM_ensanom}$FORM_begin-$FORM_end$FORM_ave$FORM_nens1$FORM_nens2
 
 if [ $FORM_which = period ]; then
   echo '<font color=\"#ff2222\">The spectrum routine often produces nonsense results. Please handle with caution...</font><p>'
