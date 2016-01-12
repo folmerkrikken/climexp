@@ -207,6 +207,22 @@ else
     # something went wrong
         echo `date`" $REMOTE_ADDR error: getunits failed for ./data/$TYPE$WMO.dat" 1>&2
     fi
+    if [ -n "$ENSEMBLE" ]; then
+        # also generate netcdf files for the rest of the ensemble
+        ensfile=$firstfile
+        i=0
+        while [ -s $ensfile ]; do
+            ncfile=${ensfile%.dat}.nc
+            if [ ! -s $ncfile -o $ncfile -ot $ensfile ]; then
+                echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
+                [ "$lwrite" = true ] && dat2nc $ensfile ${TYPE:-i} "$STATION" $ncfile
+            fi
+            i=$((i+1))
+            ii=`printf %02i $i`
+            iii=`printf %03i $i`
+            ensfile=`echo ./data/$TYPE$WMO.dat | sed -e "s/%%%/$iii/" -e "s/+++/$iii/" -e "s/%%/$ii/" -e "s/++/$ii/"`
+        done
+    fi
 fi
 
 if [ "$TYPE" = "i" -a "$EMAIL" != "someone@somewhere" ]; then
