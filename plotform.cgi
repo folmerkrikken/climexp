@@ -145,8 +145,15 @@ case "$mon2" in
 	SON) m2=4; ss4="selected";;
 esac
 
+if [ "$NX" -le 1 -a "$NZ" -gt 1 ]; then
+    latlon="Level-lat"
+elif [ "$NX" -le 1 -a "$NZ" -gt 1 ]; then
+    latlon="Level-lon"
+else
+    latlon="Lat-lon"
+fi
 cat <<EOF
-<div class="formheader">Lat-lon plot</div>
+<div class="formheader">$latlon plot</div>
 <div class="formbody">
 <form action="plotfield.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
