@@ -65,6 +65,7 @@ else
       ensgsouth=`echo $gsouth | sed -e "s/\%\%\%/$ens/" -e "s/\%\%/$ens/"`
       ensvort=`echo $vort | sed -e "s/\%\%\%/$ens/" -e "s/\%\%/$ens/"`    
       if [ ! -s $ensvort.ctl ]; then
+        echo "$iens "
         [ -f $ensvort.ctl ] && rm $ensvort.???
         [ -f $ensgsouth.ctl ] && rm $ensgsouth.???
         [ -f $ensgwest.ctl ] && rm $ensgwest.???
