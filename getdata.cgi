@@ -215,6 +215,7 @@ else
             ncfile=${ensfile%.dat}.nc
             if [ ! -s $ncfile -o $ncfile -ot $ensfile ]; then
                 [ -f $ncfile ] && rm $ncfile
+                [ "$NPERYEAR" -ge 360 ] && echo "Converting $i to netcdf<p>"
                 [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
                 dat2nc $ensfile ${TYPE:-i} "$STATION" $ncfile
             fi
