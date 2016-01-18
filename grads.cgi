@@ -1,7 +1,7 @@
 #!/bin/sh
 . ./init.cgi
 # to be sourced from various scripts.
-if [ $EMAIL = oldenbor@knmi.nl ]; then
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
 	lwrite=false # true
 	if [ "$lwrite" = true ]; then
 		echo "Turned on debug printing<p>"
