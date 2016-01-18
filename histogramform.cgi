@@ -140,4 +140,7 @@ Y <input type="$number" step=any class="forminput" name="ylo" $textsize4 value="
 </form>
 EOF
 
+if [ "$TYPE" != "set" ]; then
+    listname=""
+fi
 . ./myvinkfoot.cgi
