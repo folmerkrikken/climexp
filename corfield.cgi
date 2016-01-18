@@ -60,6 +60,7 @@ elif [ "$myname" = "corfield_cmip5" ]; then
 elif [ "$myname" = "corfield_use" ]; then
   NO_OBS=true
   NO_REA=true
+  NO_AR5=true
   NO_SEA=true
   NO_CO2=true
   anotherfield="a user-defined field"
