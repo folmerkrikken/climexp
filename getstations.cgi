@@ -84,6 +84,24 @@ if [ -z "$listname" ]; then
     fortargs=`echo "$FORM_name" | tr '[:lower:]' '[:upper:]'`
     if [ -n "$FORM_min" ] ; then
       fortargs="$fortargs min $FORM_min"
+      if [ -n "$FORM_month" -a "$FORM_month" != "-1" ]; then
+        fortargs="$fortargs mon $FORM_month sum $FORM_sum"
+      fi
+    fi
+    if [ -n "$FORM_dist" ] ; then
+      fortargs="$fortargs dist $FORM_dist"
+    fi
+    if [ -n "$FORM_elevmin" ] ; then
+      fortargs="$fortargs elevmin $FORM_elevmin"
+    fi
+    if [ -n "$FORM_elevmax" ] ; then
+      fortargs="$fortargs elevmax $FORM_elevmax"
+    fi
+    if [ -n "$FORM_yr1" ] ; then
+      fortargs="$fortargs begin $FORM_yr1"
+    fi
+    if [ -n "$FORM_yr2" ] ; then
+      fortargs="$fortargs end $FORM_yr2"
     fi
     . ./myvinkhead.cgi "Found station data" "$timescale$FORM_climate station $fortargs"
   elif [ -z "$FORM_lon" -a -z "$FORM_lat" \
