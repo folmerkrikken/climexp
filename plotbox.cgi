@@ -13,6 +13,9 @@ export DIR=`pwd`
 . ./myvinkhead.cgi "Map of stations" "$FORM_climate" "noindex,nofollow"
 
 plotlist=data/plotlist$$.txt
+listname="$FORM_listname"
+NPERYEAR="$FORM_nperyear"
+extraargs="$FORM_extraargs"
 ###echo ./bin/stationlist $FORM_listname $plotlist $FORM_prog plot
 ./bin/stationlist $FORM_listname $plotlist $FORM_prog plot
 

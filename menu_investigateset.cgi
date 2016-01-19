@@ -9,7 +9,7 @@
 shortclimate=`echo "$shortclimate" | tr '_' ' '`
 cat << EOF
 <div class="menukopje">Investigate this set of time series spatially</div>
-<div class="menulink"><a href="plotbox.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&extraargs=${extraargs}">Make a map</a>/<a href="box2kml.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">export kml</a></div>
+<div class="menulink"><a href="plotbox.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">Make a map</a>/<a href="box2kml.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">export kml</a></div>
 <div class="menulink"><a href="plotboxval.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">Plot $shortclimate</a></div>
 <div class="menulink"><a href="plotboxcorr.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">Correlate with a time series</a></div>
 <div class="menulink"><a href="plotboxautocorr.cgi?id=${EMAIL}&climate=${shortclimate}&prog=${prog}&listname=${listname}&nperyear=${NPERYEAR}&extraargs=${extraargs}">Autocorrelations</a></div>
