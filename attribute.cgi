@@ -281,6 +281,7 @@ if [ "$FORM_plot" = "hist" ]; then
 	if [ -n "$FORM_detrend" ]; then
 		title="$title (detrend)"
 	fi
+	title=`echo "$title" | tr '_' ' '`
 
 	cat <<EOF > $root.gnuplot
 $gnuplot_init
@@ -328,6 +329,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 		title="$title (detrend)"
 	fi
 	title="$title (${FORM_ci}% CI)"
+	title=`echo "$title" | tr '_' ' '`
 
 	xtics=`fgrep '#@' $root.txt | sed -e 's/^#@ //'`
 	if [ -n "$FORM_xlo" ]; then
