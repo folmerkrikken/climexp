@@ -198,8 +198,10 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <tr><td>&nbsp;<td><div class="kalelink">1850-now <a href="getindices.cgi?WMO=BerkeleyData/t2m_land_ocean_best&STATION=Berkeley_land_ocean_temperature&TYPE=i&id=$EMAIL">Land-ocean temperature</a>, 1750-now <a href="getindices.cgi?WMO=BerkeleyData/t2m_land_best&STATION=Berkeley_land_temperature&TYPE=i&id=$EMAIL">land temperature</a> Berkeley</div>
 <td><a href="wipefoot.cgi?http://www.berkeleyearth.org" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<!--
 <tr><td>&nbsp;<td><div class="kalelink">ERA-interim T2m/SST <a href="getindices.cgi?WMO=ERA-interim/erai_t2msst_gl&STATION=ERA_global_t2msst&TYPE=i&id=$EMAIL">global</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2msst_land&STATION=ERA_land_t2msst&TYPE=i&id=$EMAIL">land</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2msst_sea&STATION=ERA_sea_t2msst&TYPE=i&id=$EMAIL">sea</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2msst_nh&STATION=ERA_nh_t2msst&TYPE=i&id=$EMAIL">NH</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2msst_sh&STATION=ERA_sh_t2msst&TYPE=i&id=$EMAIL">SH</a> T2m  (1979-now)</div>
 <td><a href="wipefoot.cgi?http://apps.ecmwf.int/datasets/data/interim_full_moda/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+-->
 
 <tr><td>Lower troposphere temperature<td><div class="kalelink"><a href="getindices.cgi?WMO=UAHData/tlt_gl&STATION=TLT&TYPE=i&id=$EMAIL">Global</a>, <a href="getindices.cgi?WMO=UAHData/tlt_nh&STATION=TLT_NH&TYPE=i&id=$EMAIL">NH</a>, <a href="getindices.cgi?WMO=UAHData/tlt_sh&STATION=TLT_SH&TYPE=i&id=$EMAIL">SH</a>, <a href="getindices.cgi?WMO=UAHData/tlt_land&STATION=TLT_land&TYPE=i&id=$EMAIL">land</a>, <a href="getindices.cgi?WMO=UAHData/tlt_sea&STATION=TLT_sea&TYPE=i&id=$EMAIL">sea</a> anomalies (1979-now, UAH v6.0beta3)</div>
 <td><a href="wipefoot.cgi?http://www.atmos.uah.edu/data/msu/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
