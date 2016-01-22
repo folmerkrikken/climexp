@@ -33,12 +33,18 @@ else
         while [ $i -le $nmax ]
         do
     	    if [ $c3 = 0 ]; then
-		        ensfile=`echo $file | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
+    	        allfiles=`echo $file | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
 		    else
-		        ensfile=`echo $file | sed -e "s:\%\%\%:$ii:"`
+		        allfiles=`echo $file | sed -e "s:\%\%\%:$ii:"`
 		    fi
+		    if [ "$splitfield" = true ]; then
+    		    ensfile=`ls -t $allfiles | head -1`
+    		else
+    		    ensfile=$allfiles
+    		fi
 	        if [ -s $ensfile -a \( -z "$newestfile" -o $ensfile -nt "$newestfile" \) ]; then
 	    	    newestfile=$ensfile
+	    	    newestfiles=$allfiles
 	        fi
 	        if [ $i -lt 1 -o -s $ensfile ]; then
 		        i=$((i+1))
@@ -62,6 +68,7 @@ else
   		    fi
 	    done
 	    ensfile=$newestfile
+	    allfiles=$newestfiles
     fi
     metadata=./metadata/`echo $file|tr '/' '.'`.txt
     [ "$lwrite" = true ] && echo "echo ensfile=$ensfile<br>"
@@ -70,17 +77,17 @@ else
         exit -1
     fi
     if [ -s $metadata -a ! $metadata -ot $ensfile ]; then
-#       quick from chache
+#       quick from cache
         cat $metadata
         if [ -s $metadata.eval ]; then
-            eval `cat $metadata.eval`
+            eval `egrep '^[A-Z]*=[-"0-9a-zA-Z/*]*$' $metadata.eval`
         else
             ./bin/getunits $file | fgrep -v error > $metadata.eval        
             touch -r $file $metadata.eval
-            [ -s $metadata.eval ] && eval `cat $metadata.eval`
+            [ -s $metadata.eval ] && eval `egrep '^[A-Z]*=[-"0-9a-zA-Z/*]*$' $metadata.eval`
         fi
 #       but make sure the field is read once to make it faster on the next page
-        ( ./bin/getunits $file < /dev/null > /dev/null 2>&1 ) &
+        [ ! "$splitield" = true ] && ( ./bin/getunits $file < /dev/null > /dev/null 2>&1 ) &
     else
         ($describefile $file > /dev/null ) 2>&1 | tee $metadata
         ###echo "./bin/getunits $file &gt; $metadata.eval<br>"

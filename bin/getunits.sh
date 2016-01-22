@@ -6,5 +6,5 @@ if [ -s "$metadata" -a "$metadata" -nt "$file" ]; then
   cat "$metadata"
 else
   echo used=prog
-  ./bin/getunits $file |fgrep -v error |tee $metadata
+  ./bin/getunits `echo $file` |fgrep -v error |tee $metadata
 fi

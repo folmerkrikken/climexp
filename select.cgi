@@ -124,6 +124,7 @@ EOF
 EOF
 fi # NZ <= 1
 
+if [ "$splitfield" != true ]; then
 if [ $NPERYEAR -gt 1 ]; then
     case $NPERYEAR in
 	4) monthly=seasonally;;
@@ -145,6 +146,7 @@ cat <<EOF
 EOF
 . ./filteryearform.cgi
 echo '</div>'
+fi # skip for splitfield = true
 
 cat <<EOF
 <form action="fielddaily2longer.cgi" method="POST">
