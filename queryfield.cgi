@@ -55,12 +55,21 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
 	###echo "dataset=$dataset var=$var type=$type model=$model exp=$exp rip=$rip lead=$lead ip=$ip ensave=$ensave<br>"
 	if [ "${type%mon}" != "$type" ]; then
 	    if [ $dataset = knmi14 ]; then
-	            dir=mon/atmos
-	            type=Amon
-	        else
-	            dir=monthly
-	        fi
-	   NPERYEAR=12
+            dir=mon/atmos
+            type=Amon
+        else
+            dir=monthly
+        fi
+	    NPERYEAR=12
+	elif [ "${type%day}" != "$type" ]; then
+        if [ $dataset = knmi14 ]; then
+            dir=day/atmos
+            type=day
+            splitfield=true
+        else
+            dir=daily
+        fi
+	    NPERYEAR=366
 	elif [ $type = yr ]; then
 	    dir=annual
 	    NPERYEAR=1
@@ -94,7 +103,11 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
 	   fi
 	else
 	    if [ $dataset = knmi14 ]; then
-	        file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
+	        if [ "$splitfield" = true ]; then
+	            file=${var}_${type}_${model}_${exp}_????????-????????_%%.nc
+	        else
+	            file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
+	        fi
 	        file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type/$var/$file
 	        ###echo "file=$file"
 	   	elif [ -z "$rip" ]; then
@@ -5101,3 +5114,5 @@ if [ "${FORM_field%20c3m}" != "${FORM_field}" -o "${FORM_field%sresa1b}" != "${F
   NOMISSING=nomissing
 fi
 fi # rapid
+
+###echo "file=$file"

@@ -26,7 +26,18 @@ Choose a field and press this button</td></tr>
 <th>uas
 <th>vas
 <th>psl
-<tr><td>KNMI'14 (16)
+<tr><td>daily
+<td><input type=radio class=formradio name=field value=knmi14_tas_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_tasmin_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_tasmax_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_pr_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_evspsbl_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_pme_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_ssr_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_uas_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_vas_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_psl_Aday_ECEARTH23_rcp85>
+<tr><td>monthly
 <td><input type=radio class=formradio name=field value=knmi14_tas_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tasmin_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tasmax_Amon_ECEARTH23_rcp85>
@@ -37,7 +48,28 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_uas_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_vas_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_psl_Amon_ECEARTH23_rcp85>
-
+<tr><th>&nbsp;
+<th>Rx1day
+<th>Rx3day
+<th>Rx5day
+<th>Txx
+<th>Txn
+<th>Tnx
+<th>Tnn
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<tr><td>annual
+<td><input type=radio class=formradio name=field value=knmi14_rx1day_yr_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_rx3day_yr_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_rx5day_yr_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_txx_yr_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_txn_yr_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_tnx_yr_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_tnn_yr_ECEARTH23_rcp85>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
 </table>
 </form>
 <div class=alineakop>Monthly series</div>
