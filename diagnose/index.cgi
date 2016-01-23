@@ -718,9 +718,9 @@ if [ "$naam" = "wereldgemiddelde temperatuur" \
     echo "$alternatieve_reeksen: "
     if [ "$naam" = "wereldgemiddelde temperatuur" \
       -o "$naam" = "global mean temperature" ]; then
-        vars="giss_al_gl_m hadcrut4_ns_avg ncdc_gl erai_t2msst_gl"
+        vars="giss_al_gl_m hadcrut4_ns_avg ncdc_gl" # erai_t2msst_gl
     else
-        vars="giss_land crutem4gl ncdc_gl_land erai_t2m_landnoice"
+        vars="giss_land crutem4gl ncdc_gl_land" # erai_t2m_landnoice
     fi
     for alt in $vars
     do
