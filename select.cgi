@@ -87,7 +87,9 @@ if [ $n != 1 ]; then
 	exit
 fi
 ./bin/describefield.sh $file
-metadata=./metadata/`echo $file|tr '/' '.'`.txt
+metadata=./metadata/$file.txt
+metadir=`dirname $metadata`
+[ ! -d $metadir ] && mkdir -p $metadir
 if [ -f $metadata.eval ]; then
   eval `cat $metadata.eval | egrep '(^NPERYEAR=|^VAR=|^UNITS=|^NEWUNITS=|^N.=)[-_" ^*/a-zA-Z0-9]*$'`
 else

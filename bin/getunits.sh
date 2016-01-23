@@ -1,10 +1,12 @@
 #!/bin/sh
 file="$1"
-metadata=metadata/`echo "$file" | tr '/' '.'`.txt.eval
+metadata=metadata/$file.txt.eval
+metadir=`dirname $metadata`
+[ ! -d $metadir ] && mkdir -p $metadir
 if [ -s "$metadata" -a "$metadata" -nt "$file" ]; then
   echo used=cache
-  cat "$metadata"
+  egrep '^[A-Z]*=[-"0-9a-zA-Z/*]*$' "$metadata"
 else
   echo used=prog
-  ./bin/getunits `echo $file` |fgrep -v error |tee $metadata
+  ./bin/getunits $file |fgrep -v error |tee $metadata
 fi
