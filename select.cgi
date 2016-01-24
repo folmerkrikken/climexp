@@ -33,6 +33,13 @@ fi
 
 . ./myvinkhead.cgi "Field" "$kindname $climfield" "nofollow,index"
 
+if [ "$splitfield" = true ]; then
+    echo "<font color=\"#FF0000\">This field is very large and is stored as a set of files, I am working on getting features to work. Operations on this field will take a <b>long</b> time, more than one hour.<p></font>"
+    if [ -z "$EMAIL" -o "$EMAIL" = "someone@somewhere" ]; then
+        echo "You will have to register to use this feauture of the Climate Explorer."
+    fi
+fi
+
 if [ ${FORM_field#rt2b_} != $FORM_field -o ${FORM_field#rt3_} != $FORM_field ]; then
 	if [ "$EMAIL" = someone@somewhere ]; then
 		echo "Sorry, you need to be <a href=\"registerform.cgi\">logged in</a> to use ENSEMBLES data"
@@ -180,7 +187,7 @@ if [ "$field_type" = SST ]; then
   echo "<p><a href=\"hurricane.cgi?email=$EMAIL&field=$FORM_field\">Compute expected number of Atlantic hurricanes</a>"
 fi
 
-if [ -n "$ENSEMBLE" ]; then
+if [ -n "$ENSEMBLE" -a "$splitfield" != true ]; then
   cat <<EOF
 <p><div class="formheader">Compute ensemble mean</div>
 <div class='formbody'>
@@ -218,7 +225,7 @@ if [ $NPERYEAR = 12 ]; then
 EOF
 fi
 
-if [ -n "$NY" -a "$NY" != 1 ]; then
+if [ -n "$NY" -a "$NY" != 1 -a "$splitfield" != true ]; then
   cat <<EOF
 <p><div class="formheader">Compute zonal mean</div>
 <div class='formbody'>
@@ -328,6 +335,7 @@ fi
 ###echo "ENSEMBLE=$ENSEMBLE<br>"
 
 if [ "$download" = OK ]; then
+
 if [ -n "$ENSEMBLE" ]; then
   i=0
   c2=`echo $file | fgrep -c '%%'`
@@ -351,19 +359,26 @@ if [ -n "$ENSEMBLE" ]; then
       member=`echo $file | sed -e "s/%%%/$i/"`
     fi
     ###echo "member=$member<br>"
-    if [ -f $member ]; then
-      if [ ${member%nc} = $member ]; then
-        datfile=`dirname $member`/`head -1 $member \
-	    | sed -e 's/DSET *//' -e 's/dset *//' -e 's/\^//'`
-	if [ ! -f $datfile ]; then
-	  datfile=$datfile.gz
-        fi
-        echo "ensemble member $i: download <a href=\"$member\">ctl</a> and <a href=\"$datfile\">dat</a> files or <a href=\"grads2nc.cgi?file=$member&id=$EMAIL\">netcdf</a>,"
-      else
-        echo "ensemble member $i: download <a href=\"$member\">netcdf</a>,"
-      fi
-      echo "analyse <a href=\"selectmember.cgi?id=$EMAIL&i=$i&field=$FORM_field\">separately</a><br>"
+    if [ "$splitfield" = true ]; then
+        members=`echo $member`
+    else
+        members=$member
     fi
+    for member in $members; do
+        if [ -f $member ]; then
+          if [ ${member%nc} = $member ]; then
+            datfile=`dirname $member`/`head -1 $member \
+            | sed -e 's/DSET *//' -e 's/dset *//' -e 's/\^//'`
+            if [ ! -f $datfile ]; then
+                datfile=$datfile.gz
+            fi
+            echo "ensemble member $i: download <a href=\"$member\">ctl</a> and <a href=\"$datfile\">dat</a> files or <a href=\"grads2nc.cgi?file=$member&id=$EMAIL\">netcdf</a>,"
+          else
+            echo "ensemble member $i: download <a href=\"$member\">netcdf</a>,"
+          fi
+          echo "analyse <a href=\"selectmember.cgi?id=$EMAIL&i=$i&field=$FORM_field\">separately</a><br>"
+        fi
+    done
     i=$(($i + 1))
   done
   ensemble_done=true

@@ -17,7 +17,7 @@ elif [ -n "$STATION" ]; then
   . ./menu_investigate.cgi
 fi
 ###echo "FORM_field=$FORM_field"
-if [ -n "$field2" -a "$splitfield != true ]; then
+if [ -n "$field2" -a "$splitfield" != true ]; then
   FORM_field=$field1
   kindname=$kindname1
   climfield=$climfield1
@@ -27,7 +27,7 @@ if [ -n "$field2" -a "$splitfield != true ]; then
   kindname=$kindname2
   climfield=$climfield2
   . ./menu_investigatefield.cgi
-elif [ -n "$FORM_field" -a "$splitfield != true ]; then
+elif [ -n "$FORM_field" -a "$splitfield" != true ]; then
   . ./menu_investigatefield.cgi
 fi
 [ -x "./$1.cgi" ] && . "./$1.cgi"

@@ -206,6 +206,13 @@ if [ "$FORM_gridpoints" != true ]; then
   if [ $n -gt 10 -a $outfile -nt $file ]; then
     PROG=""
   fi
+  if [ "$splitfield" = true -a "$PROG" != "" ]; then
+    warning='<font color="#ff0000">This will take a long time, at least an hour.</font>'
+    if [ -z "$EMAIL" -o "$EMAIL" = someone@somewhere ]; then
+        . ./myvinhead.cgi "Error" "Please register for this operation"
+        . ./myvinkfoot.cgi
+    fi
+  fi
   . ./getdata.cgi
 else
   STATION=""

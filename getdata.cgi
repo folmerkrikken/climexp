@@ -40,6 +40,10 @@ fi
 station=`echo "$STATION" | tr '_' ' '`
 . ./myvinkhead.cgi "Time series" "$timescale $station $NAME" "index,nofollow"
 
+if [ -n "$warning" ]; then
+    echo "$warning<p>"
+fi
+
 # if a mask has been used in the construction of the time series, plot it and enable its download
 if [ -n "$masknetcdf" ]; then
     i=0

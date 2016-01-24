@@ -65,7 +65,7 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
         if [ $dataset = knmi14 ]; then
             dir=day/atmos
             type=day
-            splitfield=true
+            export splitfield=true
         else
             dir=daily
         fi

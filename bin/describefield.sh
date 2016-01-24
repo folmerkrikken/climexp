@@ -1,4 +1,5 @@
 #!/bin/sh
+###set -x
 file="$1"
 if [ -z "$file" ]; then
   echo "usage: $0 file"
@@ -6,10 +7,10 @@ if [ -z "$file" ]; then
 fi
 lwrite=false
 [ "$lwrite" = true ] && echo "file=$file<br>"
-describefile=${0%.sh}
+describefield=${0%.sh}
 if [ ${file%.nc} = $file -a ${file%.cdf} = $file -o ${file#data} != $file ]; then
     [ "$lwrite" = true ] && echo "grads file $file<br>"
-    ($describefile $file > /dev/null) 2>&1
+    ($describefield $file > /dev/null) 2>&1
     eval `./bin/getunits $file`
 else
     [ "$lwrite" = true ] && echo "netcdf file $file"  
@@ -40,16 +41,17 @@ else
                 allfiles=`echo $file | sed -e "s:\%\%\%:$ii:"`
             fi
             if [ "$splitfield" = true ]; then
-                ensfile=`ls -t $allfiles | head -1`
+                ensfile=`ls -t $allfiles 2>&1 | head -1`
             else
                 ensfile=$allfiles
             fi
-            if [ -s $ensfile -a \( -z "$newestfile" -o $ensfile -nt "$newestfile" \) ]; then
+            if [ -s "$ensfile" -a \( -z "$newestfile" -o "$ensfile" -nt "$newestfile" \) ]; then
+                [ "$lwrite" = true ] && echo "set newestfile to $ensfile"
                 newestfile=$ensfile
                 newestfiles=$allfiles
                 newestii=$ii
             fi
-            if [ $i -lt 1 -o -s $ensfile ]; then
+            if [ $i -lt 1 -o -s "$ensfile" ]; then
                 i=$((i+1))
             else
                 i=$((1+nmax))
@@ -69,6 +71,7 @@ else
     fi
     if [ "$splitfield" = true ]; then
         files=`echo $allfiles | sed -e "s/_$newestii/_$pattern/g"`
+        [ "$lwrite" = true ] && echo "files=$files"
     else
         files=$file
     fi
@@ -83,9 +86,10 @@ else
             [ -s $metadata.eval ] && eval `egrep '^[A-Z]*=[-"0-9a-zA-Z/*]*$' $metadata.eval`
         fi
 #       but make sure the field is read once to make it faster on the next page
-        [ ! "$splitield" = true ] && ( ./bin/getunits $file < /dev/null > /dev/null 2>&1 ) &
+        [ "$splitield" != true ] && ( ./bin/getunits $files < /dev/null > /dev/null 2>&1 ) &
     else
-        ($describefile $files > /dev/null ) 2>&1 | tee $metadata
+        [ "$lwrite" = true ] && echo "executing $describefield $files"
+        ($describefield $files > /dev/null ) 2>&1 | tee $metadata
         ###echo "./bin/getunits $file &gt; $metadata.eval<br>"
         ./bin/getunits $files | fgrep -v error > $metadata.eval
         touch -r $ensfile $metadata
