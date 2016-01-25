@@ -80,7 +80,7 @@ if [ "$NPERYEAR" -ge 360 ]; then
 else
     timefmt="'%Y%m'"
 fi
-if [ "$NEWUNITS" = "mm/day" ]; then
+if [ "$NEWUNITS" = "mm/day" -o "$VAR" = "soilw" ]; then
     above=3
     below=1
 else
