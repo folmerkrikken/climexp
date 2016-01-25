@@ -103,6 +103,19 @@ t1=subwrd(result,3)
 dy=substr(t1,4,2)
 mo=substr(t1,6,3)
 yr=substr(t1,9,4)
+'q dims'
+say result
+line=sublin(result,4)
+varying=subwrd(line,3)
+if ( varying = 'varying' )
+  z1=subwrd(line,11)
+  z2=subwrd(line,13)
+  if ( z1 > z2 )
+    say 'Z-axis decreases, flip'
+    say 'set z 'z2' 'z1
+    'set z 'z2' 'z1
+  endif
+endif
 
 if ( cmin != '' & cmax != '' & cint = '' )
 cint = (cmax-cmin)/10
@@ -150,7 +163,7 @@ if ( field = corr )
 else
   if ( field = sign )
     clevs='0.9 0.95 0.99 0.995 0.999 0.9995 0.9999'
-    flipped=3
+    flipped=13
   else
     if ( field = prob )
       clevs='0.0001 0.0005 0.001 0.005 0.01 0.05 0.1'
@@ -161,7 +174,7 @@ else
     else
       if ( substr(field,1,2) = rt | substr(field,1,4) = lort | substr(field,1,4) = hirt | substr(field,1,6) = pot_rt | substr(field,4,9) = pot_rt | substr(field,1,7) = norm_rt | substr(field,4,10) = norm_rt | substr(field,1,6) = gev_rt | substr(field,4,10) = gev_rt )
         clevs='10 20 50 100 200 500 1000 2000 5000 10000'
-        flipped=3
+        flipped=13
       else
 *
 *	figure out maxval from the field
