@@ -86,7 +86,7 @@ else
             [ -s $metadata.eval ] && eval `egrep '^[A-Z]*=[-"0-9a-zA-Z/*]*$' $metadata.eval`
         fi
 #       but make sure the field is read once to make it faster on the next page
-        [ "$splitield" != true ] && ( ./bin/getunits $files < /dev/null > /dev/null 2>&1 ) &
+        [ "$splitfield" != true ] && ( ./bin/getunits $files < /dev/null > /dev/null 2>&1 ) &
     else
         [ "$lwrite" = true ] && echo "executing $describefield $files"
         ($describefield $files > /dev/null ) 2>&1 | tee $metadata
