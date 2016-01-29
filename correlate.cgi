@@ -160,8 +160,8 @@ $xrange
 $yrange
 set term postscript epsf color solid
 set output "${corrroot}_runcor.eps"
-set title "$title"
-set ylabel "$correlation"
+set title "`echo $title | tr '_' ' '`"
+set ylabel "`echo $correlation | tr '_' ' '`""
 plot "$DIR/data/$TYPE$WMO${FORM_num}.runcor" using 1:3 title "${FORM_runwindow}-yr $corr" with lines lt 1, \
      "$DIR/data/$TYPE$WMO${FORM_num}.runcor" using 1:5 title " 2.5%" with lines lt 2, \
      "$DIR/data/$TYPE$WMO${FORM_num}.runcor" using 1:9 title "97.5%" with lines lt 2
@@ -330,7 +330,7 @@ set log y
 set ylabel 'probability'
 set zero 1e-40
 set format y "%5.0e"
-set title "$title"
+set title "`echo $title | tr '_' ' '`"
 plot "data/$TYPE$WMO${FORM_num}.corr" $prob1 notitle with lines,\
      "data/$TYPE$WMO${FORM_num}.corr" $prob2 notitle with lines
 set nolog y
@@ -479,9 +479,9 @@ FIT_LIMIT=1e-8
 $fitit
 set term postscript epsf color solid
 set output "$corrroot.eps"
-set title "$title"
-set xlabel "$indexmonth $xlabel$added"
-set ylabel "$seriesmonth $CLIM $ylabel"
+set title "`echo $title | tr '_' ' '`"
+set xlabel "`echo $indexmonth $xlabel$added | tr '_' ' '`"
+set ylabel "`echo $seriesmonth $CLIM $ylabel | tr '_' ' '`"
 set key left samplen -1
 $xrange
 $yrange
@@ -508,8 +508,8 @@ $gnuplot_init
 set size 0.7,0.5
 $xrange
 set yrange [0:100]
-set title "$seriesmonth $title"
-set xlabel "$indexmonth $xlabel$added"
+set title "`echo $seriesmonth $title | tr '_' ' '`"
+set xlabel "`echo $indexmonth $xlabel$added | tr '_' ' '`"
 set ylabel "probability [%]"
 set term postscript epsf color solid
 set output "$corrroot.trc.eps"
@@ -630,8 +630,8 @@ else
 $gnuplot_init
 set size 0.7,0.5
 set zeroaxis
-set title "$title"
-set xlabel "lag [${lagunit}] (lag positive: $index leading $CLIM)"
+set title "`echo $title | tr '_' ' '`"
+set xlabel "`echo lag [${lagunit}] (lag positive: $index leading $CLIM) | tr '_' ' '`"
 set ylabel "$correlation"
 set term postscript epsf color solid
 $xrange
@@ -652,8 +652,8 @@ set size 0.7,0.5
 $xrange
 $yrange
 set zeroaxis
-set title "$seriesmonth $title"
-set xlabel "lag [${lagunit}] (lag positive: $index leading $CLIM)"
+set title "`echo $seriesmonth $title | tr '_' ' '`"
+set xlabel "`echo lag [${lagunit}] (lag positive: $index leading $CLIM) | tr '_' ' '`"
 set ylabel "(<<)+(>>), (<>)+(><)"
 set term postscript epsf color solid
 set output "$corrroot.eps"
