@@ -9,7 +9,7 @@ export TYPE="$FORM_TYPE"
 NPERYEAR="$FORM_NPERYEAR"
 NAME="$FORM_NAME"
 
-root=`basename $FORM_datafile .txt`
+root=`basename $FORM_datafile .txt | tr '%' '+'`
 datafile=data/$root.txt
 ensemblefile=`echo "$datafile" | tr '%' '+'`
 if [ $datafile != $ensemblefile ]; then
