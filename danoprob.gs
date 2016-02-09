@@ -173,7 +173,7 @@ else
         clevs='-200 -100 -50 -20 -10 10 20 50 100 200'
     else
       if ( substr(field,1,2) = rt | substr(field,1,4) = lort | substr(field,1,4) = hirt | substr(field,1,6) = pot_rt | substr(field,4,9) = pot_rt | substr(field,1,7) = norm_rt | substr(field,4,10) = norm_rt | substr(field,1,6) = gev_rt | substr(field,4,10) = gev_rt )
-        clevs='10 20 50 100 200 500 1000 2000 5000 10000'
+        clevs='20 50 100 200 500 1000'
         flipped=13
       else
 *
