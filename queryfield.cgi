@@ -15,53 +15,53 @@ else
 NPERYEAR=12 # default
 case $FORM_field in
 cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
-	field=$FORM_field
-	dataset=${field%%_*}
-	field=${field#cmip5_}
-	field=${field#thor_}
-	field=${field#knmi14_}
-	var=${field%%_*}
-	field=${field#*_}
-	type=${field%%_*}
-	field=${field#*_}
-	model=${field%%_*}
-	field=${field#*_}
-	if [ ${field#p?_} != $field ]; then
-		physics=${field%%_*}
-		model=${model}_${physics}
-		field=${field#*_}
-	fi
-	if [ ${field#decadal} != $field ]; then
-	   exp=${field%%_*}
-	   field=${field#*_}
-	   lead=${field%%_*}
-	   field=${field#*_}
-	   ip=${field%%_*}
-	   field=${field#*_}
-	   ensave=$field
-	elif [ ${field%_*} = $field ]; then
-	   exp=$field
-	   rip=""
-	else
-	   exp=${field%_*}
-	   rip=${field#*_}
-	   if [ $rip = 144 ]; then # special case
-	      rip=ave_144
-	   fi
-	   if [ $rip = 288 ]; then # special case
-	      rip=ave_288
-	   fi
-	fi
-	###echo "dataset=$dataset var=$var type=$type model=$model exp=$exp rip=$rip lead=$lead ip=$ip ensave=$ensave<br>"
-	if [ "${type%mon}" != "$type" ]; then
-	    if [ $dataset = knmi14 ]; then
+    field=$FORM_field
+    dataset=${field%%_*}
+    field=${field#cmip5_}
+    field=${field#thor_}
+    field=${field#knmi14_}
+    var=${field%%_*}
+    field=${field#*_}
+    type=${field%%_*}
+    field=${field#*_}
+    model=${field%%_*}
+    field=${field#*_}
+    if [ ${field#p?_} != $field ]; then
+        physics=${field%%_*}
+        model=${model}_${physics}
+        field=${field#*_}
+    fi
+    if [ ${field#decadal} != $field ]; then
+       exp=${field%%_*}
+       field=${field#*_}
+       lead=${field%%_*}
+       field=${field#*_}
+       ip=${field%%_*}
+       field=${field#*_}
+       ensave=$field
+    elif [ ${field%_*} = $field ]; then
+       exp=$field
+       rip=""
+    else
+       exp=${field%_*}
+       rip=${field#*_}
+       if [ $rip = 144 ]; then # special case
+          rip=ave_144
+       fi
+       if [ $rip = 288 ]; then # special case
+          rip=ave_288
+       fi
+    fi
+    ###echo "dataset=$dataset var=$var type=$type model=$model exp=$exp rip=$rip lead=$lead ip=$ip ensave=$ensave<br>"
+    if [ "${type%mon}" != "$type" ]; then
+        if [ $dataset = knmi14 ]; then
             dir=mon/atmos
             type=Amon
         else
             dir=monthly
         fi
-	    NPERYEAR=12
-	elif [ "${type%day}" != "$type" ]; then
+        NPERYEAR=12
+    elif [ "${type%day}" != "$type" ]; then
         if [ $dataset = knmi14 ]; then
             dir=day/atmos
             type=day
@@ -69,124 +69,124 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
         else
             dir=daily
         fi
-	    NPERYEAR=366
-	elif [ $type = yr ]; then
-	    dir=annual
-	    NPERYEAR=1
-	else
-	   echo "$0: cannot handle type $type yet"
-	   exit -1
-	fi
-	case $dataset in
-	     cmip5) datasetname=CMIP5;decdir=CMIP5/decadal;;
-	     thor) datasetname=THOR;decdir=THOR;;
-	     knmi14) datasetname=KNMI14;;
-	     *) echo "unknown dataset $dataset"; exit -1;;
-	esac
-	if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
-	     $var = tp ]; then
-	    flipcolor=11
-	fi
-	if [ $exp = decadal ]; then
+        NPERYEAR=366
+    elif [ $type = yr ]; then
+        dir=annual
+        NPERYEAR=1
+    else
+       echo "$0: cannot handle type $type yet"
+       exit -1
+    fi
+    case $dataset in
+         cmip5) datasetname=CMIP5;decdir=CMIP5/decadal;;
+         thor) datasetname=THOR;decdir=THOR;;
+         knmi14) datasetname=KNMI14;;
+         *) echo "unknown dataset $dataset"; exit -1;;
+    esac
+    if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
+         $var = tp ]; then
+        flipcolor=11
+    fi
+    if [ $exp = decadal ]; then
            if [ $model = modmean -o $model = mod -o $model = ens ]; then
-	      if [ $ip = i0p1 ]; then
-	         file=$decdir/${var}_${type}_${model}0_yr${lead}_%%.nc
-	      elif [ $ip = i1p1 ]; then
-	         file=$decdir/${var}_${type}_${model}_yr${lead}_%%.nc
-	      else
-                 exit -1
-	      fi
-	   elif [ $ensave = ens ]; then
-	      file=$decdir/${var}_${type}_${model}_yr${lead}_${ip}_%%.nc
-	   else
-	      file=$decdir/${var}_${type}_${model}_yr${lead}_${ip}_ave.nc
-	   fi
-	else
-	    if [ $dataset = knmi14 ]; then
-	        if [ "$splitfield" = true ]; then
-	            file=${var}_${type}_${model}_${exp}_????????-????????_%%.nc
-	        else
-	            file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
-	        fi
-	        file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type/$var/$file
-	        ###echo "file=$file"
-	   	elif [ -z "$rip" ]; then
-	   		file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_000.nc
-			if [ -e $file -o -L $file ]; then
-	    		file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_%%%.nc
-	    	else
-	    		oldfile=$file
-		   		file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_00.nc
-				if [ -e $file -o -L $file ]; then
-					file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_%%.nc
-				else
-					echo "queryfield: error: cannot locate CMIP5 file $oldfile or $file"
-					exit -1
-				fi
-			fi
-	   	else
-	    	file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_${rip}.nc
-	   	fi
-	fi
-	###echo "file=$file<br>"
-	if [ $exp = decadal ]; then
-	   if [ $ip = i1p1 ]; then
-	      kindname="$model $dataset $exp yr$lead $ensave"
-	   elif [ $ip = i0p1 ]; then
-	      kindname="$model no-assim $exp yr$lead $ensave"
-	   else
-	      kindname="$model $ip $exp yr$lead $ensave"
-	   fi
-	elif [ "${model#mod}" != $model -o $model = ens ]; then
-	   if [ 0 = 1 ]; then # use date of file
-	      ensfile=`echo $file | tr '%' '0'`
-	      if [ `uname` = Darwin ]; then
-	      	 datum=`stat -t '%Y%m%d' -f '%Sm' $ensfile`
-	      else
-	         datum=`stat --printf="%y" $ensfile | cut -d ' ' -f 1`
-	      fi
-	      kindname="${model}_$datum $exp"
-	   else # use number of models
-	      modname=`echo $file | sed -e 's/modmean/mod/' -e 's/%%%/???/' -e 's/%%/??/'`
-	      ###echo "modname=$modname<br>"
-	      nmod=`echo $modname | wc -w | tr -d ' '`
-	      kindname="${model}$nmod $exp"
-	   fi
-	   # first rough approximation
-	   if [ $var = sic -o $var = tos -o $var = sos ]; then
-	      LSMASK=CMIP5/monthly/lsmask_cmip3_288.nc
-	   else
-	      LSMASK=CMIP5/monthly/lsmask_cmip3_144.nc
-	   fi
-	else
-	   kindname="$model $exp"
-       if [ $type = Amon -o $type = Lmon ]; then
-	       case $model in
-	            ECEARTH23) trylsmask=KNMI14Data/sftlf_ns.nc;;
-				EC-EARTH) trylsmask=CMIP5/monthly/sftlf.nc;;
-				FIO-ESM)  trylsmask=CMIP5/fixed/sftlf.FIO-ESM.nc;;
-				GISS-E2-H-CC) trylsmask=CMIP5/fixed/sftlf_fx_GISS-E2-H_historical_r0i0p0.nc;; # tmp
-    			GISS-E2-R-CC) trylsmask=CMIP5/fixed/sftlf_fx_GISS-E2-R_historical_r0i0p0.nc;; # tmp
-	        	HadGEM2*)  trylsmask=CMIP5/fixed/sftlf_fx_HadGEM2-ES_historical_r1i1p1.nc;;
-	        	inmcm4)    trylsmask=CMIP5/fixed/sftlf_fx_${model}_rcp45_r0i0p0.nc;;
-	        	*)         trylsmask=CMIP5/fixed/sftlf_fx_${model}_historical_r0i0p0.nc;;
-	       esac
+          if [ $ip = i0p1 ]; then
+             file=$decdir/${var}_${type}_${model}0_yr${lead}_%%.nc
+          elif [ $ip = i1p1 ]; then
+             file=$decdir/${var}_${type}_${model}_yr${lead}_%%.nc
+          else
+             exit -1
+          fi
+       elif [ $ensave = ens ]; then
+          file=$decdir/${var}_${type}_${model}_yr${lead}_${ip}_%%.nc
+       else
+          file=$decdir/${var}_${type}_${model}_yr${lead}_${ip}_ave.nc
        fi
-	   if [ -n "$trylsmask" -a \( -s "$trylsmask" -o -s $HOME/climexp/$trylsmask \) ]; then
-	       LSMASK=$trylsmask
-	   else
-	       trylsmask=""
-	   fi
-	fi
-	[ -n "$rip" ] && kindname="$kindname $rip"
-	climfield="$var"
-	;;
-	
+    else
+        if [ $dataset = knmi14 ]; then
+            if [ "$splitfield" = true ]; then
+                file=${var}_${type}_${model}_${exp}_????????-????????_%%.nc
+            else
+                file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
+            fi
+            file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type/$var/$file
+            ###echo "file=$file"
+        elif [ -z "$rip" ]; then
+            file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_000.nc
+            if [ -e $file -o -L $file ]; then
+                file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_%%%.nc
+            else
+                oldfile=$file
+                file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_00.nc
+                if [ -e $file -o -L $file ]; then
+                    file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_%%.nc
+                else
+                    echo "queryfield: error: cannot locate CMIP5 file $oldfile or $file"
+                    exit -1
+                fi
+            fi
+        else
+            file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_${rip}.nc
+        fi
+    fi
+    ###echo "file=$file<br>"
+    if [ $exp = decadal ]; then
+       if [ $ip = i1p1 ]; then
+          kindname="$model $dataset $exp yr$lead $ensave"
+       elif [ $ip = i0p1 ]; then
+          kindname="$model no-assim $exp yr$lead $ensave"
+       else
+          kindname="$model $ip $exp yr$lead $ensave"
+       fi
+    elif [ "${model#mod}" != $model -o $model = ens ]; then
+       if [ 0 = 1 ]; then # use date of file
+          ensfile=`echo $file | tr '%' '0'`
+          if [ `uname` = Darwin ]; then
+             datum=`stat -t '%Y%m%d' -f '%Sm' $ensfile`
+          else
+             datum=`stat --printf="%y" $ensfile | cut -d ' ' -f 1`
+          fi
+          kindname="${model}_$datum $exp"
+       else # use number of models
+          modname=`echo $file | sed -e 's/modmean/mod/' -e 's/%%%/???/' -e 's/%%/??/'`
+          ###echo "modname=$modname<br>"
+          nmod=`echo $modname | wc -w | tr -d ' '`
+          kindname="${model}$nmod $exp"
+       fi
+       # first rough approximation
+       if [ $var = sic -o $var = tos -o $var = sos ]; then
+          LSMASK=CMIP5/monthly/lsmask_cmip3_288.nc
+       else
+          LSMASK=CMIP5/monthly/lsmask_cmip3_144.nc
+       fi
+    else
+       kindname="$model $exp"
+       if [ $type = Amon -o $type = Lmon ]; then
+           case $model in
+                ECEARTH23) trylsmask=KNMI14Data/sftlf_ns.nc;;
+                EC-EARTH) trylsmask=CMIP5/monthly/sftlf.nc;;
+                FIO-ESM)  trylsmask=CMIP5/fixed/sftlf.FIO-ESM.nc;;
+                GISS-E2-H-CC) trylsmask=CMIP5/fixed/sftlf_fx_GISS-E2-H_historical_r0i0p0.nc;; # tmp
+                GISS-E2-R-CC) trylsmask=CMIP5/fixed/sftlf_fx_GISS-E2-R_historical_r0i0p0.nc;; # tmp
+                HadGEM2*)  trylsmask=CMIP5/fixed/sftlf_fx_HadGEM2-ES_historical_r1i1p1.nc;;
+                inmcm4)    trylsmask=CMIP5/fixed/sftlf_fx_${model}_rcp45_r0i0p0.nc;;
+                *)         trylsmask=CMIP5/fixed/sftlf_fx_${model}_historical_r0i0p0.nc;;
+           esac
+       fi
+       if [ -n "$trylsmask" -a \( -s "$trylsmask" -o -s $HOME/climexp/$trylsmask \) ]; then
+           LSMASK=$trylsmask
+       else
+           trylsmask=""
+       fi
+    fi
+    [ -n "$rip" ] && kindname="$kindname $rip"
+    climfield="$var"
+    ;;
+    
 rt2b_*) 
-	. ./ENSEMBLES_RCM/rt2b.cgi;;
+    . ./ENSEMBLES_RCM/rt2b.cgi;;
 rt3_*) 
-	. ./ENSEMBLES_RCM/rt3.cgi;;
-	
+    . ./ENSEMBLES_RCM/rt3.cgi;;
+    
 ens_ecmwf4*|ecmwf4*)
     FORM_field=${FORM_field#ens_}
     mon=${FORM_field##*_}
@@ -266,7 +266,7 @@ ersstv3b) file=NCDCData/ersstv3b.ctl;kindname="ERSST v3b2";climfield="SST";;
 ersstv4) file=NCDCData/ersstv4.nc;kindname="ERSST v4";climfield="SST";;
 dasilva_ssta) file=DaSilvaData/dasilva_sst_anom.cdf;kindname="Da Silva";climfield="SSTa";;
 ssmi_sst) file=SSMIData/ssmi_sst.ctl;kindname="SSMI";climfield="SST";;
-tlt_60) file=UAHData/tlt_60b4.nc;kindname="UAH MSU v6.0beta4";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
+tlt_60) file=UAHData/tlt_60b5.nc;kindname="UAH MSU v6.0beta5";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
 tlt_56) file=UAHData/tlt_56.nc;kindname="UAH MSU v5.6";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
 tlt_55) file=UAHData/tlt_55.nc;kindname="UAH MSU v5.5";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
 rss_tlt) file=SSMIData/rss_tlt.nc;kindname="RSS MSU 3.3";climfield="Tlt";;
@@ -4811,23 +4811,23 @@ uas_A2_mpi_echam5_20c3m) file="IPCCData/20c3m_daily/uas_A2_mpi_echam5_1961-2000.
 vas_A2_mpi_echam5_20c3m) file="IPCCData/20c3m_daily/vas_A2_mpi_echam5_1961-2000.nc";kindname="mpi echam5 20c3m";climfield="vas";LSMASK="IPCCData/20c3m/lsmask_mpi_echam5.nc";NPERYEAR=366;;
 
 *_miroc3_2_hires_20c3m)
-	var=${FORM_field%%_miroc3_2_hires_20c3m}
-	file="IPCCData/20c3m/${var}_A1_miroc3_2_hires.nc"
-	kindname="miroc 3.2 hi 20c3m"
-	climfield="$var"
-	LSMASK="IPCCData/20c3m/sftlf_A1_miroc3_2_hires.nc";;
+    var=${FORM_field%%_miroc3_2_hires_20c3m}
+    file="IPCCData/20c3m/${var}_A1_miroc3_2_hires.nc"
+    kindname="miroc 3.2 hi 20c3m"
+    climfield="$var"
+    LSMASK="IPCCData/20c3m/sftlf_A1_miroc3_2_hires.nc";;
 *_ukmo_hadcm3_20c3m)
-	var=${FORM_field%%_ukmo_hadcm3_20c3m}
-	file="IPCCData/20c3m/${var}_A1_ukmo_hadcm3_%%.nc"
-	kindname="hadcm3 20c3m"
-	climfield="$var"
-	LSMASK="IPCCData/20c3m/sftlf_A1_ukmo_hadcm3.nc";;
+    var=${FORM_field%%_ukmo_hadcm3_20c3m}
+    file="IPCCData/20c3m/${var}_A1_ukmo_hadcm3_%%.nc"
+    kindname="hadcm3 20c3m"
+    climfield="$var"
+    LSMASK="IPCCData/20c3m/sftlf_A1_ukmo_hadcm3.nc";;
 *_ukmo_hadgem1_20c3m)
-	var=${FORM_field%%_ukmo_hadgem1_20c3m}
-	file="IPCCData/20c3m/${var}_A1_ukmo_hadgem1_%%.nc"
-	kindname="hadgem1 20c3m"
-	climfield="$var"
-	LSMASK="IPCCData/picntrl/sftlf_A1_ukmo_hadgem1.nc";;
+    var=${FORM_field%%_ukmo_hadgem1_20c3m}
+    file="IPCCData/20c3m/${var}_A1_ukmo_hadgem1_%%.nc"
+    kindname="hadgem1 20c3m"
+    climfield="$var"
+    LSMASK="IPCCData/picntrl/sftlf_A1_ukmo_hadgem1.nc";;
 
 tas_mrijma_tl959l60_20c3m) file="MRIJMAData/m2_TA_AJ.ctl";kindname="MRI/JMA TL959L60 control";climfield="TA";map='set lon -30 50';;
 tas_mrijma_tl959l60_sresa1b) file="MRIJMAData/m2_TA_AK.ctl";kindname="MRI/JMA TL959L60 sresa1b";climfield="TA";map='set lon -30 50';;
@@ -5011,9 +5011,9 @@ kindname=`tail -2 $FORM_field | head -1`
 climfield=`tail -1 $FORM_field`
 # the upload routine forgets to set NPERYEAR...
 if [ -z "$NPERYEAR" ]; then
-	eval `./bin/getunits $file`
-	mv $FORM_field /tmp/
-	cat > $FORM_field <<EOF
+    eval `./bin/getunits $file`
+    mv $FORM_field /tmp/
+    cat > $FORM_field <<EOF
 $file
 NPERYEAR=$NPERYEAR
 $kindname
@@ -5023,70 +5023,70 @@ fi
 ;;
 
 psl_meti_20c3m)
-	file=ECEARTH/MSL_2x2_mon_meti_1940-1989.nc;kindname="meti";climfield=psl;;
+    file=ECEARTH/MSL_2x2_mon_meti_1940-1989.nc;kindname="meti";climfield=psl;;
 psl_metw_20c3m)
-	file=ECEARTH/MSL_2x2_mon_metw_1940-1989.nc;kindname="metw";climfield=psl;;
+    file=ECEARTH/MSL_2x2_mon_metw_1940-1989.nc;kindname="metw";climfield=psl;;
 psl_mesr_20c3m)
-	file=ECEARTH/MSL_2x2_mesr_mon_1940-1989.nc;kindname="mesr";climfield=psl;;
+    file=ECEARTH/MSL_2x2_mesr_mon_1940-1989.nc;kindname="mesr";climfield=psl;;
 
 *_ecearth_20c3m)
-	var=`echo $FORM_field | sed -e 's/_.*//'`
-	file="ECEARTH/20c3m/${var}_ecearth_%%.nc"
-	kindname="EC-EARTH yr$lead"
-	climfield=$var;;	
+    var=`echo $FORM_field | sed -e 's/_.*//'`
+    file="ECEARTH/20c3m/${var}_ecearth_%%.nc"
+    kindname="EC-EARTH yr$lead"
+    climfield=$var;;    
 
 *_ecearth_ave_*)
-	var=`echo $FORM_field | sed -e 's/_.*//'`
-	lead=`echo $FORM_field | sed -e 's/.*_//'`
-	file="THOR/${var}_ecearth_${lead}_ave.nc"
-	if [ $var = sst ]; then
-	   LSMASK=THOR/lsm_ocean.nc
-	else
-	   LSMASK=THOR/lsm.nc
-	fi
-	kindname="EC-EARTH yr$lead"
-	climfield=$var;;
+    var=`echo $FORM_field | sed -e 's/_.*//'`
+    lead=`echo $FORM_field | sed -e 's/.*_//'`
+    file="THOR/${var}_ecearth_${lead}_ave.nc"
+    if [ $var = sst ]; then
+       LSMASK=THOR/lsm_ocean.nc
+    else
+       LSMASK=THOR/lsm.nc
+    fi
+    kindname="EC-EARTH yr$lead"
+    climfield=$var;;
 *_ecearth_*)
-	var=`echo $FORM_field | sed -e 's/_.*//'`
-	lead=`echo $FORM_field | sed -e 's/.*_//'`
-	file="THOR/${var}_ecearth_${lead}_%%.nc"
-	if [ $var = sst ]; then
-	   LSMASK=THOR/lsm_ocean.nc
-	else
-	   LSMASK=THOR/lsm.nc
-	fi
-	kindname="EC-EARTH yr$lead"
-	climfield=$var;;
+    var=`echo $FORM_field | sed -e 's/_.*//'`
+    lead=`echo $FORM_field | sed -e 's/.*_//'`
+    file="THOR/${var}_ecearth_${lead}_%%.nc"
+    if [ $var = sst ]; then
+       LSMASK=THOR/lsm_ocean.nc
+    else
+       LSMASK=THOR/lsm.nc
+    fi
+    kindname="EC-EARTH yr$lead"
+    climfield=$var;;
 *_ecearth24*)
-	var=${FORM_field%%_*}
-	lead=${FORM_field##*_}
-	model=${FORM_field%_*}
-	model=${model#*_}
-	file="COMBINE/${var}_${model}_${lead}_%%.nc"
-	if [ $var = sst ]; then
-	   LSMASK=COMBINE/lsm_ocean.nc
-	else
-	   LSMASK=COMBINE/landsea1.25.nc
-	fi
-	kindname="EC-EARTH2.4${model#ecearth24} yr$lead"
-	climfield=$var;;
+    var=${FORM_field%%_*}
+    lead=${FORM_field##*_}
+    model=${FORM_field%_*}
+    model=${model#*_}
+    file="COMBINE/${var}_${model}_${lead}_%%.nc"
+    if [ $var = sst ]; then
+       LSMASK=COMBINE/lsm_ocean.nc
+    else
+       LSMASK=COMBINE/landsea1.25.nc
+    fi
+    kindname="EC-EARTH2.4${model#ecearth24} yr$lead"
+    climfield=$var;;
 
 *_ensdec_*) # eg "tas_ifs33r1_ensdec_1.nc"
-	var=`echo $FORM_field | sed -e 's/_.*//'`
-	model=`echo $FORM_field | sed -e 's/[^_]*_//' -e 's/_.*//'`
-	lead=`echo $FORM_field | sed -e 's/.*_//'`
-	file="ENSEMBLES_dec/${var}_${model}_%%_${lead}.nc"
-	LSMASK=ENSEMBLES_dec/lsm.nc
-	kindname="$model yr$lead"
-	climfield=$var;;
+    var=`echo $FORM_field | sed -e 's/_.*//'`
+    model=`echo $FORM_field | sed -e 's/[^_]*_//' -e 's/_.*//'`
+    lead=`echo $FORM_field | sed -e 's/.*_//'`
+    file="ENSEMBLES_dec/${var}_${model}_%%_${lead}.nc"
+    LSMASK=ENSEMBLES_dec/lsm.nc
+    kindname="$model yr$lead"
+    climfield=$var;;
 *_avedec_*) # eg "tas_ifs33r1_avedec_1.nc"
-	var=`echo $FORM_field | sed -e 's/_.*//'`
-	model=`echo $FORM_field | sed -e 's/[^_]*_//' -e 's/_.*//'`
-	lead=`echo $FORM_field | sed -e 's/.*_//'`
-	file="ENSEMBLES_dec/${var}_${model}_ave_${lead}.nc"
-	LSMASK=ENSEMBLES_dec/lsm.nc
-	kindname="$model yr$lead"
-	climfield=$var;;
+    var=`echo $FORM_field | sed -e 's/_.*//'`
+    model=`echo $FORM_field | sed -e 's/[^_]*_//' -e 's/_.*//'`
+    lead=`echo $FORM_field | sed -e 's/.*_//'`
+    file="ENSEMBLES_dec/${var}_${model}_ave_${lead}.nc"
+    LSMASK=ENSEMBLES_dec/lsm.nc
+    kindname="$model yr$lead"
+    climfield=$var;;
 
 *) echo 
 [ -x ./myvinkhead.cgi ] && . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
