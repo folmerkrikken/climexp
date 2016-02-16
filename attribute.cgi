@@ -16,6 +16,7 @@ prog=$NAME
 FORM_dgt=${FORM_dgt%%%}
 FORM_dgt=${FORM_dgt}%
 [ -z "$FORM_assume" ] && FORM_assume=shift
+[ -z "$FORM_pmin" ] && FORM_pmin=0.01 # compute how much area has rt2* > 100 year
 extraargs=$FORM_extraargs
 if [ -n "$extraargs" ]; then
   NPERYEAR=`echo "$extraargs" | cut -f 1 -d '_'`
