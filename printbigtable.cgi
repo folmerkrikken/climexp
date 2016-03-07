@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # print an ensemble of time series
-
+. ./init.cgi
 . ./getargs.cgi
 
 # no ensemble member selection yet
