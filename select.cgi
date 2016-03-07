@@ -300,7 +300,7 @@ elif [ "${FORM_field#era}" != "${FORM_field}" -o "${FORM_field#ecmwf}" != "${FOR
   echo "Please consult the ECMWF <a href=\"http://www.ecmwf.int/research/era/\" target="_new">ERA</a> or <a href=\"http://www.ecmwf.int/services/seasonal/\" target="_new">seasonal forecasting</a> website for further information."
 elif [ "${FORM_field#demeter}" != "${FORM_field}" -o "${FORM_field#ens_demeter}" != "${FORM_field}" ]; then
   echo "Please download the data from the ECMWF <a href=\"http://www.ecmwf.int/research/demeter/\" target="_new">DEMETER</a> website."
-elif [ "${FORM_field#ensembles}" != "${FORM_field}" -o "${FORM_field#ens_demeter}" != "${FORM_field}" ]; then
+elif [ "${FORM_field#ensembles}" != "${FORM_field}" -a $NPERYEAR = 366 ]; then
   echo "Please download the data from the <a href=\"http://www.ecad.eu/download/ensembles/ensembles.php\" target="_new">E-OBS</a> website."
 elif [ ${file#IPCCData} != $file -o ${file#ESSENCE} != $file ]; then
   model=`echo $FORM_field | sed -e 's/^[^_]*_//' -e 's/_[^_]*$//'`
