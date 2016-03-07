@@ -103,11 +103,8 @@ WMO=`basename "$WMO"`
 if [ "${wmo#data}" != "$wmo" ]; then
   WMO=${WMO##i}
 fi
-if [ -n "$extraargs" ]; then
-  WMO=$WMO`echo $extraargs | tr ' ' '_'`_$NPERYEAR
-fi
 TYPE=`basename "$TYPE"`
-# if the output file exists and is newer than teh input file skip this step
+# if the output file exists and is newer than the input file skip this step
 if [ -n "$file" -a -s "$file" -a -s ./data/$TYPE$WMO.dat -a ./data/$TYPE$WMO.dat -nt "$file" ]; then
     [ "$lwrite" = true ] && echo "Skipping generating the data, already there"
     skipit=true
@@ -159,6 +156,13 @@ EOF
 	echo "</pre>"
         . ./myvinkfoot.cgi
 	exit
+  fi
+  [ "$lwrite" = true ] && echo "<p>extraargs=$extraargs<p>"
+  if [ -n "$extraargs" ]; then
+    infile=./data/$TYPE$WMO.dat
+    WMO=$WMO`echo $extraargs | tr ' ' '_'`_$NPERYEAR
+    outfile=./data/$TYPE$WMO.dat
+    daily2longer $infile `echo $extraargs | tr '_' ' '` > $outfile
   fi
 else
     if [ -z "$PROG" -o $skipit = true ]; then

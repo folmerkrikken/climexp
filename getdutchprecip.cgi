@@ -5,7 +5,7 @@ export DIR=`pwd`
 
 WMO="$FORM_WMO"
 TYPE=`basename $0 .cgi`
-TYPE=${TYPE#getdutchprecip_}
+TYPE=${TYPE#getdutchprecip}
 STATION="$FORM_STATION"
 NPERYEAR=366
 extraargs="$FORM_extraargs"

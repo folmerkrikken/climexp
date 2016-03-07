@@ -288,6 +288,12 @@ EOF
 elif [ ${listname#data} = $listname ]; then
 # the list is not in the data directory, so it has been pre-made
 # this is the case for the Indian and Dutch data (maybe more)
+  if [ ! -s "$listname" ]; then
+    . ./myvinkhead.cgi "Internal error"
+    echo "Cannot find $listname"
+    . ./myvinkfoot.cgi
+    exit
+  fi
   . ./myvinkhead.cgi "Found station data" "$timescale$FORM_climate stations"
 # there are too many scripts (i.e., at least one) that expect that the 
 # list lives in data/
@@ -348,7 +354,7 @@ cat <<EOF
 <input type="hidden" name="WMO" value="$WMO">
 <input type="hidden" name="STATION" value="series $location">
 <input type="hidden" name="NAME" value="$NAME">
-<input type="hidden" name="extraargs" value="$FORM_extraargs">
+<input type="hidden" name="extraargs" value="$extraargs">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
 <div class="formheader"><a href="javascript:pop_page('help/averageseries.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Aggregate this set of time series</div>
 <div class="formbody">
