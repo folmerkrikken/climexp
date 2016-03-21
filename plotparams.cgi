@@ -41,11 +41,13 @@ if [ $EMAIL != someone@somewhere ]; then
     esac
 
     case "$FORM_mproj" in
-        latlon)   mproj_latlon="selected";;
-        nps)      mproj_nps="selected";;
-        sps)      mproj_sps="selected";;
-        robinson) mproj_robinson="selected";;
-        *)        mproj_default="selected";;
+        latlon)    mproj_latlon="selected";;
+        nps)       mproj_nps="selected";;
+        sps)       mproj_sps="selected";;
+        robinson)  mproj_robinson="selected";;
+        mollweide) mproj_mollweide="selected";;
+        lambert)   mproj_lambert="selected";;
+        *)         mproj_default="selected";;
     esac
 
     if [ -n "$FORM_nocbar" ]; then
@@ -109,7 +111,9 @@ make grey when P><input type="text" class="forminput" name="greycut" size="2" va
 <option value="latlon" $mproj_latlon>lat-lon
 <option value="nps" $mproj_nps>North polar stereographic
 <option value="sps" $mproj_sps>South polar stereographic
-<option value="robinson" $mproj_robinson>Robinson
+<option value="robinson" $mproj_robinson>Robinson (only 0-360 or 180-180)
+<option value="mollweide" $mproj_mollweide>Mollweide
+<option value="lambert" $mproj_lambert>Lambert
 </select> projection
 <td><a href="javascript:pop_page('help/maptype.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a>
 <tr><td>Plot options:<td>

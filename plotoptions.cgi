@@ -15,11 +15,13 @@ if [ "$EMAIL" != somene@somewhere ]; then
 fi
 
 case "$FORM_mproj" in
-latlon)   mproj_latlon="selected";;
-nps)      mproj_nps="selected";;
-sps)      mproj_sps="selected";;
-robinson) mproj_robinson="selected";;
-*)        mproj_default="selected";;
+latlon)    mproj_latlon="selected";;
+nps)       mproj_nps="selected";;
+sps)       mproj_sps="selected";;
+robinson)  mproj_robinson="selected";;
+mollweide) mproj_mollweide="selected";;
+lambert)   mproj_lambert="selected";;
+*)         mproj_default="selected";;
 esac
 
 case "$FORM_maskout" in
@@ -91,12 +93,6 @@ else
 fi
 
 echo '<tr><td>Map type:<td>'
-#<input type="radio" class="formradio" name="mproj" value="default" $mproj_default>default
-#<input type="radio" class="formradio" name="mproj" value="latlon" $mproj_latlon>lat-lon
-#<input type="radio" class="formradio" name="mproj" value="nps" $mproj_nps>North polar stereographic
-#<input type="radio" class="formradio" name="mproj" value="sps" $mproj_sps>South polar stereographic
-#<input type="radio" class="formradio" name="mproj" value="robinson" $mproj_robinson>Robinson
-#projection
 cat <<EOF
 <select class="forminput" name="mproj">
 <option value="default" $mproj_default>default
@@ -104,6 +100,8 @@ cat <<EOF
 <option value="nps" $mproj_nps>North polar stereographic
 <option value="sps" $mproj_sps>South polar stereographic
 <option value="robinson" $mproj_robinson>Robinson
+<option value="mollweide" $mproj_mollweide>Mollweide
+<option value="lambert" $mproj_lambert>Lambert
 </select> projection
 EOF
 echo "<td><a href=\"javascript:pop_page('help/maptype.shtml',284,450)\"><img src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
