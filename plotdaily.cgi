@@ -62,9 +62,21 @@ root=data/plot${nday}last$TYPE$WMO$KIND${FORM_climyear1}${FORM_climyear2}_$endda
 if [ $FORM_anom = zero ]; then
     anom=anom
 fi
+if [ -z "$FORM_cdf" ]; then
+    if [ "$NEWUNITS" = "mm/day" -o "$TYPE" = p ]; then
+        FORM_cdf=on
+    else
+        FORM_cdf=off
+    fi
+fi
+if [ $FORM_cdf = on ]; then
+    cdf=cdf
+else
+    cdf=""
+fi
 
 echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend $anom" >> log/log
-(./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend $anom > $root.txt) 2>&1
+(./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdf $beginend $anom > $root.txt) 2>&1
 lastdate=`tail -n 1 $root.txt | cut -b 1-8`
 [ -z "$FORM_yr" ] && FORM_yr=`echo "$lastdate" | cut -b 1-4`
 [ -z "$FORM_mo" ] && FORM_mo=`echo "$lastdate" | cut -b 5-6`
@@ -87,6 +99,7 @@ else
     above=1
     below=3
 fi
+
 wmo_=`echo "$WMO" | tr '_' ' '`
 ./bin/gnuplot << EOF
 $gnuplot_init
@@ -117,6 +130,11 @@ pngfile="./$root.png"
 getpngwidth
 echo "<center><img src=\"$pngfile\" alt=\"last $nday ${months}s of $name at $station\" width="$halfwidth" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
+if [ $FORM_cdf = on ]; then
+    cdf_checked=checked
+else
+    cdf_unchecked=checked
+fi
 if [ $FORM_anom = zero ]; then
     zero_checked=checked
 else
@@ -145,6 +163,10 @@ if [ ${NPERYEAR:-12} -gt 12 ]; then
     echo "<input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$FORM_dy">"
 fi
 cat <<EOF
+<tr><td>Plot:
+<td>
+<input type=radio class=formradio name="cdf" value="off" $cdf_unchecked>observations
+<input type=radio class=formradio name="cdf" value="on" $cdf_checked>cumulatives
 <tr><td>Compare with:
 <td>
 <input type=radio class=formradio name="anom" value="range" $range_checked>climatology
