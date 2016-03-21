@@ -111,7 +111,7 @@ make grey when P><input type="text" class="forminput" name="greycut" size="2" va
 <option value="latlon" $mproj_latlon>lat-lon
 <option value="nps" $mproj_nps>North polar stereographic
 <option value="sps" $mproj_sps>South polar stereographic
-<option value="robinson" $mproj_robinson>Robinson (only 0-360 or 180-180)
+<option value="robinson" $mproj_robinson>Robinson
 <option value="mollweide" $mproj_mollweide>Mollweide
 <option value="lambert" $mproj_lambert>Lambert
 </select> projection
