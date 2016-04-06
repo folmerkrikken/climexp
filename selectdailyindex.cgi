@@ -41,7 +41,7 @@ cat <<EOF
 <td>
 
 <tr><td>Rotation<td><div class="kalelink"><a href="getindices.cgi?WMO=IERSData/lod&STATION=lenth_of_day&TYPE=i&id=$EMAIL&NPERYEAR=366">Length Of Day</a> (1962-now, IERS)</div>
-<td><a href="wipefoot.cgi?http://www.iers.org/MainDisp.csl?pid=36-9" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<td><a href="wipefoot.cgi?http://www.iers.org/IERS/EN/DataProducts/EarthOrientationData/eop.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>Currents<td><div class="kalelink"><a href="getindices.cgi?WMO=AOMLData/FC_daily&STATION=Florida_Current&TYPE=i&id=$EMAIL&NPERYEAR=366">Strength of the Florida Current [Sv]</a> (1982-now, Florida  Current Project)</div>
 <td><a href="wipefoot.cgi?http://www.aoml.noaa.gov/phod/floridacurrent/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>

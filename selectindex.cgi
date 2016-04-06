@@ -296,7 +296,7 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 <td><a href="wipefoot.cgi?http://www.eiscat.rl.ac.uk/Members/mike/Open%20solar%20flux%20data/openflux1675to2010.txt" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>Rotation<td><div class="kalelink"><a href="getindices.cgi?WMO=IERSData/lod_12&STATION=length_of_day&TYPE=i&id=$EMAIL">Length Of Day</a> (1962-now, IERS)</div>
-<td><a href="wipefoot.cgi?http://www.iers.org/MainDisp.csl?pid=36-9" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<td><a href="wipefoot.cgi?http://www.iers.org/IERS/EN/DataProducts/EarthOrientationData/eop.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <!--
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=ASUData/mld&STATION=maximum_lunar_declination&TYPE=i&id=$EMAIL">Maximum Lunar Declination</a>
