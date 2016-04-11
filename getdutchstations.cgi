@@ -17,6 +17,7 @@ fx) FORM_climate="maximum_wind_gust";;
 tg) FORM_climate="mean_temperature";;
 tn) FORM_climate="min_temperature";;
 tx) FORM_climate="max_temperature";;
+tw) FORM_climate="max_wetbulb_temperature";;
 t1) FORM_climate="min_surface_temperature";;
 td) FORM_climate="max_dew_point_temperature";;
 ng) FORM_climate="cloud_cpver";;

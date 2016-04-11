@@ -145,7 +145,7 @@ yet been homogenised. Homogenised daily precipitation series are available <a hr
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=tn">minimum temperature</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=tx">maximum temperature</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=t1">min 10cm temperature</a><br>
-<a href="getdutchstations.cgi?id=$EMAIL&TYPE=td">max dew point temp</a><br>
+<a href="getdutchstations.cgi?id=$EMAIL&TYPE=tw">max wet bulb temp</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=dr">precipitation duration</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=rh">precipitation (0-24)</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=rr">precipitation (8-8)</a><br>
@@ -165,6 +165,7 @@ yet been homogenised. Homogenised daily precipitation series are available <a hr
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=dx">zonal wind direction</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=dy">meridional wind direction</a><br>
 </td><td>
+<a href="getdutchstations.cgi?id=$EMAIL&TYPE=td">max dew point temp</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=ug">mean relative humidity</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=un">minimum relative humidity</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=ux">maximum relative humidity</a><br>

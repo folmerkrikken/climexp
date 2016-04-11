@@ -23,6 +23,7 @@ fx) NAME="maximum wind gust";;
 tg) NAME="mean temperature";;
 tn) NAME="min temperature";;
 tx) NAME="max temperature";;
+tx) NAME="max wet bulb temperature";;
 t1) NAME="min surface temperature";;
 td) NAME="max dew point temperature";;
 ng) NAME="cloud cover";;
