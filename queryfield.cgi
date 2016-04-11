@@ -317,6 +317,9 @@ cru_vap) file=CRUData/cru_ts3.23.1901.2014.vap.dat.nc;kindname="CRU TS3.23";clim
 cru_vap_10) file=CRUData/cru_ts3.23.1901.2014.vap.dat_1.nc;kindname="CRU TS3.23";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
 cru_vap_25) file=CRUData/cru_ts3.23.1901.2014.vap.dat_25.nc;kindname="CRU TS3.23";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
 
+hadex2_ann_*) var=${FORM_field#hadex2_ann_};file=UKMOData/HadEX2_${var}_ann.nc;kindname="HadEX2";climfield=$var;NPERYEAR=1;;
+hadex2_*) var=${FORM_field#hadex2_};file=UKMOData/HadEX2_${var}_mo.nc;kindname="HadEX2";climfield=$var;;
+
 hadcruh_q) file=CRUData/CRU_blendnewjul08_q_7303cf.nc;kindname="HadCRUH";climfield="specific humidity";flipcolor=11;;
 hadcruh_rh) file=CRUData/CRU_blendnewjul08_RH_7303cf.nc;kindname="HadCRUH";climfield="relative humidity";flipcolor=11;;
 
@@ -511,9 +514,9 @@ luge_past) file=McGillData/glpast_1700-2007_05.nc;kindname="LUGE";climfield="pas
 en3_sos) file=UKMOData/salt_EN3_v2a_ObjectiveAnalysis_5m.nc;kindname="EN3";climfield="SSS";;
 en3_osc*) depth=${FORM_field#en3_osc};file=UKMOData/salt_EN3_v2a_ObjectiveAnalysis_sal${depth}.nc;kindname="EN3";climfield="sal${depth}";;
 en3_ohc*) depth=${FORM_field#en3_ohc};file=UKMOData/temp_EN3_v2a_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN3";climfield="ohc${depth}";;
-en4_sos) file=UKMOData/salt_EN.4.0.2_ObjectiveAnalysis_5m.nc;kindname="EN4";climfield="SSS";;
-en4_osc*) depth=${FORM_field#en4_osc};file=UKMOData/salt_EN.4.0.2_ObjectiveAnalysis_sal${depth}.nc;kindname="EN4";climfield="sal${depth}";;
-en4_ohc*) depth=${FORM_field#en4_ohc};file=UKMOData/temp_EN.4.0.2_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN4";climfield="ohc${depth}";;
+en4_sos) file=UKMOData/salt_EN.4.1.1_ObjectiveAnalysis_5m.nc;kindname="EN4.1.1";climfield="SSS";;
+en4_osc*) depth=${FORM_field#en4_osc};file=UKMOData/salt_EN.4.1.1_ObjectiveAnalysis_sal${depth}.nc;kindname="EN4.1.1";climfield="sal${depth}";;
+en4_ohc*) depth=${FORM_field#en4_ohc};file=UKMOData/temp_EN.4.1.1_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN4.1.1";climfield="ohc${depth}";;
 bmrc_d20) file=BMRCData/d20.nc;kindname="PEODAS";climfield="D20";;
 
 sos_u)     file="SOS/u_mean12.ctl";kindname="KNMI ERS";climfield="u";;
@@ -887,6 +890,8 @@ erai_prcp_daily) file=ERA-interim/erai_tp_daily.nc;kindname="ERA-int";climfield=
 erai_prcp_daily_e) file=ERA-interim/erai_tp_daily_extended.nc;kindname="ERA-int+";climfield="pr";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2m_daily) file=ERA-interim/erai_t2m_daily.nc;kindname="ERA-int";climfield="T2m";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2m_daily_e) file=ERA-interim/erai_t2m_daily_extended.nc;kindname="ERA-int+";climfield="T2m";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_tdew_daily) file=ERA-interim/erai_tdew_daily.nc;kindname="ERA-int";climfield="Tdew";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_twet_daily) file=ERA-interim/erai_twetbulb_daily.nc;kindname="ERA-int";climfield="Twetbulb";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_slp_daily) file=ERA-interim/erai_msl_daily.nc;kindname="ERA-int";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_slp_daily_e) file=ERA-interim/erai_msl_daily_extended.nc;kindname="ERA-int+";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_z500_daily) file=ERA-interim/erai_z500_daily.nc;kindname="ERA-int";climfield="Z500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
@@ -911,6 +916,7 @@ erai_t2msst) file=ERA-interim/erai_t2msst.nc;kindname="ERA-int";climfield="T2m/S
 erai_wspd) file=ERA-interim/erai_wspd.nc;kindname="ERA-int";climfield="wind speed";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ci) file=ERA-interim/erai_ci.nc;kindname="ERA-int";climfield="sea-ice cover";LSMASK=ERA-interim/lsmask07.nc;;
 erai_snd) file=ERA-interim/erai_snd.nc;kindname="ERA-int";climfield="snow depth";LSMASK=ERA-interim/lsmask07.nc;;
+erai_vap) file=ERA-interim/erai_vap.nc;kindname="ERA-int";climfield="column vapour";LSMASK=ERA-interim/lsmask07.nc;;
 erai_lhf) file=ERA-interim/erai_lhtfl.nc;kindname="ERA-int";climfield="latent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_shf) file=ERA-interim/erai_shtfl.nc;kindname="ERA-int";climfield="sensible heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_huss) file=ERA-interim/erai_huss.nc;kindname="ERA-int";climfield="spec humidity";LSMASK=ERA-interim/lsmask075.nc;;
@@ -925,6 +931,7 @@ erai_u*) lev=${FORM_field#erai_u};file=ERA-interim/${FORM_field}.nc;kindname="ER
 erai_v*) lev=${FORM_field#erai_v};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="v$lev";;
 erai_w*) lev=${FORM_field#erai_w};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="w$lev";;
 erai_q*) lev=${FORM_field#erai_q};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="q$lev";;
+erai_rh*) lev=${FORM_field#erai_rh};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="rh$lev";;
 
 era20c_slp|era20c_psl|era20c_msl) file=ERA-20C/era20c_msl.nc;kindname="ERA-20C";climfield="MSL";LSMASK=ERA-20C/lsmask64.nc;;
 era20c_slp_daily) file=ERA-20C/era20c_msl_daily.nc;kindname="ERA-20C";climfield="MSL";LSMASK=ERA-20C/lsmask64.nc;NPERYEAR=366;;
