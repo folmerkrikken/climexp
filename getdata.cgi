@@ -105,7 +105,9 @@ if [ "${wmo#data}" != "$wmo" ]; then
 fi
 TYPE=`basename "$TYPE"`
 # if the output file exists and is newer than the input file skip this step
-if [ -n "$file" -a -s "$file" -a -s ./data/$TYPE$WMO.dat -a ./data/$TYPE$WMO.dat -nt "$file" ]; then
+# doit is set to true by getindices if some ensemble members are missing, 
+# this can happen in practice :-(
+if [ -n "$file" -a -s "$file" -a -s ./data/$TYPE$WMO.dat -a ./data/$TYPE$WMO.dat -nt "$file" -a "$doit" != true ]; then
     [ "$lwrite" = true ] && echo "Skipping generating the data, already there"
     skipit=true
 else

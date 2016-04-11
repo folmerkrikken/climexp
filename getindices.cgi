@@ -33,11 +33,13 @@ newfile=data/$TYPE$wmo.dat
 if [ ! -s "$file" ]; then
   ens0=`echo $file | sed -e 's/+++/000/' -e 's/%%%/000/' -e 's/++/00/' -e 's/%%/00/'`
   if [ -s "$ens0" ]; then
+    i=0
     file=$ens0
     newfile=`echo $newfile | sed -e 's/+++/000/' -e 's/%%%/000/' -e 's/++/00/' -e 's/%%/00/'`
   else
     ens1=`echo $file | sed -e 's/+++/001/' -e 's/%%%/001/' -e 's/++/01/' -e 's/%%/01/'`
     if [ -s "$ens1" ]; then
+      i=1
       file=$ens1
       newfile=`echo $newfile | sed -e 's/+++/001/' -e 's/%%%/001/' -e 's/++/01/' -e 's/%%/01/'`
     fi
@@ -49,7 +51,26 @@ if [ -s $file ]; then
     LASTMODIFIED=`date -R -d "$LASTMODIFIED"`    
   fi
 fi
-if [ $newfile = $file -o $newfile -nt $file -a -s $newfile ]; then
+# make sure that the whole ensemble is in ./data, otherwise copy it again.
+doit=false
+if [ -n "$i" ]; then
+    ensfile=$file
+    while [ -s $ensfile ]; do
+        i=$((i+1))
+        ii=`printf %02i $i`
+        iii=`printf %03i $i`
+        ensfile=`echo $WMO.dat | sed -e "s/+++/$iii/" -e "s/%%%/$iii/" -e "s/++/$ii/" -e "s/%%/$ii/"`
+        newensfile=`echo data/$TYPE$wmo.dat | sed -e "s/+++/$iii/" -e "s/%%%/$iii/" -e "s/++/$ii/" -e "s/%%/$ii/"`
+        if [ ! -s $newensfile ]; then
+            doit=true
+        elif [ $newensfile -ot $ensfile ]; then
+            doit=true
+        fi
+    done
+fi
+if [ $doit = true ]; then
+  PROG=getindices
+elif [ $newfile = $file -o $newfile -nt $file -a -s $newfile ]; then
   PROG=
 else
   PROG=getindices
