@@ -19,8 +19,8 @@ fi
 if [ -z "$ROBOT" ]; then
   echo `date` "$EMAIL ($REMOTE_ADDR) $FORM_field" >> log/log
 fi
-if [ $EMAIL = oldenbor@knmi.nl ]; then
-    lwrite=false
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
+    export lwrite=false
 fi
 
 # start real work
@@ -86,14 +86,12 @@ esac
 if [ -n "$url" ]; then
   echo "<a href=\"$url\" target=\"_new\"><img src=\"images/info-i.gif\" alt=\"more information\" border=\"0\" align=\"right\"></a>"
 fi
-###echo $FORM_field,$file '<br>'
-n=`echo $file | wc -w`
-if [ $n != 1 ]; then
-	echo "select: internal error: wrong value for file=$file<br>"
-	. ./myvinkfoot.cgi
-	exit
+if [ "$lwrite" = true ]; then
+    echo "FORM_field=$FORM_field<br>"
+    echo "file=$file<br>"
+    echo "./bin/describefield.sh $file"
 fi
-./bin/describefield.sh $file
+./bin/describefield.sh "$file"
 metadata=./metadata/$file.txt
 metadir=`dirname $metadata`
 [ ! -d $metadir ] && mkdir -p $metadir
@@ -406,8 +404,16 @@ else
     fi
     echo "files (size $size MB)<br>Alternatively, you can generate a <a href=\"grads2nc.cgi?$args\">netCDF</a> file of the same size."
   else
-    size=`ls -l $file | awk '{print $5/1048576}'`
-    echo "a <a href=\"$file\">netcdf file</a> (size $size MB)."
+    if [ "$splitfield" = true ]; then
+        files=`ls $file`
+        for partfile in $files; do
+            size=`ls -lL $partfile | awk '{print $5/1048576}'`
+            echo "a <a href=\"$partfile\">netcdf file</a> (size $size MB),"    
+        done
+    else
+        size=`ls -lL $file | awk '{print $5/1048576}'`
+        echo "a <a href=\"$file\">netcdf file</a> (size $size MB)."
+    fi
   fi
 fi
 fi
