@@ -5,7 +5,6 @@ if [ -z "$file" ]; then
   echo "usage: $0 file"
   exit -1
 fi
-lwrite=false
 [ "$lwrite" = true ] && echo "file=$file<br>"
 describefield=${0%.sh}
 if [ ${file%.nc} = $file -a ${file%.cdf} = $file -o ${file#data} != $file ]; then
@@ -18,7 +17,12 @@ else
     c2=`echo $file | fgrep -c '++'`
     [ "$lwrite" = true ] && echo "ensemble? c1,c2 = $c1,$c2<br>"
     if [ $c1 -eq 0 -a $c2 -eq 0 ]; then
-        ensfile=$file
+        if [ "$splitfield" = true ]; then
+            ensfile=`ls -t $file 2>&1 | head -1`
+            allfiles=`ls $file`
+        else
+            ensfile=$file
+        fi
     else
         c3=`echo $file | fgrep -c '%%%'`
         i=0
