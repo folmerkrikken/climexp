@@ -252,6 +252,8 @@ berkeley_tmin_daily) file=BerkeleyData/TMIN_Daily_LatLong1.nc;kindname="Berkeley
 berkeley_tavg) file=BerkeleyData/TAVG_LatLong1.nc;kindname="Berkeley";climfield="Tavg";LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmax) file=BerkeleyData/TMAX_LatLong1.nc;kindname="Berkeley";climfield="Tmax";LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmin) file=BerkeleyData/TMIN_LatLong1.nc;kindname="Berkeley";climfield="Tmin";LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_txx) file=BerkeleyData/$FORM_field.nc;kindname="Berkeley";climfield="Txx";NPERYEAR=1;LSMASK=BerkeleyData/land_mask.nc;;
+
 hadghcnd_tx) file=UKMOData/hadghcnd_tx.ctl;kindname="HadGHCND";climfield="Tmax";NPERYEAR=366;;
 hadghcnd_tn) file=UKMOData/hadghcnd_tn.ctl;kindname="HadGHCND";climfield="Tmin";NPERYEAR=366;;
 rtg_sst_5dy) file=NCEPData/rtg_sst_5dy.ctl;kindname="RTG";climfield="SST";NPERYEAR=73;;
@@ -932,6 +934,8 @@ erai_v*) lev=${FORM_field#erai_v};file=ERA-interim/${FORM_field}.nc;kindname="ER
 erai_w*) lev=${FORM_field#erai_w};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="w$lev";;
 erai_q*) lev=${FORM_field#erai_q};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="q$lev";;
 erai_rh*) lev=${FORM_field#erai_rh};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="rh$lev";;
+
+erai_txx|erai_tnn|erai_rx?day) file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield=${FORM_field#erai_};NPERYEAR=1;LSMASK=ERA-interim/lsmask07.nc;;
 
 era20c_slp|era20c_psl|era20c_msl) file=ERA-20C/era20c_msl.nc;kindname="ERA-20C";climfield="MSL";LSMASK=ERA-20C/lsmask64.nc;;
 era20c_slp_daily) file=ERA-20C/era20c_msl_daily.nc;kindname="ERA-20C";climfield="MSL";LSMASK=ERA-20C/lsmask64.nc;NPERYEAR=366;;
