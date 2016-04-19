@@ -2,9 +2,13 @@
 
 prog=`basename $1`
 shift
-wmo=`echo $* | cut -f $# -d ' '`
+n=$#
+wmo=`echo $* | cut -f $n -d ' '`
+extraargs=`echo $* | cut -f 1-$(($n-1)) -d ' '`
 
 tmpfile=/tmp/pipe.$$
+###echo "pipe:sh: bin/$prog $wmo > $tmpfile" >> log/log
 bin/$prog $wmo > $tmpfile
-bin/daily2longer $tmpfile $*
+###echo "pipe:sh: bin/daily2longer $tmpfile $extraargs" >> log/log
+bin/daily2longer $tmpfile $extraargs
 rm $tmpfile

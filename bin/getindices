@@ -7,7 +7,7 @@ c=`echo $file | egrep -c '\+\+|%%'`
 if [ "$c" = 0 ]; then
 	if [ -s ./$file.dat ]; then
 		cat ./$file.dat
-	elif [ -s $DIR/$file.nc ]; then
+	elif [ -s ./$file.nc ]; then
 		netcdf2dat ./$file.nc
 	fi
 else
@@ -25,7 +25,7 @@ else
 	    ncfile=data/$TYPE`basename $ensfile`.nc
 	    datfile=data/$TYPE`basename $ensfile.dat`
 		if [ -f $ensfile.dat ]; then
-			echo "# data/i`basename $ensfile`.dat"
+			echo "# data/$TYPE`basename $ensfile`.dat"
 			cp -p $ensfile.dat $datfile
 			if [ -s $ensfile.nc ]; then
 			    cp -p $ensfile.nc $ncfile
