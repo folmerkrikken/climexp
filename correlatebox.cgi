@@ -105,6 +105,7 @@ if [ -n "$FORM_extraargs" ]; then
 else
   fullprog=$FORM_prog
 fi
+FORM_listname=`echo "$FORM_listname" | tr -d '\\'`
 
 if [ "$FORM_type" = 'plot' -o "$FORM_type" = 'histogram' -o "$FORM_type" = attribute ]; then
   corrargs="$FORM_listname $plotlist $fullprog $FORM_var"

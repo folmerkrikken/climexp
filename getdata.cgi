@@ -44,6 +44,12 @@ if [ -n "$warning" ]; then
     echo "$warning<p>"
 fi
 
+if [ "$lwrite" = true ]; then
+    echo "WMO=$WMO<br>"
+    echo "PROG=$PROG<br>"
+    echo "extraargs=$extraargs<br>"
+fi
+
 # if a mask has been used in the construction of the time series, plot it and enable its download
 if [ -n "$masknetcdf" ]; then
     i=0

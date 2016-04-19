@@ -377,6 +377,7 @@ echo '<pre>'
 cat $listname
 echo '</pre>'
 fi
+
 if [ "$format" = new ]; then
     sed \
 	-e 's/====*//' \

@@ -22,6 +22,6 @@ esac
 
 export DIR=`pwd`
 FROM="from <a href="wipefoot.cgi?https://www.ncdc.noaa.gov/ghcnm/" target="_new">GHCN-M v2/v3 (adjusted) database</a>"
-makenetcdf=true
+[ -z "$extraargs" ] && makenetcdf=true
 
 . $DIR/getdata.cgi

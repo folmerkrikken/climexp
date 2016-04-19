@@ -25,12 +25,12 @@ if [ -z "$extraargs" ]; then
   NPERYEAR=366
 else
   NPERYEAR=`echo $extraargs | cut -f 1 -d ' '`
-  NAME=`echo "$extraargs" | cut -f 2- -d ' '`" $NAME"
+  NAME=`echo "$extraargs" | cut -f 2 -d ' '`" $NAME"
   PROG="pipe.sh $PROG $extraargs"
 fi
 export DIR=`pwd`
 file=GDCNData/ghcnd/$WMO.dly.gz # to check whether the output is up-to-date
 FROM="from <a href=\"ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/\" target=\"_new\">GHCN-D v2 database</a>"
-makenetcdf=true
+[ -z "$extraargs" ] && makenetcdf=true
 
 . ./getdata.cgi
