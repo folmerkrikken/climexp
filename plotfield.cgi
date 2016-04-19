@@ -13,9 +13,13 @@ export DIR=`pwd`
 . ./myvinkhead.cgi "Plot field" "$kindname $climfield" "noindex,nofollow"
 
 eval `bin/getunits.sh $file`
-
 # better hack
 FORM_var=`./bin/describefield.sh $file | tail -1 | awk '{print $2}' | cut -b 1-15`
+if [ "${FORM_field#erai}" != "$FORM_field" -o "${FORM_field#data/erai}" != "$FORM_field" ]; then
+    if [ -z "$FORM_plotanomaly" -a "$UNITS" = "K" -a "$NEWUNITS" = "Celsius" ]; then
+        FORM_var="$FORM_var-273.15"
+    fi
+fi
 if [ -n "$FORM_year2" ]; then
 # some sanity checking
   if [ -z "$FORM_lon2" ]; then
