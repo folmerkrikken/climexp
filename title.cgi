@@ -1,6 +1,7 @@
 #!/bin/sh
 # set the time-independent part of the title
 case "${NPERYEAR:-12}" in
+-1) timescale="year";timely="annual (Jul-Jun)";;
 1) timescale="year";timely="annual";;
 4) timescale="season";timely="seasonal";;
 12) timescale="month";timely="monthly";;
