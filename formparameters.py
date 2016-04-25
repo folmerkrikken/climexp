@@ -532,7 +532,7 @@ obs_tasmin_values = [['cru_tmn', 'CRU TS 3.23']]
 
 obs_tasmax_values = [['cru_tmx', 'CRU TS 3.23']]
 
-obs_pr_values = [['gpcc_25_n1', 'GPCC v6'],
+obs_pr_values = [['gpcc_25_n1', 'GPCC v7'],
                  ['prca', 'NCDC anomalies'],
                  ['cru_pre', 'CRU TS 3.23']]
 
