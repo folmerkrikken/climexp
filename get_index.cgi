@@ -187,7 +187,7 @@ if [ "$count" != 0 ]; then
     echo 'Content-Type: text/html'
     echo 
     . ./myvinkhead.cgi "Try again later" "Multiple attempts to compute the same quantity"
-    echo "The exact same computation is already running, started either by you or another user. It does not make much sense to compute it twice."
+    echo "The same computation seems to be already running, started either by you or another user. It does not make much sense to compute it twice."
     echo "Please try again after the original computation is finished. This can take up to 15 minutes for daily data."
     . ./myvinkfoot.cgi
     exit
