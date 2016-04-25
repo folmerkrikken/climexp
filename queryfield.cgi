@@ -275,7 +275,7 @@ rss_tlt) file=SSMIData/rss_tlt.nc;kindname="RSS MSU 3.3";climfield="Tlt";;
 rss_tlt_anom) file=SSMIData/rss_tlt_anom.nc;kindname="RSS MSU 3.3";climfield="Tlt anomaly";;
 rss_tlt_old) file=SSMIData/rss_tlt_32.nc;kindname="RSS MSU 3.2";climfield="Tlt";;
 rss_tlt_anom_old) file=SSMIData/rss_tlt_anom_32.nc;kindname="RSS MSU 3.2";climfield="Tlt anomaly";;
-prca) file=NCDCData/prcp_anom.ctl;kindname="NCDC";climfield="precip anom";flipcolor=11;;
+prca) file=NCDCData/prcp_anom.ctl;kindname="NCDC";climfield="precip anom";LSMASK=NCDCData/lsmask_5.nc;flipcolor=11;;
 ncdc_prcp) file=NCDCData/prcp_total.nc;kindname="NCDC";climfield="prcp";flipcolor=11;;
 prcp_trmm) file=TRMMData/prcp_trmm.nc;kindname="TRMM+GPCC";climfield="precipitation";flipcolor=11;;
 prcp_trmm_lo) file=TRMMData/prcp_trmm_lo.nc;kindname="TRMM+GPCC";climfield="precipitation";flipcolor=11;;
@@ -532,18 +532,6 @@ ersstrsu) file=CERSATData/ersstrsu.ctl;kindname="ERS";climfield="zonal wind stre
 ersstrsv) file=CERSATData/ersstrsv.ctl;kindname="ERS";climfield="meridional wind stress";;
 dasilva_taux) file=DaSilvaData/dasilva_taux.cdf;kindname="Da Silva";climfield="zonal windstress";;
 dasilva_tauy) file=DaSilvaData/dasilva_tauy.cdf;kindname="Da Silva";climfield="meridional windstress";;
-pactaux) file=FSUData/fsupactaux.ctl;kindname="old FSU";climfield="zonal pseudo windstress";map='set lat -30 30
-set lon 120 300';;
-pactauy) file=FSUData/fsupactauy.ctl;kindname="old FSU";climfield="meridional pseudo windstress";map='set lat -30 30
-set lon 120 300';;
-paccurltau) file=FSUData/fsucurltau.ctl;kindname="old FSU";climfield="curl pseudo wind stress";map='set lat -30 30
-set lon 120 300';;
-pacdivtau) file=FSUData/fsudivtau.ctl;kindname="old FSU";climfield="div pseudo wind stress";map='set lat -30 30
-set lon 120 300';;
-fsu_wu) file=FSUData/wu.nc;kindname="FSU";climfield="zonal pseudo windstress";map='set lat -30 30
-set lon 120 300';;
-fsu_wv) file=FSUData/wv.nc;kindname="FSU";climfield="meridional pseudo windstress";map='set lat -30 30
-set lon 120 300';;
 
 tao_sst) file=TAOData/tao_sst.ctl;kindname="TAO";climfield="SST";map='set lat -10 10
 set lon 130 280';;
@@ -893,7 +881,9 @@ erai_prcp_daily_e) file=ERA-interim/erai_tp_daily_extended.nc;kindname="ERA-int+
 erai_t2m_daily) file=ERA-interim/erai_t2m_daily.nc;kindname="ERA-int";climfield="T2m";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2m_daily_e) file=ERA-interim/erai_t2m_daily_extended.nc;kindname="ERA-int+";climfield="T2m";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_tdew_daily) file=ERA-interim/erai_tdew_daily.nc;kindname="ERA-int";climfield="Tdew";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_tdew_daily_e) file=ERA-interim/erai_tdew_daily_extended.nc;kindname="ERA-int+";climfield="Tdew";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_twet_daily) file=ERA-interim/erai_twetbulb_daily.nc;kindname="ERA-int";climfield="Twetbulb";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_twet_daily_e) file=ERA-interim/erai_twetbulb_daily_extended.nc;kindname="ERA-int+";climfield="Twetbulb";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_slp_daily) file=ERA-interim/erai_msl_daily.nc;kindname="ERA-int";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_slp_daily_e) file=ERA-interim/erai_msl_daily_extended.nc;kindname="ERA-int+";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_z500_daily) file=ERA-interim/erai_z500_daily.nc;kindname="ERA-int";climfield="Z500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
