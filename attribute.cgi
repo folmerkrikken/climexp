@@ -183,9 +183,10 @@ if [ "$TYPE" = set ]; then
     while [ -z "$f" -a $i -lt 100 ]; do
         i=$((i+1))
         if [ -z "$FORM_extraargs" ]; then
-            f=`ls -t ./data/${NAME}*[0-9ni].dat|head -1`
+            # watch out, two extraarg names end with an "n" also...
+            f=`ls -t ./data/${NAME}*[0-9ni].dat | egrep -v '_mean|_min' | head -1`
         else
-            f=`ls -t ./data/${NAME}*$FORM_extraargs.dat|head -1`
+            f=`ls -t ./data/${NAME}*_$FORM_extraargs.dat | head -1`
         fi
         if [ ! -s $f ]; then
             rm -f $f ${f%.dat}.nc
@@ -195,8 +196,12 @@ if [ "$TYPE" = set ]; then
 else
     f=./data/$TYPE$WMO.dat
 fi
-###echo "f=$f<br>"
-###./bin/getunits $f
+if [ "$lwrite" = true ]; then
+    echo "NPERYEAR2=$NPERYEAR<br>"
+    echo "./data/${NAME}[^_]*[0-9ni].dat<br>"
+    echo "f=$f<br>"
+    ./bin/getunits $f
+fi
 if [ $NPERYEAR -gt 12 ]; then
 	eval `./bin/getunits.sh $f`
 else
