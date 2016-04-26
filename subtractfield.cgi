@@ -42,12 +42,13 @@ else
 		ii=00
 		nmax=100
 		format="%02i"
+		outfile=data/s$$_%%.ctl
 	else
 		ii=000
 		nmax=1000
 		format="%03i"
+        outfile=data/s$$_%%%.ctl
 	fi
-	outfile=data/s$$_%%%.ctl
 	touch /tmp/s$$.log
 	ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
 	while [ $i -lt $nmax ]
@@ -56,7 +57,7 @@ else
 		if [ -s $ensfile -o -s data/$ensfile ]
 		then
 			ensargs=`echo $FORM_corrargs | sed -e "s@\+\+\+@$ii@" -e "s@\%\%\%@$ii@" -e "s@\+\+@$ii@" -e "s@\%\%@$ii@"`
-			ensout=`echo $outfile | sed -e "s@\%\%\%@$ii@"`
+			ensout=`echo $outfile | sed -e "s@\%\%\%@$ii@" -e "s@\%\%@$ii@"`
 			echo ./bin/correlatefield $ensfile $ensargs subtract $ensout >> /tmp/s$$.log
 			(./bin/correlatefield $ensfile $ensargs subtract $ensout >> /tmp/s$$.log) 2>&1
 			if [ ! -s $ensout ]; then
