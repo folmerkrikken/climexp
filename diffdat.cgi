@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Take time derivative of a time series
-
+. ./init.cgi
 export DIR=`pwd`
 . ./getargs.cgi
 NPERYEAR=$FORM_NPERYEAR

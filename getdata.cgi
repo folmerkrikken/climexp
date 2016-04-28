@@ -414,9 +414,9 @@ cat << EOF
 <input type="hidden" name="wmo" value="$WMO">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
 Scale factor: <input type="$number" step=any class="forminput" name="factor" $textsize10>
-</td><td><a href="javascript:pop_page('help/scaleseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a><tr><td>&nbsp;<td>
 <input type="submit" class="formbutton" value="Scale">
 </form>
+</td><td><a href="javascript:pop_page('help/scaleseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a>
 </td></tr>
 EOF
 if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
@@ -436,6 +436,10 @@ if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
       31) n31=selected;;
       *) n3=selected;;
   esac
+  def=./prefs/$EMAIL.shift
+  if [ -s $def ]; then
+    eval `egrep '^FORM_[a-z0-9]*=[a-z]*[-+0-9.]*;$' $def`
+  fi
 fi
 cat <<EOF
 <tr><td>Time derivative:</td><td>
@@ -456,12 +460,21 @@ using <select class="forminput" name="ndiff">
 <option $n15>15
 <option $n31>31
 </select> ${month}s
-</td><td><a href="javascript:pop_page('help/derivativeseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a>
-<tr><td>&nbsp;<td>
 <input type="submit" class="formbutton" value="Take time derivative">
 </form>
-</td><td>&nbsp</td>
-<tr><td>Normalise:</td><td>
+</td><td><a href="javascript:pop_page('help/derivativeseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a>
+</td><td>&nbsp</td></tr>
+<tr><td>Shift:</td><td>
+<form action="shiftseries.cgi" method="POST">
+<input type="hidden" name="EMAIL" value="$EMAIL">
+<input type="hidden" name="station" value="$STATION">
+<input type="hidden" name="type" value="$TYPE">
+<input type="hidden" name="wmo" value="$WMO">
+<input type="hidden" name="NPERYEAR" value="$NPERYEAR">
+Shift data by 
+<input type="$number" step=any class="forminput" name="shift" $textsize4 value="$FORM_shift"> ${month}s.
+<input type="submit" class="formbutton" value="Shift">
+</td></tr><tr><td>Normalise:</td><td>
 <form action="normdiff.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="CLIMATE" value="$name">
@@ -479,7 +492,7 @@ Take anomalies and set standard deviation to one
 <tr><td>&nbsp;<td>
 <input type="submit" class="formbutton" value="Normalise">
 </form>
-</td></td><tr><td>Combine:</td><td>
+</td></tr><tr><td>Combine:</td><td>
 <a href="normdiffform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Combine with another timeseries to form a normalized index</a>
 </td><td><a href="javascript:pop_page('help/combineseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr><tr><td>Mask out:</td><td>
 <a href="maskseriesform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Mask out based on another time series</a>
