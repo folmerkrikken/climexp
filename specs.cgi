@@ -19,9 +19,9 @@ precipitation=GPCCcom
 pressure=20CRslp
 
 case "$FORM_var" in
-    temp) dataset=$temperature;units="[&deg;C]";temp_selected=selected;varname="temperature ";;
+    prcp) dataset=$precipitation;unis="[%]";prcp_selected=selected;varname="precipitation ";;
     slpa) dataset=$pressure;units="[hPa]";slpa_selected=selected;varname="sea-level pressure ";;
-    *) dataset=$precipitation;unis="[%]";prcp_selected=selected;varname="precipitation ";;
+    *) dataset=$temperature;units="[&deg;C]";temp_selected=selected;varname="temperature ";;
 esac
 
 prefix=$FORM_prefix
