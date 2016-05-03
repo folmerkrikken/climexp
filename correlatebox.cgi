@@ -73,8 +73,15 @@ if [ -n "$FORM_timeseries" ]; then
   gmst)      index="GMST"
              if [ ${NPERYEAR:-12} = 12 ]; then
                 sfile="$DIR/NASAData/giss_al_gl_m.dat"
-             elif [ $NPERYEAR = 1 -o $NOERYEAR = -1 ]; then
+             elif [ $NPERYEAR = 1 -o $NPERYEAR = -1 ]; then
                 sfile="$DIR/NASAData/giss_al_gl_a_4yrlo.dat"
+             else
+                echo 
+                . ./myvinkhead.cgi "Not yet ready" ""
+                . ./nperyear2timescale.cgi
+                echo "I am afraid this routine cannot yet handle $timescale data."
+                . ./myvinkfoot.cgi
+                exit
              fi;;
   time)      index="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
   *)         sfile=$DIR/`head -1 $FORM_timeseries | tr $forbidden '?'`
