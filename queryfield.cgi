@@ -226,7 +226,7 @@ tempa_old) file=NCDCData/temp_anom_old.ctl;kindname="NCDC v2";climfield="T2m ano
 ncdc_temp) file=NCDCData/t_anom.ctl;kindname="NCDC v3";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 ncdc_temp_old) file=NCDCData/t_anom.ctl;kindname="NCDC v2";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 ###hadcrut4) file=UKMOData/hadcrut4_median.nc;kindname="HadCRUT4";climfield="SST/T2m anom";;
-hadcrut4) file=UKMOData/HadCRUT.4.4.0.0.median.nc;kindname="HadCRUT4.4";climfield="SST/T2m anom";;
+hadcrut4) file=UKMOData/HadCRUT.4.4.0.0.median.nc;kindname="HadCRUT4.4";climfield="SST/T2m anom";LSMASK=UKMOData/lsmask_5.nc;;
 crutem1) file=CRUData/crutem1.ctl;kindname="CRUTEM1";climfield="T2m anom";;
 ncrutem1) file=CRUData/ncrutem1.ctl;kindname="CRUTEM1";climfield="number of stations";;
 crutem1v) file=CRUData/crutem1v.ctl;kindname="CRUTEM1v";climfield="T2m anom";;
