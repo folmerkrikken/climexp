@@ -60,6 +60,9 @@ esac
 if [ -n "$FORM_changesign" ]; then
   changesign_checked="checked"
 fi
+if [ "$FORM_assume" = scale ]; then
+  lowerlimitzero_checked="checked"
+fi
 
 case ${FORM_restrain:-0} in
 0.5) select05=selected;;
@@ -104,7 +107,8 @@ INCLUDE_TWOTHIRD=true
 NAME=$save_name
 
 echo "<tr><td>Change sign:"
-echo "<td><input type=\"checkbox\" class=\"formcheck\" name=\"changesign\" $changesign_checked>study the low extremes<td><a href=\"javascript:pop_page('help/changesign.shtml',284,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
+echo "<td><input type=\"checkbox\" class=\"formcheck\" name=\"changesign\" $changesign_checked>study the low extremes,"
+echo "<input type=\"checkbox\" class=\"formcheck\" name=\"lowerlimitzero\" $lowerlimitzero_checked>enforce a lower limit of zero<td><a href=\"javascript:pop_page('help/changesign.shtml',284,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
 
 echo "<tr><td>Fit:<td>"
 echo "<input type=\"radio\" class=\"formradio\" name=\"fit\" value=\"none\" $fit_none>nothing"

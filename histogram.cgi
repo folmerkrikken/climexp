@@ -54,6 +54,10 @@ else
 fi
 corrargs="$corrargs $FORM_nbin fit $FORM_fit hist $FORM_plot"
 n=0
+if [ -n "$FORM_lowerlimitzero" ]; then
+    FORM_assume=scale
+    corrargs="$corrargs assume scale"
+fi
 . ./getopts.cgi
 
 if [ $EMAIL != someone@somewhere ]; then

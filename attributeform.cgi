@@ -8,14 +8,14 @@ echo
 if [ -n "$FORM_field" ]; then
     . ./queryfield.cgi
     TYPE=field
-    station="$flimfield"
+    station="$climfield"
     NAME="$kindname"
 else
     TYPE="$FORM_TYPE"
     WMO="$FORM_WMO"
     listname=$WMO
     STATION="$FORM_STATION"
-    station=` echo "$STATION" | tr '_' ' '`
+    station=` echo "$STATION" | tr '_%' ' +'`
     NAME="$FORM_NAME"
     prog=$NAME
     NPERYEAR="$FORM_NPERYEAR"

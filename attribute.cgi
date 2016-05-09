@@ -41,7 +41,7 @@ elif [ "$TYPE" = set ]; then
     station=`echo $FORM_STATION | tr '_' ' '`
 else
 	CLIM=`echo "$FORM_NAME"  | tr '[:upper:]' '[:lower:]'`
-    station=`echo $FORM_STATION | tr '_' ' '`
+    station=`echo $FORM_STATION | tr '_%' ' +'`
 fi
 # common options
 if [ -z "$FORM_hist" ]; then
@@ -455,7 +455,9 @@ EOF
 		cat $root.gnuplot
 		echo '</pre>'
 	fi
-	./bin/gnuplot < $root.gnuplot 2>&1
+	./bin/gnuplot < $root.gnuplot 2>&1 | fgrep -v "'unknown' terminal" | fgrep -v 'select a terminal' 
+	# the filtering is necessary since gnuplot 5, I could not yet find another way 
+	# to plot nowhere
 	if [ ! -s ${root}.png ]; then
 		echo "Something went wrong while making the plot."
 		echo "The plot commands are <a href=\"$root.gnuplot\">here</a>."
