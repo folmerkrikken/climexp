@@ -285,7 +285,7 @@ fi
 echo "<div class=\"alineakop\"><a name=\"download\">Download $kindname $climfield</a></div>"
 
 ###echo "FORM_field=$FORM_field<br>"
-if [ ${FORM_field#had} != $FORM_field -o ${FORM_field#mohmat} != $FORM_field ]; then
+if [ ${FORM_field#had} != $FORM_field -o ${FORM_field#mohmat} != $FORM_field -o ${FORM_field#en4} != $FORM_field ]; then
   echo "(c) Crown copyright 2006, data supplied by the Met Office."
   echo "The UKMO license does not allow us to redistribute this file. "
   echo "Please consult their <a href="wipefoot.cgi?http://www.hadobs.org" target=\"_new\">website</a> for further information."
