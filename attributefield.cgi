@@ -23,7 +23,7 @@ fi
 
 startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
-outfile=data/trends_${FORM_field}_$$.nc
+outfile=data/trends_`basename ${FORM_field} .info`_$$.nc
 corrargs="$corrargs $outfile"
 echo `date` "$EMAIL ($REMOTE_ADDR) attributefield $corrargs" >> log/log
 echo "Computing trend in extremes in each grid box.  This will take (quite) a while...<br>"
