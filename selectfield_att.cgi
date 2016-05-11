@@ -111,6 +111,42 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
+<tr><th>&nbsp;
+<th>&nbsp;
+<th>Rx1day
+<th>Rx3day
+<th>Rx5day
+<th>Txx
+<th>Txn
+<th>Tnx
+<th>Tnn
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<tr><td>annual
+<td>observed
+<td><input type=radio class=formradio name=field value=eucleia_rx1day_Aday_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_rx3day_Aday_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_rx5day_Aday_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_txx_Aday_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_txn_Aday_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_tnx_Aday_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_tnn_Aday_HadGEM3-A-N216_historical>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<tr><td>annual
+<td>counterfactual
+<td><input type=radio class=formradio name=field value=eucleia_rx1day_Aday_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_rx3day_Aday_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_rx5day_Aday_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_txx_Aday_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_txn_Aday_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_tnx_Aday_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_tnn_Aday_HadGEM3-A-N216_historicalNat>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
 </table>
 </form>
 <div class=alineakop>EC-Earth 2.3 monthly series</div>
