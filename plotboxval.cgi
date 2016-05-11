@@ -136,7 +136,7 @@ if [ $NPERYEAR -ge 12 ]; then
                 echo "<option>$sum"
             fi
         done
-        echo "</select>months"
+        echo "</select>days"
     else
         cat <<EOF
 <input type="text" class="forminput" name="sum" size=4>periods
