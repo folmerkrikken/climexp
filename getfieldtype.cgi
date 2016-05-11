@@ -2,9 +2,7 @@
 if [ "$VAR" = "temp" -a "$kindname" = "SODA  " ]; then
   VAR=sst
 fi
-if [ -z "$VAR" ]; then
-    exit
-fi
+if [ -n "$VAR" ]; then
 myvar=${VAR#min_}
 myvar=${myvar#max_}
 case ${myvar:-unknown} in 
@@ -27,3 +25,4 @@ fd*) field_type="frost days";;
 salinity) field_type="salinity";;
 *) echo "getfieldtype: please ask <a href=\"mailto:oldenborgh@knmi.nl\">me</a> to add \"$VAR\" to the lists in getfieldtype";field_type="$VAR";;
 esac
+fi
