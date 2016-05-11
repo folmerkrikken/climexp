@@ -293,6 +293,9 @@ elif [ ${FORM_field#ukmo} != $FORM_field -o ${FORM_field#ens_ukmo} != $FORM_fiel
   echo "(c) Crown copyright 2006, data supplied by the Met Office."
   echo "The UKMO does not allow us to redistribute this file. "
   echo "Please consult their <a href="wipefoot.cgi?http://www.metoffice.gov.uk" target=\"_new\">website</a> for further information."
+elif [ ${file#EUCLEIA/Had} != $file ]; then
+  echo "Please read and agree to the <a href="wipefoot.cgi?EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf" target=\"_new\">terms and conditions</a> before downloading.<p>"
+  download=OK
 elif [ "${FORM_field#era}" != "${FORM_field}" -o "${FORM_field#ecmwf}" != "${FORM_field}" -o "${FORM_field#ens_ecmwf}" != "${FORM_field}" ]; then
   echo "The ECMWF member states do not permit us to give you access to the raw data."
   echo "Please consult the ECMWF <a href=\"http://www.ecmwf.int/research/era/\" target="_new">ERA</a> or <a href=\"http://www.ecmwf.int/services/seasonal/\" target="_new">seasonal forecasting</a> website for further information."
