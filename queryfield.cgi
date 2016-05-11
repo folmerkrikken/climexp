@@ -14,12 +14,13 @@ if [ ${FORM_field#Rapid} != $FORM_field ]; then
 else
 NPERYEAR=12 # default
 case $FORM_field in
-cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
+cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
     field=$FORM_field
     dataset=${field%%_*}
     field=${field#cmip5_}
     field=${field#thor_}
     field=${field#knmi14_}
+    field=${field#eucleia_}
     var=${field%%_*}
     field=${field#*_}
     type=${field%%_*}
@@ -66,6 +67,10 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
             dir=day/atmos
             type=day
             export splitfield=true
+        elif [ $dataset = eucleia ]; then
+            dir=day
+            type=day
+            export splitfield=true
         else
             dir=daily
         fi
@@ -81,6 +86,7 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
          cmip5) datasetname=CMIP5;decdir=CMIP5/decadal;;
          thor) datasetname=THOR;decdir=THOR;;
          knmi14) datasetname=KNMI14;;
+         eucleia) datasetname=EUCLEIA;;
          *) echo "unknown dataset $dataset"; exit -1;;
     esac
     if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
@@ -109,6 +115,14 @@ cmip5*|thor*|knmi14*) # expecting cmip5_var_Amon_model_exp
                 file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
             fi
             file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type/$var/$file
+            ###echo "file=$file"
+        elif [ $dataset = eucleia ]; then
+            if [ "$splitfield" = true ]; then
+                file=${var}_${type}_${model}_${exp}_????????-????????_%%%.nc
+            else
+                file=${var}_${type}_${model}_${exp}_186001-210012_%%%.nc
+            fi
+            file=EUCLEIA/${model}/$dir/$var/$file
             ###echo "file=$file"
         elif [ -z "$rip" ]; then
             file=CMIP5/$dir/$var/${var}_${type}_${model}_${exp}_000.nc
