@@ -2,6 +2,9 @@
 if [ "$VAR" = "temp" -a "$kindname" = "SODA  " ]; then
   VAR=sst
 fi
+if [ -z "$VAR" ]; then
+    exit
+fi
 myvar=${VAR#min_}
 myvar=${myvar#max_}
 case ${myvar:-unknown} in 
