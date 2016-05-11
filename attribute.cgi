@@ -379,6 +379,7 @@ set title "$title"
 set xlabel "covariate"
 set ylabel "$ylabel"
 set datafile missing '-999.900'
+set yrange [${FORM_ylo}:${FORM_yhi}]
 plot \
 "$obsplotfile" index 0 notitle with points lt 3,\\
 "$obsplotfile" index 1 notitle with points lt 4,\\
