@@ -124,26 +124,26 @@ Choose a field and press this button</td></tr>
 <th>&nbsp;
 <th>&nbsp;
 <tr><td>annual
-<td>observed
-<td><input type=radio class=formradio name=field value=eucleia_rx1day_Aday_HadGEM3-A-N216_historical>
-<td><input type=radio class=formradio name=field value=eucleia_rx3day_Aday_HadGEM3-A-N216_historical>
-<td><input type=radio class=formradio name=field value=eucleia_rx5day_Aday_HadGEM3-A-N216_historical>
-<td><input type=radio class=formradio name=field value=eucleia_txx_Aday_HadGEM3-A-N216_historical>
-<td><input type=radio class=formradio name=field value=eucleia_txn_Aday_HadGEM3-A-N216_historical>
-<td><input type=radio class=formradio name=field value=eucleia_tnx_Aday_HadGEM3-A-N216_historical>
-<td><input type=radio class=formradio name=field value=eucleia_tnn_Aday_HadGEM3-A-N216_historical>
+<td>historical
+<td><input type=radio class=formradio name=field value=eucleia_rx1day_yr_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_rx3day_yr_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_rx5day_yr_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_txx_yr_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_txn_yr_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_tnx_yr_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_tnn_yr_HadGEM3-A-N216_historical>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
 <tr><td>annual
-<td>counterfactual
-<td><input type=radio class=formradio name=field value=eucleia_rx1day_Aday_HadGEM3-A-N216_historicalNat>
-<td><input type=radio class=formradio name=field value=eucleia_rx3day_Aday_HadGEM3-A-N216_historicalNat>
-<td><input type=radio class=formradio name=field value=eucleia_rx5day_Aday_HadGEM3-A-N216_historicalNat>
-<td><input type=radio class=formradio name=field value=eucleia_txx_Aday_HadGEM3-A-N216_historicalNat>
-<td><input type=radio class=formradio name=field value=eucleia_txn_Aday_HadGEM3-A-N216_historicalNat>
-<td><input type=radio class=formradio name=field value=eucleia_tnx_Aday_HadGEM3-A-N216_historicalNat>
-<td><input type=radio class=formradio name=field value=eucleia_tnn_Aday_HadGEM3-A-N216_historicalNat>
+<td>historicalNat
+<td><input type=radio class=formradio name=field value=eucleia_rx1day_yr_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_rx3day_yr_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_rx5day_yr_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_txx_yr_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_txn_yr_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_tnx_yr_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_tnn_yr_HadGEM3-A-N216_historicalNat>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
@@ -160,6 +160,10 @@ Choose a field and press this button</td></tr>
 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,
 <br><a href="getindices.cgi?WMO=KNMI14Data/Pcumbria/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_NEngland&STATION=P_NEngland_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Northern England</a>,
 <br><a href="getindices.cgi?WMO=KNMI14Data/Pboulder/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_Boulder&STATION=P_Boulder_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Boulder, Colorado, USA</a>.
+
+<div class=alineakop>HadGEM3A N216 daily series</div>
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">historical precipitation at 52&deg;N, 5&deg;E</a>,
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historicalNat_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_nat&TYPE=p&NPERYEAR=360&id=$EMAIL">counterfactual precipitation at 52&deg;N, 5&deg;E</a>.
 
 EOF
 

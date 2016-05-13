@@ -120,7 +120,7 @@ cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
             if [ "$splitfield" = true ]; then
                 file=${var}_${type}_${model}_${exp}_????????-????????_%%%.nc
             else
-                file=${var}_${type}_${model}_${exp}_186001-210012_%%%.nc
+                file=${var}_${type}_${model}_${exp}_196001-201312_%%%.nc
             fi
             file=EUCLEIA/${model}/$dir/$var/$file
             ###echo "file=$file"
