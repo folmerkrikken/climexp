@@ -38,11 +38,8 @@ grads2nc)
   fi
   if [ ! -f $outfile ]; then
     export UDUNITS_PATH=$DIR/etc/udunits.dat
-    ncfile=`echo $tmpfile | sed -e 's/++/__/' -e 's/%%/__/' -e 's/@/_/'`
-    ###echo "<br>cd `pwd`;$DIR/bin/grads2nc $tmpfile.ctl $ncfile -q<br>"
-    $DIR/bin/grads2nc $tmpfile.ctl $ncfile.nc > /tmp/grads2nc$$.log 2>&1
-    echo 'compressing <p>'
-    cdo -r -f nc4 -z zip copy $ncfile.nc $outfile
+    ###echo "<br>cd `pwd`;$DIR/bin/grads2nc $tmpfile.ctl $outfile<br>"
+    $DIR/bin/grads2nc $tmpfile.ctl $outfile > /tmp/grads2nc$$.log 2>&1
   fi
   ;;
 grads2hdf)
@@ -84,6 +81,7 @@ esac
 if [ ! -f $outfile ]; then
   echo 'Something went wrong in the netCDF/HDF/HDF5 generation routine.  Please send the following cryptic output to <a href="mailto:oldenborgh@knmi.nl">me</a> and I will try to fix it.<pre>'
   cat /tmp/grads2nc$$.log
+  de $DIR
   . ./myvinkfoot.cgi
   exit
 fi
