@@ -148,6 +148,14 @@ def get_file_list(exp, params):
         paramsDict['type'] = typeVar
         paramsDict['res'] = res
 
+    elif params.FORM_dataset.split('-')[0] in ['CORDEX' ]:
+
+        # output a list of files in $files and a dirName to put the output $dirName
+        var = params.FORM_var
+        typeVar = 'mon'
+        paramsDict['type'] = typeVar
+        paramsDict['res'] = res
+
     elif params.FORM_dataset == 'CMIP3':
     
         dirName = '{FORM_dataset}/{exp}'.format(exp=exp, **paramsDict)
@@ -250,6 +258,16 @@ def get_file_list(exp, params):
 
                 for mask in maskFiles:
                     files += glob.glob(mask)
+
+    elif params.FORM_dataset.split('-')[0] == 'CORDEX':
+
+        dirName = '{dataset}/{exp}'.format(dataset=params.FORM_dataset, exp=exp, **paramsDict)
+        indir = params.FORM_dataset.replace('-','/')
+        if params.FORM_plotvar == 'mean':
+            files.append("{indir}/{typeVar}/{FORM_var}/{FORM_var}_EUR-44_cordex_{exp}_{typeVar}_ave.nc".format(indir=indir, exp=exp, typeVar=typeVar, **paramsDict))
+        else:
+            mask = "{indir}/{typeVar}/{FORM_var}/{FORM_var}_EUR-44_*_{exp}_r*i1p1_*_latlon.nc".format(indir=indir, exp=exp, typeVar=typeVar, **paramsDict)
+            files += glob.glob(mask)
 
     elif params.FORM_dataset == 'CMIP3':
 
@@ -418,6 +436,28 @@ def get_model(params, filename, typeVar):
             else:
                 print '<b>Cannot find mask file %s</b><br>' % trylsmask
                 raise PlotSeriesError('<b>Cannot find mask file %s</b><br>' % trylsmask)
+
+    elif params.FORM_dataset.split('-')[0] in ['CORDEX']:
+
+        domain = params.FORM_dataset.split('-')[1]
+        domain = domain[:-2] + '-' + domain[-2:]
+        model = os.path.basename(filename)
+        model = strip_begin(model, '{var}_{domain}_'.format(var=var, domain=domain))           
+        idx = model.rfind('_v')
+        if idx >= 0:
+            model = model[:idx]
+
+        if model.startswith('cordex'):
+            # coordinate with queryfield...
+            LSMASK = 'CORDEX/{domain}/fx/lsmask_{domain}_cordex_ave.nc'.format(domain=domain)
+        else:
+            mask = 'CORDEX/{domain}/fx/lsmask_{domain}_{model}_v1_fx_latlon.nc'.format(domain=domain, model=model)
+            mask = mask.replace('rcp26','historical') # there must be a better way
+            mask = mask.replace('rcp45','historical') # there must be a better way
+            mask = mask.replace('rcp85','historical') # there must be a better way
+            idx0 = mask.find('_r')
+            idx1 = mask.find('p1_')
+            LSMASK = mask[:idx0] + '_r0i0p0_' + mask[idx1+3:]
 
     elif params.FORM_dataset in ['CMIP3', 'ERAi', 'ERA20C', '20CR', 'obs']:
 

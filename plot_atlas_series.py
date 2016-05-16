@@ -56,7 +56,7 @@ class PlotAtlasSeries:
         self.maskfile = None
 
         # set flag for ensembles
-        if self.params.FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3']:
+        if self.params.FORM_dataset.split('-')[0] in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3', 'CORDEX']:
             self.ensemble = True
 
 
@@ -118,7 +118,7 @@ class PlotAtlasSeries:
             self.logOut.info("Error: a reference period is needed for relative changes")
             return None
 
-        for dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone']:
+        for dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', self.params.FORM_dataset]:
             dir = 'atlas/series/{dataset}'.format(dataset=dataset)
             if not os.path.isdir(dir):
                 os.makedirs(dir)
@@ -129,12 +129,19 @@ class PlotAtlasSeries:
                        (self.params.FORM_rcp60, 'rcp60'), (self.params.FORM_rcp85, 'rcp85')]
             # Create a list of experiments
             exps = [el[1] for el in lstExps if el[0]]
+        elif self.params.FORM_dataset.split('-')[0] in ['CORDEX']:
+            # params.FORM_rcp26, _rcp45, _rcp85
+            lstExps = [(self.params.FORM_rcp26, 'rcp26'), (self.params.FORM_rcp45, 'rcp45'),
+                       (self.params.FORM_rcp85, 'rcp85')]
+            # Create a list of experiments
+            exps = [el[1] for el in lstExps if el[0]]
         elif self.params.FORM_dataset == 'CMIP3':
             exps = ['sresa1b']
         elif self.params.FORM_dataset in ['ERAi', 'ERA20C', '20CR']:
             exps = ['reanalysis']
         elif self.params.FORM_dataset == 'obs':
             exps = ['observations']
+
         if self.params.FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone']:
             for exp in exps:
                 dirall = 'atlas/series/CMIP5/{exp}'.format(exp=exp)
@@ -156,6 +163,11 @@ class PlotAtlasSeries:
                 if not os.path.islink(dirone):
                     os.symlink('../CMIP5ext/{exp}'.format(exp=exp), dirone)
                 dir = 'atlas/series/CMIP5ext/{exp}'.format(exp=exp)
+                if not os.path.isdir(dir):
+                    os.makedirs(dir)
+        if self.params.FORM_dataset.split('-')[0] == 'CORDEX':
+            for exp in exps:
+                dir = 'atlas/series/{dataset}/{exp}'.format(dataset=self.params.FORM_dataset.split, exp=exp)
                 if not os.path.isdir(dir):
                     os.makedirs(dir)
 
@@ -433,6 +445,10 @@ class PlotAtlasSeries:
             # params.FORM_rcp26, _rcp45, _rcp60, _rcp85
             lstExps = [(self.params.FORM_rcp26, 'rcp26'), (self.params.FORM_rcp45, 'rcp45'),
                    (self.params.FORM_rcp60, 'rcp60'), (self.params.FORM_rcp85, 'rcp85')]
+        if self.params.FORM_dataset.split('-')[0] in ['CORDEX']:
+            # params.FORM_rcp26, _rcp45, _rcp85
+            lstExps = [(self.params.FORM_rcp26, 'rcp26'), (self.params.FORM_rcp45, 'rcp45'),
+                   (self.params.FORM_rcp85, 'rcp85')]
         elif self.params.FORM_dataset == 'CMIP3':
             lstExps = [('on', 'sresa1b')]
         elif self.params.FORM_dataset in ['ERAi', 'ERA20C', '20CR']:
@@ -524,7 +540,7 @@ s/5.000 UL/5.000 UL 1 .setopacityalpha/"""
         FORM_field = ""
         if not os.path.isdir(plotfolder):
             os.makedirs(plotfolder)
-        if self.params.FORM_dataset in ['CMIP5','CMIP5one','CMIP5ext','CMIP5extone','CMIP3']:
+        if self.params.FORM_dataset.split('-')[0] in ['CMIP5','CMIP5one','CMIP5ext','CMIP5extone','CMIP3', 'CORDEX']:
             lastbit = self.params.FORM_dataset + '_' + scenarios
         elif self.params.FORM_dataset in ['ERAi','ERA20C','20CR']:
             lastbit = self.params.FORM_dataset
@@ -618,18 +634,19 @@ plot \\\n""".format(range=rangeVal, region_extension=self.region_extension, var=
 
                     idx += 1
 
-                    # one ensemble member per model - choose the same ones as in CMIP5one
-                    rip, r, i, p = get_rip(self.params, file)
-                    ###print "model = {model}, rip = {rip}<br>".format(model=model,rip=rip)
-                    if model == 'EC-EARTH':
-                        if r != 8:
-                            continue
-                    elif model == 'HadGEM2-ES':
-                        if r != 2:
-                            continue
-                    else:
-                        if r != 1:
-                            continue
+                    if self.params.FORM_dataset in ['CMIP5','CMIP5one','CMIP5ext','CMIP5extone']:
+                        # one ensemble member per model - choose the same ones as in CMIP5one
+                        rip, r, i, p = get_rip(self.params, file)
+                        ###print "model = {model}, rip = {rip}<br>".format(model=model,rip=rip)
+                        if model == 'EC-EARTH':
+                            if r != 8:
+                                continue
+                        elif model == 'HadGEM2-ES':
+                            if r != 2:
+                                continue
+                        else:
+                            if r != 1:
+                                continue
 
                     basename = os.path.splitext(os.path.basename(file))[0]
                     (monthlydir, anomdir, dump0dir, dump1dir) = self.set_dirs(dir, paramsDict)
@@ -664,6 +681,10 @@ plot \\\n""".format(range=rangeVal, region_extension=self.region_extension, var=
                     else:
                         modone = 'mod'
                     series = '{monthlydir}/time_{var}_{typeVar}_{modone}mean_{exp}_000_{region_extension}.dat'.format(monthlydir=monthlydir, var=var, typeVar=self.typeVar, modone=modone, exp=exp, region_extension=self.region_extension)
+                elif self.params.FORM_dataset.split('-')[0] == 'CORDEX':
+                    domain = self.params.FORM_dataset.split('-')[1]
+                    domain = domain[:-2] + '-' + domain[-2:]
+                    series = '{monthlydir}/time_{var}_{domain}_cordex_{exp}_mon_ave_{region_extension}.dat'.format(monthlydir=monthlydir, var=var, domain=domain, exp=exp, region_extension=self.region_extension)
                 elif self.params.FORM_dataset == 'CMIP3':
                     series = '{monthlydir}/time_{var}_cmip3_ave_mean_144_{region_extension}.dat'.format(monthlydir=monthlydir, var=var, region_extension=self.region_extension)
                 elif self.params.FORM_dataset == 'ERAi':
@@ -696,7 +717,7 @@ plot \\\n""".format(range=rangeVal, region_extension=self.region_extension, var=
                             f.write( "\"{dumpfile1}\" u {s3}:{s2} title \"{title}\" with lines lt {lt} lw {lw},\\\n".format(dumpfile1=dumpfile1, s3=s3, s2=defVar.s2, lt=lt, lw=lw, title=title))
 
             # and the same for historical - take RCP4.5 as this has the largest number of runs
-            if self.params.FORM_dataset in ['CMIP5', 'CMIP5one','CMIP5ext', 'CMIP5extone']:
+            if self.params.FORM_dataset.split('-')[0] in ['CMIP5', 'CMIP5one','CMIP5ext', 'CMIP5extone','CORDEX']:
                 exp = 'rcp45'
                 title = 'historical'
             elif self.params.FORM_dataset == 'CMIP3':
@@ -735,6 +756,10 @@ plot \\\n""".format(yr1s=yr1s, yr2s=yr2s)
 
                 if self.params.FORM_dataset in ['CMIP5one', 'CMIP5', 'CMIP5extone', 'CMIP5ext']:
                     findFilesFilter += 'atlas/series/{dataset}/{exp}/monthly/{region_extension}/time_{var}_{typeVar}_{modone}mean_{exp}_000_{region_extension}.dat'.format(dataset=self.params.FORM_dataset, exp=exp, region_extension=self.region_extension, var=var, typeVar=self.typeVar, modone=modone)
+                elif self.params.FORM_dataset.split('-')[0] == 'CORDEX':
+                    domain = self.params.FORM_dataset.split('-')[1]
+                    domain = domain[:-2] + '-' + domain[-2:]
+                    findFilesFilter += 'atlas/series/{dataset}/{exp}/monthly/{region_extension}/time_{var}_{domain}_cordex_{exp}_mon_ave_{region_extension}.dat'.format(dataset=self.params.FORM_dataset, domain=domain, exp=exp, region_extension=self.region_extension, var=var)
                 elif self.params.FORM_dataset == 'CMIP3':
                     findFilesFilter += 'atlas/series/{dataset}/{exp}/monthly/{region_extension}/time_{var}_cmip3_ave_mean_144_{region_extension}.dat'.format(dataset=self.params.FORM_dataset, exp=exp, region_extension=self.region_extension, var=var)
                 else:
@@ -751,6 +776,8 @@ plot \\\n""".format(yr1s=yr1s, yr2s=yr2s)
                     for exp in exps:
                         if exp == 'sresa1b':
                             inpattern += 'atlas/series/{dataset}/{exp}/monthly/{region_extension}/time_{var}_{typeVar}_*_{region_extension}.dat '.format(dataset=self.params.FORM_dataset, exp=exp, var=var, typeVar=self.typeVar, region_extension=self.region_extension)
+                        elif  self.params.FORM_dataset.split('-')[0] == 'CORDEX':
+                            inpattern += 'atlas/series/{dataset}/{exp}/monthly/{region_extension}/time_{var}_{domain}_*_{exp}_*_{region_extension}.dat '.format(dataset=self.params.FORM_dataset, exp=exp, var=var, domain=domain, region_extension=self.region_extension)
                         else:
                             inpattern += 'atlas/series/{dataset}/{exp}/monthly/{region_extension}/time_{var}_{typeVar}_*_{exp}_*_{region_extension}.dat '.format(dataset=self.params.FORM_dataset, exp=exp, var=var, typeVar=self.typeVar, region_extension=self.region_extension)
 

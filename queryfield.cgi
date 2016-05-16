@@ -195,7 +195,68 @@ cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
     [ -n "$rip" ] && kindname="$kindname $rip"
     climfield="$var"
     ;;
+
+cordex*)
+    # expecting cordex_${domain}_${var}_${gcm}_${exp}_${rip}_${rcm}_${timescale}
+    field=${FORM_field#cordex_}
+    domain=${field%%_*}
+    field=${field#*_}
+    var=${field%%_*}
+    field=${field#*_}
+    gcm=${field%%_*}
+    field=${field#*_}
+    exp=${field%%_*}
+    field=${field#*_}
+    rip=${field%%_*}
+    field=${field#*_}
+    rcm=${field%%_*}
+    timescale=${field#*_}
+    version=v1
+    case $gcm in
+        ave) file=CORDEX/$domain/$timescale/$var/${var}_${domain}_cordex_${exp}_${timescale}_ave.nc
+        climfield=$var
+        kindname="CORDEX $domain ave $exp"
+        LSMASK=CORDEX/$domain/fx/lsmask_EUR-44_cordex_ave.nc
+        ;;
+        ens) file=CORDEX/$domain/$timescale/$var/${var}_${domain}_cordex_${exp}_${timescale}_%%%.nc
+        climfield=$var
+        kindname="CORDEX $domain $exp"
+        LSMASK=CORDEX/$domain/fx/lsmask_EUR-44_cordex_ave.nc
+        ;;
+        *) 
+file=CORDEX/$domain/$timescale/$var/${var}_${domain}_${gcm}_${exp}_${rip}_${rcm}_${version}_${timescale}_*.nc
+        ###echo $file
+        file=`ls $file 2> /dev/null | head -1`
+        climfield=$var
+        if [ $rcm = MPI-CSC-REMO2009 ]; then
+            kindname="$gcm/$rcm $rip $exp"
+        else
+            kindname="$gcm/$rcm $exp"
+        fi
+        LSMASK=CORDEX/$domain/fx/lsmask_${domain}_${gcm}_historical_r0i0p0_${rcm}_${version}_fx_latlon.nc
+        ;;
+    esac
+    case $file in
+        *%.nc) ensfile=`echo $file | tr '%' '0'`;;
+        *) ensfile=$file;;
+    esac
+    [ ! -f "$ensfile" ] && file=
+    case $timescale in
+        day) case $gcm in
+                MOHC*) NPERYEAR=360;;
+                NOAA_GFDL*|NCC-NorESM1*|CSIRO-QCCCE*|IPSL-IPSL-CM5A*|MIROC-MIROC5*) NPERYEAR=365;;
+                *) NPERYEAR=366;;
+             esac;;
+        annual) NPERYEAR=1;;
+    esac
+    if [ -z "$file" ]; then
+        echo
+        echo "Cannot handle $FORM_field (yet)"
+        exit -1
+    fi
     
+    ;;
+
 rt2b_*) 
     . ./ENSEMBLES_RCM/rt2b.cgi;;
 rt3_*) 

@@ -66,11 +66,16 @@ class PlotAtlasMap:
         self.ensemble = False
 
         # Set temporary folder
-        self.tempDir = tempfile.mkdtemp()
-        self.log.debug('Use temporary folder: %s' % self.tempDir)
+        if True:
+            self.tempDir = tempfile.mkdtemp()
+            self.log.debug('Use temporary folder: %s' % self.tempDir)
+        else:
+            self.tempDir = "./tmp"
+            subprocess.check_output("rm ./tmp/*", shell=True, stderr=subprocess.STDOUT)
+            self.logOut.info("DEBUG: using ./tmp<br>")
 
         # set flag for ensembles
-        if self.params.FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3']:
+        if self.params.FORM_dataset.split('-')[0] in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3', 'CORDEX']:
             self.ensemble = True
 
         # Set rel
@@ -119,7 +124,7 @@ class PlotAtlasMap:
         save_plotvar = self.params.FORM_plotvar
         save_dataset = self.params.FORM_dataset
         meanfile = ""
-        if ( self.params.FORM_measure == 'regr' or self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone'] ) and self.ensemble:
+        if ( self.params.FORM_measure == 'regr' or self.params.FORM_dataset.split('-')[0] in ['CMIP5ext', 'CMIP5extone', 'CORDEX'] ) and self.ensemble:
             if self.params.FORM_plotvar == 'mean':
                 # make sure we also get the full list, needed for the natural variability
                 # note the CMIP3 case does not use the parameter
@@ -376,7 +381,7 @@ class PlotAtlasMap:
         nfiles = len(self.files)
 
         ## compute quantiles if needed
-        if self.params.FORM_plotvar != 'mean' or self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
+        if self.params.FORM_plotvar != 'mean' or self.params.FORM_dataset.split in ['CMIP5ext', 'CMIP5extone']:
             infiles = []
             doit = False
 
@@ -437,7 +442,7 @@ class PlotAtlasMap:
     def _add_standard_deviation(self):
         """ Add sd from pre-industrial runs """
 
-        if self.params.FORM_measure == 'diff' and not self.params.FORM_dataset in ['CMIP5ext','CMIP5extone']:
+        if self.params.FORM_measure == 'diff' and not self.params.FORM_dataset.split('-')[0] in ['CMIP5ext','CMIP5extone','CORDEX']:
             period1 = int(self.params.FORM_end1) - int(self.params.FORM_begin1) + 1
             period2 = int(self.params.FORM_end2) - int(self.params.FORM_begin2) + 1
         
@@ -608,6 +613,51 @@ class PlotAtlasMap:
                     self.logOut.info("Hatching of regions where the change is small compared to natural variability is only possible when the full ensemble has been run for a percentile.<br>")
                     self.sdfile = 'atlas/diff/CMIP5/sd_20/null.nc'.format(dataset=self.params.FORM_dataset)
 
+        elif self.params.FORM_dataset.split('-')[0] == 'CORDEX':
+
+                # get the s.d. from the diffs (taking serial correlations into account?)
+                infiles = []
+                for outfile in self.outfiles:
+                    if outfile.find('ave_') == -1:
+                        infile = os.path.join(self.tempDir, '%s_%s' % ('d'+self.xvar, os.path.basename(outfile)))
+                        if not os.path.exists(outfile) or os.path.getsize(outfile) == 0:
+                            raise PlotMapError("Cannot find outfile {outfile} with variable error".format(outfile=outfile,xvar=self.xvar))
+                    
+                        cmd = 'ncks -O -v error {outfile} {infile}'.format(xvar=self.xvar, outfile=outfile, infile=infile)
+                        ###self.logOut.info("%s<br>" % cmd)
+                        subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+
+                        infiles.append(infile)
+            
+                self.logOut.info("Generating mean of variability...<br>")
+
+                if not infiles:
+                    raise PlotMapError("Cannot find regression data.")
+
+                noisefile = os.path.join(self.tempDir, '%s%s_%s' % ('quant_d',self.xvar, os.path.basename(outfile)))
+                cmd = "cdo ensmean {infiles} {noisefile}".format(infiles=' '.join(infiles), noisefile=noisefile)
+                ###self.logOut.info("%s<br>" % cmd)
+                cmdOutput = subprocess.call(cmd, shell=True, stderr=subprocess.STDOUT)
+
+                # Remove temporary 'infiles'
+                try:
+                    for infile in infiles:
+                        if os.path.isfile(infile):
+                            os.remove(infile)
+                except OSError as e:
+                    self.log.warning("Cannot remove file %s. %s" % (infile, str(e)))
+        
+                # take median to represent to s.d.
+                self.sdfile = os.path.join(self.tempDir, '%s%s_%s' % ('sd_',self.xvar, os.path.basename(outfile)))
+                cmd = "ncks -v error {noisefile} {sdfile}".format(noisefile=noisefile, sdfile=self.sdfile)
+                ###self.logOut.info("%s<br>" % cmd)
+                cmdOutput = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+                cmd = "ncrename -v error,sd {sdfile}".format(noisefile=noisefile, sdfile=self.sdfile)
+                ###self.log.debug("%s<br>" % cmd)
+                cmdOutput = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
+                mergeit = True
+                self.logOut.info("Using temporal variability to estimate natural variability for the hatching.<br>")
+            
         else:
             raise PlotMapError("Unknown measure {measure}".format(measure=self.params.FORM_measure))
 
@@ -622,13 +672,13 @@ class PlotAtlasMap:
                 # add call to script here.... if successfull, set uncert to 1.
                 self.sdfile = 'atlas/diff/CMIP5/sd_20/null.nc'.format(dataset=self.params.FORM_dataset)
             else:
-                if self.params.FORM_measure == 'diff' and not self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
+                if self.params.FORM_measure == 'diff' and not self.params.FORM_dataset.split('-')[0] in ['CMIP5ext', 'CMIP5extone','CORDEX']:
                     self.logOut.info("Using natural variability in the CMIP5 pre-industrial control runs for the hatching.<br>")
         
             newplotfile = self.plotfile[:-3] + "_withsd.nc"
             if not os.path.exists(newplotfile) or (os.path.getmtime(newplotfile) < os.path.getmtime(self.plotfile)):
                 tempfile = os.path.join(self.tempDir, os.path.basename(self.sdfile))
-                if not self.params.FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3']:
+                if not self.params.FORM_dataset.split('-')[0] in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3', 'CORDEX']:
                     # interpolate to the grid of the data
                     cmd = "cdo remapbil,{plotfile} {sdfile} {tempfile}".format(sdfile=self.sdfile, plotfile=self.plotfile, tempfile=tempfile)
                     ###self.logOut.info("cmd: '%s'" % cmd)
@@ -639,7 +689,7 @@ class PlotAtlasMap:
                     os.remove(newplotfile)
                 # and merge in the information from the pre-industrial control run
                 cmd = 'cdo -r merge {sdfile} {plotfile} {newplotfile}'.format(sdfile=self.sdfile, plotfile=self.plotfile, newplotfile=newplotfile)
-                self.log.debug("cmd: '%s'" % cmd)
+                ###self.logOut.info("%s" % cmd)
                 subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
 
                 if os.path.getsize(newplotfile) == 0:
@@ -687,6 +737,8 @@ class PlotAtlasMap:
 
         elif self.params.FORM_region == 'ipbes':
             polyRegionFile = "IPBES/" + self.params.FORM_ipbes + ".txt"
+            if not os.path.exists(polyRegionFile):
+                raise PlotMapError("Cannot find polyRegionFile %s" % polyRegionFile)
             xmin, xmax, ymin, ymax = getboxfrompolygon(polyRegionFile)
             reg = DefineRegion('world')
             region = self.params.FORM_ipbes
@@ -779,6 +831,10 @@ class PlotAtlasMap:
         plotlon2 = float(plotlon2)
         plotlat1 = float(plotlat1)
         plotlat2 = float(plotlat2)
+        
+        if self.params.FORM_dataset.split('-')[0] == 'CORDEX':
+            if region in ['arctic','highlatitudes','antarctica']:
+                raise PlotMapError("Cannot plot CORDEX data in this projection yet.")
 
         if lwrite:
             self.logOut.info("plotlon1,plotlon2={plotlon1},{plotlon2}<br>".format(plotlon1=plotlon1, plotlon2=plotlon2))
@@ -808,7 +864,10 @@ class PlotAtlasMap:
         var = self.params.FORM_var
         normsd = self.params.FORM_normsd
 
-        
+        domain = 'global'
+        if self.params.FORM_dataset == 'CORDEX-EUR44':
+            domain = 'europe'
+
         self.log.debug('region_extension = %s' % region_extension)
         self.log.debug('root = %s' % root)
         self.log.debug('var = %s' % var)
@@ -851,7 +910,7 @@ class PlotAtlasMap:
         else:
             FORM_field = "" # is only required for the obs
         datasetname = define_dataset(self.params.FORM_dataset, FORM_field)
-        if self.params.FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone']:
+        if self.params.FORM_dataset.split('-')[0] in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CORDEX']:
             title = "%(FORM_scenario_cmip5)s {titlebegin} {datasetname}".format(titlebegin=titlebegin, datasetname=datasetname) % paramsDict
         elif self.params.FORM_dataset == 'CMIP3':
             title = "%(FORM_scenario_cmip3)s {titlebegin} {datasetname}".format(titlebegin=titlebegin, datasetname=datasetname) % paramsDict
@@ -860,7 +919,7 @@ class PlotAtlasMap:
         elif self.params.FORM_dataset in ('RT3', 'ERAi', 'ERA20C', '20CR', 'obs'):
             title = "{titlebegin} {datasetname}".format(titlebegin=titlebegin, datasetname=datasetname)
         else:
-            raise PlotMapError("Unknown datasetA %(FORM_dataset)s" % paramsDict)
+            raise PlotMapError("make_plot: unknown dataset %(FORM_dataset)s" % paramsDict)
 
         self.log.debug('')
         self.log.debug('title = %s' % title)
@@ -914,7 +973,8 @@ class PlotAtlasMap:
                              'plotlon1': plotlon1, 'plotlon2': plotlon2,
                              'plotlat1': plotlat1, 'plotlat2': plotlat2,
                              'plotvarunits': plotvarunits, 'title': title,
-                             'mycbar': mycbar, 'uncert': uncert, 'cnfac': cnfac}
+                             'mycbar': mycbar, 'uncert': uncert, 'cnfac': cnfac,
+                             'domain': domain}
             nclInputDict.update(varObj.__dict__)
             nclInputStr = """
             load "%(NCARG_ROOT)s/lib/ncarg/nclscripts/csm/gsn_code.ncl"
@@ -1010,7 +1070,7 @@ class PlotAtlasMap:
               res@lbLabelFontHeightF = 0.012
 
             ; TO PREVENT AN UNPLOTTED HALF...
-             if("%(region)s".eq."pacific") then
+             if("%(region)s".eq."pacific".or."%(domain)s".ne."global") then
                usefieldf = False
              else
                usefieldf = True

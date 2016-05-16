@@ -155,6 +155,10 @@ Variable:
     {% for var_val in cmip5_extreme_values %}
         <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
     {% endfor %}
+{% elif FORM_dataset in ['CORDEX-EUR44'] %}
+    {% for var_val in cordex_var_values %}
+        <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
+    {% endfor %}
 {% elif FORM_dataset == 'CMIP3' %}
     {% for var_val in cmip3_var_values %}
         <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
@@ -175,6 +179,8 @@ Variable:
     {% for var_val in obs_var_values %}
         <option value="{{var_val[0]}}" {{ 'selected' if FORM_var == var_val[0] }}>{{var_val[1]}}</option>
     {% endfor %}
+{% else %}
+    internal error: unknown dataset 
 {% endif %}
 </select>
 </td><td><a href="javascript:pop_page('help/atlas_variable.shtml',248,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
@@ -202,7 +208,7 @@ Output:
     Map options
     </th></tr><tr><td>
 
-    {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3', 'RT2b'] %}
+    {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CORDEX-EUR44', 'CMIP3', 'RT2b'] %}
         Scenario:
     {% elif FORM_dataset in ['ERAi', 'ERA20C', '20CR'] %}
         (Re)analysis:
@@ -216,6 +222,14 @@ Output:
         </td><td>
         <select class=forminput name=scenario_cmip5>
         {% for val in scenario_cmip5_values %}
+            <option value={{val[0]}} {{ 'selected' if FORM_scenario_cmip5 == val[0] }}>{{val[1]}}</option>
+        {% endfor %}
+        </select>
+</td><td><a href="javascript:pop_page('help/atlas_scenario.shtml',248,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
+    {% elif FORM_dataset in ['CORDEX-EUR44'] %}
+        </td><td>
+        <select class=forminput name=scenario_cmip5>
+        {% for val in scenario_cordex_values %}
             <option value={{val[0]}} {{ 'selected' if FORM_scenario_cmip5 == val[0] }}>{{val[1]}}</option>
         {% endfor %}
         </select>
@@ -372,7 +386,7 @@ Output:
         </td></tr><tr><td>
         Mean/percentiles:
         </td><td>
-        {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3'] %}
+        {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CORDEX-EUR44', 'CMIP3'] %}
             <select class=forminput name=plotvar>
             {% for val in plotvar_values %}
                 <option value={{val[0]}} {{ 'selected' if FORM_plotvar|default(mean) == val[0] }}>{{val[1]}}</option>
@@ -391,6 +405,8 @@ Output:
             May take up to 15 minutes the first time a season / measure is selected
         {% elif FORM_dataset == 'CMIP5' %}
             May take up to half an hour the first time a season / measure is selected
+        {% elif FORM_dataset == 'CORDEX-EUR44' %}
+            May take up to 15 minutes the first time a season / measure is selected
         {% elif FORM_dataset == 'CMIP5extone' %}
             May take up to 10 minutes the first time a season / measure is selected
         {% elif FORM_dataset == 'CMIP5ext' %}
@@ -423,14 +439,14 @@ Output:
     </td></tr><tr><th colspan=3>
     Time series options
     </th></tr><tr><td>
-    {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CMIP3', 'RT2b'] %}
+    {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CORDEX-EUR44', 'CMIP3', 'RT2b'] %}
         Scenario(s):
     {% else %}
         (Re)analysis:
     {% endif %}
     </td><td>
 
-    {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone' ] %}
+    {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CORDEX-EUR44' ] %}
         
         {% if ((not FORM_rcp26) and (not FORM_rcp45) and (not FORM_rcp60) and (not FORM_rcp85)) %}
             {% set FORM_rcp45 = 'on' %}
@@ -438,7 +454,9 @@ Output:
 
         <input type=checkbox class=formcheck name=rcp26 {{ 'checked' if FORM_rcp26 }}>RCP2.6
         <input type=checkbox class=formcheck name=rcp45 {{ 'checked' if FORM_rcp45 }}>RCP4.5
-        <input type=checkbox class=formcheck name=rcp60 {{ 'checked' if FORM_rcp60 }}>RCP6.0
+        {% if FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone', 'CORDEX-EUR44' ] %}
+            <input type=checkbox class=formcheck name=rcp60 {{ 'checked' if FORM_rcp60 }}>RCP6.0
+        {% endif %}
         <input type=checkbox class=formcheck name=rcp85 {{ 'checked' if FORM_rcp85 }}>RCP8.5
 </td><td><a href="javascript:pop_page('help/atlas_scenario.shtml',248,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
     {% else %}
@@ -539,7 +557,7 @@ Output:
     {# submit #}
     </td></tr><tr><td colspan=2>
     <input type="submit" class="formbutton" value="Make time series" onclick="this.form.doAction.value=2; this.form.submit()">
-    {% if FORM_dataset in ['CMIP5one', 'CMIP5extone'] %}
+    {% if FORM_dataset in ['CMIP5one', 'CMIP5extone', 'CORDEX-EUR44'] %}
         May take up to 15 minutes per scenario the first time a region is selected
     {% elif FORM_dataset in ['CMIP5', 'CMIP5ext' ] %}
         May take up to half an hour per scenario the first time a region is selected
@@ -576,6 +594,7 @@ Users are strongly advised to study the <a href="javascript:pop_page('help/atlas
       <div class="menulink"><a href="http://www.skepticalscience.com/rcp.php" target="_new">RCP scenario's</a></div>
       <div class="menukopje">Funding</div>
       <div class="menulink"><a href="http://www.knmi.nl/" target="_new">KNMI</a></div>
+      <div class="menulink"><a href="http://www.specs-fp7.eu" target="_new">SPECS</a></div>
       <div class="menulink"><a href="http://www.climatecentre.org" target="_new">Red Cross / Red Crescent Climate Centre</a></div>
       <div class="menulink"><a href="http://www.government.nl/ministries/ienm/organisation" target="_new">Dutch Ministry of Infrastructure and Environment, DGMI</a></div>
       </td>

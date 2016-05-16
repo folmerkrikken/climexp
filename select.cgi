@@ -350,7 +350,8 @@ if [ -n "$ENSEMBLE" ]; then
       imax=1000
     fi
   fi
-  while [ $i -lt $imax ]
+  foundlast=false
+  while [ $i -lt $imax -a $foundlast = false ]
   do
     if [ $i -lt 10 ]; then
       member=`echo $file | sed -e "s/%%%/00$i/" -e "s/%%/0$i/"`
@@ -378,6 +379,8 @@ if [ -n "$ENSEMBLE" ]; then
             echo "ensemble member $i: download <a href=\"$member\">netcdf</a>,"
           fi
           echo "analyse <a href=\"selectmember.cgi?id=$EMAIL&i=$i&field=$FORM_field\">separately</a><br>"
+        else
+            foundlast=true
         fi
     done
     i=$(($i + 1))

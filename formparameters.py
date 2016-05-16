@@ -416,6 +416,7 @@ dataset_values = [['CMIP5one', 'GCM: CMIP5 (IPCC AR5 Atlas subset)'],
                   ['CMIP5', 'GCM: CMIP5 (full set)'],
                   ['CMIP5extone', 'GCM: CMIP5 extremes (one ensemble member)'],
                   ['CMIP5ext', 'GCM: CMIP5 extremes (full set)'],
+                  ['CORDEX-EUR44', 'RCM: Europe 50km (uncorrected)'],
                   ['CMIP3', 'GCM: CMIP3'],
 #                 ['RT2b', 'RCM: ENSEMBLES (Europe) GCM-driven'],
 #                 ['RT3', 'RCM: ENSEMBLES (Europe) ERA40-driven'],
@@ -460,6 +461,11 @@ cmip5_extreme_values = [['altcdd','CDD: maximum length of dry spell'],
               ['tx90p','TX90p: percentage of days when TX &gt; 90th percentile'],
               ['txn','TXn: annual minimum value of daily maximum temperature'],
               ['txx','TXx: annual maximum value of daily maximum temperature']]
+
+cordex_var_values = [['tas', 'near-surface temperature'],
+              ['tasmin', 'minimum near-surface temperature'],
+              ['tasmax', 'maximum near-surface temperature'],
+              ['pr', 'precipitation']]
 
 cmip3_var_values = [['tas', 'near-surface temperature'],
               ['pr', 'precipitation'],
@@ -522,6 +528,10 @@ scenario_cmip5_values = [['rcp26', 'Historical + RCP2.6'],
                          ['rcp60', 'Historical + RCP6.0'],
                          ['rcp85', 'Historical + RCP8.5'],
                          ['rcp45to85', 'Historical + RCP4.5/RCP6.0/RCP8.5']]
+
+scenario_cordex_values = [['rcp26', 'Historical + RCP2.6'],
+                         ['rcp45', 'Historical + RCP4.5'],
+                         ['rcp85', 'Historical + RCP8.5']]
 
 obs_tas_values = [['giss_temp_1200', 'GISTEMP 1200'],
                   ['ncdc_temp', 'NCDC MOST'],
@@ -616,7 +626,7 @@ class FormParameters:
         self.FORM_end1 = '2005'
         self.FORM_begin2 = '2081'
         self.FORM_end2 = '2100'
-        self.FORM_begin_fit = '1950'
+        self.FORM_begin_fit = '1900'
         self.FORM_end_fit = '2100'
         self.FORM_lon = ''
         self.FORM_lat = ''
@@ -796,6 +806,9 @@ class FormParameters:
         if self.FORM_dataset in ['CMIP5', 'CMIP5one', 'CMIP5ext', 'CMIP5extone']:
             self.yr1, self.yr2 = 1861, 2100
             self.dumptypes, self.endhistory = [0, 1], 2005
+        elif self.FORM_dataset == 'CORDEX-EUR44':
+            self.yr1, self.yr2 = 1951, 2099
+            self.dumptypes, self.endhistory = [0, 1], 2005
         elif self.FORM_dataset == 'CMIP3':
             self.yr1, self.yr2 = 1900, 2099
             self.dumptypes, self.endhistory = [0, 1], 2000
@@ -823,6 +836,8 @@ class FormParameters:
             else:
                 self.yr1 = 1901
             self.yr2 = thisYear
+        else:
+        	print "\nerror, unknow dataset "+self.FORM_dataset
 
         # do not overwrite values from the defaults file
         if self.FORM_begin == None:

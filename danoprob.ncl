@@ -121,7 +121,11 @@ begin
  end if
 
  if (uncert.eq.1 .and. pmin.lt.100) then
-  plot2 = gsn_csm_contour(wks,probf,ress)
+  if ( usefieldf ) then
+   plot2 = gsn_csm_contour(wks,probf,ress)
+  else
+   plot2 = gsn_csm_contour(wks,prob,ress)
+  end if
   overlay(plot,plot2)
  end if
  if (uncert.eq.2) then
