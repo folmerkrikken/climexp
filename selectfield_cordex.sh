@@ -5,7 +5,7 @@ function getfile {
     elif [ $gcm = ens ]; then
         file=CORDEX/$domain/$timescale/$var/${var}_${domain}_cordex_${exp}_${timescale}_000.nc
     else
-        file=`ls CORDEX/$domain/$timescale/$var/${var}_${domain}_${gcm}_${exp}_${rip}_${rcm}_${version}_${timescale}_*.nc 2> /dev/null | head -1 `
+        file=`ls CORDEX/$domain/$timescale/$var/${var}_${domain}_${gcm}_${exp}_${rip}_${rcm}_${version}_${timescale}_*_latlon.nc 2> /dev/null | head -1 `
     fi
 }
 # constructs automatically but off-line the HTML file for the CORDEX ensemble field selection.

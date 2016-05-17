@@ -224,7 +224,7 @@ cordex*)
         LSMASK=CORDEX/$domain/fx/lsmask_EUR-44_cordex_ave.nc
         ;;
         *) 
-file=CORDEX/$domain/$timescale/$var/${var}_${domain}_${gcm}_${exp}_${rip}_${rcm}_${version}_${timescale}_*.nc
+file=CORDEX/$domain/$timescale/$var/${var}_${domain}_${gcm}_${exp}_${rip}_${rcm}_${version}_${timescale}_*latlon.nc
         ###echo $file
         file=`ls $file 2> /dev/null | head -1`
         climfield=$var
