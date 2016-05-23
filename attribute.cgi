@@ -142,7 +142,7 @@ fi
 [ "$TYPE" != "set" -a "$TYPE" != "setmap" ] && listname="" && FORM_listname="" # otherwise we get the wrong menu
 
 if [ ! \( -s $sfile -a -f $sfile \) ]; then
-    echo "Error: cannot locate covariate series $sfile"
+    echo "Error: cannot locate $covstation series $sfile"
     . .myvinkfoot.cgi
     exit
 fi
@@ -376,7 +376,7 @@ set size 0.7,0.5
 set term png $gnuplot_png_font_hires
 set output "${root}_obsplot.png"
 set title "$title"
-set xlabel "covariate"
+set xlabel "$covstation"
 set ylabel "$ylabel"
 set datafile missing '-999.900'
 set yrange [${FORM_ylo}:${FORM_yhi}]
@@ -481,7 +481,7 @@ else
     echo "using an unknown assumption,"
 fi
 if [ $FORM_assume = 'scale' -a -n "$FORM_anomal" ]; then
-    echo "It does not make sense to assume that he distribution scales with the covariate when taking anomalies"
+    echo "It does not make sense to assume that he distribution scales with $covstation when taking anomalies"
     . ./myvinkfoot.cgi
     exit
 fi
