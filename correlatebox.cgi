@@ -72,7 +72,7 @@ if [ -n "$FORM_timeseries" ]; then
              fi;;
   gmst)      index="GMST"
              if [ ${NPERYEAR:-12} = 12 ]; then
-                sfile="$DIR/NASAData/giss_al_gl_m.dat"
+                sfile="$DIR/NASAData/giss_al_gl_m_4yrlo.dat"
              elif [ $NPERYEAR = 1 -o $NPERYEAR = -1 ]; then
                 sfile="$DIR/NASAData/giss_al_gl_a_4yrlo.dat"
              else
