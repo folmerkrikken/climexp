@@ -167,7 +167,7 @@ class PlotAtlasSeries:
                     os.makedirs(dir)
         if self.params.FORM_dataset.split('-')[0] == 'CORDEX':
             for exp in exps:
-                dir = 'atlas/series/{dataset}/{exp}'.format(dataset=self.params.FORM_dataset.split, exp=exp)
+                dir = 'atlas/series/{dataset}/{exp}'.format(dataset=self.params.FORM_dataset, exp=exp)
                 if not os.path.isdir(dir):
                     os.makedirs(dir)
 
@@ -295,7 +295,8 @@ class PlotAtlasSeries:
                         subprocess.call(command, shell=True, stderr=subprocess.STDOUT)
                         if not os.path.exists(maskfile) or os.path.getsize(maskfile) == 0:
                             # most likely there were no grid points in the polygons - skip
-                            print "no grid points fall inside {country}, skipping {model}<br>".format(country=country, model=model)
+                            print "Cannot make mask for {country}, skipping {model}<br>".format(country=country, model=model)
+                            print command
                             continue
 
                     args = "mask {maskfile}".format(maskfile=maskfile)
@@ -317,7 +318,7 @@ class PlotAtlasSeries:
                     cmd = 'get_index {file} {args} > {series}'.format(file=filename, args=args, series=series)
                     ###self.logOut.info(cmd)
                     if printexp:
-                        self.logOut.info('%s<p>' % exp)
+                        self.logOut.info('<p>%s<br>' % exp)
                         printexp = False
                     self.logOut.info('Averaging {i}/{n} {infile} over {regionname}<br>'.format(i=str(idxFilename), n=str(len(files) - 1), infile=os.path.splitext(os.path.basename(filename))[0], regionname=self.regionname))
 
@@ -344,12 +345,14 @@ class PlotAtlasSeries:
                     aseries = self.get_aseries_name(anomdir, series, paramsDict)
 
                     if not os.path.exists(aseries) or os.path.getsize(aseries) == 0 or (os.path.getmtime(aseries) < os.path.getmtime(series)):
+                        if int(self.params.FORM_anom1) < int(self.params.yr1):
+                            raise PlotSeriesError("beginning of anomaly range {FORM_anom1} is before beginning of data {yr1}".format(**paramsDict))
                         # ensanom here means "compute anomalies relative to the ensemble mean"
                         # normsd here means "take relative anomalies"
                 
                         cmd = "plotdat anom {FORM_anom1} {FORM_anom2} ensanom {rel} {series} | fgrep -v repeat > {aseries}".format(rel=rel, series=series, aseries=aseries, **paramsDict)
                         if printexp:
-                            self.logOut.info('%s<p>' % exp)
+                            self.logOut.info('<p>%s<br>' % exp)
                             printexp = False
                         ###self.logOut.info('Taking {relative} anomalies {i}/{n} {series} w.r.t. {anom1}-{anom2}<br>'.format(relative=relative, series=os.path.splitext(os.path.basename(series))[0], i=str(idxFilename), n=str(len(files) - 1), anom1=self.params.FORM_anom1, anom2=self.params.FORM_anom2))
                         subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
@@ -445,7 +448,7 @@ class PlotAtlasSeries:
             # params.FORM_rcp26, _rcp45, _rcp60, _rcp85
             lstExps = [(self.params.FORM_rcp26, 'rcp26'), (self.params.FORM_rcp45, 'rcp45'),
                    (self.params.FORM_rcp60, 'rcp60'), (self.params.FORM_rcp85, 'rcp85')]
-        if self.params.FORM_dataset.split('-')[0] in ['CORDEX']:
+        elif self.params.FORM_dataset.split('-')[0] in ['CORDEX']:
             # params.FORM_rcp26, _rcp45, _rcp85
             lstExps = [(self.params.FORM_rcp26, 'rcp26'), (self.params.FORM_rcp45, 'rcp45'),
                    (self.params.FORM_rcp85, 'rcp85')]

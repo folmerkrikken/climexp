@@ -9,6 +9,8 @@ echo
 
 cat <<EOF
 
+Please note that all scenario runs also include the historical part (1951-2005).
+
 <form action="select.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
 <table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>

@@ -273,7 +273,7 @@ def get_file_list(exp, params):
 
         dirName = '{FORM_dataset}/{exp}'.format(exp=exp, **paramsDict)
         if params.FORM_plotvar == 'mean':
-            files.append("IPCCData/{FORM_scenario_cmip3}/{FORM_var}_cmip3_ave_mean{res}.nc".format(exp=exp, **paramsDict))
+            files.append("IPCCData/{FORM_scenario_cmip3}/{FORM_var}_cmip3_ave_mean_144.nc".format(exp=exp, **paramsDict))
         else:
             cmip3models = [ "bccr_bcm2_0", "cccma_cgcm3_1", "cccma_cgcm3_1_t63", "cnrm_cm3", "csiro_mk3_0", "csiro_mk3_5", "gfdl_cm2_0", "gfdl_cm2_1", "giss_aom", "giss_model_e_h", "giss_model_e_r", "ingv_echam4", "inmcm3_0", "ipsl_cm4", "miroc3_2_medres", "miroc3_2_hires", "miub_echo_g", "mpi_echam5", "mri_cgcm2_3_2a", "ncar_ccsm3_0", "ncar_pcm1", "ukmo_hadgem1", "ukmo_hadcm3" ]
             for model in cmip3models:
@@ -463,10 +463,12 @@ def get_model(params, filename, typeVar):
 
         ensfile = re.sub(r'_0[0-9]_', '_%%_', os.path.basename(filename))
         ensfile = ensfile.replace("_144.nc","")
+        ensfile = ensfile.replace(".nc","")
         ###print "ensfile = %s<br>" % ensfile
 
         f = open('queryfield.cgi','r')
         line = "aap"
+        model = 'unknown'
         while line != "":
             line = f.readline()
             if line.find(ensfile) >= 0:
@@ -520,8 +522,8 @@ def get_model(params, filename, typeVar):
     else:
         raise GetModelError("get_model: unknown dataset {FORM_dataset}".format(**paramsDict))
 
-    if not model:
-        raise GetModelError("Something went wrong in get_model with filename '{filename}' dataset '{FORM_dataset}' and var '{var}'".format(var=var, LSMASK=LSMASK, filename=filename, **paramsDict))
+    if model == 'unknown':
+        raise GetModelError("Something went wrong in get_model with filename '{filename}' dataset '{FORM_dataset}' and var '{var}', ensfile '{ensfile}'".format(var=var, LSMASK=LSMASK, filename=filename, ensfile=ensfile, **paramsDict))
    
 #    if LSMASK is None:
 #        raise GetModelError("Cannot find LSMASK '{LSMASK}' with filename '{filename}', dataset '{FORM_dataset}' and var '{var}'.".format(var=var, LSMASK=LSMASK, filename=filename, **paramsDict))
