@@ -306,14 +306,12 @@ fi
 fi
 echo "</select>$periods<br>"
 fi
-if [ $NPERYEAR -ge 4 ]; then
 cat <<EOF
 <tr><td>Anomalies:<td>
 <input type="checkbox" class="formcheck" name="plotanomaly" $plotanomaly_checked><select class="forminput" name="plotanomalykind"><option $absolute_selected>absolute<option $relative_selected>relative<option $logrelative_selected>logrelative</select>anomalies wrt to
 <input type="$number" min=1 max=2500 step=1 class="forminput" name="climyear1" size="4" style="width: 5em;" value="$FORM_climyear1">:
 <input type="$number" min=1 max=2500 step=1 class="forminput" name="climyear2" size="4" style="width: 5em;" value="$FORM_climyear2"> (default: all data)
 EOF
-fi
 intable=TRUE
 latlononly=true
 NEWUNITS=$UNITS # to kill the unit-changing option, which has not been implemented

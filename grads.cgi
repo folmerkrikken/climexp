@@ -103,27 +103,29 @@ if [ -n "$FORM_plotsum" ]; then
 fi
 # anomalies requested?
 if [ -n "$FORM_plotanomaly" ]; then
-	anom_file=${FORM_field}_anom$FORM_climyear1${FORM_climyear2}_${FORM_plotsum:-1}.ctl
-	if [ ${anom_file#data} = $anom_file ]; then
-		anom_file=data/$anom_file
+	clim_file=${FORM_field}_clim$FORM_climyear1${FORM_climyear2}_${FORM_plotsum:-1}.ctl
+	if [ ${clim_file#data} = $clim_file ]; then
+		clim_file=data/$clim_file
 	fi
-	if [ ! -s $anom_file -o $anom_file -ot $file ]; then
+	if [ ! -s $clim_file -o $clim_file -ot $file ]; then
 		args="$file"
 		[ -n "$FORM_climyear1" ] && args="$args begin $FORM_climyear1"
 		[ -n "$FORM_climyear2" ] && args="$args end $FORM_climyear2"
 		[ -n "$FORM_plotsum" ] && args="$args ave $FORM_plotsum"
-		echo "<p>Computing anomalies..."
-		[ -f $anom_file ] && rm $anom_file
-		bin/fieldclim $args $anom_file 2>&1
-		if [ ! -s "$anom_file" ]; then
+		echo "<p>Computing climatology..."
+		[ -f $clim_file ] && rm $clim_file
+		bin/fieldclim $args $clim_file 2>&1
+		if [ ! -s "$clim_file" ]; then
 			echo "grads.cgi: error: failed to compute climatology<br>"
-			echo "bin/fieldclim $args $anom_file"
+			echo "bin/fieldclim $args $clim_file"
 			. ./myvinkfoot.cgi
 			exit -1
 		fi
-		echo "<p>Anomalies are ready, calling Grads..."
+		echo "<p><a href=grads2nc.cgi?file=$clim_file&id=$EMAIL>Climatology</a> is ready, calling Grads..."
+    else
+		echo "<p>Using <a href=grads2nc.cgi?file=$clim_file&id=$EMAIL>climatology</a>."
 	fi
-	clim="open $anom_file
+	clim="open $clim_file
 run clim ${var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $FORM_climyear2"
 	if [ -n "$FORM_climyear1" ]; then
 	# this should be coordinated with clim.gs
