@@ -8,20 +8,30 @@ export DIR=`pwd`
 . ./getargs.cgi
 TYPE="$FORM_TYPE"
 WMO="$FORM_WMO"
+wmo=`echo "$WMO" | tr '_' ' '`
 STATION="$FORM_STATION"
+station=`echo "$STATION" | tr '_' ' '`
 NAME="$FORM_NAME"
+name=`echo "$NAME" | tr '_' ' '`
 KIND="$FORM_KIND"
+case $KIND in
+    yr0) kind="year (Jan-Dec)";;
+    yr1) kind="year (Jul-Jun)";;
+    half) kind="half year";;
+    *) kind="$KIND"
+esac
 
 . ./nosearchengine.cgi
 
-. ./myvinkhead.cgi "Time series plots per ${KIND}" "$STATION $NAME" "noindex,nofollow"
+. ./myvinkhead.cgi "Time series plots per $kind" "$station $name" "noindex,nofollow"
 
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
 (./bin/series ./data/$TYPE$WMO.dat plot ./data/ts$TYPE$WMO.plt > ./data/ts$TYPE$WMO.txt) 2>&1
-echo "<div class=\"bijschrift\">The thick line is a 10-year running average "
+echo "<div class=\"bijschrift\">Time series plots of $station $name per $kind. The thick line is a 10-year running average "
 echo "(<a href=\"data/ts$TYPE$WMO$KIND.eps.gz\">eps</a>, <a href="ps2pdf.cgi?file=data/ts$TYPE$WMO$KIND.eps.gz">pdf</a>, <a href=\"data/ts$TYPE$WMO.txt\">raw data</a>)</div>"
 
 . ./setyaxis.cgi
+var=`echo "$VAR" | tr '_' ' '`
 
 for ext in eps png
 do
@@ -216,15 +226,15 @@ $setxzeroaxis
 set term $term
 set output "./data/ts$TYPE$WMO$KIND.$ext"
 set format y "%8.2f"
-set ylabel "$VAR [$UNITS]"
+set ylabel "$var [$UNITS]"
 set multiplot
 set size 0.7,0.5
 set origin 0,0.5
-set title "Oct-Mar $NAME $STATION ($WMO)"
+set title "Oct-Mar $name $station ($wmo)"
 plot "./data/ts$TYPE$WMO.plt" u 1:38 notitle with lines lt 2 lw 5, \
      "./data/ts$TYPE$WMO.plt" u 1:18 notitle with steps lt 1
 set origin 0,0
-set title "Apr-Sep $NAME $STATION ($WMO)"
+set title "Apr-Sep $name $station ($wmo)"
 plot "./data/ts$TYPE$WMO.plt" u 1:39 notitle with lines lt 2 lw 5, \
      "./data/ts$TYPE$WMO.plt" u 1:19 notitle with steps lt 1
 set nomultiplot
@@ -239,8 +249,8 @@ set zero 1e-40
 set xzeroaxis
 set size 0.7,0.5
 set term $term
-set title "Jan-Dec $NAME $STATION ($WMO)"
-set ylabel "$VAR [$UNITS]"
+set title "Jan-Dec $name $station ($wmo)"
+set ylabel "$var [$UNITS]"
 set output "./data/ts$TYPE$WMO$KIND.$ext"
 plot "./data/ts$TYPE$WMO.plt" u 1:40 notitle with lines lt 2 lw 5, \
      "./data/ts$TYPE$WMO.plt" u 1:20 notitle with steps lt 1
@@ -255,8 +265,8 @@ set zero 1e-40
 set xzeroaxis
 set size 0.7,0.5
 set term $term
-set title "Jul-Jun $NAME $STATION ($WMO)"
-set ylabel "$VAR [$UNITS]"
+set title "Jul-Jun $name $station ($wmo)"
+set ylabel "$var [$UNITS]"
 set output "./data/ts$TYPE$WMO$KIND.$ext"
 plot "./data/ts$TYPE$WMO.plt" u 1:41 notitle with lines lt 2 lw 5, \
      "./data/ts$TYPE$WMO.plt" u 1:21 notitle with steps lt 1
@@ -270,6 +280,6 @@ done
 gzip -f ./data/ts$TYPE$WMO$KIND.eps
 pngfile=data/ts$TYPE$WMO$KIND.png
 getpngwidth
-echo "<center><img src=\"data/ts$TYPE$WMO$KIND.png\" alt=\"time series per $KIND\" width=\"$halfwidth\" border=0 class="realimage" hspace=0 vspace=0></center>"
+echo "<center><img src=\"data/ts$TYPE$WMO$KIND.png\" alt=\"time series per $kind\" width=\"$halfwidth\" border=0 class="realimage" hspace=0 vspace=0></center>"
 
 . ./myvinkfoot.cgi
