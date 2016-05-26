@@ -149,8 +149,6 @@ fi
 
 if [ "$FORM_assume" != 'both' ]; then
     if [ "$FORM_fit" = "gpd" -a $NPERYEAR -gt 12 ]; then
-        echo '<font color=#ff2222>The GPD(T) still has bugs for daily data. Please cross-check the results with other methods.</font><p>'
-    else
         echo '<font color=#ff2222>I think it works now, please report problems.</font><p>'
     fi
 else
@@ -370,6 +368,12 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	fi
 	
 	if [ -s $obsplotfile ]; then
+	    if [ "$covstation" = "time" ]; then
+	        covstation="year"
+	        x="(\$1+2000)"
+	    else
+	        x=1
+	    fi
     	cat > ${root}_obsplot.gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.5
@@ -381,12 +385,12 @@ set ylabel "$ylabel"
 set datafile missing '-999.900'
 set yrange [${FORM_ylo}:${FORM_yhi}]
 plot \
-"$obsplotfile" index 0 notitle with points lt 3,\\
-"$obsplotfile" index 1 notitle with points lt 4,\\
-"$obsplotfile" index 2 notitle with line lt 1 lw 3,\\
-"$obsplotfile" index 3 notitle with errorbars lt 1 lw 3,\\
-"$obsplotfile" index 2 using 1:(\$2+\$3) notitle with line lt 1,\\
-"$obsplotfile" index 2 using 1:(\$2+2*\$3) notitle with line lt 1
+"$obsplotfile" index 0 using $x:2 notitle with points lt 3,\\
+"$obsplotfile" index 1 using $x:2 notitle with points lt 4,\\
+"$obsplotfile" index 2 using $x:2 notitle with line lt 1 lw 3,\\
+"$obsplotfile" index 3 using $x:2:3:4 notitle with errorbars lt 1 lw 3,\\
+"$obsplotfile" index 2 using $x:(\$2+\$3) notitle with line lt 1,\\
+"$obsplotfile" index 2 using $x:(\$2+2*\$3) notitle with line lt 1
 set term postscript epsf color solid
 set output "${root}_obsplot.eps"
 replot
