@@ -98,7 +98,7 @@ if [ -n "$FORM_plotsum" ]; then
 	if [ "$FORM_plotsum" -gt 1 ]; then
 		###sum="run sum ${FORM_var:-corr} $FORM_plotsum"
 		FORM_var="ave(${FORM_var:-corr},t+0,t+$((FORM_plotsum-1)))"
-		echo "FORM_var=$FORM_var<br>"
+		[ "$lwrite" = true ] && echo "FORM_var=$FORM_var<br>"
 	fi
 fi
 # anomalies requested?
