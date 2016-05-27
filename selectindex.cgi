@@ -455,6 +455,7 @@ Hadley Centre)</div>
 
 <tr><td>Noise<td><div class="kalelink"><form action="ar1.cgi" method="POST">Red noise: 
 <input type="hidden" name="email" value="$EMAIL">
+<input type="hidden" name="NPERYEAR" value="12">
 Y(mo,yr) = white gaussian noise + 
 <input type="text" class="forminput" name="a1" size="6" value="0.0">Y(mo-1,yr) +
 <input type="text" class="forminput" name="a2" size="6" value="0.0">Y(mo,yr-1)

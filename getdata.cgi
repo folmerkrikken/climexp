@@ -494,9 +494,11 @@ Take anomalies and set standard deviation to one
 </form>
 </td></tr><tr><td>Combine:</td><td>
 <a href="normdiffform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Combine with another timeseries to form a normalized index</a>
-</td><td><a href="javascript:pop_page('help/combineseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr><tr><td>Mask out:</td><td>
-<a href="maskseriesform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Mask out based on another time series</a>
+</td><td><a href="javascript:pop_page('help/combineseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
+<tr><td>Mask out:</td><td><a href="maskseriesform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Mask out based on another time series</a>
 </td><td><a href="javascript:pop_page('help/maskseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
+<tr><td>Noise:</td><td><a href="ar1.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR&n=100">Make 100 random series with the same mean, variance and autocorrelation</a>
+</td><td><a href="javascript:pop_page('help/ar1.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 </table>
 </div>
 EOF

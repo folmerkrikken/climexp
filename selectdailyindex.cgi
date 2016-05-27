@@ -72,6 +72,16 @@ cat <<EOF
 <tr><td>Netherlands precipitation<td><div class="kalelink"><a href="PhomNL.cgi?id=$EMAIL">Moved to a separate page</a> (1906-now, KNMI)</div>
 <td><a href="http://www.knmi.nl/klimatologie/daggegevens/nsl-download.cgi?language=eng" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>Noise<td><div class="kalelink"><form action="ar1.cgi" method="POST">Red noise: 
+<input type="hidden" name="email" value="$EMAIL">
+<input type="hidden" name="NPERYEAR" value="366">
+Y(dy,yr) = white gaussian noise + 
+<input type="text" class="forminput" name="a1" size="6" value="0.0">Y(dy-1,yr) +
+<input type="text" class="forminput" name="a2" size="6" value="0.0">Y(dy,yr-1)
+<input type="submit" class="formbutton" value="make noise">
+</form>
+<td>
+
 </table>
 EOF
 

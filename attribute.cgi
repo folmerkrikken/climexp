@@ -396,6 +396,7 @@ set output "${root}_obsplot.eps"
 replot
 quit
 EOF
+        [ $covstation = year ] && covstation=time
 	    if [ "$lwrite" = true ]; then
 		    echo '<pre>'
 		    cat ${root}_obsplot.gnuplot
