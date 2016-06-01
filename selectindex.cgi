@@ -16,7 +16,10 @@ cat <<EOF
 <tr><td>ENSO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCDCData/ersst_nino12a&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3a&STATION=NINO3&TYPE=i&id=$EMAIL">NINO3</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a&STATION=NINO3.4&TYPE=i&id=$EMAIL">NINO3.4</a>,
-<a href="getindices.cgi?WMO=NCDCData/ersst_nino4a&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino4a&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>, detrended <a href="getindices.cgi?WMO=NCDCData/ersst_nino12a_detrend&STATION=NINO12detrend&TYPE=i&id=$EMAIL">NINO12</a>,
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino3a_detrend&STATION=NINO3detrend&TYPE=i&id=$EMAIL">NINO3</a>,
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a_detrend&STATION=NINO3.4detrend&TYPE=i&id=$EMAIL">NINO3.4</a>,
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino4a_detrend&STATION=NINO4detrend&TYPE=i&id=$EMAIL">NINO4</a>
 (1880-now, ERSST v4)</div>
 <td><a
 href="wipefoot.cgi?https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v4" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
