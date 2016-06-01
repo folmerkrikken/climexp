@@ -495,6 +495,9 @@ ngpcc_25) file=GPCCData/gpcc_V7_25_n.nc;kindname="GPCC V7";climfield="#gauges";;
 gpcc_daily) file=GPCCData/gpcc_combined_daily.nc;kindname="GPCC daily V1";climfield="precipitation";;
 gpcc_daily_n1) file=GPCCData/gpcc_combined_daily_n1.nc;kindname="GPCC daily V1";climfield="precipitation";;
 ngpcc_daily) file=GPCCData/gpcc_combined_daily_n.nc;kindname="GPCC daily V1";climfield="#gauges";;
+prcp_cpc_daily) file=NCEPData/prcp_daily.nc;kindname="CPC daily";climfield="precipitation";;
+prcp_cpc_daily_n1) file=NCEPData/prcp_daily_n1.nc;kindname="CPC daily";climfield="precipitation";;
+nprcp_cpc_daily) file=NCEPData/nprcp.nc.nc;kindname="CPC daily";climfield="#gauges";;
 gpcp) file=GPCPData/gpcp.ctl;kindname="GPCP v2";climfield="precipitation";flipcolor=11;;
 gpcp_21) file=GPCPData/gpcp_21.ctl;kindname="GPCP v2.1";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_22) file=GPCPData/gpcp_22.ctl;kindname="GPCP v2.2";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
@@ -838,14 +841,13 @@ nvs925) file=NCEPNCAR40/vs925.ctl;kindname="NCEP/NCAR";climfield="10m-850mb vert
 nvs775) file=NCEPNCAR40/vs775.ctl;kindname="NCEP/NCAR";climfield="850mb-700mb vertical shear";;
 nvs600) file=NCEPNCAR40/vs600.ctl;kindname="NCEP/NCAR";climfield="700mb-500mb vertical shear";;
 nvs350) file=NCEPNCAR40/vs350.ctl;kindname="NCEP/NCAR";climfield="500mb-200mb vertical shear";;
-nlhtfl) file=NCEPNCAR40/lhtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="latent heat flux";;
-nshtfl) file=NCEPNCAR40/shtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="sensible heat flux";;
+nlhtfl) file=NCEPNCAR40/lhtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="latent heat flux";LSMASK=NCEPNCAR40/lsmask.nc;;
+nshtfl) file=NCEPNCAR40/shtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="sensible heat flux";LSMASK=NCEPNCAR40/lsmask.nc;;
+netflx) file=NCEPNCAR40/netflx.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net heat flux";LSMASK=NCEPNCAR40/lsmask.nc;;
 nolr) file=NCEPNCAR40/ulwrf.ntat.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
 npme) file=NCEPNCAR40/pme.ctl;kindname="NCEP/NCAR";climfield="P-E";flipcolor=11;;
-nnsr) file=NCEPNCAR40/nswrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net solar radiation";;
-nnlr) file=NCEPNCAR40/nlwrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net longwave radiation";;
-ndswrfsfc) file=NCEPNCAR40/ndswrfsfc.ctl;kindname="NCEP/DOE R2";climfield="downward solar radiation";;
-ndlwrfsfc) file=NCEPNCAR40/ndlwrfsfc.ctl;kindname="NCEP/DOE R2";climfield="downward longwave radiation";;
+nnsr) file=NCEPNCAR40/nswrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface shortwave";LSMASK=NCEPNCAR40/lsmask.nc;;
+nnlr) file=NCEPNCAR40/nlwrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface longwave";LSMASK=NCEPNCAR40/lsmask.nc;;
 nsoil) file=NCEPNCAR40/soilw.0-10cm.mon.mean.nc;kindname="NCEP/NCAR";climfield="soil moisture";flipcolor=11;;
 
 cfsr_slp) file=CFSR/cfsr_slp.nc;kindname=CFSR;climfield=SLP;;
@@ -993,6 +995,7 @@ erai_snd) file=ERA-interim/erai_snd.nc;kindname="ERA-int";climfield="snow depth"
 erai_vap) file=ERA-interim/erai_vap.nc;kindname="ERA-int";climfield="column vapour";LSMASK=ERA-interim/lsmask07.nc;;
 erai_lhf) file=ERA-interim/erai_lhtfl.nc;kindname="ERA-int";climfield="latent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_shf) file=ERA-interim/erai_shtfl.nc;kindname="ERA-int";climfield="sensible heat flux";LSMASK=ERA-interim/lsmask07.nc;;
+erai_snetflx) file=ERA-interim/erai_shnetflx.nc;kindname="ERA-int";climfield="sfc net heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_huss) file=ERA-interim/erai_huss.nc;kindname="ERA-int";climfield="spec humidity";LSMASK=ERA-interim/lsmask075.nc;;
 erai_evap) file=ERA-interim/erai_evap.nc;kindname="ERA-int";climfield="evaporation";LSMASK=ERA-interim/lsmask07.nc;;
 erai_pme) file=ERA-interim/erai_pme.nc;kindname="ERA-int";climfield="P-E";LSMASK=ERA-interim/lsmask07.nc;;
