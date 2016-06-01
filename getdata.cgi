@@ -2,7 +2,7 @@
 . ./init.cgi
 # should be sourced from one of the get* scripts
 lwrite=false
-if [ "$EMAIL" = oldenbor@knmi.nl -o $REMOTE_ADDR = 127.0.0.1 ]; then
+if [ "$EMAIL" = oldenborgh@knmi.nl -o $REMOTE_ADDR = 127.0.0.1 ]; then
     lwrite=false # true
 fi
 if [ -z "$myvinkhead" ]; then
