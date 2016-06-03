@@ -35,7 +35,7 @@ cat <<EOF
 <a href="javascript:pop_page('help/empirical_event_attribution.shtml',568,480)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 
 Compute the return times of an extreme in the distribution of the other values and in the 
-counterfactual world of another year, assuming that the PDF shifts or scales with the covariate.
+climate of another year, assuming that the PDF shifts or scales with the covariate.
 
 <font color=#ff2222>Test version under development, may or may not give correct answers
 today. Use with caution and please report problems.</font>
