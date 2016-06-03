@@ -30,6 +30,8 @@ else
 fi
 
 case ${FORM_gridpoints:-average} in
+max) max_checked="checked";;
+min) min_checked="checked";;
 true) gridpoints_checked="checked";;
 field) outfield_checked="checked";;
 *)    average_checked="checked";;
@@ -87,7 +89,10 @@ Boundaries:
 </select>
 </td></tr>
 <tr><td>Make:</td>
-<td><input type="radio" class="formradio" name="gridpoints" value="false" $average_checked>average
+<td>
+<input type="radio" class="formradio" name="gridpoints" value="false" $average_checked>average
+<input type="radio" class="formradio" name="gridpoints" value="max" $max_checked>max
+<input type="radio" class="formradio" name="gridpoints" value="min" $min_checked>min
 <input type="radio" class="formradio" name="gridpoints" value="true" $gridpoints_checked>set of grid points
 <input type="radio" class="formradio" name="gridpoints" value="field" $outfield_checked>subset of the field
 </td><td align="right"><a href="javascript:pop_page('help/gridpoints.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>

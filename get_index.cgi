@@ -130,6 +130,9 @@ fi
 if [ "$FORM_minfac" != 30 ]; then
     WMO=${WMO}_${FORM_minfac}p
 fi
+if [ "$FORM_gridpoints" = min -o "$FORM_gridpoints" = max ]; then
+    WMO=${WMO}_${FORM_gridpoints}    
+fi
 if [ -n "$ENSEMBLE" ]; then
 	c3=`echo $file | fgrep -c '%%%'`
 	if [ $c3 = 0 ]; then
@@ -141,7 +144,11 @@ if [ -n "$ENSEMBLE" ]; then
 fi
 STATION=`echo $station | tr ' ' '_'`
 TYPE=i
-NAME="Index"
+if [ "$FORM_gridpoints" = min -o "$FORM_gridpoints" = max ]; then
+    NAME="$FORM_gridpoints"
+else
+    NAME=mean
+fi
 NPERYEAR=${FIELDNPERYEAR:-12}
 if [ -n "$LSMASK" -a -n "$FORM_masktype" ]; then
   mask="lsmask $LSMASK $FORM_masktype"
@@ -150,14 +157,22 @@ if [ -n "$FORM_maskmetadata" ]; then
 	# generate masknetcdf for this particular grid
 	basefield=`basename ${FORM_field}`
 	masknetcdf=data/mask_${basefile}_${basefield}.nc
-	size=`cat $masknetcdf | wc -c`
-	[ $size -lt 500 ] && rm $masknetcdf
+	if [ -s $masknetcdf ]; then
+    	size=`cat $masknetcdf | wc -c`
+	else
+	    size=0
+	fi
+	if [ $size -lt 500 ]; then
+	    [ -f $masknetcdf ] && rm $masknetcdf
+	fi
 	if [ ! -s $masknetcdf -o $masknetcdf -ot $maskfile ]; then
 		# generate masknetcdf file including the land/sea mask
 		onefile=`echo $file | sed -e 's/%%%/000/' -e 's/%%/00/'`
-		if [ ! -s $onefile ]; then
+		onefile=`ls $onefile | head -1` # in case there are wildcards in the file name
+		if [ ! -s "$onefile" ]; then
 			onefile=`echo $file | sed -e 's/%%%/001/' -e 's/%%/01/'`
-			if [ ! -s $onefile ]; then
+    		onefile=`ls $onefile | head -1`
+			if [ ! -s "$onefile" ]; then
 			    echo "Content-Type: text/html"
     			echo
 			    echo
@@ -178,6 +193,8 @@ else
 	PROG="get_index.sh $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 dipole $FORM_dipole"
 fi
 PROG="$PROG minfac $FORM_minfac $FORM_intertype $FORM_noisemodel $mask $NOMISSING $FORM_standardunits"
+[ "$FORM_gridpoints" = max ] && PROG="$PROG max"
+[ "$FORM_gridpoints" = min ] && PROG="$PROG min"
 #
 # try to make the site a bit more student-proof
 #
@@ -186,7 +203,7 @@ count=`ps axuw | fgrep "$shortprog" | fgrep -v fgrep | wc -l | tr -d '[:space:]'
 if [ "$count" != 0 ]; then
     echo 'Content-Type: text/html'
     echo 
-    . ./myvinkhead.cgi "Try again later" "Multiple attempts to compute the same quantity"
+v    . ./myvinkhead.cgi "Try again later" "Multiple attempts to compute the same quantity"
     echo "The same computation seems to be already running, started either by you or another user. It does not make much sense to compute it twice."
     echo "Please try again after the original computation is finished. This can take up to 15 minutes for daily data."
     . ./myvinkfoot.cgi
@@ -198,18 +215,22 @@ export file
 export TYPE
 if [ "$FORM_gridpoints" != true ]; then
   outfile=data/$TYPE$WMO.dat
-  if [ -s $outfile ]; then
-    n=`cat $outfile | wc -l`
-  else
-    n=0
-  fi
-  if [ $n -gt 10 -a $outfile -nt $file ]; then
-    PROG=""
+  if [ -z "$ENSEMBLE" ]; then
+      if [ -s $outfile ]; then
+        n=`cat $outfile | wc -l`
+      else
+        n=0
+      fi
+      if [ $n -gt 10 -a $outfile -nt $file ]; then
+        PROG=""
+      fi
   fi
   if [ "$splitfield" = true -a "$PROG" != "" ]; then
     warning='<font color="#ff0000">This will take a long time, at least an hour.</font>'
     if [ -z "$EMAIL" -o "$EMAIL" = someone@somewhere ]; then
-        . ./myvinhead.cgi "Error" "Please register for this operation"
+        echo 'Content-Type: text/html'
+        echo 
+        . ./myvinkhead.cgi "Error" "Please register for this operation"
         . ./myvinkfoot.cgi
     fi
   fi
