@@ -295,7 +295,7 @@ if ( flipped = 13 | flipped = 18 )
 'set rgb 25 227 74 51'
 'set rgb 26 179 0 0'
 else
-if ( flipped = 12 | flipped = 19 )
+if ( flipped = 12 | flipped = 14 | flipped = 19 )
 'set rgb 50 248 248 248'
 'set rgb 21 241 238 246'
 'set rgb 22 208 209 230'
@@ -303,6 +303,11 @@ if ( flipped = 12 | flipped = 19 )
 'set rgb 24 116 169 207'
 'set rgb 25 43 140 190'
 'set rgb 26 4 90 141'
+'set rgb 27 253 187 132'
+'set rgb 28 252 141 89'
+'set rgb 29 227 74 51'
+'set rgb 30 179 0 0'
+'set rgb 31 0 0 0'
 else
 'set rgb 50 222 222 222'
 * insert output from ligtcolour below
@@ -392,6 +397,10 @@ if ( flipped = 12 )
 say 'grey - blue colourbar'
 rbcols1='set rbcols 50 21 22 23 24 25 26'
 else
+if ( flipped = 14 ) 
+say 'grey - blue - red colourbar'
+rbcols1='set rbcols 50 21 22 23 24 25 26 27 28 29 30 31'
+else
 if ( flipped = 1 )
 say 'red - grey - blue colourbar'
 rbcols1='set rbcols  6  2  8 12  7 50 10  3 11  4 14'
@@ -425,12 +434,13 @@ endif
 endif
 endif
 endif
+endif
 *
 *	set clevs
 *
 if ( cint != '' )
 ***say 'set clevs 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+5*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax
-if ( flipped > 11 )
+if ( flipped > 11 & flipped != 14 )
 setclevs='set clevs 'cmin' 'cmin+2*cint' 'cmin+4*cint' 'cmin+6*cint' 'cmin+8*cint' 'cmax
 else
 setclevs='set clevs 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+5*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax

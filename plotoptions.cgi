@@ -173,6 +173,7 @@ cat <<EOF
 <option value="11" $colourscale_11>red-grey-blue
 <option value="13" $colourscale_13>grey-red
 <option value="12" $colourscale_12>grey-blue
+<option value="14" $colourscale_14>grey-blue-red
 <option value="18" $colourscale_18>red-grey
 <option value="19" $colourscale_19>blue-grey
 <option value="0" $colourscale_0>old blue-grey-red
