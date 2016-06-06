@@ -36,6 +36,8 @@ case ${FORM_var:-mean} in
     hime) hime=checked;;
     hisd) hisd=checked;;
     hisk) hisk=checked;;
+    himi) himi=checked;;
+    hima) hima=checked;;
     higa) higa=checked;;
     higr) higr=checked;;
     higR) higR=checked;;
@@ -78,6 +80,10 @@ cat <<EOF
 <td><input type="radio" name="var" value="hisd" $hisd>standard deviation
 <tr><td>&nbsp;
 <td><input type="radio" name="var" value="hisk" $hisk>skewness
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="himi" $himi>minimum
+<tr><td>&nbsp;
+<td><input type="radio" name="var" value="hima" $hima>maximum
 <tr><td>Fit:
 <td><input type="radio" name="var" value="higa" $higa>Gaussian and plot &chi;<sup>2</sup> 
 <tr><td>Return time:
