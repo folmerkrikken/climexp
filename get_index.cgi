@@ -4,7 +4,7 @@
 . ./getargs.cgi
 
 lwrite=false
-if [ $EMAIL = oldenbor@knmi.nl ]; then
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
     lwrite=false # true
 fi
 export DIR=`pwd`
@@ -203,7 +203,7 @@ count=`ps axuw | fgrep "$shortprog" | fgrep -v fgrep | wc -l | tr -d '[:space:]'
 if [ "$count" != 0 ]; then
     echo 'Content-Type: text/html'
     echo 
-v    . ./myvinkhead.cgi "Try again later" "Multiple attempts to compute the same quantity"
+    . ./myvinkhead.cgi "Try again later" "Multiple attempts to compute the same quantity"
     echo "The same computation seems to be already running, started either by you or another user. It does not make much sense to compute it twice."
     echo "Please try again after the original computation is finished. This can take up to 15 minutes for daily data."
     . ./myvinkfoot.cgi
@@ -299,14 +299,14 @@ EOF
 	    nmax=1000
 	    format=%03i
 	fi
-    ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii: -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
+    ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
     while [ $i -lt $nmax ]
     do
       [ "$lwrite" = true ] && echo "i=$i, checking for $ensfile"
       if [ -f $ensfile -o -f data/$ensfile ]
       then
       	[ ! -s $ensfile ] && ensfile=data/$ensfile # I think
-        ensout=`echo $outfile | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
+        ensout=`echo $outfile | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
     	if [ -f $ensout.nc -a $ensout -nt $ensfile ]; then
 	      echo "Ensemble member $ii already exists<br>"
     	else
@@ -315,6 +315,7 @@ EOF
             subsetname="mask $maskname"
           else
             [ "$lwrite" = true ] && echo ./bin/get_index $ensfile $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits $ensout.nc
+            echo "generating ensemble member $ii...<p>"
             ./bin/get_index $ensfile $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits outfield $ensout.nc 2>&1
             subsetname="${FORM_lat1}N-${FORM_lat2}N,${FORM_lon1}E-${FORM_lon2}E"
           fi
