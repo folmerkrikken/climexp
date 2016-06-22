@@ -159,11 +159,31 @@ Choose a field and press this button</td></tr>
 <br><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5&deg;E</a>,
 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,
 <br><a href="getindices.cgi?WMO=KNMI14Data/Pcumbria/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_NEngland&STATION=P_NEngland_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Northern England</a>,
-<br><a href="getindices.cgi?WMO=KNMI14Data/Pboulder/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_Boulder&STATION=P_Boulder_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Boulder, Colorado, USA</a>.
+<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Loire_su_%%&STATION=P_Loire_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Loire basin</a>.
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Seine_su_%%&STATION=P_Seine_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>.
 
-<div class=alineakop>HadGEM3A N216 daily series</div>
-<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">historical precipitation at 52&deg;N, 5&deg;E</a>,
-<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historicalNat_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_nat&TYPE=p&NPERYEAR=360&id=$EMAIL">counterfactual precipitation at 52&deg;N, 5&deg;E</a>.
+<div class=alineakop>HadGEM3A N216 historical daily series</div>
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
+<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
+
+<div class=alineakop>HadGEM3A N216 historicalNat daily series</div>
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historicalNat_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_nat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>.
+<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
+
+<div class=alineakop>CORDEX EUR-11 (LCSE)</div>
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/rx3day_cordex_LOIRE_%%&STATION=Rx3day_Loire_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">max of 3-day ave precipitation in Loire basin</a>,
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/rx3day_cordex_SEINE_%%&STATION=Rx3day_Seine_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">max of 3-day ave precipitation in Seine basin</a>.
+<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_cordex_germany_%%&STATION=prmax_germany_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>.
+
+<div class=alineakop>EC-Earth/RACMO 12km runs (KNMI)</div>
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/pr_racmo_Loire_%%&STATION=pr_Loire_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Loire basin</a>,
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/pr_racmo_Seine_%%&STATION=pr_Seine_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>
+<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_racmo_germany_%%&STATION=prmax_Germany_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>
+
+<div class=alineakop>HadGEM2-ES/RACMO 12km runs (KNMI)</div>
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_racmo_hadgem_germany_%%&STATION=prmax_Germany_HadGEM2_RACMO&TYPE=p&NPERYEAR=360&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>
 
 EOF
 
