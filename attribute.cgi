@@ -217,7 +217,7 @@ c=`wc -l $root.txt|awk '{print $1}'`
 if [ $c -lt 20 ]; then
 	echo "<p>Something went wrong, c=$c"
 	echo 'Please send <a href="mailto:mailto:oldenborgh@knmi.nl">me</a> the following command and I will try to fix it.<p>'
-	echo bin/attribute $corrargs
+	echo bin/attribute $corrargs | sed -e 's@data/attribute@/tmp/attribute@g'
 	. ./myvinkfoot.cgi
 	exit
 fi
