@@ -39,6 +39,7 @@ case "$FORM_colourscale" in
 8) colourscale_8="selected";;
 11) colourscale_11="selected";;
 13) colourscale_13="selected";;
+14) colourscale_14="selected";;
 12) colourscale_12="selected";;
 19) colourscale_19="selected";;
 18) colourscale_18="selected";;
