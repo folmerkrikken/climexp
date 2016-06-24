@@ -23,7 +23,7 @@ if [ -n "$FORM_nperyearnew" ]; then
   360|365|366) sel_daily="selected";;
   esac
 else
-  if [ "$NPERYEAR:-12" = 12 ]; then
+  if [ "${NPERYEAR:-12}" = 12 ]; then
     sel_annual="selected"
   elif [ "$NPERYEAR" = 366 -o "$NPERYEAR" = 365 -o "$NPERYEAR" = 360 ]; then
     sel_monthly="selected"
