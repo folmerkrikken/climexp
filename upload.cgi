@@ -46,47 +46,46 @@ done
 if [ -n "$FORM_data" ]; then
   echo "$FORM_data" | tr '\r' '\n' > $DIR/data/$TYPE$WMO.dat
 else
-  echo "Content-Type: text/html"
-  echo
-  echo
-  . ./myvinkhead.cgi "Retrieving series" "$STATION" "index,nofollow"
-  . ./checkurl.cgi
-  nens=`echo $FORM_url | wc -w`
-  if [ $nens = 1 ]; then
-    curl -s "$FORM_url" | tr '\r' '\n' > data/$TYPE$WMO.dat
-  else
+    echo "Content-Type: text/html"
+    echo
+    echo
+    . ./myvinkhead.cgi "Retrieving series" "$STATION" "index,nofollow"
+    . ./checkurl.cgi
+    nens=`echo $FORM_url | wc -w`
+    if [ $nens = 1 ]; then
+        curl -s "$FORM_url" | tr '\r' '\n' > data/$TYPE$WMO.dat
+    else
 # ensemble
-    iens=0
-    for url in $FORM_url
-    do
-      if [ $iens -lt 10 ]; then
-        ensfile=data/$TYPE${WMO}_0$iens.dat
-      elif [ $iens -lt 100 ]; then
-        ensfile=data/$TYPE${WMO}_$iens.dat
-      else
-        echo "Error: can only handle up to 100 ensemble members"
-        . ./myvinkfoot.cgi
-    	exit
-      fi
-      echo "Retrieving $ensfile from $url<br>"
-      curl -s "$url" > $ensfile
-      iens=$(($iens + 1))
-    done
-    WMO=${WMO}_%%
-  fi
+        iens=0
+        for url in $FORM_url
+        do
+            if [ $iens -lt 10 ]; then
+                ensfile=data/$TYPE${WMO}_0$iens.dat
+            elif [ $iens -lt 100 ]; then
+                ensfile=data/$TYPE${WMO}_$iens.dat
+            else
+                echo "Error: can only handle up to 100 ensemble members"
+                . ./myvinkfoot.cgi
+    	        exit
+            fi
+            echo "Retrieving $ensfile from $url<br>"
+            curl -s "$url" > $ensfile
+            iens=$(($iens + 1))
+        done
+        WMO=${WMO}_%%
+    fi
 fi
 
-eval `bin/getunits ./data/$TYPE$WMO.dat`
+eval `./bin/getunits ./data/$TYPE$WMO.dat`
 if [ -z "$NT" -o "$NT" = 0 ]; then
     rm ./data/$TYPE$WMO.dat
-    echo 'Content-Type: text/html'
+    echo "Content-Type: text/html"
     echo
     echo
     . ./myvinkhead.cgi "Error" "$station $NAME" "nofollow,index"
     echo "This does not appear to be a valid time series."
     . ./myvinkfoot.cgi
-
     exit -1
 fi
 
-. $DIR/getdata.cgi
+. ./getdata.cgi
