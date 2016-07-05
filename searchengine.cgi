@@ -9,7 +9,7 @@ cc=`echo "$EMAIL" | fgrep -c "http:"`
 ###echo "searchengine: $HTTP_USER_AGENT"
 ###echo "searchengine: $c"
 # change to blacklisted address if needed
-if [ $c -gt 0 -o $cc -gt 0 -o $REMOTE_ADDR = 0.0.0.0 -o -z "$HTTP_USER_AGENT" ]
+if [ $c -gt 0 -o $cc -gt 0 -o "$REMOTE_ADDR" = 0.0.0.0 -o -z "$HTTP_USER_AGENT" ]
 then
   ROBOT=true
   if [ -z "$EMAIL" ]; then
