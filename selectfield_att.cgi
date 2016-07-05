@@ -86,9 +86,9 @@ Choose a field and press this button</td></tr>
 <th>&nbsp;
 <th>&nbsp;
 <th>&nbsp;
-<th>&nbsp;
+<th>psl
 <tr><td>daily
-<td>observed
+<td>historical
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Aday_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tasmax_Aday_HadGEM3-A-N216_historical>
@@ -98,9 +98,9 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
-<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_psl_Aday_HadGEM3-A-N216_historical>
 <tr><td>daily
-<td>counterfactual
+<td>historicalNat
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Aday_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tasmax_Aday_HadGEM3-A-N216_historicalNat>
@@ -110,7 +110,7 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
-<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_psl_Aday_HadGEM3-A-N216_historicalNat>
 <tr><th>&nbsp;
 <th>&nbsp;
 <th>Rx1day
