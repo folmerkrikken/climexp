@@ -3,7 +3,7 @@
 # plus a check on the state of the server
 if [ -z "$init_done" ]; then
 
-    if [ -z "$use_uptime" ] ;then
+    if [ -n "$use_uptime" ] ;then
         line=`uptime`
         load=${line##*averages: } # Mac OSX
         load=${load##*average: }  # linux
@@ -13,12 +13,12 @@ if [ -z "$init_done" ]; then
         load=`ps axuw | fgrep -c .cgi`
         maxload=7 # 1 is the grep, we have 4 cores
     fi
-   if [ ${load:-0} -gt $maxload -a `uname` != Darwin ]; then
-       echo 
-       echo "Server too busy (load $load &gt; $maxload), try again later"
-       echo `date` "Server too busy, load $load > $maxload" >> log/log
-       exit
-   fi
+    if [ ${load:-0} -gt $maxload -a `uname` != Darwin ]; then
+        echo 
+        echo "Server too busy (load $load &gt; $maxload), try again later"
+        echo `date` "Server too busy, load $load > $maxload" >> log/log
+        exit
+    fi
     if [ -s log/attack-ip.txt ]; then
         c=`fgrep -c $REMOTE_ADDR log/attack-ip.txt`
         if [ $c != 0 ]; then
