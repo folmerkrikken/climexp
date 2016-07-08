@@ -909,6 +909,8 @@ cfsr_str) file=CFSR/cfsr_lwrf_sfc.nc;kindname=CFSR;climfield="net LW sfc";LSMASK
 cfsr_tsr) file=CFSR/cfsr_swrf_toa.nc;kindname=CFSR;climfield="net SW TOA";LSMASK=CFSR/lsmask_f.nc;;
 cfsr_ttr) file=CFSR/cfsr_ulwrf_toa.nc;kindname=CFSR;climfield="net LW TOA";LSMASK=CFSR/lsmask_f.nc;;
 
+jra_*) var=${FORM_field#jra_};file="JRA-55/jra_${var}_mo.nc";kindname="JRA-55";climfield="$var";;
+
 cslp|cpsl|cprmsl) file=20C/prmsl.mon.mean.nc;kindname="20C";climfield="SLP";LSMASK=unknown;;
 cslp_extended) file=20C/prmsl.mon.mean_extended.nc;kindname="20C+";climfield="SLP";LSMASK=unknown;;
 cz850) file=20C/hgt850.nc;kindname="20C";climfield="850mb height";;
