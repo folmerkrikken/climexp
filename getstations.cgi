@@ -342,7 +342,8 @@ fi
 case ${FORM_setoper:-mean} in
     min) minselected=selected;;
     max) maxselected=selected;;
-    num) numsleected=selected;;
+    num) numselected=selected;;
+    mis) misselected=selected;;
     *) meanselected=selected;;
 esac
 
@@ -365,6 +366,7 @@ cat <<EOF
 <option value="min" $minselected>minimum
 <option value="max" $maxselected>maximum
 <option value="num" $numselected>number with data
+<option value="mis" $misselected>fraction missing
 </select>
 <tr><td colspan=2><input type="submit" class="formbutton" value="make time series">
 </td></tr></table>
