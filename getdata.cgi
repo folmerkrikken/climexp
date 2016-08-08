@@ -608,7 +608,7 @@ EOF
 </table>
 </div>
 
-<p><div class="formheader">Compute ensemble mean</div>
+<p><div class="formheader">Compute ensemble statistic</div>
 <div class='formbody'>
 <table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>
@@ -618,8 +618,13 @@ EOF
 <input type="hidden" name="type" value="$TYPE">
 <input type="hidden" name="wmo" value="$WMO">
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
+Operation: 
+<input type="radio" class="formradio" name="oper" value="mean" checked>mean, 
+<input type="radio" class="formradio" name="oper" value="min">min, 
+<input type="radio" class="formradio" name="oper" value="max">max
+<br>
 Ensemble members: <input type="$number" min=0 step=1 size="3" style="width: 4em;" name="nens1"> to <input type="$number" min=0 step=1 size="3" style="width: 4em;" name="nens2"><br>
-<input type="submit" class="formbutton" value="Average">
+<input type="submit" class="formbutton" value="Compute">
 </form>
 </td></tr>
 </table>
