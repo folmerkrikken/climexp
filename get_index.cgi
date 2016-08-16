@@ -198,7 +198,7 @@ PROG="$PROG minfac $FORM_minfac $FORM_intertype $FORM_noisemodel $mask $NOMISSIN
 #
 # try to make the site a bit more student-proof
 #
-shortprog=`echo $PROG | cut -b 1-80`
+shortprog=`echo $PROG | cut -b 1-100`
 count=`ps axuw | fgrep "$shortprog" | fgrep -v fgrep | wc -l | tr -d '[:space:]'`
 if [ "$count" != 0 ]; then
     echo 'Content-Type: text/html'
