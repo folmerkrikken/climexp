@@ -101,8 +101,12 @@ fi
 if [ "${WMO#corr}" = "$WMO" -a "${WMO#sign}" = "$WMO" ]; then
     if [ ! -s ./${base}a.eps.gz -o ! -s ./${base}a.png -o ! -s ./${base}a.plt -o ./${base}a.plt -ot ./data/$TYPE$WMO.dat ]; then
         ###echo ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat
-        ( ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat | fgrep -v 'disregarding' > ./${base}a.plt ) 2>&1
-        fgrep -v "# repeat last"  ./${base}a.plt > ./${base}a.txt
+        if [ ! -s ./${base}a.plt -o ./${base}a.plt -ot ./data/$TYPE$WMO.dat ]; then
+            ( ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat | fgrep -v 'disregarding' > ./${base}a.plt ) 2>&1
+        fi
+        if [ ! -s ./${base}a.txt -o ./${base}a.txt -ot ./${base}a.plt ]; then
+            fgrep -v "# repeat last"  ./${base}a.plt > ./${base}a.txt
+        fi
 	    ###title="anomalies of $station $NAME$period"
         ./bin/gnuplot << EOF
 $gnuplot_init
