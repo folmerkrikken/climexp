@@ -33,8 +33,8 @@ else
 		elif [ -f $ensfile.nc ]; then
 		    # make a netcdf copy for faster I/O
 		    # eventually only use the netcdf, but I first have to check everything works
-			cp -p $ensfile.nc $ncfile
 			netcdf2dat $ensfile.nc > $datfile
+			cp $ensfile.nc $ncfile
 			echo "# $ncfile"
 			ntime=$((ntime+1))
 			if [ $((ntime%100)) = 0 ]; then
