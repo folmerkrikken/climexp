@@ -100,5 +100,8 @@ else
             ensfile=$allfiles
         fi
         echo "ensfile=$ensfile" >> /tmp/aap
+		if [ $((i%100)) = 0 -a \( -s "$ensfile" -o -s "data/$ensfile" \) ]; then
+		    echo "Processing $i...<p>" 1>&2
+		fi
 	done
 fi
