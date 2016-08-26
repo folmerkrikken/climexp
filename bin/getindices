@@ -33,11 +33,15 @@ else
 		elif [ -f $ensfile.nc ]; then
 		    # make a netcdf copy for faster I/O
 		    # eventually only use the netcdf, but I first have to check everything works
-			netcdf2dat $ensfile.nc > $datfile
-			cp $ensfile.nc $ncfile
+		    if [ ! -s $datfile -o $datfile -ot $endfile.nc ]; then
+    			netcdf2dat $ensfile.nc > $datfile
+	    	fi
+	    	if [ ! -s $ncfile -o $ncfile -ot $ensfile.nc ]; then
+			    cp $ensfile.nc $ncfile
+			fi
 			echo "# $ncfile"
 			ntime=$((ntime+1))
-			if [ $((ntime%100)) = 0 ]; then
+			if [ $((ntime%20)) = 0 ]; then
 			    echo "Copying file $ntime<p>" 1>&2
 			fi
 		elif [ $i -ge 1 ]; then
