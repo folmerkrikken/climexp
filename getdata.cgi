@@ -578,7 +578,8 @@ EOF
 		nmax=1000
 	fi
 	i=0
-	while [ $i -lt $nmax ]
+	exist=true
+	while [ $i -lt $nmax -a $exist = true ]
 	do
 		if [ $c3 = 0 ]; then
 	    	if [ $i -lt 10 ]; then
@@ -597,6 +598,8 @@ EOF
 		fi
     	if [ -f data/$TYPE$member.dat ]; then
       		echo "<option>$i"
+      	elif [ $i -gt 5 ]; then
+      	    exist=false
     	fi
     	i=$(($i + 1))
 	done
