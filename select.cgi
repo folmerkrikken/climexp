@@ -265,6 +265,7 @@ if [ "$EMAIL" = "oldenborgh@knmi.nl" \
   -o "$EMAIL" = "omar.bellprat@ic3.cat" \
   -o "$EMAIL" = "kew@knmi.nl" -o "$EMAIL" = "sarah.teulingkew@gmail.com" \
   -o "$EMAIL" = "philip@knmi.nl" -o "$EMAIL" = "sjoukje.knmi@gmail.com" \
+  -o "$EMAIL" = "karin.vanderwiel@noaa.gov" \
   ]; then # add more later, not foolproof but OK for the moment
     extended=false
     if [ "${FORM_field#era}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc ]; then
