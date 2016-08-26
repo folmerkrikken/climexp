@@ -497,6 +497,8 @@ gpcc_daily_n1) file=GPCCData/gpcc_combined_daily_n1.nc;kindname="GPCC daily V1";
 ngpcc_daily) file=GPCCData/gpcc_combined_daily_n.nc;kindname="GPCC daily V1";climfield="#gauges";;
 prcp_cpc_daily) file=NCEPData/prcp_GLB_daily.nc;kindname="CPC daily";climfield="precipitation";;
 prcp_cpc_daily_us) file=NCEPData/prcp_CONUS_daily.nc;kindname="CPC daily";climfield="precipitation";;
+prcp_cpc_daily_us_05) file=NCEPData/prcp_CONUS_daily_05.nc;kindname="CPC daily";climfield="precipitation";;
+prcp_cpc_daily_us_10) file=NCEPData/prcp_CONUS_daily_10.nc;kindname="CPC daily";climfield="precipitation";;
 prcp_cpc_daily_n1) file=NCEPData/prcp_GLB_daily_n1.nc;kindname="CPC daily";climfield="precipitation";;
 prcp_cpc_daily_n1_us) file=NCEPData/prcp_CONUS_daily_n1.nc;kindname="CPC daily";climfield="precipitation";;
 nprcp_cpc_daily) file=NCEPData/nprcp_GLB_daily.nc;kindname="CPC daily";climfield="#gauges";;
