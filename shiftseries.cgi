@@ -25,6 +25,6 @@ STATION="${FORM_station} shifted by $FORM_shift ${month}s"
 export TYPE=$FORM_type
 NAME="$FORM_NAME"
 export file=data/$TYPE$FORM_wmo.dat
-PROG="timeshift ./data/$TYPE$FORM_wmo.dat $FORM_shift"
+PROG="timeshift.sh ./data/$TYPE$FORM_wmo.dat $FORM_shift"
 
 . ./getdata.cgi
