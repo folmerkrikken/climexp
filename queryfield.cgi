@@ -512,6 +512,8 @@ cmap) file=NCEPData/cmap.ctl;kindname="CMAP";climfield="precipitation";flipcolor
 cmaperr) file=NCEPData/cmaperr.ctl;kindname="CMAP";climfield="relative error on precipitation";;
 cmapm) file=NCEPData/cmapm.ctl;kindname="CMAP incl model";climfield="precipitation";flipcolor=11;;
 cmapmerr) file=NCEPData/cmapmerr.ctl;kindname="CPMAP (incl model)";climfield="relative error on precipitation";;
+chirps_20_25) file=CHIRPSData/v2p0chirps_25.nc;kindname="CHIRPS";climfield="precipitation";flipcolor=11;NPERYEAR=366;map="set lon -20 55
+set lat -40 40";;
 emulate) file=CRUData/emulate_3.2_1850-2003.nc;kindname="EMULATE 3.2";climfield="SLP";NPERYEAR=366;map="set lon -70 50
 set lat 25 70";;
 trenberthslp) file=UCARData/ds010_1.ctl;kindname="Trenberth";climfield="SLP";map='set mproj nps';;
