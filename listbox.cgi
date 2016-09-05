@@ -2,7 +2,6 @@
 . ./init.cgi
 echo "Content-Type: text/plain"
 echo
-echo
 
 export DIR=`pwd`
 . ./getargs.cgi
