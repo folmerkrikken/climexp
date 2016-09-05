@@ -34,7 +34,7 @@ cat <<EOF
 <a href="javascript:pop_page('help/hcdn.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>HCDN
 </th></tr><tr><td>
 <input type="radio" class="formradio" name="climate" value="gdcnprcp" $climate_gdcnprcp>precipitation<br>
-<input type="radio" class="formradio" name="climate" value="gdcnprcpall" $climate_gdcnprcp>precip+GTS
+<input type="radio" class="formradio" name="climate" value="gdcnprcpall" $climate_gdcnprcp_all>precip+GTS
 </td><td>
 <input type="radio" class="formradio" name="climate" value="ecaprcp" $climate_ecaprcp>precipitation 
 </td><td>
