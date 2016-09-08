@@ -24,6 +24,7 @@ FORM_shadingtype=$FORM_shadingtype;
 FORM_yflip=$FORM_yflip;
 FORM_notitleonplot=$FORM_notitleonplot;
 FORM_nogrid=$FORM_nogrid;
+FORM_nopoli=$FORM_nopoli;
 FORM_nolab=$FORM_nolab;
 FORM_xlint=$FORM_xlint;
 FORM_ylint=$FORM_ylint;

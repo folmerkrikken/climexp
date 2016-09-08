@@ -76,6 +76,9 @@ fi
 if [ -n "$FORM_nolab" ]; then
   nolab_checked=checked
 fi
+if [ -n "$FORM_nopoli" ]; then
+  nopoli_checked=checked
+fi
 
 case ${FORM_masktype:-all} in
 5lan) hlan_checked="checked";;
@@ -199,6 +202,7 @@ cat <<EOF
 <input type="checkbox" class="formcheck" name="nocbar" $nocbar_checked>no color bar&nbsp;&nbsp;
 <input type="checkbox" class="formcheck" name="notitleonplot" $notitleonplot_checked>no title on plot,&nbsp;&nbsp;
 <input type="checkbox" class="formcheck" name="nogrid" $nogrid_checked>no grid
+<input type="checkbox" class="formcheck" name="nopoli" $nopoli_checked>no political boundaries
 EOF
 echo "<td><a href=\"javascript:pop_page('help/plotoptions.shtml',284,450)\"><img src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
 echo '<tr><td><td>'

@@ -245,6 +245,10 @@ do
 	else
 		grid="set grid on"
 	fi
+	if [ -n "$FORM_nopoli" ]; then
+		grid="$grid
+set poli off"
+	fi
 	if [ -n "$FORM_nolab" ]; then
 		grid="$grid
 set xlab off
@@ -269,9 +273,9 @@ set ylab off"
 			map="$map
 set mpdset hires"
 		else
-			[ "$lwrite" = true ] && echo "dlat -lt 39, EH, hence newmap map<br>"
+			[ "$lwrite" = true ] && echo "dlat -lt 39, EH, hence mres map<br>"
 			map="$map
-set mpdset newmap"
+set mpdset mres"
 		fi
 	else
 		[ "$lwrite" = true ] && echo "dlat -ge 39 hence lowres map<br>"
