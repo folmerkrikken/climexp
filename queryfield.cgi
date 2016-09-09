@@ -1005,6 +1005,7 @@ erai_snd) file=ERA-interim/erai_snd.nc;kindname="ERA-int";climfield="snow depth"
 erai_vap) file=ERA-interim/erai_vap.nc;kindname="ERA-int";climfield="column vapour";LSMASK=ERA-interim/lsmask07.nc;;
 erai_lhf) file=ERA-interim/erai_lhtfl.nc;kindname="ERA-int";climfield="latent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_shf) file=ERA-interim/erai_shtfl.nc;kindname="ERA-int";climfield="sensible heat flux";LSMASK=ERA-interim/lsmask07.nc;;
+erai_trbflx) file=ERA-interim/erai_trbflx.nc;kindname="ERA-int";climfield="turbulent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_snetflx) file=ERA-interim/erai_snetflx.nc;kindname="ERA-int";climfield="sfc net heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_huss) file=ERA-interim/erai_huss.nc;kindname="ERA-int";climfield="spec humidity";LSMASK=ERA-interim/lsmask075.nc;;
 erai_evap) file=ERA-interim/erai_evap.nc;kindname="ERA-int";climfield="evaporation";LSMASK=ERA-interim/lsmask07.nc;;
