@@ -274,8 +274,13 @@ set ylab off"
 set mpdset hires"
 		else
 			[ "$lwrite" = true ] && echo "dlat -lt 39, EH, hence mres map<br>"
-			map="$map
+            if [ -n "$FORM_nopoli" ]; then
+			    map="$map
 set mpdset mres"
+            else
+			    map="$map
+set mpdset newmap"
+            fi
 		fi
 	else
 		[ "$lwrite" = true ] && echo "dlat -ge 39 hence lowres map<br>"
