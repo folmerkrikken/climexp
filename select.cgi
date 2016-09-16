@@ -24,6 +24,7 @@ if [ $EMAIL = oldenborgh@knmi.nl ]; then
 fi
 
 # start real work
+[ "$lwrite" = true ] && echo "calling queryfield...<br>"
 . ./queryfield.cgi
 [ "$lwrite" = true ] && echo "FORM_field=$FORM_field<br>file=$file<br>"
 

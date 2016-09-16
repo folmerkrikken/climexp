@@ -8,10 +8,15 @@ if [ -z "$FORM_field" ]; then
   echo;echo "Please select a field"
   exit
 fi
+if [ "$lwrite" = true ]; then
+    echo "queryfield: FORM_field=$FORM_field<br>"
+fi
 if [ ${FORM_field#Rapid} != $FORM_field ]; then 
-# Gerard's data
+  # Gerard's data
+  [ "$lwrite" = true ] && echo "queryfield.cgi: calling queryfield_rapid.cgi<br>"
   . ./queryfield_rapid.cgi
 else
+[ "$lwrite" = true ] && echo "queryfield.cgi: entering case switch with FORM_field=$FORM_field<br>"
 NPERYEAR=12 # default
 case $FORM_field in
 cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
@@ -451,12 +456,12 @@ set lat 30 75';;
 ensembles_025_elev) file=ENSEMBLES/elev_0.25deg_reg_v4.0.nc;kindname="E-OBS 4.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
 set lat 30 75';;
 
-prism_ppt) file=PRISMData/myprism_ppt_1950-2015_WUS_monthly.nc;kindname="PRISM";climfield="prcp";flipcolor=11;map='set lon 232 260
-set lat 28 50';;
-prism_tmax) file=PRISMData/myprism_tmax_1950-2015_WUS_monthly.nc;kindname="PRISM";climfield="prcp";map='set lon 232 260
-set lat 28 50';;
-prism_tmin) file=PRISMData/myprism_tmin_1950-2015_WUS_monthly.nc;kindname="PRISM";climfield="prcp";map='set lon 232 260
-set lat 28 50';;
+prism_ppt*) ext=${FORM_field#prism_ppt};file=PRISMData/ppt_prism$ext.nc;kindname="PRISM";climfield="prcp";flipcolor=11;map='set lon -125 -66
+set lat 24 50';;
+prism_tmax*) ext=${FORM_field#prism_tmax};file=PRISMData/tmax_prism$ext.nc;kindname="PRISM";climfield="Tmax";map='set lon -125 -66
+set lat 24 50';;
+prism_tmin*) ext=${FORM_field#prism_tmin};file=PRISMData/tmin_prism$ext.nc;kindname="PRISM";climfield="Tmin";map='set lon -125 -66
+set lat 24 50';;
 
 scpdsi) file=CRUData/pdsi.3.21.penman.snow.nc;kindname="CRU";climfield="scPDSI 3.21";;
 scpdsi_alpine) file=CRUData/scpdsi_alpine.ctl;kindname="CRU";climfield="scPDSI";map='set lon 4 19
@@ -492,17 +497,17 @@ ngpcc) file=GPCCData/gpcc_10_n_mon.nc;kindname="GPCC monitoring";climfield="#gau
 ngpcc_05) file=GPCCData/gpcc_V7_05_n.nc;kindname="GPCC V7";climfield="#gauges";;
 ngpcc_10) file=GPCCData/gpcc_V7_10_n.nc;kindname="GPCC V7";climfield="#gauges";;
 ngpcc_25) file=GPCCData/gpcc_V7_25_n.nc;kindname="GPCC V7";climfield="#gauges";;
-gpcc_daily) file=GPCCData/gpcc_combined_daily.nc;kindname="GPCC daily V1";climfield="precipitation";;
-gpcc_daily_n1) file=GPCCData/gpcc_combined_daily_n1.nc;kindname="GPCC daily V1";climfield="precipitation";;
-ngpcc_daily) file=GPCCData/gpcc_combined_daily_n.nc;kindname="GPCC daily V1";climfield="#gauges";;
-prcp_cpc_daily) file=NCEPData/prcp_GLB_daily.nc;kindname="CPC daily";climfield="precipitation";;
-prcp_cpc_daily_us) file=NCEPData/prcp_CONUS_daily.nc;kindname="CPC daily";climfield="precipitation";;
-prcp_cpc_daily_us_05) file=NCEPData/prcp_CONUS_daily_05.nc;kindname="CPC daily";climfield="precipitation";;
-prcp_cpc_daily_us_10) file=NCEPData/prcp_CONUS_daily_10.nc;kindname="CPC daily";climfield="precipitation";;
-prcp_cpc_daily_n1) file=NCEPData/prcp_GLB_daily_n1.nc;kindname="CPC daily";climfield="precipitation";;
-prcp_cpc_daily_n1_us) file=NCEPData/prcp_CONUS_daily_n1.nc;kindname="CPC daily";climfield="precipitation";;
-nprcp_cpc_daily) file=NCEPData/nprcp_GLB_daily.nc;kindname="CPC daily";climfield="#gauges";;
-nprcp_cpc_daily_us) file=NCEPData/nprcp_CONUS_daily.nc;kindname="CPC daily";climfield="#gauges";;
+gpcc_daily) file=GPCCData/gpcc_combined_daily.nc;kindname="GPCC daily V1";climfield="precipitation"NPERYEAR=366;;
+gpcc_daily_n1) file=GPCCData/gpcc_combined_daily_n1.nc;kindname="GPCC daily V1";climfield="precipitation"NPERYEAR=366;;
+ngpcc_daily) file=GPCCData/gpcc_combined_daily_n.nc;kindname="GPCC daily V1";climfield="#gauges"NPERYEAR=366;;
+prcp_cpc_daily) file=NCEPData/prcp_GLB_daily.nc;kindname="CPC daily";climfield="precipitation";NPERYEAR=366;;
+prcp_cpc_daily_us) file=NCEPData/prcp_CONUS_daily.nc;kindname="CPC daily";climfield="precipitation";NPERYEAR=366;;
+prcp_cpc_daily_us_05) file=NCEPData/prcp_CONUS_daily_05.nc;kindname="CPC daily";climfield="precipitation";NPERYEAR=366;;
+prcp_cpc_daily_us_10) file=NCEPData/prcp_CONUS_daily_10.nc;kindname="CPC daily";climfield="precipitation";NPERYEAR=366;;
+prcp_cpc_daily_n1) file=NCEPData/prcp_GLB_daily_n1.nc;kindname="CPC daily";climfield="precipitation";NPERYEAR=366;;
+prcp_cpc_daily_n1_us) file=NCEPData/prcp_CONUS_daily_n1.nc;kindname="CPC daily";climfield="precipitation";NPERYEAR=366;;
+nprcp_cpc_daily) file=NCEPData/nprcp_GLB_daily.nc;kindname="CPC daily";climfield="#gauges";NPERYEAR=366;;
+nprcp_cpc_daily_us) file=NCEPData/nprcp_CONUS_daily.nc;kindname="CPC daily";climfield="#gauges";NPERYEAR=366;;
 gpcp_22) file=GPCPData/gpcp_22.ctl;kindname="GPCP v2.2";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_23) file=GPCPData/gpcp.nc;kindname="GPCP v2.3";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_1dd) file=GPCPData/gpcp_1dd.ctl;kindname="GPCP";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
@@ -1005,7 +1010,6 @@ erai_snd) file=ERA-interim/erai_snd.nc;kindname="ERA-int";climfield="snow depth"
 erai_vap) file=ERA-interim/erai_vap.nc;kindname="ERA-int";climfield="column vapour";LSMASK=ERA-interim/lsmask07.nc;;
 erai_lhf) file=ERA-interim/erai_lhtfl.nc;kindname="ERA-int";climfield="latent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_shf) file=ERA-interim/erai_shtfl.nc;kindname="ERA-int";climfield="sensible heat flux";LSMASK=ERA-interim/lsmask07.nc;;
-erai_trbflx) file=ERA-interim/erai_trbflx.nc;kindname="ERA-int";climfield="turbulent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_snetflx) file=ERA-interim/erai_snetflx.nc;kindname="ERA-int";climfield="sfc net heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_huss) file=ERA-interim/erai_huss.nc;kindname="ERA-int";climfield="spec humidity";LSMASK=ERA-interim/lsmask075.nc;;
 erai_evap) file=ERA-interim/erai_evap.nc;kindname="ERA-int";climfield="evaporation";LSMASK=ERA-interim/lsmask07.nc;;
@@ -5192,7 +5196,7 @@ echo "Cannot handle $FORM_field (yet)"
 [ -x ./myvinkfoot.cgi ] && exit;;
 
 esac
-###echo "FORM_field=$FORM_field<br>file=$file<br>NPERYEAR=$NPERYEAR<br>LSMASK=$LSMASK<br>"
+[ "$lwrite" = true ] && echo "FORM_field=$FORM_field<br>file=$file<br>NPERYEAR=$NPERYEAR<br>LSMASK=$LSMASK<br>"
 
 c=`echo $file | fgrep -c %`
 if [ $c -gt 0 ]; then
