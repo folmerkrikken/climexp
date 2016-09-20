@@ -30,7 +30,8 @@ fi
 ###echo "wmo=$wmo<br>"
 file=$WMO.dat
 newfile=data/$TYPE$wmo.dat
-if [ ! -s "$file" ]; then
+c=`echo $file | egrep -c '\+\+|%%'`
+if [ ! -s "$file" -o "$c" != 0 ]; then
   ens0=`echo $file | sed -e 's/+++/000/' -e 's/%%%/000/' -e 's/++/00/' -e 's/%%/00/'`
   if [ -s "$ens0" ]; then
     i=0
