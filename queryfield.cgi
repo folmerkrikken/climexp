@@ -925,6 +925,7 @@ cfsr_ttr) file=CFSR/cfsr_ulwrf_toa.nc;kindname=CFSR;climfield="net LW TOA";LSMAS
 jra_*) var=${FORM_field#jra_};file="JRA-55/jra_${var}_mo.nc";kindname="JRA-55";climfield="$var";;
 
 cslp|cpsl|cprmsl) file=20C/prmsl.mon.mean.nc;kindname="20C";climfield="SLP";LSMASK=unknown;;
+cprmsl_daily) file=20C/prmsl_daily.nc;kindname="20C";climfield="SLP";NPERYEAR=366;LSMASK=unknown;;
 cslp_extended) file=20C/prmsl.mon.mean_extended.nc;kindname="20C+";climfield="SLP";LSMASK=unknown;;
 cz850) file=20C/hgt850.nc;kindname="20C";climfield="850mb height";;
 cz700) file=20C/hgt700.nc;kindname="20C";climfield="700mb height";;
@@ -947,15 +948,19 @@ cv300) file=20C/vwnd300.nc;kindname="20C";climfield="300mb meridional wind";;
 cv200) file=20C/vwnd200.nc;kindname="20C";climfield="200mb meridional wind";;
 cwspd) file=20C/wspd.mon.mean.nc;kindname="20C";climfield="10m wind speed";LSMASK=20C/land.nc;;
 cair|ctas)  file=20C/air.2m.mon.mean.nc;kindname="20C";climfield="2m temperature";LSMASK=20C/land.nc;;
+ct2m_daily)  file=20C/air.2m_daily.nc;kindname="20C";climfield="2m temperature";LSMASK=20C/land.nc;NPERYEAR=366;;
 ctsfc) file=20C/air.sfc.mon.mean.nc;kindname="20C";climfield="surface temp";LSMASK=20C/land.nc;;
 ctmin|ctasmin)  file=20C/tmin.2m.mon.mean.nc;kindname="20C";climfield="Tmin";LSMASK=20C/land.nc;;
+ctmin_daily)  file=20C/tmin.2m_daily.nc;kindname="20C";climfield="Tmin";LSMASK=20C/land.nc;NPERYEAR=366;;
 ctmax|ctasmax)  file=20C/tmax.2m.mon.mean.nc;kindname="20C";climfield="Tmax";LSMASK=20C/land.nc;;
+ctmax_daily)  file=20C/tmax.2m_daily.nc;kindname="20C";climfield="Tmax";LSMASK=20C/land.nc;NPERYEAR=366;;
 ct850) file=20C/air850.nc;kindname="20C";climfield="850mb temperature";;
 ct700) file=20C/air700.nc;kindname="20C";climfield="700mb temperature";;
 ct500) file=20C/air500.nc;kindname="20C";climfield="500mb temperature";;
 ct300) file=20C/air300.nc;kindname="20C";climfield="300mb temperature";;
 ct200) file=20C/air200.nc;kindname="20C";climfield="200mb temperature";;
 cprate|cpr) file=20C/prate.mon.mean.nc;kindname="20C";climfield="precipitation";flipcolor=11;LSMASK=20C/land.nc;;
+cprate_daily) file=20C/prate_daily.nc;kindname="20C";climfield="precipitation";flipcolor=11;LSMASK=20C/land.nc;NPERYEAR=366;;
 cevap) file=20C/evap.mon.mean.nc;kindname="20C";climfield="evaporation";LSMASK=20C/land.nc;;
 cpme) file=20C/pme.mon.mean.nc;kindname="20C";climfield="P-E";flipcolor=11;LSMASK=20C/land.nc;;
 clhtfl) file=20C/lhtfl.mon.mean.nc;kindname="20C";climfield="latent heat flux";LSMASK=20C/land.nc;;
