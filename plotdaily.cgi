@@ -102,7 +102,7 @@ fi
 
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
 root=data/plot${nday}last$TYPE$WMO$KIND${FORM_climyear1}${FORM_climyear2}_$enddate
-if [ $anom = zero ]; then
+if [ "$anom" = zero ]; then
     anomarg=anom
 fi
 if [ -z "$cdf" ]; then
@@ -120,14 +120,20 @@ fi
 
 echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdfarg $beginend $anomarg" >> log/log
 (./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdfarg $beginend $anomarg > $root.txt) 2>&1
-lastdate=`grep '[0-9]' $root.txt | tail -n 1 | cut -b 1-8`
+c=`egrep -v '^#' $root.txt | grep '[0-9]' | wc -l`
+if [ $c = 0 ] ; then
+    echo "No valid output, maybe the date $enddate is beyond the end date of the series?"
+    . ./myvinkfoot.cgi
+    exit
+fi
+lastdate=`gegrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
 [ -z "$yr" ] && yr=`echo "$lastdate" | cut -b 1-4`
 [ -z "$mo" ] && mo=`echo "$lastdate" | cut -b 5-6`
 [ -z "$dy" ] && dy=`echo "$lastdate" | cut -b 7-8`
 lastdate=$((lastdate+1))
 firstdate=`fgrep -v '#' $root.txt | grep '[0-9]' | head -n 1 | cut -b 1-8`
 ###echo firstdate,lastdate = $firstdate,$lastdate
-if [ $anom != zero ]; then
+if [ "$anom" != zero ]; then
     with="with climatology $computed"
 fi
 echo "<div class=\"bijschrift\">$last$nday ${month}s of $name observations at $station$ending $with"
