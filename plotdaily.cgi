@@ -11,7 +11,7 @@ echo
 . ./getargs.cgi
 NPERYEAR="$FORM_NPERYEAR"
 if [ $EMAIL = oldenborgh@knmi.nl ]; then
-    lwrite=true
+    lwrite=false # true
 fi
 
 TYPE="$FORM_TYPE"
