@@ -13,7 +13,8 @@ if [ "${NPERYEAR:-12}" = '12' ]; then
 <div class="menulink">View last 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=12&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">1</a>, 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=60&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">5</a>, 
-<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=120&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">10</a>
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=120&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">10</a>,
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=${NPERYEAR:-12}">N</a>
 years</div>
 EOF
 elif [ "${NPERYEAR:-12}" -ge 360 ]; then
@@ -21,7 +22,8 @@ elif [ "${NPERYEAR:-12}" -ge 360 ]; then
 <div class="menulink">View last 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=30&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">30</a>, 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=90&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">90</a>, 
-<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=366&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">366</a>
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=365&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">365</a>,
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=${NPERYEAR:-12}">N</a>
 days</div>
 EOF
 elif [ "${NPERYEAR#-}" = 1 ]; then
@@ -29,7 +31,8 @@ elif [ "${NPERYEAR#-}" = 1 ]; then
 <div class="menulink">View last 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=10&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">10</a>, 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=20&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">20</a>,
-<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=50&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">50</a>
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=50&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}">50</a>,
+<a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=${NPERYEAR:-12}">N</a>
 years</div>
 EOF
 fi

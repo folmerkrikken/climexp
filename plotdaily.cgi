@@ -9,21 +9,69 @@ echo
 echo
 
 . ./getargs.cgi
+NPERYEAR="$FORM_NPERYEAR"
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
+    lwrite=true
+fi
+
 TYPE="$FORM_TYPE"
 WMO="$FORM_WMO"
 STATION="$FORM_STATION"
 station=`echo "$STATION" | tr '_' ' '`
 NAME="$FORM_NAME"
 name=`echo "$NAME" | tr '_' ' '`
+if [ ! -s ./data/$TYPE$WMO.dat ]; then
+    . ./myvinkhead.cgi "Error" "Cannot find file"
+    echo "Cannot find file $TYPE$WMO"
+    . ./myvinkfoot.cgi
+    exit
+fi
+
+. ./nosearchengine.cgi
+. ./nperyear2timescale.cgi
+. ./myvinkhead.cgi "$last$nday ${month}s of $station $name" "" "noindex,nofollow"
+
+# arguments trump remembered values
 nday="$FORM_nday"
-NPERYEAR="$FORM_NPERYEAR"
-if [ -n "$FORM_mo" -a "${FORM_mo#0}" = "$FORM_mo" ]; then
-    [ $FORM_mo -le 9 ] && FORM_mo=0$FORM_mo
+yr=$FORM_yr
+mo=$FORM_mo
+dy=$FORM_dy
+cdf=$FORM_cdf
+anom=$FORM_anom
+climyear1=$FORM_climyear1
+climyear2=$FORM_climyear2
+if [ "$lwrite" = true ]; then
+    echo "After argument processing nday=$nday<br>"
 fi
-if [ -n "$FORM_dy" -a "${FORM_dy#0}" = "$FORM_dy" ]; then
-    [ $FORM_dy -le 9 ] && FORM_dy=0$FORM_dy
+
+if [ $EMAIL != someone@somewhere ]; then
+    def=prefs/$EMAIL.plotdaily.$NPERYEAR
+    if [ -f $def ]; then
+        eval `egrep '^FORM_[a-z0-9]*=[a-zA-Z]*[-+0-9.%]*;$' $def`
+    fi
 fi
-enddate="$FORM_yr$FORM_mo$FORM_dy"
+
+[ -z "$nday" ] && nday="$FORM_nday"
+[ -z "$yr" ] && yr=$FORM_yr
+[ -z "$mo" ] && mo=$FORM_mo
+[ -z "$dy" ] && dy=$FORM_dy
+[ -z "$cdf" ] && cdf=$FORM_cdf
+[ -z "$anom" ] && anom=$FORM_anom
+[ -z "$climyear1" ] && climyear1=$FORM_climyear1
+[ -z "$climyear2" ] && climyear2=$FORM_climyear2
+if [ "$lwrite" = true ]; then
+    echo "After remembering last time nday=$nday<br>"
+fi
+
+eval `./bin/getunits ./data/$TYPE$WMO.dat`
+[ -z "$nday" ] && nday=$NPERYEAR
+if [ -n "$mo" -a "${mo#0}" = "$mo" ]; then
+    [ $mo -le 9 ] && mo=0$mo
+fi
+if [ -n "$dy" -a "${dy#0}" = "$dy" ]; then
+    [ $dy -le 9 ] && dy=0$dy
+fi
+enddate="$yr$mo$dy"
 if [ -z "$enddate" ]; then
     enddate=last
     last="Last "
@@ -31,9 +79,6 @@ else
     ending=" ending at $enddate"
 fi
 
-. ./nosearchengine.cgi
-. ./nperyear2timescale.cgi
-. ./myvinkhead.cgi "$last$nday ${month}s of $station $name" "" "noindex,nofollow"
 
 if [ -n "$FORM_climyear1" -a -z "$FORM_climyear2" ]; then
     echo "Error: provide begin and end year of reference period"
@@ -56,36 +101,36 @@ else
 fi
 
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
-###echo "./bin/getunits ./data/$TYPE$WMO.dat<br>"
-###echo "NEWUNITS=$NEWUNITS<br>"
 root=data/plot${nday}last$TYPE$WMO$KIND${FORM_climyear1}${FORM_climyear2}_$enddate
-if [ $FORM_anom = zero ]; then
-    anom=anom
+if [ $anom = zero ]; then
+    anomarg=anom
 fi
-if [ -z "$FORM_cdf" ]; then
+if [ -z "$cdf" ]; then
     if [ "$NEWUNITS" = "mm/day" -o "$TYPE" = p ]; then
-        FORM_cdf=on
+        cdf=on
     else
-        FORM_cdf=off
+        cdf=off
     fi
 fi
-if [ $FORM_cdf = on ]; then
-    cdf=cdf
+if [ $cdf = on ]; then
+    cdfarg=cdf
 else
-    cdf=""
+    cdfarg=""
 fi
 
-echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $beginend $anom" >> log/log
-(./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdf $beginend $anom > $root.txt) 2>&1
-lastdate=`tail -n 1 $root.txt | cut -b 1-8`
-[ -z "$FORM_yr" ] && FORM_yr=`echo "$lastdate" | cut -b 1-4`
-[ -z "$FORM_mo" ] && FORM_mo=`echo "$lastdate" | cut -b 5-6`
-[ -z "$FORM_dy" ] && FORM_dy=`echo "$lastdate" | cut -b 7-8`
+echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdfarg $beginend $anomarg" >> log/log
+(./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdfarg $beginend $anomarg > $root.txt) 2>&1
+lastdate=`grep '[0-9]' $root.txt | tail -n 1 | cut -b 1-8`
+[ -z "$yr" ] && yr=`echo "$lastdate" | cut -b 1-4`
+[ -z "$mo" ] && mo=`echo "$lastdate" | cut -b 5-6`
+[ -z "$dy" ] && dy=`echo "$lastdate" | cut -b 7-8`
 lastdate=$((lastdate+1))
-firstdate=`fgrep -v '#' $root.txt | head -n 1 | cut -b 1-8`
+firstdate=`fgrep -v '#' $root.txt | grep '[0-9]' | head -n 1 | cut -b 1-8`
 ###echo firstdate,lastdate = $firstdate,$lastdate
-
-echo "<div class=\"bijschrift\">$last$nday ${month}s of $name observations at $station$ending with climatology $computed"
+if [ $anom != zero ]; then
+    with="with climatology $computed"
+fi
+echo "<div class=\"bijschrift\">$last$nday ${month}s of $name observations at $station$ending $with"
 echo "(<a href=\"$root.eps\">eps</a>, <a href="ps2pdf.cgi?file=$root.eps">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
 if [ "$NPERYEAR" -ge 360 ]; then
     timefmt="'%Y%m%d'"
@@ -130,15 +175,28 @@ pngfile="./$root.png"
 getpngwidth
 echo "<center><img src=\"$pngfile\" alt=\"last $nday ${months}s of $name at $station\" width="$halfwidth" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
-if [ $FORM_cdf = on ]; then
+if [ "$cdf" = on ]; then
     cdf_checked=checked
 else
     cdf_unchecked=checked
 fi
-if [ $FORM_anom = zero ]; then
+if [ "$anom" = zero ]; then
     zero_checked=checked
 else
     range_checked=checked
+fi
+
+if [ $EMAIL != someone@somewhere ]; then
+    cat > $def <<EOF
+FORM_nday=$nday;
+FORM_yr=$yr;
+FORM_mo=$mo;
+FORM_dy=$dy;
+FORM_cdf=$cdf;
+FORM_anom=$anom;
+FORM_climyear1=$climyear1;
+FORM_climyear2=$climyear2;
+EOF
 fi
 
 cat <<EOF
@@ -154,13 +212,13 @@ cat <<EOF
 <tr><td>Replot: 
 <td><input type="$number" min="1" max="1000" step=1 name="nday" $textsize3 value="$nday">
 ${month}s with end date
-<input type="$number" min="1" max="2400" step=1 name="yr" $textsize4 value="$FORM_yr">
+<input type="$number" min="1" max="2400" step=1 name="yr" $textsize4 value="$yr">
 EOF
 if [ ${NPERYEAR:-12} -gt 1 ]; then
-    echo "<input type="$number" min="1" max="12" step=1 name="mo" $textsize2 value="$FORM_mo">"
+    echo "<input type="$number" min="1" max="12" step=1 name="mo" $textsize2 value="$mo">"
 fi
 if [ ${NPERYEAR:-12} -gt 12 ]; then
-    echo "<input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$FORM_dy">"
+    echo "<input type="$number" min="1" max="31" step=1 name="dy" $textsize2 value="$dy">"
 fi
 cat <<EOF
 <tr><td>Plot:
@@ -170,7 +228,7 @@ cat <<EOF
 <tr><td>Compare with:
 <td>
 <input type=radio class=formradio name="anom" value="range" $range_checked>climatology
-<input type="$number" min="1" max="2400" step=1 name="climyear1" $textsize4 value="$FORM_climyear1">-<input type="$number" min="1" max="2400" step=1 name="climyear2" $textsize4 value="$FORM_climyear2">
+<input type="$number" min="1" max="2400" step=1 name="climyear1" $textsize4 value="$climyear1">-<input type="$number" min="1" max="2400" step=1 name="climyear2" $textsize4 value="$climyear2">
 <br>
 <input type=radio class=formradio name="anom" value="zero" $zero_checked>zero, data are already anomalies
 <tr><td>
