@@ -53,9 +53,6 @@ say lon1' 'lon2' 'lat1' 'lat2
 'open null'
 'set lon 'lon1' 'lon2
 'set lat 'lat1' 'lat2
-if ( lat2-lat1 < 41 )
-  'set mpdset hires'
-endif
 'set clevs 0'
 # black map lines
 'set map 1'

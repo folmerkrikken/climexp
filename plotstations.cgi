@@ -1,7 +1,12 @@
 #!/bin/sh
 . ./init.cgi
-if [ "$id" = oldenbor@knmi.nl ]; then
-    lwrite=true
+. ./getargs.cgi
+# check email address
+. ./checkemail.cgi
+export DIR=`pwd`
+
+if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
+    lwrite=true # false
 fi
 
 hiresmap=true
@@ -30,10 +35,6 @@ if [ -z "$plotlist" ]; then
   echo
 
   # to find netpbm on MacOS X
-  export DIR=`pwd`
-  . ./getargs.cgi
-  # check email address
-  . ./checkemail.cgi
   # fix title...
   FORM_title=`echo "$FORM_title" | sed -e 's/with /\\\\with /'`
   title=`echo "$FORM_title" | sed -e 's/\\\\/ /'`
@@ -61,26 +62,26 @@ fi
 
 if [ "$FORM_col" = colour -o "$FORM_col" = flipcolour -o \
 "$FORM_col" = color -o "$FORM_col" = flipcolor ]; then
-sortsig="-r"
-sortval=""
+    sortsig="-r"
+    sortval=""
 else
-sortsig=""
-sortval="-r"
+    sortsig=""
+    sortval="-r"
 fi
 if [ "$FORM_var" = sign ]; then
-# sort with the smallest values at the end so that they come out on top
-head -1 $plotlist > /tmp/plotstat$$
-tail -n +2 $plotlist | sort -g -k 5 $sortsig >> /tmp/plotstat$$
-mv /tmp/plotstat$$ $plotlist
+    # sort with the smallest values at the end so that they come out on top
+    head -1 $plotlist > /tmp/plotstat$$
+    tail -n +2 $plotlist | sort -g -k 5 $sortsig >> /tmp/plotstat$$
+    mv /tmp/plotstat$$ $plotlist
 else
-# sort with the largest absolute values at the end
-head -1 $plotlist > /tmp/plotstat$$
-tail -n +2 $plotlist \
-| sed -e 's/^ *\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *-\(.*\)/@\1 \2 \3 \4/' \
-| sort -g -k 4 $sortval \
-| sed -e 's/^@\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *\(.*\)/\1 \2 \3 -\4/' \
->> /tmp/plotstat$$
-mv /tmp/plotstat$$ $plotlist
+    # sort with the largest absolute values at the end
+    head -1 $plotlist > /tmp/plotstat$$
+    tail -n +2 $plotlist \
+    | sed -e 's/^ *\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *-\(.*\)/@\1 \2 \3 \4/' \
+    | sort -g -k 4 $sortval \
+    | sed -e 's/^@\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *\([^ ][^ ]*\)  *\(.*\)/\1 \2 \3 -\4/' \
+    >> /tmp/plotstat$$
+    mv /tmp/plotstat$$ $plotlist
 fi
 
 if [ -z "$FORM_notitleonplot" ]; then
@@ -92,6 +93,16 @@ if [ -n "$FORM_nogrid" ]; then
   grid="set grid off"
 else
   grid="set grid on"
+fi
+line=`head -1 $plotlist`
+FORM_lon1=`echo $line | awk '{print $2}'`
+FORM_lon2=`echo $line | awk '{print $3}'`
+FORM_lat1=`echo $line | awk '{print $4}'`
+FORM_lat2=`echo $line | awk '{print $5}'`
+. ./setmap.cgi
+if [ -n "$FORM_nopoli" ]; then
+    grid="$grid
+set poli off"
 fi
 
 forbidden='!`;&|'
@@ -124,6 +135,7 @@ FORM_cmax=$cmax;
 FORM_greycut=$FORM_greycut;
 FORM_mproj=$mproj;
 FORM_nogrid=$FORM_nogrid;
+FORM_nopoli=$FORM_nopoli;
 FORM_nocbar=$FORM_nocbar;
 FORM_notitleonplot=$FORM_notitleonplot;
 FORM_xlint=$FORM_xlint;

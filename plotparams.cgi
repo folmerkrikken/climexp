@@ -59,6 +59,9 @@ if [ $EMAIL != someone@somewhere ]; then
     if [ -n "$FORM_nogrid" ]; then
         nogrid_checked=checked
     fi
+    if [ -n "$FORM_nopoli" ]; then
+        nopoli_checked=checked
+    fi
 fi # nonimous user?
 
 # generate form
@@ -117,9 +120,10 @@ make grey when P><input type="text" class="forminput" name="greycut" size="2" va
 </select> projection
 <td><a href="javascript:pop_page('help/maptype.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a>
 <tr><td>Plot options:<td>
-<input type="checkbox" class="formcheck" name="nocbar" $nocbar_checked>no legend&nbsp;&nbsp;
-<input type="checkbox" class="formcheck" name="notitleonplot" $notitleonplot_checked>no title on plot,&nbsp;&nbsp;
-<input type="checkbox" class="formcheck" name="nogrid" $nogrid_checked>no grid
+<input type="checkbox" class="formcheck" name="nocbar" $nocbar_checked>no legend,
+<input type="checkbox" class="formcheck" name="notitleonplot" $notitleonplot_checked>no title on plot,
+<input type="checkbox" class="formcheck" name="nogrid" $nogrid_checked>no grid,
+<input type="checkbox" class="formcheck" name="nopoli" $nopoli_checked>no political boundaries
 <td><a href="javascript:pop_page('help/plotoptions.shtml',284,450)"><img src="images/info-i.gif" alt="help" border=\"0\"></a>
 </td></tr><tr><td></td><td>
 label distance <input type="$number" class="forminput" name="xlint" value="$FORM_xlint" $textsize2>&times;<input type="$number" class="forminput" name="ylint" value="$FORM_ylint" $textsize2>&deg;
