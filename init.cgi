@@ -11,7 +11,7 @@ if [ -z "$init_done" ]; then
         maxload=20
     else
         load=`ps axuw | egrep -c '\.cgi$'`
-        maxload=7 # 1 is the grep, we have 4 cores
+        maxload=9 # 1 is the grep, we have 4 cores
     fi
     if [ ${load:-0} -gt $maxload -a `uname` != Darwin ]; then
         echo 
