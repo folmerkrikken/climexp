@@ -468,7 +468,7 @@ prism_tdmean*) ext=${FORM_field#prism_tdmean};file=PRISMData/tdmean_prism$ext.nc
 set lat 24 50';;
 
 scpdsi) file=CRUData/scPDSI.cru.3.24.bams.2016.GLOBAL.1901.2015.nc;kindname="CRU";climfield="scPDSI 3.24";;
-scpdsi_europe) file=CRUData/unknown.nc;kindname="CRU";climfield="scPDSI";;
+scpdsi_europe) file=CRUData/scpdsi_Europe_IJC.nc;kindname="CRU";climfield="scPDSI";;
 scpdsi_alpine) file=CRUData/scpdsi_alpine.ctl;kindname="CRU";climfield="scPDSI";map='set lon 4 19
 set lat 43 49
 set mpdset hires';;
