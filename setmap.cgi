@@ -13,7 +13,11 @@ else
     mlon=5
 fi
 [ $dlat -lt 0 ] && dlat=$((0 - $dlat))
-[ "$lwrite" = true ] && echo "dlat,mlon = $dlat,$mlon<br>"
+if [ "$lwrite" = true ]; then
+    echo "lat1,lat2 = $FORM_lat1,$FORM_lat2<br>"
+    echo "lon1,lon2 = $FORM_lon1,$FORM_lon2<br>"
+    echo "dlat,mlon = $dlat,$mlon<br>"
+fi
 if [ $dlat -lt 39 ]; then
     if [ $mlon -lt 0 -o \( $mlon -gt 180 -a $mlon -lt 360 \) ]; then
         [ "$lwrite" = true ] && echo "dlat -lt 39, WH, hence hires map<br>"
