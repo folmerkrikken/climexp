@@ -10,7 +10,7 @@ export DIR=`pwd`
 . ./checkemail.cgi
 # off-limits for robots
 . ./nosearchengine.cgi
-if [ "$EMAIL" = oldenbor@knmi.nl ]; then
+if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
    lwrite=false # true
 fi
 

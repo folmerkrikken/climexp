@@ -105,6 +105,12 @@ fi
 # GO
 . ./myvinkhead.cgi "Compute mean, s.d., or extremes" "$kindname $climfield" "noindex,nofollow"
 
+if [ "$lwrite" = true ]; then
+    echo '<pre>'
+    ./bin/getunits.sh $file
+    echo '</pre>'
+    echo "UNITS,NEWUNITS=$UNITS,$NEWUNITS<br>"
+fi
 cat <<EOF
 <form action="getmomentsfield.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">

@@ -20,7 +20,7 @@ if [ -z "$ROBOT" ]; then
   echo `date` "$EMAIL ($REMOTE_ADDR) $FORM_field" >> log/log
 fi
 if [ $EMAIL = oldenborgh@knmi.nl ]; then
-    export lwrite=false
+    export lwrite=false # true
 fi
 
 # start real work
