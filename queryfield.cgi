@@ -456,16 +456,16 @@ set lat 30 75';;
 ensembles_025_elev) file=ENSEMBLES/elev_0.25deg_reg_v4.0.nc;kindname="E-OBS 4.0";climfield="elev";NPERYEAR=0;map='set lon -30 50
 set lat 30 75';;
 
-prism_ppt*) ext=${FORM_field#prism_ppt};file=PRISMData/ppt_prism$ext.nc;kindname="PRISM";climfield="prcp";flipcolor=11;map='set lon -125 -66
-set lat 24 50';;
-prism_tmax*) ext=${FORM_field#prism_tmax};file=PRISMData/tmax_prism$ext.nc;kindname="PRISM";climfield="Tmax";map='set lon -125 -66
-set lat 24 50';;
-prism_tmin*) ext=${FORM_field#prism_tmin};file=PRISMData/tmin_prism$ext.nc;kindname="PRISM";climfield="Tmin";map='set lon -125 -66
-set lat 24 50';;
-prism_tmean*) ext=${FORM_field#prism_tmean};file=PRISMData/tmean_prism$ext.nc;kindname="PRISM";climfield="temperature";map='set lon -125 -66
-set lat 24 50';;
-prism_tdmean*) ext=${FORM_field#prism_tdmean};file=PRISMData/tdmean_prism$ext.nc;kindname="PRISM";climfield="dew point";map='set lon -125 -66
-set lat 24 50';;
+prism_ppt*) ext=${FORM_field#prism_ppt};file=PRISMData/ppt_prism$ext.nc;kindname="PRISM";climfield="prcp";flipcolor=11;map='set lon -125 -66.5
+set lat 24.1 49.9';;
+prism_tmax*) ext=${FORM_field#prism_tmax};file=PRISMData/tmax_prism$ext.nc;kindname="PRISM";climfield="Tmax";map='set lon -125 -66.5
+set lat 24.1 49.9';;
+prism_tmin*) ext=${FORM_field#prism_tmin};file=PRISMData/tmin_prism$ext.nc;kindname="PRISM";climfield="Tmin";map='set lon -125 -66.5
+set lat 24.1 49.9';;
+prism_tmean*) ext=${FORM_field#prism_tmean};file=PRISMData/tmean_prism$ext.nc;kindname="PRISM";climfield="temperature";map='set lon -125 -66.5
+set lat 24.1 49.9';;
+prism_tdmean*) ext=${FORM_field#prism_tdmean};file=PRISMData/tdmean_prism$ext.nc;kindname="PRISM";climfield="dew point";map='set lon -125 -66.5
+set lat 24.1 49.9';;
 
 scpdsi) file=CRUData/scPDSI.cru.3.24.bams.2016.GLOBAL.1901.2015.nc;kindname="CRU";climfield="scPDSI 3.24";;
 scpdsi_europe) file=CRUData/scpdsi_Europe_IJC.nc;kindname="CRU";climfield="scPDSI";;
