@@ -6,7 +6,7 @@
 export DIR=`pwd`
 
 if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
-    lwrite=true # false
+    lwrite=false # true
 fi
 
 hiresmap=true
