@@ -39,9 +39,10 @@ if [ ! -s $natvarfile ]; then
     export NCARG_ROOT=./ncl
     klaarfile=/tmp/klaar$$.txt
     ( ./ncl/bin/ncl -Q < $nclfile > $nclfile.log; echo klaar > $klaarfile) &
+    i=0
     while [ ! -s $klaarfile ]; do
         sleep 30
-        echo "Still computing... "
+        echo "Still computing $((i++)) ... "
         ls -t natvar/ | head -1 | fgrep natvar
         echo "<p>"
     done
