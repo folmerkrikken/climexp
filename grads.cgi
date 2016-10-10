@@ -632,10 +632,24 @@ elif [ "$FORM_mapformat" = png ]; then
 				else
 					pmin=${FORM_pmin:-10}
 				fi
+				c=`echo $map | fgrep -c 'set lon'`
+				if [ $c != 0 ]; then
+				    lons=`echo $map | sed -e 's/.*set lon//' -e 's/set lat.*//'`
+				    FORM_lon1=`echo $lons | awk '{print \$1}'`
+				    FORM_lon2=`echo $lons | awk '{print \$2}'`
+				fi
+				c=`echo $map | fgrep -c 'set lat'`
+				if [ $c != 0 ]; then
+				    lats=`echo $map | sed -e 's/.*set lat//' -e 's/set .*//'`
+				    FORM_lat1=`echo $lats | awk '{print \$1}'`
+				    FORM_lat2=`echo $lats | awk '{print \$2}'`
+				fi
 				if [ "$lwrite" = true ]; then
 					echo "FORM_var=$FORM_var<br>"
 					echo "x=$x<br>"
 					echo "pmin=$pmin<br>"
+                    echo "lons=$lons<br>"
+                    echo "lats=$lats<br>"
 					echo "./bin/fieldsignificance $file $i $pmin lon1 ${FORM_lon1:--180} lon2 ${FORM_lon2:-180} lat1 ${FORM_lat1:--90} lat2 ${FORM_lat2:-90} > /tmp/fieldsignificance.log"
 				fi
 				[ $pmin = 'all_lo' ] && echo '<b>Low extremes:</b><br>'
