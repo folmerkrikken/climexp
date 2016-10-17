@@ -19,9 +19,9 @@ export DIR=`pwd`
 
 # another field?
 if [ ${FORM_field:-none} != none ]; then
-# common options
+  # common options
   . $DIR/getopts.cgi
-# and go
+  # and go
   . $DIR/correlatefieldfield.cgi
   exit
 fi
@@ -40,6 +40,13 @@ if [ "$FORM_fix" = "fix1" ]; then
   FORM_fix="fix2"
 else
   FORM_fix="fix1"
+fi
+# the meaning of ave, ave2 is reversed
+echo "FORM_sum,FORM_sum2=$FORM_sum,$FORM_sum2" >> log/log
+if [ -n "$FORM_sum2" -a "$FORM_sum2" != "$FORM_sum" ]; then
+    aap=$FORM_sum2
+    FORM_sum2=$FORM_sum
+    FORM_sum=$aap
 fi
 # the meaning of index/data is reversed
 aap="$FORM_lt"
