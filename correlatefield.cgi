@@ -1,7 +1,7 @@
 #!/bin/sh
 
 lwrite=false
-if [ $EMAIL = oldenbor@knmi.nl ]; then
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
     lwrite=false # true
 fi
 
