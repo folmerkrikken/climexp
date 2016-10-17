@@ -368,6 +368,7 @@ knmi_radar_daily) file=KNMIRadarData/radar_sum.nc;kindname="KNMI radar";climfiel
 set lat 50.5 54';;
 knmi_radar_maxhourly) file=KNMIRadarData/radar_max.nc;kindname="KNMI radar";climfield="max hourly precip";flipcolor=11;NPERYEAR=366;map='set lon 3 7.5
 set lat 50.5 54';;
+imerg_daily) file=GPMData/imerg_daily.nc;kindname="IMERG";climfield=precipitation;flipcolor=11;NPERYEAR=366;;
 ssmi_1) file=NCDCData/ssmi_1.ctl;kindname="NCDC SSMI/I";climfield="precipitation";flipcolor=11;;
 hulme) file=CRUData/hulme23.ctl;kindname="CRU";climfield="precipitation";flipcolor=11;;
 hulme-nino3) file=CRUData/hulme23-nino3.ctl;kindname="CRU";climfield="precipitation - nino3";flipcolor=11;;
