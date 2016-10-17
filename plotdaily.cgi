@@ -104,6 +104,9 @@ eval `./bin/getunits ./data/$TYPE$WMO.dat`
 root=data/plot${nday}last$TYPE$WMO$KIND${FORM_climyear1}${FORM_climyear2}_$enddate
 if [ "$anom" = zero ]; then
     anomarg=anom
+    root=data/plot${nday}last$TYPE$WMO${KIND}_$enddate
+else
+    root=data/plot${nday}last$TYPE$WMO$KIND${FORM_climyear1}${FORM_climyear2}_$enddate
 fi
 if [ -z "$cdf" ]; then
     if [ "$NEWUNITS" = "mm/day" -o "$TYPE" = p ]; then
