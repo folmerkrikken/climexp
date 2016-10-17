@@ -335,7 +335,7 @@ case $var in
         climyear2=
         ;;
   tg|tg_f)
-        field=ensembles_05_tg_mo
+        field=ensembles_025_tg_mo
         name=tg_eobs
         mproj=latlon
         gxout=grfill
@@ -355,7 +355,7 @@ case $var in
         climyear2=2010
         ;;
   tn|tn_f)   
-        field=ensembles_05_tn_mo
+        field=ensembles_025_tn_mo
         name=tn_eobs
         mproj=latlon
         gxout=grfill
@@ -375,7 +375,7 @@ case $var in
         climyear2=2010
         ;;
   tx|tx_f)
-        field=ensembles_05_tx_mo
+        field=ensembles_025_tx_mo
         name=tx_eobs
         mproj=latlon
         gxout=grfill
