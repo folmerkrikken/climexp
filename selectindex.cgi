@@ -47,6 +47,9 @@ href="wipefoot.cgi?http://hadobs.metoffice.gov.uk/hadisst/" target="_new"><img s
 (1882-now, NCEP)</div>
 <td><a href="wipefoot.cgi?http://www.cpc.noaa.gov/data/indices/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>&nbsp;<td><div class="kalelink">Precipitation Ni&ntilde;o indices:  <a href="getindices.cgi?WMO=GPCCData/telecon_nino34_gpcc&STATION=Nino34_prcp_land&TYPE=i&id=$EMAIL">GPCC land </a>, <a href="getindices.cgi?WMO=NCEPData/telecon_nino34_cmorph&STATION=Nino34_prcp_sat&TYPE=i&id=$EMAIL">CMORPH satellite</a></div>
+<td><a href="help/prcp_nino_indices.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NOAAData/mei&STATION=MEI&TYPE=i&id=$EMAIL">MEI</a>
 (1950-now, NOAA/ESRL/PSD)</div>
 <td><a href="wipefoot.cgi?http://www.cdc.noaa.gov/people/klaus.wolter/MEI/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
