@@ -224,6 +224,22 @@ if [ $NPERYEAR = 12 ]; then
 EOF
 fi
 
+if [ $NPERYEAR = 1 ]; then
+cat <<EOF
+<p><div class='formheader'>Create a monthly field</div>
+<div class='formbody'>
+<form action="yearly2shorter.cgi" method="POST">
+<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+EOF
+. ./yearly2shorterform.cgi
+cat << EOF
+<tr><td colspan=2><input type="submit" class="formbutton" value="make new field"></td></tr>
+</form>
+</table>
+</div>
+EOF
+fi
+
 if [ -n "$NY" -a "$NY" != 1 -a "$splitfield" != true ]; then
   cat <<EOF
 <p><div class="formheader">Compute zonal mean</div>

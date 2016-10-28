@@ -8,6 +8,7 @@ else
 fi
 cat <<EOF
 <input type="hidden" name="EMAIL" value="$EMAIL">
+<input type="hidden" name="field" value="$FORM_field">
 <input type="hidden" name="TYPE" value="$TYPE">
 <input type="hidden" name="WMO" value="$WMO">
 <input type="hidden" name="STATION" value="$STATION">
