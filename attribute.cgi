@@ -419,7 +419,7 @@ EOF
         else
             plotvariable="position parameter"
         fi
-        echo "<div class=\"bijschrift\">Fitted points, value in $FORM_year,  $plotvariable a, a${plus}b and a${plus}2b"
+        echo "<div class=\"bijschrift\">Fitted points, value in $FORM_year,  $plotvariable &mu;, &mu;${plus}&sigma; and &mu;${plus}2&sigma;"
         echo "(<a href=\"${root}_obsplot.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_obsplot.eps.gz\">pdf</a>, <a href=\"${obsplotfile}\">raw data</a>, <a href=\"${root}_obsplot.gnuplot\">plot script</a>)</div>"
         echo "<center><img src=\"${root}_obsplot.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
     fi
@@ -477,11 +477,11 @@ pngfile=${root}.png
 getpngwidth
 echo "<div class=\"bijschrift\">$title"
 if [ $FORM_assume = 'shift' ]; then
-    echo "with the effects of $covstation linearly subtracted from the position parameter a,"
+    echo "with the effects of $covstation linearly subtracted from the position parameter &mu;,"
 elif [ $FORM_assume = 'scale' ]; then
-    echo "with the effects of $covstation scaling the position and scale parameters parameter a,b, "
+    echo "with the effects of $covstation scaling the position and scale parameters parameter &mu;,&sigma;, "
 elif [ $FORM_assume = 'both' ]; then
-    echo "with the effects of $covstation linearly subtracted from the position parameter a and independently from the scale parameter b,"
+    echo "with the effects of $covstation linearly subtracted from the position parameter &mu; and independently from the scale parameter &sigma;,"
 else
     echo "using an unknown assumption,"
 fi
