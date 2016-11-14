@@ -32,6 +32,9 @@ else
     period=" (${FORM_climyear1}:${FORM_climyear2})"
     beginend="begin ${FORM_climyear1} end ${FORM_climyear2}"
 fi
+name_=`echo $name | tr "_" " "`
+station_=`echo $station | tr "_" " "`
+
 if [ ${NPERYEAR:-12} -gt 1 ]; then
 	startstop=./data/$TYPE${WMO}_${FORM_climyear1}_${FORM_climyear2}.startstop
     if [ ! -s $startstop -o ! -s ${base}_yr.plt -o ${base}_yr.plt -ot ./data/$TYPE$WMO.dat ]; then
@@ -85,7 +88,7 @@ plot \
  "./${base}_yr.plt" using 1:4 notitle with steps lt 2 lw 2,\
  "./${base}_yr.plt" using 1:6 notitle with steps lt 2 lw 2,\
  "./${base}_yr.plt" using 1:7 notitle with steps lt 2 lw 2,\
-"./${base}_yr.plt" using 1:2 title "mean $NAME $station$period" w steps lt 1 lw 4
+"./${base}_yr.plt" using 1:2 title "mean $name_ $station_$period" w steps lt 1 lw 4
 set term png $gnuplot_png_font_hires
 set out "./${base}_yr.png"
 replot
@@ -116,7 +119,7 @@ set ylabel "$ylabel"
 set term postscript epsf color solid
 set zeroaxis
 set output "./${base}a.eps"
-plot "./${base}a.plt" title "$NAME $station anomalies$period" with steps
+plot "./${base}a.plt" title "$name_ $station_ anomalies$period" with steps
 set term png $gnuplot_png_font_hires
 set out "./${base}a.png"
 replot
@@ -140,7 +143,7 @@ EOF
 (<a href="${base}a.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=${base}a.eps.gz">pdf</a>,
 <a href="${base}a.txt">raw data</a>, 
 <a href="dat2nc.cgi?datafile=${datafile}&type=$TYPE&station=$STATION&id=$EMAIL">netcdf</a>,
-<a href="analyse_anomaly.cgi?datafile=$datafile&STATION=${STATION}_anomalies&TYPE=$TYPE&id=$EMAIL">analyse this time series)</a></div>
+<a href="analyse_anomaly.cgi?datafile=$datafile&STATION=${STATION}_anomalies&TYPE=$TYPE&id=$EMAIL">analyse this time series</a>)</a></div>
 <center>
 <img src="${base}a.png" alt="anomalies" width="$halfwidth" border=0 class="realimage" hspace=0 vspace=0>
 </center>
