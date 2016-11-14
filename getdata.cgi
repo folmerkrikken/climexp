@@ -281,6 +281,8 @@ if [ -s $firstfile ]; then
   if [ \( ! -s $DIR/data/$TYPE$WMO.png \) -o \( ! -s $DIR/data/$TYPE$WMO.eps.gz \) -o $DIR/data/$TYPE$WMO.png -ot $DIR/data/$TYPE$WMO.dat ]; then
     wmo_=`echo $WMO | tr '_' ' '`
     var_=`echo $VAR | tr '_' ' '`
+    name_=`echo $NAME | tr '_' ' '`
+    station_=`echo $station | tr '_' ' '`
     ./bin/gnuplot << EOF
 $gnuplot_init
 set xzeroaxis
@@ -288,7 +290,7 @@ set size .7057,.4
 set term postscript epsf color solid
 set output "$DIR/data/$TYPE$WMO.eps"
 set ylabel "$var_ $plotunits"
-plot "$DIR/data/$TYPE$WMO.txt" title "$NAME $station ($wmo_)" with steps
+plot "$DIR/data/$TYPE$WMO.txt" title "$name_ $station_ ($wmo_)" with steps
 set term png $gnuplot_png_font_hires
 set out "$DIR/data/$TYPE$WMO.png"
 replot
