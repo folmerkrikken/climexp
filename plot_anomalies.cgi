@@ -143,7 +143,7 @@ EOF
 (<a href="${base}a.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=${base}a.eps.gz">pdf</a>,
 <a href="${base}a.txt">raw data</a>, 
 <a href="dat2nc.cgi?datafile=${datafile}&type=$TYPE&station=$STATION&id=$EMAIL">netcdf</a>,
-<a href="analyse_anomaly.cgi?datafile=$datafile&STATION=${STATION}_anomalies&TYPE=$TYPE&id=$EMAIL">analyse this time series</a>)</a></div>
+<a href="analyse_anomaly.cgi?datafile=$datafile&STATION=${STATION}_anomalies&TYPE=$TYPE&id=$EMAIL">analyse this time series</a>)</div>
 <center>
 <img src="${base}a.png" alt="anomalies" width="$halfwidth" border=0 class="realimage" hspace=0 vspace=0>
 </center>
