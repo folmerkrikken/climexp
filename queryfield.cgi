@@ -1000,6 +1000,10 @@ erai_sp_daily) file=ERA-interim/erai_sp_daily.nc;kindname="ERA-int";climfield="S
 erai_slp_daily_e) file=ERA-interim/erai_msl_daily_extended.nc;kindname="ERA-int+";climfield="MSL";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_z500_daily) file=ERA-interim/erai_z500_daily.nc;kindname="ERA-int";climfield="Z500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_z500_daily_e) file=ERA-interim/erai_z500_daily_extended.nc;kindname="ERA-int+";climfield="Z500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_t500_daily) file=ERA-interim/erai_t500_daily.nc;kindname="ERA-int";climfield="t500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_t500_daily_e) file=ERA-interim/erai_t500_daily_extended.nc;kindname="ERA-int+";climfield="t500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_q500_daily) file=ERA-interim/erai_q500_daily.nc;kindname="ERA-int";climfield="q500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_q500_daily_e) file=ERA-interim/erai_q500_daily_extended.nc;kindname="ERA-int+";climfield="q500";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmin_daily) file=ERA-interim/erai_tmin_daily.nc;kindname="ERA-int";climfield="Tmin";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmin_daily_e) file=ERA-interim/erai_tmin_daily_extended.nc;kindname="ERA-int+";climfield="Tmin";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmax_daily) file=ERA-interim/erai_tmax_daily.nc;kindname="ERA-int";climfield="Tmax";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
