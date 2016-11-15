@@ -112,6 +112,11 @@ while [ $ok != true ]; do # sometimes the most recent series does not have data.
     else
         f=./data/$TYPE$WMO.dat
     fi
+    if [ -z "$f" -o ! -s "$f" ]; then
+        echo "Can not find any valid data, giving up."
+        . ./myvinkfoot.cgi
+        exit
+    fi
     if [ $NPERYEAR -gt 12 ]; then
         eval `./bin/getunits.sh $f`
     else
