@@ -103,7 +103,7 @@ if [ -n "$FORM_plotsum" ]; then
 fi
 # anomalies requested?
 if [ -n "$FORM_plotanomaly" ]; then
-	clim_file=${FORM_field}_clim$FORM_climyear1${FORM_climyear2}_${FORM_plotsum:-1}.ctl
+	clim_file=${FORM_field}_clim$FORM_climyear1${FORM_climyear2}_${FORM_plotsum:-1}.nc
 	if [ ${clim_file#data} = $clim_file ]; then
 		clim_file=data/$clim_file
 	fi
@@ -121,11 +121,11 @@ if [ -n "$FORM_plotanomaly" ]; then
 			. ./myvinkfoot.cgi
 			exit -1
 		fi
-		echo "<p><a href=grads2nc.cgi?file=$clim_file&id=$EMAIL>Climatology</a> is ready, calling Grads..."
+		echo "<p><a href=$clim_file>Climatology</a> is ready, calling Grads..."
     else
-		echo "<p>Using <a href=grads2nc.cgi?file=$clim_file&id=$EMAIL>climatology</a>."
+		echo "<p>Using <a href=$clim_file>climatology</a>."
 	fi
-	clim="open $clim_file
+	clim="sdfopen $clim_file
 run clim ${var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $FORM_climyear2"
 	if [ -n "$FORM_climyear1" ]; then
 	# this should be coordinated with clim.gs
