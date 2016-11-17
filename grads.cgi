@@ -6,7 +6,7 @@ if [ $EMAIL = oldenborgh@knmi.nl ]; then
 	if [ "$lwrite" = true ]; then
 		echo "Turned on debug printing<p>"
 		###set -x
-	fi
+    fi
 fi
 hiresmap=true
 if [ "$hiresmap" = true ]; then
@@ -372,6 +372,7 @@ export UDUNITS_PATH=$DIR/grads/udunits.dat
 export HOME=/tmp
 cat <<EOF > /tmp/grads$id.log
 $openfile
+$clim
 set xlopts 1 4 0.15
 set ylopts 1 4 0.15
 $setlon
@@ -381,7 +382,6 @@ $parea
 $map
 $grid
 $sum
-$clim
 $dano
 quit
 EOF
