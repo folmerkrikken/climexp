@@ -70,8 +70,18 @@ endif
 
 'set dfile 2'
 'set t 1 'nperyear
-' q dims'
+'set z 1'
+'q dims'
 say result
+line=sublin(result,4)
+varying=subwrd(line,3)
+if ( varying = 'varying' )
+  z1=subwrd(line,11)
+  z2=subwrd(line,13)
+  if ( z1 > z2 )
+    'set z 'z2' 'z1
+  endif
+endif
 if ( yr1 > 0 | yr2 > 0 )
     say 'define clim'yy1 yy2' = 'field'.2'
     'define clim'yy1 yy2' = 'field'.2'
@@ -80,3 +90,4 @@ else
     'define clim = 'field'.2'
 endif
 'set dfile 1'
+'set z 1'
