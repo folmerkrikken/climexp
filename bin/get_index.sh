@@ -59,7 +59,7 @@ else
                 do
                     [ "$splitfield" = true ] && echo "`basename $ensfile .nc`<p>" 1>&2
                     ensargs=`echo $* | sed -e "s@$file@$ensfile@"`
-                    echo "$DIR/bin/$PROG $ensargs >> $ensout.tmp$$" >> /tmp/aap
+                    [ "$lwrite" = true ] && echo "$DIR/bin/$PROG $ensargs >> $ensout.tmp$$" >> /tmp/aap
                     $DIR/bin/$PROG $ensargs >> $ensout.tmp$$
                     c=`fgrep -v '#' $ensout.tmp$$ | wc -l`
                     if [ $c = 0 ]; then
@@ -99,7 +99,7 @@ else
         else
             ensfile=$allfiles
         fi
-        echo "ensfile=$ensfile" >> /tmp/aap
+        [ "$lwrite" = true ] && echo "ensfile=$ensfile" >> /tmp/aap
 		if [ $((i%100)) = 0 -a \( -s "$ensfile" -o -s "data/$ensfile" \) ]; then
 		    echo "Processing $i...<p>" 1>&2
 		fi
