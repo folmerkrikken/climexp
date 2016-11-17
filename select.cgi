@@ -96,6 +96,7 @@ fi
 metadata=./metadata/$file.txt
 metadir=`dirname $metadata`
 [ ! -d $metadir ] && mkdir -p $metadir
+###echo "metadata.eval=$metadata.eval<br>"
 if [ -f $metadata.eval ]; then
   eval `cat $metadata.eval | egrep '(^NPERYEAR=|^VAR=|^UNITS=|^NEWUNITS=|^N.=)[-_" ^*/a-zA-Z0-9]*$'`
 else
@@ -163,12 +164,23 @@ cat <<EOF
 <table border=0 cellspacing=0 cellpadding=0>
 <tr><td>
 EOF
-. $DIR/daily2longerform.cgi
+. ./daily2longerform.cgi
 cat <<EOF
 <input type="submit" class="formbutton" value="Make new field">
 <input type="hidden" name="field" value="$FORM_field">
 </td></tr>
 </table>
+</div>
+</form>
+
+<form action="averagefieldspace.cgi" method="POST">
+<div class="formheader"><a href="javascript:pop_page('help/lowerspatialresolutionfield.shtml',568,450)"><img src="images/info-i.gif" align="right" alt="help" border="0"></a>Create a field with lower spatial resolution</div>
+<div class="formbody">
+EOF
+. ./averagefieldspaceform.cgi
+cat <<EOF
+<input type="submit" class="formbutton" value="Make new field">
+<input type="hidden" name="field" value="$FORM_field">
 </div>
 </form>
 EOF
