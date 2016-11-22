@@ -394,11 +394,11 @@ rbcols2='set rbcols 70 59 56 52 58 62 57 60 53 61 54 64'
 rbcols3='set rbcols 90 79 76 72 78 82 77 80 73 81 74 84'
 else
 if ( flipped = 12 ) 
-say 'grey - blue colourbar'
+say 'new grey - blue colourbar'
 rbcols1='set rbcols 50 21 22 23 24 25 26'
 else
 if ( flipped = 14 ) 
-say 'grey - blue - red colourbar'
+say 'new grey - blue - red colourbar'
 rbcols1='set rbcols 50 21 22 23 24 25 26 27 28 29 30 31'
 else
 if ( flipped = 1 )
