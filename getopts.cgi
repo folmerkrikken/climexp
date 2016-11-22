@@ -35,7 +35,8 @@ elif [ "$FORM_operation" = "subtracting" ]; then
   [ -n "$FORM_sum" ]  && corrargs="$corrargs mdiff $FORM_sum"
   [ -n "$FORM_sum2" ] && corrargs="$corrargs mdiff2 $FORM_sum2"
 elif [ "${FORM_operation#ave}" != "$FORM_operation" ]; then 
-  if [ "$TYPE" = "p" -o "$TYPE" = "rh" -o "$TYPE" = "peca" -o "$TYPE" = "pa" -o "$FORM_field_type" = "Precipitation" ]; then
+  if [ "$TYPE" = "p" -o "$TYPE" = "rh" -o "$TYPE" = "peca" -o "$TYPE" = "pa" \
+    -o "$FORM_field_type" = "Precipitation" -o "${FORM_climate%precipitation}" != "$FORM_climate" ]; then
     FORM_operation="summing"
     [ -n "$FORM_sum" ]  && corrargs="$corrargs sum $FORM_sum"
     [ -n "$FORM_sum2" ] && corrargs="$corrargs sum2 $FORM_sum2"
