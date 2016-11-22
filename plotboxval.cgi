@@ -102,7 +102,7 @@ if [ $NPERYEAR -ge 12 ]; then
         while [ $i -lt $dpm ]
         do
 	        i=$((i+1))
-	        if [ $i = $FORM_day ]; then
+	        if [ $i = "$FORM_day" ]; then
 	            echo "<option value=\"$i\" selected>$i"
 	        else
 	            echo "<option value=\"$i\">$i"
@@ -113,7 +113,9 @@ if [ $NPERYEAR -ge 12 ]; then
     if [ $NPERYEAR = 12 ]; then
         echo "<br>length of season"
     else
-        echo "<br>average over"
+        ###echo "<br>average over"
+        echo "<select class=forminput name=operation>"
+        echo "<option>averaging<option>summing</select> over"
     fi
     if [ $NPERYEAR -eq 12 ]; then
         echo "<select class=\"forminput\" name=\"sum\">"
@@ -130,7 +132,7 @@ if [ $NPERYEAR -ge 12 ]; then
         echo "<select class=\"forminput\" name=\"sum\">"
         for sum in 1 2 3 4 5 6 7 10 9 10 15 20 30 60 90 120 180 365
         do
-            if [ $sum = $FORM_sum ]; then
+            if [ "$sum" = "$FORM_sum" ]; then
                 echo "<option selected>$sum"
             else
                 echo "<option>$sum"

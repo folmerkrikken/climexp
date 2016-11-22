@@ -60,8 +60,12 @@ fi
 
 # sort the list so that the brightest colours come out on top
 
-if [ "$FORM_col" = colour -o "$FORM_col" = flipcolour -o \
-"$FORM_col" = color -o "$FORM_col" = flipcolor ]; then
+if [ "$FORM_col" = precipitation ]; then
+    sortsig="-r"
+    sortval=""
+elif [ "$FORM_col" = newcolour -o "$FORM_col" = newflipcolour -o \
+     "$FORM_col" = colour -o "$FORM_col" = flipcolour -o \
+     "$FORM_col" = color -o "$FORM_col" = flipcolor ]; then
     sortsig="-r"
     sortval=""
 else
@@ -177,7 +181,18 @@ else
   c=$cmax
   o=0
 fi
-if [ 0 = 1 ]; then
+if [ "$FORM_col" = precipitation ]; then
+val10=`echo "1.0*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val9=`echo "0.9*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val8=`echo "0.8*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val7=`echo "0.7*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val6=`echo "0.6*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val5=`echo "0.5*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val4=`echo "0.4*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val3=`echo "0.3*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val2=`echo "0.2*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+val1=`echo "0.1*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
+elif [ 0 = 1 ]; then
 val6=`echo "1.0*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
 val5=`echo "0.8*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
 val4=`echo "0.6*$c + $o" | bc -l -q | sed -e 's/0*$//' -e 's/^\./0./'`
@@ -759,6 +774,140 @@ set line 1
 draw mark 2 7 $y2 $size2
 draw string 7 $y0 +$legend2
 "
+  elif [ $FORM_col = 'newcolour' ]; then
+# coordinate with plotbox.gs ...
+    y0=0.15
+    legenda="\
+set string 1 tc
+set line 34
+draw mark 3 3 $y8 $size5
+set line 1
+draw mark 2 3 $y8 $size5
+draw string 3.25 $y0 -$val6
+set line 24
+draw mark 3 3.5 $y8 $size5
+set line 1
+draw mark 2 3.5 $y8 $size5
+draw string 3.75 $y0 -$val5
+set line 31
+draw mark 3 4 $y8 $size5
+set line 1
+draw mark 2 4 $y8 $size5
+draw string 4.25 $y0 -$val4
+set line 23
+draw mark 3 4.5 $y8 $size5
+set line 1
+draw mark 2 4.5 $y8 $size5
+draw string 4.75 $y0 -$val3
+set line 30
+draw mark 3 5 $y8 $size5
+set line 1
+draw mark 2 5 $y8 $size5
+draw string 5.25 $y0 -$val2
+set line 50
+draw mark 3 5.5 $y8 $size5
+set line 1
+draw mark 2 5.5 $y8 $size5
+draw string 5.75 $y0 +$val2
+set line 27
+draw mark 3 6 $y8 $size5
+set line 1
+draw mark 2 6 $y8 $size5
+draw string 6.25 $y0 +$val3
+set line 32
+draw mark 3 6.5 $y8 $size5
+set line 1
+draw mark 2 6.5 $y8 $size5
+draw string 6.75 $y0 +$val4
+set line 28
+draw mark 3 7 $y8 $size5
+set line 1
+draw mark 2 7 $y8 $size5
+draw string 7.25 $y0 +$val5
+set line 22
+draw mark 3 7.5 $y8 $size5
+set line 1
+draw mark 2 7.5 $y8 $size5
+draw string 7.75 $y0 +$val6
+set line 26
+draw mark 3 8 $y8 $size5
+set line 1
+draw mark 2 8 $y8 $size5
+
+set line 50
+draw mark 3 9 $y8 $size5
+set line 15
+draw mark 2 9 $y8 $size5
+set line 1
+draw string 9.25 $y0 P>${FORM_greycut}%
+"
+  elif [ $FORM_col = 'newflipcolour' ]; then
+# coordinate with plotbox.gs ...
+    y0=0.15
+    legenda="\
+set string 1 tc
+set line 26
+draw mark 3 3 $y8 $size5
+set line 1
+draw mark 2 3 $y8 $size5
+draw string 3.25 $y0 -$val6
+set line 22
+draw mark 3 3.5 $y8 $size5
+set line 1
+draw mark 2 3.5 $y8 $size5
+draw string 3.75 $y0 -$val5
+set line 28
+draw mark 3 4 $y8 $size5
+set line 1
+draw mark 2 4 $y8 $size5
+draw string 4.25 $y0 -$val4
+set line 32
+draw mark 3 4.5 $y8 $size5
+set line 1
+draw mark 2 4.5 $y8 $size5
+draw string 4.75 $y0 -$val3
+set line 27
+draw mark 3 5 $y8 $size5
+set line 1
+draw mark 2 5 $y8 $size5
+draw string 5.25 $y0 -$val2
+set line 15
+draw mark 3 5.5 $y8 $size5
+set line 1
+draw mark 2 5.5 $y8 $size5
+draw string 5.75 $y0 +$val2
+set line 30
+draw mark 3 6 $y8 $size5
+set line 1
+draw mark 2 6 $y8 $size5
+draw string 6.25 $y0 +$val3
+set line 23
+draw mark 3 6.5 $y8 $size5
+set line 1
+draw mark 2 6.5 $y8 $size5
+draw string 6.75 $y0 +$val4
+set line 31
+draw mark 3 7 $y8 $size5
+set line 1
+draw mark 2 7 $y8 $size5
+draw string 7.25 $y0 +$val5
+set line 24
+draw mark 3 7.5 $y8 $size5
+set line 1
+draw mark 2 7.5 $y8 $size5
+draw string 7.75 $y0 +$val6
+set line 34
+draw mark 3 8 $y8 $size5
+set line 1
+draw mark 2 8 $y8 $size5
+
+set line 50
+draw mark 3 9 $y8 $size5
+set line 15
+draw mark 2 9 $y8 $size5
+set line 1
+draw string 9.25 $y0 P>${FORM_greycut}%
+"
   elif [ $FORM_col = 'colour' -o $FORM_col = color ]; then
 # coordinate with plotbox.gs ...
     y0=0.15
@@ -882,6 +1031,76 @@ set line 1
 draw mark 2 7.5 $y8 $size5
 draw string 7.75 $y0 +$val6
 set line 14
+draw mark 3 8 $y8 $size5
+set line 1
+draw mark 2 8 $y8 $size5
+
+set line 50
+draw mark 3 9 $y8 $size5
+set line 15
+draw mark 2 9 $y8 $size5
+set line 1
+draw string 9.25 $y0 P>${FORM_greycut}%
+"
+  elif [ $FORM_col = 'precipitation' ]; then
+# coordinate with plotbox.gs ...
+    y0=0.15
+    legenda="\
+set string 1 tc
+set line 1
+draw mark 2 2.5 $y8 $size5
+draw string 2.75 $y0 0
+set line 21
+draw mark 3 3 $y8 $size5
+set line 1
+draw mark 2 3 $y8 $size5
+draw string 3.25 $y0 $val1
+set line 22
+draw mark 3 3.5 $y8 $size5
+set line 1
+draw mark 2 3.5 $y8 $size5
+draw string 3.75 $y0 $val2
+set line 23
+draw mark 3 4 $y8 $size5
+set line 1
+draw mark 2 4 $y8 $size5
+draw string 4.25 $y0 $val3
+set line 24
+draw mark 3 4.5 $y8 $size5
+set line 1
+draw mark 2 4.5 $y8 $size5
+draw string 4.75 $y0 $val4
+set line 25
+draw mark 3 5 $y8 $size5
+set line 1
+draw mark 2 5 $y8 $size5
+draw string 5.25 $y0 $val5
+set line 26
+draw mark 3 5.5 $y8 $size5
+set line 1
+draw mark 2 5.5 $y8 $size5
+draw string 5.75 $y0 $val6
+set line 27
+draw mark 3 6 $y8 $size5
+set line 1
+draw mark 2 6 $y8 $size5
+draw string 6.25 $y0 $val7
+set line 28
+draw mark 3 6.5 $y8 $size5
+set line 1
+draw mark 2 6.5 $y8 $size5
+draw string 6.75 $y0 $val8
+set line 29
+draw mark 3 7 $y8 $size5
+set line 1
+draw mark 2 7 $y8 $size5
+draw string 7.25 $y0 $val9
+set line 30
+draw mark 3 7.5 $y8 $size5
+set line 1
+draw mark 2 7.5 $y8 $size5
+draw string 7.75 $y0 $val10
+set line 31
 draw mark 3 8 $y8 $size5
 set line 1
 draw mark 2 8 $y8 $size5

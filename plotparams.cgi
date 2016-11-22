@@ -33,6 +33,9 @@ if [ $EMAIL != someone@somewhere ]; then
         flipbw)     col_flipbw="checked";;
         rb)         col_rb="checked";;
         br)         col_br="checked";;
+        newcolour)     col_newcolour="checked";;
+        newflipcolour) col_newflipcolour="checked";;
+        precipitation) col_precipitation="checked";;
         colour)     col_colour="checked";;
         flipcolour) col_flipcolour="checked";;
         color)      col_color="checked";;
@@ -91,20 +94,28 @@ cat <<EOF
 <input type="checkbox" class="formcheck" name="code" $code>station code, 
 <input type="checkbox" class="formcheck" name="name" $name>station name</td>
 </tr><tr>
+<td>Range:</td><td>
+up to <input type="text" class="forminput" name="cmax" size="4" value="${FORM_cmax:-0.6}">
+</tr><tr>
 <td>Colour:</td><td>
+<!--
 <input type="radio" class="formradio" name="col" value="bw" $col_bw>black/white
-<input type="radio" class="formradio" name="col" value="flipbw" $col_flipbw>white/black
+<input type="radio" class="formradio" name="col" value="flipbw" $col_flipbw>white/black varying sizes
 </td></tr><tr><td>&nbsp;</td><td>
+-->
 <input type="radio" class="formradio" name="col" value="rb" $col_rb>red/blue
-<input type="radio" class="formradio" name="col" value="br" $col_br>blue/red
+<input type="radio" class="formradio" name="col" value="br" $col_br>blue/red varying sizes
 </td></tr><tr><td>&nbsp;</td><td>
-<input type="radio" class="formradio" name="col" value="colour" $col_colour>rainbow (blue-red)
-<input type="radio" class="formradio" name="col" value="flipcolour" $col_flipcolour>rainbow (red-blue)
-Range: <!--input type="text" class="forminput" name="cmin" size="4" value="-0.6"-->
-to <input type="text" class="forminput" name="cmax" size="4" value="${FORM_cmax:-0.6}">
+<input type="radio" class="formradio" name="col" value="newcolour" $col_newcolour>blue-red
+<input type="radio" class="formradio" name="col" value="newflipcolour" $col_newflipcolour>red-blue varying colours
 </td></tr><tr><td>&nbsp;</td><td>
-<input type="radio" class="formradio" name="col" value="color" $col_color>rainbow (blue-red without border)
-<input type="radio" class="formradio" name="col" value="flipcolor" $col_flipcolor>rainbow (red-blue without border)
+<input type="radio" class="formradio" name="col" value="colour" $col_colour>old rainbow (blue-red)
+<input type="radio" class="formradio" name="col" value="flipcolour" $col_flipcolour>old rainbow (red-blue)
+</td></tr><tr><td>&nbsp;</td><td>
+<input type="radio" class="formradio" name="col" value="color" $col_color>old rainbow (blue-red without border)
+<input type="radio" class="formradio" name="col" value="flipcolor" $col_flipcolor>old rainbow (red-blue without border)
+</td></tr><tr><td>&nbsp;</td><td>
+<input type="radio" class="formradio" name="col" value="precipitation" $col_precipitation>grey-blue-red for precipitation
 </td></tr><tr><td>&nbsp;</td><td>
 make grey when P><input type="text" class="forminput" name="greycut" size="2" value="${FORM_greycut:-5}">%</td>
 </tr><tr>

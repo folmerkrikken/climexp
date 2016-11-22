@@ -18,8 +18,8 @@ fi
 # check email address
 . ./checkemail.cgi
 
-if [ "$EMAIL" = oldenbor@knmi.nl ]; then
-    lwrite=false # true
+if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
+    lwrite=true
 fi
 
 # real work

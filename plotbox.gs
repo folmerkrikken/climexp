@@ -12,7 +12,7 @@ function plotbox(args)
 *   arguments
 *   1 filename
 *   2 scale
-*   3 col: [flip]bw/[flip]colour
+*   3 col: [flip]bw/[flip]colour | precipitation
 *   4 greycut: value of sign in percent over which a grey mark is draw
 *   5 '1'+val/code/name: plot the name or code near the spot
 *   6 [empty=val] value (column 3) or sign (column 4)
@@ -113,7 +113,7 @@ y=subwrd(result,6)
 if ( var = sign )
   v=sig
 else
-  if ( col = flipcolor | col = flipcolour | col = br )
+  if ( col = flipcolor | col = flipcolour | col = br | col = newflipcolour )
     if ( scaletype = return )
       v=val
     else
@@ -122,138 +122,12 @@ else
   else
     v=val
   endif
-endif
-if ( col = color | col = colour | col = flipcolor | col = flipcolour )
-***  say 'var = 'var
-  if ( scaletype = return )
-    say 'return times, v = 'v
-    if ( v > 10000 )
-      linecol = 14
-    else
-      if ( v > 5000 )
-        linecol = 6
-      else
-        if ( v > 2000 )
-          linecol = 2
-        else
-          if ( v > 1000 )
-            linecol = 8
-          else
-            if ( v > 500 )
-              linecol = 12
-            else
-              if ( v > 200 )
-                  linecol = 7
-              else
-                if ( v > 100 )
-                    linecol = 10
-                else
-                  if ( v > 50 )
-                      linecol = 3
-                  else
-                    if ( v > 20 )
-                        linecol = 11
-                    else
-                      if ( v > 10 )
-                          linecol = 15
-                      else
-                          linecol = 50
-                      endif
-                    endif
-                  endif
-                endif
-              endif
-            endif
-          endif
-        endif
-      endif
-    endif
-    say 'linecol = 'linecol
-    'set line 'linecol
-  else
-    if ( var = sign )
-      if ( v < 0.001 )
-        linecol = 6
-      else
-        if ( v < 0.005 )
-          linecol = 2
-        else
-          if ( v < 0.01 )
-            linecol = 12
-          else
-            if ( v < 0.05 )
-              linecol = 7
-            else
-              if ( v < 0.1 )
-                  linecol = 15
-              else
-                  'set rgb 50 230 230 230'
-                  linecol = 50
-              endif
-            endif
-          endif
-        endif
-      endif
-      'set line 'linecol
-    else
-      if ( maxcol = 0.6 )
-        offset = 0.1
-        maxcol = 0.5
-      else
-        offset = 0
-    endif
-    if ( v > maxcol+offset )
-      linecol = 6
-      else
-        if ( v > 0.8*maxcol+offset )
-          linecol = 2
-        else
-          if ( v > 0.6*maxcol+offset )
-            linecol = 8
-          else
-            if ( v > 0.4*maxcol+offset )
-              linecol = 12
-            else
-              if ( v > 0.2*maxcol+offset )
-                linecol = 7
-              else
-                if ( v > -0.2*maxcol-offset )
-                  linecol = 15
-                else
-                  if ( v > -0.4*maxcol-offset )
-                    linecol = 10
-                  else
-                    if ( v > -0.6*maxcol-offset )
-                      linecol = 3
-                    else
-                      if ( v > -0.8*maxcol-offset )
-                        linecol = 11
-                      else
-                        if ( v > -1*maxcol-offset )
-                          linecol = 4
-                        else
-                          linecol = 14
-                        endif
-                      endif
-                    endif
-                  endif
-                endif
-              endif
-            endif
-          endif
-        endif
-      endif
-      'set line 'linecol
-      if ( sig > greycut/100 )
-***         say 'sig,cut = 'sig' 'greycut/100
-        'set rgb 50 230 230 230'
-        'set line 50'
-      endif
-    endif
+  if ( col = precipitation )
+*   only positive, map to -maxcol...maxcol
+    v=2*v-maxcol
   endif
-  size=0.5
-***  say 'v,maxcol,linecol = 'v' 'maxcol' 'linecol
-else
+endif
+if ( col = bw | col = rb | col = flipbw | col = br )
   if ( col = bw | col = flipbw )
     'set line 1'
     if ( sig > greycut/100 )
@@ -285,6 +159,208 @@ else
       exit
     endif
   endif
+else
+* colour scales
+  c15 = 15
+  c15a = 15
+  if ( col = precipitation )
+'set rgb 50 248 248 248'
+'set rgb 21 241 238 246'
+'set rgb 22 208 209 230'
+'set rgb 23 166 189 219'
+'set rgb 24 116 169 207'
+'set rgb 25 43 140 190'
+'set rgb 26 4 90 141'
+'set rgb 27 253 187 132'
+'set rgb 28 252 141 89'
+'set rgb 29 227 74 51'
+'set rgb 30 179 0 0'
+'set rgb 31 0 0 0'
+    c6 = 31
+    c2 = 30
+    c8 = 29
+    c12 = 28
+    c7 = 27
+    c15a = 26
+    c15 = 25
+    c10 = 24
+    c3 = 23
+    c11 = 22
+    c4 = 21
+    c14 = 0
+  else
+    if ( col = newcolour | col = newflipcolour )
+'set rgb 50 248 248 248'
+'set rgb 34  49  54 149'
+'set rgb 24  69 117 180'
+'set rgb 31 116 217 233'
+'set rgb 23 171 217 233'
+'set rgb 30 224 243 248'
+'set rgb 27 254 224 144'
+'set rgb 32 253 174  97'
+'set rgb 28 244 109  67'
+'set rgb 22 215  48  39'
+'set rgb 26 165   0  38'
+      c6 = 26
+      c2 = 22
+      c8 = 28
+      c12 = 32
+      c7 = 27
+      c15 = 50
+      c15a = 50
+      c10 = 30
+      c3 = 23
+      c11 = 31
+      c4 = 24
+      c14 = 34
+    else
+      c6 = 6
+      c2 = 2
+      c8 = 8
+      c12 = 12
+      c7 = 7
+      c10 = 10
+      c3 = 3
+      c11 = 11
+      c4 = 4
+      c14 = 14
+    endif
+  endif
+***say 'var = 'var', c6 = 'c6
+  if ( scaletype = return )
+    say 'return times, v = 'v
+    if ( v > 10000 )
+      linecol = c14
+    else
+      if ( v > 5000 )
+        linecol = c6
+      else
+        if ( v > 2000 )
+          linecol = c2
+        else
+          if ( v > 1000 )
+            linecol = c8
+          else
+            if ( v > 500 )
+              linecol = c12
+            else
+              if ( v > 200 )
+                  linecol = c7
+              else
+                if ( v > 100 )
+                    linecol = c10
+                else
+                  if ( v > 50 )
+                      linecol = c3
+                  else
+                    if ( v > 20 )
+                        linecol = c11
+                    else
+                      if ( v > 10 )
+                          linecol = c15
+                      else
+                          linecol = c50
+                      endif
+                    endif
+                  endif
+                endif
+              endif
+            endif
+          endif
+        endif
+      endif
+    endif
+    say 'linecol = 'linecol
+    'set line 'linecol
+  else
+    if ( var = sign )
+      if ( v < 0.001 )
+        linecol = c6
+      else
+        if ( v < 0.005 )
+          linecol = c2
+        else
+          if ( v < 0.01 )
+            linecol = c12
+          else
+            if ( v < 0.05 )
+              linecol = c7
+            else
+              if ( v < 0.1 )
+                  linecol = c15
+              else
+                  'set rgb 50 230 230 230'
+                  linecol = 50
+              endif
+            endif
+          endif
+        endif
+      endif
+      'set line 'linecol
+    else
+*     not return value or significance
+      if ( maxcol = 0.6 )
+        offset = 0.1
+        maxcol = 0.5
+      else
+        offset = 0
+      endif
+*indentation error
+    if ( v > maxcol+offset )
+      linecol = c6
+      else
+        if ( v > 0.8*maxcol+offset )
+          linecol = c2
+        else
+          if ( v > 0.6*maxcol+offset )
+            linecol = c8
+          else
+            if ( v > 0.4*maxcol+offset )
+              linecol = c12
+            else
+              if ( v > 0.2*maxcol+offset )
+                linecol = c7
+              else
+                if ( v > 0 )
+                  linecol = c15a
+                else
+                  if ( v > -0.2*maxcol-offset )
+                    linecol = c15
+                  else
+                    if ( v > -0.4*maxcol-offset )
+                      linecol = c10
+                    else
+                      if ( v > -0.6*maxcol-offset )
+                        linecol = c3
+                      else
+                        if ( v > -0.8*maxcol-offset )
+                          linecol = c11
+                        else
+                          if ( v > -1*maxcol-offset )
+                            linecol = c4
+                          else
+                            linecol = c14
+                          endif
+                        endif
+                      endif
+                    endif
+                  endif
+                endif
+              endif
+            endif
+          endif
+        endif
+      endif
+      'set line 'linecol
+      if ( sig > greycut/100 )
+***         say 'sig,cut = 'sig' 'greycut/100
+        'set rgb 50 230 230 230'
+        'set line 50'
+      endif
+    endif
+  endif
+  size=0.5
+***  say 'v,maxcol,offset,linecol = 'v' 'maxcol' 'offset' 'linecol
 endif
 
 
