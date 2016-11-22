@@ -1,0 +1,6 @@
+'set imprun grads/imprun'
+'set digsiz 0.2'
+'set dignum 2'
+'set xlopts 1 4 0.16'
+'set ylopts 1 4 0.16'
+'set prnopts %10.3e 1 0'
