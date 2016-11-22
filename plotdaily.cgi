@@ -126,36 +126,34 @@ echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate
 c=`egrep -v '^#' $root.txt | grep '[0-9]' | wc -l`
 if [ $c = 0 ] ; then
     echo "No valid output, maybe the date $enddate is beyond the end date of the series?"
-    . ./myvinkfoot.cgi
-    exit
-fi
-lastdate=`gegrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
-[ -z "$yr" ] && yr=`echo "$lastdate" | cut -b 1-4`
-[ -z "$mo" ] && mo=`echo "$lastdate" | cut -b 5-6`
-[ -z "$dy" ] && dy=`echo "$lastdate" | cut -b 7-8`
-lastdate=$((lastdate+1))
-firstdate=`fgrep -v '#' $root.txt | grep '[0-9]' | head -n 1 | cut -b 1-8`
-###echo firstdate,lastdate = $firstdate,$lastdate
-if [ "$anom" != zero ]; then
-    with="with climatology $computed"
-fi
-echo "<div class=\"bijschrift\">$last$nday ${month}s of $name observations at $station$ending $with"
-echo "(<a href=\"$root.eps\">eps</a>, <a href="ps2pdf.cgi?file=$root.eps">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
-if [ "$NPERYEAR" -ge 360 ]; then
-    timefmt="'%Y%m%d'"
 else
-    timefmt="'%Y%m'"
-fi
-if [ "$NEWUNITS" = "mm/day" -o "$VAR" = "soilw" ]; then
-    above=3
-    below=1
-else
-    above=1
-    below=3
-fi
+    lastdate=`gegrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
+    [ -z "$yr" ] && yr=`echo "$lastdate" | cut -b 1-4`
+    [ -z "$mo" ] && mo=`echo "$lastdate" | cut -b 5-6`
+    [ -z "$dy" ] && dy=`echo "$lastdate" | cut -b 7-8`
+    lastdate=$((lastdate+1))
+    firstdate=`fgrep -v '#' $root.txt | grep '[0-9]' | head -n 1 | cut -b 1-8`
+    ###echo firstdate,lastdate = $firstdate,$lastdate
+    if [ "$anom" != zero ]; then
+        with="with climatology $computed"
+    fi
+    echo "<div class=\"bijschrift\">$last$nday ${month}s of $name observations at $station$ending $with"
+    echo "(<a href=\"$root.eps\">eps</a>, <a href="ps2pdf.cgi?file=$root.eps">pdf</a>, <a href=\"$root.txt\">raw data</a>)</div>"
+    if [ "$NPERYEAR" -ge 360 ]; then
+        timefmt="'%Y%m%d'"
+    else
+        timefmt="'%Y%m'"
+    fi
+    if [ "$NEWUNITS" = "mm/day" -o "$VAR" = "soilw" ]; then
+        above=3
+        below=1
+    else
+        above=1
+        below=3
+    fi
 
-wmo_=`echo "$WMO" | tr '_' ' '`
-./bin/gnuplot << EOF
+    wmo_=`echo "$WMO" | tr '_' ' '`
+    ./bin/gnuplot << EOF
 $gnuplot_init
 set size 0.8,0.6
 set datafile missing "-999.900"
@@ -180,9 +178,10 @@ replot
 quit
 EOF
 
-pngfile="./$root.png"
-getpngwidth
-echo "<center><img src=\"$pngfile\" alt=\"last $nday ${months}s of $name at $station\" width="$halfwidth" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
+    pngfile="./$root.png"
+    getpngwidth
+    echo "<center><img src=\"$pngfile\" alt=\"last $nday ${months}s of $name at $station\" width="$halfwidth" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
+fi
 
 if [ "$cdf" = on ]; then
     cdf_checked=checked
