@@ -32,10 +32,14 @@ if [ $EMAIL = oldenborgh@knmi.nl ]; then
 fi
 
 if [ -n "$FORM_field" ]; then
-    TYPE=field
     . ./queryfield.cgi
     CLIM="field"
     station="$kindname $climfield"
+    if [ "$TYPE" = gridpoints ]; then
+        station="gridpoints $station"
+    else
+        TYPE=field
+    fi
 elif [ "$TYPE" = set ]; then
 	CLIM="stations"
     station=`echo $FORM_STATION | tr '_' ' '`
@@ -47,7 +51,9 @@ fi
 if [ -z "$FORM_hist" ]; then
 	FORM_hist=none
 fi
-if [ "$TYPE" = field ]; then
+if [ "$TYPE" = gridpoints ]; then
+    corrargs="gridpoints $file"
+elif [ "$TYPE" = field ]; then
     corrargs=$file
 elif [ "$TYPE" = set ]; then
     if [ -n "$extraargs" ]; then
@@ -176,7 +182,9 @@ fi
 (./bin/attribute $corrargs > $root.txt) 2>&1
 grep 'bootstrap' $root.txt | sed -e 's/#//'
 echo '<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>'
-if [ "$TYPE" = set ]; then
+if [ "$TYPE" = gridpoints -o $TYPE = field ]; then
+    f=$file
+elif [ "$TYPE" = set ]; then
     i=0
     while [ -z "$f" -a $i -lt 100 ]; do
         i=$((i+1))
@@ -396,7 +404,7 @@ set output "${root}_obsplot.eps"
 replot
 quit
 EOF
-        [ $covstation = year ] && covstation=time
+        [ "$covstation" = year ] && covstation=time
 	    if [ "$lwrite" = true ]; then
 		    echo '<pre>'
 		    cat ${root}_obsplot.gnuplot

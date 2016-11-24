@@ -39,6 +39,15 @@ cat <<EOF
 <div class="menulink"><a href="svdform_use.cgi?id=$EMAIL&field=$FORM_field">only user-defined fields</a></div>
 </div>
 <div class="menulink"><a href="regionverificationform.cgi?id=$EMAIL&field=$FORM_field">Verify field against observations</a></div>
+EOF
+if [ -n "$NX" -a -n "$NY" ]; then
+    if [ $((NX*NY)) -le 1000 ]; then
+        cat <<EOF
+<div class="menulink"><a href="attributeform.cgi?id=$EMAIL&field=${FORM_field}&TYPE=gridpoints&NPERYEAR=${NPERYEAR}">Trends in return times of extremes of all grid points</a></div>
+EOF
+    fi
+fi
+cat <<EOF
 </ul>
 EOF
 fi

@@ -7,7 +7,11 @@ echo
 
 if [ -n "$FORM_field" ]; then
     . ./queryfield.cgi
-    TYPE=field
+    if [ -n "FORM_TYPE" ]; then
+        TYPE=$FORM_TYPE
+    else
+        TYPE=field
+    fi
     station="$climfield"
     NAME="$kindname"
 else
@@ -23,7 +27,9 @@ fi
 
 . ./nosearchengine.cgi
 
-if [ $TYPE = field ]; then
+if [ $TYPE = gridpoints ]; then
+  . ./myvinkhead.cgi "Trends in return times of extremes" "gridpoints of $kindname $climfield" "noindex,nofollow"
+elif [ $TYPE = field ]; then
   . ./myvinkhead.cgi "Trends in return times of extremes" "$kindname $climfield" "noindex,nofollow"
 elif [ $TYPE = set ]; then
   . ./myvinkhead.cgi "Trends in return times of extremes" "$station stations" "noindex,nofollow"
@@ -180,7 +186,7 @@ cat <<EOF
 </select> of GEV and GPD
 <tr><td>Assume:<td>the PDF <input type="radio" class="formradio" name="assume" value="shift" $assume_shift>shifts, <input type="radio" class="formradio" name="assume" value="scale" $assume_scale>scales or <input type="radio" class="formradio" name="assume" value="both" $assume_both>both with the covariate<td><a href="javascript:pop_page('help/assume.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
 EOF
-if [ -n "$ENSEMBLE" -o $TYPE = set ]; then
+if [ -n "$ENSEMBLE" -o $TYPE = set -o $TYPE = gridpoints ]; then
     cat <<EOF
 <tr><td>Normalise:
 <td><input type="checkbox" class="formcheck" name="normsd" $normsd_checked>all series to the same mean<td><a href="javascript:pop_page('help/normaliseseries.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>
@@ -204,7 +210,7 @@ if [ "$TYPE" != setmap -a "$TYPE" != field ]; then
 Y <input type="$number" step=any class="forminput" name="ylo" $textsize4 value="$FORM_ylo">:<input type="$number" step=any class="forminput" name="yhi" $textsize4 value="$FORM_yhi">
 <input type="hidden" name="var" value="$FORM_var">
 EOF
-elif [ "$TYPE" != field ]; then
+elif [ "$TYPE" = setmap ]; then
     cat <<EOF
 <tr><td>Plot variable:<td>
 <input type="radio" class="formradio" name="var" value="atr1" $atr1>Return time at the time of the event,
@@ -232,5 +238,5 @@ cat <<EOF
 EOF
 
 FORM_listname=""
-listname="" # otherwise the menu goes te wrong way
+listname="" # otherwise the menu goes the wrong way
 . ./myvinkfoot.cgi
