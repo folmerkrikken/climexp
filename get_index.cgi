@@ -7,6 +7,12 @@ lwrite=false
 if [ $EMAIL = oldenborgh@knmi.nl ]; then
     lwrite=false # true
 fi
+if [ "$lwrite" = true ]; 
+then
+    echo "Content-Type: text/html"
+    echo 
+    echo
+fi
 export DIR=`pwd`
 
 # defaults
@@ -80,8 +86,6 @@ EOF
     . ./myvinkfoot.cgi
     exit
 fi
-
-if [ "$FORM_gridpoints" != field ]; then
 
 if [ -n "$FORM_maskmetadata" ]; then
     FORM_maskmetadata=data/`basename $FORM_maskmetadata`
@@ -186,12 +190,19 @@ EOF
 		fi
 		polycommand="polygon2mask $onefile $maskfile $sp $mask $masknetcdf"
 		echo `date` "$EMAIL ($REMOTE_ADDR) $polycommand" >> log/log
-		($polycommand > /tmp/polygon2mask.log) 2>&1 &
+		if [ "$FORM_gridpoints" != field ]; then
+		    ($polycommand > /tmp/polygon2mask.log) 2>&1 &
+		else
+		    ($polycommand > /tmp/polygon2mask.log) 2>&1
+		fi
 	fi
 	PROG="get_index.sh $file mask $masknetcdf"
 else
 	PROG="get_index.sh $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 dipole $FORM_dipole"
 fi
+
+if [ "$FORM_gridpoints" != field ]; then
+
 PROG="$PROG minfac $FORM_minfac $FORM_intertype $FORM_noisemodel $mask $NOMISSING $FORM_standardunits"
 [ "$FORM_gridpoints" = max ] && PROG="$PROG max"
 [ "$FORM_gridpoints" = min ] && PROG="$PROG min"
@@ -268,6 +279,9 @@ EOF
   else
     outfile=data/${outfile}_${name_lon}E_${name_lat}N
   fi
+  if [ -n "$FORM_maskmetadata" ]; then
+    outfile=${outfile}_`basename $maskfile .txt`
+fi
   if [ -n "$FORM_standardunits" ]; then
     outfile=${outfile}_su
   fi
@@ -275,9 +289,15 @@ EOF
     if [ -f $outfile.nc -a $outfile.nc -nt $file ]; then
 	  echo "Field already exists<br>"
     else
-      if [ -n "$FORM_metadata" ]; then
-        [ "$lwrite" = true ] && echo cdo maskregion,$maskfile $file $outfile.nc
-        cdo maskregion,$maskfile $file $outfile.nc
+      if [ -n "$FORM_maskmetadata" ]; then
+        if [ 0 = 1 ]; then
+            [ "$lwrite" = true ] && echo cdo maskregion,$maskfile $file $outfile.nc
+            cdo maskregion,$masknetcdf $file $outfile.nc
+        else
+            # there still are .ctl files...
+            [ "$lwrite" = true ] && echo ./bin/get_index $file mask $masknetcdf 5lan $FORM_standardunits outfield $outfile.nc
+            ./bin/get_index $file mask $masknetcdf 5lan $FORM_standardunits outfield $outfile.nc 2>&1 | fgrep -v '# '
+        fi
       else
         [ "$lwrite" = true ] && echo ./bin/get_index $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits outfield $outfile.nc
         ./bin/get_index $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits outfield $outfile.nc 2>&1
@@ -310,8 +330,12 @@ EOF
     	if [ -f $ensout.nc -a $ensout -nt $ensfile ]; then
 	      echo "Ensemble member $ii already exists<br>"
     	else
-    	  if [ -n "$FORM_metadata" ]; then
-            cdo maskregion,$maskfile $endfile $ensout.nc
+    	  if [ -n "$FORM_maskmetadata" ]; then
+            if [ 0 = 1 ]; then
+                cdo maskregion,$masknetcdf $ensfile $ensout.nc
+            else
+                ./bin/get_index $ensfile mask $masknetcdf 5lan $FORM_standardunits outfield $ensout.nc 2>&1 | fgrep -v '# ' 
+            fi
             subsetname="mask $maskname"
           else
             [ "$lwrite" = true ] && echo ./bin/get_index $ensfile $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits $ensout.nc
@@ -331,7 +355,7 @@ EOF
 $outfile.nc
 NPERYEAR=$NPERYEAR
 LSMASK=$LSMASK
-${kindname}
+${kindname}_`basename $maskfile .txt`
 $climfield
 EOF
   FORM_field="$infofile"
