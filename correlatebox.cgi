@@ -19,7 +19,7 @@ fi
 . ./checkemail.cgi
 
 if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
-    lwrite=true
+    lwrite=false # true
 fi
 
 # real work
