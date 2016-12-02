@@ -154,7 +154,7 @@ Replot using half year
 </select>
 <input type="hidden" name="sum" value="1">
 EOF
-        elif [ $NPOERYEAR = 4 ]; then
+        elif [ $NPERYEAR = 4 ]; then
             cat <<EOF
 Replot using season 
 <select class="forminput" name="month">
