@@ -5,7 +5,7 @@ echo
 
 . ./getargs.cgi
 
-. ./myvinkhead.cgi "Select a monthly field" "Attribution runs" "index,nofollow"
+. ./myvinkhead.cgi "Select a field" "Attribution runs" "index,nofollow"
 
 cat <<EOF
 <div class="kalelink">
@@ -111,6 +111,30 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=eucleia_psl_Aday_HadGEM3-A-N216_historicalNat>
+<tr><td>monthly
+<td>historical
+<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_tasmin_Amon_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_tasmax_Amon_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_pr_Amon_HadGEM3-A-N216_historical>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_psl_Amon_HadGEM3-A-N216_historical>
+<tr><td>monthly
+<td>historicalNat
+<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_tasmin_Amon_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_tasmax_Amon_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_pr_Amon_HadGEM3-A-N216_historicalNat>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_psl_Amon_HadGEM3-A-N216_historicalNat>
 <tr><th>&nbsp;
 <th>&nbsp;
 <th>Rx1day
@@ -158,7 +182,8 @@ Choose a field and press this button</td></tr>
 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E&STATION=Tdebilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">temperature at 52&deg;N, 5&deg;E</a>,
 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/ttasmax_muladdcorr_ydrun_retrend_%%&STATION=Tmax_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmax De Bilt bias-corrected</a>,
 <br><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5&deg;E</a>,
-<a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,<br>
+<a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/pr_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Pdebilt_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
 <br><a href="getindices.cgi?WMO=KNMI14Data/Pcumbria/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_NEngland&STATION=P_NEngland_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Northern England</a>,
 <br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Loire_su_%%&STATION=P_Loire_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Loire basin</a>.
 <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Seine_su_%%&STATION=P_Seine_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>.
