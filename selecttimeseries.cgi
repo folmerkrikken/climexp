@@ -22,6 +22,7 @@ elif [ $NPERYEAR = 1 -o $NPERYEAR = -1 ]; then
     echo "<input type=\"checkbox\" class=\"formcheck\" name=\"gmst\">GMST"
 fi
 echo "<input type=\"checkbox\" class=\"formcheck\" name=\"time\">time"
+[ "$show_none" = true -a \( $NPERYEAR = 1 -o $NPERYEAR = -1 \) ] && echo "<input type=\"checkbox\" class=\"formcheck\" name=\"none\">none"
 echo "</td></tr><tr><th><a href=\"javascript:pop_page('help/userseries.shtml',568,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>User-defined ${timescale}timeseries</th></tr><tr><td>"
 forbidden='!`;&|'
 i=0
