@@ -96,6 +96,7 @@ co2)       covstation="CO2 concentration";sfile="CDIACData/co2_annual.dat";;
 gmst)      covstation="Global mean surface temperature (smoothed)"
             sfile="NASAData/giss_al_gl_a_4yrlo.dat";;
 time)      covstation="time";sfile="$DIR/KNMIData/time$NPERYEAR.dat";;
+none)      covstation="none";sfile="none";;
 *)         covstation=`head -2 $FORM_timeseries | tail -1 | tr '_' ' '`
            sfile=$DIR/`head -1 $FORM_timeseries | tr '\`#;' '?'`
            ;;
@@ -147,7 +148,7 @@ fi
 . ./myvinkhead.cgi "Trends in return times of extremes" "$CLIM $station" "noindex,nofollow"
 [ "$TYPE" != "set" -a "$TYPE" != "setmap" ] && listname="" && FORM_listname="" # otherwise we get the wrong menu
 
-if [ ! \( -s $sfile -a -f $sfile \) ]; then
+if [ ! \( -s $sfile -a -f $sfile -o $sfile = none \) ]; then
     echo "Error: cannot locate $covstation series $sfile"
     . .myvinkfoot.cgi
     exit
@@ -366,7 +367,11 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 		plus="+"
 	fi
 	if [ -n "$FORM_year" ]; then
-		plotformyear=", \"$root.txt\" index 2 u 2:4 title \"observed $FORM_year\" w lines lt 4" 
+	    if [ $FORM_timeseries != none ]; then
+    		plotformyear=", \"$root.txt\" index 2 u 2:4 title \"observed $FORM_year\" w lines lt 4" 
+        else
+    		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"observed $FORM_year\" w lines lt 4" 
+    	fi
 	else
 		plotformyear=""
 	fi
@@ -375,7 +380,7 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 	    fittext="$fittext >${FORM_dgt}"
 	fi
 	
-	if [ -s $obsplotfile ]; then
+	if [ -s $obsplotfile -a "$FORM_timeseries" != 'none' ]; then
 	    if [ "$covstation" = "time" ]; then
 	        covstation="year"
 	        x="(\$1+2000)"
@@ -432,7 +437,8 @@ EOF
         echo "<center><img src=\"${root}_obsplot.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
     fi
 
-	cat > $root.gnuplot << EOF
+    if [ $FORM_timeseries != none ]; then
+	    cat > $root.gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.7
 set title "$title"
@@ -464,6 +470,36 @@ set output "${root}.eps"
 replot
 quit
 EOF
+    else
+    	cat > $root.gnuplot << EOF
+$gnuplot_init
+set size 0.7,0.7
+set title "$title"
+set xlabel "return period [yr]"
+set ylabel "$ylabel"
+$sety2label
+set datafile missing '-999.900'
+set key $bottomtop
+$xtics
+set xrange [${xlo}:${xhi}]
+set yrange [${FORM_ylo}:${FORM_yhi}]
+set term unknown
+plot \\
+"$root.txt" index 0 u 2:3 notitle with points lt 1,\\
+"$root.txt" index 0 u 2:4 title "$fittext fit" with line lt 1
+set yrange [GPVAL_Y_MIN:GPVAL_Y_MAX]
+set y2range [GPVAL_Y_MIN:GPVAL_Y_MAX]
+set term png $gnuplot_png_font_hires
+set output "${root}.png"
+plot \\
+"$root.txt" index 0 u 2:3 notitle with points lt 1,\\
+"$root.txt" index 0 u 2:4 title "$fittext fit" with line lt 1$plotformyear
+set term postscript epsf color solid
+set output "${root}.eps"
+replot
+quit
+EOF
+    fi # none
 	if [ "$lwrite" = true ]; then
 		echo '<pre>'
 		cat $root.gnuplot
@@ -484,21 +520,27 @@ gzip -f $root.eps
 pngfile=${root}.png
 getpngwidth
 echo "<div class=\"bijschrift\">$title"
-if [ $FORM_assume = 'shift' ]; then
-    echo "with the effects of $covstation linearly subtracted from the position parameter &mu;,"
-elif [ $FORM_assume = 'scale' ]; then
-    echo "with the effects of $covstation scaling the position and scale parameters parameter &mu;,&sigma;, "
-elif [ $FORM_assume = 'both' ]; then
-    echo "with the effects of $covstation linearly subtracted from the position parameter &mu; and independently from the scale parameter &sigma;,"
+if [ $FORM_timeseries != none ]; then
+    times=times
+    if [ $FORM_assume = 'shift' ]; then
+        echo "with the effects of $covstation linearly subtracted from the position parameter &mu;,"
+    elif [ $FORM_assume = 'scale' ]; then
+        echo "with the effects of $covstation scaling the position and scale parameters parameter &mu;,&sigma;, "
+    elif [ $FORM_assume = 'both' ]; then
+        echo "with the effects of $covstation linearly subtracted from the position parameter &mu; and independently from the scale parameter &sigma;,"
+    else
+        echo "using an unknown assumption,"
+    fi
+    if [ $FORM_assume = 'scale' -a -n "$FORM_anomal" ]; then
+        echo "It does not make sense to assume that he distribution scales with $covstation when taking anomalies"
+        . ./myvinkfoot.cgi
+        exit
+    fi
+    echo "referenced at $FORM_begin2 and $FORM_year"
 else
-    echo "using an unknown assumption,"
+    times=time
 fi
-if [ $FORM_assume = 'scale' -a -n "$FORM_anomal" ]; then
-    echo "It does not make sense to assume that he distribution scales with $covstation when taking anomalies"
-    . ./myvinkfoot.cgi
-    exit
-fi
-echo "referenced at $FORM_begin2 and $FORM_year (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
+echo "(<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, <a href=\"$root.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
 
 cat > ${root}_cdf.gnuplot << EOF
@@ -506,7 +548,7 @@ $gnuplot_init
 set size 0.7,0.4
 set term png $gnuplot_png_font_hires
 set output "${root}_cdf.png"
-set title "CDF of return times"
+set title "CDF of return $times"
 set xlabel "return period [yr]"
 set ylabel "CDF"
 set datafile missing '-999.900'
@@ -515,7 +557,17 @@ $xtics
 set xrange [${xlo}:${xhi}]
 set yrange [0:1]
 set ytics (0,0.1,0.25,0.5,0.75,0.9,1)
+EOF
+if [ $FORM_timeseries != none ]; then
+    cat >> ${root}_cdf.gnuplot << EOF
 plot "$probfile" u 5:1 title "in climate $FORM_begin2" with lines lt 3, "$probfile" index 0 u 6:1 title "in climate $FORM_year" with lines lt 1
+EOF
+else
+    cat >> ${root}_cdf.gnuplot << EOF
+plot "$probfile" index 0 u 6:1 notitle with lines lt 1
+EOF
+fi
+cat >> ${root}_cdf.gnuplot << EOF
 set term postscript epsf color solid
 set output "${root}_cdf.eps"
 replot
@@ -536,8 +588,17 @@ fi
 gzip -f ${root}_cdf.eps
 pngfile=${root}_cdf.png
 getpngwidth
-echo "<div class=\"bijschrift\">CDF of the return time of $FORM_year $title in the climates of $FORM_year and of $FORM_begin2 (<a href=\"${root}_cdf.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_cdf.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>, <a href=\"${root}_cdf.gnuplot\">plot script</a>)</div>"
+echo "<div class=\"bijschrift\">CDF of the return time"
+if [ $FORM_timeseries != none ]; then
+    echo "of $FORM_year $title in the climates of $FORM_year and of $FORM_begin2"
+fi
+echo "(<a href=\"${root}_cdf.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_cdf.eps.gz\">pdf</a>, <a href=\"$probfile\">raw data</a>, <a href=\"${root}_cdf.gnuplot\">plot script</a>)</div>"
 echo "<center><img src=\"${root}_cdf.png\" alt=\"CDF of the return time of $FORM_year\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
+
+if [ "$FORM_timeseries" = none ]; then
+    . ./myvinkfoot.cgi
+    exit
+fi
 
 ###xtics=`fgrep '#@' $probfile | sed -e 's/^#@ //'`
 cat > ${root}_cdfdiff.gnuplot << EOF

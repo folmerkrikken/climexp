@@ -140,6 +140,11 @@ fi
 save_nperyear=$NPERYEAR
 for NPERYEAR in $nperyears
 do
+    if [ $NPERYEAR = 1 ]; then
+        show_none=true
+    else
+        show_none=false
+    fi
     . ./selecttimeseries.cgi | sed \
     -e 's;="'$series'";="'$series'" checked;' \
     -e 's/checkbox\" class=\"formcheck\" name/radio\" class=\"formradio\" name=\"timeseries\" value/' \
