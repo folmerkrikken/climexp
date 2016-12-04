@@ -26,6 +26,7 @@ find ./atlas/maps/ -atime +30 -exec rm -f {} \;
 find ./atlas/series/ -atime +90 -exec rm -f {} \;
 find ./atlas/regr/ -atime +90 -exec rm -f {} \;
 find ./atlas/diff/ -atime +90 -exec rm -f {} \;
+find ./atlas -type d -empty -exec rmdir {} \;
 find ./pid/ -atime +1 -exec rm -f {} \;
 find ./prefs/ -ctime +7 -exec rm -f {} \;
 find ./metadata/ -name 'cache*' -ctime +7 -exec rm -f {} \;
