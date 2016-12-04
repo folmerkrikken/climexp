@@ -1,6 +1,8 @@
 #!/bin/sh
 # usage: make_ipbes_regions.sh < IPBES\ regions\ for\ KNMI\ website.csv
 # I assume the .csv file has udnerscores instead of spaces.
+# After this you need to corasen the IPBES_Americas.txt file to 0.2º, and teh IPBES_North_America.txt file to 0.1º
+# otherwise ncl crashes on them.
 IFS=";"
 lastregion="none"
 lastsubregion="none"
