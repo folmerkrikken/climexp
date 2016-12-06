@@ -19,13 +19,10 @@ else
 [ "$lwrite" = true ] && echo "queryfield.cgi: entering case switch with FORM_field=$FORM_field<br>"
 NPERYEAR=12 # default
 case $FORM_field in
-cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
+cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_exp
     field=$FORM_field
     dataset=${field%%_*}
-    field=${field#cmip5_}
-    field=${field#thor_}
-    field=${field#knmi14_}
-    field=${field#eucleia_}
+    field=${field#*_}
     var=${field%%_*}
     field=${field#*_}
     type=${field%%_*}
@@ -58,7 +55,7 @@ cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
           rip=ave_288
        fi
     fi
-    ###echo "dataset=$dataset var=$var type=$type model=$model exp=$exp rip=$rip lead=$lead ip=$ip ensave=$ensave<br>"
+    [ "$lwrite" = true ] && echo "dataset=$dataset var=$var type=$type model=$model exp=$exp rip=$rip lead=$lead ip=$ip ensave=$ensave<br>"
     if [ "${type%mon}" != "$type" ]; then
         if [ $dataset = knmi14 ]; then
             dir=mon/atmos
@@ -92,6 +89,7 @@ cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
          thor) datasetname=THOR;decdir=THOR;;
          knmi14) datasetname=KNMI14;;
          eucleia) datasetname=EUCLEIA;;
+         futureweather) datasetname=FutureWeather;;
          *) echo "unknown dataset $dataset"; exit -1;;
     esac
     if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
@@ -120,6 +118,16 @@ cmip5*|thor*|knmi14*|eucleia*) # expecting cmip5_var_Amon_model_exp
                 file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
             fi
             file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type/$var/$file
+            ###echo "file=$file"
+        elif [ $dataset = futureweather ]; then
+            period=$exp
+            exp=FutureWeather
+            if [ "$splitfield" = true ]; then
+                file=${var}_${type}_${model}_${exp}_${period}_%%%.nc
+            else
+                file=${var}_${type}_${model}_${exp}_${period}_%%%.nc
+            fi
+            file=ECEARTH23/FutureWeather/${type#A}/$var/$file
             ###echo "file=$file"
         elif [ $dataset = eucleia ]; then
             if [ "$splitfield" = true ]; then
