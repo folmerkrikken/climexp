@@ -381,7 +381,7 @@ class PlotAtlasMap:
         nfiles = len(self.files)
 
         ## compute quantiles if needed
-        if self.params.FORM_plotvar != 'mean' or self.params.FORM_dataset.split in ['CMIP5ext', 'CMIP5extone']:
+        if self.params.FORM_plotvar != 'mean' or self.params.FORM_dataset in ['CMIP5ext', 'CMIP5extone']:
             infiles = []
             doit = False
 
