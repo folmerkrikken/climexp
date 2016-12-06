@@ -7,7 +7,7 @@ echo
 
 if [ -n "$FORM_field" ]; then
     . ./queryfield.cgi
-    if [ -n "FORM_TYPE" ]; then
+    if [ -n "$FORM_TYPE" ]; then
         TYPE=$FORM_TYPE
     else
         TYPE=field
