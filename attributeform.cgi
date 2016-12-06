@@ -155,7 +155,7 @@ NPERYEAR=$save_nperyear
 cat <<EOF
 <div class="formheader">Plot</div>
 <div class="formbody">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table width="100%" border='0' cellpadding='0' cellspacing='0'>
 EOF
 
 justonemonth=true
@@ -181,7 +181,7 @@ cat <<EOF
 <input type="radio" class="formradio" name="fit" value="gumbel" $fit_gumbel>Block maxima and fit Gumbel distribution<br>
 <input type="radio" class="formradio" name="fit" value="gev" $fit_gev>Block maxima and fit GEV<br>
 <input type="radio" class="formradio" name="fit" value="gpd" $fit_gpd>Peak over threshold
-<input type="$number" class="forminput" name="dgt" value="${FORM_dgt:-80}" $textsize6>% and fit GPD
+<input type="$number" class="forminput" name="dgt" value="${FORM_dgt:-80}" $textsize6>% and fit GPD<br>
 <select class="forminput" name="restrain">
 <option value="0" $select00>do not constrain shape
 <option value="0.5" $select05>constrain shape to &plusmn;0.5
