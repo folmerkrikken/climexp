@@ -128,6 +128,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
                 file=${var}_${type}_${model}_${exp}_${period}_%%%.nc
             fi
             file=ECEARTH23/FutureWeather/${type#A}/$var/$file
+            LSMASK=ECEARTH23/FutureWeather/fixed/
             ###echo "file=$file"
         elif [ $dataset = eucleia ]; then
             if [ "$splitfield" = true ]; then
@@ -872,6 +873,8 @@ nlhtfl) file=NCEPNCAR40/lhtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="la
 nshtfl) file=NCEPNCAR40/shtfl.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="sensible heat flux";LSMASK=NCEPNCAR40/lsmask.nc;;
 netflx) file=NCEPNCAR40/netflx.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net heat flux";LSMASK=NCEPNCAR40/lsmask.nc;;
 nolr) file=NCEPNCAR40/ulwrf.ntat.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
+umd_olr) file=UMDData/umd_olr_mo.nc;kindname="NOAA/UMD";climfield="OLR";;
+umd_olr_daily) file=UMDData/umd_olr_dy.nc;kindname="NOAA/UMD";climfield="OLR";NPERYEAR=366;;
 npme) file=NCEPNCAR40/pme.ctl;kindname="NCEP/NCAR";climfield="P-E";flipcolor=11;;
 nnsr) file=NCEPNCAR40/nswrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface shortwave";LSMASK=NCEPNCAR40/lsmask.nc;;
 nnlr) file=NCEPNCAR40/nlwrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface longwave";LSMASK=NCEPNCAR40/lsmask.nc;;
