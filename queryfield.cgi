@@ -128,7 +128,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
                 file=${var}_${type}_${model}_${exp}_${period}_%%%.nc
             fi
             file=ECEARTH23/FutureWeather/${type#A}/$var/$file
-            LSMASK=ECEARTH23/FutureWeather/fixed/
+            LSMASK=ECEARTH23/FutureWeather/fixed/lsmask_ecearth23_t799.nc
             ###echo "file=$file"
         elif [ $dataset = eucleia ]; then
             if [ "$splitfield" = true ]; then
