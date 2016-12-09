@@ -130,7 +130,7 @@ EOF
 (<a href="${missbase}.eps">eps</a>, <a href="ps2pdf.cgi?file=${missbase}.eps">pdf</a>,
 <a href="${missbase}.txt">raw data</a>, 
 <a href="dat2nc.cgi?datafile=${missbase}.txt&type=i&station=missing_$STATION&id=$EMAIL">netcdf</a>, 
-<a href="analyse_anomaly.cgi?datafile=$datafile&STATION=${STATION}_missing&TYPE=$TYPE&id=$EMAIL">analyse this time series)</div>
+<a href="analyse_anomaly.cgi?datafile=$datafile&STATION=${STATION}_missing&TYPE=$TYPE&id=$EMAIL">analyse this time series</a>)</div>
 <center>
 <img src="${missbase}.png" alt="fraction missing data" width="$halfwidth" border=0 class="realimage" hspace=0 vspace=0>
 </center>
