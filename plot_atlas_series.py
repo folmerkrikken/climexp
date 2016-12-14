@@ -216,7 +216,7 @@ class PlotAtlasSeries:
                     self.params.FORM_sum = 12
                 if self.params.FORM_dataset == '20CR':
                     basename = "c{var}".format(var=self.params.FORM_var)
-                if self.params.FORM_dataset == 'obs':
+                elif self.params.FORM_dataset == 'obs':
                     basename = "{model}".format(model=model)
                 else:
                     basename = os.path.splitext(os.path.basename(filename))[0]
