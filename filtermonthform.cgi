@@ -18,7 +18,7 @@ if [ $EMAIL != someone@somewhere ]; then
    case "$FORM_nfilter" in
        1) m1=selected;;
        2) m2=selected;;
-       3) m2=selected;;
+       3) m3=selected;;
        4) m4=selected;;
        5) m5=selected;;
        6) m6=selected;;
