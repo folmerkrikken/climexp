@@ -352,7 +352,7 @@ fi
 cat << EOF
 <div class=formheader>Manipulate this time series</div>
 <div class=formbody>
-<table border=0 cellpadding=0 cellspacing=0 style="width:445px;">
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr><td>Select years:</td><td><form action="selectyear.cgi" method="post">
 <input type="hidden" name="wmo"     value="$WMO">
 <input type="hidden" name="station" value="$STATION">
