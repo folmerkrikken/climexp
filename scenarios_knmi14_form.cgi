@@ -24,7 +24,7 @@ en tijdhorizonten. Het is ook mogelijk eigen historische tijdreeksen in te voere
 <form method=post action="scenarios_knmi14.cgi">
 <input type=hidden name=EMAIL value="$EMAIL">
 <input type=hidden name=variable value="rr">
-<table border=0 cellpadding=0 cellspacing=0 style="width:445px;">
+<table border=0 cellpadding=0 cellspacing=0 style="width:100%;">
 <tr>
 <td><span style="float:left">Station</span> <a href="http://www.knmi.nl/klimaat/klimaatscenarios/KNMI'14/uitleg_stations.html" target="legenda">
                              <img style="vertical-align:top;margin-right:5px; margin-left:5px;" src="/images/info-i.gif" vspace=0 hspace=0 border=0 alt="Uitleg" title="Uitleg"></a>
@@ -100,7 +100,7 @@ cat <<EOF
 <div class=formbody>
 <form method=post action="scenarios_knmi14.cgi">
 <input type=hidden name=EMAIL value="$EMAIL">
-<table border=0 cellpadding=0 cellspacing=0 style="width:445px;">
+<table border=0 cellpadding=0 cellspacing=0 style="width:100%;">
 <tr>
 <td><span style="float:left">Variabele</span></td>
 <td><p><br><span style="float:right;">

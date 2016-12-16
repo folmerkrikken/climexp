@@ -24,7 +24,7 @@ your own data and to use large datasets) are then disabled.  As a registered use
 Register / Log in
 </div>
 <div class="formbody">
-<table border=0 cellpadding=0 cellspacing=0 style="width:445px;">
+<table border=0 cellpadding=0 cellspacing=0 style="width:100%;">
 <tr>
 <td><span style="float:left">E-mail address</span></td>
 <td><span style="float:right;"><input type="email" name="email" class="forminput" style="width:250px;" placeholder="your e-mail address"></span></td>

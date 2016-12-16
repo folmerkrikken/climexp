@@ -86,7 +86,7 @@ cat <<EOF
 
 <div class="formheader">Plot</div>
 <div class="formbody">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Type of plot:<td>
 <input type="radio" class="formradio" name="plot" value="hist" $plot_hist>histogram with <input type="$number" min=2 step=1 class="forminput" name="nbin" size="4" style="width: 5em;" value="${FORM_nbin:-20}">bins<br>
 <input type="radio" class="formradio" name="plot" value="qq" $plot_qq>quantile-quantile plot<br>

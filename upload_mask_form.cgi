@@ -23,7 +23,7 @@ cat <<EOF
 <a href="javascript:pop_page('help/upload_mask.shtml',284,450)"><img align=right src="images/info-i.gif" alt="help" border="0"></a>
 </div>
 <div class='formbody'>
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <form action="upload_mask.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
 <input type="hidden" name="field" value="$FORM_field">

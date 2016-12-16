@@ -73,7 +73,7 @@ cat <<EOF
 
 <div class="formheader">Plot options</div>
 <div class="formbody">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Variable:
 <td><input type="radio" name="var" value="hime" $hime>mean
 <tr><td>&nbsp;
@@ -115,7 +115,7 @@ cat <<EOF
 </div>
 <p><div class="formheader">Common options</div>
 <div class="formbody">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 
 justonemonth=true

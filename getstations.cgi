@@ -320,7 +320,7 @@ if [ "$FORM_gridpoints" != true ]; then
         cat <<EOF
 <div class="formheader"><a href="javascript:pop_page('help/lowerresolutionset.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Create a new set of station data</div>
 <div class="formbody">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>
 EOF
         . ./daily2longerform.cgi
@@ -359,7 +359,7 @@ cat <<EOF
 <input type="hidden" name="NPERYEAR" value="$NPERYEAR">
 <div class="formheader"><a href="javascript:pop_page('help/averageseries.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Aggregate this set of time series</div>
 <div class="formbody">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Type:
 <td><select class="forminput" name="setoper">
 <option value="mean" $meanselected>unweighted mean

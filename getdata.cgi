@@ -517,7 +517,7 @@ if [ $NPERYEAR = 360 -o $NPERYEAR = 365 -o $NPERYEAR = 366 ]; then
 <p><div class='formheader'><a href="javascript:pop_page('help/extremeindices.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Compute extreme indices</div>
 <div class='formbody'>
 <form action="extremeseries.cgi" method="POST">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 	. ./extremeform.cgi
 	cat << EOF
@@ -535,7 +535,7 @@ if [ $NPERYEAR -gt 1 ]; then
 <p><div class='formheader'><a href="javascript:pop_page('help/lowerresolutionseries.shtml',568,450)"><img src="images/info-i.gif" align="right"alt="help" border="0"></a>Create a lower resolution time series</div>
 <div class='formbody'>
 <form action="daily2longer.cgi" method="POST">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
     . ./daily2longerform.cgi
     cat << EOF
@@ -552,7 +552,7 @@ cat <<EOF
 <p><div class='formheader'>Create a monthly time series</div>
 <div class='formbody'>
 <form action="yearly2shorter.cgi" method="POST">
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 EOF
 . $DIR/yearly2shorterform.cgi
 cat << EOF
@@ -567,7 +567,7 @@ if [ -n "$ENSEMBLE" ]; then
 	cat <<EOF
 <p><div class="formheader">Select ensemble member</div>
 <div class='formbody'>
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>
 <form action="selectmembers.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
@@ -620,7 +620,7 @@ EOF
 
 <p><div class="formheader">Compute ensemble statistic</div>
 <div class='formbody'>
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>
 <form action="average_ensemble.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">

@@ -21,7 +21,7 @@ cat <<EOF
 <a name='upload'></a>
 <div class='formheader'>Upload text data</div>
 <div class='formbody'>
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <form action="upload.cgi" method="POST">
 <input type="hidden" name="email" value="$EMAIL">
 <tr><td>
@@ -57,7 +57,7 @@ Type:
 <p>
 <div class='formheader'>Upload a netCDF file</div>
 <div class='formbody'>
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <form action="uploadseries.cgi" method="POST"  enctype="multipart/form-data">
 <input type="hidden" name="email" value="$EMAIL">
 <tr><td>

@@ -34,7 +34,7 @@ Kijk voor meer aanwijzingen bij het gebruik van eigen tijdreeksen onder "Toelich
 <p>
 <div class='formheader'>Upload ${variable}tijdreeks</div>
 <div class='formbody'>
-<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <form action="scenarios_monthly.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$FORM_EMAIL">
 <input type="hidden" name="station" value="$FORM_station">
