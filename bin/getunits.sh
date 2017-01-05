@@ -8,5 +8,5 @@ if [ -s "$metadata" -a "$metadata" -nt "$file" ]; then
   egrep '^[A-Z]*=[- "0-9a-zA-Z/*]*$' "$metadata"
 else
   echo used=prog
-  ./bin/getunits $file |fgrep -v error |tee $metadata
+  ./bin/getunits $file | egrep '^[A-Z]*=[- "0-9a-zA-Z/*]*$' |tee $metadata
 fi
