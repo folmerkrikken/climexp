@@ -139,6 +139,7 @@ EOF
     echo "WMO = $WMO<br>"
     echo "PROG = $PROG<br>"
   fi
+  echo `date` "$EMAIL ($REMOTE_ADDR) ./bin/$PROG $wmo ./data/$TYPE$WMO.dat" >> log/log
   if [ "$makenetcdf" = true ]; then
       (./bin/$PROG $wmo ./data/$TYPE$WMO.dat ) 2>&1
   else
