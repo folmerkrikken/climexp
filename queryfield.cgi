@@ -8,13 +8,16 @@ if [ -z "$FORM_field" ]; then
   echo;echo "Please select a field"
   exit
 fi
+if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
+    lwrite=false # true
+fi
 if [ "$lwrite" = true ]; then
     echo "queryfield: FORM_field=$FORM_field<br>"
 fi
 if [ ${FORM_field#Rapid} != $FORM_field ]; then 
-  # Gerard's data
-  [ "$lwrite" = true ] && echo "queryfield.cgi: calling queryfield_rapid.cgi<br>"
-  . ./queryfield_rapid.cgi
+    # Gerard's data
+    [ "$lwrite" = true ] && echo "queryfield.cgi: calling queryfield_rapid.cgi<br>"
+    . ./queryfield_rapid.cgi
 else
 [ "$lwrite" = true ] && echo "queryfield.cgi: entering case switch with FORM_field=$FORM_field<br>"
 NPERYEAR=12 # default
@@ -112,12 +115,17 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
        fi
     else
         if [ $dataset = knmi14 ]; then
-            if [ "$splitfield" = true ]; then
-                file=${var}_${type}_${model}_${exp}_????????-????????_%%.nc
+            if [ $model = RACMO22E ]; then
+                file=${var}_WEU-11i_KNMI-EC-EARTH_historical-${exp}_KNMI-${model}_v1_${rip}_1950-2100_%%.nc
+                file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$var/$file
             else
-                file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
+                if [ "$splitfield" = true ]; then
+                    file=${var}_${type}_${model}_${exp}_????????-????????_%%.nc
+                else
+                    file=${var}_${type}_${model}_${exp}_186001-210012_%%.nc
+                fi
+                file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type/$var/$file
             fi
-            file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$type/$var/$file
             ###echo "file=$file"
         elif [ $dataset = futureweather ]; then
             period=$exp
@@ -512,7 +520,7 @@ ngpcc) file=GPCCData/gpcc_10_n_mon.nc;kindname="GPCC monitoring";climfield="#gau
 ngpcc_05) file=GPCCData/gpcc_V7_05_n.nc;kindname="GPCC V7";climfield="#gauges";;
 ngpcc_10) file=GPCCData/gpcc_V7_10_n.nc;kindname="GPCC V7";climfield="#gauges";;
 ngpcc_25) file=GPCCData/gpcc_V7_25_n.nc;kindname="GPCC V7";climfield="#gauges";;
-gpcc_daily) file=GPCCData/gpcc_combined_daily.nc;kindname="GPCC daily V1";climfield="precipitation"NPERYEAR=366;;
+gpcc_daily) file=GPCCData/gpcc_combined_daily.nc;kindname="GPCC daily V1";climfield="precipitation";NPERYEAR=366;;
 gpcc_daily_n1) file=GPCCData/gpcc_combined_daily_n1.nc;kindname="GPCC daily V1";climfield="precipitation"NPERYEAR=366;;
 ngpcc_daily) file=GPCCData/gpcc_combined_daily_n.nc;kindname="GPCC daily V1";climfield="#gauges"NPERYEAR=366;;
 prcp_cpc_daily) file=NCEPData/prcp_GLB_daily.nc;kindname="CPC daily";climfield="precipitation";NPERYEAR=366;;
@@ -5132,7 +5140,7 @@ rcp*) file="UNHData/${FORM_field}.ctl";kindname=${FORM_field%%_*}
       climfield=${climfield#*_}
       NPERYEAR=1;;
 
-data/*) 
+data/*|*.info) 
 file=`head -1 $FORM_field`
 export LSMASK=`fgrep 'LSMASK=' $FORM_field | tr '\`!&' ' ' | sed -e 's/^LSMASK=//'`
 export NPERYEAR=`fgrep 'NPERYEAR=' $FORM_field | tr '\`!&' ' ' | sed -e 's/^NPERYEAR=//'` 
