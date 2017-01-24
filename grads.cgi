@@ -3,10 +3,13 @@
 # to be sourced from various scripts.
 if [ $EMAIL = oldenborgh@knmi.nl ]; then
 	lwrite=false # true
-	if [ "$lwrite" = true ]; then
-		echo "Turned on debug printing<p>"
-		###set -x
-    fi
+fi
+if [ $EMAIL = philip@knmi.nl ]; then
+	lwrite=false # true
+fi
+if [ "$lwrite" = true ]; then
+    echo "Turned on debug printing<p>"
+    ###set -x
 fi
 hiresmap=true
 if [ "$hiresmap" = true ]; then
@@ -34,7 +37,7 @@ fi
 export PATH=/sw/bin:/usr/local/bin:$PATH
 if [ -z "$alreadyprinted" ]
 then
-	echo "<p>Plotting with <a href=\"http://grads.iges.org/grads/\" target=_top>GrADS $gradsver</a>..."
+	echo "<p>Plotting with <a href=\"http://cola.gmu.edu/grads/\" target=_top>GrADS $gradsver</a>..."
 fi
 
 . ./save_plotoptions.cgi
