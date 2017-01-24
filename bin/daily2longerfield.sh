@@ -26,10 +26,10 @@ else
   fi
   while [ $i -lt $imax ]
   do
-    ensfile=`echo $file | sed -e "s:\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\%\%:$ii:"`
+    ensfile=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\%\%:$ii:"`
     if [ -s $ensfile -o -s data/$ensfile ]
     then
-      ensargs=(`echo $* | sed -e "s:\+\+:$ii:g" -e "s:\%\%\%:$ii:g" -e "s:\%\%:$ii:g"`)
+      ensargs=(`echo $* | sed -e "s:\+\+\+:$ii:g" -e "s:\+\+:$ii:g" -e "s:\%\%\%:$ii:g" -e "s:\%\%:$ii:g"`)
       ###echo "$DIR/bin/$PROG ${ensargs[*]}"
       $DIR/bin/$PROG ${ensargs[*]}
       echo "generated ${ensargs[$n]}<p>"
