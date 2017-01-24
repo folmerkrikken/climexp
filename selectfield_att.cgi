@@ -183,7 +183,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=futureweather_uas_Amon_ECEARTH23_209401-209812>
 <td><input type=radio class=formradio name=field value=futureweather_vas_Amon_ECEARTH23_209401-209812>
 <td><input type=radio class=formradio name=field value=futureweather_psl_Amon_ECEARTH23_209401-209812>
-<tr><th>HadGEM3A N216<br><a href="EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf">conditions</a>
+<tr><th>HadGEM3A N216<br><a href="EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf">conditions of use</a>
 <th>SST forcing
 <th>&nbsp;
 <th>tas<br>min
@@ -279,6 +279,62 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
+<tr><th>RACMO 12km<br>/EC-EARTH2.3
+<th>scenario
+<th>RX1day
+<th>RX2day
+<th>RX3day
+<th>RX5day
+<th>TXx
+<th>TX3x
+<th>TXn
+<th>TX3n
+<th>TNx
+<th>TN3x
+<th>TNn
+<th>TN3n
+<tr><td>annual
+<td>RCP8.5
+<td><input type=radio class=formradio name=field value=knmi14_RX1day_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_RX2day_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_RX3day_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_RX5day_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TXx_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TX3x_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TXn_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TX3n_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TNx_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TN3x_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TNn_yr_RACMO22E_rcp85_year>
+<td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_year>
+<tr><td>Oct-Mar
+<td>RCP8.5
+<td><input type=radio class=formradio name=field value=knmi14_RX1day_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_RX2day_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_RX3day_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_RX5day_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TXx_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TX3x_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TXn_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TX3n_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TNx_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TN3x_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TNn_yr_RACMO22E_rcp85_ONDJFM>
+<td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_ONDJFM>
+<tr><td>Apr-Sep
+<td>RCP8.5
+<td><input type=radio class=formradio name=field value=knmi14_RX1day_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_RX2day_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_RX3day_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_RX5day_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TXx_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TX3x_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TXn_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TX3n_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TNx_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TN3x_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TNn_yr_RACMO22E_rcp85_AMJJAS>
+<td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_AMJJAS>
 </table>
 </form>
 <div class=alineakop>EC-Earth 2.3 monthly series</div>
@@ -297,12 +353,14 @@ Choose a field and press this button</td></tr>
 <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Seine_su_%%&STATION=P_Seine_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>.
 
 <div class=alineakop>HadGEM3A N216 historical daily series</div>
-<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>
+<br><a href="select.cgi?field=EUCLEIA/HadGEM3-A-N216/Tdebilt/pr_day_HadGEM3-A-N216_historical__%%%_Netherlands_without_Caribbean_su.info&NPERYEAR=360&id=$EMAIL">precipitation in the Netherlands (w/o Caribbean)</a>
 <br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
 <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
 
 <div class=alineakop>HadGEM3A N216 historicalNat daily series</div>
 <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historicalNat_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_nat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>.
+<br><a href="select.cgi?field=EUCLEIA/HadGEM3-A-N216/Tdebilt/pr_day_HadGEM3-A-N216_historicalNat__%%%_Netherlands_without_Caribbean_su.info&NPERYEAR=360&id=$EMAIL">precipitation in the Netherlands (w/o Caribbean)</a>
 <br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
 <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
 
