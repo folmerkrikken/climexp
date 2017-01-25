@@ -8,7 +8,7 @@ NPERYEAR=$FORM_nperyear
 j=0
 while [[ $j -lt 20 ]]
 do
-    j=$(($j+1))
+    j=$((j+1))
     export FORM_a$j
 done
 export EMAIL
