@@ -1,7 +1,7 @@
 #!/bin/sh
 lwrite=false
 if [ -n "$EMAIL" -a "$EMAIL" = oldenborgh@knmi.nl ]; then
-	lwrite=false
+	lwrite=false # true
 fi
 if [ -z "$DIR" ]; then
 	DIR=`pwd`
@@ -63,17 +63,17 @@ else
                     $DIR/bin/$PROG $ensargs >> $ensout.tmp$$
                     c=`fgrep -v '#' $ensout.tmp$$ | wc -l`
                     if [ $c = 0 ]; then
-                        echo "<br>Something went wrong in bin/$PROG $ensargs"
+                        echo "<br>Something went wrong in bin/$PROG $ensargs" 1>&2
                         echo "<br>Retrying...<br>" 1>&2
                         $DIR/bin/$PROG $ensargs >> $ensout.tmp$$
                         c=`fgrep -v '#' $ensout.tmp$$ | wc -l`
                         if [ $c = 0 ]; then
-                            echo "<br>Something again went wrong"
+                            echo "<br>Something again went wrong $c" 1>&2
                             echo "<br>Retrying...<br>"  1>&2
                             $DIR/bin/$PROG $ensargs >> $ensout.tmp$$
                             c=`fgrep -v '#' $ensout.tmp$$ | wc -l`
                             if [ $c = 0 ]; then
-                                echo "<br>And again"
+                                echo "<br>And again $c" 1>&2
                                 echo "<br>Retrying for the last time...<br>"  1>&2
                                 $DIR/bin/$PROG $ensargs >> $ensout.tmp$$
                                 c=`fgrep -v '#' $ensout.tmp$$ | wc -l`
