@@ -79,7 +79,11 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
         else
             dir=daily
         fi
-        NPERYEAR=366
+        if [ ${model#Had} != ${model} ]; then
+            NPERYEAR=360
+        else
+            NPERYEAR=366
+        fi
     elif [ $type = yr ]; then
         dir=annual
         NPERYEAR=1
@@ -142,7 +146,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
             if [ "$splitfield" = true ]; then
                 file=${var}_${type}_${model}_${exp}_????????-????????_%%%.nc
             else
-                file=${var}_${type}_${model}_${exp}_196001-201312_%%%.nc
+                file=${var}_${type}_${model}_${exp}_%%%.nc
             fi
             file=EUCLEIA/${model}/$dir/$var/$file
             ###echo "file=$file"

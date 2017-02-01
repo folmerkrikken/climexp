@@ -221,7 +221,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=eucleia_psl_Aday_HadGEM3-A-N216_historicalNat>
 <tr><td>monthly
 <td>historical
-<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_tas_Amon_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Amon_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tasmax_Amon_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_pr_Amon_HadGEM3-A-N216_historical>
@@ -233,7 +233,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=eucleia_psl_Amon_HadGEM3-A-N216_historical>
 <tr><td>monthly
 <td>historicalNat
-<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_tas_Amon_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Amon_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tasmax_Amon_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_pr_Amon_HadGEM3-A-N216_historicalNat>
