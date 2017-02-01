@@ -38,7 +38,7 @@ else
             pattern='%%%'
         fi
         newestfile=""
-        while [ $i -le $nmax ]; do
+        while [ $i -le 1 ]; do
             if [ $c3 = 0 ]; then
                 allfiles=`echo $file | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
             else
