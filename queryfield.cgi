@@ -200,8 +200,9 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
        fi
     else
        kindname="$model $exp"
-       if [ $type = Amon -o $type = Lmon ]; then
+       if [ $type = Amon -o $type = Lmon -o $type = day ]; then
            case $model in
+                HadGEM3-A-N216) trylsmask=EUCLEIA/HadGEM3-A-N216/fx/sftlf_fx_HadGEM3-A-N216_historical_r0i0p0.nc;;
                 ECEARTH23) trylsmask=KNMI14Data/sftlf_ns.nc;;
                 EC-EARTH) trylsmask=CMIP5/monthly/sftlf.nc;;
                 FIO-ESM)  trylsmask=CMIP5/fixed/sftlf.FIO-ESM.nc;;
@@ -393,33 +394,33 @@ imerg_daily) file=GPMData/imerg_daily.nc;kindname="IMERG";climfield=precipitatio
 ssmi_1) file=NCDCData/ssmi_1.ctl;kindname="NCDC SSMI/I";climfield="precipitation";flipcolor=11;;
 hulme) file=CRUData/hulme23.ctl;kindname="CRU";climfield="precipitation";flipcolor=11;;
 hulme-nino3) file=CRUData/hulme23-nino3.ctl;kindname="CRU";climfield="precipitation - nino3";flipcolor=11;;
-cru_tmp) file=CRUData/cru_ts3.24.1901.2015.tmp.dat.nc;kindname="CRU TS3.24";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmp_st0) file=CRUData/cru_ts3.24.1901.2015.tmp.st0.nc;kindname="CRU TS3.24 st0";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmp_stn) file=CRUData/cru_ts3.24.1901.2015.tmp.stn.nc;kindname="CRU TS3.24 stn";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmp_10) file=CRUData/cru_ts3.24.1901.2015.tmp.dat_1.nc;kindname="CRU TS3.24";climfield="temperature";LSMASK=CRUData/lsmask_10.nc;;
-cru_tmp_25) file=CRUData/cru_ts3.24.1901.2015.tmp.dat_25.nc;kindname="CRU TS3.24";climfield="temperature";LSMASK=CRUData/lsmask_25.nc;;
-cru_tmx) file=CRUData/cru_ts3.24.1901.2015.tmx.dat.nc;kindname="CRU TS3.24";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmx_st0) file=CRUData/cru_ts3.24.1901.2015.tmpdtr.st0.nc;kindname="CRU TS3.24 st0";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmx_stn) file=CRUData/cru_ts3.24.1901.2015.tmpdtr.stn.nc;kindname="CRU TS3.24 stn";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmx_10) file=CRUData/cru_ts3.24.1901.2015.tmx.dat_1.nc;kindname="CRU TS3.24";climfield="Tmax";LSMASK=CRUData/lsmask_10.nc;;
-cru_tmx_25) file=CRUData/cru_ts3.24.1901.2015.tmx.dat_25.nc;kindname="CRU TS3.24";climfield="Tmax";LSMASK=CRUData/lsmask_25.nc;;
-cru_tmn) file=CRUData/cru_ts3.24.1901.2015.tmn.dat.nc;kindname="CRU TS3.24";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmn_st0) file=CRUData/cru_ts3.24.1901.2015.tmpdtr.st0.nc;kindname="CRU TS3.24 st0";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmn_stn) file=CRUData/cru_ts3.24.1901.2015.tmpdtr.stn.nc;kindname="CRU TS3.24 stn";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
-cru_tmn_10) file=CRUData/cru_ts3.24.1901.2015.tmn.dat_1.nc;kindname="CRU TS3.24";climfield="Tmin";LSMASK=CRUData/lsmask_10.nc;;
-cru_tmn_25) file=CRUData/cru_ts3.24.1901.2015.tmn.dat_25.nc;kindname="CRU TS3.24";climfield="Tmin";LSMASK=CRUData/lsmask_25.nc;;
-cru_dtr) file=CRUData/cru_ts3.24.1901.2015.dtr.dat.nc;kindname="CRU TS3.24";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_05.nc;;
-cru_dtr_10) file=CRUData/cru_ts3.24.1901.2015.dtr.dat_1.nc;kindname="CRU TS3.24";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_10.nc;;
-cru_dtr_25) file=CRUData/cru_ts3.24.1901.2015.dtr.dat_25.nc;kindname="CRU TS3.24";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_25.nc;;
-cru_pre) file=CRUData/cru_ts3.24.1901.2015.pre.dat.nc;kindname="CRU TS3.24";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
-cru_pre_10) file=CRUData/cru_ts3.24.1901.2015.pre.dat_1.nc;kindname="CRU TS3.24";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
-cru_pre_25) file=CRUData/cru_ts3.24.1901.2015.pre.dat_25.nc;kindname="CRU TS3.24";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
-cru_cld) file=CRUData/cru_ts3.24.1901.2015.cld.dat.nc;kindname="CRU TS3.24";climfield="cloud fraction";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
-cru_cld_10) file=CRUData/cru_ts3.24.1901.2015.cld.dat_1.nc;kindname="CRU TS3.24";climfield="cloud fraction";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
-cru_cld_25) file=CRUData/cru_ts3.24.1901.2015.cld.dat_25.nc;kindname="CRU TS3.24";climfield="cloud fraction";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
-cru_vap) file=CRUData/cru_ts3.24.1901.2015.vap.dat.nc;kindname="CRU TS3.24";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
-cru_vap_10) file=CRUData/cru_ts3.24.1901.2015.vap.dat_1.nc;kindname="CRU TS3.24";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
-cru_vap_25) file=CRUData/cru_ts3.24.1901.2015.vap.dat_25.nc;kindname="CRU TS3.24";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
+cru_tmp) file=CRUData/cru_ts3.24.01.1901.2015.tmp.dat.nc;kindname="CRU TS3.24.01";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmp_st0) file=CRUData/cru_ts3.24.01.1901.2015.tmp.st0.nc;kindname="CRU TS3.24.01 st0";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmp_stn) file=CRUData/cru_ts3.24.01.1901.2015.tmp.stn.nc;kindname="CRU TS3.24.01 stn";climfield="temperature";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmp_10) file=CRUData/cru_ts3.24.01.1901.2015.tmp.dat_1.nc;kindname="CRU TS3.24.01";climfield="temperature";LSMASK=CRUData/lsmask_10.nc;;
+cru_tmp_25) file=CRUData/cru_ts3.24.01.1901.2015.tmp.dat_25.nc;kindname="CRU TS3.24.01";climfield="temperature";LSMASK=CRUData/lsmask_25.nc;;
+cru_tmx) file=CRUData/cru_ts3.24.01.1901.2015.tmx.dat.nc;kindname="CRU TS3.24.01";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmx_st0) file=CRUData/cru_ts3.24.01.1901.2015.tmpdtr.st0.nc;kindname="CRU TS3.24.01 st0";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmx_stn) file=CRUData/cru_ts3.24.01.1901.2015.tmpdtr.stn.nc;kindname="CRU TS3.24.01 stn";climfield="Tmax";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmx_10) file=CRUData/cru_ts3.24.01.1901.2015.tmx.dat_1.nc;kindname="CRU TS3.24.01";climfield="Tmax";LSMASK=CRUData/lsmask_10.nc;;
+cru_tmx_25) file=CRUData/cru_ts3.24.01.1901.2015.tmx.dat_25.nc;kindname="CRU TS3.24.01";climfield="Tmax";LSMASK=CRUData/lsmask_25.nc;;
+cru_tmn) file=CRUData/cru_ts3.24.01.1901.2015.tmn.dat.nc;kindname="CRU TS3.24.01";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmn_st0) file=CRUData/cru_ts3.24.01.1901.2015.tmpdtr.st0.nc;kindname="CRU TS3.24.01 st0";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmn_stn) file=CRUData/cru_ts3.24.01.1901.2015.tmpdtr.stn.nc;kindname="CRU TS3.24.01 stn";climfield="Tmin";LSMASK=CRUData/lsmask_05.nc;;
+cru_tmn_10) file=CRUData/cru_ts3.24.01.1901.2015.tmn.dat_1.nc;kindname="CRU TS3.24.01";climfield="Tmin";LSMASK=CRUData/lsmask_10.nc;;
+cru_tmn_25) file=CRUData/cru_ts3.24.01.1901.2015.tmn.dat_25.nc;kindname="CRU TS3.24.01";climfield="Tmin";LSMASK=CRUData/lsmask_25.nc;;
+cru_dtr) file=CRUData/cru_ts3.24.01.1901.2015.dtr.dat.nc;kindname="CRU TS3.24.01";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_05.nc;;
+cru_dtr_10) file=CRUData/cru_ts3.24.01.1901.2015.dtr.dat_1.nc;kindname="CRU TS3.24.01";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_10.nc;;
+cru_dtr_25) file=CRUData/cru_ts3.24.01.1901.2015.dtr.dat_25.nc;kindname="CRU TS3.24.01";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_25.nc;;
+cru_pre) file=CRUData/cru_ts3.24.01.1901.2015.pre.dat.nc;kindname="CRU TS3.24.01";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
+cru_pre_10) file=CRUData/cru_ts3.24.01.1901.2015.pre.dat_1.nc;kindname="CRU TS3.24.01";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
+cru_pre_25) file=CRUData/cru_ts3.24.01.1901.2015.pre.dat_25.nc;kindname="CRU TS3.24.01";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
+cru_cld) file=CRUData/cru_ts3.24.01.1901.2015.cld.dat.nc;kindname="CRU TS3.24.01";climfield="cloud fraction";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
+cru_cld_10) file=CRUData/cru_ts3.24.01.1901.2015.cld.dat_1.nc;kindname="CRU TS3.24.01";climfield="cloud fraction";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
+cru_cld_25) file=CRUData/cru_ts3.24.01.1901.2015.cld.dat_25.nc;kindname="CRU TS3.24.01";climfield="cloud fraction";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
+cru_vap) file=CRUData/cru_ts3.24.01.1901.2015.vap.dat.nc;kindname="CRU TS3.24.01";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
+cru_vap_10) file=CRUData/cru_ts3.24.01.1901.2015.vap.dat_1.nc;kindname="CRU TS3.24.01";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
+cru_vap_25) file=CRUData/cru_ts3.24.01.1901.2015.vap.dat_25.nc;kindname="CRU TS3.24.01";climfield="vapour pressure";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
 
 hadex2_ann_*) var=${FORM_field#hadex2_ann_};file=UKMOData/HadEX2_${var}_ann.nc;kindname="HadEX2";climfield=$var;NPERYEAR=1;;
 hadex2_*) var=${FORM_field#hadex2_};file=UKMOData/HadEX2_${var}_mo.nc;kindname="HadEX2";climfield=$var;;
@@ -489,7 +490,7 @@ set lat 24.1 49.9';;
 prism_tdmean*) ext=${FORM_field#prism_tdmean};file=PRISMData/tdmean_prism$ext.nc;kindname="PRISM";climfield="dew point";map='set lon -125 -66.5
 set lat 24.1 49.9';;
 
-scpdsi) file=CRUData/scPDSI.cru.3.24.bams.2016.GLOBAL.1901.2015.nc;kindname="CRU";climfield="scPDSI 3.24";;
+scpdsi) file=CRUData/scPDSI.cru.3.24.01.bams.2016.GLOBAL.1901.2015.nc;kindname="CRU";climfield="scPDSI 3.24.01";;
 scpdsi_europe) file=CRUData/scpdsi_Europe_IJC.nc;kindname="CRU";climfield="scPDSI";;
 scpdsi_alpine) file=CRUData/scpdsi_alpine.ctl;kindname="CRU";climfield="scPDSI";map='set lon 4 19
 set lat 43 49
