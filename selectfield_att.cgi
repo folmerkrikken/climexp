@@ -185,7 +185,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=futureweather_psl_Amon_ECEARTH23_209401-209812>
 <tr><th>HadGEM3A N216<br><a href="EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf">conditions of use</a>
 <th>SST forcing
-<th>&nbsp;
+<th>tas
 <th>tas<br>min
 <th>tas<br>max
 <th>pr
@@ -197,7 +197,7 @@ Choose a field and press this button</td></tr>
 <th>psl
 <tr><td>daily
 <td>historical
-<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_tas_Aday_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Aday_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tasmax_Aday_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_pr_Aday_HadGEM3-A-N216_historical>
@@ -209,7 +209,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=eucleia_psl_Aday_HadGEM3-A-N216_historical>
 <tr><td>daily
 <td>historicalNat
-<td>&nbsp;
+<td><input type=radio class=formradio name=field value=eucleia_tas_Aday_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Aday_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tasmax_Aday_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_pr_Aday_HadGEM3-A-N216_historicalNat>
