@@ -84,9 +84,12 @@ if [ -n "$FORM_month" ]; then
 fi
 if [ ! -s ${missbase}.txt -o ${missbase}.plt -ot $base.dat ]; then
     if [ -n "$FORM_month" ]; then
-        args="mon $FORM_month sel $FORM_sel"
+        args="mon $FORM_month"
+        if [ -n "$FORM_sel" ]; then
+            args="$args sel $FORM_sel"
+        fi
     fi
-    [ "$lwrite" = true ] && echo "./bin/count_missing $args $base.dat"
+    [ "$lwrite" = true ] && echo "./bin/count_missing $base.dat $args"
     ( ./bin/count_missing $base.dat $args > ${missbase}.txt ) 2>&1
 fi
 c=`cat ${missbase}.txt | wc -l`
