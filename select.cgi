@@ -301,6 +301,7 @@ if [ "${FORM_field#era}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc ]; the
       -o "$EMAIL" = "peter.uhe@ouce.ox.ac.uk" \
       -o "$EMAIL" = "marcel.bult@knmi.nl" \
       -o "$EMAIL" = "hylke.de.vries@knmi.nl" \
+      -o "$EMAIL" = "wiel@knmi.nl" \
       ]; then # add more later, not foolproof but OK for the moment
         extended=true
         text="(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
