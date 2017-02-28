@@ -490,7 +490,7 @@ set lat 24.1 49.9';;
 prism_tdmean*) ext=${FORM_field#prism_tdmean};file=PRISMData/tdmean_prism$ext.nc;kindname="PRISM";climfield="dew point";map='set lon -125 -66.5
 set lat 24.1 49.9';;
 
-scpdsi) file=CRUData/scPDSI.cru.3.24.01.bams.2016.GLOBAL.1901.2015.nc;kindname="CRU";climfield="scPDSI 3.24.01";;
+scpdsi) file=CRUData/scPDSI.cru.3.24.bams.2016.GLOBAL.1901.2015.nc;kindname="CRU";climfield="scPDSI 3.24";;
 scpdsi_europe) file=CRUData/scpdsi_Europe_IJC.nc;kindname="CRU";climfield="scPDSI";;
 scpdsi_alpine) file=CRUData/scpdsi_alpine.ctl;kindname="CRU";climfield="scPDSI";map='set lon 4 19
 set lat 43 49
@@ -548,6 +548,8 @@ cmapmerr) file=NCEPData/cmapmerr.ctl;kindname="CPMAP (incl model)";climfield="re
 chirps_20_25) file=CHIRPSData/v2p0chirps_25.nc;kindname="CHIRPS";climfield="precipitation";flipcolor=11;NPERYEAR=366;map="set lon -20 55
 set lat -40 40";;
 CenTrendsv1) file=UCSBData/CenTrends_v1_monthly_ce.nc;kindname="CenTrends v1";climfield="precipitation";flipcolor=11;map="set lon 28 54
+set lat -15 18";;
+CenTrendsChirps) file=CHIRPSData/centrends_chirps.nc;kindname="CenTrends/CHIRPS";climfield="precipitation";flipcolor=11;map="set lon 28 54
 set lat -15 18";;
 emulate) file=CRUData/emulate_3.2_1850-2003.nc;kindname="EMULATE 3.2";climfield="SLP";NPERYEAR=366;map="set lon -70 50
 set lat 25 70";;
@@ -642,9 +644,9 @@ luge_past) file=McGillData/glpast_1700-2007_05.nc;kindname="LUGE";climfield="pas
 en3_sos) file=UKMOData/salt_EN3_v2a_ObjectiveAnalysis_5m.nc;kindname="EN3";climfield="SSS";;
 en3_osc*) depth=${FORM_field#en3_osc};file=UKMOData/salt_EN3_v2a_ObjectiveAnalysis_sal${depth}.nc;kindname="EN3";climfield="sal${depth}";;
 en3_ohc*) depth=${FORM_field#en3_ohc};file=UKMOData/temp_EN3_v2a_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN3";climfield="ohc${depth}";;
-en4_sos) file=UKMOData/salt_EN.4.1.1_ObjectiveAnalysis_5m.nc;kindname="EN4.1.1";climfield="SSS";;
-en4_osc*) depth=${FORM_field#en4_osc};file=UKMOData/salt_EN.4.1.1_ObjectiveAnalysis_sal${depth}.nc;kindname="EN4.1.1";climfield="sal${depth}";;
-en4_ohc*) depth=${FORM_field#en4_ohc};file=UKMOData/temp_EN.4.1.1_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN4.1.1";climfield="ohc${depth}";;
+en4_sos) file=UKMOData/salt_EN.4.2.0_ObjectiveAnalysis_5m.nc;kindname="EN4.2.0";climfield="SSS";;
+en4_osc*) depth=${FORM_field#en4_osc};file=UKMOData/salt_EN.4.2.0_ObjectiveAnalysis_sal${depth}.nc;kindname="EN4.2.0";climfield="sal${depth}";;
+en4_ohc*) depth=${FORM_field#en4_ohc};file=UKMOData/temp_EN.4.2.0_ObjectiveAnalysis_ohc${depth}.nc;kindname="EN4.2.0";climfield="ohc${depth}";;
 bmrc_d20) file=BMRCData/d20.nc;kindname="PEODAS";climfield="D20";;
 
 sos_u)     file="SOS/u_mean12.ctl";kindname="KNMI ERS";climfield="u";;
@@ -888,7 +890,7 @@ netflx) file=NCEPNCAR40/netflx.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="n
 nolr) file=NCEPNCAR40/ulwrf.ntat.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
 umd_olr) file=UMDData/umd_olr_mo.nc;kindname="NOAA/UMD";climfield="OLR";;
 umd_olr_daily) file=UMDData/umd_olr_dy.nc;kindname="NOAA/UMD";climfield="OLR";NPERYEAR=366;;
-npme) file=NCEPNCAR40/pme.ctl;kindname="NCEP/NCAR";climfield="P-E";flipcolor=11;;
+npme) file=NCEPNCAR40/pme.mon.mean.nc;kindname="NCEP/NCAR";climfield="P-E";flipcolor=11;;
 nnsr) file=NCEPNCAR40/nswrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface shortwave";LSMASK=NCEPNCAR40/lsmask.nc;;
 nnlr) file=NCEPNCAR40/nlwrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface longwave";LSMASK=NCEPNCAR40/lsmask.nc;;
 nsoil) file=NCEPNCAR40/soilw.0-10cm.mon.mean.nc;kindname="NCEP/NCAR";climfield="soil moisture";flipcolor=11;;
