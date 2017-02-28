@@ -202,13 +202,6 @@ cat <<EOF
 <tr><td>Compare:<td>return time if it had occurred in year <input type="$number" min=1 max=2500 step=1 class="forminput" name="begin2" $textsize4 value="$FORM_begin2">
 EOF
 
-if [ -n "$ENSEMBLE" ]; then
-cat <<EOF
-<tr><td>Ensemble members:
-<td><input type="$number" min=0 step=1 class="forminput" name="nens1" $textsize2 value="$FORM_nens1">to
-<input type="$number" min=0 step=1 class="forminput" name="nens2" $textsize2 value="$FORM_nens2">
-EOF
-fi
 if [ "$TYPE" != setmap -a "$TYPE" != field ]; then
     cat <<EOF
 <tr><td>Plot range:<td>X <input type="$number" step=any class="forminput" name="xlo" $textsize4 value="$FORM_xlo">:<input type="$number" step=any class="forminput" name="xhi" $textsize4 value="$FORM_xhi">,
