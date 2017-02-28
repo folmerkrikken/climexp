@@ -8,7 +8,7 @@ echo
 
 cat <<EOF
 <p>Past observations are used to deduce significant correlations between the weather 
-in the last three months (up to the beginning of the month) and the weather over the next season (from the end of the month). The main predictors are El Ni&ntilde;o / La Ni&ntilde;a and the trends due to global warming. Overfitting is avoided as much as possible. The system has been documented in <a href="http://www.geosci-model-dev-discuss.net/8/3941/2015/gmdd-8-3941-2015.html" target="_new">Eden et al, 2015</a> (under review).
+in the last three months (up to the beginning of the month) and the weather over the next season (from the end of the month). The main predictors are El Ni&ntilde;o / La Ni&ntilde;a and the trends due to global warming. Overfitting is avoided as much as possible. The system has been documented in <a href="http://www.geosci-model-dev.net/8/3947/2015/" target="_new">Eden et al, 2015</a>.
 
 <p>This web page is under construction. Please give feedback if it does not work properly.
 
@@ -33,7 +33,7 @@ case "$prefix" in
     *) prefix=forecast_;forecast_selected=selected;plotname="Forecast anomalies";;
 esac
 
-firstdate=`ls SPES/plots/$dataset/ | tr " " "\n" | tail -1`
+firstdate=`ls SPES/plots/$dataset/25/ | tr " " "\n" | tail -1`
 firstyear=${firstdate%??}
 firstmonth=${firstdate#????}
 firstm=${firstmonth#0}
@@ -135,7 +135,7 @@ cat <<EOF
       <td width="81.5%" valign=top>
          <div id="printable" name="printable">
 <div class=bijschrift id=caption>$plotname $units of $nextseasonname $yy $varname made in early $analysismonth.</div>
-<img id="imageToSwap" src="SPES/plots/$dataset/$date/${dataset}_${prefix}$date.png" width="100%" />
+<img id="imageToSwap" src="SPES/plots/$dataset/25/$date/${dataset}_${prefix}$date.png" width="100%" />
 <p>The development of this forecast system was supported by the EU-project <a href="http://www.specs-fp7.eu">SPECS</a>.
         </div>
       </td>
