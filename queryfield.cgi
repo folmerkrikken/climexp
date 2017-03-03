@@ -362,7 +362,7 @@ rtg_sst_5dy) file=NCEPData/rtg_sst_5dy.ctl;kindname="RTG";climfield="SST";NPERYE
 rtg_sst_month) file=NCEPData/rtg_sst_month.ctl;kindname="RTG";climfield="SST";;
 sstoi_v2) file=NCEPData/sstoi_v2.ctl;kindname="NCEP OI v2";climfield="SST";;
 sstoiv2_monthly) file=NCEPData/oisst_v2_monthly.nc;kindname="NCEP OIv2 1/4";climfield="SST";;
-sstoiv2_daily) file=NCEPData/oisst_v2_daily.nc;kindname="NCEP OIv2 1/4";climfield="SST";;
+sstoiv2_daily) file=NCEPData/oisst_v2_daily.nc;kindname="NCEP OIv2 1/4";climfield="SST";NPERYEAR=366;;
 iceoi_v2) file=NCEPData/iceoi_v2.ctl;kindname="Reynolds v2";climfield="ice cover";;
 sstoi) file=NCEPData/sstoi.ctl;kindname="Reynolds";climfield="SST";;
 kaplan_ssta) file=LDGOData/kaplan_ssta.nc;kindname="Kaplan";climfield="SSTa";;
@@ -890,6 +890,7 @@ netflx) file=NCEPNCAR40/netflx.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="n
 nolr) file=NCEPNCAR40/ulwrf.ntat.mon.mean.nc;kindname="NCEP/NCAR";climfield="OLR";;
 umd_olr) file=UMDData/umd_olr_mo.nc;kindname="NOAA/UMD";climfield="OLR";;
 umd_olr_daily) file=UMDData/umd_olr_dy.nc;kindname="NOAA/UMD";climfield="OLR";NPERYEAR=366;;
+nevap) file=NCEPNCAR40/evap.mon.mean.nc;kindname="NCEP/NCAR";climfield="evaporation";;
 npme) file=NCEPNCAR40/pme.mon.mean.nc;kindname="NCEP/NCAR";climfield="P-E";flipcolor=11;;
 nnsr) file=NCEPNCAR40/nswrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface shortwave";LSMASK=NCEPNCAR40/lsmask.nc;;
 nnlr) file=NCEPNCAR40/nlwrs.sfc.mon.mean.nc;kindname="NCEP/NCAR";climfield="net surface longwave";LSMASK=NCEPNCAR40/lsmask.nc;;
@@ -1053,6 +1054,7 @@ erai_snd) file=ERA-interim/erai_snd.nc;kindname="ERA-int";climfield="snow depth"
 erai_vap) file=ERA-interim/erai_vap.nc;kindname="ERA-int";climfield="column vapour";LSMASK=ERA-interim/lsmask07.nc;;
 erai_lhf) file=ERA-interim/erai_lhtfl.nc;kindname="ERA-int";climfield="latent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_shf) file=ERA-interim/erai_shtfl.nc;kindname="ERA-int";climfield="sensible heat flux";LSMASK=ERA-interim/lsmask07.nc;;
+erai_trbflx) file=ERA-interim/erai_trbflx.nc;kindname="ERA-int";climfield="turbulent heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_snetflx) file=ERA-interim/erai_snetflx.nc;kindname="ERA-int";climfield="sfc net heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_huss) file=ERA-interim/erai_huss.nc;kindname="ERA-int";climfield="spec humidity";LSMASK=ERA-interim/lsmask075.nc;;
 erai_evap) file=ERA-interim/erai_evap.nc;kindname="ERA-int";climfield="evaporation";LSMASK=ERA-interim/lsmask07.nc;;
