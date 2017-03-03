@@ -44,6 +44,8 @@ case ${FORM_plotsum:-1} in
 18) sum_18_selected=selected;;
 24) sum_24_selected=selected;;
 30) sum_30_selected=selected;;
+48) sum_48_selected=selected;;
+60) sum_60_selected=selected;;
 *) sum_1_selected=selected;;
 esac  
 
@@ -285,6 +287,10 @@ cat <<EOF
 <option $sum_12_selected>12
 <option $sum_13_selected>13
 <option $sum_14_selected>14
+<option $sum_24_selected>24
+<option $sum_36_selected>36
+<option $sum_48_selected>48
+<option $sum_60_selected>60
 EOF
 if [ $NPERYEAR -gt 12 ]; then
 cat <<EOF
