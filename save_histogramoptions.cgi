@@ -27,4 +27,6 @@ FORM_var=$FORM_var;
 FORM_normsd=$FORM_normsd;
 FORM_ci=$FORM_ci;
 FORM_minfac=$FORM_minfac;
+FORM_biasmul=$FORM_biasmul;
+FORM_biasadd=$FORM_biasadd;
 EOF

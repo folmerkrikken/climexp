@@ -24,6 +24,9 @@ else
     prog=$NAME
     NPERYEAR="$FORM_NPERYEAR"
 fi
+if [ $EMAIL = oldenborgh@knmi.nl ];then
+    lwrite=false
+fi
 
 . ./nosearchengine.cgi
 
@@ -123,6 +126,31 @@ cat <<EOF
 <div class="formheader">Covariate series</div>
 EOF
 
+# get units
+# this still fails for sets of stations, but these do not need bias corrections...
+if [ -n "$file" ]; then
+    files=$file
+else
+    files=./data/$TYPE$WMO.dat
+fi
+if [ "$ENSEMBLE" = true ]; then
+  firstfile=`echo $files | sed -e 's/%%%/000/' -e 's/+++/000/' -e 's/%%/00/' -e 's/++/00/'`
+  if [ ! -s $firstfile ]; then
+    firstfile=`echo $filest | sed -e 's/%%%/001/' -e 's/+++/001/' -e 's/%%/01/' -e 's/++/01/'`
+  fi
+else
+  firstfile=$files
+fi
+if [ "$lwrite" = true ]; then
+    echo '<pre>'
+    echo "firstfile=$firstfile"
+    ./bin/getunits $firstfile
+    echo '</pre>'
+fi
+if [ -s $firstfile ]; then
+    eval `./bin/getunits $firstfile`
+fi
+
 # we can handle time series at all time scales...
 if [ $NPERYEAR -ge 360 ]; then
     nperyears="1 12 $NPERYEAR"
@@ -200,6 +228,9 @@ fi
 cat <<EOF
 <tr><td>Return time:<td>year <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$FORM_year"> (with value <input type="text" class="forminput" name="xyear" $textsize6 value="$FORM_xyear">)
 <tr><td>Compare:<td>return time if it had occurred in year <input type="$number" min=1 max=2500 step=1 class="forminput" name="begin2" $textsize4 value="$FORM_begin2">
+<tr><td>Bias correction:<td>add
+<input class="forminput" name="biasmul" $textsize4 value="$FORM_biasmul">% and/or 
+<input class="forminput" name="biasadd" $textsize4 value="$FORM_biasadd"> $UNITS.
 EOF
 
 if [ "$TYPE" != setmap -a "$TYPE" != field ]; then
