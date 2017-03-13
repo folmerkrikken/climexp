@@ -153,12 +153,12 @@ fi
 date2=$m2$FORM_year2
 if [ "$NPERYEAR" = 12 ]; then
     endmonth=$(($FORM_month + $FORM_plotsum - 1))
-    if [ -z "$FORM_year2" ]; then
-        if [ $endmonth -gt 12 ]; then
-            plotyear="$(($FORM_year + 1))\\"
-        else
-            plotyear="$FORM_year\\"
-        fi
+fi
+if [ -z "$FORM_year2" ]; then
+    if [ $endmonth -gt 12 ]; then
+        plotyear="$(($FORM_year + 1))\\"
+    else
+        plotyear="$FORM_year\\"
     fi
 fi
 if [ $NPERYEAR -le 12 ]; then
