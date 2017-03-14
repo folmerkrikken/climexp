@@ -134,6 +134,7 @@ case ${FORM_lag:-0} in
 "-120:0") lag_m120t0_selected="selected";;
 "-120") lag_m120_selected="selected";;
 "-84") lag_m84_selected="selected";;
+"-72") lag_m72_selected="selected";;
 "-60:60") lag_m60t60_selected="selected";;
 "-60:0") lag_m60t0_selected="selected";;
 "-60") lag_m60_selected="selected";;
@@ -489,6 +490,7 @@ if [ -z "$ONLYONE" ]; then
 	echo "<option $lag_m120t0_selected>-120:0"
 	echo "<option $lag_m120_selected>-120"
 	echo "<option $lag_m84_selected>-84"
+	echo "<option $lag_m72_selected>-72"
 	echo "<option $lag_m60t60_selected>-60:60"
 	echo "<option $lag_m60t0_selected>-60:0"
 	echo "<option $lag_m60_selected>-60"
