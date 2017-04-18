@@ -13,14 +13,15 @@ echo
 cat <<EOF
 <table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr><th colspan="3">Select a time series by clicking on the name
-<tr><td>ENSO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCDCData/ersst_nino12a&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
+<tr><td>ENSO<td><div class="kalelink">absolute <a href="getindices.cgi?WMO=NCDCData/ersst_nino12a&STATION=NINO12&TYPE=i&id=$EMAIL">NINO12</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3a&STATION=NINO3&TYPE=i&id=$EMAIL">NINO3</a>,
-<a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a&STATION=NINO3.4&TYPE=i&id=$EMAIL">NINO3.4</a>,
-<a href="getindices.cgi?WMO=NCDCData/ersst_nino4a&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>, detrended <a href="getindices.cgi?WMO=NCDCData/ersst_nino12a_detrend&STATION=NINO12detrend&TYPE=i&id=$EMAIL">NINO12</a>,
-<a href="getindices.cgi?WMO=NCDCData/ersst_nino3a_detrend&STATION=NINO3detrend&TYPE=i&id=$EMAIL">NINO3</a>,
-<a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a_detrend&STATION=NINO3.4detrend&TYPE=i&id=$EMAIL">NINO3.4</a>,
-<a href="getindices.cgi?WMO=NCDCData/ersst_nino4a_detrend&STATION=NINO4detrend&TYPE=i&id=$EMAIL">NINO4</a>
-(1880-now, ERSST v4)</div>
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a&STATION=NINO3.4&TYPE=i&id=$EMAIL">NINO3.4</a>,  
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino4a&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>, relative 
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino12a_rel&STATION=NINO12_rel&TYPE=i&id=$EMAIL">NINO12</a>,
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino3a_rel&STATION=NINO3_rel&TYPE=i&id=$EMAIL">NINO3</a>,
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a_rel&STATION=NINO3.4_real&TYPE=i&id=$EMAIL">NINO3.4</a>,
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino4a_rel&STATION=NINO4_rel&TYPE=i&id=$EMAIL">NINO4</a>
+(1880-now, ERSST v4, relative is relative to 20S-20N, i.e., without global warming, recommended)</div>
 <td><a
 href="wipefoot.cgi?https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v4" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
@@ -372,19 +373,19 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 
 <tr><td>Land ice</td><td><div class="kalelink">GRACE <a href="getindices.cgi?WMO=GRACEData/data_grs&STATION=Greenland_mass&TYPE=i&id=$EMAIL">Greenland</a>, <a href="getindices.cgi?WMO=GRACEData/data_ant&STATION=Antarctica_mass&TYPE=i&id=$EMAIL">Antarctica</a> mass changes,  (2003-2013, TU Delft)</td><td>&nbsp;</a>
 
-<tr><td>India<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/ALLIN&STATION=All-India_Rainfall&TYPE=p&id=$EMAIL">All-India Rainfall</a> (1871-2012, 29 subdivision, 2880000 km2, IITM)</div>
+<tr><td>India<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/ALLIN&STATION=All-India_Rainfall&TYPE=p&id=$EMAIL">All-India Rainfall</a> (1871-2014, 29 subdivision, 2880000 km2, IITM)</div>
 <td><a href="wipefoot.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/HOMIN&STATION=Homogeneous_India_RAINFALL&TYPE=p&id=$EMAIL">Homogeneous India Rainfall</a> (1871-2012, 14 subdivisions, 1596970 km2, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/HOMIN&STATION=Homogeneous_India_RAINFALL&TYPE=p&id=$EMAIL">Homogeneous India Rainfall</a> (1871-2014, 14 subdivisions, 1596970 km2, IITM)</div>
 <td><a href="wipefoot.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/CORIN&STATION=Core-Monsoon_India_Rainfall&TYPE=p&id=$EMAIL">Core-Monsoon India Rainfall</a> (1871-1999, 7 subdivisions, 776942 km2, IITM)</div>
 <td><a href="wipefoot.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=p">Indian rainfall per region</a> (<a href="IITMData/ismreg.png" target="_new">map</a>, 1871-2012, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=p">Indian rainfall per region</a> (<a href="IITMData/ismreg.png" target="_new">map</a>, 1871-2014, IITM)</div>
 <td><a href="wipefoot.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=subdiv&type=p">Indian rainfall per subdivision</a> (<a href="IITMData/india-subdiv-rev1.png" target="_new">map</a>, 1871-2012, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=subdiv&type=p">Indian rainfall per subdivision</a> (<a href="IITMData/india-subdiv-rev1.png" target="_new">map</a>, 1871-2014, IITM)</div>
 <td><a href="wipefoot.cgi?http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=n">Indian minimum temperature per region</a> (1871-2007, IITM)</div>
