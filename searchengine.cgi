@@ -4,7 +4,7 @@
 # checks whether the UA is a search engine, if so set to anonymous
 
 # this catches a lot
-c=`echo "$HTTP_USER_AGENT" | egrep -i -c 'htdig|bot|crawl|slurp|/search|jeeves|spider|archive|pompos|heritrix|litefinder|scout|yandex'`
+c=`echo "$HTTP_USER_AGENT" | egrep -i -c 'htdig|bot|crawl|slurp|/search|jeeves|spider|archive|pompos|heritrix|litefinder|scout|yandex|ltx71'`
 cc=`echo "$EMAIL" | fgrep -c "http:"`
 ###echo "searchengine: $HTTP_USER_AGENT"
 ###echo "searchengine: $c"
