@@ -3,6 +3,10 @@
 # plus a check on the state of the server
 if [ -z "$init_done" ]; then
 
+    if [ -n "$HTTP_X_FORWARDED_FOR" ]; then
+        REMOTE_ADDR=$HTTP_X_FORWARDED_FOR
+    fi
+
     if [ -n "$use_uptime" ] ;then
         line=`uptime`
         load=${line##*averages: } # Mac OSX
