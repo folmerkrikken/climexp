@@ -10,8 +10,10 @@ do
 ###rm $corrroot$ext.ppm
         echo "<div class=\"bijschrift\">$title (<a href=\"data/$TYPE${WMO}corr$FORM_num$ext.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE${WMO}corr$FORM_num$ext.eps.gz\">pdf</a>,"
     if [ -f ${corrroot}_yr.eps ]; then
+       epstopdf ${corrroot}_yr.eps
        gzip -f ${corrroot}_yr.eps
        echo "<a href=\"data/$TYPE${WMO}corr$FORM_num${ext}_yr.eps.gz\">month.year format</a>,"
+       echo "<a href=\"data/$TYPE${WMO}corr$FORM_num${ext}_yr.pdf\">pdf</a>,"
     fi
     if [ -f data/$TYPE$WMO${FORM_num}.cor ]; then
       echo "<a href=\"data/$TYPE$WMO${FORM_num}.cor\">plot data</a>, "
