@@ -13,6 +13,9 @@ if [ $EMAIL = someone@somewhere ]; then
     echo "Please <a href=registerform.cgi>login or register</a> before using this routine."
     . ./myvinkheadfoot.cgi
 fi
+if [ $EMAIL = oldenborgh@knmi.nl ]; then
+    lwrite=true # false
+fi
 
 [ ! -d synthesis/$EMAIL ] && mkdir synthesis/$EMAIL
 prefs=prefs/$EMAIL.synthesis
@@ -59,7 +62,7 @@ if [ $useprefs = true ]; then
 fi
 
 case "$FORM_weighted" in
-    unweighted) unweighted_checked="checked";;
+    noave) noave_checked="checked";;
     weighted) weighted_checked="checked";;
     *) unweighted_checked="checked";;
 esac
@@ -115,8 +118,9 @@ fi
 cat <<EOF
 </textarea>
 <tr><td>Weighting:<td>
-<input type="radio" class="formradio" name="weighted" value="weighted" $weighted_checked>weighted or 
-<input type="radio" class="formradio" name="weighted" value="unweighted" $unweighted_checked>unweighted average.
+<input type="radio" class="formradio" name="weighted" value="weighted" $weighted_checked>weighted.
+<input type="radio" class="formradio" name="weighted" value="unweighted" $unweighted_checked>unweighted, or
+<input type="radio" class="formradio" name="weighted" value="noave" $noave_checked>no average.
 <tr><td>Logarithm:<td>
 <input type=checkbox class=formcheck name=log $log_checked>data should be evaluated and plotted on a logarithmic axis (like PRs).
 <tr><td>Percentiles:<td>
@@ -157,7 +161,7 @@ if [ -z "$nocomputation" ]; then
     root=data/synthesis.`date -u "+%Y%m%d_%H%M%S"`.$EMAIL
     ofile=$root.txt
 
-    [ "$lwrite" = true ]] && echo "Executing ./bin/synthesis $args<br>"
+    [ "$lwrite" = true ] && echo "./bin/synthesis $args<br>"
     ./bin/synthesis $args > $ofile
     if [ ! -s $ofile ]; then
         echo "Something went wrong in synthesis $args"
