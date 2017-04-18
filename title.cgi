@@ -84,17 +84,23 @@ if [ "$FORM_plottype" = "time-lat" ]; then
 fi
 
 ylabel=" "
-[ -n "$FORM_log" ] && ylabel=" log$ylabel"
-[ -n "$FORM_sqrt" ] && ylabel=" sqrt$ylabel"
-[ -n "$FORM_square" ] && ylabel=" ${ylabel}^2"
-
+climfield1=climfield
+if [ -z "$FORM_field" ]; then
+    [ -n "$FORM_log" ] && ylabel=" log$ylabel"
+    [ -n "$FORM_sqrt" ] && ylabel=" sqrt$ylabel"
+    [ -n "$FORM_square" ] && ylabel=" ${ylabel}^2"
+else
+    [ -n "$FORM_log" ] && climfield1="log $climfield"
+    [ -n "$FORM_sqrt" ] && climfield1="sqrt $climfield"
+    [ -n "$FORM_square" ] && climfield1="${climfield}^2"
+fi
 extra=""
 if [ -n "$FORM_anomal" -o \( "FORM_operation" = "selecting" -a ${FORM_sum:-1} -gt 1 \) ]; then
   if [ `echo "$CLIM" | fgrep -c "anom"` = 0 ]; then
     anoclim="$CLIM anomalies"
   fi
   if [ `echo "$climfield" | fgrep -c "anom"` = 0 ]; then
-    climfield="$climfield anomalies"
+    climfield1="$climfield1 anomalies"
   fi
 else
   anoclim="$CLIM"
@@ -200,9 +206,9 @@ elif [ -n "$FORM_STATION" ]; then
     with="with"
   fi
   if [ -n "$kindname" ]; then
-    with="\\$with $indexmonth $kindname $climfield$extra"
+    with="\\$with $indexmonth $kindname $climfield1$extra"
   else
-    with="\\$with $indexmonth $climfield$extra"
+    with="\\$with $indexmonth $climfield1$extra"
   fi
 elif [ -n "$extra" ]; then
   with="\ $extra"
@@ -249,7 +255,7 @@ if [ "$lwrite" = true ]; then
   echo var=$var
   echo day=$day
   echo seriesmonth=$seriesmonth
-  echo climfield=$climfield
+  echo climfield1=$climfield1
   echo kindname=$kindname
   echo plotyear=$plotyear
   echo ylabel=$ylabel
