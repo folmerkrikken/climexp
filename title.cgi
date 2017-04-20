@@ -84,7 +84,7 @@ if [ "$FORM_plottype" = "time-lat" ]; then
 fi
 
 ylabel=" "
-climfield1=climfield
+climfield1=$climfield
 if [ -z "$FORM_field" ]; then
     [ -n "$FORM_log" ] && ylabel=" log$ylabel"
     [ -n "$FORM_sqrt" ] && ylabel=" sqrt$ylabel"
