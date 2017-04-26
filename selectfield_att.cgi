@@ -26,6 +26,8 @@ Choose a field and press this button</td></tr>
 <th>ssr
 <th>uas
 <th>vas
+<th>wspd
+<th>max<br>wspd
 <th>psl
 <tr><td>daily
 <td>RCP8.5
@@ -38,6 +40,8 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_ssr_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_uas_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_vas_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_sfcWind_Aday_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_sfcWindmax_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_psl_Aday_ECEARTH23_rcp85>
 <tr><td>monthly
 <td>RCP8.5
@@ -50,6 +54,8 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_ssr_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_uas_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_vas_Amon_ECEARTH23_rcp85>
+<td><input type=radio class=formradio name=field value=knmi14_sfcWind_Amon_ECEARTH23_rcp85>
+<td>&nbsp;
 <td><input type=radio class=formradio name=field value=knmi14_psl_Amon_ECEARTH23_rcp85>
 <tr><th>&nbsp;
 <th>&nbsp;
@@ -63,6 +69,8 @@ Choose a field and press this button</td></tr>
 <th>&nbsp;
 <th>&nbsp;
 <th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
 <tr><td>annual
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_rx1day_yr_ECEARTH23_rcp85>
@@ -72,6 +80,8 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_txn_yr_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tnx_yr_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tnn_yr_ECEARTH23_rcp85>
+<td>&nbsp;
+<td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
