@@ -140,13 +140,17 @@ run clim ${var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $
 		yy1=""
 		yy2=""
 	fi
-	climtime="${date%????}2000"
+	climname=clim${yy1}${yy2}
+	if [ -z "$FORM_hovmuller" ]; then
+	    climtime="${date%????}2000"
+	    climname="${climname}(time=${climtime})"
+	fi
 	if [ "$FORM_plotanomalykind" = "logrelative" ]; then
-		FORM_var="log10(${FORM_var:-corr}/clim${yy1}${yy2}(time=$climtime))"
+		FORM_var="log10(${FORM_var:-corr}/${climname})"
 	elif [ "$FORM_plotanomalykind" = "relative" ]; then
-		FORM_var="${FORM_var:-corr}/clim${yy1}${yy2}(time=$climtime)-1"
+		FORM_var="${FORM_var:-corr}/${climname}-1"
 	else
-		FORM_var="${FORM_var:-corr}-clim${yy1}${yy2}(time=$climtime)"
+		FORM_var="${FORM_var:-corr}-${climname}"
 	fi
 fi
 
@@ -268,7 +272,7 @@ disable print
 printim data/g${id}_$i.png white $doublesize"
 
 	else
-		if [ -n "$date2" ]; then
+		if [ -n "$FORM_hovmuller" ]; then
 			date="${date}:$i${date2}"
 			parea="set parea 1.5 10.5 1 7.5"
 		fi

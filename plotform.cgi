@@ -332,7 +332,7 @@ cat <<EOF
 <form action="plotfield.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
 <input type="hidden" name="field" value="$FORM_field">
-<input type="hidden" name="movie" value="no" checked>
+<input type="hidden" name="hovmuller" value="yes" checked>
 <table style='width:100%' border='0' cellpadding='0' cellspacing='0'>
 <tr><td>Time:<td>From year: <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$y1">
 EOF

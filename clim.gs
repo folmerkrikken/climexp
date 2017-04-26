@@ -89,5 +89,8 @@ else
     say 'define clim = 'field'.2'
     'define clim = 'field'.2'
 endif
+if ( nperyear = 12 )
+    'modify clim seasonal'
+endif
 'set dfile 1'
 'set z 1'
