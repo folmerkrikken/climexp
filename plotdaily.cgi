@@ -15,14 +15,14 @@ if [ $EMAIL = oldenborgh@knmi.nl ]; then
 fi
 
 TYPE="$FORM_TYPE"
-WMO="$FORM_WMO"
+WMO=`echo "$FORM_WMO" | tr -d '\\'`
 STATION="$FORM_STATION"
 station=`echo "$STATION" | tr '_' ' '`
 NAME="$FORM_NAME"
 name=`echo "$NAME" | tr '_' ' '`
 if [ ! -s ./data/$TYPE$WMO.dat ]; then
     . ./myvinkhead.cgi "Error" "Cannot find file"
-    echo "Cannot find file $TYPE$WMO"
+    echo "Cannot find file $TYPE$WMO.dat"
     . ./myvinkfoot.cgi
     exit
 fi
@@ -127,7 +127,7 @@ c=`egrep -v '^#' $root.txt | grep '[0-9]' | wc -l`
 if [ $c = 0 ] ; then
     echo "No valid output, maybe the date $enddate is beyond the end date of the series?"
 else
-    lastdate=`gegrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
+    lastdate=`egrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
     [ -z "$yr" ] && yr=`echo "$lastdate" | cut -b 1-4`
     [ -z "$mo" ] && mo=`echo "$lastdate" | cut -b 5-6`
     [ -z "$dy" ] && dy=`echo "$lastdate" | cut -b 7-8`
