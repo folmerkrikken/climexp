@@ -19,7 +19,7 @@ cat <<EOF
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino4a&STATION=NINO4&TYPE=i&id=$EMAIL">NINO4</a>, relative 
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino12a_rel&STATION=NINO12_rel&TYPE=i&id=$EMAIL">NINO12</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3a_rel&STATION=NINO3_rel&TYPE=i&id=$EMAIL">NINO3</a>,
-<a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a_rel&STATION=NINO3.4_real&TYPE=i&id=$EMAIL">NINO3.4</a>,
+<a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a_rel&STATION=NINO3.4_rel&TYPE=i&id=$EMAIL">NINO3.4</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino4a_rel&STATION=NINO4_rel&TYPE=i&id=$EMAIL">NINO4</a>
 (1880-now, ERSST v4, relative is relative to 20S-20N, i.e., without global warming, recommended)</div>
 <td><a
