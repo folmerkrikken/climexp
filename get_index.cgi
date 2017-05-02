@@ -250,12 +250,19 @@ else
   STATION=""
   FORM_field=`basename $FORM_field`
   PROG="$PROG gridpoints $FORM_field"
-  listname=data/grid_${FORM_field}_${FORM_lon1}:${FORM_lon2}_${FORM_lat1}:${FORM_lat2}_${FORM_masktype}.txt
+  if [ -n "$FORM_maskmetadata" ]; then
+    m=`basename $maskfile .nc`
+    m=`basename $maskfile .txt`
+    listname=data/grid_${m}.txt
+  else
+    listname=data/grid_${FORM_field}_${FORM_lon1}:${FORM_lon2}_${FORM_lat1}:${FORM_lat2}_${FORM_masktype}.txt
+  fi
   echo 'Content-Type: text/html'
   echo 
   echo
   . ./myvinkhead.cgi "Set of grid points" "$timescale $kindname $climfield"
   ###echo ./bin/$PROG
+  echo `date` "$EMAIL ($REMOTE_ADDR) $PROG > $listname" >> log/log
   ( ./bin/$PROG > $listname ) 2>&1
   FORM_climate=`echo "$kindname $climfield" | tr ' ' '_'`
   prog="grid$FORM_field"
