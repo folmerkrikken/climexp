@@ -413,6 +413,8 @@ cru_dtr) file=CRUData/cru_ts3.24.01.1901.2015.dtr.dat.nc;kindname="CRU TS3.24.01
 cru_dtr_10) file=CRUData/cru_ts3.24.01.1901.2015.dtr.dat_1.nc;kindname="CRU TS3.24.01";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_10.nc;;
 cru_dtr_25) file=CRUData/cru_ts3.24.01.1901.2015.dtr.dat_25.nc;kindname="CRU TS3.24.01";climfield="Tmax-Tmin";LSMASK=CRUData/lsmask_25.nc;;
 cru_pre) file=CRUData/cru_ts3.24.01.1901.2015.pre.dat.nc;kindname="CRU TS3.24.01";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
+cru_pre_st0) file=CRUData/cru_ts3.24.1901.2015.pre.st0.nc;kindname="CRU TS3.24.01 st0";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
+cru_pre_stn) file=CRUData/cru_ts3.24.1901.2015.pre.stn.nc;kindname="CRU TS3.24.01 stn";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
 cru_pre_10) file=CRUData/cru_ts3.24.01.1901.2015.pre.dat_1.nc;kindname="CRU TS3.24.01";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_10.nc;;
 cru_pre_25) file=CRUData/cru_ts3.24.01.1901.2015.pre.dat_25.nc;kindname="CRU TS3.24.01";climfield="precipitation";flipcolor=11;LSMASK=CRUData/lsmask_25.nc;;
 cru_cld) file=CRUData/cru_ts3.24.01.1901.2015.cld.dat.nc;kindname="CRU TS3.24.01";climfield="cloud fraction";flipcolor=11;LSMASK=CRUData/lsmask_05.nc;;
