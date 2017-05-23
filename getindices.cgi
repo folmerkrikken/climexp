@@ -31,22 +31,36 @@ fi
 file=$WMO.dat
 newfile=data/$TYPE$wmo.dat
 c=`echo $file | egrep -c '\+\+|%%'`
-if [ ! -s "$file" -o "$c" != 0 ]; then
+if [ "$c" != 0 ]; then
   ens0=`echo $file | sed -e 's/+++/000/' -e 's/%%%/000/' -e 's/++/00/' -e 's/%%/00/'`
+  ncens0=${ens0%.dat}.nc
   if [ -s "$ens0" ]; then
     i=0
     file=$ens0
     newfile=`echo $newfile | sed -e 's/+++/000/' -e 's/%%%/000/' -e 's/++/00/' -e 's/%%/00/'`
+    ext=.dat
+  elif [ -s "$ncens0" ]; then
+    i=0
+    file=$ncens0
+    newfile=`echo $newfile | sed -e 's/+++/000/' -e 's/%%%/000/' -e 's/++/00/' -e 's/%%/00/'`
+    ext=.nc
   else
     ens1=`echo $file | sed -e 's/+++/001/' -e 's/%%%/001/' -e 's/++/01/' -e 's/%%/01/'`
+    ncens1=${ens1%.dat}.nc
     if [ -s "$ens1" ]; then
       i=1
       file=$ens1
       newfile=`echo $newfile | sed -e 's/+++/001/' -e 's/%%%/001/' -e 's/++/01/' -e 's/%%/01/'`
+      ext=.dat
+    elif [ -s "$ncens1" ]; then
+      i=1
+      file=$ncens1
+      newfile=`echo $newfile | sed -e 's/+++/001/' -e 's/%%%/001/' -e 's/++/01/' -e 's/%%/01/'`
+      ext=.nc
     fi
   fi
 fi
-if [ -s $file ]; then
+if [ -s $file -a "$c" = 0 ]; then
   if [ `uname` = Linux ]; then
     LASTMODIFIED=`stat $file | fgrep Modify | cut -b 8-27`
     LASTMODIFIED=`date -R -d "$LASTMODIFIED"`    
@@ -60,8 +74,8 @@ if [ -n "$i" ]; then
         i=$((i+1))
         ii=`printf %02i $i`
         iii=`printf %03i $i`
-        ensfile=`echo $WMO.dat | sed -e "s/+++/$iii/" -e "s/%%%/$iii/" -e "s/++/$ii/" -e "s/%%/$ii/"`
-        newensfile=`echo data/$TYPE$wmo.dat | sed -e "s/+++/$iii/" -e "s/%%%/$iii/" -e "s/++/$ii/" -e "s/%%/$ii/"`
+        ensfile=`echo $WMO$ext | sed -e "s/+++/$iii/" -e "s/%%%/$iii/" -e "s/++/$ii/" -e "s/%%/$ii/"`
+        newensfile=`echo data/$TYPE$wmo$ext | sed -e "s/+++/$iii/" -e "s/%%%/$iii/" -e "s/++/$ii/" -e "s/%%/$ii/"`
         if [ ! -s $newensfile ]; then
             doit=true
         elif [ $newensfile -ot $ensfile ]; then
