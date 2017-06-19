@@ -303,7 +303,7 @@ EOF
     mywmo=`echo $WMO | tr '+' '%'`
     mystation=`echo $STATION | tr ' +' '_%'`
     cat << EOF 
-(<a href="data/$TYPE$WMO.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz">pdf</a>, <a href="rawdata.cgi?wmo=$mywmo&station=$mystation&type=$TYPE&id=$EMAIL&nperyear=$NPERYEAR">raw data</a>)
+(<a href="data/$TYPE$WMO.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE$mywmo.eps.gz">pdf</a>, <a href="rawdata.cgi?wmo=$mywmo&station=$mystation&type=$TYPE&id=$EMAIL&nperyear=$NPERYEAR">raw data</a>)
 EOF
   else
     c=`echo "$HTTP_USER_AGENT" | fgrep -i -c 'MSIE'`
