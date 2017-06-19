@@ -46,6 +46,17 @@ case ${FORM_plotsum:-1} in
 30) sum_30_selected=selected;;
 48) sum_48_selected=selected;;
 60) sum_60_selected=selected;;
+75) sum_75_selected=selected;;
+90) sum_90_selected=selected;;
+105) sum_105_selected=selected;;
+120) sum_120_selected=selected;;
+180) sum_180_selected=selected;;
+240) sum_240_selected=selected;;
+300) sum_300_selected=selected;;
+360) sum_360_selected=selected;;
+480) sum_480_selected=selected;;
+600) sum_600_selected=selected;;
+1200) sum_1200_selected=selected;;
 *) sum_1_selected=selected;;
 esac  
 
@@ -298,15 +309,18 @@ cat <<EOF
 <option $sum_18_selected>18
 <option $sum_24_selected>24
 <option $sum_30_selected>30
-<option>60
-<option>120
-<option>180
-<option>240
-<option>300
-<option>360
-<option>480
-<option>600
-<option>1200
+<option $sum_60_selected>60
+<option $sum_60_selected>60
+<option $sum_75_selected>75
+<option $sum_105_selected>105
+<option $sum_120_selected>120
+<option $sum_180_selected>180
+<option $sum_240_selected>240
+<option $sum_300_selected>300
+<option $sum_360_selected>360
+<option $sum_480_selected>480
+<option $sum_600_selected>600
+<option $sum_1200_selected>1200
 EOF
 fi
 fi
