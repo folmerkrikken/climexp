@@ -511,11 +511,6 @@ Output:
             {% for val in obs_pr_values %}
                 <option value={{val[0]}} {{ 'selected' if FORM_obs_pr == val[0] }}>{{val[1]}}</option>
             {% endfor %}
-            <!--
-            <option value=gpcc_25 $gpcc_25_selected>GPCC v6
-            <option value=prca $prca_selected>NCDC anomalies
-            <option value=cru311_pre_25 $cru311_pre_25_selected>CRU TS 3.10.01
-            -->
             </select>
         {% else %}
             <input type=hidden name=obs_pr value={{FORM_obs_pr}}>
