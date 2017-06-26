@@ -403,6 +403,9 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 <tr><td>Switzerland<td><div class="kalelink"><a href="getindices.cgi?WMO=BernData/ch_temp&STATION=Swiss_reconstruction&TYPE=t&id=$EMAIL">Temperature</a>, <a href="getindices.cgi?WMO=BernData/ch_prec&STATION=Swiss_reconstruction&TYPE=p&id=$EMAIL">precipitation</a> reconstruction (1525-1989, Pfister)</div>
 <td><a href="http://www.ncdc.noaa.gov/paleo/historical.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=MeteoSwissData/swiss_swiss&STATION=Swissmean&TYPE=t&id=$EMAIL">Swissmean</a>, <a href="getindices.cgi?WMO=MeteoSwissData/swiss_north.low&STATION=Swiss_north_low&TYPE=t&id=$EMAIL">North low</a>, <a href="getindices.cgi?WMO=MeteoSwissData/swiss_north.high&STATION=Swiss_north_high&TYPE=t&id=$EMAIL">North high</a>, <a href="getindices.cgi?WMO=MeteoSwissData/swiss_south&STATION=Swiss_south&TYPE=t&id=$EMAIL">South</a>, (1864-now, MeteoSwiss) (<a href="getindices.cgi?WMO=KNMIData/cnt&STATION=CNT_v1.0&TYPE=t&id=$EMAIL">v1.0</a>)</div>
+<td><a href="http://www.meteoswiss.admin.ch/home/climate/present-day/climate-trends/data-on-the-swiss-temperature-mean-since-1864.html"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
 <tr><td>United Kingdom<td><div class="kalelink"><a href="getindices.cgi?WMO=UKMOData/cet&STATION=Central_England_Temperature&TYPE=t&id=$EMAIL">Central England Temperature</a> (1659-now),
 <a href="getindices.cgi?WMO=UKMOData/cet_min&STATION=Central_England_min_temperature&TYPE=t&id=$EMAIL">minimum</a> (1878-now),
 <a href="getindices.cgi?WMO=UKMOData/cet_max&STATION=Central_England_max_temperature&TYPE=t&id=$EMAIL">maximum</a> (1878-now,
