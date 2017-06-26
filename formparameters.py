@@ -536,15 +536,15 @@ scenario_cordex_values = [['rcp26', 'Historical + RCP2.6'],
 obs_tas_values = [['giss_temp_1200', 'GISTEMP 1200'],
                   ['ncdc_temp', 'NCDC MOST'],
                   ['hadcrut4', 'HadCRUT4.2.0.0'],
-                  ['cru_tmp', 'CRU TS 3.24']]
+                  ['cru4_tmp', 'CRU TS 4.00']]
 
-obs_tasmin_values = [['cru_tmn', 'CRU TS 3.24']]
+obs_tasmin_values = [['cru4_tmn', 'CRU TS 4.00']]
 
-obs_tasmax_values = [['cru_tmx', 'CRU TS 3.24']]
+obs_tasmax_values = [['cru4_tmx', 'CRU TS 4.00']]
 
 obs_pr_values = [['gpcc_25_n1', 'GPCC V7'],
                  ['prca', 'NCDC anomalies'],
-                 ['cru_pre', 'CRU TS 3.24']]
+                 ['cru4_pre', 'CRU TS 4.00']]
 
 obs_psl_values = [['trenberthslp', 'UCAR ds010 (NH only)'],
                   ['hadslp2r', 'HadSLP2r']]
@@ -612,8 +612,8 @@ class FormParameters:
         self.FORM_scenario_cmip3 = 'sresa1b'
         self.FORM_scenario_rt2b = 'sresa1b'
         self.FORM_obs_tas = 'giss_temp_1200'
-        self.FORM_obs_tasmin = 'cru_tmn'
-        self.FORM_obs_tasmax = 'cru_tmx'
+        self.FORM_obs_tasmin = 'cru4_tmn'
+        self.FORM_obs_tasmax = 'cru4_tmx'
         self.FORM_obs_pr = 'gpcc_25_n1'
         self.FORM_obs_psl = 'hadslp2r'
         self.FORM_measure = 'diff'
