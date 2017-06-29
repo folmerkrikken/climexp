@@ -90,6 +90,13 @@ if [ -n "$FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
     corrargs="$corrargs ave $FORM_sum"
     outfile=${outfile}_${FORM_sum}v
 fi
+if [ -n "$FORM_addoption" ]; then
+    corrargs="$corrargs $FORM_addoption"
+    if [ $FORM_addoption != add_anom ]; then
+        outfile=${outfile}_${FORM_addoption#add_}
+        NAME="$NAME ${FORM_addoption#add_}"
+    fi
+fi
 
 if [ -n "$ENSEMBLE" ]; then
     c=`echo $file | fgrep -c '%%%'`
