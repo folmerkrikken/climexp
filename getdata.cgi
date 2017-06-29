@@ -138,6 +138,7 @@ EOF
     echo "TYPE = $TYPE<br>"
     echo "WMO = $WMO<br>"
     echo "PROG = $PROG<br>"
+    echo "makenetcdf = $makenetcdf<br>"
   fi
   echo `date` "$EMAIL ($REMOTE_ADDR) ./bin/$PROG $wmo ./data/$TYPE$WMO.dat" >> log/log
   if [ "$makenetcdf" = true ]; then
@@ -206,8 +207,8 @@ if [ ! -s $firstfile ]; then
     echo "For search engines this data is not retrieved."
   else
     # something went wrong
-    echo `date`" $REMOTE_ADDR error: could not find ./data/$TYPE$WMO.dat" 1>&2
-    echo "Something went wrong.  Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a>"
+    echo `date`" $REMOTE_ADDR error: could not find $firstfile" 1>&2
+    echo "Something went wrong, could not find $firstfile.  Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a>"
   fi
   VAR="unknown"
   UNITS="unknown"
