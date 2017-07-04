@@ -456,6 +456,29 @@ Precipitation along the Gulf Coast in HiFLOR transient runs 1971-2015 nudged to 
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.sst-E%%.19710101-20151231.precip_LA_all_ce_3dymax&STATION=pr_LA_HiFLOR_sst&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial and annual max of 3-day means</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.sst-E%%.19710101-20151231.precip_LA_all_ce_3dymax_mo&STATION=pr_LA_HiFLOR_sst&TYPE=p&NPERYEAR=12&id=$EMAIL">spatial and monthly max of 3-day means</a>.
 
+<div class=alineakop>2017 Europe June heat series</div>
+Portugal CRU TS 4.00
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_Portugal_without_islands&STATION=Tmax_Portugal&TYPE=t&id=$EMAIL">Tmax</a>, 
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_Portugal_without_islands&STATION=T2m_Portugal&TYPE=t&id=$EMAIL">T2m</a>
+<br>Spain CRU TS 4.00
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_Spain_Europe&STATION=Tmax_Spain&TYPE=t&id=$EMAIL">Tmax</a>,
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_Spain_Europe&STATION=T2m_Spain&TYPE=t&id=$EMAIL">T2m</a>
+<br>France CRU TS 4.00
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_France_metropolitan&STATION=Tmax_France&TYPE=t&id=$EMAIL">Tmax</a>,
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_France_metropolitan&STATION=T2m_France&TYPE=t&id=$EMAIL">T2m</a>
+<br>Switzerland  CRU TS 4.00
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_Switzerland&STATION=Tmax_Switzerland&TYPE=t&id=$EMAIL">Tmax</a>, Swissmean 
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/swiss_swiss&STATION=Swissmean&TYPE=t&id=$EMAIL">T2m</a>
+<br>Belgium CRU TS 4.00
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_Belgium&STATION=Tmax_Belgium&TYPE=t&id=$EMAIL">Tmax</a>,
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_Belgium&STATION=T2m_Belgium&TYPE=t&id=$EMAIL">T2m</a>
+<br>Netherlands CRU TS 4.00
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_Netherlands_without_Caribbean&STATION=Tmax_Netherlands&TYPE=t&id=$EMAIL">Tmax</a>, CNT
+<a href="getindices.cgi?WMO=KNMIData/cnt_v11&STATION=CNT&TYPE=t&id=$EMAIL">T2m</a>
+<br>Central England
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_-3-0E_54-57N_n&STATION=Tmax_-3-0E_54-57N&TYPE=t&id=$EMAIL">Tmax</a>, CET
+<a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_-3-0E_54-57N_n&STATION=CET&TYPE=t&id=$EMAIL">T2m</a>
+
 EOF
 
 . ./myvinkfoot.cgi
