@@ -1,7 +1,7 @@
 #!/bin/sh
 # add a max-age HTTP/1.1 header for easier control, also works on 
 # machine where convdate is absent
-echo "Cache-Control: max-age=86400"
+###echo "Cache-Control: max-age=86400"
 if [ -x bin/convdate ]; then
 # make an Expires header for better performance
 # (really, really should switch to perl or python!  another 3 processes!)
