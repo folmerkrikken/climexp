@@ -192,6 +192,7 @@ title=`echo $title | sed -e 's/^sign/Log10(sign)/'`
 htmltitle=`echo "$title" | sed -e 's/^corr /Correlation of /' -e 's/\\\\/ /'`
 
 backupfile="data/correlatebox_$$.html"
+[ "$lwrite" = true ] && echo "calling restofcorrelatebox"
 . $DIR/restofcorrelatebox.cgi |tee $backupfile
 sed -e 's:plotstations.cgi:../plotstations.cgi:' $backupfile > $backupfile.new
 mv $backupfile.new $backupfile

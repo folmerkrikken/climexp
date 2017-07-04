@@ -16,7 +16,6 @@ correlatebox $corrargs
 EOF
 export SCRIPTPID=$$
 export FORM_EMAIL=$EMAIL
-[ $EMAIL = oldenborgh@knmi.nl ] && lwrite=false # true
 if [ "$lwrite" = true ]; then
     echo "./bin/stationlist $corrargs<br>"
     [ -n "$attribute_args" ] && echo "attribute_args=$attribute_args<br>"
