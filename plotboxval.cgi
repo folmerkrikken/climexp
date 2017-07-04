@@ -121,7 +121,7 @@ if [ $NPERYEAR -ge 12 ]; then
         echo "<select class=\"forminput\" name=\"sum\">"
         for sum in 1 2 3 4 5 6 7 8 9 10 11 12 18 24 60
         do
-            if [ $sum = $FORM_sum ]; then
+            if [ "$sum" = "$FORM_sum" ]; then
                 echo "<option selected>$sum"
             else
                 echo "<option>$sum"
