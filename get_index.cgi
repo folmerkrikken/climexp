@@ -237,7 +237,7 @@ if [ "$FORM_gridpoints" != true ]; then
       fi
   fi
   if [ "$splitfield" = true -a "$PROG" != "" ]; then
-    warning='<font color="#ff0000">This will take a long time, at least an hour.</font>'
+    warning='<font color="#ff0000">This may take a long time, more than an hour.</font>'
     if [ -z "$EMAIL" -o "$EMAIL" = someone@somewhere ]; then
         echo 'Content-Type: text/html'
         echo 
