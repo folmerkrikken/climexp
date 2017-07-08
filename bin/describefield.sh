@@ -5,6 +5,9 @@ if [ -z "$file" ]; then
   echo "usage: $0 file"
   exit -1
 fi
+if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
+    lwrite=false # true
+fi
 [ "$lwrite" = true ] && echo "file=$file<br>"
 describefield=${0%.sh}
 if [ ${file%.nc} = $file -a ${file%.cdf} = $file -o ${file#data} != $file ]; then
@@ -68,7 +71,7 @@ else
     metadata=./metadata/$file.txt
     metadir=`dirname $metadata`
     [ ! -d $metadir ] && mkdir -p $metadir
-    [ "$lwrite" = true ] && echo "echo ensfile=$ensfile<br>"
+    [ "$lwrite" = true ] && echo "ensfile=$ensfile<br>"
     if [ ! -s $ensfile ]; then
         echo "error: cannot locate $ensfile<br>"
         exit -1
@@ -79,7 +82,7 @@ else
     else
         files=$file
     fi
-    if [ -s $metadata -a ! $metadata -ot $ensfile ]; then
+    if [ -s $metadata -a ! $metadata -ot "$ensfile" ]; then
 #       quick from cache
         cat $metadata
         if [ -s $metadata.eval ]; then
