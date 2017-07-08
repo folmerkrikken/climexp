@@ -237,7 +237,7 @@ if [ "$FORM_gridpoints" != true ]; then
       fi
   fi
   if [ "$splitfield" = true -a "$PROG" != "" ]; then
-    warning='<font color="#ff0000">This may take a long time, more than an hour.</font>'
+    warning='<font color="#ff0000">This may take a long time, more than an hour for daily data.</font>'
     if [ -z "$EMAIL" -o "$EMAIL" = someone@somewhere ]; then
         echo 'Content-Type: text/html'
         echo 
@@ -260,7 +260,7 @@ else
   echo 'Content-Type: text/html'
   echo 
   echo
-  . ./myvinkhead.cgi "Set of grid points" "$timescale $kindname $climfield"
+  . ./myvinkhead.cgi "Set of grid points" "$timese $kindname $climfield"
   ###echo ./bin/$PROG
   echo `date` "$EMAIL ($REMOTE_ADDR) $PROG > $listname" >> log/log
   ( ./bin/$PROG > $listname ) 2>&1
