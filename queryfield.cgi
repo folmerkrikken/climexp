@@ -134,11 +134,11 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
         elif [ $dataset = futureweather ]; then
             period=$exp
             exp=FutureWeather
-            if [ $exp=alldays ]; then
+            if [ $exp = alldays ]; then
                 export splitfield=true
                 period='????????-????????'
             fi
-            if [ $exp=allmonths ]; then
+            if [ $exp = allmonths ]; then
                 export splitfield=true
                 period='??????-??????'
             fi
