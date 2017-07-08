@@ -99,16 +99,16 @@ Choose a field and press this button</td></tr>
 <th>psl
 <tr><td>daily
 <td>together
-<td><input type=radio class=formradio name=field value=futureweather_tas_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_tasmin_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_tasmax_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_pr_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_evspsbl_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_pme_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_ssr_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_uas_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_vas_Aday_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_psl_Aday_ECEARTH23_all>
+<td><input type=radio class=formradio name=field value=futureweather_tas_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_tasmin_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_tasmax_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_pr_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_evspsbl_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_pme_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_ssr_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_uas_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_vas_Aday_ECEARTH23_alldays>
+<td><input type=radio class=formradio name=field value=futureweather_psl_Aday_ECEARTH23_alldays>
 <tr><td>&nbsp;
 <td>1850-1854
 <td><input type=radio class=formradio name=field value=futureweather_tas_Aday_ECEARTH23_18500101-18541231>
@@ -159,16 +159,16 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=futureweather_psl_Aday_ECEARTH23_20940101-20981231>
 <tr><td>monthly
 <td>together
-<td><input type=radio class=formradio name=field value=futureweather_tas_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_tasmin_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_tasmax_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_pr_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_evspsbl_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_pme_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_ssr_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_uas_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_vas_Amon_ECEARTH23_all>
-<td><input type=radio class=formradio name=field value=futureweather_psl_Amon_ECEARTH23_all>
+<td><input type=radio class=formradio name=field value=futureweather_tas_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_tasmin_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_tasmax_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_pr_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_evspsbl_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_pme_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_ssr_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_uas_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_vas_Amon_ECEARTH23_allmonths>
+<td><input type=radio class=formradio name=field value=futureweather_psl_Amon_ECEARTH23_allmonths>
 <tr><td>&nbsp;
 <td>1850-1854
 <td><input type=radio class=formradio name=field value=futureweather_tas_Amon_ECEARTH23_185001-185412>
