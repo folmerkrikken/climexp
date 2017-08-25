@@ -96,7 +96,7 @@ if [ -n "$FORM_yflip" ]; then
 fi
 [ "$lwrite" = true ] && echo "FORM_yflip=$FORM_yflip<br>ylint=$ylint<br>"
 # sum in GrADS?
-var=$FORM_var
+[ -z "$var" ] && var=$FORM_var
 if [ -n "$FORM_plotsum" ]; then
 	if [ "$FORM_plotsum" -gt 1 ]; then
 		###sum="run sum ${FORM_var:-corr} $FORM_plotsum"

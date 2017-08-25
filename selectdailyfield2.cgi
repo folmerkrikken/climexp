@@ -17,7 +17,7 @@ EOF
 sed -e 's:<input type="radio" class="formradio" name="field" value="\([^"]*\)"></td>:<a href="select.cgi?id='$EMAIL'\&field=\1">x</a>:g' \
     -e 's/<input type="radio" class="formradio" name="field" value="\([^"]*\)">/<a href="select.cgi?id='$EMAIL'\&field=\1">/g' \
     -e 's:,:</a>,:g' \
-    -e 's:</td><td><a href="wipefeet:</a></td><td><a href="wipefeet:g' \
+    -e 's:</td><td><a href=":</a></td><td><a href=":g' \
     selectdailyfield_obs.html
 cat <<EOF
 </table>
@@ -26,7 +26,7 @@ EOF
 sed -e 's:<input type="radio" class="formradio" name="field" value="\([^"]*\)"></td>:<a href="select.cgi?id='$EMAIL'\&field=\1">x</a>:g' \
     -e 's/<input type="radio" class="formradio" name="field" value="\([^"]*\)">/<a href="select.cgi?id='$EMAIL'\&field=\1">/g' \
     -e 's:,:</a>,:g' \
-    -e 's:</td><td><a href="wipefeet:</a></td><td><a href="wipefeet:g' \
+    -e 's:</td><td><a href=":</a></td><td><a href=":g' \
     selectdailyfield_rea.html
 cat <<EOF
 </table>
@@ -36,7 +36,7 @@ sed -e 's:<input type="radio" class="formradio" name="field" value="\([^"]*\)"><
     -e 's:<input type="radio" class="formradio" name="field" value="\([^"]*\)"></td>:<a href="select.cgi?id='$EMAIL'\&field=\1">x</a>:g' \
     -e 's/<input type="radio" class="formradio" name="field" value="\([^"]*\)">/<a href="select.cgi?id='$EMAIL'\&field=\1">/g' \
     -e 's:,:</a>,:g' \
-    -e 's:</td><td><a href="wipefeet:</a></td><td><a href="wipefeet:g' \
+    -e 's:</td><td><a href=":</a></td><td><a href=":g' \
     selectdailyfield_ipcc.html
 cat <<EOF
 </table>

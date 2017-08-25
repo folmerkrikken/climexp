@@ -11,52 +11,35 @@ echo
 # in order not to break bookmarks to this entry point allow QUERY_STRING (with some checking)
 # do not allow / in email address
 . ./searchengine.cgi
-if [ -z "$EMAIL" ]; then
-  ###. ./myvinkhead.cgi "No login id given" "" "noindex,nofollow"
-  ###echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
-  EMAIL=someone@somewhere
-  ###. ./myvinkfoot.cgi
-  ###exit
+if [ -z "$id" ]; then
+   id=$EMAIL
 fi
-c=`fgrep -c "^$EMAIL " ./log/list`
-if [ $c = 0 ]; then
-  string=$EMAIL
-  if [ ${string#p.della} != $string ]; then
-    string=spam
-  fi
-  EMAIL=someone@somewhere
-  id=someone@somewhere
-  FORM_id=someone@somewhere
-  . ./myvinkhead.cgi "User $string unknown" "" "noindex,follow"
-  echo "Please <a href=\"registerform.cgi\">register or log in</a> or use the Climate Explorer <a href=\"/start.cgi?id=someone@somewhere\">anonymously</a> (with restrictions)"
-  . ./myvinkfoot.cgi
-else
-  FORM_username=`fgrep "$EMAIL" ./log/list|cut -f 2 -d ' '|tail -1|sed -e 's/+/ /g'`
-  FORM_institute=`fgrep "$EMAIL" ./log/list|cut -f 3 -d ' '|tail -1|sed -e 's/+/ /g'`
-  . ./myvinkhead.cgi "Starting point" "" "index,follow"
+if [ -z "$EMAIL" ]; then
+    EMAIL=someone@somewhere
+fi
+. ./checkemail.cgi
+. ./myvinkhead.cgi "Starting point" "" "index,follow"
 
 if [ "$EMAIL" != someone@somewhere ]; then
-  echo "<div class=\"alineakop\">Welcome, $FORM_username from $FORM_institute</div>"
-  ###echo "This page can be added to your bookmarks/favorites to avoid logging in.<p>"
-  if [ -s data/randomimage.png ]
-  then
-    randomimage=data/randomimage.png
-  else
-    tmpfile=/tmp/start$$.txt
-    list=`ls -t data/ | fgrep .png | egrep '(^[dghR])|(.*corr.*)' | egrep -v 'kml|tmp' `
-    for file in $list
-    do
-      if [ -z "$randomimage" -a -s data/$file ]
-      then
-        randomimage=data/$file
-      fi
-    done
-  fi
+    FORM_username=`fgrep "$EMAIL" ./log/newlist | cut -f 2 -d ' ' | tail -1 | sed -e 's/+/ /g'`
+    FORM_institute=`fgrep "$EMAIL" ./log/newlist | cut -f 3 -d ' ' | tail -1 | sed -e 's/+/ /g'`
+    echo "<div class=\"alineakop\">Welcome, $FORM_username from $FORM_institute</div>"
+    if [ -s data/randomimage.png ]; then
+        randomimage=data/randomimage.png
+    else
+        tmpfile=/tmp/start$$.txt
+        list=`ls -t data/ | fgrep .png | egrep '(^[dghR])|(.*corr.*)' | egrep -v 'kml|tmp' `
+        for file in $list; do
+            if [ -z "$randomimage" -a -s data/$file ]; then
+                randomimage=data/$file
+            fi
+        done
+    fi
 else
-  echo "<div class=\"alineakop\">Welcome, anonymous user</div>"
-  randomimage=imageoftheweek.png # pa61223.png
+    echo "<div class=\"alineakop\">Welcome, anonymous user</div>"
+    randomimage=imageoftheweek.png # pa61223.png
 
-        cat <<EOF
+    cat <<EOF
 Please enter the KNMI Climate Explorer, a research tool to investigate the climate.  This web site collects a lot of climate data and analysis tools.  Please verify yourself that the data you use is good enough for your purpose, and report errors back.  In publications the original data source should be cited, a link to a web page describing the data is always provided.
 
 <p>Start by selecting a class of climate data from the right-hand menu.  After you have selected the time series or fields of interest, you will be able to investigate it, correlate it to other data, and generate derived data from it.
@@ -68,14 +51,13 @@ EOF
 fi
 
 if [ "$EMAIL" = someone@somewhere ]; then
-  echo "<p>Some restrictions are in force, notably the possibility to define your own indices, to upload data into the Climate Explorer and to handle large datasets.  If you want to use these features please <a href="registerform.cgi">log in or register</a>."
+    echo "<p>Some restrictions are in force, notably the possibility to define your own indices, to upload data into the Climate Explorer and to handle large datasets.  If you want to use these features please <a href="registerform.cgi">log in or register</a>."
 fi
 
 . ./check_ie.cgi
 
 if [ "$EMAIL" != someone@somewhere ]; then
-        ###. ./headlines.cgi
-        touch ./prefs/$EMAIL.news
+    touch ./prefs/$EMAIL.news
 fi
 
 pngfile=$randomimage
@@ -93,4 +75,3 @@ head -6 news.html | sed -e "s/FORM_EMAIL/$EMAIL/"
 echo "<tr><td><a href=\"news.cgi?id=$EMAIL&all=all\">more...</a></td><td>&nbsp;</td></tr></table>"
 
 . ./myvinkfoot.cgi
-fi

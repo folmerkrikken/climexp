@@ -232,8 +232,8 @@ atr2) var="return time in climate of $FORM_begin2";;
 atra) var="log10(ratio) of return times";; 
 "") var="corr";;
 ave*) var=`echo $FORM_var | sed -e 's/ave[(]\([a-z0-9]*\),t[^)]*[)]/\1/' -e 's/[(]time=[^)]*[)]//'`;;
-*) var="${FORM_var%(*}";;
 esac
+[ -z "$var" ] && var="${FORM_var%(*}"
 
 if [ -n "$FORM_day" ]; then
     if [ -z "$FORM_hour" ]; then

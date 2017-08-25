@@ -13,7 +13,7 @@ EOF
 
 sed -e 's/<input type="radio" class="formradio" name="field" value="\([^"]*\)">/<a href="select.cgi?id=EMAIL\&field=\1">/g' \
     -e 's:,:</a>,:g' \
-    -e 's:</td><td><a href="wipefeet:</a></td><td><a href="wipefeet:g' \
+    -e 's:</td><td><a href=":</a></td><td><a href=":g' \
     -e "s/EMAIL/$EMAIL/g" \
     ./selectfield_obs.html
 

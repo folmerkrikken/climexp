@@ -98,8 +98,8 @@ if [ "${FORM_var#pot}" != "$FORM_var" ]; then
   fi
   corrargs="$corrargs dgt ${FORM_threshold}%"
 fi
-. $DIR/getopts.cgi
-. $DIR/getfieldopts.cgi
+. ./getopts.cgi
+. ./getfieldopts.cgi
 
 . ./myvinkhead.cgi "Compute $var" "$kindname $climfield" "noindex,nofollow"
 
@@ -125,8 +125,8 @@ if [ "${FORM_var%_rt}" != "$FORM_var" -a "$FORM_changesign" = "both" ]; then
     FORM_var=bo_$FORM_var
     rm data/m$$p.nc data/m$$m.nc data/m$$*.nc.tmp data/m$$*.nc.m.tmp
 fi
-if [ ! -s $DIR/data/m$$.nc -a ! -s $DIR/data/m$$.dat -a ! -s  $DIR/data/m$$.grd ]; then
-  cat $DIR/wrong.html
+if [ ! -s ./data/m$$.nc -a ! -s ./data/m$$.dat -a ! -s ./data/m$$.grd ]; then
+  cat ./wrong.html
   echo "<pre>"
   cat /tmp/getmomentsfield$$.log
   echo "</pre>"

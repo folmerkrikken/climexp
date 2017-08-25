@@ -8,6 +8,6 @@ NAME="Sealevel"
 NPERYEAR=12
 export DIR=`pwd`
 PROG=getsealev
-FROM="from <a href="wipefoot.cgi?http://www.pol.ac.uk/psmsl/datainfo/" target="_new">PSMSL database</a>"
+FROM="from <a href="http://www.pol.ac.uk/psmsl/datainfo/" target="_new">PSMSL database</a>"
 
 . $DIR/getdata.cgi

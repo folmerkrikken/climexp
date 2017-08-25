@@ -1,7 +1,7 @@
 <!--#include virtual="help_header.html"-->
 <div class="alineakop">HCDN US daily runoff data</div> 
 
-The <a href="../wipefoot.cgi?http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
+The <a href="http://water.usgs.gov/pubs/wri/wri934076/1st_page.html"
 target="_new">HCDN dataset</a> contains daily unoff data from the US
 only over the period 1874-1988.  In general hydrologists are not keen to share
 their data, and with the exception of the US it is almost impossible

@@ -21,7 +21,7 @@ case $PROG in
 esac
 
 export DIR=`pwd`
-FROM="from <a href="wipefoot.cgi?https://www.ncdc.noaa.gov/ghcnm/" target="_new">GHCN-M v2/v3 (adjusted) database</a>"
+FROM="from <a href="https://www.ncdc.noaa.gov/ghcnm/" target="_new">GHCN-M v2/v3 (adjusted) database</a>"
 [ -z "$extraargs" ] && makenetcdf=true
 
 . $DIR/getdata.cgi
