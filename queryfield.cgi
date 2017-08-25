@@ -134,11 +134,11 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
         elif [ $dataset = futureweather ]; then
             period=$exp
             exp=FutureWeather
-            if [ $exp = alldays ]; then
+            if [ $period = alldays ]; then
                 export splitfield=true
                 period='????????-????????'
             fi
-            if [ $exp = allmonths ]; then
+            if [ $period = allmonths ]; then
                 export splitfield=true
                 period='??????-??????'
             fi
@@ -376,6 +376,7 @@ sstoi) file=NCEPData/sstoi.ctl;kindname="Reynolds";climfield="SST";;
 kaplan_ssta) file=LDGOData/kaplan_ssta.nc;kindname="Kaplan";climfield="SSTa";;
 ersstv3b) file=NCDCData/ersstv3b.ctl;kindname="ERSST v3b2";climfield="SST";;
 ersstv4) file=NCDCData/ersstv4.nc;kindname="ERSST v4";climfield="SST";;
+ersstv5) file=NCDCData/ersstv5.nc;kindname="ERSST v5";climfield="SST";;
 dasilva_ssta) file=DaSilvaData/dasilva_sst_anom.cdf;kindname="Da Silva";climfield="SSTa";;
 ssmi_sst) file=SSMIData/ssmi_sst.ctl;kindname="SSMI";climfield="SST";;
 tlt_60) file=UAHData/tlt_60.nc;kindname="UAH MSU v6.0";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
@@ -528,6 +529,8 @@ set lat 24.1 49.9';;
 prism_tmean*) ext=${FORM_field#prism_tmean};file=PRISMData/tmean_prism$ext.nc;kindname="PRISM";climfield="temperature";map='set lon -125 -66.5
 set lat 24.1 49.9';;
 prism_tdmean*) ext=${FORM_field#prism_tdmean};file=PRISMData/tdmean_prism$ext.nc;kindname="PRISM";climfield="dew point";map='set lon -125 -66.5
+set lat 24.1 49.9';;
+prism_vpdmax*) ext=${FORM_field#prism_vpdmax};file=PRISMData/tdmean_prism$ext.nc;kindname="PRISM";climfield="max vapour pressure deficit";map='set lon -125 -66.5
 set lat 24.1 49.9';;
 
 scpdsi) file=CRUData/scPDSI.cru.3.25.bams2017.GLOBAL.1901.2016.nc;kindname="CRU";climfield="scPDSI 3.25";;
