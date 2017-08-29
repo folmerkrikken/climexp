@@ -37,7 +37,7 @@ else
     if [ -n "$FORM_username" ]; then
         username=`echo $FORM_username | tr ' ' '+'`
         institute=`echo $FORM_institute | tr ' ' '+'`
-        md5=`echo "$EMAIL" | md5`
+        md5=`echo "$EMAIL" | md5sum | cut -f 1 -d ' '`
         echo "^$EMAIL $username $institute $md5 `date`" >> $DIR/log/newlist
     fi
 fi
