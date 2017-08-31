@@ -502,6 +502,8 @@ Portugal CRU TS 4.00
 <br>Central England
 <a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_-3-0E_54-57N_n&STATION=Tmax_-3-0E_54-57N&TYPE=t&id=$EMAIL">Tmax</a>, CET
 <a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_-3-0E_54-57N_n&STATION=CET&TYPE=t&id=$EMAIL">T2m</a>
+<p>
+<a href="getindices.cgi?WMO=KNMI14Data/Tmed/tasmax_8-24E_36-48N_muladdcorr_ydrun_retrend_%%&STATION=EC-EARTH_biascorr_Tmax_8-24E_36-48N&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmax 36-48&deg;N, 8-24&deg;E</a>
 
 EOF
 
