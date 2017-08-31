@@ -25,7 +25,6 @@ if ( $NCFILE ) {
   close OUTFILE;
   # make a file with meta-metadata
   $infofile = "$outfile";
-  if ($EMAIL =~ /^[\w_\-\.\+]+@[\w_\-\.]+$/) {
     $infofile =~ s/\.[\w]*$/\.$EMAIL.info/;
     open (OUTFILE,">$infofile");
     print OUTFILE "$outfile\n";
@@ -46,13 +45,6 @@ if ( $NCFILE ) {
       exit(1);
     }
     close OUTFILE;
-  } else {
-    # Invalid email address.
-    $result = system("./htmlheader.cgi");
-    $result = system("./myvinkhead.cgi error invalid_email");
-    $result = system("./myvinkfoot.cgi");
-    exit(1);
-  }
 } else {
   $result = system("./htmlheader.cgi");
   $result = system("./myvinkhead.cgi error no_netcdf_file");
