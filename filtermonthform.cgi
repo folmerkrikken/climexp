@@ -94,7 +94,7 @@ filter<br>cut-off value
 <select class="forminput" name="nfilter">
 <option $m1>1
 <option $m2>2
-<option $m2>3
+<option $m3>3
 <option $m4>4
 <option $m5>5
 <option $m6>6
