@@ -439,19 +439,20 @@ detrended:
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_gulf_flor_control_%%&STATION=SST_Gulf_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">ensemble</a>,
 
 <div class=alineakop>HiFLOR daily series</div>
-Precipitation along the Gulf Coast in hiFLOR control runs 
+Daily precipitation along the Gulf Coast in hiFLOR control runs per grid box:
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1860-Ctl.00010101-02001231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_1860&TYPE=p&NPERYEAR=366&id=$EMAIL">1860</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1940-Ctl.00010101-00761231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_1940&TYPE=p&NPERYEAR=366&id=$EMAIL">1940</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1990-Ctl.00010101-03011231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_1990&TYPE=p&NPERYEAR=366&id=$EMAIL">1990</a>,
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.2015-Ctl.00010101-00701231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_2015&TYPE=p&NPERYEAR=366&id=$EMAIL">2015</a>.
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_05_conc_%%%&STATION=pr_LA_hiFLOR_conc&TYPE=p&NPERYEAR=366&id=$EMAIL">concatenated</a>.
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.2015-Ctl.00010101-00701231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_2015&TYPE=p&NPERYEAR=366&id=$EMAIL">2015</a>,
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_conc_%%%&STATION=pr_LA_hiFLOR_conc&TYPE=p&NPERYEAR=366&id=$EMAIL">concatenated</a>.
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_conc_%%%_max1_3v&STATION=pr_LA_hiFLOR_conc_max1_3v&TYPE=p&NPERYEAR=1&id=$EMAIL">concatenated annual max of 3-day precip</a>.
 <br>
-spatially averaged over 2x2 grid boxes 
+Annual max of 3-day precip of HiFLOR spatially averaged over 2x2 grid boxes 
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1860-Ctl.00010101-02001231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_1860&TYPE=p&NPERYEAR=366&id=$EMAIL">1860</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1940-Ctl.00010101-00761231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_1940&TYPE=p&NPERYEAR=366&id=$EMAIL">1940</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1990-Ctl.00010101-03011231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_1990&TYPE=p&NPERYEAR=366&id=$EMAIL">1990</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.2015-Ctl.00010101-00701231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_2015&TYPE=p&NPERYEAR=366&id=$EMAIL">2015</a>.
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_05_conc_%%%&STATION=pr_LA_hiFLOR_conc_1max3ave&TYPE=p&NPERYEAR=1&id=$EMAIL">concatenated</a>.
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_05_conc_%%%&STATION=pr_LA_hiFLOR_05_conc_1max3ave&TYPE=p&NPERYEAR=1&id=$EMAIL">concatenated</a>.
 <br>
 Global mean temperature in 
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.1860-Ctl.0001-0200.t_ref_all_gm_ce&STATION=GMST_hiFLOR_1860&TYPE=i&NPERYEAR=1&id=$EMAIL">1860</a>,
