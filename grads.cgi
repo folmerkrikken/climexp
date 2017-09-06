@@ -43,8 +43,8 @@ fi
 . ./save_plotoptions.cgi
 
 # generate unique number if not already set
-if [ -z "$id" ]; then
-	id=`date "+%Y%m%d_%H%M"`_$$
+if [ -z "$uniq" ]; then
+	uniq=`date "+%Y%m%d_%H%M"`_$$
 fi
 # check
 if [ -z "$NZ" ]; then
@@ -266,10 +266,10 @@ set poli off"
 	if [ "$FORM_movie" = "yes" ]; then
 		
 		dano="$dano
-enable print data/g${id}_$i.gm
+enable print data/g${uniq}_$i.gm
 run danoloop ${FORM_var:-corr} $i$date $i2$date2 $FORM_shadingtype $flipcolor $FORM_cbar $FORM_cmin $FORM_cmax $cint
 disable print
-printim data/g${id}_$i.png white $doublesize"
+printim data/g${uniq}_$i.png white $doublesize"
 
 	else
 		if [ -n "$FORM_hovmuller" ]; then
@@ -301,15 +301,15 @@ run danoprob ${FORM_var:-corr} ${date:-$i} ${FORM_shadingtype:-shadedcontour} ${
 $drawtitle"
 			if [ -z "$grads20" ]; then
 				dano="$dano
-enable print data/g${id}_$i.gm
+enable print data/g${uniq}_$i.gm
 print
 disable print
-printim data/g${id}_$i.png white $doublesize
+printim data/g${uniq}_$i.png white $doublesize
 clear"
 			else
 				dano="$dano
-print data/g${id}_$i.eps
-printim data/g${id}_$i.png white $doublesize
+print data/g${uniq}_$i.eps
+printim data/g${uniq}_$i.png white $doublesize
 clear"
 			fi
 		elif [ "$FORM_mapformat" = kml ]; then
@@ -320,16 +320,16 @@ set grid off
 set mpdraw off
 $dano
 run danoprob ${FORM_var:-corr} ${date:-$i} ${FORM_shadingtype:-shadedcontour} ${flipcolor:-0} off ${ylint:-0} $pminarg $FORM_cmin $FORM_cmax
-printim data/g${id}_${i}_tmp.png white x1584 y1020
+printim data/g${uniq}_${i}_tmp.png white x1584 y1020
 cbarn
-printim data/g${id}_${i}_tmp2.png white x1584 y1020
+printim data/g${uniq}_${i}_tmp2.png white x1584 y1020
 clear"
 		else
 			dano="set xlab off
 set ylab off
 set grid off
 $dano
-run danoprob ${FORM_var:-corr} ${date:-$i} geotiff:data/g${id}_$i ${flipcolor:-0} off ${ylint:-0} $pminarg $FORM_cmin $FORM_cmax
+run danoprob ${FORM_var:-corr} ${date:-$i} geotiff:data/g${uniq}_$i ${flipcolor:-0} off ${ylint:-0} $pminarg $FORM_cmin $FORM_cmax
 clear"
 		fi
 	fi
@@ -377,7 +377,7 @@ fi
 export GADDIR=$DIR/grads
 export UDUNITS_PATH=$DIR/grads/udunits.dat
 export HOME=/tmp
-cat <<EOF > /tmp/grads$id.log
+cat <<EOF > /tmp/grads$uniq.log
 $openfile
 $clim
 set xlopts 1 4 0.15
@@ -392,7 +392,7 @@ $sum
 $dano
 quit
 EOF
-$grads -l -b << EOF >> /tmp/grads$id.log
+$grads -l -b << EOF >> /tmp/grads$uniq.log
 $openfile
 set xlopts 1 4 0.15
 set ylopts 1 4 0.15
@@ -450,46 +450,46 @@ if [ "$FORM_mapformat" = kml ]; then
 	while [ $i -lt $l ]
 	do
 		i=$(($i+1))
-		f=data/g${id}_$i
-		if [ ! -s data/g${id}_${i}_tmp.png ]; then
-			[ -f data/g${id}_${i}_tmp.png ] && rm data/g${id}_${i}_tmp.png
+		f=data/g${uniq}_$i
+		if [ ! -s data/g${uniq}_${i}_tmp.png ]; then
+			[ -f data/g${uniq}_${i}_tmp.png ] && rm data/g${uniq}_${i}_tmp.png
 			echo "<html><body><pre>"
 			echo "Something went wrong!"
 			echo
 			echo "$dano"
 			echo
-			cat /tmp/grads$id.log
+			cat /tmp/grads$uniq.log
 			echo "</pre>"
 			. ./myvinkfoot.cgi
 		fi
 		if [ "$lwrite" = true ]; then
 			echo '<pre>'
-			cat /tmp/grads$id.log
+			cat /tmp/grads$uniq.log
 			echo '</pre>'
 		fi
-		rm /tmp/grads$id.log
+		rm /tmp/grads$uniq.log
 		if [ -z "$alreadyprinted" ]; then
 			alreadyprinted=true
 			echo "<p>Converting to KML file for <a href=\"http://earth.google.com\" target=_new>Google Earth</a>, <a href=\"http://worldwind.arc.nasa.gov/\" target=_new>World Wind</a>, <a href=\"http://www.esri.com/software/arcgis/explorer/\" target=_new>ArcGIS explorer</a> or another visualisation application....<p>"
 		fi
 		if [ "$lwrap" = TRUE ]; then
 			# left and right remove the whole frame if the whole earth is covered
-			(pngtopnm data/g${id}_${i}_tmp.png | pnmcrop | pnmcut -left 2 -right -3 -top 1 -bottom -2 > /tmp/g${id}_${i}_m.pnm) 2> /dev/null
-			pnmcut -right 0 /tmp/g${id}_${i}_m.pnm > /tmp/g${id}_${i}_l.pnm
-			pnmcut -left -1 /tmp/g${id}_${i}_m.pnm > /tmp/g${id}_${i}_r.pnm
-			pnmcat -leftright /tmp/g${id}_${i}_l.pnm /tmp/g${id}_${i}_m.pnm /tmp/g${id}_${i}_r.pnm | pnmtopng > data/g${id}_${i}_kml.png
+			(pngtopnm data/g${uniq}_${i}_tmp.png | pnmcrop | pnmcut -left 2 -right -3 -top 1 -bottom -2 > /tmp/g${uniq}_${i}_m.pnm) 2> /dev/null
+			pnmcut -right 0 /tmp/g${uniq}_${i}_m.pnm > /tmp/g${uniq}_${i}_l.pnm
+			pnmcut -left -1 /tmp/g${uniq}_${i}_m.pnm > /tmp/g${uniq}_${i}_r.pnm
+			pnmcat -leftright /tmp/g${uniq}_${i}_l.pnm /tmp/g${uniq}_${i}_m.pnm /tmp/g${uniq}_${i}_r.pnm | pnmtopng > data/g${uniq}_${i}_kml.png
 		else
 			# remove the white around the figure, and half the frame on top and bottom
-			(pngtopnm data/g${id}_${i}_tmp.png | pnmcrop | pnmcut -left 1 -right -2 -top 1 -bottom -2 | pnmtopng > data/g${id}_${i}_kml.png) 2> /dev/null
+			(pngtopnm data/g${uniq}_${i}_tmp.png | pnmcrop | pnmcut -left 1 -right -2 -top 1 -bottom -2 | pnmtopng > data/g${uniq}_${i}_kml.png) 2> /dev/null
 		fi
 		# extract colour bar - if someone knows a better way I'd love to hear it
-		pnmfile=/tmp/g${id}_${i}_tmp.pnm
-		cbfile=data/cb${id}_${i}_kml.png
-		pngtopnm data/g${id}_${i}_tmp2.png | pnmcrop > $pnmfile
+		pnmfile=/tmp/g${uniq}_${i}_tmp.pnm
+		cbfile=data/cb${uniq}_${i}_kml.png
+		pngtopnm data/g${uniq}_${i}_tmp2.png | pnmcrop > $pnmfile
 		string=`pamfile $pnmfile`
 		hsize2=`echo $string | sed -e 's/^[^,]*, //' -e 's/ by.*$//'`
 		vsize2=`echo $string | sed -e 's/^.*by //' -e 's/ maxval.*$//'`
-		string=`file data/g${id}_${i}_kml.png`
+		string=`file data/g${uniq}_${i}_kml.png`
 		hsize1=`echo $string | sed -e 's/^[^,]*, //' -e 's/ x .*$//'`
 		vsize1=`echo $string | sed -e 's/^.* x //' -e 's/,.*$//'`
 		if [ $hsize2 = $(($hsize1 + 2)) ]; then
@@ -516,8 +516,8 @@ if [ "$FORM_mapformat" = kml ]; then
 			echo "size2 = $hsize2 x $vsize2<br>"
 			cbfile=""
 		fi
-		rm data/g${id}_${i}_tmp.png data/g${id}_${i}_tmp2.png $pnmfile
-		kmlfile=data/g${id}_$i.kml
+		rm data/g${uniq}_${i}_tmp.png data/g${uniq}_${i}_tmp2.png $pnmfile
+		kmlfile=data/g${uniq}_$i.kml
 		kmlbase=$SERVER_NAME
 		[ $SERVER_NAME = zuidzee.knmi.nl -o $SERVER_NAME = bhw080.knmi.nl ] && kmlbase="$kmlbase/~oldenbor/climexp"
 		kmltitle=`echo "$title" | tr '\\\\' ' '`
@@ -536,7 +536,7 @@ if [ "$FORM_mapformat" = kml ]; then
   <name>Climate Explorer map</name>
   <color>B0ffffff</color>
   <Icon>
-	<href>g${id}_${i}_kml.png</href>
+	<href>g${uniq}_${i}_kml.png</href>
   </Icon>
   <LatLonBox>
 	<north>$latlonbox_north</north>
@@ -549,7 +549,7 @@ if [ "$FORM_mapformat" = kml ]; then
 <ScreenOverlay>
   <name>Climate Explorer Colour bar</name>
   <Icon>
-	<href>cb${id}_${i}_kml.png</href>
+	<href>cb${uniq}_${i}_kml.png</href>
   </Icon>
   <overlayXY x="$x1" y="$y1" xunits="fraction" yunits="fraction"/>
   <screenXY x="$x2" y="$y2" xunits="fraction" yunits="fraction"/>
@@ -558,7 +558,7 @@ if [ "$FORM_mapformat" = kml ]; then
 </Folder>
 </kml>
 EOF
-		( cd data; zip g${id}_$i.kmz g${id}_$i.kml g${id}_${i}_kml.png cb${id}_${i}_kml.png; rm g${id}_$i.kml g${id}_${i}_kml.png cb${id}_${i}_kml.png ) > /dev/null
+		( cd data; zip g${uniq}_$i.kmz g${uniq}_$i.kml g${uniq}_${i}_kml.png cb${uniq}_${i}_kml.png; rm g${uniq}_$i.kml g${uniq}_${i}_kml.png cb${uniq}_${i}_kml.png ) > /dev/null
 		echo "<p>"
 		echo "<a href=\"$f.kmz\">KML file</a> of "
 		cat /tmp/grads_title_$$_$i.txt
@@ -579,7 +579,7 @@ elif [ "$FORM_mapformat" = png ]; then
 	while [ $i -lt $l ]
 	do
 		i=$(($i+1))
-		f=data/g${id}_$i
+		f=data/g${uniq}_$i
 		if [ -z "$grads20" ]; then
 			size=`wc -c $f.gm | sed -e 's/data.*//'`
 		else
@@ -588,18 +588,18 @@ elif [ "$FORM_mapformat" = png ]; then
 		if [ "$size" -lt 50 ];then
 			echo "Something went wrong!"
 			echo "<pre>"
-			cat /tmp/grads$id.log
-			rm /tmp/grads$id.log
+			cat /tmp/grads$uniq.log
+			rm /tmp/grads$uniq.log
 			echo "</pre>"
 		else
-			if [ -f /tmp/grads$id.log ]; then
+			if [ -f /tmp/grads$uniq.log ]; then
 				if [ "$lwrite" = true ]; then
 					echo '<pre>'
 					echo "$dano"
-					cat /tmp/grads$id.log
+					cat /tmp/grads$uniq.log
 					echo '</pre>'
 				fi
-				rm /tmp/grads$id.log
+				rm /tmp/grads$uniq.log
 			fi
 		fi
 		if [ "$FORM_movie" != "yes" ]; then
@@ -739,8 +739,8 @@ EOF
 <p>
 Get the raw data as GrADS <a href="$datafile.ctl">control</a>
 and (gzipped) <a href="$datfile.gz">data</a> files,
-or generate a <a href="grads2nc.cgi?file=$datafile.ctl&id=$EMAIL&title=$nexttitle">netCDF</a> file,
-or download as <a href="grads2ascii.cgi?file=$datafile.ctl&id=$EMAIL&title=$nexttitle">ascii</a> (big).
+or generate a <a href="grads2nc.cgi?file=$datafile.ctl&uniq=$EMAIL&title=$nexttitle">netCDF</a> file,
+or download as <a href="grads2ascii.cgi?file=$datafile.ctl&uniq=$EMAIL&title=$nexttitle">ascii</a> (big).
 EOF
 			fi
 		fi
@@ -858,23 +858,23 @@ elif [ "$FORM_mapformat" = geotiff ]; then
 	while [ $i -lt $l ]
 	do
 		i=$(($i+1))
-		f=data/g${id}_$i
+		f=data/g${uniq}_$i
 		size=`wc -c $f.tif | sed -e 's/data.*//'`
 		if [ "$size" -lt 50 ];then
 			echo "Something went wrong!"
 			echo "<pre>"
-			cat /tmp/grads$id.log
-			rm /tmp/grads$id.log
+			cat /tmp/grads$uniq.log
+			rm /tmp/grads$uniq.log
 			echo "</pre>"
 		else
-			if [ -f /tmp/grads$id.log ]; then
+			if [ -f /tmp/grads$uniq.log ]; then
 				if [ "$lwrite" = true ]; then
 					echo '<pre>'
 					echo "$dano"
-					cat /tmp/grads$id.log
+					cat /tmp/grads$uniq.log
 					echo '</pre>'
 				fi
-				rm /tmp/grads$id.log
+				rm /tmp/grads$uniq.log
 			fi
 		fi
 		echo "<p>"
