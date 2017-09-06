@@ -78,11 +78,12 @@ case ${FORM_sel:-1} in
 esac
 
 base=./data/$TYPE$WMO
+[ -z "$firstfile" ] && firstfile=$base.dat
 missbase=`echo ${base}_missing | sed -e 's/+++//' -e 's/++//'`
 if [ -n "$FORM_month" ]; then
     missbase=${missbase}_${FORM_sum}_${FORM_sel}
 fi
-if [ ! -s ${missbase}.txt -o ${missbase}.plt -ot $base.dat ]; then
+if [ ! -s ${missbase}.txt -o ${missbase}.txt -ot $firstfile ]; then
     if [ -n "$FORM_month" ]; then
         args="mon $FORM_month"
         if [ -n "$FORM_sel" ]; then

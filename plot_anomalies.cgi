@@ -4,7 +4,7 @@
 if [ -z "$EMAIL" ]; then
 	EMAIL=FORM_EMAIL
 fi
-if [ $EMAIL = oldenbor@knmi.nl ]; then
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
     lwrite=false # true
 fi
 if [ "$EMAIL" != someone@somewhere ]; then
@@ -35,9 +35,10 @@ fi
 name_=`echo $name | tr "_" " "`
 station_=`echo $station | tr "_" " "`
 
+[ -z "$firstfile" ] && firstfile=./data/$TYPE$WMO.dat
 if [ ${NPERYEAR:-12} -gt 1 ]; then
 	startstop=./data/$TYPE${WMO}_${FORM_climyear1}_${FORM_climyear2}.startstop
-    if [ ! -s $startstop -o ! -s ${base}_yr.plt -o ${base}_yr.plt -ot ./data/$TYPE$WMO.dat ]; then
+    if [ ! -s $startstop -o ! -s ${base}_yr.plt -o ${base}_yr.plt -ot $firstfile ]; then
         [ "$lwrite" = true ] && echo "./bin/climatology ./data/$TYPE$WMO.dat $beginend startstop $startstop"
 		( ./bin/climatology ./data/$TYPE$WMO.dat $beginend startstop $startstop > ${base}_yr.plt ) 2>&1
     fi
@@ -67,7 +68,7 @@ if [ ${NPERYEAR:-12} -gt 1 ]; then
     ylabel="$VAR $plotunits"
 	# when plotting pressure, subtract 1000
     title="yearly cycle of $station $NAME$period"
-    if [ \( ! -s ${base}_yr.png \) -o ${base}_yr.png -ot ./data/$TYPE$WMO.dat ]; then
+    if [ \( ! -s ${base}_yr.png \) -o ${base}_yr.png -ot $firstfile ]; then
 		./bin/gnuplot << EOF
 $gnuplot_init
 ###set title "$title"
@@ -102,9 +103,9 @@ EOF
 fi
 
 if [ "${WMO#corr}" = "$WMO" -a "${WMO#sign}" = "$WMO" ]; then
-    if [ ! -s ./${base}a.eps.gz -o ! -s ./${base}a.png -o ! -s ./${base}a.plt -o ./${base}a.plt -ot ./data/$TYPE$WMO.dat ]; then
+    if [ ! -s ./${base}a.eps.gz -o ! -s ./${base}a.png -o ! -s ./${base}a.plt -o ./${base}a.plt -ot $firstfile ]; then
         ###echo ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat
-        if [ ! -s ./${base}a.plt -o ./${base}a.plt -ot ./data/$TYPE$WMO.dat ]; then
+        if [ ! -s ./${base}a.plt -o ./${base}a.plt -ot $firstfile ]; then
             ( ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat | fgrep -v 'disregarding' > ./${base}a.plt ) 2>&1
         fi
         if [ ! -s ./${base}a.txt -o ./${base}a.txt -ot ./${base}a.plt ]; then

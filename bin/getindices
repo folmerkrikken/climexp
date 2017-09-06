@@ -24,24 +24,32 @@ else
 		###echo "# checking for $ensfile"
 	    ncfile=data/$TYPE`basename $ensfile`.nc
 	    datfile=data/$TYPE`basename $ensfile.dat`
-		if [ -f $ensfile.dat ]; then
+		if [ -s $ensfile.dat ]; then
 			echo "# data/$TYPE`basename $ensfile`.dat"
-			cp -p $ensfile.dat $datfile
-			if [ -s $ensfile.nc ]; then
+			if [ ! -s $datfile -o $datfile -ot $ensfile ]; then
+    			ntime=$((ntime+1))
+    			[ "$lwrite" = true ] && echo "copying $ensfile.dat" 1>&2
+    			cp -p $ensfile.dat $datfile
+    		fi
+			if [ -s $ensfile.nc -a \( ! -s $ncfile -o $ncfile -ot $datfile \) ]; then
+    			[ "$lwrite" = true ] && echo "copying $ensfile.nc" 1>&2
 			    cp -p $ensfile.nc $ncfile
 			fi
-		elif [ -f $ensfile.nc ]; then
+		elif [ -s $ensfile.nc ]; then
 		    # make a netcdf copy for faster I/O
 		    # eventually only use the netcdf, but I first have to check everything works
 		    if [ ! -s $datfile -o $datfile -ot $endfile.nc ]; then
+    			[ "$lwrite" = true ] && echo "generating $datfile" 1>&2
     			netcdf2dat $ensfile.nc > $datfile
 	    	fi
 	    	if [ ! -s $ncfile -o $ncfile -ot $ensfile.nc ]; then
+	    	    sleep 1
+    			ntime=$((ntime+1))
+    			[ "$lwrite" = true ] && echo "copying $ensfile.nc" 1>&2
 			    cp $ensfile.nc $ncfile
 			fi
 			echo "# $ncfile"
-			ntime=$((ntime+1))
-			if [ $((ntime%20)) = 0 ]; then
+			if [ $ntime -gt 0 -a $((ntime%20)) = 0 ]; then
 			    echo "Copying file $ntime<p>" 1>&2
 			fi
 		elif [ $i -ge 1 ]; then
