@@ -4,6 +4,7 @@ echo
 echo
 
 # check if a search engine, if so set user to anonymous
+. ./init.cgi
 . ./getargs.cgi
 . ./searchengine.cgi
 . ./checkemail.cgi
