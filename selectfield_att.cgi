@@ -481,6 +481,10 @@ Precipitation along the Gulf Coast in HiFLOR transient runs 1971-2015 nudged to 
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.sst-E%%.19710101-20151231.precip_LA_all_ce_3dymax&STATION=pr_LA_HiFLOR_sst&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial and annual max of 3-day means</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.sst-E%%.19710101-20151231.precip_LA_all_ce_3dymax_mo&STATION=pr_LA_HiFLOR_sst&TYPE=p&NPERYEAR=12&id=$EMAIL">spatial and monthly max of 3-day means</a>.
 
+<div class=alineakop>EC-Earth 2.3 T799 daily series</div>
+Precipitation along the Gulf Coast in FutureWeather runs: 
+<a href="select.cgi?field=pr_futureweather_gulfcoast&id=$EMAIL">gridded daily data</a>,
+
 <div class=alineakop>2017 Europe June heat series</div>
 Portugal CRU TS 4.00
 <a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_Portugal_without_islands&STATION=Tmax_Portugal&TYPE=t&id=$EMAIL">Tmax</a>, 

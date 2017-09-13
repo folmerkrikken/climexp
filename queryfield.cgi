@@ -5277,6 +5277,16 @@ psl_mesr_20c3m)
     kindname="$model yr$lead"
     climfield=$var;;
 
+pr_futureweather_gulfcoast)
+    file=KNMI14Data/Pgulf/pr_Aday_ECEARTH23_FutureWeather_????0101-????1231_%%%_-97.5--85E_27.5-31N_su.nc
+    kindname="FutureWeather"
+    climfield="precipitation"
+    flipcolor=11
+    NPERYEAR=366
+    map='set lon -100 -82.5
+set lat 27 31.5'
+    export splitfield=true;;
+
 *) echo 
 [ -x ./myvinkhead.cgi ] && . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
 echo "Cannot handle $FORM_field (yet)"
