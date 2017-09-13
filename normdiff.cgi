@@ -36,11 +36,18 @@ else
     STATION="${FORM_STATION}-$index"
     c1=`echo $FORM_WMO | egrep -c '%%|\+\+'`
     c2=`echo $datfile  | egrep -c '%%|\+\+'`
-    if [ $c1 = 1 -a $c2 = 1 ]; then
-	export WMO=`echo $FORM_WMO | sed -e 's:\+\+:__:' -e 's:%%:__:'`-`basename $datfile .dat|cut -b 2-`
-    else
-	export WMO=${FORM_WMO}-`basename $datfile .dat|cut -b 2-`
+    if [ "$lwrite" = true ]; then
+        echo "Content-Type: text/html"
+        echo
+        echo "FORM_WMO=$FORM_WMO<br>"
+        echo "datfile =$datfile<br>"
     fi
+    if [ $c1 = 1 -a $c2 = 1 ]; then
+	    export WMO=`echo $FORM_WMO | sed -e 's:\+\+\+:___:' -e 's:\+\+:__:' -e 's:%%%:___:' -e 's:%%:__:'`-`basename $datfile .dat|cut -b 2-`
+    else
+	    export WMO=${FORM_WMO}-`basename $datfile .dat|cut -b 2-`
+    fi
+    [ "$lwrite" = true ] && echo "WMO(out)=$WMO<br>"
 fi
 
 PROG="normdiff.sh $DIR/data/$TYPE$FORM_WMO.dat $datfile $FORM_my1 $FORM_my2"
