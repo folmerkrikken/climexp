@@ -8,7 +8,6 @@ if [ $c != 0 ]; then
     md5=`echo "$realemail" | md5sum | cut -f 1 -d ' '`
     if [ "$md5" != "$EMAIL" ]; then
         . ./myvinkhead.cgi "Error" "Id \"$EMAIL\" does not correspond to email address $realemail" "noindex,nofollow"
-        echo "Please <a href=\"registerform.cgi\">register or log in</a>."
         EMAIL="someone@somewhere"
         id=someone@somewhere
         FORM_id=someone@somewhere
