@@ -6,6 +6,7 @@ Content-Type: text/html
 
 EOF
 
+. ./init.cgi
 . ./getargs.cgi
 # check email address
 . ./checkemail.cgi
@@ -112,20 +113,19 @@ else
 fi
 
 [ "$lwrite" = true ] && echo "c=$c<br>file=$file<br>testfile = $testfile<br>outfile=$outfile<br>"
-if [ ! -s $testfile.ctl -o $testfile.ctl -ot $file ]; then
-    if [ -s $testfile.ctl ]; then
-       rm `echo $outfile.ctl | sed -e 's/%%%/???/' -e 's/%%/??/'`
-       rm `echo $outfile.dat | sed -e 's/%%%/???/' -e 's/%%/??/'`
+if [ ! -s $testfile.nc -o $testfile.nc -ot $file ]; then
+    if [ -s $testfile.nc ]; then
+       rm `echo $outfile.nc | sed -e 's/%%%/???/' -e 's/%%/??/'`
     fi
-    [ "$lwrite" = true ] && echo "daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl"
-    echo `date` "$EMAIL ($REMOTE_ADDR) daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl" >> log/log
-    (./bin/daily2longerfield.sh $corrargs $NOMISSING $outfile.ctl) 2>&1
+    [ "$lwrite" = true ] && echo "daily2longerfield.sh $corrargs $NOMISSING $outfile.nc"
+    echo `date` "$EMAIL ($REMOTE_ADDR) daily2longerfield.sh $corrargs $NOMISSING $outfile.nc" >> log/log
+    (./bin/daily2longerfield.sh $corrargs $NOMISSING $outfile.nc) 2>&1
 fi
 
 infofile=$outfile.$EMAIL.info
 ###echo "cat > $infofile <<EOF"
 cat > $infofile <<EOF
-$outfile.ctl
+$outfile.nc
 NPERYEAR=$FORM_nperyearnew
 LSMASK=$LSMASK
 $kindname
