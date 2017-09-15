@@ -121,6 +121,7 @@ if [ ! -s $testfile.nc -o $testfile.nc -ot $file ]; then
     echo `date` "$EMAIL ($REMOTE_ADDR) daily2longerfield.sh $corrargs $NOMISSING $outfile.nc" >> log/log
     (./bin/daily2longerfield.sh $corrargs $NOMISSING $outfile.nc) 2>&1
 fi
+splitfield=false # we have concatenated the fields in daily2longerfield.sh
 
 infofile=$outfile.$EMAIL.info
 ###echo "cat > $infofile <<EOF"
