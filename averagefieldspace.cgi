@@ -6,6 +6,7 @@ Content-Type: text/html
 
 EOF
 
+. ./init.cgi
 . ./getargs.cgi
 # check email address
 . ./checkemail.cgi
