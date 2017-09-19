@@ -351,7 +351,7 @@ class PlotAtlasMap:
                 if not self.ensemble:
                     # use dregr/drelregr from fit
                     self.xvar = '{rel}regr'.format(rel=self.rel)
-                    cmd = 'ncrename -O -v d{xvar},sd {regrfile}'.format(xvar=self.xvar, regrfile=regrfile)
+                    cmd = 'ncrename -O -v .d{xvar},sd {regrfile}'.format(xvar=self.xvar, regrfile=regrfile)
                     ###self.logOut.info("cmd = '%s'" % cmd)
                     subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
                 
