@@ -283,10 +283,10 @@ Choose a field and press this button</td></tr>
 <th>Rx3day
 <th>Rx5day
 <th>Txx
+<th>Tx3x
 <th>Txn
 <th>Tnx
 <th>Tnn
-<th>&nbsp;
 <th>&nbsp;
 <th>&nbsp;
 <tr><td>annual
@@ -295,10 +295,10 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=eucleia_rx3day_yr_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_rx5day_yr_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_txx_yr_HadGEM3-A-N216_historical>
+<td><input type=radio class=formradio name=field value=eucleia_tx3x_yr_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_txn_yr_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tnx_yr_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tnn_yr_HadGEM3-A-N216_historical>
-<td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
 <tr><td>annual
@@ -307,6 +307,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=eucleia_rx3day_yr_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_rx5day_yr_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_txx_yr_HadGEM3-A-N216_historicalNat>
+<td><input type=radio class=formradio name=field value=eucleia_tx3x_yr_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_txn_yr_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tnx_yr_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tnn_yr_HadGEM3-A-N216_historicalNat>
