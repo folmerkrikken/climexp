@@ -377,6 +377,7 @@ kaplan_ssta) file=LDGOData/kaplan_ssta.nc;kindname="Kaplan";climfield="SSTa";;
 ersstv3b) file=NCDCData/ersstv3b.ctl;kindname="ERSST v3b2";climfield="SST";;
 ersstv4) file=NCDCData/ersstv4.nc;kindname="ERSST v4";climfield="SST";;
 ersstv5) file=NCDCData/ersstv5.nc;kindname="ERSST v5";climfield="SST";;
+ersstv5a) file=NCDCData/ersstv5a.nc;kindname="ERSST v5";climfield="SSTa";;
 dasilva_ssta) file=DaSilvaData/dasilva_sst_anom.cdf;kindname="Da Silva";climfield="SSTa";;
 ssmi_sst) file=SSMIData/ssmi_sst.ctl;kindname="SSMI";climfield="SST";;
 tlt_60) file=UAHData/tlt_60.nc;kindname="UAH MSU v6.0";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
