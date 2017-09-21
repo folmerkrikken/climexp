@@ -49,8 +49,8 @@ else
                 for ensfile in $allfiles; do
                     realoutfile=`echo ${ensargs[$n]} | sed -e "s:\+\+\+:$ii:g" -e "s:\+\+:$ii:g" -e "s:\%\%\%:$ii:g" -e "s:\%\%:$ii:g"`
                     outfile=${realoutfile%.ctl}
-                    outfile=${realoutfile%.nc}
-                    outfile=${realoutfile}_$ifile.nc
+                    outfile=${outfile%.nc}
+                    outfile=${outfile}_$ifile.nc
                     outfiles="$outfiles $outfile"
                     ((ifile++))
                     [ "$lwrite" = true ] && echo "$DIR/bin/$PROG $ensfile $restargs $outfile"
