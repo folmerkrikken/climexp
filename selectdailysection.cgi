@@ -38,8 +38,8 @@ fi
 # dataset and variable
 ncks="ncks -p $path $file -v $FORM_var"
 root="${FORM_var}_${CLASS}"
-if [ -n "$FORM_id" ]; then
-  root=${root}_`echo ${FORM_id}|tr '/' '_'`
+if [ -n "$FORM_uniq" ]; then
+  root=${root}_`echo ${FORM_uniq}|tr '/' '_'`
 fi
 
 # time steps
@@ -106,9 +106,9 @@ root=`echo "$root" | tr ' ' '_'`
 
 # ensemble members
 if [ $CLASS = Demeter -o $CLASS = ENSEMBLES_stream_1_ocean ]; then
-  id=experiment_id
+  uniq=experiment_id
 else
-  id=source
+  uniq=source
 fi
 if [ -n "$FORM_iens" ]; then
   ncks="$ncks -d ensemble,$FORM_iens"

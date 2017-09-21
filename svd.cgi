@@ -100,7 +100,7 @@ isvd=0
 while [ $isvd -lt ${FORM_nsvd:-4} ]
 do
   isvd=$(($isvd+1))
-  id=${$}_${isvd}_l
+  uniq=${$}_${isvd}_l
   if [ $isvd -lt ${FORM_nsvd:-4} ]; then
     insideloop=true
   else
