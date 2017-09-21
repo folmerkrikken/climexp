@@ -3,9 +3,9 @@ echo 'Content-Type: text/html'
 echo
 echo
 
-# check if a search engine, if so set user to anonymous
 . ./init.cgi
 . ./getargs.cgi
+# check if a search engine, if so set user to anonymous
 . ./searchengine.cgi
 . ./checkemail.cgi
 
@@ -14,8 +14,8 @@ if [ $EMAIL = someone@somewhere ]; then
     echo "Please <a href=registerform.cgi>login or register</a> before using this routine."
     . ./myvinkheadfoot.cgi
 fi
-if [ $EMAIL = oldenborgh@knmi.nl ]; then
-    lwrite=true # false
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
+    lwrite=false
 fi
 
 [ ! -d synthesis/$EMAIL ] && mkdir synthesis/$EMAIL
@@ -33,7 +33,7 @@ if [ -n "$FORM_data" ]; then
     fi
     title=`fgrep '#' $tmpfile | head -1 | sed -e 's/ *# *//'`
     file=synthesis/$EMAIL/synthesis.`date -u "+%Y%m%d_%H%M%S"`.$EMAIL.txt
-    oldfile=`ls -t synthesis/$EMAIL/synthesis.* | head -1`
+    oldfile=`ls -t synthesis/$EMAIL/synthesis.*.txt | head -1`
     if [ -f "$oldfile" ]; then
         cmp -s $oldfile $tmpfile
         if [ $? = 0 ]; then
@@ -45,10 +45,20 @@ if [ -n "$FORM_data" ]; then
     else
         mv $tmpfile $file
     fi
+    cat > $file.prefs << EOF
+FORM_weighted=$FORM_weighted;
+FORM_log=$FORM_log;
+FORM_perc=$FORM_perc;
+FORM_ref=$FORM_ref;
+FORM_flipsign=$FORM_flipsign;
+FORM_factortype=$FORM_factortype;
+FORM_factor=$FORM_factor;
+EOF
     useprefs=false
 elif [ -n "$FORM_file" ]; then
     file=$FORM_file
     title=`fgrep '#' $file | head -1 | sed -e 's/ *# *//'`
+    [ -f $file.prefs ] && prefs=$file.prefs
     useprefs=true
 else
     file=
@@ -227,10 +237,10 @@ fi # nocomputation
 
 echo '<p><table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>'
 echo '<tr><th>Old synthesis files'
-for f in ./synthesis/$EMAIL/synthesis.*; do
+for f in `ls -t ./synthesis/$EMAIL/synthesis.*.txt`; do
     if [ -s $f ]; then
         title=`fgrep '#' $f | head -1 | sed -e 's/ *# *//'`
-        echo "<tr><td><a href=synthesis.cgi?id=$EMAIL&file=$file>$title</a>"
+        echo "<tr><td><a href=synthesis.cgi?id=$EMAIL&file=$f>$title</a>"
     fi
 done
 echo '</table>'
