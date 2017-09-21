@@ -349,7 +349,7 @@ class PlotAtlasMap:
                 ###self.logOut.info('cmd = %s<br>' % cmd)
                 subprocess.call(cmd, shell=True, stderr=subprocess.STDOUT)
                 if not self.ensemble:
-                    # use dregr/drelregr from fit
+                    # use dregr/drelregr from fit. Sometimes the rename already happened, s make optional (. before variable name)
                     self.xvar = '{rel}regr'.format(rel=self.rel)
                     cmd = 'ncrename -O -v .d{xvar},sd {regrfile}'.format(xvar=self.xvar, regrfile=regrfile)
                     ###self.logOut.info("cmd = '%s'" % cmd)
