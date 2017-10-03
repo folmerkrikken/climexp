@@ -3,6 +3,7 @@ echo 'Content-Type: text/html'
 echo
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 ###echo '<pre>'
 ###set | fgrep FORM_
