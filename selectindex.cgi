@@ -270,6 +270,10 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 <tr><td>&nbsp;<td><div class="kalelink">SRES <a href="getindices.cgi?WMO=CDIACData/A1B&STATION=A1B&TYPE=i&id=$EMAIL&NPERYEAR=1">A1B</a>, <a href="getindices.cgi?WMO=CDIACData/A1B&STATION=A1B&TYPE=i&id=$EMAIL&NPERYEAR=1">A1B</a>, <a href="getindices.cgi?WMO=CDIACData/A1FI&STATION=A1FI&TYPE=i&id=$EMAIL&NPERYEAR=1">A1FI</a>, <a href="getindices.cgi?WMO=CDIACData/A2&STATION=A2&TYPE=i&id=$EMAIL&NPERYEAR=1">A2</a>, <a href="getindices.cgi?WMO=CDIACData/B1&STATION=B1&TYPE=i&id=$EMAIL&NPERYEAR=1">B1</a>, <a href="getindices.cgi?WMO=CDIACData/B2&STATION=B2&TYPE=i&id=$EMAIL&NPERYEAR=1">B2</a>, <a href="getindices.cgi?WMO=CDIACData/sres%%&STATION=SRES&TYPE=i&id=$EMAIL&NPERYEAR=1">combined</a> scenarios (1850-2100, IPCC)</div>
 <td><a href="http://www.ipcc-data.org/ancilliary/tar-isam.txt" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>&nbsp;<td><div class="kalelink">Global <a href="getindices.cgi?WMO=CDIACData/global_co2_emissions&STATION=CO2_emissions&TYPE=i&NPERYEAR=1&id=$EMAIL">CO2 emissions</a>, <a href="getindices.cgi?WMO=CDIACData/cum_global_co2_emissions&STATION=cum_CO2_emissions&TYPE=i&NPERYEAR=1&id=$EMAIL">cumulative</a></div>
+<td><a href="http://cdiac.ess-dive.lbl.gov/trends/emis/meth_reg.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
+
 <tr><td>&nbsp;<td><div class="kalelink">Global <a href="getindices.cgi?WMO=NASAData/saod_gl&STATION=stratospheric_AOD&TYPE=i&id=$EMAIL">stratospheric aerosol optical depth</a> due to volcanic eruptions, <a href="getindices.cgi?WMO=NASAData/saod_nh&STATION=stratospheric_AOD_NH&TYPE=i&id=$EMAIL">NH</a>,<a href="getindices.cgi?WMO=NASAData/saod_sh&STATION=stratospheric_AOD_SH&TYPE=i&id=$EMAIL">SH</a> (1850-now, NASA/GISS)</div>
 <td><a href="http://data.giss.nasa.gov/modelforce/strataer/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
