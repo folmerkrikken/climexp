@@ -10,7 +10,11 @@ cat <<EOF
 <p>Past observations are used to deduce significant correlations between the weather 
 in the last three months (up to the beginning of the month) and the weather over the next season (from the end of the month). The main predictors are El Ni&ntilde;o / La Ni&ntilde;a and the trends due to global warming. Overfitting is avoided as much as possible. The system has been documented in <a href="http://www.geosci-model-dev.net/8/3947/2015/" target="_new">Eden et al, 2015</a>.
 
+<!--
 <p>This web page is under construction. Please give feedback if it does not work properly.
+-->
+
+<p><font color=#FF1010"><blink>We are debugging a new version, please disregard the plots for a few days...</blink></font>
 
 EOF
 
@@ -30,7 +34,7 @@ case "$prefix" in
     correlation_) correlation_selected=selected;plotname="Correlation of ensemble mean";units=;;
     crpss_) crpss_selected=selected;plotname="Probability skill score";units=;;
     rmsess_) rmsess_selected=selected;plotname="Deterministic skill score";units=;;
-    *) prefix=forecast_;forecast_selected=selected;plotname="Forecast anomalies";;
+    *) prefix=ensmean_;ensmean_selected=selected;plotname="Forecast anomalies";;
 esac
 
 firstdate=`ls SPES/plots/$dataset/25/ | tr " " "\n" | tail -1`
@@ -68,18 +72,18 @@ do
         selected=
     fi
     case $ii in
-        01) nextseason=JFM;nextseasonname="January-March";analysismonth=December;;
-        02) nextseason=FMA;nextseasonname="February-April";analysismonth=January;;
-        03) nextseason=MAM;nextseasonname="March-May";analysismonth=February;;
-        04) nextseason=AMJ;nextseasonname="April-June";analysismonth=March;;
-        05) nextseason=MJA;nextseasonname="May-July";analysismonth=April;;
-        06) nextseason=JJA;nextseasonname="June-August";analysismonth=May;;
-        07) nextseason=JAS;nextseasonname="July-September";analysismonth=June;;
-        08) nextseason=ASO;nextseasonname="August-October";analysismonth=July;;
-        09) nextseason=SON;nextseasonname="September-November";analysismonth=August;;
-        10) nextseason=OND;nextseasonname="October-December";analysismonth=September;;
-        11) nextseason=NDJ;nextseasonname="November-January";analysismonth=October;;
-        12) nextseason=DJF;nextseasonname="December-February";analysismonth=November;;
+        12) nextseason=JFM;nextseasonname="January-March";analysismonth=December;;
+        01) nextseason=FMA;nextseasonname="February-April";analysismonth=January;;
+        02) nextseason=MAM;nextseasonname="March-May";analysismonth=February;;
+        03) nextseason=AMJ;nextseasonname="April-June";analysismonth=March;;
+        04) nextseason=MJA;nextseasonname="May-July";analysismonth=April;;
+        05) nextseason=JJA;nextseasonname="June-August";analysismonth=May;;
+        06) nextseason=JAS;nextseasonname="July-September";analysismonth=June;;
+        07) nextseason=ASO;nextseasonname="August-October";analysismonth=July;;
+        08) nextseason=SON;nextseasonname="September-November";analysismonth=August;;
+        09) nextseason=OND;nextseasonname="October-December";analysismonth=September;;
+        10) nextseason=NDJ;nextseasonname="November-January";analysismonth=October;;
+        11) nextseason=DJF;nextseasonname="December-February";analysismonth=November;;
         *) echo "</table>error: unknown month in past=$past m=$m i=$i ii=$ii"; . ./myvinkfoot.cgi;exit;;
     esac
     echo "<option value=${y}${ii} $selected>$nextseasonname $y from $analysismonth</option>"
@@ -87,18 +91,18 @@ done
 year=${date%??}
 month=${date#????}
 case $month in
-    01) nextseason=JFM;nextseasonname="January-March";analysismonth=December;;
-    02) nextseason=FMA;nextseasonname="February-April";analysismonth=January;;
-    03) nextseason=MAM;nextseasonname="March-May";analysismonth=February;;
-    04) nextseason=AMJ;nextseasonname="April-June";analysismonth=March;;
-    05) nextseason=MJA;nextseasonname="May-July";analysismonth=April;;
-    06) nextseason=JJA;nextseasonname="June-August";analysismonth=May;;
-    07) nextseason=JAS;nextseasonname="July-September";analysismonth=June;;
-    08) nextseason=ASO;nextseasonname="August-October";analysismonth=July;;
-    09) nextseason=SON;nextseasonname="September-November";analysismonth=August;;
-    10) nextseason=OND;nextseasonname="October-December";analysismonth=September;;
-    11) nextseason=NDJ;nextseasonname="November-January";analysismonth=October;;
-    12) nextseason=DJF;nextseasonname="December-February";analysismonth=November;;
+    12) nextseason=JFM;nextseasonname="January-March";analysismonth=December;;
+    01) nextseason=FMA;nextseasonname="February-April";analysismonth=January;;
+    02) nextseason=MAM;nextseasonname="March-May";analysismonth=February;;
+    03) nextseason=AMJ;nextseasonname="April-June";analysismonth=March;;
+    04) nextseason=MJA;nextseasonname="May-July";analysismonth=April;;
+    05) nextseason=JJA;nextseasonname="June-August";analysismonth=May;;
+    06) nextseason=JAS;nextseasonname="July-September";analysismonth=June;;
+    07) nextseason=ASO;nextseasonname="August-October";analysismonth=July;;
+    08) nextseason=SON;nextseasonname="September-November";analysismonth=August;;
+    09) nextseason=OND;nextseasonname="October-December";analysismonth=September;;
+    10) nextseason=NDJ;nextseasonname="November-January";analysismonth=October;;
+    11) nextseason=DJF;nextseasonname="December-February";analysismonth=November;;
     *) echo "</table>error: unknown month in ii=$ii"; . ./myvinkfoot.cgi;exit;;
 esac
 
@@ -113,7 +117,7 @@ cat <<EOF
 
 <tr><td>Show<td>
 <select class="forminput" name="prefix" onChange="this.form.submit()">
-<option value="" $forecast_selected>Forecast anomalies</option>
+<option value="" $ensmean_selected>Forecast anomalies</option>
 <option value="tercile_" $tercile_selected>Tercile summery plot</option>
 <option value="crpss_" $crpss_selected>Probabilistic skill score (CRPSS)</option>
 <option value="rmsess_" $rmsess_selected>Deterministic skill score (RMSESS)</option>
