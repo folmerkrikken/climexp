@@ -27,8 +27,8 @@ fi
 . ./checkemail.cgi
 
 lwrite=false
-if [ $EMAIL = oldenborgh@knmi.nl ]; then
-	lwrite=false
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
+	lwrite=fale # true
 fi
 
 if [ -n "$FORM_field" ]; then
@@ -165,7 +165,8 @@ fi
 echo `date` "$EMAIL ($REMOTE_ADDR) attribute $corrargs" >> log/log
 startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
-root=data/h${TYPE}${WMO}_$$
+root=`echo data/h${TYPE}${WMO}_$$ | tr -d \\\\`
+[ "$lwrite" = true ] && echo "root=$root<be>"
 
 if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
 	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"
@@ -417,7 +418,7 @@ EOF
 	    fi
     	./bin/gnuplot < ${root}_obsplot.gnuplot 2>&1
 	    if [ ! -s ${root}_obsplot.png ]; then
-		    echo "Something went wrong while making the plot."
+		    echo "Something went wrong while making the plot, cannot find ${root}_obsplot.png."
 		    echo "The plot command are <a href=\"${root}_obsplot.gnuplot\">here</a>."
 		    . ./myvinkfoot.cgi
 		    exit
