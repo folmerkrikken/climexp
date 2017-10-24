@@ -1,7 +1,7 @@
 #!/bin/sh
 . ./init.cgi
 # to be sourced from various scripts.
-if [ $EMAIL = oldenborgh@knmi.nl ]; then
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
 	lwrite=false # true
 fi
 if [ $EMAIL = philip@knmi.nl ]; then
