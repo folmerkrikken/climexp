@@ -64,8 +64,9 @@ if [ ${NPERYEAR:-12} -gt 1 ]; then
 	fi
     echo "<div class=\"bijschrift\">Two annual cycles, $computed"
     computed_=`echo "$computed" | tr ' ' '_'`
+    base_=`echo "$base" | tr '+' '%'`
     echo "(<a href=\"${base}_yr.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${base}_yr.eps.gz\">pdf</a>, 
-<a href=\"${base}_yr.txt\">raw data</a>). <a href=\"plot_annualcycle.cgi?base=$base&computed=$computed&station=$station&name=$name&period=$period&VAR=$VAR&plotunits=$plotunits&id=$EMAIL\">Plot one annual cycle</a></div>"
+<a href=\"${base}_yr.txt\">raw data</a>). <a href=\"plot_annualcycle.cgi?base=$base_&computed=$computed&station=$station&name=$name&period=$period&VAR=$VAR&plotunits=$plotunits&id=$EMAIL\">Plot one annual cycle</a></div>"
     ylabel="$VAR $plotunits"
 	# when plotting pressure, subtract 1000
     title="yearly cycle of $station $NAME$period"

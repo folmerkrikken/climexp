@@ -2,7 +2,7 @@
 . ./init.cgi
 . ./getargs.cgi
 
-base=$FORM_base
+base=`echo $FORM_base | tr '%' '+'`
 computed_=`echo "$FORM_computed" | tr '_' ' '`
 station=$FORM_station
 name=$FORM_name
@@ -14,13 +14,14 @@ echo 'Content-Type: text/html'
 echo
 . ./myvinkhead.cgi "Annual cycle of $VAR" "$station" 
 
+###echo "base=\"$base\"<br>"
 name_=`echo $name | tr "_" " "`
 station_=`echo $station | tr "_" " "`
 
 echo "<div class=\"bijschrift\">Annual cycles, $computed_"
 echo "(<a href=\"${base}_yr1.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${base}_yr1.eps.gz\">pdf</a>, 
 <a href=\"${base}_yr1.txt\">raw data</a>)."
-ylabel="$VAR $plotunits"
+ylabel=`echo "$VAR $plotunits" | tr '_' ' '`
 # when plotting pressure, subtract 1000
 if [ \( ! -s ${base}_yr1.png \) -o ${base}_yr1.png -ot ${base}_yr.plt ]; then
 	./bin/gnuplot << EOF
