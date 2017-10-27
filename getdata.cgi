@@ -370,7 +370,7 @@ EOF
 inffile=data/$TYPE$WMO.$NPERYEAR.$EMAIL.inf
 type=$TYPE
 # sometimes things go wrong...
-if [ ! -f $inffile -a -f data/$WMO.$NPERYEAR.$EMAIL.inf ]; then
+if [ ! -f "$inffile" -a -f data/$WMO.$NPERYEAR.$EMAIL.inf ]; then
     inffile=data/$WMO.$NPERYEAR.$EMAIL.inf
     type=""
 fi
@@ -379,7 +379,7 @@ if [ "$lwrite" = true ]; then
     ls -l $inffile 2>& 1
     echo "<br>"
 fi
-if [ ! -s $inffile ]; then
+if [ ! -s "$inffile" ]; then
     cat <<EOF
 </td></tr><tr><td>Make index:</td><td>
 <form action="makeindex.cgi" method="POST">
