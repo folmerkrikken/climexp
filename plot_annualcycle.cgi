@@ -18,7 +18,7 @@ echo
 name_=`echo $name | tr "_" " "`
 station_=`echo $station | tr "_" " "`
 
-echo "<div class=\"bijschrift\">Annual cycles, $computed_"
+echo "<div class=\"bijschrift\">Annual cycle, $computed_"
 echo "(<a href=\"${base}_yr1.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${base}_yr1.eps.gz\">pdf</a>, 
 <a href=\"${base}_yr1.txt\">raw data</a>)."
 ylabel=`echo "$VAR $plotunits" | tr '_' ' '`
