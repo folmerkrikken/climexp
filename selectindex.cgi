@@ -21,7 +21,7 @@ cat <<EOF
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3a_rel&STATION=NINO3_rel&TYPE=i&id=$EMAIL">NINO3</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino3.4a_rel&STATION=NINO3.4_rel&TYPE=i&id=$EMAIL">NINO3.4</a>,
 <a href="getindices.cgi?WMO=NCDCData/ersst_nino4a_rel&STATION=NINO4_rel&TYPE=i&id=$EMAIL">NINO4</a>
-(1880-now, ERSST v4, relative is relative to 20S-20N, i.e., without global warming, recommended)</div>
+(1880-now, ERSST v5, relative is relative to 20S-20N, i.e., without global warming, recommended)</div>
 <td><a
 href="https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v4" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
@@ -242,7 +242,22 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 (2005-now, NODC)</div>
 <td><a href="http://www.nodc.noaa.gov/OC5/3M%5ftemp%5fCONTENT/basin%5fdata.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>Sea level<td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/sl_global&STATION=global_sea_level&TYPE=i&id=$EMAIL">Global sea level</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=ocean">oceans</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=sea">seas</a> from altimetry. Same with inverse barometer correction: <a href="getindices.cgi?WMO=CUData/sl_ib_global&STATION=global_sea_level&TYPE=i&id=$EMAIL">global sea level</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=ocean_ib">oceans</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=sea_ib">seas</a> (1993-now, University of Colorado)</div><a name="cudata"></a>
+<tr><td>Sea level<td><div class="kalelink"><a href="getindices.cgi?WMO=AVISOData/ssh_aviso&STATION=global_sea_level&TYPE=i&id=$EMAIL">Global sea level</a> from altimetry. (1993-now, AVISO)</div></a>
+<td><a href="https://www.aviso.altimetry.fr/en/data/products/ocean-indicators-products/mean-sea-level/products-images.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
+<tr><td><!--Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=SiegenData/ssh_dangendorf&STATION=global_sea_level&TYPE=i&NPERYEAR=1&id=$EMAIL">Global sea level reconstruction</a> (1902-2012, Dangendorf et al, <a href="getindices.cgi?WMO=SiegenData/dssh_dangendorf&STATION=global_sea_level&TYPE=i&NPERYEAR=1&id=$EMAIL">uncertainty</a>), <a href="getindices.cgi?WMO=SiegenData/ssh_dangendorf_extended&STATION=global_sea_level&TYPE=i&NPERYEAR=1&id=$EMAIL">extended with AVISO</a></div></a>
+<td><a href="http://www.pnas.org/content/114/23/5946.abstract" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
+<!--
+<tr><td><td><div class="kalelink"><a href="getindices.cgi?WMO=HarvardData/ssh_hay&STATION=global_sea_level&TYPE=i&id=$EMAIL">Global sea level reconstruction</a> (1900-2012, Hay et al), <a href="getindices.cgi?WMO=HarvardData/ssh_hay_extended&STATION=global_sea_level&TYPE=i&id=$EMAIL">extended with AVISO</a> (1900-now)</div></a>
+<td><a href="http://www.nature.com/nature/journal/v517/n7535/full/nature14093.html?foxtrotcallback=true" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+-->
+
+<tr><td><!--Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=CSIROData/ssh_church&STATION=global_sea_level&TYPE=i&NPERYEAR=1&id=$EMAIL">Global sea level reconstruction</a> (1880-2013, Church and White, <a href="getindices.cgi?WMO=CSIROData/dssh_church&STATION=global_sea_level&TYPE=i&NPERYEAR=1&id=$EMAIL">uncertainty</a>), <a href="getindices.cgi?WMO=CSIROData/ssh_church_extended&STATION=global_sea_level&TYPE=i&NPERYEAR=1&id=$EMAIL">extended with AVISO</a></div></a>
+<td><a href="https://link.springer.com/article/10.1007/s10712-011-9119-1" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
+<tr><td><!--
+Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/sl_global&STATION=global_sea_level&TYPE=i&id=$EMAIL">Global sea level</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=ocean">oceans</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=sea">seas</a> from altimetry. Same with inverse barometer correction: <a href="getindices.cgi?WMO=CUData/sl_ib_global&STATION=global_sea_level&TYPE=i&id=$EMAIL">global sea level</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=ocean_ib">oceans</a>, <a href="getsealevelave.cgi?id=$EMAIL&WHERE=sea_ib">seas</a> (1993-now, University of Colorado)</div><a name="cudata"></a>
 <td><a href="http://sealevel.colorado.edu/results.php" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td><!--Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=PSMSLData/gsl&STATION=global_coastal_sea_level&TYPE=i&id=$EMAIL">Global coastal sea level</a> (<a href="getindices.cgi?WMO=PSMSLData/gsl_err&STATION=global_sea_level_error&TYPE=i&id=$EMAIL">error</a>), <a href="getindices.cgi?WMO=PSMSLData/gsl_rate&STATION=global_sea_level_rate&TYPE=i&id=$EMAIL">rate of change</a> (<a href="getindices.cgi?WMO=PSMSLData/gsl_rate_err&STATION=global_sea_level_rate_error&TYPE=i&id=$EMAIL">error</a>) (1807-2002, PSMSL)</div>
