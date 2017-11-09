@@ -2,8 +2,8 @@
 . ./init.cgi
 # should be sourced from one of the get* scripts
 lwrite=false
-if [ "$EMAIL" = oldenborgh@knmi.nl -o $REMOTE_ADDR = 127.0.0.1 ]; then
-    lwrite=false # true
+if [ "$EMAIL" = ec8907341dfc63c526d08e36d06b7ed8 ]; then
+    lwrite=true
 fi
 if [ -z "$myvinkhead" ]; then
   echo 'Content-Type: text/html'
