@@ -1,4 +1,5 @@
 #!/bin/sh
+. ./init.cgi
 if [ "$FORM_type" != attribute ]; then
     export DIR=`pwd`
     . ./getargs.cgi
