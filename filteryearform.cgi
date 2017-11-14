@@ -12,8 +12,7 @@ if [ $EMAIL != someone@somewhere ]; then
    case "$FORM_filtertype" in
        loess1) loess1_selected=selected;;
        loess2) loess2_selected=selected;;
-       box) box_selected=selected;;
-       *) loess1_selected=selected;;
+       *) box_selected=selected;;
    esac
    case "$FORM_nfilter" in
        1) m1=selected;;
