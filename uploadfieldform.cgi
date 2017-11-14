@@ -1,9 +1,6 @@
 #!/bin/sh
 if [ -z "$myvinkhead" ]; then
-  echo 'Content-Type: text/html'
-  echo
-  echo
-
+  . ./httpheaders_nochache.cgi
   # check if a search engine, if so set user to anonymous
   . ./getargs.cgi
   . ./searchengine.cgi

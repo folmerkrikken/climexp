@@ -1,9 +1,6 @@
 #!/bin/sh
 . ./init.cgi
-echo 'Content-Type: text/html'
-echo
-echo
-
+. ./httpheaders_nochache.cgi
 . ./getargs.cgi
 CLASS="$FORM_CLASS"
 

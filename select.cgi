@@ -1,10 +1,7 @@
 #!/bin/sh
 . ./init.cgi
 if [ -z "$myvinkhead" ]; then
-  echo 'Content-Type: text/html'
-  . ./expires.cgi
-  echo
-  echo
+    . ./httpheaders_nochache.cgi
 fi
 
 export DIR=`pwd`

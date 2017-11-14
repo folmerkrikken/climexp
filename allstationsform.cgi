@@ -1,11 +1,7 @@
 #!/bin/sh
-
-echo "Content-Type:text/html"
-echo
-echo
-
+. ./httpheaders_nochache.cgi
+. ./init.cgi
 . ./getargs.cgi
-
 . ./searchengine.cgi
 
 . ./myvinkhead.cgi "Select all monthly time series" "Historical observations" "index,follow"

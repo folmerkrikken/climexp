@@ -1,9 +1,6 @@
 #!/bin/sh
+. ./httpheaders_nochache.cgi
 . ./init.cgi
-echo 'Content-Type: text/html'
-echo
-echo
-
 DIR=`pwd`
 . ./getargs.cgi
 

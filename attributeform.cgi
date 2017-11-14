@@ -1,8 +1,5 @@
 #!/bin/sh
-echo 'Content-Type: text/html'
-echo
-echo
-
+. ./httpheaders_nochache.cgi
 . ./getargs.cgi
 
 if [ -n "$FORM_field" ]; then

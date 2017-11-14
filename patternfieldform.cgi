@@ -1,18 +1,12 @@
 #!/bin/sh
-
-export DIR=`pwd`
+. ./httpheaders_nochache.cgi
 . ./getargs.cgi
-
+export DIR=`pwd`
 . ./queryfield.cgi
 if [ -z "$NPERYEAR" ]; then
   NPERYEAR=12
 fi
 
-cat <<EOF
-Content-Type: text/html
-
-
-EOF
 . ./myvinkhead.cgi "Project $FORM_variable on another field" "$kindname $climfield" "noindex,nofollow"
 
 cat <<EOF
