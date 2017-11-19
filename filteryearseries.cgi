@@ -3,6 +3,7 @@
 # select a period from a data file
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 # check email address
 . ./checkemail.cgi
