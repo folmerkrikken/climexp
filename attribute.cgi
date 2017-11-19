@@ -101,8 +101,10 @@ none)      covstation="none";sfile="none";;
            sfile=$DIR/`head -1 $FORM_timeseries | tr '\`#;' '?'`
            ;;
 esac
-probfile=data/attribute_prob_$$.txt
-obsplotfile=data/attribute_obsplot_$$.txt
+root=`echo data/h${TYPE}${WMO}_$$ | tr -d \\\\`
+[ "$lwrite" = true ] && echo "root=$root<be>"
+probfile=${root}_prob.txt
+obsplotfile=${root}_obsplot.txt
 corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume"
 if [ "$TYPE" != field -a "$TYPE" != setmap ]; then
     corrargs="$corrargs dump $probfile obsplot $obsplotfile"
@@ -165,8 +167,6 @@ fi
 echo `date` "$EMAIL ($REMOTE_ADDR) attribute $corrargs" >> log/log
 startstop="/tmp/startstop$$.txt"
 corrargs="$corrargs startstop $startstop"
-root=`echo data/h${TYPE}${WMO}_$$ | tr -d \\\\`
-[ "$lwrite" = true ] && echo "root=$root<be>"
 
 if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
 	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"
