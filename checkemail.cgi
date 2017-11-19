@@ -1,4 +1,8 @@
 #!/bin/sh
+# redefine anonymous
+[ -z "$id" ] && id=$EMAIL
+[ -z "$EMAIL" ] && EMAIL=$id
+[ -z "$EMAIL" ] && EMAIL=someone@somewhere  && id=$EMAIL
 # common typo?
 [ "$EMAIL" = someone@somehere ] && EMAIL=someone@somewhere
 # new system

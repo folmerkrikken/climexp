@@ -1,22 +1,12 @@
 #!/bin/sh
+. ./init.cgi
+. ./getargs.cgi
 echo 'Content-Type: text/html'
 echo
 echo
-
-[ "$REMOTE_ADDR" = "134.17.128.149" ] && exit
-[ "$REMOTE_ADDR" = "134.17.132.13" ] && exit
-[ "$REMOTE_ADDR" = "81.94.205.66" ] && exit
-. ./getargs.cgi
-. ./init.cgi
 # in order not to break bookmarks to this entry point allow QUERY_STRING (with some checking)
 # do not allow / in email address
 . ./searchengine.cgi
-if [ -z "$id" ]; then
-   id=$EMAIL
-fi
-if [ -z "$EMAIL" ]; then
-    EMAIL=someone@somewhere
-fi
 . ./checkemail.cgi
 . ./myvinkhead.cgi "Starting point" "" "index,follow"
 
