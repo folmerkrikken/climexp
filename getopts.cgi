@@ -102,8 +102,8 @@ fi
 [ -n "$FORM_lt" ] && corrargs="$corrargs lt $FORM_lt"
 [ -n "$FORM_dgt" ] && corrargs="$corrargs dgt $FORM_dgt"
 [ -n "$FORM_dlt" ] && corrargs="$corrargs dlt $FORM_dlt"
-if [ -n "$FORM_runcorr$FORM_moment" -a -n "$FORM_runwindow" ]; then
-  corrargs="$corrargs run$FORM_runvar $FORM_runwindow $DIR/data/$TYPE$WMO${FORM_num}.runcor"
+if [ -n "$FORM_runcorr$FORM_moment" ]; then
+  corrargs="$corrargs run$FORM_runvar ${FORM_runwindow:-1} $DIR/data/$TYPE$WMO${FORM_num}.runcor"
   [ -n "$FORM_random" ] && corrargs="$corrargs random $FORM_random"
   [ -n "$FORM_noisetype" ] && corrargs="$corrargs noise $FORM_noisetype"
 fi

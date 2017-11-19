@@ -16,7 +16,7 @@ NPERYEAR=$FORM_NPERYEAR
 FORM_num=$$
 
 lwrite=false
-[ "$EMAIL" = oldenbor@knmi.nl ] && lwrite=false
+[ "$EMAIL" = ec8907341dfc63c526d08e36d06b7ed8 ] && lwrite=false # true
 
 # check email address
 . ./checkemail.cgi
@@ -54,13 +54,19 @@ echo `date` "$EMAIL ($REMOTE_ADDR) correlate $corrargs" | sed -e  "s:$DIR/::g" >
 corrargs="$corrargs plot ./data/$TYPE$WMO${FORM_num}.cor dump ./data/$TYPE$WMO${FORM_num}.dump"
 . ./myvinkhead.cgi "Time series correlations" "$CLIM $station with $index" "noindex,nofollow"
 
-if [ -n "$FORM_runcorr" -a -n "$FORM_runwindow" ]; then
+if [ -n "$FORM_runcorr" -a -n "$FORM_runvar" ]; then
 	if [ -n "$FORM_minnum" -a "$FORM_minnum" -gt $FORM_runwindow ]; then
 		echo "Warning: you requested a minimum number of points ($FORM_minnum) that is higher then the running correlation window length ($FORM_runwindow). Adjusted it to be the same.<p>"
 		FORM_minnum=$FORM_runwindow
 		corrargs="$corrargs minnum $FORM_minnum"
 	fi
-echo "Computing running $FORM_runvar and its significance with a Monte Carlo.  This may take a while<p>"
+    if [ $FORM_runvar = regression -o $FORM_runvar = correlation ]; then
+        echo "Computing running $FORM_runvar and its significance with a Monte Carlo.  This may take a while<p>"
+    else
+        [ -z "$FORM_runwindow" ] && FORM_runwindow=1 # needed, apparently...
+        [ "$FORM_runwindow" -lt 1 ] && FORM_runwindow=1 # needed, apparently...
+        echo "Varying starting dates are under development, please check results<p>"
+    fi
 fi
 corrroot=$DIR/data/$TYPE${WMO}corr${FORM_num}
 [ "$lwrite" = true ] && echo "correlate $corrargs <p>"
@@ -153,6 +159,11 @@ if [ -n "$FORM_runcorr" -a -n "$FORM_runwindow" ]; then
     exit
   fi
   # plot the running correlations
+  if [ $FORM_runvar = regression -o $FORM_runvar = correlation ]; then
+    linetitle=${FORM_runwindow}-yr $corr
+  else
+    linetitle=$FORM_runvar
+  fi
   ./bin/gnuplot <<EOF
 $gnuplot_init
 set size 0.7,0.5
@@ -163,7 +174,7 @@ set term postscript epsf color solid
 set output "${corrroot}_runcor.eps"
 set title "`echo $title | tr '_' ' '`"
 set ylabel "`echo $correlation | tr '_' ' '`""
-plot "$DIR/data/$TYPE$WMO${FORM_num}.runcor" using 1:3 title "${FORM_runwindow}-yr $corr" with lines lt 1, \
+plot "$DIR/data/$TYPE$WMO${FORM_num}.runcor" using 1:3 title "$linetitle" with lines lt 1, \
      "$DIR/data/$TYPE$WMO${FORM_num}.runcor" using 1:5 title " 2.5%" with lines lt 2, \
      "$DIR/data/$TYPE$WMO${FORM_num}.runcor" using 1:9 title "97.5%" with lines lt 2
 set term png $gnuplot_png_font_hires
@@ -173,10 +184,14 @@ EOF
   gzip ${corrroot}_runcor.eps &
   pngfile=data/$TYPE${WMO}corr${FORM_num}_runcor.png
   getpngwidth
-  cat <<EOF
+  if [ $FORM_runvar = regression -o $FORM_runvar = correlation ]; then
+    cat <<EOF
 <p>The global significance of the minimum, maximum and difference
-against a straight line plus white noise is given above.  The 95%
-confidence interval in the plot below is local.
+against a straight line plus white noise is given above.  
+EOF
+fi
+    cat <<EOF
+The 95% confidence interval in the plot below is local.
 <div class="bijschrift">Running $FORM_runvar of $title (<a href="data/$TYPE${WMO}corr${FORM_num}_runcor.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE${WMO}corr${FORM_num}_runcor.eps.gz">pdf</a>,
 <a href="data/$TYPE${WMO}${FORM_num}.runcor">raw data</a>)</div>
 <center>

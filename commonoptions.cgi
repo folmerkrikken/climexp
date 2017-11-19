@@ -235,6 +235,8 @@ fi
 
 case ${FORM_runvar:-correlation} in
 regression) runvar_regression_selected="selected";;
+startcorrelation) runvar_startcorrelation_selected="selected";;
+startregression) runvar_startregression_selected="selected";;
 *)			runvar_correlation_selected="selected";;
 esac
 
@@ -620,9 +622,11 @@ if [ "$station" != "stations" -a -z "$ONLYONE" -a -z "$norun" ]; then
 <tr><td>Running correlation:<td><div class="kalelink"><a href="javascript:hidden_info_switch('hidden_info');">show/hide running correlation options</a></div>
 <tr><td><td>
 <div id="hidden_info" $hiddenstyle>
-<input type="checkbox" class="formcheck" name="runcorr" $runcorr_checked>running <select class="forminput" name="runvar">
-<option $runvar_correlation_selected>correlation</option>
-<option $runvar_regression_selected>regression</option>
+<input type="checkbox" class="formcheck" name="runcorr" $runcorr_checked><select class="forminput" name="runvar">
+<option value="correlation" $runvar_correlation_selected>running correlation</option>
+<option value="regression" $runvar_regression_selected>running regression</option>
+<option value="startcorrelation" $runvar_startcorrelation_selected>varying start correlation</option>
+<option value="startregression" $runvar_startregression_selected>varying start regression</option>
 </select>
 analysis<br>
 <input type="$number" min=1 step=1 class="forminput" name="runwindow" size="3" style="width: 5em;" value="$FORM_runwindow"> years window<br>
