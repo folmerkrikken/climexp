@@ -171,6 +171,7 @@ do
         show_none=false
     fi
     . ./selecttimeseries.cgi | sed \
+    -e 's/giss_al_gl_m/giss_al_gl_a_4yrlo/' \
     -e 's;="'$series'";="'$series'" checked;' \
     -e 's/checkbox\" class=\"formcheck\" name/radio\" class=\"formradio\" name=\"timeseries\" value/' \
     -e 's/value=\"myindex[0-9]*\"//'
