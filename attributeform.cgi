@@ -225,6 +225,7 @@ fi
 cat <<EOF
 <tr><td>Return time:<td>year <input type="$number" min=1 max=2500 step=1 class="forminput" name="year" $textsize4 value="$FORM_year"> (with value <input class="forminput" name="xyear" $textsize6 value="$FORM_xyear">)
 <tr><td>Compare:<td>return time if it had occurred in year <input type="$number" min=1 max=2500 step=1 class="forminput" name="begin2" $textsize4 value="$FORM_begin2">
+<tr><td>Optionally plot:<td>return time if it had occurred in year <input type="$number" min=1 max=2500 step=1 class="forminput" name="end3" $textsize4 value="$FORM_end3">
 <tr><td>Bias correction:<td>add
 <input type="$number" class="forminput" name="biasmul" $textsize4 value="$FORM_biasmul">% and/or 
 <input type="$number" class="forminput" name="biasadd" $textsize4 value="$FORM_biasadd"> $UNITS.

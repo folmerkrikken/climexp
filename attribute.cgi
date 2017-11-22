@@ -28,7 +28,7 @@ fi
 
 lwrite=false
 if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
-	lwrite=fale # true
+	lwrite=false # true
 fi
 
 if [ -n "$FORM_field" ]; then
@@ -227,7 +227,7 @@ c=`wc -l $root.txt|awk '{print $1}'`
 if [ $c -lt 20 ]; then
 	echo "<p>Something went wrong, c=$c"
 	echo 'Please send <a href="mailto:mailto:oldenborgh@knmi.nl">me</a> the following command and I will try to fix it.<p>'
-	echo bin/attribute $corrargs | sed -e 's@data/attribute@/tmp/attribute@g'
+	echo bin/attribute $corrargs | sed -e 's@data/h@/tmp/h@g' -e 's/startstop.*//'
 	. ./myvinkfoot.cgi
 	exit
 fi
@@ -367,18 +367,24 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 		bottomtop=bottom
 		plus="+"
 	fi
-	if [ -n "$FORM_year" ]; then
-	    if [ $FORM_timeseries != none ]; then
-    		plotformyear=", \"$root.txt\" index 2 u 2:4 title \"observed $FORM_year\" w lines lt 4" 
-        else
-    		plotformyear=", \"$root.txt\" index 1 u 2:4 title \"observed $FORM_year\" w lines lt 4" 
-    	fi
-	else
-		plotformyear=""
-	fi
 	fittext=$FORM_fit
 	if [ $FORM_fit = gpd ]; then
 	    fittext="$fittext >${FORM_dgt}"
+	fi
+	if [ -n "$FORM_year" ]; then
+	    alsoplot=""
+	    if [ $FORM_timeseries = none ]; then
+            indexobs=1
+        elif [ -z "$FORM_end3" ]; then
+            indexobs=2
+        else
+            indexobs=3
+            alsoplot=", \"$root.txt\" index 2 u 2:3 notitle with points lt 7,\\
+ \"$root.txt\" index 2 u 2:4 title \"$fittext $FORM_assume fit $FORM_end3\" with line lt 7"
+        fi
+    	plotformyear="$alsoplot, \"$root.txt\" index $indexobs u 2:4 title \"observed $FORM_year\" w lines lt 4" 
+	else
+		plotformyear=""
 	fi
 	
 	if [ -s $obsplotfile -a "$FORM_timeseries" != 'none' ]; then
@@ -506,7 +512,8 @@ EOF
 		cat $root.gnuplot
 		echo '</pre>'
 	fi
-	./bin/gnuplot < $root.gnuplot 2>&1 | fgrep -v "'unknown' terminal" | fgrep -v 'select a terminal' 
+	./bin/gnuplot < $root.gnuplot 2>&1 | fgrep -v "'unknown' terminal" | fgrep -v 'select a terminal' \
+	    | fgrep -v Skipping
 	# the filtering is necessary since gnuplot 5, I could not yet find another way 
 	# to plot nowhere
 	if [ ! -s ${root}.png ]; then
@@ -559,13 +566,17 @@ set xrange [${xlo}:${xhi}]
 set yrange [0:1]
 set ytics (0,0.1,0.25,0.5,0.75,0.9,1)
 EOF
-if [ $FORM_timeseries != none ]; then
+if [ $FORM_timeseries = none ]; then
+    cat >> ${root}_cdf.gnuplot << EOF
+plot "$probfile" index 0 u 6:1 notitle with lines lt 1
+EOF
+elif [ -z "$FORM_end3" ]; then
     cat >> ${root}_cdf.gnuplot << EOF
 plot "$probfile" u 5:1 title "in climate $FORM_begin2" with lines lt 3, "$probfile" index 0 u 6:1 title "in climate $FORM_year" with lines lt 1
 EOF
 else
     cat >> ${root}_cdf.gnuplot << EOF
-plot "$probfile" index 0 u 6:1 notitle with lines lt 1
+plot "$probfile" u 5:1 title "in climate $FORM_begin2" with lines lt 3, "$probfile" index 0 u 6:1 title "in climate $FORM_year" with lines lt 1, "$probfile" index 0 u 9:1 title "in climate $FORM_end3" with lines lt 7
 EOF
 fi
 cat >> ${root}_cdf.gnuplot << EOF

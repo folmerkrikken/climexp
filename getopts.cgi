@@ -56,6 +56,7 @@ fi
 [ -n "$FORM_end" ] && corrargs="$corrargs end $FORM_end"
 [ -n "$FORM_begin2" ] && corrargs="$corrargs begin2 $FORM_begin2"
 [ -n "$FORM_end2" ] && corrargs="$corrargs end2 $FORM_end2"
+[ -n "$FORM_end3" ] && corrargs="$corrargs end3 $FORM_end3"
 [ -n "$FORM_anomal" ] && corrargs="$corrargs anomal"
 if [ -z "$FORM_field" ]; then
     [ -n "$FORM_log" ] && corrargs="$corrargs log"
