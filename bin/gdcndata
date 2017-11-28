@@ -62,7 +62,8 @@ else
     outfile=$2
     if [ ! -s $outfile -o $outfile -ot $infile ]; then
         ###echo "$prog $WMO > $outfile<br>" 1>&2
-        $prog $WMO > $outfile
+        $prog $WMO > $outfile.$$
+        mv $outfile.$$ $outfile
     fi
     ncfile=${outfile%.dat}.nc
     if [ ! -s $ncfile -o $ncfile -ot $outfile ]; then
