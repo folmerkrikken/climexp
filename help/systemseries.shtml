@@ -5,12 +5,9 @@ following monthly time series are always available to correlate when
 the time scale is monthly.  For other time scales only time is
 available at the moment.
 <ul>
-  <li>NINO1+2, NINO3, NINO3.4, NINO4: SST anomaly indices by <a
-  href="http://ingrid.ldgo.columbia.edu/SOURCES/.Indices/.nino/.KAPLAN/"
-  target="_new">A. Kaplan</a> 1856-1949, <a
-  href="http://nic.fb4.noaa.gov:80/data/cddb/"
-  target="_new">CPC/NOAA</a> 1950-now.  Ni&ntilde;o indices based on
-  ERSST and HadSST can be selected via <i>monthly indices</i>.
+  <li>NINO1+2, NINO3, NINO3.4, NINO4: SST anomaly indices from ERSST v5
+  1854-now.  Ni&ntilde;o indices based on
+  HadSST can be selected via <i>monthly indices</i>.
   NINO1+2 is the SST anomaly over 10&deg;S-EQ, 80&deg;-90&deg;W; NINO3
   over 5&deg;S-5&deg;N, 90&deg;-150&deg;W; NINO4 covers
   5&deg;S-5&deg;N, 160&deg;E-150&deg;W.  The NINO3.4 index is between
@@ -41,6 +38,13 @@ available at the moment.
   action, but has a much longer time series.  This time series is
   updated irregularly by CRU.  The CPC pattern-based NAO index
   1948-now can be   selected under <i>monthly indices</i>.
+  <li>CO2: annual mean CO2 concentration. The observed part is the global 
+  marine series from ESRL extended with Mauna Loa for the last few months 
+  before taking the annual average. The historical part is the one specified 
+  in the CMIP5 forcing.
+  <li>smoothed GMST: the GISTEMP land/sea global mean temperature smoothed with
+  a four-year running mean. The "trends in extremes" page always uses the annual
+  mean version, even if it is selected under "monthly".
   <li>Time: centered on 1-jan-2000.  Very useful to do trend analyses; the
   regression against time is the trend.
 </ul>
