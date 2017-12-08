@@ -8,7 +8,7 @@ if [ -z "$FORM_field" ]; then
   echo;echo "Please select a field"
   exit
 fi
-if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
+if [ "$EMAIL" = ec8907341dfc63c526d08e36d06b7ed8 ]; then
     lwrite=false # true
 fi
 if [ "$lwrite" = true ]; then
@@ -120,7 +120,8 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
     else
         if [ $dataset = knmi14 ]; then
             if [ $model = RACMO22E ]; then
-                file=${var}_WEU-11i_KNMI-EC-EARTH_historical-${exp}_KNMI-${model}_v1_${rip}_1950-2100_%%.nc
+                period=1950-2100
+                file=${var}_WEU-11i_KNMI-EC-EARTH_historical-${exp}_KNMI-${model}_v1_${type#A}_${period}_%%.nc
                 file=KNMI14Data/CMIP5/output/KNMI/$model/$exp/$dir/$var/$file
             else
                 if [ "$splitfield" = true ]; then

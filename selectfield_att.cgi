@@ -313,9 +313,44 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=eucleia_tnn_yr_HadGEM3-A-N216_historicalNat>
 <td>&nbsp;
 <td>&nbsp;
-<td>&nbsp;
 <tr><th>RACMO 12km<br>/EC-EARTH2.3
 <th>scenario
+<th>tas
+<th>tas<br>min
+<th>tas<br>max
+<th>pr
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>psl
+<tr><td>daily
+<td>RCP8.5
+<td><input type=radio class=formradio name=field value=knmi14_t2m_day_RACMO22E_rcp85>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<tr><td>monthly
+<td>RCP8.5
+<td><input type=radio class=formradio name=field value=knmi14_t2m_mon_RACMO22E_rcp85>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<tr><th>&nbsp;
+<th>&nbsp;
 <th>RX1day
 <th>RX2day
 <th>RX3day
