@@ -78,12 +78,18 @@ fi
 
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
 if [ -z "$NT" -o "$NT" = 0 ]; then
-    rm ./data/$TYPE$WMO.dat
     echo "Content-Type: text/html"
     echo
     echo
     . ./myvinkhead.cgi "Error" "$station $NAME" "nofollow,index"
     echo "This does not appear to be a valid time series."
+    if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
+        echo '<pre>'
+        echo "./bin/getunits ./data/$TYPE$WMO.dat"
+        ./bin/getunits ./data/$TYPE$WMO.dat
+        echo '</pre>'
+    fi
+    rm ./data/$TYPE$WMO.dat
     . ./myvinkfoot.cgi
     exit -1
 fi
