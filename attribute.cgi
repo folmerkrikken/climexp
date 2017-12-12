@@ -102,7 +102,7 @@ none)      covstation="none";sfile="none";;
            ;;
 esac
 root=`echo data/h${TYPE}${WMO}_$$ | tr -d \\\\`
-[ "$lwrite" = true ] && echo "root=$root<be>"
+[ "$lwrite" = true ] && echo "root=$root<br>"
 probfile=${root}_prob.txt
 obsplotfile=${root}_obsplot.txt
 corrargs="$corrargs $sfile $FORM_fit assume $FORM_assume"
