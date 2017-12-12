@@ -175,6 +175,7 @@ yet been homogenised. Homogenised daily precipitation series are available <a hr
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=qq">global radiation</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=vn">minimum visibility</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=vx">maximum visibility</a><br>
+<a href="getdutchstations.cgi?id=$EMAIL&TYPE=sd">snow depth (8-8)</a><br>
 </td></tr></table>
 EOF
 if [ ${EMAIL%knmi.nl} != $EMAIL ]; then

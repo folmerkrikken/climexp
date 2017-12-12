@@ -1,6 +1,9 @@
-<tr><td>08-dec-2017</td><td>Reorganised the trends in extremes output to make it (hopefully) clearer, especially when requesting a third year (thanks Sjoukje). How many people wold use the remaining issing output: the inverse risk ratio and the risk ratio for the third year?</td></tr>
+<tr><td>12-dec-2017</td><td>The Climate Explorer has been unavailable from yesterday 13:40 UTC to today 10:15 UTC due to an error of our IT provider.</td></tr>
+<tr><td>12-dec-2017</td><td>Added daily Dutch snow depth observations.</td></tr>
+<tr><td>11-dec-2017</td><td>ECA&amp;D fixed a bug that caused very wrong snow depths for Dutch stations over the last year (thanks Gerard)</td></tr>
+<tr><td>08-dec-2017</td><td>Reorganised the trends in extremes output to make it (hopefully) clearer, especially when requesting a third year (thanks Sjoukje). How many people wold use the remaining missing output: the risk ratio for the third year?</td></tr>
 <tr><td>07-dec-2017</td><td>Added the daily t2m of the 16-run 12-km RACMO2.2E runs, still interpolated to a lat-lon grid (thanks Hylke).</td></tr>
-<tr><td>22-nov-2017</td><td>Added option in time series trends of extremes to optionally plot a third curve, usually for teh future. When using GMST as covariate the years 2045 and 2070 correspond to a 1.5 and 2.0 degree world (above 1880-1900) respectively. 2040 and 2065 subtract 0.1 &deg;C for true pre-industrial.</td></tr>
+<tr><td>22-nov-2017</td><td>Added option in time series trends of extremes to optionally plot a third curve, usually for the future. When using GMST as covariate the years 2045 and 2070 correspond to a 1.5 and 2.0 degree world (above 1880-1900) respectively. 2040 and 2065 subtract 0.1 &deg;C for true pre-industrial.</td></tr>
 <tr><td>22-nov-2017</td><td>Fixed bug in plotting Gumbel trends with low extremes.</td></tr>
 <tr><td>20-nov-2017</td><td>Added an option to the running correlations to make plots with the first year running but the final year standing still to make the kind of plots Tom Knutson always makes.</td></tr>
 <tr><td>19-nov-2017</td><td>Updated ERSST IPO index to v5 (finally).</td></tr>
@@ -19,7 +22,7 @@
 <tr><td>14-sep-2017</td><td>You can now take the temporal min/max/mean of very large fields and it even works.</td></tr>
 <tr><td>13-sep-2017</td><td>Taking the difference of two ensembles of time series may work now (thanks Sarah).</td></tr>
 <tr><td>07-sep-2017</td><td>Both NODC and EN4 ocean heat content analyses are updated again (thanks Rein). Hospital is boring.</td></tr>
-<tr><td>06-sep-2017</td><td>Fixed one bug resulting from teh change of 25-aug-2017: all maps were given the same name instead of a random number and date/time. This was no problem if you viewed or downloaded the map immediately, only if you went back to it (could be overwritten by another) or tried to generate a map for which there were no data (could give the previous one with data).</td></tr>
+<tr><td>06-sep-2017</td><td>Fixed one bug resulting from the change of 25-aug-2017: all maps were given the same name instead of a random number and date/time. This was no problem if you viewed or downloaded the map immediately, only if you went back to it (could be overwritten by another) or tried to generate a map for which there were no data (could give the previous one with data).</td></tr>
 <tr><td>25-aug-2017</td><td>Finally removed the email address from the URLs for privacy and security reasons (replaced by its md5 hash). Please let me know if something does not work properly.</td></tr>
 <tr><td>07-aug-2017</td><td>Support for the Climate Explorer is again provided by Geert Jan van Oldenborgh.</td></tr>
 <tr><td>07-jul-2017</td><td>Camiel Severijns takes over support for the Climate Explorer for one or two months starting Friday 7 July.</td></tr>
@@ -28,7 +31,7 @@
 <tr><td>29-may-2017</td><td>Daily NASA GPM/IMERG v4.0 0.1º precipitation 2014-now is available now, not all operations may work because of the high resolution.</td></tr>
 <tr><td>28-may-2017</td><td>Changed the definition oif return time for gaussian fits for multiple months from any month to a given month.</td></tr>
 <tr><td>22-may-2017</td><td>Restored the monthly E-OBS fields that were accidentally deleted from the list (thanks Ileana).</td></tr>
-<tr><td>12-may-2017</td><td>Normalised the relative Ni&ntilde;o indices to have the same variability as teh original ones (thanks Michelle).</td></tr>
+<tr><td>12-may-2017</td><td>Normalised the relative Ni&ntilde;o indices to have the same variability as the original ones (thanks Michelle).</td></tr>
 <tr><td>11-may-2017</td><td>Added CRU TS 4.00, kept 3.24.01 for comparison (thanks Molly).</td></tr>
 <tr><td>02-may-2017</td><td>Implemented a first-order correction for the problem in the Dutch 8-8 rain gauges 2012-2017.</td></tr>
 <tr><td>18-apr-2017</td><td>Fixed type that gave "climfield" in titles instead of the variable. Please complain about these kind of errors so that they get fixed more quickly.</td></tr>
@@ -130,7 +133,7 @@
 <tr><td>17-nov-2015</td><td>Fixed a bug that prevented the "getdata" link of GHCN-D stations with a dash in the ID to work.</td></tr>
 <tr><td>12-nov-2015</td><td>The ECMWF S4 fields were offset by one month (the old problem of which time to use for a monhly mean). I am fixing it now.</td></tr>
 <tr><td>11-nov-2015</td><td>Plotting daily anomaly fields (including N-day sums) seems to work now, much faster than it used to be. Needed it for the 1-10Nov record heat in Europe.</td></tr>
-<tr><td>11-nov-2015</td><td>Improved the verification routines so that they no longer give time-outs for high-resolution maps, such as teh new ECMWF S4 data.</td></tr>
+<tr><td>11-nov-2015</td><td>Improved the verification routines so that they no longer give time-outs for high-resolution maps, such as the new ECMWF S4 data.</td></tr>
 <tr><td>11-nov-2015</td><td>Tried to fix the title of daily plots, hope it works now.</td></tr>
 <tr><td>10-nov-2015</td><td>Added ECMWF S4 seasonla hindcasts and forcasts, monthly means. For Nov and Dec start dates the precipitation does not work yet.</td></tr>
 <tr><td>09-nov-2015</td><td>Finally added average = (min+max).2 temperature to GHCN-D v2.</td></tr>
@@ -274,7 +277,7 @@
 <tr><td>24-jun-2013</td><td>The zombie bug in the CESM1-CAM5 r3i1p1 data that was squashed more than a year ago has risen from the grave again. I deleted all data from this run until the correct version again replaces the buggy one and is propagated (thanks Kenneth)</td><tr>
 <tr><td>20-jun-2013</td><td>Fixed a serious bug in the field filtering routine that wrote Feb 29 in non-leap years as zeroes into the output file (as Mar 1 the first time, Mar 2 the  second, etc). This also meant the output was too long. I hope no-one else was bitten by this one.</td></tr>
 <tr><td>19-jun-2013</td><td>Updated the field significance routine to include statements for return times and to use a somewhat different way to estimate the decorrelation length which emphasises the signal regions more.</td></tr>
-<tr><td>19-jun-2013</td><td>Fixed a bug in the running correlation routine: the scatterplot at the end contained the last random sereis from teh Monte Carlo significance test rather than real data. Fixed. (thanks Tim).</td></tr>
+<tr><td>19-jun-2013</td><td>Fixed a bug in the running correlation routine: the scatterplot at the end contained the last random sereis from the Monte Carlo significance test rather than real data. Fixed. (thanks Tim).</td></tr>
 <tr><td>11-jun-2013</td><td>Updated the CMIP5 tos (SST) fields. CSIRO now has -1.8&deg;C under sea ice, I was shown a way to interpolate the CMCC and GFDL fields as well (thanks Enrico), only BNU-ESM is still missing.</td></tr>
 <tr><td>10-jun-2013</td><td>GPCP daily precipitation updated to v1.2, which also brings it up-to-date (thanks Rogier).</td></tr>
 <tr><td>04-jun-2013</td><td>Fixed the BNU-ESM land/sea mask (again).</td></tr>
