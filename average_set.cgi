@@ -3,6 +3,7 @@
 # average a set of time series
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 . ./checkemail.cgi
 
