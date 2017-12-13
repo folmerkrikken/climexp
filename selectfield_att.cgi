@@ -29,7 +29,7 @@ Choose a field and press this button</td></tr>
 <th>wspd
 <th>max<br>wspd
 <th>psl
-<tr><td>daily
+<tr><td>16 daily 1860-2100
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_tas_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tasmin_Aday_ECEARTH23_rcp85>
@@ -43,7 +43,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_sfcWind_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_sfcWindmax_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_psl_Aday_ECEARTH23_rcp85>
-<tr><td>monthly
+<tr><td>16 monthly 1860-2100
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_tas_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tasmin_Amon_ECEARTH23_rcp85>
@@ -85,6 +85,57 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
+EOF
+if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
+    -o $EMAIL = e279dd4de035b5fd9edc95ba4df755f7 \
+    -o $EMAIL = bd113ded9265e569c369d53ff59bf69a \
+    -o $EMAIL = f9646e78b5dbcaee3d001eb713252e3e ]; then
+    cat << EOF
+<tr><th>EC-Earth 2.3<br>T159 coupled
+<th>scenario
+<th>tas
+<th>tas<br>min
+<th>tas<br>max
+<th>pr
+<th>evsp<br>sbl
+<th>pme
+<th>ssr
+<th>uas
+<th>vas
+<th>wspd
+<th>max<br>wspd
+<th>psl
+<tr><td>400 daily 5yr
+<td>present
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td><input type=radio class=formradio name=field value=hiwaves3_pr_Aday_ECEarth_PD>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<tr><td>400 daily 5yr
+<td>2&deg;C
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td><input type=radio class=formradio name=field value=hiwaves3_pr_Aday_ECEarth_2C>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+EOF
+fi
+cat <<EOF
 <tr><th>EC-Earth 2.3<br>T799 SST-forced
 <th>period
 <th>tas
@@ -97,7 +148,7 @@ Choose a field and press this button</td></tr>
 <th>uas
 <th>vas
 <th>psl
-<tr><td>daily
+<tr><td>6 daily
 <td>together
 <td><input type=radio class=formradio name=field value=futureweather_tas_Aday_ECEARTH23_alldays>
 <td><input type=radio class=formradio name=field value=futureweather_tasmin_Aday_ECEARTH23_alldays>
@@ -157,7 +208,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=futureweather_uas_Aday_ECEARTH23_20940101-20981231>
 <td><input type=radio class=formradio name=field value=futureweather_vas_Aday_ECEARTH23_20940101-20981231>
 <td><input type=radio class=formradio name=field value=futureweather_psl_Aday_ECEARTH23_20940101-20981231>
-<tr><td>monthly
+<tr><td>6 monthly
 <td>together
 <td><input type=radio class=formradio name=field value=futureweather_tas_Amon_ECEARTH23_allmonths>
 <td><input type=radio class=formradio name=field value=futureweather_tasmin_Amon_ECEARTH23_allmonths>
@@ -229,7 +280,7 @@ Choose a field and press this button</td></tr>
 <th>&nbsp;
 <th>&nbsp;
 <th>psl
-<tr><td>daily
+<tr><td>15/105 daily
 <td>historical
 <td><input type=radio class=formradio name=field value=eucleia_tas_Aday_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Aday_HadGEM3-A-N216_historical>
@@ -241,7 +292,7 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=eucleia_psl_Aday_HadGEM3-A-N216_historical>
-<tr><td>daily
+<tr><td>15/105 daily
 <td>historicalNat
 <td><input type=radio class=formradio name=field value=eucleia_tas_Aday_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Aday_HadGEM3-A-N216_historicalNat>
@@ -253,7 +304,7 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=eucleia_psl_Aday_HadGEM3-A-N216_historicalNat>
-<tr><td>monthly
+<tr><td>15/105 monthly
 <td>historical
 <td><input type=radio class=formradio name=field value=eucleia_tas_Amon_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Amon_HadGEM3-A-N216_historical>
@@ -265,7 +316,7 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=eucleia_psl_Amon_HadGEM3-A-N216_historical>
-<tr><td>monthly
+<tr><td>15/105 monthly
 <td>historicalNat
 <td><input type=radio class=formradio name=field value=eucleia_tas_Amon_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_tasmin_Amon_HadGEM3-A-N216_historicalNat>
@@ -289,7 +340,7 @@ Choose a field and press this button</td></tr>
 <th>Tnn
 <th>&nbsp;
 <th>&nbsp;
-<tr><td>annual
+<tr><td>15/105 annual
 <td>historical
 <td><input type=radio class=formradio name=field value=eucleia_rx1day_yr_HadGEM3-A-N216_historical>
 <td><input type=radio class=formradio name=field value=eucleia_rx3day_yr_HadGEM3-A-N216_historical>
@@ -301,7 +352,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=eucleia_tnn_yr_HadGEM3-A-N216_historical>
 <td>&nbsp;
 <td>&nbsp;
-<tr><td>annual
+<tr><td>15/105 annual
 <td>historicalNat
 <td><input type=radio class=formradio name=field value=eucleia_rx1day_yr_HadGEM3-A-N216_historicalNat>
 <td><input type=radio class=formradio name=field value=eucleia_rx3day_yr_HadGEM3-A-N216_historicalNat>
@@ -325,7 +376,7 @@ Choose a field and press this button</td></tr>
 <th>&nbsp;
 <th>&nbsp;
 <th>psl
-<tr><td>daily
+<tr><td>16 daily
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_t2m_day_RACMO22E_rcp85>
 <td>&nbsp;
@@ -337,7 +388,7 @@ Choose a field and press this button</td></tr>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
-<tr><td>monthly
+<tr><td>16 monthly
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_t2m_mon_RACMO22E_rcp85>
 <td>&nbsp;
@@ -363,7 +414,7 @@ Choose a field and press this button</td></tr>
 <th>TN3x
 <th>TNn
 <th>TN3n
-<tr><td>annual
+<tr><td>16 annual
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_RX1day_yr_RACMO22E_rcp85_year>
 <td><input type=radio class=formradio name=field value=knmi14_RX2day_yr_RACMO22E_rcp85_year>
@@ -377,7 +428,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_TN3x_yr_RACMO22E_rcp85_year>
 <td><input type=radio class=formradio name=field value=knmi14_TNn_yr_RACMO22E_rcp85_year>
 <td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_year>
-<tr><td>Oct-Mar
+<tr><td>16 Oct-Mar
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_RX1day_yr_RACMO22E_rcp85_ONDJFM>
 <td><input type=radio class=formradio name=field value=knmi14_RX2day_yr_RACMO22E_rcp85_ONDJFM>
@@ -391,7 +442,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_TN3x_yr_RACMO22E_rcp85_ONDJFM>
 <td><input type=radio class=formradio name=field value=knmi14_TNn_yr_RACMO22E_rcp85_ONDJFM>
 <td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_ONDJFM>
-<tr><td>Apr-Sep
+<tr><td>16 Apr-Sep
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_RX1day_yr_RACMO22E_rcp85_AMJJAS>
 <td><input type=radio class=formradio name=field value=knmi14_RX2day_yr_RACMO22E_rcp85_AMJJAS>
