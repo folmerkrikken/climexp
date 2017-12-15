@@ -157,6 +157,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amo
             file=${var}_${type}_${model}_${exp}_%%%.nc
             file=HIWAVES3/${type}/$var/$file
             ###echo "file=$file"
+            LSMASK=KNMI14Data/sftlf_ns.nc
         elif [ $dataset = eucleia ]; then
             if [ "$splitfield" = true ]; then
                 file=${var}_${type}_${model}_${exp}_????????-????????_%%%.nc
