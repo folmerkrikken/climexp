@@ -22,7 +22,7 @@ else
 [ "$lwrite" = true ] && echo "queryfield.cgi: entering case switch with FORM_field=$FORM_field<br>"
 NPERYEAR=12 # default
 case $FORM_field in
-cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_exp
+cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amon_model_exp
     field=$FORM_field
     dataset=${field%%_*}
     field=${field#*_}
@@ -97,6 +97,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
          knmi14) datasetname=KNMI14;;
          eucleia) datasetname=EUCLEIA;;
          futureweather) datasetname=FutureWeather;;
+         hiwaves3) datasetname-HIWAVES3;;
          *) echo "unknown dataset $dataset"; exit -1;;
     esac
     if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
@@ -150,6 +151,11 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_e
             fi
             file=ECEARTH23/FutureWeather/${type#A}/$var/$file
             LSMASK=ECEARTH23/FutureWeather/fixed/lsmask_ecearth23_t799.nc
+            ###echo "file=$file"
+        elif [ $dataset = hiwaves3 ]; then
+            ###[ $type == Aday ] && export splitfield=true
+            file=${var}_${type}_${model}_${exp}_%%%.nc
+            file=HIWAVES3/${type}/$var/$file
             ###echo "file=$file"
         elif [ $dataset = eucleia ]; then
             if [ "$splitfield" = true ]; then
