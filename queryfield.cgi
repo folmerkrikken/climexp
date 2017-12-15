@@ -22,7 +22,7 @@ else
 [ "$lwrite" = true ] && echo "queryfield.cgi: entering case switch with FORM_field=$FORM_field<br>"
 NPERYEAR=12 # default
 case $FORM_field in
-cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amon_model_exp
+cmip5*|thor*|knmi14*|eucleia*|futureweather*) # expecting cmip5_var_Amon_model_exp
     field=$FORM_field
     dataset=${field%%_*}
     field=${field#*_}
@@ -97,7 +97,6 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amo
          knmi14) datasetname=KNMI14;;
          eucleia) datasetname=EUCLEIA;;
          futureweather) datasetname=FutureWeather;;
-         hiwaves3) datasetname-HIWAVES3;;
          *) echo "unknown dataset $dataset"; exit -1;;
     esac
     if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
@@ -151,11 +150,6 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amo
             fi
             file=ECEARTH23/FutureWeather/${type#A}/$var/$file
             LSMASK=ECEARTH23/FutureWeather/fixed/lsmask_ecearth23_t799.nc
-            ###echo "file=$file"
-        elif [ $dataset = hiwaves3 ]; then
-            ###[ $type == Aday ] && export splitfield=true
-            file=${var}_${type}_${model}_${exp}_%%%.nc
-            file=HIWAVES3/${type}/$var/$file
             ###echo "file=$file"
         elif [ $dataset = eucleia ]; then
             if [ "$splitfield" = true ]; then
@@ -5202,6 +5196,10 @@ rcp*) file="UNHData/${FORM_field}.ctl";kindname=${FORM_field%%_*}
 
 data/*|*.info) 
 file=`head -1 $FORM_field`
+c=`echo $file | wc -w`
+if [ $c -gt 1 ]; then
+    export splitfield=true
+fi
 export LSMASK=`fgrep 'LSMASK=' $FORM_field | tr '\`!&' ' ' | sed -e 's/^LSMASK=//'`
 export NPERYEAR=`fgrep 'NPERYEAR=' $FORM_field | tr '\`!&' ' ' | sed -e 's/^NPERYEAR=//'` 
 kindname=`tail -2 $FORM_field | head -1`
@@ -5291,6 +5289,7 @@ pr_futureweather_gulfcoast)
     climfield="precipitation"
     flipcolor=11
     NPERYEAR=366
+    LSMASK=KNMI14Data/Pgulf/lsmask_ECEARTH23_FutureWeather_-97.5--85E_27.5-31N.nc
     map='set lon -100 -82.5
 set lat 27 31.5'
     export splitfield=true;;
