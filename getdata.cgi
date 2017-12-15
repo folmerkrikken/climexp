@@ -3,7 +3,7 @@
 # should be sourced from one of the get* scripts
 lwrite=false
 if [ "$EMAIL" = ec8907341dfc63c526d08e36d06b7ed8 ]; then
-    lwrite=false # true
+    lwrite=fasle # true
 fi
 if [ -z "$myvinkhead" ]; then
   echo 'Content-Type: text/html'
@@ -141,7 +141,7 @@ EOF
     echo "makenetcdf = $makenetcdf<br>"
   fi
   echo `date` "$EMAIL ($REMOTE_ADDR) ./bin/$PROG $wmo ./data/$TYPE$WMO.dat" >> log/log
-  if [ "$makenetcdf" = true ]; then
+  if [ "$makenetcdf" = true -a "$splitfield" != true ]; then
       (./bin/$PROG $wmo ./data/$TYPE$WMO.dat ) 2>&1
   else
       (./bin/$PROG $wmo > ./data/$TYPE$WMO.dat.$$ ) 2>&1

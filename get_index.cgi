@@ -4,7 +4,7 @@
 . ./getargs.cgi
 
 lwrite=false
-if [ $EMAIL = oldenborgh@knmi.nl ]; then
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
     lwrite=false # true
 fi
 if [ "$lwrite" = true ]; 
@@ -211,7 +211,7 @@ PROG="$PROG minfac $FORM_minfac $FORM_intertype $FORM_noisemodel $mask $NOMISSIN
 #
 shortprog=`echo $PROG | cut -b 1-100`
 count=`ps axuw | fgrep "$shortprog" | fgrep -v fgrep | wc -l | tr -d '[:space:]'`
-if [ "$count" != 0 ]; then
+if [ "$count" -gt 1 ]; then
     echo 'Content-Type: text/html'
     echo 
     . ./myvinkhead.cgi "Try again later" "Multiple attempts to compute the same quantity"
