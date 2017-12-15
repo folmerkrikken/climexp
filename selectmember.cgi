@@ -13,21 +13,7 @@ field=`basename $FORM_field .info`
 field=`basename $field .$EMAIL`
 infofile=data/$field.$i.$EMAIL.info
 c=`echo $file | fgrep -c '%%%'`
-if [ $c = 0 ]; then
-	if [ $i -lt 10 ]; then
-		member=`  echo $file       | sed -e "s/%%/0$i/"`
-	else
-		member=`  echo $file       | sed -e "s/%%/$i/"`
-	fi
-else
-	if [ $i -lt 10 ]; then
-		member=`  echo $file       | sed -e "s/%%%/00$i/"`
-	elif [ $i -lt 100 ]; then
-		member=`  echo $file       | sed -e "s/%%%/0$i/"`
-	else
-		member=`  echo $file       | sed -e "s/%%%/$i/"`
-	fi
-fi
+member="$FORM_member"
 echo "$member"           > $infofile
 if [ -n "$LSMASK" ]; then
   echo "LSMASK=$LSMASK" >> $infofile
@@ -40,4 +26,5 @@ echo $climfield         >> $infofile
 
 FORM_field=$infofile
 ENSEMBLE=""
+splitfield=""
 . ./select.cgi
