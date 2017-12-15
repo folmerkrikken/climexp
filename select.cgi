@@ -104,12 +104,14 @@ if [ "$lwrite" = true ]; then
     ./bin/getunits.sh $file
     echo "NY=$NY<br>"
 fi
-
+if [ ${file%.nc} != $file -o ${file#cdf} != file ]; then
+    echo "<a href=\"showmetadata.cgi?field=$FORM_field&id=$EMAIL\">Full metadata</a>."
+fi
 if [ -n "$LSMASK" ]; then
   if [ -f "$LSMASK" ]; then
-    echo "The associated land/sea mask is available for some operations"
+    echo "The associated <a href="$LSMASK">land/sea mask</a> is available for some operations"
   else
-    echo "<font color='#ff4444'>Cannot locate the land/sea mask file</font>"
+    echo "<font color='#ff4444'>Cannot locate the <a href="$LSMASK">land/sea mask<a/> file</font>"
   fi
 fi
 if [ ${NZ:-1} -le 1 ]; then
@@ -414,7 +416,7 @@ if [ -n "$ENSEMBLE" ]; then
           else
             echo "ensemble member $i: download <a href=\"$member\">netcdf</a>,"
           fi
-          echo "analyse <a href=\"selectmember.cgi?id=$EMAIL&i=$i&field=$FORM_field\">separately</a><br>"
+          echo "analyse <a href=\"selectmember.cgi?id=$EMAIL&i=$i&field=$FORM_field&member=$member\">separately</a><br>"
         else
             foundlast=true
         fi
