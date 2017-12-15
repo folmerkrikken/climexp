@@ -281,13 +281,12 @@ EOF
   . ./myvinkhead.cgi "Computing subset field" "$kindname $climfield" "noindex,nofollow"
   outfile=`basename $file .ctl`
   outfile=`basename $outfile .nc`
-  if [ -n "$FORM_metadata" ]; then
+  if [ -n "$FORM_maskmetadata" ]; then
     outfile=data/${outfile}_${basefile}
+    newkindname=${kindname}_${basefile}
   else
     outfile=data/${outfile}_${name_lon}E_${name_lat}N
-  fi
-  if [ -n "$FORM_maskmetadata" ]; then
-    outfile=${outfile}_`basename $maskfile .txt`
+    newkindname=${kindname}_${name_lon}E_${name_lat}N
   fi
   if [ -n "$FORM_standardunits" ]; then
     outfile=${outfile}_su
@@ -305,12 +304,24 @@ EOF
             cdo maskregion,$masknetcdf $file $outfile.nc
         else
             # there still are .ctl files...
-            [ "$lwrite" = true ] && echo ./bin/get_index $file mask $masknetcdf 5lan $FORM_standardunits outfield $outfile.nc
-            ./bin/get_index $file mask $masknetcdf 5lan $FORM_standardunits outfield $outfile.nc 2>&1 | fgrep -v '# '
+            [ "$lwrite" = true ] && echo ./bin/get_index $file mask $masknetcdf $FORM_standardunits outfield $outfile.nc
+            ./bin/get_index $file mask $masknetcdf $FORM_standardunits outfield $outfile.nc 2>&1 | fgrep -v '# '
+        fi
+        if [ -n "$LSMASK" -a -s "$LSMASK" ]; then
+            outmask=data/lsmask_`basename $outfile`
+            [ "$lwrite" = true ] && echo ./bin/get_index $LSMASK mask $masknetcdf outfield $outmask.nc
+            ./bin/get_index $LSMASK mask $masknetcdf outfield $outmask.nc 2>&1
+            LSMASK=$outmask.nc
         fi
       else
         [ "$lwrite" = true ] && echo ./bin/get_index $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits outfield $outfile.nc
         ./bin/get_index $file $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits outfield $outfile.nc 2>&1
+        if [ -n "$LSMASK" -a -s "$LSMASK" ]; then
+            outmask=data/lsmask_`basename $outfile`
+            [ "$lwrite" = true ] && echo ./bin/get_index $LSMASK $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 outfield $outmask.nc
+            ./bin/get_index $LSMASK $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 outfield $outmask.nc 2>&1
+            LSMASK=$outmask.nc
+        fi
       fi
       if [ ! -s $outfile.nc ]; then
       . ./myvinkfoot.cgi
@@ -356,8 +367,8 @@ EOF
                         ((j++))
                         if [ ! -s ${ensout}_$j.nc -o ${ensout}_$j.nc -ot $ensfile ]; then
                             echo "`basename $ensfile .nc`<p>"
-                            [ "$lwrite" = true ] && echo "./bin/get_index $ensfile mask $masknetcdf 5lan $FORM_standardunits outfield ${ensout}_${j}_$$.nc 2>&1 | fgrep -v '# ' <p>"
-                            ./bin/get_index $ensfile mask $masknetcdf 5lan $FORM_standardunits outfield ${ensout}_${j}_$$.nc 2>&1 | fgrep -v '# ' 
+                            [ "$lwrite" = true ] && echo "./bin/get_index $ensfile mask $masknetcdf $FORM_standardunits outfield ${ensout}_${j}_$$.nc 2>&1 | fgrep -v '# ' <p>"
+                            ./bin/get_index $ensfile mask $masknetcdf $FORM_standardunits outfield ${ensout}_${j}_$$.nc 2>&1 | fgrep -v '# ' 
                             mv ${ensout}_${j}_$$.nc ${ensout}_$j.nc
                         fi
                         ensoutfiles="$ensoutfiles ${ensout}_$j.nc"
@@ -399,19 +410,31 @@ EOF
       i=$((i+1))
       ii=`printf $format $i`
       allfiles=`echo $file | sed -e "s:\+\+\+:$ii:" -e "s:\%\%\%:$ii:" -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
-    done    
+    done
+    if [ -n "$LSMASK" -a -s "$LSMASK" ]; then
+        outmask=data/lsmask_`basename $outfile | tr '%' '0'`
+        if [ -n "$FORM_maskmetadata" ]; then
+            [ "$lwrite" = true ] && echo ./bin/get_index $LSMASK mask $masknetcdf outfield $outmask.nc
+            ./bin/get_index $LSMASK mask $masknetcdf $FORM_standardunits outfield $outmask.nc 2>&1
+        else
+            [ "$lwrite" = true ] && echo ./bin/get_index $LSMASK $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 $FORM_standardunits outfield $outmask.nc
+            ./bin/get_index $LSMASK $FORM_lon1 $FORM_lon2 $FORM_lat1 $FORM_lat2 outfield $outmask.nc 2>&1
+        fi
+        LSMASK=$outmask.nc
+    fi
   fi
   infofile=$outfile.$EMAIL.info
   cat > $infofile <<EOF
 $outfile.nc
 NPERYEAR=$NPERYEAR
 LSMASK=$LSMASK
-${kindname}_`basename $maskfile .txt`
+$newkindname
 $climfield
 EOF
   FORM_field="$infofile"
   splitfield=false # no longer a split field
   STATION="" # otherwise the series menu pops up...
+  kindname=$newkindname
   . ./select.cgi
 
 fi
