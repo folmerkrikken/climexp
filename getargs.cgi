@@ -22,4 +22,5 @@ if [ -z "$alreadycalledgetargs" ]; then
     ###echo "EMAIL=$EMAIL<br>"
     [ -n "FORM_WMO" ] && FORM_WMO=`echo "$FORM_WMO" | sed -e 's/%%%/+++/' -e 's/%%/++/'`
     [ -n "FORM_wmo" ] && FORM_wmo=`echo "$FORM_wmo" | sed -e 's/%%%/+++/' -e 's/%%/++/'`
+    [ -n "$FORM_field" ] && export FORM_field
 fi # alreadycalledgetargs
