@@ -26,7 +26,7 @@ if [ ! -s $file0 ]; then
         exit
     fi
 fi
-if [ -n "$FORM_url" ]; then
+if [ -n "$url" ]; then
     echo "<tr><td>official web page<td><a href=$url>$url</a>"
 fi
 echo "<tr><td>Climate Explorer URL<td><a href=>climexp.knmi.nl/select.cgi?field=$FORM_field<a/>"
