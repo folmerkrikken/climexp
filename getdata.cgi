@@ -278,7 +278,7 @@ if [ -s $firstfile ]; then
   fi
 ###  echo "Plotting data:"
   echo '<div class="bijschrift">'
-  egrep '^#' data/$TYPE$WMO.dat | fgrep -v 'bin/' | egrep -v -i '(jan *feb)|(VRIJ WORDEN GEBRUIKT)|(CAN BE USED)|(ROYAL NETHERLANDS METEOROLOGICAL INSTITUTE)|(^# Searching )|(non-commercial )|(any commercial)|(intentionally)|(coauthors)|(1441-1453)' | grep -v '^ *$' | sed -e 's/^#//' -e 's/^.#//' -e 's/$/,/' -e 's/^ *, *//' | tr '_' ' ' | sed -e 's/antieke wrn/antieke_wrn/'
+  egrep '^#' data/$TYPE$WMO.dat | fgrep -v 'bin/' | egrep -v -i '( :: )|(jan *feb)|(VRIJ WORDEN GEBRUIKT)|(CAN BE USED)|(ROYAL NETHERLANDS METEOROLOGICAL INSTITUTE)|(^# Searching )|(non-commercial )|(any commercial)|(intentionally)|(coauthors)|(1441-1453)' | grep -v '^ *$' | sed -e 's/^#//' -e 's/^.#//' -e 's/$/,/' -e 's/^ *, *//' | tr '_' ' ' | sed -e 's/antieke wrn/antieke_wrn/'
   [ -n "$UNITS" ] && plotunits="[$UNITS]"
   if [ \( ! -s ./data/$TYPE$WMO.png \) -o \( ! -s ./data/$TYPE$WMO.eps.gz \) -o ./data/$TYPE$WMO.png -ot $firstfile ]; then
     wmo_=`echo $WMO | tr '_' ' '`

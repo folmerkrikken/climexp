@@ -3,7 +3,12 @@
 # select a period from a data file
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
+
+if [ "$EMAIL" = ec8907341dfc63c526d08e36d06b7ed8 ]; then
+    lwrite=false # true
+fi
 
 NPERYEAR=$FORM_nperyear
 if [ $NPERYEAR = 12 ]; then
@@ -60,12 +65,8 @@ EOF
 	  echo "Field already exists<br>"
     else
       [ -f $outfile.nc ] && rm $outfile.nc
-      ###echo ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.nc
-      # note that my routine does not yet produce compressed netcdf4
-      tmpfile=data/aap$$.nc
-      ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $tmpfile 2>&1
-      cdo -r -f nc4 -z zip copy $tmpfile $outfile.nc
-      rm $tmpfile
+      [ "$lwrite" = true ] && echo "./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.nc"
+      ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $file $corrargs $outfile.nc 2>&1
     fi
   else
     i=0
@@ -78,11 +79,8 @@ EOF
         ensout=`echo $outfile | sed -e "s:\+\+:$ii:" -e "s:\%\%:$ii:"`
         if [ ! -s $ensout.nc -o $ensout.nc -ot $ensefile ]; then
           [ -f $ensout.nc ] && rm $ensout.nc
-          ###echo ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.nc
-          # note that my routine does not yet produce compressed netcdf4
-          tmpfile=data/aap$$.nc
-          ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $tmpfile 2>&1
-          cdo -r -f nc4 -z zip copy $tmpfile $ensout.nc
+          [ "$lwrite" = true ] && echo "./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.nc"
+          ./bin/filtermonthfield ${FORM_hilo} ${FORM_filtertype} ${FORM_nfilter} $ensfile $corrargs $ensout.nc 2>&1
         fi
       fi
       i=$(($i + 1))

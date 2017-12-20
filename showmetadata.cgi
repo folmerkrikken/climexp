@@ -29,11 +29,11 @@ fi
 if [ -n "$url" ]; then
     echo "<tr><td>official web page<td><a href=$url>$url</a>"
 fi
-echo "<tr><td>Climate Explorer URL<td><a href=>climexp.knmi.nl/select.cgi?field=$FORM_field<a/>"
+echo "<tr><td>Climate Explorer URL<td><a href=/select.cgi?field=$FORM_field>climexp.knmi.nl/select.cgi?field=$FORM_field<a/>"
 if [ "$file0" = "$file" ]; then
-    echo "<tr><td>filename<td>$file0"
+    echo "<tr><td>Climate Explorer filename<td>$file0"
 else
-    echo "<tr><td>filename<td>$file"
+    echo "<tr><td>Climate Explorer filename<td>$file"
     echo "<tr><td>first ensemble member<td>$file0"
 fi
 echo "<tr><th colspan=2>Netcdf global metadata"
@@ -48,9 +48,11 @@ ncdump -h $file0 | sed \
 -e 's/"//g' \
 -e 's/\n,/\<br\>/g' \
 -e 's/\\n,/\<br\>/g' \
+-e 's/\n/\<br\>/g' \
+-e 's/\\n/\<br\>/g' \
 -e 's/^}//' \
--e 's@doi:\([^ ]*\)@<a href=https://doi.org/\1>doi:\1</a>@' \
--e 's@https://\([^ ]*\)@<a href=https:\1>\1</a>@'
+-e 's@https://\([^ "]*\)@<a href=https:\1>\1</a>@' \
+-e 's@doi:\([^ ]*\)@<a href=https://doi.org/\1>doi:\1</a>@'
 echo "</table>"
 
 . ./myvinkfoot.cgi
