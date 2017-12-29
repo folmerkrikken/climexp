@@ -364,9 +364,12 @@ had4_krig_v2) file=YorkData/had4_krig_v2_0_0.nc;kindname="HadCRUT4 filled-in";cl
 ghcn_cams_05) file=NCEPData/ghcn_cams_05.ctl;kindname="GHCN/CAMS";climfield="t2m";;
 ghcn_cams_10) file=NCEPData/ghcn_cams_10.ctl;kindname="GHCN/CAMS";climfield="t2m";;
 ghcn_cams_25) file=NCEPData/ghcn_cams_25.ctl;kindname="GHCN/CAMS";climfield="t2m";;
-berkeley_tavg_daily) file=BerkeleyData/TAVG_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tavg";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
-berkeley_tmax_daily) file=BerkeleyData/TMAX_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmax";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
-berkeley_tmin_daily) file=BerkeleyData/TMIN_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmin";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tavg_daily_full) file=BerkeleyData/TAVG_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tavg";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmax_daily_full) file=BerkeleyData/TMAX_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tmax";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmin_daily_full) file=BerkeleyData/TMIN_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tmin";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tavg_daily) file=BerkeleyData/TAVG_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tavg anom";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmax_daily) file=BerkeleyData/TMAX_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmax anom";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmin_daily) file=BerkeleyData/TMIN_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmin anom";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tavg) file=BerkeleyData/TAVG_LatLong1.nc;kindname="Berkeley";climfield="Tavg";LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmax) file=BerkeleyData/TMAX_LatLong1.nc;kindname="Berkeley";climfield="Tmax";LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmin) file=BerkeleyData/TMIN_LatLong1.nc;kindname="Berkeley";climfield="Tmin";LSMASK=BerkeleyData/land_mask.nc;;
