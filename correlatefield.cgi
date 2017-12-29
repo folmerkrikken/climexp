@@ -51,9 +51,9 @@ export SCRIPTPID=$$
 export FORM_EMAIL
 # generate GrADS data file
 id=`date "+%Y%m%d_%H%M"`_$$
-[ "$lwrite" = true ] && echo $prog $corrargs $DIR/data/g$id.ctl
-( (echo $prog $corrargs $DIR/data/g$id.ctl; $prog $corrargs $DIR/data/g$id.ctl) > /tmp/correlatefield$id.log ) 2>&1
-if [ ! -s $DIR/data/g$id.dat -a ! -s  $DIR/data/g$id.grd ]; then
+[ "$lwrite" = true ] && echo $prog $corrargs $DIR/data/g$id.nc
+( (echo $prog $corrargs $DIR/data/g$id.nc; $prog $corrargs $DIR/data/g$id.nc) > /tmp/correlatefield$id.log ) 2>&1
+if [ ! -s $DIR/data/g$id.nc ]; then
   cat ./wrong.html
   cat /tmp/correlatefield$id.log | sed -e 's/$/<br>/'
   rm /tmp/correlatefield$id.log
@@ -66,7 +66,7 @@ else
   rm /tmp/correlatefield$id.log
 fi
 
-file=data/g$id.ctl
+file=data/g$id.nc
 datafile=data/g$id
 if [ ${FORM_var:-corr} != composite -a ${FORM_var:-corr} != comperr ]; then
   subtractform="yes"
