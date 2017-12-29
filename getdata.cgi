@@ -507,6 +507,8 @@ Take anomalies and set standard deviation to one
 </td><td><a href="javascript:pop_page('help/combineseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 <tr><td>Mask out:</td><td><a href="maskseriesform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Mask out based on another time series</a>
 </td><td><a href="javascript:pop_page('help/maskseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
+<tr><td>Extend:</td><td><a href="patchseriesform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Extend with another time series</a>
+</td><td><a href="javascript:pop_page('help/patchseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 <tr><td>Noise:</td><td><a href="ar1.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR&n=100">Make 100 random series with the same mean, variance and autocorrelation</a>
 </td><td><a href="javascript:pop_page('help/ar1.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 </table>
