@@ -345,9 +345,11 @@ class PlotAtlasMap:
                 else:
                     season = "mon %(FORM_mon)s ave %(FORM_sum)s" % paramsDict
                 cmd = 'correlatefield {filename} {reffile} {season} begin {FORM_begin_fit} end {FORM_end_fit} {standardunits} {regrfile} > /dev/null'.format(filename=filename, reffile=reffile, season=season, standardunits=varObj.standardunits, regrfile=regrfile, **paramsDict)
-
                 ###self.logOut.info('cmd = %s<br>' % cmd)
                 subprocess.call(cmd, shell=True, stderr=subprocess.STDOUT)
+                if not os.path.exists(regrfile):
+                    raise PlotMapError("Something went wrong in {cmd}".format(cmd=cmd))
+
                 if not self.ensemble:
                     # use dregr/drelregr from fit. Sometimes the rename already happened, s make optional (. before variable name)
                     self.xvar = '{rel}regr'.format(rel=self.rel)
