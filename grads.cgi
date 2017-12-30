@@ -19,13 +19,17 @@ else
 fi
 grads=$DIR/bin/grads
 config=`$grads -b -l -c quit| fgrep Config`
-c=`echo $config | fgrep -c v2.0`
+gradsver=`echo $config | cut -f 2 -d ' '`
+c=`echo $config | fgrep -c v2.`
 [ -z "$FORM_mapformat" ] && FORM_mapformat=png
-if [ $c -gt 0 ]; then
+if [ ${gradsver#v2.1} != $gradsver ]; then
 	grads20=true
-	gradsver=2.0
+	gxprint=gxprint
+	gxprintoptions=white
+elif [ ${gradsver#v2.0} != $gradsver ]; then
+	grads20=true
+	gxprint=print
 else
-	gradsver=1.8
 	if [ "$FORM_mapformat" = geotiff ]; then
 		echo "geotiff export is not supported by GrADS 1.8"
 		exit
@@ -308,7 +312,7 @@ printim data/g${uniq}_$i.png white $doublesize
 clear"
 			else
 				dano="$dano
-print data/g${uniq}_$i.eps
+$gxprint data/g${uniq}_$i.eps $gxprintoptions
 printim data/g${uniq}_$i.png white $doublesize
 clear"
 			fi

@@ -17,17 +17,21 @@ else
 fi
 grads=./bin/grads
 config=`$grads -b -l -c quit| fgrep Config`
-c=`echo $config | fgrep -c v2.0`
-if [ $c -gt 0 ]; then
-    grads20=true
-    gradsver=2.0
+gradsver=`echo $config | cut -f 2 -d ' '`
+if [ ${gradsver#v2.1} != $gradsver ]; then
+	grads20=true
+	gxprint=gxprint
+	gxprintoptions=white
+elif [ ${gradsver#v2.0} != $gradsver ]; then
+	grads20=true
+	gxprint=print
 else
-    gradsver=1.8
 	if [ "$FORM_mapformat" = geotiff ]; then
 		echo "geotiff export is not supported by GrADS 1.8"
 		exit
 	fi
 fi
+[ -z "$FORM_mapformat" ] && FORM_mapformat=png
 
 if [ -z "$plotlist" ]; then
   echo 'Content-Type: text/html'
@@ -1121,7 +1125,7 @@ if [ -z "$grads20" ]; then
 print
 disable print"
 else
-    printeps="print $f.eps"
+    printeps="$gxprint $f.eps $gxprintoptions"
 fi
 
 export HOME=/tmp
