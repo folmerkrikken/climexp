@@ -297,6 +297,11 @@ do
         text="(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
         extension="operational analyses"
     fi
+    if [ "${FORM_field#berkeley}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc -a $EMAIL = $md5 ]; then
+        extended=true
+        text="(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
+        extension="ERA-interim / ECMWF operational analyses"
+    fi
     if [ "${FORM_field#ensembles_025}" != "${FORM_field}" -a -s ${file%u.nc}e.nc ]; then
         extended=true
         text="(Preliminary data, should be updated every morning)<br>"

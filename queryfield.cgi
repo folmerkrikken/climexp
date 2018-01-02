@@ -367,6 +367,9 @@ ghcn_cams_25) file=NCEPData/ghcn_cams_25.ctl;kindname="GHCN/CAMS";climfield="t2m
 berkeley_tavg_daily_full) file=BerkeleyData/TAVG_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tavg";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmax_daily_full) file=BerkeleyData/TMAX_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tmax";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmin_daily_full) file=BerkeleyData/TMIN_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tmin";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tavg_daily_full_e) file=BerkeleyData/TAVG_Daily_LatLong1_full_extended.nc;kindname="Berkeley+";climfield="Tavg";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmax_daily_full_e) file=BerkeleyData/TMAX_Daily_LatLong1_full_extended.nc;kindname="Berkeley+";climfield="Tmax";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
+berkeley_tmin_daily_full_e) file=BerkeleyData/TMIN_Daily_LatLong1_full_extended.nc;kindname="Berkeley+";climfield="Tmin";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tavg_daily) file=BerkeleyData/TAVG_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tavg anom";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmax_daily) file=BerkeleyData/TMAX_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmax anom";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmin_daily) file=BerkeleyData/TMIN_Daily_LatLong1.nc;kindname="Berkeley";climfield="Tmin anom";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
