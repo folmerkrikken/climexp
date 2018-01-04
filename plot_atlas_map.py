@@ -505,6 +505,8 @@ class PlotAtlasMap:
                     rel01 = 0
                 sd1file = 'atlas/diff/CMIP5/sd_{period}/sd_{var}{rel}_{period}_{season}.nc'.format(dataset=self.params.FORM_dataset, var=varObj.sdvar, period=period1, rel=self.rel, season=self.season)
                 if not os.path.exists(sd1file) or os.path.getsize(sd1file) == 0:
+                    if period1 > 131:
+                        raise PlotMapError("Cannot handle periods longer than 131 years: {period1}".format(period1=period1))
                     # generate files for period1
                     self.logOut.info("As you are the first to requests maps of {period}-yr means of the variable {var}, the maps of the standard deviation of natural variability are now being computed. This may take up to half an hour or so, but only once.<p>".format(period=period1,var=varObj.sdvar))
 
@@ -516,7 +518,9 @@ class PlotAtlasMap:
                 if period1 != period2:
                     sd2file = 'atlas/diff/CMIP5/sd_{period}/sd_{var}{rel}_{period}_{season}.nc'.format(dataset=self.params.FORM_dataset, var=varObj.sdvar, period=period2, rel=self.rel, season=self.season)
                     if not os.path.exists(sd2file) or os.path.getsize(sd2file) == 0:
-                        # generate files for period1
+                        if period2 > 131:
+                            raise PlotMapError("Cannot handle periods longer than 131 years: {period2}".format(period2=period2))
+                        # generate files for period2
                         cmd = './makesd.cgi {period} {var} {rel01}'.format(var=varObj.sdvar, rel01=rel01, period=period2)
                         self.log.debug("cmd: '%s'" % cmd)
                         subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
