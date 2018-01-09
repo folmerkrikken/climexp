@@ -1031,7 +1031,7 @@ cu200) file=20C/uwnd200.nc;kindname="20C";climfield="200mb zonal wind";;
 ctauy) file=20C/vflx.mon.mean.nc;kindname="20C";climfield="meridional windstress";LSMASK=20C/land.nc;;
 cv10m) file=20C/vwnd.10m.mon.mean.nc;kindname="20C";climfield="10m meridional wind";LSMASK=20C/land.nc;;
 cwspd) file=20C/wspd.10m.mon.mean.nc;kindname="20C";climfield="10m wind speed";LSMASK=20C/land.nc;;
-cwspd_daily) file=20C/wspd.10m.max.mean.nc;kindname="20C";climfield="daily max 10m wind speed";LSMASK=20C/land.nc;;
+cwspd_daily) file=20C/wspd.10m.max.mean.nc;kindname="20C";climfield="daily max 10m wind speed";LSMASK=20C/land.nc;NPERYEAR=366;;
 cv850) file=20C/vwnd850.nc;kindname="20C";climfield="850mb meridional wind";;
 cv700) file=20C/vwnd700.nc;kindname="20C";climfield="700mb meridional wind";;
 cv500) file=20C/vwnd500.nc;kindname="20C";climfield="500mb meridional wind";;
