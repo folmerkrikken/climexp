@@ -526,7 +526,7 @@ Take anomalies and set standard deviation to one
 EOF
 if [ "$NEWUNITS" = "Celsius" ]; then
     cat <<EOF
-<tr><td>Convert to Fahrenheit:</td><td><a href="fahrenheit.cgi?id=$EMAIL&TYPE=$TYPE&wmo=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR&anom=false">Full values</a>, <a href="fahrenheit.cgi?id=$EMAIL&TYPE=$TYPE&wmo=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR&anom=true">anomalies</a>
+<tr><td>Convert to Fahrenheit:</td><td><a href="fahrenheit.cgi?id=$EMAIL&TYPE=$TYPE&wmo=$wmo&STATION=$STATION&NAME=$NAME&NPERYEAR=$NPERYEAR&anom=false">Full values</a>, <a href="fahrenheit.cgi?id=$EMAIL&TYPE=$TYPE&wmo=$wmo&STATION=$STATION&NAME=$NAME&NPERYEAR=$NPERYEAR&anom=true">anomalies</a>
 </td><td>&nbsp;</td></tr>
 EOF
 fi

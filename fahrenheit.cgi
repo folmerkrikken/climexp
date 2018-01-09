@@ -3,11 +3,11 @@
 # select a period from a data file
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
-
 WMO="${FORM_wmo}_F"
-STATION="$FORM_station"
+STATION="$FORM_STATION"
 TYPE=$FORM_TYPE
 NAME=$FORM_NAME
 NPERYEAR=$FORM_NPERYEAR
