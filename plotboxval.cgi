@@ -130,7 +130,7 @@ if [ $NPERYEAR -ge 12 ]; then
         echo "</select>months"
     elif [ $NPERYEAR -ge 360 -a $NPERYEAR -le 366 ]; then
         echo "<select class=\"forminput\" name=\"sum\">"
-        for sum in 1 2 3 4 5 6 7 10 9 10 15 20 30 60 90 120 180 365
+        for sum in 1 2 3 4 5 6 7 10 9 10 11 12 13 14 15 18 20 21 25 30 60 90 120 180 365
         do
             if [ "$sum" = "$FORM_sum" ]; then
                 echo "<option selected>$sum"
