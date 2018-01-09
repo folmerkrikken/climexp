@@ -3,7 +3,7 @@
 # should be sourced from one of the get* scripts
 lwrite=false
 if [ "$EMAIL" = ec8907341dfc63c526d08e36d06b7ed8 ]; then
-    lwrite=fasle # true
+    lwrite=false # true
 fi
 if [ -z "$myvinkhead" ]; then
   echo 'Content-Type: text/html'
@@ -214,6 +214,20 @@ if [ ! -s $firstfile ]; then
   UNITS="unknown"
   NEWUNITS="unknown"
 else
+    # adjust units if necessary
+    if [ "$adjust_units_to_fahrenheit" = true ]; then
+        if [ "$ENSEMBLE" = true ]; then
+            files=`echo ./data/$TYPE$WMO.dat | sed -e 's/%%%/???/' -e 's/+++/???/' -e 's/%%/??/' -e 's/++/??/'`
+            files=`echo $files`
+            for file in $files; do
+                sed -e "s/$UNITS/Fahrenheit/" $file > $file.converted
+                mv $file.converted $file
+            done
+        else
+            sed -e "s/$UNITS/Fahrenheit/" ./data/$TYPE$WMO.dat > ./data/$TYPE$WMO.dat.converted
+            mv ./data/$TYPE$WMO.dat.converted ./data/$TYPE$WMO.dat
+        fi
+    fi
     # speed up subsequent operations
     ncfile=${firstfile%.dat}.nc
     if [ ! -s $ncfile -o $ncfile -ot $firstfile ]; then
@@ -509,6 +523,14 @@ Take anomalies and set standard deviation to one
 </td><td><a href="javascript:pop_page('help/maskseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 <tr><td>Extend:</td><td><a href="patchseriesform.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR">Extend with another time series</a>
 </td><td><a href="javascript:pop_page('help/patchseries.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
+EOF
+if [ "$NEWUNITS" = "Celsius" ]; then
+    cat <<EOF
+<tr><td>Convert to Fahrenheit:</td><td><a href="fahrenheit.cgi?id=$EMAIL&TYPE=$TYPE&wmo=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR&anom=false">Full values</a>, <a href="fahrenheit.cgi?id=$EMAIL&TYPE=$TYPE&wmo=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR&anom=true">anomalies</a>
+</td><td>&nbsp;</td></tr>
+EOF
+fi
+cat <<EOF
 <tr><td>Noise:</td><td><a href="ar1.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&NPERYEAR=$NPERYEAR&n=100">Make 100 random series with the same mean, variance and autocorrelation</a>
 </td><td><a href="javascript:pop_page('help/ar1.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 </table>
