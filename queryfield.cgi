@@ -1018,6 +1018,7 @@ cprmsl_daily) file=20C/prmsl_daily.nc;kindname="20C";climfield="SLP";NPERYEAR=36
 cslp_extended) file=20C/prmsl.mon.mean_extended.nc;kindname="20C+";climfield="SLP";LSMASK=unknown;;
 cz850) file=20C/hgt850.nc;kindname="20C";climfield="850mb height";;
 cz700) file=20C/hgt700.nc;kindname="20C";climfield="700mb height";;
+cz500_daily) file=20C/hgt500_daily.nc;kindname="20C";climfield="500mb height";NPERYEAR=366;;
 cz500) file=20C/hgt500.nc;kindname="20C";climfield="500mb height";;
 cz300) file=20C/hgt300.nc;kindname="20C";climfield="300mb height";;
 cz200) file=20C/hgt200.nc;kindname="20C";climfield="200mb height";;
