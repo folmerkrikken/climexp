@@ -2,10 +2,7 @@
 . ./init.cgi
 # to be sourced from various scripts.
 if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
-	lwrite=false # true
-fi
-if [ $EMAIL = philip@knmi.nl ]; then
-	lwrite=false # true
+	lwrite=true
 fi
 if [ "$lwrite" = true ]; then
     echo "Turned on debug printing<p>"
@@ -78,6 +75,9 @@ if [ -n "$FORM_pmin" ]; then
 			FORM_pmin="0"
 		fi
 	fi
+fi
+if [ -n "$FORM_logcolour" ]; then
+    logcolour=log
 fi
 # watch colourbar variable - may be empty
 if [ -n "$FORM_nocbar" -o "$FORM_mapformat" != png ]; then
@@ -301,7 +301,7 @@ printim data/g${uniq}_$i.png white $doublesize"
 		fi
 		if [ "$FORM_mapformat" = png ]; then
 			dano="$dano
-run danoprob ${FORM_var:-corr} ${date:-$i} ${FORM_shadingtype:-shadedcontour} ${flipcolor:-0} ${FORM_cbar:-1} ${ylint:-0} $pminarg $FORM_cmin $FORM_cmax
+run danoprob ${FORM_var:-corr} ${date:-$i} ${FORM_shadingtype:-shadedcontour} ${flipcolor:-0} ${FORM_cbar:-1} ${ylint:-0} $pminarg $FORM_cmin $FORM_cmax $logcolour
 $drawtitle"
 			if [ -z "$grads20" ]; then
 				dano="$dano

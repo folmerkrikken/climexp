@@ -64,6 +64,9 @@ esac
 if [ -n "$FORM_yflip" ]; then
   yflip_checked=checked
 fi
+if [ -n "$FORM_logcolour" ]; then
+  logcolour_checked=checked
+fi
 if [ -n "$FORM_nocbar" ]; then
   nocbar_checked=checked
 fi
@@ -167,8 +170,10 @@ to
 <input type="$number" step=any class="forminput" name="cmax" value="$FORM_cmax" $textsize6>
 EOF
 if [ -n "$probmask" ]; then
-echo "<select class=forminput name=maskout><option value=mask $mask_selected>mask out<option value=light $light_selected>make light<option value=lighter $lighter_selected>make lighter</select>: p&gt;<input type=\"$number\" step=any class=\"forminput\" name=\"pmin\" value="${FORM_pmin:-10}" $textsize3>%"
+    echo "<select class=forminput name=maskout><option value=mask $mask_selected>mask out<option value=light $light_selected>make light<option value=lighter $lighter_selected>make lighter</select>: p&gt;<input type=\"$number\" step=any class=\"forminput\" name=\"pmin\" value="${FORM_pmin:-10}" $textsize3>%"
 fi
+echo "<input type=checkbox class=formcheck name=logcolour $logcolour_checked>logarithmic scale"
+
 echo "<td><a href=\"javascript:pop_page('help/contour.shtml',852,450)\"><img src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
 echo '<tr><td>Colours:<td>' 
 cat <<EOF

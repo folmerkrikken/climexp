@@ -49,6 +49,19 @@ endwhile
 cmin=subwrd(args,8)
 cmax=subwrd(args,9)
 cint=subwrd(args,10)
+scale = lin
+if ( cmin = 'log' )
+    scale = log
+    cmin = ''
+endif
+if ( cmax = 'log' )
+    scale = log
+    cmax = ''
+endif
+if ( cint = 'log' )
+    scale = log
+    cint = ''
+endif
 if ( time = '1year' )
    'q file'
    line=sublin(result,5)   
@@ -121,7 +134,6 @@ if ( cmin != '' & cmax != '' & cint = '' )
 cint = (cmax-cmin)/10
 endif
 clevs = NULL
-scale = lin
 *
 if ( flipcolor = '' )
 flipped=0
@@ -438,7 +450,7 @@ endif
 *
 *	set clevs
 *
-if ( cint != '' )
+if ( cint != '' & scale = lin )
 ***say 'set clevs 'cmin' 'cmin+cint' 'cmin+2*cint' 'cmin+3*cint' 'cmin+4*cint' 'cmin+5*cint' 'cmin+6*cint' 'cmin+7*cint' 'cmin+8*cint' 'cmin+9*cint' 'cmax
 if ( flipped > 11 & flipped != 14 )
 setclevs='set clevs 'cmin' 'cmin+2*cint' 'cmin+4*cint' 'cmin+6*cint' 'cmin+8*cint' 'cmax
@@ -451,6 +463,7 @@ if ( clevs != NULL )
 setclevs='set clevs 'clevs
 else
 if ( scale = lin )
+say 'linear colour scale'
 if ( flipped = 0 | flipped = 1 | flipped = 6 | flipped = 8 | flipped = 9 | flipped = 10 | flipped = 11 )
 ***say 'set clevs -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' 0 '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval
 setclevs='set clevs -'maxval' -'0.8*maxval' -'0.6*maxval' -'0.4*maxval' -'0.2*maxval' 0 '0.2*maxval' '0.4*maxval' '0.6*maxval' '0.8*maxval' 'maxval
@@ -468,13 +481,19 @@ endif
 endif
 else
 if ( scale = log )
+say 'logarithmic colour scale'
 *	get first digit
+maxval = cmax
 d=substr(maxval,1,1)
 i=1
 while ( d = '0' | d = '.' )
-i=i+1
-d=substr(maxval,i,1)
+    i=i+1
+    d=substr(maxval,i,1)
 endwhile
+* temp solution to get a plot, will round up to 1 2 5 later
+if ( d = '3' | d = '4' | d = '6' | d = '7' | d = '8' | d = '9' )
+    d = 1
+endif
 if ( d = 1 )
 ***say 'set clevs -'maxval' -'maxval/2' -'maxval/5' -'maxval/10' -'maxval/20' 0 'maxval/20' 'maxval/10' 'maxval/5' 'maxval/2' 'maxval
 setclevs='set clevs -'maxval' -'maxval/2' -'maxval/5' -'maxval/10' -'maxval/20' 0 'maxval/20' 'maxval/10' 'maxval/5' 'maxval/2' 'maxval

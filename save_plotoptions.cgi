@@ -26,10 +26,12 @@ FORM_notitleonplot=$FORM_notitleonplot;
 FORM_nogrid=$FORM_nogrid;
 FORM_nopoli=$FORM_nopoli;
 FORM_nolab=$FORM_nolab;
+FORM_nocbar=$FORM_nocbar;
 FORM_xlint=$FORM_xlint;
 FORM_ylint=$FORM_ylint;
 FORM_intertype=$FORM_intertype;
 FORM_masktype=$FORM_masktype;
 FORM_standardunits=$FORM_standardunits;
+FORM_log=$FORM_log;
 EOF
 fi
