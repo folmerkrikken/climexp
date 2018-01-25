@@ -318,14 +318,14 @@ EOF
     mywmo=`echo $WMO | tr '+' '%'`
     mystation=`echo $STATION | tr ' +' '_%'`
     cat << EOF 
-(<a href="data/$TYPE$WMO.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE$mywmo.eps.gz">pdf</a>, <a href="rawdata.cgi?wmo=$mywmo&station=$mystation&type=$TYPE&id=$EMAIL&nperyear=$NPERYEAR">raw data</a>)
+(<a href="data/$TYPE$WMO.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE$mywmo.eps.gz">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$WMO&station=$STATION&id=$EMAIL\">metadata</a>, <a href="rawdata.cgi?wmo=$mywmo&station=$mystation&type=$TYPE&id=$EMAIL&nperyear=$NPERYEAR">raw data</a>)
 EOF
   else
     c=`echo "$HTTP_USER_AGENT" | fgrep -i -c 'MSIE'`
     if [ $c != 0 ]; then
-      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>, <a href=\"dat2dos.cgi?file=data/$TYPE$WMO.dat\">DOS</a>)"
+      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$WMO&station=$STATION&id=$EMAIL\">metadata</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>, <a href=\"dat2dos.cgi?file=data/$TYPE$WMO.dat\">DOS</a>)"
     else
-      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>)"
+      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$WMO&station=$STATION&id=$EMAIL\">metadata</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>)"
     fi    
   fi
   pngfile=data/$TYPE$WMO.png
