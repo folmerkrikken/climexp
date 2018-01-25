@@ -5,6 +5,7 @@ echo
 echo
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 # printenv
 email="$EMAIL"
