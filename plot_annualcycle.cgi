@@ -20,7 +20,7 @@ station_=`echo $station | tr "_" " "`
 
 echo "<div class=\"bijschrift\">Annual cycle, $computed_"
 echo "(<a href=\"${base}_yr1.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${base}_yr1.eps.gz\">pdf</a>, 
-<a href=\"${base}_yr1.txt\">raw data</a>)."
+<a href=\"${base}_yr.txt\">raw data</a>)."
 ylabel=`echo "$VAR $plotunits" | tr '_' ' '`
 # when plotting pressure, subtract 1000
 if [ \( ! -s ${base}_yr1.png \) -o ${base}_yr1.png -ot ${base}_yr.plt ]; then
