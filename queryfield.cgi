@@ -617,7 +617,7 @@ hadslp2r) file=UKMOData/hadslp2r.ctl;kindname="HadSLP2r";climfield="SLP";;
 hadslp2.0) file=UKMOData/hadslp2_0.ctl;kindname="HadSLP2.0";climfield="SLP";;
 hadsst2) file=UKMOData/hadsst2.ctl;kindname="HadSST2";climfield="SSTa";;
 hadsst3) file=UKMOData/HadSST.3.1.1.0.median.nc;kindname="HadSST3110";climfield="SSTa";;
-hadisst1) file=UKMOData/hadisst1.ctl;kindname="HadISST1";climfield="SST";;
+hadisst1) file=UKMOData/HadISST_sst.nc;kindname="HadISST1";climfield="SST";;
 hadisst1_ice) file=UKMOData/HadISST_ice.nc;kindname="HadISST1";climfield="ice";;
 gisst22) file=UKMOData/gisst22_sst.ctl;kindname="GISST2.2";climfield="SST";;
 gisst22_ice) file=UKMOData/gisst22_ice.ctl;kindname="GISST2.2";climfield="ice";;
@@ -1108,6 +1108,8 @@ erai_tmin) file=ERA-interim/erai_tmin.nc;kindname="ERA-int";climfield="Tmin";LSM
 erai_tmax) file=ERA-interim/erai_tmax.nc;kindname="ERA-int";climfield="Tmax";LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2msst) file=ERA-interim/erai_t2msst.nc;kindname="ERA-int";climfield="T2m/SST";LSMASK=ERA-interim/lsmask07.nc;;
 erai_wspd) file=ERA-interim/erai_wspd.nc;kindname="ERA-int";climfield="wind speed";LSMASK=ERA-interim/lsmask07.nc;;
+erai_wspd_daily) file=ERA-interim/erai_wspd_daily.nc;kindname="ERA-int";climfield="wind speed";LSMASK=ERA-interim/lsmask07.nc;;
+erai_maxwspd_daily) file=ERA-interim/erai_maxwspd_daily.nc;kindname="ERA-int";climfield="max wind speed";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ci) file=ERA-interim/erai_ci.nc;kindname="ERA-int";climfield="sea-ice cover";LSMASK=ERA-interim/lsmask07.nc;;
 erai_snd) file=ERA-interim/erai_snd.nc;kindname="ERA-int";climfield="snow depth";LSMASK=ERA-interim/lsmask07.nc;;
 erai_vap) file=ERA-interim/erai_vap.nc;kindname="ERA-int";climfield="column vapour";LSMASK=ERA-interim/lsmask07.nc;;
