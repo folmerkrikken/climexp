@@ -328,9 +328,13 @@ elif [ ${FORM_field#ukmo} != $FORM_field -o ${FORM_field#ens_ukmo} != $FORM_fiel
 elif [ ${file#EUCLEIA/Had} != $file ]; then
   echo "Please read and agree to the <a href="EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf" target=\"_new\">terms and conditions</a> before downloading.<p>"
   download=OK
-elif [ "${FORM_field#era}" != "${FORM_field}" -o "${FORM_field#ecmwf}" != "${FORM_field}" -o "${FORM_field#ens_ecmwf}" != "${FORM_field}" ]; then
+elif [ "${FORM_field#ecmwf}" != "${FORM_field}" -o "${FORM_field#ens_ecmwf}" != "${FORM_field}" ]; then
   echo "The ECMWF member states do not permit us to give you access to the raw data."
   echo "Please consult the ECMWF <a href=\"http://www.ecmwf.int/research/era/\" target="_new">ERA</a> or <a href=\"http://www.ecmwf.int/services/seasonal/\" target="_new">seasonal forecasting</a> website for further information."
+elif [ "${FORM_field#era}" != "${FORM_field}" ]; then
+echo "Contains modified Copernicus Climate Change Service information."
+  echo "Please read and agree to the <a href="http://apps.ecmwf.int/datasets/licences/copernicus/" target=\"_new\">Copernicus license</a> before downloading.<p>"
+  download=OK
 elif [ "${FORM_field#demeter}" != "${FORM_field}" -o "${FORM_field#ens_demeter}" != "${FORM_field}" ]; then
   echo "Please download the data from the ECMWF <a href=\"http://www.ecmwf.int/research/demeter/\" target="_new">DEMETER</a> website."
 elif [ "${FORM_field#ensembles}" != "${FORM_field}" -a $NPERYEAR = 366 ]; then
@@ -421,8 +425,12 @@ if [ -n "$ENSEMBLE" ]; then
 else
   if [ ${FORM_field#sos} = "$FORM_field" ]; then
     if [ -n "$url" ]; then
-      echo "Please consider downloading this field from the <a href=\"$url\">authoritative site</a>."
-      echo "<p>If you <i>really</i> want to get it here,"
+      if [ ${file#ERA-interim} != $file -a ${file%_daily.nc} != $file ]; then
+        echo "This fields have been home-constructed at KNMI."
+      else
+        echo "Please consider downloading this field from the <a href=\"$url\">authoritative site</a>."
+      fi
+      echo "<br>If you <i>really</i> want to get it here,"
     fi
   fi
   echo "$kindname $climfield is available as"
