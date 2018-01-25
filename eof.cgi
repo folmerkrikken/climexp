@@ -62,9 +62,9 @@ EOF
 export SCRIPTPID=$$
 export FORM_EMAIL=$EMAIL
 root=eof`date "+%Y%m%d_%H%M"`_${$}
-( (echo bin/eof $file $corrargs $DIR/data/$root.ctl; $DIR/bin/eof $file $corrargs $DIR/data/$root.ctl) > /tmp/$root.log ) 2>&1
+( (echo bin/eof $file $corrargs $DIR/data/$root.nc; $DIR/bin/eof $file $corrargs $DIR/data/$root.nc) > /tmp/$root.log ) 2>&1
 rm pid/$$.$EMAIL
-if [ ! -s $DIR/data/$root.grd ]; then
+if [ ! -s $DIR/data/$root.nc ]; then
   cat $DIR/wrong.html
   echo "<pre>"
   cat /tmp/$root.log
@@ -81,7 +81,7 @@ fi
 
 # plot data
 
-file=data/$root.ctl
+file=data/$root.nc
 station=$kindname
 CLIM=$climfield
 ieof=0
@@ -106,10 +106,10 @@ do
     ext=$iieof
   fi
   pcname=`echo "PC$ieof of $kindname $climfield" | tr " " "_"`
-  extra1="<br><a href=\"getindices.cgi?WMO=data/${root}_${ext}&STATION=$pcname&TYPE=i&id=$EMAIL\">Principal component PC$ieof</a><br><a href=\"patternfield.cgi?id=$EMAIL&patfile=$root.ctl&variable=eof$ieof&month="
+  extra1="<br><a href=\"getindices.cgi?WMO=data/${root}_${ext}&STATION=$pcname&TYPE=i&id=$EMAIL\">Principal component PC$ieof</a><br><a href=\"patternfield.cgi?id=$EMAIL&patfile=$root.nc&variable=eof$ieof&month="
   # here the month will be added be grads.cgi
   extra2="&field=$FORM_field\">project eof$ieof on the same field</a>, "
-  extra3="<a href=\"patternfieldform.cgi?id=$EMAIL&patfile=$root.ctl&variable=eof$ieof&month="
+  extra3="<a href=\"patternfieldform.cgi?id=$EMAIL&patfile=$root.nc&variable=eof$ieof&month="
   # here the month will be added be grads.cgi
   extra4="&field=$FORM_field\">project eof$ieof on another field</a><br>"
   . ./grads.cgi
@@ -119,10 +119,6 @@ done
 # let the user download the raw data
 #
 echo "<p>"
-gzip -c data/$root.grd > data/$root.grd.gz
-echo "Get the EOF map(s) as GrADS <a href=\"data/$root.ctl\">ctl</a>"
-echo "and (gzipped) <a href=\"data/$root.grd.gz\">dat</a> files,"
-echo "as a (gzipped) <a href=\"grads2nc.cgi?file=data/$root.ctl&id=$EMAIL\">netCDF</a> file,"
-echo "as (gzipped) <a href=\"grads2ascii.cgi?file=data/$root.ctl\">ascii</a> (big)."
+echo "Get the EOF map(s) as <a href=\"data/$root.nc\">netcdf file</a>."
 
 . ./myvinkfoot.cgi
