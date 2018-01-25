@@ -115,15 +115,15 @@ fi
 if [ -n "$LSMASK" ]; then
 	cat << EOF
 <tr valign="baseline"><td>Considering:</td><td>
-<input type="radio" class="formradio" name ="masktype" value="all" $all_checked>everything
-<input type="radio" class="formradio" name ="masktype" value="5lan" $fivelan_checked>land points
-<input type="radio" class="formradio" name ="masktype" value="5sea" $fivesea_checked>sea points
+<input type="radio" class="formradio" name="masktype" value="all" $all_checked>everything
+<input type="radio" class="formradio" name="masktype" value="5lan" $fivelan_checked>land points
+<input type="radio" class="formradio" name="masktype" value="5sea" $fivesea_checked>sea points
 <a href="javascript:hidden_info_switch('landsea');">show/hide more</a><br>
 <div id="landsea" style=$hiddenstyle_landsea>
-<input type="radio" class="formradio" name ="masktype" value="land" $land_checked>only land points
-<input type="radio" class="formradio" name ="masktype" value="sea" $sea_checked>only sea points<br>
-<input type="radio" class="formradio" name ="masktype" value="notl" $notl_checked>not land points
-<input type="radio" class="formradio" name ="masktype" value="nots" $nots_checked>not sea points<br>
+<input type="radio" class="formradio" name="masktype" value="land" $land_checked>only land points
+<input type="radio" class="formradio" name="masktype" value="sea" $sea_checked>only sea points<br>
+<input type="radio" class="formradio" name="masktype" value="notl" $notl_checked>not land points
+<input type="radio" class="formradio" name="masktype" value="nots" $nots_checked>not sea points<br>
 </div>
 </td><td align="right"><a href="javascript:pop_page('help/landseamask.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td></tr>
 EOF
@@ -131,9 +131,13 @@ fi
 if [ "$UNITS" != "$NEWUNITS" ]; then
   cat <<EOF
 <tr><td>Units:</td><td>
-<input type="radio" class="formradio" name ="standardunits" value="standardunits" $standardunits_checked>convert to $NEWUNITS
-<input type="radio" class="formradio" name ="standardunits" value="" $oldunits_checked>leave in $UNITS
+<input type="radio" class="formradio" name="standardunits" value="standardunits" $standardunits_checked>convert to $NEWUNITS
+<input type="radio" class="formradio" name="standardunits" value="" $oldunits_checked>leave in $UNITS
 </td><td align="right"><a href="javascript:pop_page('help/convertunits.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a></td>
+EOF
+else
+  cat <<EOF
+<input type="hidden" name="standardunits" value="$FORM_standardunits">
 EOF
 fi
 cat << EOF
