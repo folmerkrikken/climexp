@@ -11,9 +11,9 @@
 <tr><td>
 Type:
 </td><td>
-<input type=hidden name=id value="{{EMAIL}}">
+<input type=hidden name=id value="{{ EMAIL|e }}">
 <input type=hidden name=resubmitted value="true">
-<input type=hidden name=region_old value="{{ FORM_region }}">
+<input type=hidden name=region_old value="{{ FORM_region|e }}">
 <input type=hidden name="doAction" value="">
 
 {% for val in region_values %}
