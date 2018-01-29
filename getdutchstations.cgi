@@ -13,6 +13,7 @@ dd) FORM_climate="prevailing_wind_direction";;
 fg) FORM_climate="daily_mean_windspeed";;
 fh) FORM_climate="maximum_hourly_windspeed";;
 fn) FORM_climate="minimum_hourly_windspeed";;
+upx) FORM_climate="maximum_hourly_potential_wind";;
 fx) FORM_climate="maximum_wind_gust";;
 tg) FORM_climate="mean_temperature";;
 tn) FORM_climate="min_temperature";;
