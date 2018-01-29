@@ -29,6 +29,8 @@ a { text-decoration: none }
 <body>
 EOF
 . ./searchengine.cgi
+# in case it does not come from getopts filter the EMAIL string 
+EMAIL=`echo "$EMAIL" | sed -e 's/[^A-Za-z0-9_.@-]/_/g'`
 sed -e "s/FORM_EMAIL/$EMAIL/" ./vinklude/rcc_pagehead.html 
 cat <<EOF
 <table border="0" width="95.25%" cellspacing="0" cellpadding="0">
