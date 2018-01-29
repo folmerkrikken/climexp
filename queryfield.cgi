@@ -808,6 +808,8 @@ tomsai) file=TOMSData/toms2.ctl;kindname="TOMS";climfield="aerosol";;
 o3col) file=TEMISData/o3col1.nc;kindname="KNMI MSR";climfield="ozone";;
 gacp_tau) file=NASAData/gacp_tau.ctl;kindname="GACP";climfield="aerosol optical depth";;
 gacp_a) file=NASAData/gacp_a.ctl;kindname="GACP";climfield="aerosol Angstrom exponent";;
+eac3_aod550) file=EAC3/AOD550_mon.nc;kindname="EAC3";climfield="AOD550";;
+eac3_aod550_day) file=EAC3/AOD550_day.nc;kindname="EAC3";climfield="AOD550";NPERYEAR=366;;
 emep_so2_1) file=EMEPData/so2_emissions_1.ctl;kindname="EMEP";climfield="SO2 emissions";NPERYEAR=1;map='set lon -45 75
 set lat 25 80';NPERYEAR=1;;
 emep_so2_25) file=EMEPData/so2_emissions_25.ctl;kindname="EMEP";climfield="SO2 emissions";NPERYEAR=1;map='set lon -45 75
