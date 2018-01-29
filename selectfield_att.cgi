@@ -15,7 +15,7 @@ cat <<EOF
 <table class="realtable" width="100%" border=0 cellspacing=0 cellpadding=0>
 <tr valign="baseline"><th colspan="14"><input type="submit" class="formbutton" value="Select field">
 Choose a field and press this button</td></tr>
-<tr><th>EC-Earth 2.3<br>T159 coupled
+<tr><th>EC-Earth 2.3<br>T159 coupled 1860-2100
 <th>scenario
 <th>tas
 <th>tas<br>min
@@ -29,7 +29,7 @@ Choose a field and press this button</td></tr>
 <th>wspd
 <th>max<br>wspd
 <th>psl
-<tr><td>16 daily 1860-2100
+<tr><td>16 daily
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_tas_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tasmin_Aday_ECEARTH23_rcp85>
@@ -43,7 +43,7 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_sfcWind_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_sfcWindmax_Aday_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_psl_Aday_ECEARTH23_rcp85>
-<tr><td>16 monthly 1860-2100
+<tr><td>16 monthly
 <td>RCP8.5
 <td><input type=radio class=formradio name=field value=knmi14_tas_Amon_ECEARTH23_rcp85>
 <td><input type=radio class=formradio name=field value=knmi14_tasmin_Amon_ECEARTH23_rcp85>
@@ -57,6 +57,12 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_sfcWind_Amon_ECEARTH23_rcp85>
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=knmi14_psl_Amon_ECEARTH23_rcp85>
+<tr><td>&nbsp;
+<td>RCP8.5
+<td colspan=12>
+<a href="getindices.cgi?WMO=KNMI14Data/Tglobal/iknmi14_tas_Amon_ECEARTH23_rcp85_0-360E_-90-90N_n_su_%%&STATION=Tglobal_EC-Earth23&TYPE=t&NPERYEAR=12&id=$EMAIL">Global mean temperature</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Tglobal/iknmi14_tas_Amon_ECEARTH23_rcp85_0-360E_-90-90N_n_5lan_su_%%&STATION=Tland_EC-Earth23&TYPE=t&NPERYEAR=12&id=$EMAIL">land only</a>;
+<a href="getindices.cgi?WMO=KNMI14Data/Nino/nino34_%%%&STATION=EC-Earth23_Nino3.4&TYPE=i&NPERYEAR=12&id=$EMAIL">Ni&ntilde;o3.4 (detrended)</a>.
 <tr><th>&nbsp;
 <th>&nbsp;
 <th>Rx1day
@@ -91,7 +97,7 @@ if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
     -o $EMAIL = bd113ded9265e569c369d53ff59bf69a \
     -o $EMAIL = f9646e78b5dbcaee3d001eb713252e3e ]; then
     cat << EOF
-<tr><th>EC-Earth 2.3<br>T159 coupled
+<tr><th>EC-Earth 2.3<br>T159 coupled time slices
 <th>scenario
 <th>tas
 <th>tas<br>min
@@ -268,7 +274,7 @@ cat <<EOF
 <td><input type=radio class=formradio name=field value=futureweather_uas_Amon_ECEARTH23_209401-209812>
 <td><input type=radio class=formradio name=field value=futureweather_vas_Amon_ECEARTH23_209401-209812>
 <td><input type=radio class=formradio name=field value=futureweather_psl_Amon_ECEARTH23_209401-209812>
-<tr><th>HadGEM3A N216<br><a href="EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf">conditions of use</a>
+<tr><th>HadGEM3A N216 1960-2015<br><a href="EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf">conditions of use</a>
 <th>SST forcing
 <th>tas
 <th>tas<br>min
@@ -364,7 +370,7 @@ cat <<EOF
 <td><input type=radio class=formradio name=field value=eucleia_tnn_yr_HadGEM3-A-N216_historicalNat>
 <td>&nbsp;
 <td>&nbsp;
-<tr><th>RACMO 12km<br>/EC-EARTH2.3
+<tr><th>RACMO 12km<br>/EC-EARTH2.3 1950-2100
 <th>scenario
 <th>tas
 <th>tas<br>min
@@ -458,120 +464,86 @@ cat <<EOF
 <td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_AMJJAS>
 </table>
 </form>
-<div class=alineakop>EC-Earth 2.3 monthly series</div>
-<a href="getindices.cgi?WMO=KNMI14Data/Tglobal/iknmi14_tas_Amon_ECEARTH23_rcp85_0-360E_-90-90N_n_su_%%&STATION=Tglobal_EC-Earth23&TYPE=t&NPERYEAR=12&id=$EMAIL">Global mean temperature</a>,
-<a href="getindices.cgi?WMO=KNMI14Data/Tglobal/iknmi14_tas_Amon_ECEARTH23_rcp85_0-360E_-90-90N_n_5lan_su_%%&STATION=Tland_EC-Earth23&TYPE=t&NPERYEAR=12&id=$EMAIL">land only</a>.
-<br><a href="getindices.cgi?WMO=KNMI14Data/Nino/nino34_%%%&STATION=EC-Earth23_Nino3.4&TYPE=i&NPERYEAR=12&id=$EMAIL">Ni&ntilde;o3.4 (detrended)</a>,
 
-<div class=alineakop>EC-Earth 2.3 daily series</div>
-<a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_muladdcorr_ydrun_retrend_%%&STATION=Tmean_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmean De Bilt bias-corrected</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_muladdcorr_ydrun_retrend_%%&STATION=Tmax_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmax De Bilt bias-corrected</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmin_muladdcorr_ydrun_retrend_%%&STATION=Tmin_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmin De Bilt bias-corrected</a>,
-<br><a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E&STATION=Tdebilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">temperature at 52&deg;N, 5&deg;E</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5&deg;E</a>,
-<a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,<br>
-<a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/pr_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Pdebilt_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
-<br><a href="getindices.cgi?WMO=KNMI14Data/Pcumbria/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_NEngland&STATION=P_NEngland_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Northern England</a>,
-<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Loire_su_%%&STATION=P_Loire_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Loire basin</a>.
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Seine_su_%%&STATION=P_Seine_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>.
+<p>Observations and model output used in attribution studies are listed below per project.
+Resources not listed are either easily accessible through  other Climate Explorer pages
+or available from the authors (except for non-public data such as the IMD analyses).
 
-<div class=alineakop>HadGEM3A N216 historical daily series</div>
-<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>
-<br><a href="select.cgi?field=EUCLEIA/HadGEM3-A-N216/Tdebilt/pr_day_HadGEM3-A-N216_historical__%%%_Netherlands_without_Caribbean_su.info&NPERYEAR=360&id=$EMAIL">precipitation in the Netherlands (w/o Caribbean)</a>
-<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
+<div class=alineakop>India heat waves <a href="https://doi.org/10.5194/nhess-18-365-2018">2015, 2016</a></div>
+ERA-interim daily <a href="select.cgi?id=$EMAIL&field=erai_tmax_daily">TX</a>, <a href="select.cgi?id=$EMAIL&field=erai_tmin_daily">TN</a>,
+<a href="select.cgi?id=$EMAIL&field=erai_twet_daily">max daily Twetbulb</a>, <a href="select.cgi?id=$EMAIL&field=erai_tdew_daily">daily mean Tdew</a>
+<br>ERA-interim annual <a href="select.cgi?id=$EMAIL&field=erai_txx">TXx</a>, <a href="select.cgi?id=$EMAIL&field=erai_tnx">TNx</a>.
+<br>GHCN-D TX <a href="gdcntmax.cgi?id=$EMAIL8&WMO=IN019070100&STATION=BIKANER&extraargs=">Bikaner</a>, 
+<a href="gdcntmax.cgi?id=$EMAIL8&WMO=IN019180500&STATION=JODHPUR&extraargs=">Jodhpur</a>, 
+<a href="gdcntmax.cgi?id=$EMAIL8&WMO=IN001111200&STATION=MACHILIPATNAM&extraargs=">Machilipatnam</a>.
+<br>weather@home HadAM3P May TXx fields <a href="Weather@Home/India/unknown.nc">Actual</a>, 
+<a href="Weather@Home/India/unknown.nc">Natural</a> and <a href="Weather@Home/India/unknown.nc">Climatology</a>
+(cannot yet be analysed in the Climate Explorer).
+<br>weather@home HadAM3P May TXx at grid point Phalodi <a href="Weather@Home/India/phalodi_TXx_may_Actual_2016.nc">Actual</a>, 
+<a href="Weather@Home/India/phalodi_TXx_may_Natural_2016.nc">Natural</a> and <a href="Weather@Home/India/phalodi_TXx_may_Climatology_1986-2014.nc">Climatology</a>
+(cannot yet be analysed in the Climate Explorer).
+<br>CAMS-Interim EAC3 AOD at 550 nm 2003-2015 <a href="select.cgi?field=eac3_aod550_day&id=$EMAIL">daily</a>, <a href="select.cgi?field=eac3_aod550&id=$EMAIL">monthly</a>.
 
-<div class=alineakop>HadGEM3A N216 historicalNat daily series</div>
-<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historicalNat_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_nat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>.
-<br><a href="select.cgi?field=EUCLEIA/HadGEM3-A-N216/Tdebilt/pr_day_HadGEM3-A-N216_historicalNat__%%%_Netherlands_without_Caribbean_su.info&NPERYEAR=360&id=$EMAIL">precipitation in the Netherlands (w/o Caribbean)</a>
-<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
-
-<div class=alineakop>CORDEX EUR-11 (LCSE)</div>
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/rx3day_cordex_LOIRE_%%&STATION=Rx3day_Loire_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">max of 3-day ave precipitation in Loire basin</a>,
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/rx3day_cordex_SEINE_%%&STATION=Rx3day_Seine_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">max of 3-day ave precipitation in Seine basin</a>.
-<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_cordex_germany_%%&STATION=prmax_germany_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>.
-
-<div class=alineakop>EC-Earth/RACMO 12km runs (KNMI)</div>
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/pr_racmo_Loire_%%&STATION=pr_Loire_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Loire basin</a>,
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/pr_racmo_Seine_%%&STATION=pr_Seine_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>
-<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_racmo_germany_%%&STATION=prmax_Germany_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>
-
-<div class=alineakop>HadGEM2-ES/RACMO 12km runs (KNMI)</div>
-<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_racmo_hadgem_germany_%%&STATION=prmax_Germany_HadGEM2_RACMO&TYPE=p&NPERYEAR=360&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>
-
-<div class=alineakop>CPC analysis daily precipitation along the central Gulf Coast</div>
+<div class=alineakop>US Gulf coast extreme precipitation <a href="https://doi.org/10.5194/hess-21-897-2017">2016</a>, <a href="https://doi.org/10.1088/1748-9326/aa9ef2">2017</a></div>
+CPC analysis
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/gridprcp_cpc_daily_us_%%%&STATION=pr_LA_cpc&TYPE=p&NPERYEAR=366&id=$EMAIL">0.25&deg;</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/gridprcp_cpc_daily_us_05_%%%&STATION=pr_LA_cpc&TYPE=p&NPERYEAR=366&id=$EMAIL">0.50&deg;</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/gridprcp_cpc_daily_us_10_%%%&STATION=pr_LA_cpc&TYPE=p&NPERYEAR=366&id=$EMAIL">1.0&deg;</a> series
-
-<div class=alineakop>FLOR daily series</div>
-Precipitation along the Gulf Coast in FLOR transient runs 1861-2100: 
+FLOR transient runs 1861-2100: 
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.long.18610101-21001231.precip_LA_all_ce_%%%&STATION=pr_LA_FLOR_transient&TYPE=p&NPERYEAR=366&id=$EMAIL">all grid points</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.long-E%%.18610101-21001231.precip_LA_all_ce_3dymax&STATION=pr_LA_FLOR_transient&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial and annual max of 3-day means</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.long-E%%.18610101-21001231.precip_LA_all_ce_3dymax_mo&STATION=pr_LA_FLOR_transient&TYPE=p&NPERYEAR=12&id=$EMAIL">spatial and monthly max of 3-day means</a>,
-<br>Global mean temperature in these runs: 
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.long-E%%.1861-2100.t_ref_all_gm_ce&STATION=GMST_FLOR_transient&TYPE=i&NPERYEAR=1&id=$EMAIL">ensemble</a>,
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.long-ave.1861-2100.t_ref_all_gm_ce&STATION=GMST_FLOR_transient&TYPE=i&NPERYEAR=1&id=$EMAIL">mean</a>.
-<br>
-Same in the long 1860 conditions control run (chopped in pieces): 
+<br>FLOR transient runs 1861-2100:  
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.long-E%%.1861-2100.t_ref_all_gm_ce&STATION=GMST_FLOR_transient&TYPE=i&NPERYEAR=1&id=$EMAIL">global mean surface temperature</a>,
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.long-ave.1861-2100.t_ref_all_gm_ce&STATION=GMST_FLOR_transient&TYPE=i&NPERYEAR=1&id=$EMAIL">ensemble mean</a>.
+<br>FLOR 1860 control run
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_flor_control_1max3ave_max_%%&STATION=pr_LA_FLOR_control&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial and annual max of 3-day means</a>,
-<br>Global mean temperature in these runs: 
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/Tglobal_flor_control_%%&STATION=GMST_FLOR_control&TYPE=i&NPERYEAR=1&id=$EMAIL">ensemble</a>,
-<br>Ni&ntilde;o3.4 in these runs: 
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34_flor_control_%%&STATION=Nino34_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">ensemble</a>,
-detrended: 
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34d_flor_control_%%&STATION=Nino34detrended_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">ensemble</a>,
-<br>SST 30&deg;S-30&deg;N: 
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_30ns_flor_control_%%&STATION=SST_30S30N_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">ensemble</a>,
-<br>Gulf: 
-<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_gulf_flor_control_%%&STATION=SST_Gulf_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">ensemble</a>,
-
-<div class=alineakop>HiFLOR daily series</div>
-Daily precipitation along the Gulf Coast in hiFLOR control runs per grid box:
+<br>FLOR 1860 control run
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/Tglobal_flor_control_%%&STATION=GMST_FLOR_control&TYPE=i&NPERYEAR=1&id=$EMAIL">global mean surface temperature</a>,
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34_flor_control_%%&STATION=Nino34_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">Ni&ntilde;o3.4</a>,
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34d_flor_control_%%&STATION=Nino34detrended_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">Ni&ntilde;o3.4 detrended</a>,
+<br>FLOR 1860 control run
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_30ns_flor_control_%%&STATION=SST_30S30N_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">SST 30&deg;S-30&deg;N</a>,
+<a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_gulf_flor_control_%%&STATION=SST_Gulf_FLOR_control&TYPE=i&NPERYEAR=12&id=$EMAIL">SST Gulf</a>.
+<br>HiFLOR grid boxes
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1860-Ctl.00010101-02001231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_1860&TYPE=p&NPERYEAR=366&id=$EMAIL">1860</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1940-Ctl.00010101-00761231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_1940&TYPE=p&NPERYEAR=366&id=$EMAIL">1940</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1990-Ctl.00010101-03011231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_1990&TYPE=p&NPERYEAR=366&id=$EMAIL">1990</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.2015-Ctl.00010101-00701231.precip_LA_all_ce_%%%&STATION=pr_LA_hiFLOR_2015&TYPE=p&NPERYEAR=366&id=$EMAIL">2015</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_conc_%%%&STATION=pr_LA_hiFLOR_conc&TYPE=p&NPERYEAR=366&id=$EMAIL">concatenated</a>.
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_conc_%%%_max1_3v&STATION=pr_LA_hiFLOR_conc_max1_3v&TYPE=p&NPERYEAR=1&id=$EMAIL">concatenated annual max of 3-day precip</a>.
-<br>
-Annual max of 3-day precip of HiFLOR spatially averaged over 2x2 grid boxes 
+<br>HiFLOR 2&times;2 grid boxes
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1860-Ctl.00010101-02001231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_1860&TYPE=p&NPERYEAR=366&id=$EMAIL">1860</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1940-Ctl.00010101-00761231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_1940&TYPE=p&NPERYEAR=366&id=$EMAIL">1940</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.1990-Ctl.00010101-03011231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_1990&TYPE=p&NPERYEAR=366&id=$EMAIL">1990</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.2015-Ctl.00010101-00701231.precip_LA_all_ce_05_%%%&STATION=pr_LA_hiFLOR_2015&TYPE=p&NPERYEAR=366&id=$EMAIL">2015</a>.
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_05_conc_%%%&STATION=pr_LA_hiFLOR_05_conc_1max3ave&TYPE=p&NPERYEAR=1&id=$EMAIL">concatenated</a>.
-<br>
-Global mean temperature in 
+<br>HiFLOR global mean surface temperature 
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.1860-Ctl.0001-0200.t_ref_all_gm_ce&STATION=GMST_hiFLOR_1860&TYPE=i&NPERYEAR=1&id=$EMAIL">1860</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.1940-Ctl.0001-0075.t_ref_all_gm_ce&STATION=GMST_hiFLOR_1940&TYPE=i&NPERYEAR=1&id=$EMAIL">1940</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.1990-Ctl.0001-0301.t_ref_all_gm_ce&STATION=GMST_hiFLOR_1990&TYPE=i&NPERYEAR=1&id=$EMAIL">1990</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.2015-Ctl.0001-0070.t_ref_all_gm_ce&STATION=GMST_hiFLOR_2015&TYPE=i&NPERYEAR=1&id=$EMAIL">2015</a>.
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/Tglobal_hiflor_conc&STATION=GMST_hiFLOR_conc&TYPE=i&NPERYEAR=1&id=$EMAIL">concatenated</a>.
-<br>
-Ni&ntilde;o3.4 (detrended) in  
+<br>HiFLOR Ni&ntilde;o3.4 (detrended)  
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34d_hiflor_1860&STATION=N34d_hiFLOR_1860&TYPE=i&NPERYEAR=12&id=$EMAIL">1860</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34d_hiflor_1940&STATION=N34d_hiFLOR_1940&TYPE=i&NPERYEAR=12&id=$EMAIL">1940</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34d_hiflor_1990&STATION=N34d_hiFLOR_1990&TYPE=i&NPERYEAR=12&id=$EMAIL">1990</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34d_hiflor_2015&STATION=N34d_hiFLOR_2015&TYPE=i&NPERYEAR=12&id=$EMAIL">2015</a>.
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_n34d_hiflor_conc&STATION=N34d_hiFLOR_conc&TYPE=i&NPERYEAR=12&id=$EMAIL">concatenated</a>.
-<br>
-SST Gulf in  
+<br>HiFLOR Gulf SST  
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.1860-Ctl.000101-020012.t_surf_all_gulf_ce&STATION=30S30N_hiFLOR_1860&TYPE=i&NPERYEAR=12&id=$EMAIL">1860</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.1940-Ctl.000101-007512.t_surf_all_gulf_ce&STATION=30S30N_hiFLOR_1940&TYPE=i&NPERYEAR=12&id=$EMAIL">1940</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.1990-Ctl.000101-030112.t_surf_all_gulf_ce&STATION=30S30N_hiFLOR_1990&TYPE=i&NPERYEAR=12&id=$EMAIL">1990</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos.2015-Ctl.000101-007012.t_surf_all_gulf_ce&STATION=30S30N_hiFLOR_2015&TYPE=i&NPERYEAR=12&id=$EMAIL">2015</a>.
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/sst_gulf_hiflor_conc&STATION=30S30N_hiFLOR_conc&TYPE=i&NPERYEAR=12&id=$EMAIL">concatenated</a>.
-
-<div class=alineakop>HiFLOR daily series</div>
-Precipitation along the Gulf Coast in HiFLOR transient runs 1971-2015 nudged to observed SST: 
+<br>HiFLOR transient runs 1971-2015
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/prcp_hiflor_05_sst_%%%&STATION=pr_LA_HiFLOR_sst&TYPE=p&NPERYEAR=366&id=$EMAIL">all 2&times;2 averaged grid points</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.sst-E%%.19710101-20151231.precip_LA_all_ce_3dymax&STATION=pr_LA_HiFLOR_sst&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial and annual max of 3-day means</a>,
 <a href="getindices.cgi?WMO=GFDLData/Louisiana/atmos_daily.sst-E%%.19710101-20151231.precip_LA_all_ce_3dymax_mo&STATION=pr_LA_HiFLOR_sst&TYPE=p&NPERYEAR=12&id=$EMAIL">spatial and monthly max of 3-day means</a>.
+<br>EC-Earth 2.3 T799
+<a href="select.cgi?field=pr_futureweather_gulfcoast&id=$EMAIL">precipitation along the Gulf Coast</a>.
 
-<div class=alineakop>EC-Earth 2.3 T799 daily series</div>
-Precipitation along the Gulf Coast in FutureWeather runs: 
-<a href="select.cgi?field=pr_futureweather_gulfcoast&id=$EMAIL">gridded daily data</a>,
-
-<div class=alineakop>2017 Europe June heat series</div>
+<div class=alineakop>European summer heat <a href="https://wwa.climatecentral.org/analyses/euro-mediterranean-heat-summer-2017/">2017</a></div>
 Portugal CRU TS 4.00
 <a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_Portugal_without_islands&STATION=Tmax_Portugal&TYPE=t&id=$EMAIL">Tmax</a>, 
 <a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_Portugal_without_islands&STATION=T2m_Portugal&TYPE=t&id=$EMAIL">T2m</a>
@@ -593,8 +565,40 @@ Portugal CRU TS 4.00
 <br>Central England
 <a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_tmax_-3-0E_54-57N_n&STATION=Tmax_-3-0E_54-57N&TYPE=t&id=$EMAIL">Tmax</a>, CET
 <a href="getindices.cgi?WMO=Event_EuropeJune2017/cru_t2m_-3-0E_54-57N_n&STATION=CET&TYPE=t&id=$EMAIL">T2m</a>
-<p>
-<a href="getindices.cgi?WMO=KNMI14Data/Tmed/tasmax_8-24E_36-48N_muladdcorr_ydrun_retrend_%%&STATION=EC-EARTH_biascorr_Tmax_8-24E_36-48N&TYPE=t&NPERYEAR=366&id=$EMAIL">EC-Earth 2.3 T159 Tmax 36-48&deg;N, 8-24&deg;E, bias-corrected (mean and variance)</a>
+<br>EC-Earth 2.3 T159 
+<a href="getindices.cgi?WMO=KNMI14Data/Tmed/tasmax_8-24E_36-48N_muladdcorr_ydrun_retrend_%%&STATION=EC-EARTH_biascorr_Tmax_8-24E_36-48N&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmax 36-48&deg;N, 8-24&deg;E, bias-corrected (mean and variance)</a>
+
+
+<div class=alineakop>Spring/summer rains in France <a href="https://doi.org/10.5194/hess-2016-308">2016</a></div>
+EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Loire_su_%%&STATION=P_Loire_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Loire basin</a>.
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/knmi14_pr_Aday_ECEARTH23_rcp85_Seine_su_%%&STATION=P_Seine_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>.
+<br>HadGEM3A N216 historical <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historical_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historical&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
+<br>HadGEM3A N216 historicalNat <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Loire_su_%%%&STATION=P_Loire_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Loire basin</a>,
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_Seine_su_%%%&STATION=P_Seine_HadGEM3A_historicalNat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation in Seine basin</a>,
+<br><a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/rx3day_cordex_LOIRE_%%&STATION=Rx3day_Loire_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">max of 3-day ave precipitation in Loire basin</a>,
+<br>CORDEX EUR-11 (LCSE) <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/rx3day_cordex_SEINE_%%&STATION=Rx3day_Seine_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">max of 3-day ave precipitation in Seine basin</a>.
+<br>CORDEX EUR-11 (LCSE) <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_cordex_germany_%%&STATION=prmax_germany_CORDEX&TYPE=p&NPERYEAR=1&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>.
+<br>EC-Earth/RACMO 12km runs (KNMI) <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/pr_racmo_Loire_%%&STATION=pr_Loire_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Loire basin</a>,
+<a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/pr_racmo_Seine_%%&STATION=pr_Seine_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Seine basin</a>
+<br>EC-Earth/RACMO 12km runs (KNMI) <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_racmo_germany_%%&STATION=prmax_Germany_RACMO&TYPE=p&NPERYEAR=366&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>
+<br>HadGEM2-ES/RACMO 12km runs (KNMI) <a href="getindices.cgi?WMO=Event_FloodsEuropeMay2016/prmax_racmo_hadgem_germany_%%&STATION=prmax_Germany_HadGEM2_RACMO&TYPE=p&NPERYEAR=360&id=$EMAIL">spatial maximum of precipitation in Central/South Germany</a>
+
+
+<div class=alineakop>Winter rains in the UK <a href="https://doi.org/10.1088/1748-9326/aa9663">2015</a></div>
+EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Pcumbria/pr_day_ECEARTH23_rcp85_%%_18600101-21001231_NEngland&STATION=P_NEngland_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation in Northern England</a>.
+
+
+<div class=alineakop>The Netherlands</div>
+EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_muladdcorr_ydrun_retrend_%%&STATION=Tmean_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmean De Bilt bias-corrected</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_muladdcorr_ydrun_retrend_%%&STATION=Tmax_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmax De Bilt bias-corrected</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmin_muladdcorr_ydrun_retrend_%%&STATION=Tmin_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmin De Bilt bias-corrected</a>,
+<br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E&STATION=Tdebilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">temperature at 52&deg;N, 5&deg;E</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5&deg;E</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,
+<br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/pr_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Pdebilt_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
+<br>HadGEM3A N216 historical <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>, 
+<a href="select.cgi?field=EUCLEIA/HadGEM3-A-N216/Tdebilt/pr_day_HadGEM3-A-N216_historical__%%%_Netherlands_without_Caribbean_su.info&NPERYEAR=360&id=$EMAIL">precipitation in the Netherlands (w/o Caribbean)</a>
+<br>HadGEM3A N216 historicalNat <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historicalNat_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_nat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
+<a href="select.cgi?field=EUCLEIA/HadGEM3-A-N216/Tdebilt/pr_day_HadGEM3-A-N216_historicalNat__%%%_Netherlands_without_Caribbean_su.info&NPERYEAR=360&id=$EMAIL">precipitation in the Netherlands (w/o Caribbean)</a>
+
 
 EOF
 
