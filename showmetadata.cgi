@@ -37,11 +37,14 @@ if [ -z "$url" -a ${file0%.dat} != $file0 ]; then
     # in ascii time series files the URL is often in the comment on the top
     c=`fgrep -c href $file0`
     if [ $c != 0 ]; then
-        url=`head -n 200 $file0 | fgrep href | sed -e 's/^.*href=//' -e 's/>.*$//' -e 's/["]//g'`
+        url=`head -n 200 $file0 | fgrep href | sed -e 's/^.*href=//' -e 's/>.*$//' -e 's/["]//g' -e 's/ target=.*//'`
     fi
 fi
 if [ -n "$url" ]; then
-    echo "<tr><td>official web page<td><a href=$url>$url</a>"
+    echo "<tr><td>official web page<td>"
+    for oneurl in $url; do
+        echo "<a href=$oneurl>$oneurl</a>"
+    done
 fi
 if [ -n "$FORM_field" ]; then
     echo "<tr><td>Climate Explorer URL<td><a href=http://climexp.knmi.nl/select.cgi?field=$FORM_field>climexp.knmi.nl/select.cgi?field=$FORM_field<a/>"
