@@ -68,7 +68,7 @@ params = FormParameters(form)
 #params = FormParameters(form, logLevel=logging.DEBUG)
 params.calculateDate(form)
 # there is a function in Jina2 for this, but as a bash programmer this is easier for me :-(
-params.EMAIL = re.sub('[^0-9a-zA-_.Z@]', '_', params.EMAIL)
+params.EMAIL = re.sub('[^-0-9a-zA-Z_.@]', '_', params.EMAIL)
 
 if 0:
     dumpParams = params.dump()
