@@ -161,6 +161,7 @@ yet been homogenised. Homogenised daily precipitation series are available <a hr
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=fg">daily mean windspeed</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=fh">maximum hourly windspeed</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=fn">minimum hourly windspeed</a><br>
+<a href="getdutchstations.cgi?id=$EMAIL&TYPE=upx">maximum hourly potential wind</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=fx">maximum wind gust</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=dx">zonal wind direction</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=dy">meridional wind direction</a><br>
