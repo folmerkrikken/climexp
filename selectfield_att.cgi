@@ -476,9 +476,8 @@ ERA-interim daily <a href="select.cgi?id=$EMAIL&field=erai_tmax_daily">TX</a>, <
 <br>GHCN-D TX <a href="gdcntmax.cgi?id=$EMAIL8&WMO=IN019070100&STATION=BIKANER&extraargs=">Bikaner</a>, 
 <a href="gdcntmax.cgi?id=$EMAIL8&WMO=IN019180500&STATION=JODHPUR&extraargs=">Jodhpur</a>, 
 <a href="gdcntmax.cgi?id=$EMAIL8&WMO=IN001111200&STATION=MACHILIPATNAM&extraargs=">Machilipatnam</a>.
-<br>weather@home HadAM3P May TXx fields <a href="Weather@Home/India/unknown.nc">Actual</a>, 
-<a href="Weather@Home/India/unknown.nc">Natural</a> and <a href="Weather@Home/India/unknown.nc">Climatology</a>
-(cannot yet be analysed in the Climate Explorer).
+<br>weather@home HadAM3P May TXx fields <a href="select.cgi?field=wh_txx_india">Climatology</a>
+(cannot yet be fully analysed in the Climate Explorer).
 <br>weather@home HadAM3P May TXx at grid point Phalodi <a href="Weather@Home/India/phalodi_TXx_may_Actual_2016.nc">Actual</a>, 
 <a href="Weather@Home/India/phalodi_TXx_may_Natural_2016.nc">Natural</a> and <a href="Weather@Home/India/phalodi_TXx_may_Climatology_1986-2014.nc">Climatology</a>
 (cannot yet be analysed in the Climate Explorer).

@@ -5155,52 +5155,7 @@ tasmax_ukmohadrm3_a1b_hadcm3q0_20) file=RT2b/METO-HC_HadRM3Q0_A1B_HadCM3Q0_DM_25
 tasmax_ukmohadrm3_a1b_hadcm3q0_21) file=RT2b/METO-HC_HadRM3Q0_A1B_HadCM3Q0_DM_25km_2021-2050_tasmax_latlon.nc;kindname="UKMO HadRM3Q0 HadCM3Q0";climfield=tasmax;NPERYEAR=360;;
 tasmax_ukmohadrm3_a1b_hadcm3q0_22) file=RT2b/METO-HC_HadRM3Q0_A1B_HadCM3Q0_DM_25km_2071-2100_tasmax_latlon.nc;kindname="UKMO HadRM3Q0 HadCM3Q0";climfield=tasmax;NPERYEAR=360;;
 
-
-sos_1992_u)     file="SOS/u1992.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_1992_v)     file="SOS/v1992.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_1992_taux)  file="SOS/taux1992.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_1992_tauy)  file="SOS/tauy1992.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_1992_speed) file="SOS/speed1992.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_1994_u)     file="SOS/u1994.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_1994_v)     file="SOS/v1994.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_1994_taux)  file="SOS/taux1994.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_1994_tauy)  file="SOS/tauy1994.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_1994_speed) file="SOS/speed1994.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_1995_u)     file="SOS/u1995.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_1995_v)     file="SOS/v1995.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_1995_taux)  file="SOS/taux1995.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_1995_tauy)  file="SOS/tauy1995.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_1995_speed) file="SOS/speed1995.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_1996_u)     file="SOS/u1996.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_1996_v)     file="SOS/v1996.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_1996_taux)  file="SOS/taux1996.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_1996_tauy)  file="SOS/tauy1996.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_1996_speed) file="SOS/speed1996.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_1997_u)     file="SOS/u1997.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_1997_v)     file="SOS/v1997.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_1997_taux)  file="SOS/taux1997.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_1997_tauy)  file="SOS/tauy1997.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_1997_speed) file="SOS/speed1997.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_1998_u)     file="SOS/u1998.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_1998_v)     file="SOS/v1998.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_1998_taux)  file="SOS/taux1998.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_1998_tauy)  file="SOS/tauy1998.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_1998_speed) file="SOS/speed1998.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_1999_u)     file="SOS/u1999.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_1999_v)     file="SOS/v1999.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_1999_taux)  file="SOS/taux1999.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_1999_tauy)  file="SOS/tauy1999.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_1999_speed) file="SOS/speed1999.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_2000_u)     file="SOS/u2000.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_2000_v)     file="SOS/v2000.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_2000_taux)  file="SOS/taux2000.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_2000_tauy)  file="SOS/tauy2000.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_2000_speed) file="SOS/speed2000.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
-sos_2001_u)     file="SOS/u2001.ctl";kindname="ERS";climfield="u";NPERYEAR=1464;;
-sos_2001_v)     file="SOS/v2001.ctl";kindname="ERS";climfield="v";NPERYEAR=1464;;
-sos_2001_taux)  file="SOS/taux2001.ctl";kindname="ERS";climfield="taux";NPERYEAR=1464;;
-sos_2001_tauy)  file="SOS/tauy2001.ctl";kindname="ERS";climfield="tauy";NPERYEAR=1464;;
-sos_2001_speed) file="SOS/speed2001.ctl";kindname="ERS";climfield="speed";NPERYEAR=1464;;
+wh_txx_india) file=Weather@Home/India/India_tmax_may_Climatology_1.nc;kindname="W@H";climfield="TXx";NPERYEAR=1;;
 
 RCP*) file="IIASAData/${FORM_field}.nc";kindname=${FORM_field%%_*}
       climfield=${FORM_field%_*}
