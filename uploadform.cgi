@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -z "$myvinkhead" ]; then
-  . ./httpheaders_nochache.cgi
+  . ./httpheaders_nocache.cgi
   # check if a search engine, if so set user to anonymous
   . ./getargs.cgi
   . ./searchengine.cgi

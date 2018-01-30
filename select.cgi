@@ -1,7 +1,7 @@
 #!/bin/sh
 . ./init.cgi
 if [ -z "$myvinkhead" ]; then
-    . ./httpheaders_nochache.cgi
+    . ./httpheaders_nocache.cgi
 fi
 
 export DIR=`pwd`

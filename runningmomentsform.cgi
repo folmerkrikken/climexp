@@ -1,5 +1,5 @@
 #!/bin/sh
-. ./httpheaders_nochache.cgi
+. ./httpheaders_nocache.cgi
 
 DIR=`pwd`
 . ./getargs.cgi

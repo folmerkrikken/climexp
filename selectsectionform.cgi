@@ -1,6 +1,6 @@
 #!/bin/sh
 . ./init.cgi
-. ./httpheaders_nochache.cgi
+. ./httpheaders_nocache.cgi
 . ./getargs.cgi
 CLASS="$FORM_CLASS"
 
