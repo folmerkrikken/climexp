@@ -55,6 +55,20 @@ else
         file=`echo "$ce_url" | sed -e 's/^.*WMO=//' -e 's/\&.*$//'`.dat
         file0=$file
     fi
+    # GHCN-D
+    if [ "${TYPE%gdcn}" != "$TYPE" -o $TYPE = pgdcngts ]; then
+        case $TYPE in
+            xgdcn) prog=gdcntmax;;
+            ngdcn) prog=gdcntmin;;
+            vgdxn) prog=gdcntave;;
+            pgdcn) prog=gdcnprcp;;
+            pgdcngts) prog=gdcnprcpall;;
+            fgdcn) prog=gdcnsnow;;
+            ddgcn) prog=gdcnsnwd;;
+            *) echo "$0: error: unknown GHCN-D code $TYPE"; exit -1;;
+        esac
+        ce_url="$prog.cgi?WMO=$WMO&STATION=$FORM_station"
+    fi
     # I should check a few other obvious places...
     if [ -n "$ce_url" ]; then
         echo "<tr><td>Climate Explorer URL<td><a href=http://climexp.knmi.nl/$ce_url>climexp.knmi.nl/$ce_url<a/>"
