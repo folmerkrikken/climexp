@@ -55,18 +55,23 @@ else
         file=`echo "$ce_url" | sed -e 's/^.*WMO=//' -e 's/\&.*$//'`.dat
         file0=$file
     fi
-    # GHCN-D
-    if [ "${TYPE%gdcn}" != "$TYPE" -o $TYPE = pgdcngts ]; then
-        case $TYPE in
-            xgdcn) prog=gdcntmax;;
-            ngdcn) prog=gdcntmin;;
-            vgdxn) prog=gdcntave;;
-            pgdcn) prog=gdcnprcp;;
-            pgdcngts) prog=gdcnprcpall;;
-            fgdcn) prog=gdcnsnow;;
-            dgdcn) prog=gdcnsnwd;;
-            *) echo "$0: error: unknown GHCN-D code $TYPE"; exit -1;;
-        esac
+    prog=""
+    case $TYPE in
+        # GHCN-D
+        xgdcn) prog=gdcntmax;;
+        ngdcn) prog=gdcntmin;;
+        vgdxn) prog=gdcntave;;
+        pgdcn) prog=gdcnprcp;;
+        pgdcngts) prog=gdcnprcpall;;
+        fgdcn) prog=gdcnsnow;;
+        dgdcn) prog=gdcnsnwd;;
+        # KNMI data
+        tg|tn|tx|t1|tw|dr|rr|rh|preciphom19??|rx|ev|pg|pn|px|dd|fh|fn|fx|dx|dy|td|ug|un|ux|ng|sq|sp|qq|vn|vx|sd|up|upx) 
+            prog=getdutch$TYPE
+            WMO=${WMO#$TYPE}
+            ;;
+    esac
+    if [ -n "$prog" ]; then
         ce_url="$prog.cgi?WMO=$WMO&STATION=$FORM_station"
     fi
     # I should check a few other obvious places...
