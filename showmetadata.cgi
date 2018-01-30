@@ -64,7 +64,7 @@ else
             pgdcn) prog=gdcnprcp;;
             pgdcngts) prog=gdcnprcpall;;
             fgdcn) prog=gdcnsnow;;
-            ddgcn) prog=gdcnsnwd;;
+            dgdcn) prog=gdcnsnwd;;
             *) echo "$0: error: unknown GHCN-D code $TYPE"; exit -1;;
         esac
         ce_url="$prog.cgi?WMO=$WMO&STATION=$FORM_station"
