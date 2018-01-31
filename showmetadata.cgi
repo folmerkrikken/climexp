@@ -70,6 +70,21 @@ else
             prog=getdutch$TYPE
             WMO=${WMO#$TYPE}
             ;;
+        # ECA Data
+        ceca) prog=ecaclou;;
+        peca) prog=ecaprcp;;
+        seca) prog=ecapres;;
+        deca) prog=ecasnow;;
+        teca) prog=ecatemp;;
+        xeca) prog=ecatmax;;
+        neca) prog=ecatmin;;
+        bceca) prog=becaclou;;
+        bpeca) prog=becaprcp;;
+        bseca) prog=becapres;;
+        bdeca) prog=becasnow;;
+        bteca) prog=becatemp;;
+        bxeca) prog=becatmax;;
+        bneca) prog=becatmin;;
     esac
     if [ -n "$prog" ]; then
         ce_url="$prog.cgi?WMO=$WMO&STATION=$FORM_station"
