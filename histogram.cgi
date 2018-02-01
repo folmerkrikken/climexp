@@ -87,11 +87,11 @@ EOF
 fi
 
 if [ -n "$FORM_year" ]; then
-    corrargs="$corrargs end2 $FORM_year"
     if [ -n "$FORM_xyear" ]; then
-        echo "Error: specify either the year for which to evaluate the return time or a value, but not both"
-        . ./myvinkfoot.cgi
-        exit
+        echo "Warning: ignoring the year for which to evaluate the return time, $FORM_year<p>"
+        FORM_year=""
+    else
+        corrargs="$corrargs end2 $FORM_year"
     fi
 fi
 echo `date` "$EMAIL ($REMOTE_ADDR) histogram $corrargs" >> log/log
