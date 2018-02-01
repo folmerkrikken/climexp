@@ -19,6 +19,7 @@ case $TYPE in
 dd) NAME="prevailing wind direction";;
 fg) NAME="daily mean windspeed";;
 fh) NAME="maximum hourly windspeed";;
+upx) NAME="maximum hourly potential windspeed";;
 fn) NAME="minimum hourly windspeed";;
 fx) NAME="maximum wind gust";;
 tg) NAME="mean temperature";;
