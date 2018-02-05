@@ -10,6 +10,7 @@ echo "who are you, $REMOTE_ADDR ?"
 exit
 fi
 
+[ -z "$QUERY_STRING" -o "$QUERY_STRING" = '*' ] && exit
 ls -l data/$QUERY_STRING
 rm data/$QUERY_STRING
 ls -l data/$QUERY_STRING
