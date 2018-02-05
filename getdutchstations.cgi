@@ -45,6 +45,7 @@ sw) FORM_climate="global shortwave radiation";;
 si) FORM_climate="circulation-independent_global_shortwave_radiation";;
 sr) FORM_climate="circulation-dependent_global_shortwave_radiation";;
 sd) FORM_climate="snow depth";;
+sdhom) FORM_climate="homogenised snow depth";;
 temp_hom) FORM_climate="homogenised_temperature";;
 precipraw1910-2009) FORM_climate="raw precipitation";;
 preciphom1910) FORM_climate="homogenised precipitation";;

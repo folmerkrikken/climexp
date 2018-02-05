@@ -49,6 +49,7 @@ un) NAME="minimum relative humidity";;
 ux) NAME="maximum relative humidity";;
 sc) NAME="precipitation";;
 sd) NAME="snow depth";;
+sdhom) NAME="hom snow depth";;
 sw) NAME="global shortwave radiation";NPERYEAR=12;;
 si) NAME="circulation-independent global shortwave radiation";NPERYEAR=12;;
 sr) NAME="cicrulation-dependent global shortwave radiation";NPERYEAR=12;;
