@@ -77,13 +77,10 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/cpc_nao&STATION=CPC_NAO&TYPE=i&id=$EMAIL">NAO</a> (pattern-based, 1950-now, CPC)</div>
 <td><a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/nao.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=BernData/naomonjurg&STATION=Luterbacher_NAO&TYPE=i&id=$EMAIL">NAO reconstruction</a> (1658-2001, Luterbacher)</div>
-<td><a href="http://www.cru.uea.ac.uk/ftpdata/naoseajurg.dat"><img src="images/info-i.gif" alt="more information" border="0"></a>
-
 <tr><td>SNAO<td><div class="kalelink">Summer NAO from <a href="getindices.cgi?WMO=NCEPNCAR40/snao_ncepncar&STATION=SNAO_ncepncar&TYPE=i&id=$EMAIL">NCEP/NCAR</a> (1948-now), <a href="getindices.cgi?WMO=UCARData/snao_ucar&STATION=SNAO_ucar&TYPE=i&id=$EMAIL">UCAR</a> (1899-now), <a href="getindices.cgi?WMO=20C/snao_20c&STATION=SNAO_20C&TYPE=i&id=$EMAIL">20C</a> (1871-2008) SLP</div>
 <td><a href="javascript:pop_page('help/snao.shtml',568,450)" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>AO<td><div class="kalelink"><a href="getindices.cgi?WMO=ColostateData/ao_slp&STATION=AO_SLP&TYPE=i&id=$EMAIL">Arctic Oscillation derived from SLP</a> (1899-2002) and <a href="getindices.cgi?WMO=ColostateData/ao_sat&STATION=AO_SAT&TYPE=i&id=$EMAIL">derived from SAT</a> (1851-1997, Thompson, Colorado State)</div>
+<tr><td>AO<td><div class="kalelink"><a href="getindices.cgi?WMO=ColostateData/ao_slp_ext&STATION=AO_SLP&TYPE=i&id=$EMAIL">Arctic Oscillation derived from SLP</a> (1899-2002, Thompson, Colorado State)</div>
 <td><a href="http://www.atmos.colostate.edu/ao/Data/ao_index.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/cpc_ao&STATION=AO_CPC&TYPE=i&id=$EMAIL">Arctic Oscillation</a> (1950-now, NCEP/CPC)</div>
@@ -94,9 +91,6 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 
 <tr><td>&nbsp;<td><div class="kalelink">Atlantic Multidecadal Oscillation <a href="getindices.cgi?WMO=UKMOData/amo_hadsst_ts&STATION=AMO_hadsst&TYPE=i&id=$EMAIL">derived from HadSST</a> (1850-now) and <a href="getindices.cgi?WMO=NCDCData/amo_ersst_ts&STATION=AMO_ersst&TYPE=i&id=$EMAIL">derived from ERSST</a> (1880-now) SST EQ-60&deg;N, 0&deg;-80&deg;W minus SST 60&deg;S-60&deg;N </div>
 <td><a href="amo.cgi?id=$EMAIL"><img src="images/info-i.gif" alt="more information" border="0"></a>
-
-<tr><td>AMOC<td><div class="kalelink">Atlantic Meridional Overturning Circulation: <a href="getindices.cgi?WMO=ECMWFData/AtlanticMOC26N&STATION=AMOC_ecmwf_S3&TYPE=i&id=$EMAIL">ECMWF S3</a> (1961-2005)</div>
-<td>&nbsp;
 
 <tr><td>Teleconnection patterns<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPData/cpc_ea&STATION=CPC_EA&TYPE=i&id=$EMAIL">East Atlantic</a>, 
 <a href="getindices.cgi?WMO=NCEPData/cpc_ea_wr&STATION=CPC_EA/WR&TYPE=i&id=$EMAIL">East
@@ -121,9 +115,6 @@ Hemisphere index</a>, (1950-now, CPC)</div>
 <td><a
 href="http://www.cpc.noaa.gov/data/teledoc/telecontents.shtml"
 target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
-
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCARData/np&STATION=North_Pacific&TYPE=i&id=$EMAIL">North Pacific index</a> (1899-now, Trenberth &amp; Hurrell)</div>
-<td><a href="http://www.cgd.ucar.edu/~jhurrell/np.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>IPO<td><div class="kalelink">4-yr time scale, based on <a href="getindices.cgi?WMO=UKMOData/eof_pac_hadsst3_4_01&STATION=IPO_HadSST3_4&TYPE=i&id=$EMAIL">HadSST3</a>, <a href="getindices.cgi?WMO=UKMOData/eof_pac_hadisst1_4_01&STATION=IPO_HadISST1_4&TYPE=i&id=$EMAIL">HadISST1</a>, <a href="getindices.cgi?WMO=NCDCData/eof_pac_ersstv5_4_01&STATION=IPO_HadERSSTv5_4&TYPE=i&id=$EMAIL">ERSSTv5</a></div>
 <td><a href="javascript:pop_page('help/ipo.shtml',568,450)" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
@@ -159,11 +150,7 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 (1978-now, CPC)</div>
 <td><a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_mjo_index/mjo_index.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>QBO<td><div class="kalelink"><a href="getindices.cgi?WMO=FUBData/qbo&STATION=QBO&TYPE=i&id=$EMAIL">QBO</a>
-(1953-1999, Naujokat and Marquardt)</div>
-<td><a href="http://www.jisao.washington.edu/data_sets/qbo/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
-
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPNCAR40/nqbo&STATION=CDC_QBO&TYPE=i&id=$EMAIL">QBO</a> (1958-now, Cathy Smith, CDC)</div>
+<tr><td>QBO<td><div class="kalelink"><a href="getindices.cgi?WMO=NCEPNCAR40/nqbo&STATION=CDC_QBO&TYPE=i&id=$EMAIL">QBO</a> (1958-now, Cathy Smith, CDC)</div>
 <td><a href="http://www.cdc.noaa.gov/ClimateIndices/List/#QBO" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink">reconstruction at <a href="getindices.cgi?WMO=BernData/qbo_3&STATION=QBO_3&TYPE=i&id=$EMAIL">3</a>, <a href="getindices.cgi?WMO=BernData/qbo_5&STATION=QBO_5&TYPE=i&id=$EMAIL">5</a>, <a href="getindices.cgi?WMO=BernData/qbo_10&STATION=QBO_10&TYPE=i&id=$EMAIL">10</a>, <a href="getindices.cgi?WMO=BernData/qbo_30&STATION=QBO_30&TYPE=i&id=$EMAIL">30</a>, <a href="getindices.cgi?WMO=BernData/qbo_50&STATION=QBO_50&TYPE=i&id=$EMAIL">50</a>, <a href="getindices.cgi?WMO=BernData/qbo_90&STATION=QBO_90&TYPE=i&id=$EMAIL">90</a> hPa (Stefan Br&ouml;nnimann)</div>
@@ -305,10 +292,7 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 
 <tr><td>&nbsp;<td><div class="kalelink">Lean <a href="getindices.cgi?WMO=NCDCData/tsi_ncdc_yearly&STATION=reconstructed_tsi&TYPE=i&id=$EMAIL&NPERYEAR=1">annual</a> (1610-now), <a href="getindices.cgi?WMO=NCDCData/tsi_ncdc_monthly&STATION=reconstructed_tsi&TYPE=i&id=$EMAIL">monthly</a> (1882-now) reconstructed total solar irradiance</a>
 <td><a href="ftp://data.ncdc.noaa.gov/cdr/solar-irradiance/tsi/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
-<!--
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=FUBData/tsi_wls_mon&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL">Reconstructed solar constant</a> (1882-2008, FUB), <a href="getindices.cgi?WMO=FUBData/tsi_wls_ann&STATION=reconstructed_solar_constant&TYPE=i&id=$EMAIL&NPERYEAR=1">annual</a> (1610-2008) 
-<td><a href="http://www.geo.fu-berlin.de/en/met/ag/strat/forschung/SOLARIS/Input_data/CMIP5_solar_irradiance.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
--->
+
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=SIDCData/sunspots&STATION=sunspots&TYPE=i&id=$EMAIL">Sunspots</a> (1749-now, SIDC),  <a href="getindices.cgi?WMO=SIDCData/sunspots2&STATION=signed_sunspots&TYPE=i&id=$EMAIL">with alternating signs</a></div>
 <td><a href="http://sidc.oma.be/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
