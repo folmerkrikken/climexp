@@ -20,7 +20,7 @@ do
     command="cat $pngfile.bak"
     case $key in
         author) value="$EMAIL";;
-        title) value="$title"
+        title) value="$title";;
         creation_time) value=`date`;;
         copyright) value="Figures from the KNMI Climate Explorer may be used freely as long as the source KNMI is acknowledged";;
         variable_name) value="$VAR";;
