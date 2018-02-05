@@ -47,7 +47,7 @@ if [ ${NPERYEAR:-12} -gt 1 ]; then
     fi
     yrstart=`head -1 $startstop`
     yrstop=`tail -1 $startstop`
-    if [ $yrstart = '9999' -o "$yrstart" = "$yrstop" ]; then
+    if [ "$yrstart" = '9999' -o "$yrstart" = "$yrstop" ]; then
     	echo "Not enough data in requested interval ${FORM_climyear1}:${FORM_climyear2}, using all data for climatology"
 		###echo "./bin/climatology ./data/$TYPE$WMO.dat startstop $startstop"
 		(./bin/climatology ./data/$TYPE$WMO.dat startstop $startstop > ${base}_yr.plt) 2>&1
