@@ -21,6 +21,9 @@ if [ $EMAIL = oldenborgh@knmi.nl ]; then
 fi
 
 # start real work
+if [ -z "$FORM_field" ]; then
+    FORM_field=`echo "$QUERY_STRING" | sed -e 's/[^-a-zA-Z0-9_/.@]/_/g'`
+fi
 [ "$lwrite" = true ] && echo "calling queryfield...<br>"
 . ./queryfield.cgi
 [ "$lwrite" = true ] && echo "FORM_field=$FORM_field<br>file=$file<br>"

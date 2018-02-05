@@ -4,10 +4,29 @@ export DIR=`pwd`
 
 . ./init.cgi
 . ./getargs.cgi
+
 STATION="$FORM_STATION"
 WMO="$FORM_WMO"
 TYPE="$FORM_TYPE"
 NPERYEAR="$FORM_NPERYEAR"
+if [ -z "$WMO" -a -n "$QUERY_STRING" ]; then
+    WMO=`echo "$QUERY_STRING" | sed -e 's/[^-a-zA-Z0-9_/.@]/_/g'`
+    WMO=${WMO#/} # no absolute paths
+    if [ `basename "$WMO"` = "$WMO" ]; then
+        WMO=unknown/$WMO # only in subdirectories
+    fi
+fi
+if [ -z "$TYPE" ]; then
+    TYPE=i
+fi
+if [ -z "$STATION" ]; then
+    file=$WMO.dat
+    if [ -s $file ]; then
+        eval `./bin/getunits $file`
+        STATION=$VAR
+    fi
+fi
+###echo "TYPE,WMO,STATION=$TYPE,$WMO,$STATION" >> log/log
 
 case $TYPE in
 t) NAME="temperature";;

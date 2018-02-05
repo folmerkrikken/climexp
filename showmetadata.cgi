@@ -47,10 +47,11 @@ if [ -n "$url" ]; then
     done
 fi
 if [ -n "$FORM_field" ]; then
-    echo "<tr><td>Climate Explorer URL<td><a href=http://climexp.knmi.nl/select.cgi?field=$FORM_field>climexp.knmi.nl/select.cgi?field=$FORM_field<a/>"
+    echo "<tr><td>Climate Explorer URL<td><a href=http://climexp.knmi.nl/select.cgi?$FORM_field>climexp.knmi.nl/select.cgi?$FORM_field<a/>"
 else
     f=${file0%.dat}
-    ce_url=`cat selectindex.cgi | tr ' ' '\n' | fgrep "/${WMO}&" | sed -e 's/href=//' -e 's/>.*$//' -e 's/["]//g' -e 's/&id=$EMAIL//'`
+    ce_url=`cat selectindex.cgi | tr ' ' '\n' | fgrep "/${WMO}&" \
+        | sed -e 's/href=//' -e 's/>.*$//' -e 's/["]//g' -e 's/&id=$EMAIL//' -e 's/&TYPE=i//'`
     if [ -n "$ce_url" ]; then
         file=`echo "$ce_url" | sed -e 's/^.*WMO=//' -e 's/\&.*$//'`.dat
         file0=$file
