@@ -270,8 +270,7 @@ if [ "$TYPE" = "i" -a "$EMAIL" != "someone@somewhere" ]; then
 fi
 ###echo "<div class=\"alineakop\">Timeseries</div>"
 
-###echo '<p>Converting data...'
-###echo "$DIR/bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > $DIR/data/$TYPE$WMO.txt"
+[ "$lwrite" = true ] && echo "$DIR/bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > $DIR/data/$TYPE$WMO.txt"
 if [ -s $firstfile ]; then
   if [ \( ! -s ./data/$TYPE$WMO.txt \) -o $firstfile -nt ./data/$TYPE$WMO.txt ]; then
     ( ./bin/plotdat $DIR/data/$TYPE$WMO.dat | fgrep -v 'disregarding' > ./data/$TYPE$WMO.txt ) 2>&1
@@ -319,20 +318,20 @@ EOF
     mywmo=`echo $WMO | tr '+' '%'`
     mystation=`echo $STATION | tr ' +' '_%'`
     cat << EOF 
-(<a href="data/$TYPE$WMO.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE$mywmo.eps.gz">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$WMO&station=$STATION&id=$EMAIL\">metadata</a>, <a href="rawdata.cgi?wmo=$mywmo&station=$mystation&type=$TYPE&id=$EMAIL&nperyear=$NPERYEAR">raw data</a>)
+(<a href="data/$TYPE$WMO.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE$mywmo.eps.gz">pdf</a>, <a href="showmetadata.cgi?TYPE=$TYPE&WMO=$mywmo&station=$STATION&id=$EMAIL">metadata</a>, <a href="rawdata.cgi?wmo=$mywmo&station=$mystation&type=$TYPE&id=$EMAIL&nperyear=$NPERYEAR">raw data</a>)
 EOF
   else
     c=`echo "$HTTP_USER_AGENT" | fgrep -i -c 'MSIE'`
     if [ $c != 0 ]; then
-      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$WMO&station=$STATION&id=$EMAIL\">metadata</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>, <a href=\"dat2dos.cgi?file=data/$TYPE$WMO.dat\">DOS</a>)"
+      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$mywmo&station=$STATION&id=$EMAIL\">metadata</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>, <a href=\"dat2dos.cgi?file=data/$TYPE$WMO.dat\">DOS</a>)"
     else
-      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$WMO&station=$STATION&id=$EMAIL\">metadata</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>)"
+      echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$mywmo&station=$STATION&id=$EMAIL\">metadata</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>)"
     fi    
   fi
   pngfile=data/$TYPE$WMO.png
   datfile=data/$TYPE$WMO.txt
   getpngwidth
-  . ./add_metadata_fig.cgi
+  ###. ./add_metadata_fig.cgi
   
   cat <<EOF
 </div>
