@@ -292,13 +292,14 @@ if [ -s $firstfile ]; then
   fi
 ###  echo "Plotting data:"
   echo '<div class="bijschrift">'
-  egrep '^#' data/$TYPE$WMO.dat | fgrep -v 'bin/' | egrep -v -i '( :: )|(jan *feb)|(VRIJ WORDEN GEBRUIKT)|(CAN BE USED)|(ROYAL NETHERLANDS METEOROLOGICAL INSTITUTE)|(^# Searching )|(non-commercial )|(any commercial)|(intentionally)|(coauthors)|(1441-1453)' | grep -v '^ *$' | sed -e 's/^#//' -e 's/^.#//' -e 's/$/,/' -e 's/^ *, *//' | tr '_' ' ' | sed -e 's/antieke wrn/antieke_wrn/'
+  egrep '^#' data/$TYPE$WMO.dat | fgrep -v 'bin/' | egrep -v -i '( :: )|(jan *feb)|(VRIJ WORDEN GEBRUIKT)|(CAN BE USED)|(ROYAL NETHERLANDS METEOROLOGICAL INSTITUTE)|(^# Searching )|(non-commercial )|(any commercial)|(intentionally)|(coauthors)|(1441-1453)' | grep -v '^ *$' | sed -e 's/^#//' -e 's/^.#//' -e 's/$/,/' -e 's/^ *, *//' | tr '_' ' ' | sed -e 's/antieke wrn/antieke_wrn/' -e 's/daily a/daily_a/' -e 's/o index/o_index/'
   [ -n "$UNITS" ] && plotunits="[$UNITS]"
   if [ \( ! -s ./data/$TYPE$WMO.png \) -o \( ! -s ./data/$TYPE$WMO.eps.gz \) -o ./data/$TYPE$WMO.png -ot $firstfile ]; then
     wmo_=`echo $WMO | tr '_' ' '`
     var_=`echo $VAR | tr '_' ' '`
     name_=`echo $NAME | tr '_' ' '`
     station_=`echo $station | tr '_' ' '`
+    title="$name_ $station_ ($wmo_)"
     ./bin/gnuplot << EOF
 $gnuplot_init
 set xzeroaxis
@@ -306,7 +307,7 @@ set size .7057,.4
 set term postscript epsf color solid
 set output "$DIR/data/$TYPE$WMO.eps"
 set ylabel "$var_ $plotunits"
-plot "$DIR/data/$TYPE$WMO.txt" title "$name_ $station_ ($wmo_)" with steps
+plot "$DIR/data/$TYPE$WMO.txt" title "$title" with steps
 set term png $gnuplot_png_font_hires
 set out "$DIR/data/$TYPE$WMO.png"
 replot
@@ -329,7 +330,10 @@ EOF
     fi    
   fi
   pngfile=data/$TYPE$WMO.png
+  datfile=data/$TYPE$WMO.txt
   getpngwidth
+  . ./add_metadata_fig.cgi
+  
   cat <<EOF
 </div>
 <center>
