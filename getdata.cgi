@@ -321,6 +321,7 @@ EOF
 (<a href="data/$TYPE$WMO.eps.gz">eps</a>, <a href="ps2pdf.cgi?file=data/$TYPE$mywmo.eps.gz">pdf</a>, <a href="showmetadata.cgi?TYPE=$TYPE&WMO=$mywmo&station=$STATION&id=$EMAIL">metadata</a>, <a href="rawdata.cgi?wmo=$mywmo&station=$mystation&type=$TYPE&id=$EMAIL&nperyear=$NPERYEAR">raw data</a>)
 EOF
   else
+    mywmo=$WMO
     c=`echo "$HTTP_USER_AGENT" | fgrep -i -c 'MSIE'`
     if [ $c != 0 ]; then
       echo "(<a href=\"data/$TYPE$WMO.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=data/$TYPE$WMO.eps.gz\">pdf</a>, <a href=\"showmetadata.cgi?TYPE=$TYPE&WMO=$mywmo&station=$STATION&id=$EMAIL\">metadata</a>, <a href=\"data/$TYPE$WMO.dat\">raw data</a>, <a href=\"dat2nc.cgi?datafile=data/$TYPE$WMO.dat&type=$TYPE&station=$STATION&id=$EMAIL\">netcdf</a>, <a href=\"dat2dos.cgi?file=data/$TYPE$WMO.dat\">DOS</a>)"
