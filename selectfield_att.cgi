@@ -469,6 +469,18 @@ cat <<EOF
 Resources not listed are either easily accessible through  other Climate Explorer pages
 or available from the authors (except for non-public data such as the IMD analyses).
 
+EOF
+if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
+    -o $EMAIL = e279dd4de035b5fd9edc95ba4df755f7 \
+    -o $EMAIL = bd113ded9265e569c369d53ff59bf69a \
+    -o $EMAIL = f9646e78b5dbcaee3d001eb713252e3e ]; then
+    cat << EOF
+<div class=alineakop>Bangladesh flooding 2017</div>
+HIWAVES precipitation
+<a href="getindices.cgi?WMO=Bangladesh2017Data/iknmi14_pr_Aday_ECEARTH23_rcp85_mask20_su_%%&STATION=pr_ECEarth_rcp85_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_rcp85</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_PD_mask20_su_%%%&STATION=pr_ECEarth_PD_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_PD</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_2C_mask20_su_%%%&STATION=pr_ECEarth_2C_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_2C</a>
+EOF
+fi
+cat << EOF
 <div class=alineakop>India heat waves <a href="https://doi.org/10.5194/nhess-18-365-2018">2015, 2016</a></div>
 ERA-interim daily <a href="select.cgi?id=$EMAIL&field=erai_tmax_daily">TX</a>, <a href="select.cgi?id=$EMAIL&field=erai_tmin_daily">TN</a>,
 <a href="select.cgi?id=$EMAIL&field=erai_twet_daily">max daily Twetbulb</a>, <a href="select.cgi?id=$EMAIL&field=erai_tdew_daily">daily mean Tdew</a>
