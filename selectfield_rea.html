@@ -146,6 +146,153 @@
 </tr>
 </table></div>
 </tr><tr>
+<th width=25%><a href="javascript:hidden_info_switch('era5');">show/hide</a></th>
+<th colspan="7"><div class="kalelink"><a href="http://apps.ecmwf.int/data-catalogues/era5/?class=ea" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>ERA5 2010-"now"</div> earlier data will become available later</th>
+</tr>
+<tr><td colspan=8>
+<div id="era5" hiddenstyle_era5>
+<table width=100% border=0 cellspacing=0 cellpadding=0>
+<tr><th align="right" width=14.5%><small>variable \ level</small></th>
+<th><small>surface</small></th>
+<th><small>2m/10m</small></th>
+<th><small>850mb</small></th>
+<th><small>700mb</small></th>
+<th><small>500mb</small></th>
+<th><small>300mb</small></th>
+<th><small>200mb</small></th>
+<th><small>zonal</small></th>
+</tr>
+<tr><td align="right">slp/height</td>
+<td><input type="radio" class="formradio" name="field" value="era5_slp"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era5_z850"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_z700"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_z500"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_z300"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_z200"></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">temperature</td>
+<td><!--input type="radio" class="formradio" name="field" value="era5_ts"--></td>
+<td><input type="radio" class="formradio" name="field" value="era5_t2m"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_t850"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_t700"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_t500"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_t300"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_t200"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_tzon"></td>
+</tr>
+<tr><td align="right">min/max 2m temperature</td>
+<td><input type="radio" class="formradio" name="field" value="era5_tmin"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_tmax"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">zonal wind(stress)</td>
+<td><!--input type="radio" class="formradio" name="field" value="era5_taux"--></td>
+<td><input type="radio" class="formradio" name="field" value="era5_u10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_u850"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_u700"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_u500"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_u300"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_u200"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_uzon"></td>
+</tr>
+<tr><td align="right">meridional wind(stress)</td>
+<td><!--input type="radio" class="formradio" name="field" value="era5_tauy"--></td>
+<td><input type="radio" class="formradio" name="field" value="era5_v10m"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_v850"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_v700"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_v500"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_v300"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_v200"></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">wind speed/vertical velocity</td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era5_wspd"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_w850"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_w700"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_w500"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_w300"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_w200"></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">latent/sensible heat flux / humidity</td>
+<td><input type="radio" class="formradio" name="field" value="era5_lhf"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_shf"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_q850"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_q700"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_q500"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_q300"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_q200"></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">column water vapour / relative humidity</td>
+<td><input type="radio" class="formradio" name="field" value="era5_vap"></td>
+<td>&nbsp;</td>
+<td><input type="radio" class="formradio" name="field" value="era5_rh850"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_rh700"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_rh500"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_rh300"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_rh200"></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">P-E / surface humidity / evap</td>
+<td><!--input type="radio" class="formradio" name="field" value="era5_pme"--></td>
+<td><!--input type="radio" class="formradio" name="field" value="era5_huss"--></td>
+<td><input type="radio" class="formradio" name="field" value="era5_evap"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">precipitation/ t2m+SST</td>
+<td><input type="radio" class="formradio" name="field" value="era5_tp"></td>
+<td><!--input type="radio" class="formradio" name="field" value="era5_t2msst"--></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">surface net solar/longwave  radiation</td>
+<td><input type="radio" class="formradio" name="field" value="era5_ssr"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_str"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<tr><td align="right">surface net turbulent/all heat flux</td>
+<td><input type="radio" class="formradio" name="field" value="era5_trbflx"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_snetflx"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td align="right">sea ice / snow depth</td>
+<td><input type="radio" class="formradio" name="field" value="era5_ci"></td>
+<td><input type="radio" class="formradio" name="field" value="era5_snd"></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table></div>
+</tr><tr>
 <th width=15%><a href="javascript:hidden_info_switch('merra');">show/hide</a></th>
 <th colspan="7"><div class="kalelink"><a href="http://disc.sci.gsfc.nasa.gov/datareleases/merra_2_data_release" target="_new"><img src="images/info-i.gif" alt="more information" border="0" align="right"></a>NASA MERRA-2 1980-"now"</div></th>
 </tr>

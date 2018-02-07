@@ -15,7 +15,8 @@ export DIR=`pwd`
 eval `bin/getunits.sh $file`
 # better hack
 FORM_var=`./bin/describefield.sh $file | tail -1 | awk '{print $2}' | cut -b 1-15`
-if [ "${FORM_field#erai}" != "$FORM_field" -o "${FORM_field#data/erai}" != "$FORM_field" -o \
+if [ "${FORM_field#erai}" != "$FORM_field" -o "${FORM_field#era5}" != "$FORM_field" -o \
+    "${FORM_field#data/erai}" != "$FORM_field" -o "${FORM_field#data/era5}" != "$FORM_field" -o \
     "${FORM_field#ct}" != "$FORM_field" -o "${FORM_field#data/ct}" != "$FORM_field" ]; then
     if [ -z "$FORM_plotanomaly" -a \( "$UNITS" = "K" -o "$UNITS" = degK \) -a "$NEWUNITS" = "Celsius" ]; then
         FORM_var="$FORM_var-273.15"

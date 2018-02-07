@@ -15,6 +15,7 @@ EOF
 
 if [ -n "$ROBOT" ]; then
     hiddenstyle_erainterim=""
+    hiddenstyle_era5=""
     hiddenstyle_merra=""
     hiddenstyle_cfsr=""
     hiddenstyle_jra=""
@@ -24,6 +25,7 @@ if [ -n "$ROBOT" ]; then
     hiddenstyle_era20c=""
 else
     hiddenstyle_erainterim="style=\"display: none;\""
+    hiddenstyle_era5="style=\"display: none;\""
     hiddenstyle_merra="style=\"display: none;\""
     hiddenstyle_cfsr="style=\"display: none;\""
     hiddenstyle_jra="style=\"display: none;\""
@@ -33,11 +35,12 @@ else
     hiddenstyle_era20c="style=\"display: none;\""
 fi
 if [ -s prefs/$EMAIL.field.12 ]; then
-    eval `egrep '^FORM_field=[a-zA-Z0-9]*;$' ./prefs/$EMAIL.field.12`
+    eval `egrep '^FORM_field=[-_a-zA-Z0-9]*;$' ./prefs/$EMAIL.field.12`
     if [ -n "$FORM_field" ]; then
 	. ./queryfield.cgi
 	case $kindname in
 	    ERA-int) hiddenstyle_erainterim="";;
+	    ERA5) hiddenstyle_era5="";;
 	    MERRA) hiddenstyle_merra="";;
 	    CFSR) hiddenstyle_cfsr="";;
 	    JRA) hiddenstyle_jra="";;
@@ -50,6 +53,7 @@ if [ -s prefs/$EMAIL.field.12 ]; then
 fi
 
 sed -e "s/hiddenstyle_erainterim/$hiddenstyle_erainterim/" \
+    -e "s/hiddenstyle_era5/$hiddenstyle_era5/" \
     -e "s/hiddenstyle_merra/$hiddenstyle_merra/" \
     -e "s/hiddenstyle_cfsr/$hiddenstyle_cfsr/" \
     -e "s/hiddenstyle_jra/$hiddenstyle_jra/" \
