@@ -339,11 +339,8 @@ ens_ecmwf4*|ecmwf4*)
     LSMASK=ECMWF/S4/lsmask07.nc
     ;;
 
-tempa) file=NCDCData/temp_anom.ctl;kindname="NCDC v3";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
-tempa_old) file=NCDCData/temp_anom_old.ctl;kindname="NCDC v2";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
-ncdc_temp) file=NCDCData/t_anom.ctl;kindname="NCDC v3";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
-ncdc_temp_old) file=NCDCData/t_anom.ctl;kindname="NCDC v2";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
-###hadcrut4) file=UKMOData/hadcrut4_median.nc;kindname="HadCRUT4";climfield="SST/T2m anom";;
+tempa) file=NCDCData/temp_anom.nc;kindname="NCDC v3";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
+ncdc_temp) file=NCDCData/ncdc-merged-sfc-mntp.nc;kindname="NCDC v3";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 hadcrut4) file=UKMOData/HadCRUT.4.6.0.0.median.nc;kindname="HadCRUT4.6";climfield="SST/T2m anom";LSMASK=UKMOData/lsmask_5.nc;;
 crutem1) file=CRUData/crutem1.ctl;kindname="CRUTEM1";climfield="T2m anom";;
 ncrutem1) file=CRUData/ncrutem1.ctl;kindname="CRUTEM1";climfield="number of stations";;
@@ -361,9 +358,9 @@ giss_temp_land_250) file=NASAData/giss_temp_land_250.nc;kindname="GISS 250";clim
 giss_temp_1200) file=NASAData/giss_temp_both_1200.nc;kindname="GISS 1200";climfield="T2m/SST anom";LSMASK=NASAData/lsmask.nc;;
 giss_temp_land_1200) file=NASAData/giss_temp_land_1200.nc;kindname="GISS 1200";climfield="T2m anom";LSMASK=NASAData/lsmask.nc;;
 had4_krig_v2) file=YorkData/had4_krig_v2_0_0.nc;kindname="HadCRUT4 filled-in";climfield="T2m/SST";LSMASK=UKMOData/lsmask_5.nc;;
-ghcn_cams_05) file=NCEPData/ghcn_cams_05.ctl;kindname="GHCN/CAMS";climfield="t2m";;
-ghcn_cams_10) file=NCEPData/ghcn_cams_10.ctl;kindname="GHCN/CAMS";climfield="t2m";;
-ghcn_cams_25) file=NCEPData/ghcn_cams_25.ctl;kindname="GHCN/CAMS";climfield="t2m";;
+ghcn_cams_05) file=NCEPData/ghcn_cams_05.nc;kindname="GHCN/CAMS";climfield="t2m";;
+ghcn_cams_10) file=NCEPData/ghcn_cams_10.nc;kindname="GHCN/CAMS";climfield="t2m";;
+ghcn_cams_25) file=NCEPData/ghcn_cams_25.nc;kindname="GHCN/CAMS";climfield="t2m";;
 berkeley_tavg_daily_full) file=BerkeleyData/TAVG_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tavg";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmax_daily_full) file=BerkeleyData/TMAX_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tmax";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmin_daily_full) file=BerkeleyData/TMIN_Daily_LatLong1_full.nc;kindname="Berkeley";climfield="Tmin";NPERYEAR=366;LSMASK=BerkeleyData/land_mask.nc;;
@@ -382,10 +379,10 @@ hadghcnd_tx) file=UKMOData/hadghcnd_tx.ctl;kindname="HadGHCND";climfield="Tmax";
 hadghcnd_tn) file=UKMOData/hadghcnd_tn.ctl;kindname="HadGHCND";climfield="Tmin";NPERYEAR=366;;
 rtg_sst_5dy) file=NCEPData/rtg_sst_5dy.ctl;kindname="RTG";climfield="SST";NPERYEAR=73;;
 rtg_sst_month) file=NCEPData/rtg_sst_month.ctl;kindname="RTG";climfield="SST";;
-sstoi_v2) file=NCEPData/sstoi_v2.ctl;kindname="NCEP OI v2";climfield="SST";;
+sstoi_v2) file=NCEPData/sstoi_v2.nc;kindname="NCEP OI v2";climfield="SST";;
 sstoiv2_monthly) file=NCEPData/oisst_v2_monthly.nc;kindname="NCEP OIv2 1/4";climfield="SST";;
 sstoiv2_daily) file=NCEPData/oisst_v2_daily.nc;kindname="NCEP OIv2 1/4";climfield="SST";NPERYEAR=366;;
-iceoi_v2) file=NCEPData/iceoi_v2.ctl;kindname="Reynolds v2";climfield="ice cover";;
+iceoi_v2) file=NCEPData/iceoi_v2.nc;kindname="Reynolds v2";climfield="ice cover";;
 sstoi) file=NCEPData/sstoi.ctl;kindname="Reynolds";climfield="SST";;
 kaplan_ssta) file=LDGOData/kaplan_ssta.nc;kindname="Kaplan";climfield="SSTa";;
 ersstv3b) file=NCDCData/ersstv3b.ctl;kindname="ERSST v3b2";climfield="SST";;
@@ -401,7 +398,7 @@ rss_tlt) file=SSMIData/rss_tlt.nc;kindname="RSS MSU 3.3";climfield="Tlt";;
 rss_tlt_anom) file=SSMIData/rss_tlt_anom.nc;kindname="RSS MSU 3.3";climfield="Tlt anomaly";;
 rss_tlt_old) file=SSMIData/rss_tlt_32.nc;kindname="RSS MSU 3.2";climfield="Tlt";;
 rss_tlt_anom_old) file=SSMIData/rss_tlt_anom_32.nc;kindname="RSS MSU 3.2";climfield="Tlt anomaly";;
-prca) file=NCDCData/prcp_anom.ctl;kindname="NCDC";climfield="precip anom";LSMASK=NCDCData/lsmask_5.nc;flipcolor=11;;
+prca) file=NCDCData/prcp_anom.nc;kindname="NCDC";climfield="precip anom";LSMASK=NCDCData/lsmask_5.nc;flipcolor=11;;
 ncdc_prcp) file=NCDCData/prcp_total.nc;kindname="NCDC";climfield="prcp";flipcolor=11;;
 prcp_trmm) file=TRMMData/prcp_trmm.nc;kindname="TRMM+GPCC";climfield="precipitation";flipcolor=11;;
 prcp_trmm_lo) file=TRMMData/prcp_trmm_lo.nc;kindname="TRMM+GPCC";climfield="precipitation";flipcolor=11;;
@@ -597,7 +594,7 @@ nprcp_cpc_daily_us) file=NCEPData/nprcp_CONUS_daily.nc;kindname="CPC daily";clim
 gpcp_22) file=GPCPData/gpcp_22.ctl;kindname="GPCP v2.2";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_23) file=GPCPData/gpcp.nc;kindname="GPCP v2.3";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_daily) file=GPCPData/gpcp_daily.nc;kindname="GPCP v1.3";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
-cmap) file=NCEPData/cmap.ctl;kindname="CMAP";climfield="precipitation";flipcolor=11;;
+cmap) file=NCEPData/cmap.nc;kindname="CMAP";climfield="precipitation";flipcolor=11;;
 cmaperr) file=NCEPData/cmaperr.ctl;kindname="CMAP";climfield="relative error on precipitation";;
 cmapm) file=NCEPData/cmapm.ctl;kindname="CMAP incl model";climfield="precipitation";flipcolor=11;;
 cmapmerr) file=NCEPData/cmapmerr.ctl;kindname="CPMAP (incl model)";climfield="relative error on precipitation";;
