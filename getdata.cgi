@@ -230,6 +230,15 @@ else
     fi
     # speed up subsequent operations
     ncfile=${firstfile%.dat}.nc
+    # deduce station from file if not set (I'll try to do this more and more)
+    if [ -z "$STATION" ]; then
+        # get it from file
+        if [ -s "$firstfile" ]; then
+            # real station data?
+            STATION=`head -n 200 $firstfile | fgrep 'station_name' | sed -e 's/.*:: //' | tr ' ' '_'`
+            station=`echo "$STATION" | tr '_' ' '`
+        fi
+    fi
     if [ ! -s $ncfile -o $ncfile -ot $firstfile ]; then
         [ -f $ncfile ] && rm $ncfile
         [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
@@ -239,6 +248,11 @@ else
     if [ -z "$VAR" ]; then
     # something went wrong
         echo `date`" $REMOTE_ADDR error: getunits failed for ./data/$TYPE$WMO.dat" 1>&2
+    fi
+    # index?
+    if [ -z "$STATION" ]; then
+        STATION=$VAR
+        station=`echo "$STATION" | tr '_' ' '`
     fi
     if [ -n "$ENSEMBLE" ]; then
         # also generate netcdf files for the rest of the ensemble
