@@ -47,7 +47,7 @@ if [ -n "$url" ]; then
     done
 fi
 if [ -n "$FORM_field" ]; then
-    echo "<tr><td>Climate Explorer URL<td><a href=http://climexp.knmi.nl/select.cgi?field=$FORM_field>climexp.knmi.nl/select.cgi?field=$FORM_field<a/>"
+    echo "<tr><td>Climate Explorer URL<td><a href=http://climexp.knmi.nl/select.cgi?$FORM_field>climexp.knmi.nl/select.cgi?$FORM_field<a/>"
 else
     f=${file0%.dat}
     ce_url=`cat selectindex.cgi | tr ' ' '\n' | fgrep "/${WMO}&" \
@@ -116,11 +116,11 @@ if [ ${file0%.dat} != $file0 ]; then
     if [ "$file0" != "$file" ]; then
         echo "of first ensemble member"
     fi
-    echo '<tr><td>Description<td>'
+    echo '<tr><td>description<td>'
     head -n 200 $file0 | egrep '^#' | egrep -v -i '( :: )|(jan *feb)' | grep -v '^ *$' | sed -e 's/^#//' -e 's/^.#//' -e 's/$/,/' -e 's/^ *, *//' | tr '_' ' ' | sed -e 's/antieke wrn/antieke_wrn/'
     head -n 200 $file0 | fgrep ' :: ' | sed \
-        -e 's/^# /\<tr\>\<td\>/' \
-        -e 's/ :: */\<td\>/' \
+        -e 's/^# */\<tr\>\<td\>/' \
+        -e 's/:: */\<td\>/' \
         -e 's/\n,/\<br\>/g' \
         -e 's/\\n,/\<br\>/g' \
         -e 's/\n/\<br\>/g' \
