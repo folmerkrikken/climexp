@@ -8,16 +8,26 @@ export DIR=`pwd`
 STATION="$FORM_STATION"
 WMO="$FORM_WMO"
 TYPE="$FORM_TYPE"
+if [ -z "$TYPE" ]; then
+    TYPE=i
+fi
 NPERYEAR="$FORM_NPERYEAR"
+if [ -z "$NPERYEAR" ]; then
+    NPERYEAR=12
+fi
+if [ $NPERYEAR = 12 -a $TYPE=i ]; then
+    climexp_url="https://climexp.knmi.nl/getindices.cgi?$WMO"
+else
+    climexp_url="https://climexp.knmi.nl/getindices.cgi?WMO=$WMO"
+    [ $TYPE != i ] && climexp_url="${climexp_url}&TYPE=$TYPE"
+    [ $NPERYEAR != 12 ] && climexp_url="${climexp_url}&NPERYEAR=$NPERYEAR"
+fi
 if [ -z "$WMO" -a -n "$QUERY_STRING" ]; then
     WMO=`echo "$QUERY_STRING" | sed -e 's/[^-a-zA-Z0-9_/.@]/_/g'`
     WMO=${WMO#/} # no absolute paths
     if [ `basename "$WMO"` = "$WMO" ]; then
         WMO=unknown/$WMO # only in subdirectories
     fi
-fi
-if [ -z "$TYPE" ]; then
-    TYPE=i
 fi
 if [ -z "$STATION" ]; then
     file=$WMO.dat
@@ -112,4 +122,5 @@ fi
 ###echo "newfile=$newfile" >> log/debug
 ###echo "PROG=$PROG" >> log/debug
 export TYPE
+export climexp_url
 . $DIR/getdata.cgi
