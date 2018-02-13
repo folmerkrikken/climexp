@@ -606,7 +606,7 @@ CenTrendsChirps) file=CHIRPSData/centrends_chirps.nc;kindname="CenTrends/CHIRPS"
 set lat -15 18";;
 emulate) file=CRUData/emulate_3.2_1850-2003.nc;kindname="EMULATE 3.2";climfield="SLP";NPERYEAR=366;map="set lon -70 50
 set lat 25 70";;
-trenberthslp) file=UCARData/ds010_1.ctl;kindname="Trenberth";climfield="SLP";map='set mproj nps';;
+trenberthslp) file=UCARData/ds010_1.nc;kindname="Trenberth";climfield="SLP";map='set mproj nps';;
 gmslp) file=UKMOData/gmslp.ctl;kindname="UKMO";climfield="SLP";;
 hadslp1) file=UKMOData/hadslp1.ctl;kindname="HadSLP1";climfield="SLP";;
 hadslp1.0) file=UKMOData/hadslp1_0.ctl;kindname="HadSLP1.0";climfield="SLP";;
@@ -667,7 +667,7 @@ ntc) file="MITData/ntc.ctl";kindname="MIT";climfield="TC within 160km";NPERYEAR=
 ts_heat) file="AOMLData/heat.nc";kindname="AOML";climfield="TC Heat Potential";;
 ts_heat_1) file="AOMLData/heat_1.nc";kindname="AOML";climfield="TC Heat Potential";;
 nhsnow) file=SnowData/nhsnow.ctl;kindname="NOAA";climfield="snowcover";map='set mproj nps';flipcolor=11;;
-rutgers_nhsnow) file=RutgersData/snow_rucl.ctl;kindname="Rutgers";climfield="snowcover";map='set mproj nps';flipcolor=11;;
+rutgers_nhsnow) file=RutgersData/snow_rucl.nc;kindname="Rutgers";climfield="snowcover";map='set mproj nps';flipcolor=11;;
 ice_index_n) file=NSIDCData/conc_n.ctl;kindname=NSIDC;climfield="ice concentration";map='set mproj nps';;
 ice_index_s) file=NSIDCData/conc_s.ctl;kindname=NSIDC;climfield="ice concentration";map='set mproj sps';;
 ice_bootstrap_n) file=NSIDCData/conc_bt_n.ctl;kindname=bootstrap;climfield="ice concentration";map='set mproj nps';;
