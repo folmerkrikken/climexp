@@ -5,7 +5,7 @@ if [ -z "$myvinkhead" ]; then
     echo
     echo
 fi
-
+. ./init.cgi
 . ./searchengine.cgi
 
 export DIR=`pwd`

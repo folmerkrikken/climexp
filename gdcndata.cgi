@@ -1,5 +1,5 @@
 #!/bin/sh
-
+. ./init.cgi
 . ./getargs.cgi
 
 ###echo "Content-Type: text/plain"; echo; set | fgrep FORM_ ; exit

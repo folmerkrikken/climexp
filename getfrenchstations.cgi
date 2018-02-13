@@ -1,5 +1,5 @@
 #!/bin/sh
-
+. ./init.cgi
 . ./getargs.cgi
 TYPE="$FORM_TYPE"
 

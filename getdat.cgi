@@ -4,6 +4,7 @@ echo "Content-Type: data"
 echo "Content-Encoding: x-gzip"
 echo
 
+. ./init.cgi
 . ./getargs.cgi
 ctldir=`dirname $FORM_file`
 datafile=`head -1 $FORM_file | sed -e 's/DSET //' -e 's/dset //' -e "s:\^:$ctldir/:" -e 's/ *$//'`

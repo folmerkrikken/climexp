@@ -1,5 +1,5 @@
 #!/bin/sh
-
+. ./init.cgi
 . ./getargs.cgi
 WMO="$FORM_WMO"
 STATION="$FORM_STATION"

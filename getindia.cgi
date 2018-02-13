@@ -1,5 +1,5 @@
 #!/bin/sh
-
+. ./init.cgi
 . ./getargs.cgi
 WHERE="$FORM_where"
 TYPE="$FORM_type"

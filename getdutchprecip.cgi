@@ -1,6 +1,6 @@
 #!/bin/sh
-
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
 WMO="$FORM_WMO"
