@@ -4,8 +4,8 @@ echo
 echo
 
 # to find netpbm on MacOS X
-export PATH=/sw/bin:$PATH
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 WMO=$FORM_WMO
 TYPE=$FORM_TYPE

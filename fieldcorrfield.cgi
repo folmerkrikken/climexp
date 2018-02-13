@@ -4,6 +4,7 @@ echo
 echo
 
 DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
 # off limits for search engines

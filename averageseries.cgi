@@ -4,6 +4,7 @@ echo
 echo
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 email="$EMAIL"
 climate="$FORM_climate"

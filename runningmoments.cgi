@@ -4,6 +4,7 @@ echo
 echo
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 WMO=$FORM_WMO
 TYPE=$FORM_TYPE

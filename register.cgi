@@ -4,6 +4,7 @@ echo
 echo
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
 if [ "$lwrite" = true ]; then

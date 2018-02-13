@@ -3,6 +3,7 @@
 . ./httpheaders_nocache.cgi
 
 DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 # check email address
 . ./checkemail.cgi

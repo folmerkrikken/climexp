@@ -4,6 +4,7 @@ echo
 echo
 
 DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
 # check email address

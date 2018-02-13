@@ -1,5 +1,6 @@
 #!/bin/sh
 
+. ./init.cgi
 . ./getargs.cgi
 . ./searchengine.cgi
 . ./checkemail.cgi
