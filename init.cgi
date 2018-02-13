@@ -2,7 +2,12 @@
 # various environment variables that come in useful later on
 # plus a check on the state of the server
 if [ -z "$init_done" ]; then
-
+    if [ "$HTTP_USER_AGENT" = "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +http://megaindex.com/crawler)" ]; then
+        echo "Content-Type: text/plain"
+        echo
+        echo "As MegaIndex does not obey robots.txt nor the nofollow directive it is blocked. Please contact oldenborgh@knmi.nl for details."
+        exit
+    fi
     if [ -n "$HTTP_X_FORWARDED_FOR" ]; then
         REMOTE_ADDR=$HTTP_X_FORWARDED_FOR
     fi
