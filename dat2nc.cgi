@@ -2,7 +2,7 @@
 . ./nosearchenginewithheader.cgi
 echo "Content-type: text/html"
 echo
-
+. ./init.cgi
 . ./getargs.cgi
 
 FORM_datafile=`echo $FORM_datafile | sed -e 's/_W _/_W+_/' -e 's/_G _/_G+_/'`
