@@ -5,6 +5,9 @@ User-agent: *
 Crawl-delay: 5
 
 # downloading all kind of forbidden links
+User-agent: MegaIndex.ru
+Disallow: /
+# downloading all kind of forbidden links
 User-agent: Ezooms
 Disallow: /
 # This Czech robot seems to ignore the above.  Kill.
