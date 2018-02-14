@@ -1,8 +1,9 @@
 #!/bin/sh
 if [ -z "$myvinkhead" ]; then
   . ./httpheaders_nocache.cgi
-  # check if a search engine, if so set user to anonymous
+  . ./init.cgi
   . ./getargs.cgi
+  # check if a search engine, if so set user to anonymous
   . ./searchengine.cgi
   . ./myvinkhead.cgi "Select a monthly time series" "Upload a series"
 fi

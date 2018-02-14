@@ -3,6 +3,7 @@
 # select an ensemble member from an ensemble of time series
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
 if [ $FORM_nens1 -lt 10 ]; then

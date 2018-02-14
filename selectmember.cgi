@@ -3,6 +3,7 @@
 # Geert Jan van Oldenborgh, KNMI, 13-jan-2005
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 FORM_email="$EMAIL"
 i="$FORM_i"

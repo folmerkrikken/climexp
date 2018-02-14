@@ -3,9 +3,9 @@ echo 'Content-Type: text/html'
 echo
 echo
 
-# check if a search engine, if so set user to anonymous
+. ./init.cgi
 . ./getargs.cgi
-
+# check if a search engine, if so set user to anonymous
 . ./searchengine.cgi
 
 . ./myvinkhead.cgi "Select or upload a time series" "User-defined time series"

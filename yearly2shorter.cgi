@@ -2,6 +2,7 @@
 # make a time series with a shorter time scale than the original
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
 if [ -z "$FORM_field" ]; then

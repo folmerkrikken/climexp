@@ -1,5 +1,6 @@
 #!/bin/sh
 . ./httpheaders_nocache.cgi
+. ./init.cgi
 . ./getargs.cgi
 
 if [ -n "$FORM_field" ]; then

@@ -3,6 +3,7 @@
 # select a period from a data file
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 
 WMO="${FORM_wmo}_${FORM_yr1}:${FORM_yr2}"

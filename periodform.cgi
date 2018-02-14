@@ -1,5 +1,6 @@
 #!/bin/sh
 . ./httpheaders_nocache.cgi
+. ./init.cgi
 . ./getargs.cgi
 TYPE="$FORM_TYPE"
 WMO="$FORM_WMO"

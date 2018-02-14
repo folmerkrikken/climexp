@@ -4,8 +4,8 @@ echo "Content-Type:text/html"
 echo
 echo
 
+. ./init.cgi
 . ./getargs.cgi
-
 . ./searchengine.cgi
 
 . ./myvinkhead.cgi "Select all daily time series" "Historical observations" "index,follow"

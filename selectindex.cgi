@@ -3,8 +3,8 @@ echo 'Content-Type: text/html'
 echo
 echo
 
+. ./init.cgi
 . ./getargs.cgi
-
 # check if a search engine, if so set user to anonymous
 . ./searchengine.cgi
 

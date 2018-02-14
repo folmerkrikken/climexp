@@ -3,6 +3,7 @@ echo 'Content-Type: text/html'
 echo
 echo
 
+. ./init.cgi
 . ./getargs.cgi
 
 TYPE="$FORM_TYPE"

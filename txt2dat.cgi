@@ -1,5 +1,6 @@
 #!/bin/sh
 
+. ./init.cgi
 . ./getargs.cgi
 ###echo "Content-Type: text/plain"; echo; set; exit
 WMO="$FORM_WMO"

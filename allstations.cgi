@@ -2,6 +2,7 @@
 
 # set up the information that getstations.cgi expects
 
+. ./init.cgi
 . ./getargs.cgi
 FORM_EMAIL="$EMAIL"
 FORM_email="$EMAIL"

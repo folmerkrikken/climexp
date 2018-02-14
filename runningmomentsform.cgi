@@ -2,6 +2,7 @@
 . ./httpheaders_nocache.cgi
 
 DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 TYPE="$FORM_TYPE"
 WMO="$FORM_WMO"
