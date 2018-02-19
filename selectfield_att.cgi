@@ -481,6 +481,23 @@ HIWAVES precipitation
 EOF
 fi
 cat << EOF
+<div class=alineakop>European storms January 2018 </div>
+EC-Earth/RACMO 12km runs (KNMI) 1971-2070 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_1971-2070_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_1971-2070_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
+<!--
+<br>EC-Earth/RACMO 12km runs (KNMI) 1971-2000 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_1971-2000_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_1971-2000_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
+<br>EC-Earth/RACMO 12km runs (KNMI) 2001-2030 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_2001-2030_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_2001-2030_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
+<br>EC-Earth/RACMO 12km runs (KNMI) 2021-2050 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_2021-2050_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_2021-2050_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
+<br>EC-Earth/RACMO 12km runs (KNMI) 2041-2070 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_2041-2070_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_2041-2070_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
+-->
+<br>EC-Earth 2.3 T159 (KNMI) 1861-2100 <a href="getindices.cgi?WMO=KNMI14Data/Storms/sfcWindmax_Aday_ECEARTH23_rcp85_Eleanor_n_5lan_%%&STATION=u10max_Eleanor_ECEARTH&TYPE=i&NPERYEAR=366&id=$EMAIL">daily max wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/sfcWindmax_Aday_ECEARTH23_rcp85_Friederike_n_5lan_%%&STATION=u10max_Friederike_ECEARTH&TYPE=i&NPERYEAR3661&id=$EMAIL">Friederike region</a> (looking up exact definition)
+
+
 <div class=alineakop>India heat waves <a href="https://doi.org/10.5194/nhess-18-365-2018">2015, 2016</a></div>
 ERA-interim daily <a href="select.cgi?id=$EMAIL&field=erai_tmax_daily">TX</a>, <a href="select.cgi?id=$EMAIL&field=erai_tmin_daily">TN</a>,
 <a href="select.cgi?id=$EMAIL&field=erai_twet_daily">max daily Twetbulb</a>, <a href="select.cgi?id=$EMAIL&field=erai_tdew_daily">daily mean Tdew</a>
@@ -605,6 +622,7 @@ EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_muladdcorr_
 <br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E&STATION=Tdebilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">temperature at 52&deg;N, 5&deg;E</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5&deg;E</a>,
 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,
 <br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/pr_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Pdebilt_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
+<br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tglobal/tas_Amon_ECEARTH23_rcp85_0-360E_-90-90N_n_su_mean_mean1&STATION=Tglobal_EC-Earth23&TYPE=i&NPERYEAR=1&id=$EMAIL">annual mean ensemble mean global mean temperature</a>,
 <br>HadGEM3A N216 historical <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>, 
 <a href="select.cgi?field=EUCLEIA/HadGEM3-A-N216/Tdebilt/pr_day_HadGEM3-A-N216_historical__%%%_Netherlands_without_Caribbean_su.info&NPERYEAR=360&id=$EMAIL">precipitation in the Netherlands (w/o Caribbean)</a>
 <br>HadGEM3A N216 historicalNat <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historicalNat_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_nat&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
