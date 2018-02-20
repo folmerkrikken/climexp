@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x
+###set -x
 # add geospatial* metadata variables to netcdf metadata
 [ -z "$file" ] && echo "$0: error: set variable file" && exit -1
 [ ! -s "$file" ] && echo "$0: error: cannot find file $file" && exit -1
@@ -59,7 +59,7 @@ else
             -a "geospatial_lon_resolution",global,c,f,"$lonstep" \
                 $file
     if [ -n "$latstep" ]; then
-        ncatted -h -a "geospatial_lon_resolution",global,c,f,"$latstep" $file
+        ncatted -h -a "geospatial_lat_resolution",global,c,f,"$latstep" $file
     fi
 fi
 c=`ncdump -h $file | fgrep -c time_coverage_`
