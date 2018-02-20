@@ -13,6 +13,6 @@ if [ -s $queryfield ]; then
         ncatted -h -a climexp_url,global,c,c,$climexp_url $file
         ncatted -h -a climexp_url,global,o,c,$climexp_url $file
     else
-        echo "$0: error: cannot find $file in $queryfield.cgi"
+        echo "$0: error: cannot find $file in $queryfield"
     fi
 fi
