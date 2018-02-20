@@ -139,6 +139,33 @@ if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
+<tr><th>PCR-GLOBWB
+<th>input
+<th colspan=2>discharge
+<th colspan=2>runoff
+<th colspan=2>snowmelt
+<th colspan=2>satdeglow
+<th colspan=2>satdegupp
+<th>&nbsp;
+<th>&nbsp;
+<tr><td>1979-2017
+<td>CPC
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_discharge_Aday_CPC_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_runoff_Aday_CPC_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_snowMelt_Aday_CPC_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_satDegLow_Aday_CPC_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_satDegUpp_Aday_CPC_hist>
+<td>&nbsp;
+<td>&nbsp;
+<tr><td>1979-2017
+<td>ERA-interim
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_discharge_Aday_ERA_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_runoff_Aday_ERA_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_snowMelt_Aday_ERA_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_satDegLow_Aday_ERA_hist>
+<td colspan=2><input type=radio class=formradio name=field value=hiwaves3_satDegUpp_Aday_ERA_hist>
+<td>&nbsp;
+<td>&nbsp;
 EOF
 fi
 cat <<EOF
@@ -476,10 +503,14 @@ if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
     -o $EMAIL = f9646e78b5dbcaee3d001eb713252e3e ]; then
     cat << EOF
 <div class=alineakop>Bangladesh flooding 2017</div>
-HIWAVES precipitation
+Observed precipitation in the Brahmaputra basin: 
+<a href="getindices.cgi?WMO=Bangladesh2017Data/iprcp_cpc_daily_mask0_su&STATION=pr_CPC_Brahmaputra&TYPE=p&NPERYEAR=366&id=$EMAIL">CPC</a>, 
+<a href="getindices.cgi?WMO=Bangladesh2017Data/igpcc_daily_mask0_su&STATION=pr_GPCC_Brahmaputra&TYPE=p&NPERYEAR=366&id=$EMAIL">GPCC</a>, 
+<a href="getindices.cgi?WMO=Bangladesh2017Data/ierai_prcp_daily_mask0_su&STATION=pr_ERAi_Brahmaputra&TYPE=p&NPERYEAR=366&id=$EMAIL">ERA-interim</a>, 
+<br>HIWAVES precipitation in Bangladesh:
 <a href="getindices.cgi?WMO=Bangladesh2017Data/iknmi14_pr_Aday_ECEARTH23_rcp85_mask20_su_%%&STATION=pr_ECEarth_rcp85_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_rcp85</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_PD_mask20_su_%%%&STATION=pr_ECEarth_PD_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_PD</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_2C_mask20_su_%%%&STATION=pr_ECEarth_2C_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_2C</a>
-<br>HIWAVES discharge
-<a href="getindices.cgi?WMO=Bangladesh2017Data/CPC_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_CPC_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">HIWAVES_CPC</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ERA_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_ERA_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">HIWAVES_ERA</a>
+<br>Modelled discharge at Bahadurabad
+<a href="getindices.cgi?WMO=Bangladesh2017Data/CPC_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_CPC_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_CPC</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ERA_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_ERA_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_ERA</a>
 EOF
 fi
 cat << EOF
