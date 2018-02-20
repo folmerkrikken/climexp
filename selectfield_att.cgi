@@ -478,6 +478,8 @@ if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
 <div class=alineakop>Bangladesh flooding 2017</div>
 HIWAVES precipitation
 <a href="getindices.cgi?WMO=Bangladesh2017Data/iknmi14_pr_Aday_ECEARTH23_rcp85_mask20_su_%%&STATION=pr_ECEarth_rcp85_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_rcp85</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_PD_mask20_su_%%%&STATION=pr_ECEarth_PD_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_PD</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_2C_mask20_su_%%%&STATION=pr_ECEarth_2C_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_2C</a>
+<br>HIWAVES discharge
+<a href="getindices.cgi?WMO=Bangladesh2017Data/CPC_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_CPC_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">HIWAVES_CPC</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ERA_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_ERA_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">HIWAVES_ERA</a>
 EOF
 fi
 cat << EOF
@@ -494,8 +496,8 @@ EC-Earth/RACMO 12km runs (KNMI) 1971-2070 <a href="getindices.cgi?WMO=KNMI14Data
 <br>EC-Earth/RACMO 12km runs (KNMI) 2041-2070 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_2041-2070_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_2041-2070_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
 -->
-<br>EC-Earth 2.3 T159 (KNMI) 1861-2100 <a href="getindices.cgi?WMO=KNMI14Data/Storms/sfcWindmax_Aday_ECEARTH23_rcp85_Eleanor_n_5lan_%%&STATION=u10max_Eleanor_ECEARTH&TYPE=i&NPERYEAR=366&id=$EMAIL">daily max wind in Eleanor region</a>,
-<a href="getindices.cgi?WMO=KNMI14Data/Storms/sfcWindmax_Aday_ECEARTH23_rcp85_Friederike_n_5lan_%%&STATION=u10max_Friederike_ECEARTH&TYPE=i&NPERYEAR3661&id=$EMAIL">Friederike region</a> (looking up exact definition)
+<br>EC-Earth 2.3 T159 (KNMI) 1861-2100 <a href="getindices.cgi?WMO=KNMI14Data/Storms/sfcWindmax_Aday_ECEARTH23_rcp85_Eleanor_n_5lan_%%&STATION=u10max_Eleanor_ECEARTH&TYPE=i&NPERYEAR=366&id=$EMAIL">daily max of 3-hr instantaneous wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/sfcWindmax_Aday_ECEARTH23_rcp85_Friederike_n_5lan_%%&STATION=u10max_Friederike_ECEARTH&TYPE=i&NPERYEAR3661&id=$EMAIL">Friederike region</a>
 
 
 <div class=alineakop>India heat waves <a href="https://doi.org/10.5194/nhess-18-365-2018">2015, 2016</a></div>
