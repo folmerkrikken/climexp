@@ -15,13 +15,26 @@ else
         latstep=`echo $latline | awk '{print $7}' | sed -e 's/&deg;//'`
         latstep=${latstep#-} # no negative steps
     fi
-    latline=`cat $tmpfile | fgrep 'first point' | tail -n 1`
-    lat1=`echo $latline | awk '{print $4}' | sed -e 's/&deg;//'`
-    ns1=`echo $latline | awk '{print $5}' | tr -d ','`
-    [ $ns1 = 'S' ] && lat1="-$lat1"
-    lat2=`echo $latline | awk '{print $9}' | sed -e 's/&deg;//'`
-    ns2=`echo $latline | awk '{print $10}'`
-    [ $ns2 = 'S' ] && lat2="-$lat2"
+    if [ $gridtype = irregular ]; then
+        latline=`cat $tmpfile | fgrep 'Y axis'`
+        lat1=`echo $latline | awk '{print $9}'`
+        n=8
+        l=start
+        while [ -n "$l" -a $n -lt 100 ]; do
+            ((n++))
+            lat2=$l
+            l=`echo $latline | awk "{print \$"$n"}"`
+            ###echo "l=$l"
+        done
+    else
+        latline=`cat $tmpfile | fgrep 'first point' | tail -n 1`
+        lat1=`echo $latline | awk '{print $4}' | sed -e 's/&deg;//'`
+        ns1=`echo $latline | awk '{print $5}' | tr -d ','`
+        [ $ns1 = 'S' ] && lat1="-$lat1"
+        lat2=`echo $latline | awk '{print $9}' | sed -e 's/&deg;//'`
+        ns2=`echo $latline | awk '{print $10}'`
+        [ $ns2 = 'S' ] && lat2="-$lat2"
+    fi
     ilat1=${lat1%\.*}
     ilat2=${lat2%\.*}
     if [ $ilat1 -gt $ilat2 ]; then
@@ -37,14 +50,27 @@ else
         [ $ilat2 -ge  87 ] && lat2=90
     fi
     lonline=`cat $tmpfile | fgrep "X axis"`
-    lonstep=`echo $lonline | awk '{print $7}' | sed -e 's/&deg;//' | tr -d ' -'`
-    lonline=`cat $tmpfile | fgrep 'first point' | head -n 1`
-    lon1=`echo $lonline | awk '{print $4}' | sed -e 's/&deg;//'`
-    ew1=`echo $lonline | awk '{print $5}' | tr -d ','`
-    [ $ew1 = 'W' ] && lon1="-$lon1"
-    lon2=`echo $lonline | awk '{print $9}' | sed -e 's/&deg;//'`
-    ew2=`echo $lonline | awk '{print $10}'`
-    [ $ew2 = 'W' ] && lon2="-$lon2"
+    gridtype=`echo $latline | awk '{print $3}'`
+    if [ $gridtype = irregular ]; then
+        lon1=`echo $lonline | awk '{print $9}'`
+        n=8
+        l=start
+        while [ -n "$l" -a $n -lt 100 ]; do
+            ((n++))
+            lon2=$l
+            l=`echo $lonline | awk "{print \$"$n"}"`
+            ###echo "l=$l"
+        done
+    else
+        lonstep=`echo $lonline | awk '{print $7}' | sed -e 's/&deg;//' | tr -d ' -'`
+        lonline=`cat $tmpfile | fgrep 'first point' | head -n 1`
+        lon1=`echo $lonline | awk '{print $4}' | sed -e 's/&deg;//'`
+        ew1=`echo $lonline | awk '{print $5}' | tr -d ','`
+        [ $ew1 = 'W' ] && lon1="-$lon1"
+        lon2=`echo $lonline | awk '{print $9}' | sed -e 's/&deg;//'`
+        ew2=`echo $lonline | awk '{print $10}'`
+        [ $ew2 = 'W' ] && lon2="-$lon2"
+    fi
     if [ -n "$lonstep" ]; then
         lon1=`echo "$lon1-$lonstep/2" | bc -l | sed -e 's/0*$//'`
         lon2=`echo "$lon2+$lonstep/2" | bc -l | sed -e 's/0*$//'`
@@ -56,10 +82,12 @@ else
             -a "geospatial_lon_min",global,c,f,$lon1 \
             -a "geospatial_lon_max",global,c,f,$lon2 \
             -a "geospatial_lon_units",global,c,c,"degrees_east" \
-            -a "geospatial_lon_resolution",global,c,f,"$lonstep" \
                 $file
     if [ -n "$latstep" ]; then
         ncatted -h -a "geospatial_lat_resolution",global,c,f,"$latstep" $file
+    fi
+    if [ -n "$lonstep" ]; then
+        ncatted -h -a "geospatial_lon_resolution",global,c,f,"$lonstep" $file
     fi
 fi
 c=`ncdump -h $file | fgrep -c time_coverage_`
