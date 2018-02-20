@@ -139,7 +139,7 @@ if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
-<tr><th>PCR-GLOBWB
+<tr><th>PCR-GLOBWB S Asia
 <th>input
 <th colspan=2>discharge
 <th colspan=2>runoff
