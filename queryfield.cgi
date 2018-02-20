@@ -97,7 +97,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amo
          knmi14) datasetname=KNMI14;;
          eucleia) datasetname=EUCLEIA;;
          futureweather) datasetname=FutureWeather;;
-         hiwaves3) datasetname-HIWAVES3;;
+         hiwaves3) datasetname=HIWAVES3;;
          *) echo "unknown dataset $dataset"; exit -1;;
     esac
     if [ $var = pr -o $var = pme -o $var = huss -o $var = hurs -o \
@@ -714,79 +714,79 @@ ersstrsv) file=CERSATData/ersstrsv.ctl;kindname="ERS";climfield="meridional wind
 dasilva_taux) file=DaSilvaData/dasilva_taux.cdf;kindname="Da Silva";climfield="zonal windstress";;
 dasilva_tauy) file=DaSilvaData/dasilva_tauy.cdf;kindname="Da Silva";climfield="meridional windstress";;
 
-tao_sst) file=TAOData/tao_sst.ctl;kindname="TAO";climfield="SST";map='set lat -10 10
+tao_sst) file=TAOData/tao_sst.nc;kindname="TAO";climfield="SST";map='set lat -10 10
 set lon 130 280';;
-tao_airt) file=TAOData/tao_airt.ctl;kindname="TAO";climfield="air temp";map='set lat -10 10
+tao_airt) file=TAOData/tao_airt.nc;kindname="TAO";climfield="air temp";map='set lat -10 10
 set lon 130 280';;
-tao_windu) file=TAOData/tao_windu.ctl;kindname="TAO";climfield="zonal wind";map='set lat -10 10
+tao_windu) file=TAOData/tao_windu.nc;kindname="TAO";climfield="zonal wind";map='set lat -10 10
 set lon 130 280';;
-tao_windv) file=TAOData/tao_windv.ctl;kindname="TAO";climfield="meridional wind";map='set lat -10 10
+tao_windv) file=TAOData/tao_windv.nc;kindname="TAO";climfield="meridional wind";map='set lat -10 10
 set lon 130 280';;
-tao_xstrs) file=TAOData/tao_tau_x.ctl;kindname="TAO";climfield="zonal windstress";map='set lat -10 10
+tao_xstrs) file=TAOData/tao_tau_x.nc;kindname="TAO";climfield="zonal windstress";map='set lat -10 10
 set lon 130 280';;
-tao_ystrs) file=TAOData/tao_tau_y.ctl;kindname="TAO";climfield="meridional windstress";map='set lat -10 10
+tao_ystrs) file=TAOData/tao_tau_y.nc;kindname="TAO";climfield="meridional windstress";map='set lat -10 10
 set lon 130 280';;
-tao_curu) file=TAOData/tao_curu.ctl;kindname="TAO";climfield="zonal current";map='set lat 0
+tao_curu) file=TAOData/tao_curu.nc;kindname="TAO";climfield="zonal current";map='set lat 0
 set lev 1 42
 set lon 130 280';;
-tao_curv) file=TAOData/tao_curv.ctl;kindname="TAO";climfield="meridional current";map='set lat 0
+tao_curv) file=TAOData/tao_curv.nc;kindname="TAO";climfield="meridional current";map='set lat 0
 set lev 1 42
 set lon 130 280';;
-tao_rh) file=TAOData/tao_rh.ctl;kindname="TAO";climfield="relative humidity";map='set lat -10 10
+tao_rh) file=TAOData/tao_rh.nc;kindname="TAO";climfield="relative humidity";map='set lat -10 10
 set lon 130 280';;
-tao_z20) file=TAOData/tao_z20.ctl;kindname="TAO";climfield="20C isotherm";map='set lat -10 10
+tao_z20) file=TAOData/tao_z20.nc;kindname="TAO";climfield="20C isotherm";map='set lat -10 10
 set lon 130 280';;
-tao_heat) file=TAOData/tao_heat400.ctl;kindname="TAO";climfield="heat content";map='set lat -10 10
+tao_heat) file=TAOData/tao_heat400.nc;kindname="TAO";climfield="heat content";map='set lat -10 10
 set lon 130 280';;
 
-tao_sst-5dy) file=TAOData/tao_sst-5dy.ctl;kindname="TAO";climfield="SST";NPERYEAR=73;map='set lat -10 10
+tao_sst-5dy) file=TAOData/tao_sst-5dy.nc;kindname="TAO";climfield="SST";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_airt-5dy) file=TAOData/tao_airt-5dy.ctl;kindname="TAO";climfield="air temp";NPERYEAR=73;map='set lat -10 10
+tao_airt-5dy) file=TAOData/tao_airt-5dy.nc;kindname="TAO";climfield="air temp";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_windu-5dy) file=TAOData/tao_windu-5dy.ctl;kindname="TAO";climfield="zonal wind";NPERYEAR=73;map='set lat -10 10
+tao_windu-5dy) file=TAOData/tao_windu-5dy.nc;kindname="TAO";climfield="zonal wind";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_windv-5dy) file=TAOData/tao_windv-5dy.ctl;kindname="TAO";climfield="meridional wind";NPERYEAR=73;map='set lat -10 10
+tao_windv-5dy) file=TAOData/tao_windv-5dy.nc;kindname="TAO";climfield="meridional wind";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_xstrs-5dy) file=TAOData/tao_tau_x-5dy.ctl;kindname="TAO";climfield="zonal windstress";NPERYEAR=73;map='set lat -10 10
+tao_xstrs-5dy) file=TAOData/tao_tau_x-5dy.nc;kindname="TAO";climfield="zonal windstress";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_ystrs-5dy) file=TAOData/tao_tau_y-5dy.ctl;kindname="TAO";climfield="meridional windstress";NPERYEAR=73;map='set lat -10 10
+tao_ystrs-5dy) file=TAOData/tao_tau_y-5dy.nc;kindname="TAO";climfield="meridional windstress";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_curu-5dy) file=TAOData/tao_curu-5dy.ctl;kindname="TAO";climfield="zonal current";NPERYEAR=73;map='set lat 0
+tao_curu-5dy) file=TAOData/tao_curu-5dy.nc;kindname="TAO";climfield="zonal current";NPERYEAR=73;map='set lat 0
 set lev 1 42
 set lon 130 280';;
-tao_curv-5dy) file=TAOData/tao_curv-5dy.ctl;kindname="TAO";climfield="meridional current";NPERYEAR=73;map='set lat 0
+tao_curv-5dy) file=TAOData/tao_curv-5dy.nc;kindname="TAO";climfield="meridional current";NPERYEAR=73;map='set lat 0
 set lev 1 42
 set lon 130 280';;
-tao_rh-5dy) file=TAOData/tao_rh-5dy.ctl;kindname="TAO";climfield="relative humidity";NPERYEAR=73;map='set lat -10 10
+tao_rh-5dy) file=TAOData/tao_rh-5dy.nc;kindname="TAO";climfield="relative humidity";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_z20-5dy) file=TAOData/tao_z20-5dy.ctl;kindname="TAO";climfield="20C isotherm";NPERYEAR=73;map='set lat -10 10
+tao_z20-5dy) file=TAOData/tao_z20-5dy.nc;kindname="TAO";climfield="20C isotherm";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_heat-5dy) file=TAOData/tao_heat400-5dy.ctl;kindname="TAO";climfield="heat content";NPERYEAR=73;map='set lat -10 10
+tao_heat-5dy) file=TAOData/tao_heat400-5dy.nc;kindname="TAO";climfield="heat content";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
 
-tao_sst-dy) file=TAOData/tao_sst-dy.ctl;kindname="TAO";climfield="SST";NPERYEAR=73;map='set lat -10 10
+tao_sst-dy) file=TAOData/tao_sst-dy.nc;kindname="TAO";climfield="SST";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_airt-dy) file=TAOData/tao_airt-dy.ctl;kindname="TAO";climfield="air temp";NPERYEAR=73;map='set lat -10 10
+tao_airt-dy) file=TAOData/tao_airt-dy.nc;kindname="TAO";climfield="air temp";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_windu-dy) file=TAOData/tao_windu-dy.ctl;kindname="TAO";climfield="zonal wind";NPERYEAR=73;map='set lat -10 10
+tao_windu-dy) file=TAOData/tao_windu-dy.nc;kindname="TAO";climfield="zonal wind";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_windv-dy) file=TAOData/tao_windv-dy.ctl;kindname="TAO";climfield="meridional wind";NPERYEAR=73;map='set lat -10 10
+tao_windv-dy) file=TAOData/tao_windv-dy.nc;kindname="TAO";climfield="meridional wind";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_xstrs-dy) file=TAOData/tao_tau_x-dy.ctl;kindname="TAO";climfield="zonal windstress";NPERYEAR=73;map='set lat -10 10
+tao_xstrs-dy) file=TAOData/tao_tau_x-dy.nc;kindname="TAO";climfield="zonal windstress";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_ystrs-dy) file=TAOData/tao_tau_y-dy.ctl;kindname="TAO";climfield="meridional windstress";NPERYEAR=73;map='set lat -10 10
+tao_ystrs-dy) file=TAOData/tao_tau_y-dy.nc;kindname="TAO";climfield="meridional windstress";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_curu-dy) file=TAOData/tao_curu-dy.ctl;kindname="TAO";climfield="zonal current";NPERYEAR=73;map='set lat 0
+tao_curu-dy) file=TAOData/tao_curu-dy.nc;kindname="TAO";climfield="zonal current";NPERYEAR=73;map='set lat 0
 set lev 1 42
 set lon 130 280';;
-tao_curv-dy) file=TAOData/tao_curv-dy.ctl;kindname="TAO";climfield="meridional current";NPERYEAR=73;map='set lat 0
+tao_curv-dy) file=TAOData/tao_curv-dy.nc;kindname="TAO";climfield="meridional current";NPERYEAR=73;map='set lat 0
 set lev 1 42
 set lon 130 280';;
-tao_rh-dy) file=TAOData/tao_rh-dy.ctl;kindname="TAO";climfield="relative humidity";NPERYEAR=73;map='set lat -10 10
+tao_rh-dy) file=TAOData/tao_rh-dy.nc;kindname="TAO";climfield="relative humidity";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_z20-dy) file=TAOData/tao_z20-dy.ctl;kindname="TAO";climfield="20C isotherm";NPERYEAR=73;map='set lat -10 10
+tao_z20-dy) file=TAOData/tao_z20-dy.nc;kindname="TAO";climfield="20C isotherm";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
-tao_heat-dy) file=TAOData/tao_heat400-dy.ctl;kindname="TAO";climfield="heat content";NPERYEAR=73;map='set lat -10 10
+tao_heat-dy) file=TAOData/tao_heat400-dy.nc;kindname="TAO";climfield="heat content";NPERYEAR=73;map='set lat -10 10
 set lon 130 280';;
 
 soda_sst) file=SODAData/SODA_temp_1.nc;kindname="SODA";climfield="SST";;
