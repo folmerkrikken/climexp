@@ -27,11 +27,6 @@ cat <<EOF
 </table>
 <table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 EOF
-cat selectdailyfield_ipcc.html
-cat <<EOF
-</table>
-<table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
-EOF
 cat selectdailyfield_rcm.html
 cat <<EOF
 </table>
