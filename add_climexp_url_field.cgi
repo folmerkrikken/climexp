@@ -4,7 +4,7 @@
 . $HOME/climexp/add_geospatial_time.sh
 queryfield=$HOME/climexp/queryfield.cgi
 if [ -s $queryfield ]; then
-    field=`fgrep $file $queryfield | tail -n 1 | sed -e 's/^ *//' -e 's/[|)].*$//'`
+    field=`egrep "[=/]$file" $queryfield | tail -n 1 | sed -e 's/^ *//' -e 's/[|)].*$//'`
     ### echo "$0: field=$field"
     ###echo "$0: file=$file"
     if [ -n "$field" ]; then
