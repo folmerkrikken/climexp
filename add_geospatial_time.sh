@@ -101,36 +101,49 @@ else
     startdate=`cat $tmpfile | fgrep 'available from' | awk '{print $5}'`
     stopdate=`cat $tmpfile | fgrep 'available from' | awk '{print $7}'`
     c=`cat $tmpfile | fgrep available | fgrep -c Monthly`
+    d=`cat $tmpfile | fgrep available | fgrep -c daily`
     if [ $c = 1 ]; then
         startyr=${startdate#???}
         startmon=${startdate%????}
         stopyr=${stopdate#???}
         stopmon=${stopdate%????}
-        i=0
-        for mon in $startmon $stopmon; do
-            ((i++))
-            case $mon in
-                Jan) mo=01;;
-                Feb) mo=02;;
-                Mar) mo=03;;
-                Apr) mo=04;;
-                May) mo=05;;
-                Jun) mo=06;;
-                Jul) mo=07;;
-                Aug) mo=08;;
-                Sep) mo=09;;
-                Oct) mo=10;;
-                Nov) mo=11;;
-                Dec) mo=12;;
-                *) echo "$0: error: unknown month $mon"; exit -1
-            esac
-            [ $i = 1 ] && startmo=$mo
-            [ $i = 2 ] && stopmo=$mo
-        done
-        ncatted -h -a time_coverage_start,global,c,c,"${startyr}-${startmo}-15" \
-               -a time_coverage_stop,global,c,c,"${stopyr}-${stopmo}-15" \
-                    $file
+        startday=15
+        stopday=15
+    elif [ $d = 1 ]; then
+        startyr=${startdate#?????}
+        startmon=${startdate%????}
+        startmon=${startmon#??}
+        startday=${startdate%???????}
+        stopyr=${stopdate#?????}
+        stopmon=${stopdate%????}
+        stopmon=${stopmon#??}
+        startday=${stopdate%???????}    
     else
         echo "$0: cannot handle this time scale yet"
+        exit
     fi
+    i=0
+    for mon in $startmon $stopmon; do
+        ((i++))
+        case $mon in
+            Jan) mo=01;;
+            Feb) mo=02;;
+            Mar) mo=03;;
+            Apr) mo=04;;
+            May) mo=05;;
+            Jun) mo=06;;
+            Jul) mo=07;;
+            Aug) mo=08;;
+            Sep) mo=09;;
+            Oct) mo=10;;
+            Nov) mo=11;;
+            Dec) mo=12;;
+            *) echo "$0: error: unknown month $mon"; exit -1
+        esac
+        [ $i = 1 ] && startmo=$mo
+        [ $i = 2 ] && stopmo=$mo
+    done
+    ncatted -h -a time_coverage_start,global,c,c,"${startyr}-${startmo}-${startday}" \
+           -a time_coverage_stop,global,c,c,"${stopyr}-${stopmo}-${startday}" \
+                $file
 fi
