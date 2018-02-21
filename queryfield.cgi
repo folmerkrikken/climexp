@@ -1112,7 +1112,8 @@ era5_wspd) file=ERA5/era5_wspd.nc;kindname="ERA5";climfield="wind speed";LSMASK=
 era5_wspd_daily) file=ERA5/era5_wspd_daily.nc;kindname="ERA5";climfield="wind speed";LSMASK=ERA5/era5_000000_lsm.nc;;
 era5_maxwspd_daily) file=ERA5/era5_maxwspd_daily.nc;kindname="ERA5";climfield="max wind speed";LSMASK=ERA5/era5_000000_lsm.nc;;
 era5_ci) file=ERA5/era5_ci.nc;kindname="ERA5";climfield="sea-ice cover";LSMASK=ERA5/era5_000000_lsm.nc;;
-era5_snd) file=ERA5/era5_snd.nc;kindname="ERA5";climfield="snow depth";LSMASK=ERA5/era5_000000_lsm.nc;;
+era5_snd) file=ERA5/era5_snd.nc;kindname="ERA5";climfield="swe";LSMASK=ERA5/era5_000000_lsm.nc;;
+era5_snld) file=ERA5/era5_snld.nc;kindname="ERA5";climfield="swe";LSMASK=ERA5/era5_000000_lsm.nc;;
 era5_vap) file=ERA5/era5_vap.nc;kindname="ERA5";climfield="column vapour";LSMASK=ERA5/era5_000000_lsm.nc;;
 era5_lhf) file=ERA5/era5_lhtfl.nc;kindname="ERA5";climfield="latent heat flux";LSMASK=ERA5/era5_000000_lsm.nc;;
 era5_shf) file=ERA5/era5_shtfl.nc;kindname="ERA5";climfield="sensible heat flux";LSMASK=ERA5/era5_000000_lsm.nc;;
