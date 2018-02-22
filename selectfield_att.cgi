@@ -515,7 +515,9 @@ EOF
 fi
 cat << EOF
 <div class=alineakop>European storms January 2018 </div>
-EC-Earth/RACMO 12km runs (KNMI) 1971-2070 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_1971-2070_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+EuroCODEX runs (LSCE bias-corrected) 1971-2070 <a href="getindices.cgi?WMO=CORDEX/Storms/u10max_eurocordex_rcp85_eleanor_1971-2070_%%&STATION=u10max_Eleanor_EuroCORDEX&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_eurocordex_rcp85_friederike_1971-2070_%%&STATION=u10max_Friederike_EuroCORDEX&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
+<br>EC-Earth/RACMO 12km runs (KNMI) 1971-2070 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_1971-2070_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_1971-2070_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
 <!--
 <br>EC-Earth/RACMO 12km runs (KNMI) 1971-2000 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_1971-2000_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
