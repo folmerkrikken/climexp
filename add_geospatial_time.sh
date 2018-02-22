@@ -1,9 +1,9 @@
 #!/bin/sh
-###set -x
+set -x
 # add geospatial* metadata variables to netcdf metadata
 [ -z "$file" ] && echo "$0: error: set variable file" && exit -1
 [ ! -s "$file" ] && echo "$0: error: cannot find file $file" && exit -1
-c=`ncdump -h $file | fgrep -c geospatial_`
+c=`ncdump -h $file | fgrep -c ":geospatial_"`
 if [ $c != 0 ]; then
     echo "$0: geospatial information already in $file, do nothing"
 else
@@ -50,7 +50,7 @@ else
         [ $ilat2 -ge  87 ] && lat2=90
     fi
     lonline=`cat $tmpfile | fgrep "X axis"`
-    gridtype=`echo $latline | awk '{print $3}'`
+    gridtype=`echo $lonline | awk '{print $3}'`
     if [ $gridtype = irregular ]; then
         lon1=`echo $lonline | awk '{print $9}'`
         n=8
