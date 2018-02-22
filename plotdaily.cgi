@@ -72,7 +72,7 @@ if [ -n "$dy" -a "${dy#0}" = "$dy" ]; then
     [ $dy -le 9 ] && dy=0$dy
 fi
 enddate="$yr$mo$dy"
-if [ -z "$enddate" ]; then
+if [ -z "$enddate" -o $FORM_enddate = last ]; then
     enddate=last
     last="Last "
 else
@@ -128,9 +128,9 @@ if [ $c = 0 ] ; then
     echo "No valid output, maybe the date $enddate is beyond the end date of the series?"
 else
     lastdate=`egrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
-    [ -z "$yr" ] && yr=`echo "$lastdate" | cut -b 1-4`
-    [ -z "$mo" ] && mo=`echo "$lastdate" | cut -b 5-6`
-    [ -z "$dy" ] && dy=`echo "$lastdate" | cut -b 7-8`
+    [ -z "$yr" -o $FORM_enddate = last ] && yr=`echo "$lastdate" | cut -b 1-4`
+    [ -z "$mo" -o $FORM_enddate = last ] && mo=`echo "$lastdate" | cut -b 5-6`
+    [ -z "$dy" -o $FORM_enddate = last ] && dy=`echo "$lastdate" | cut -b 7-8`
     lastdate=$((lastdate+1))
     firstdate=`fgrep -v '#' $root.txt | grep '[0-9]' | head -n 1 | cut -b 1-8`
     ###echo firstdate,lastdate = $firstdate,$lastdate
