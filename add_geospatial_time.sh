@@ -90,7 +90,7 @@ else
         ncatted -h -a "geospatial_lon_resolution",global,c,f,"$lonstep" $file
     fi
 fi
-c=`ncdump -h $file | fgrep -c time_coverage_`
+c=`ncdump -h $file | fgrep -c time_coverage_end`
 if [ $c != 0 ]; then
     echo "$0: time_coverage information already in $file, do nothing"
 else
@@ -138,12 +138,12 @@ else
             Oct) mo=10;;
             Nov) mo=11;;
             Dec) mo=12;;
-            *) echo "$0: error: unknown month $mon"; exit -1
+            *) echo "$0: error: unknown month $mon" in $file; cat $tmpfile; exit -1
         esac
         [ $i = 1 ] && startmo=$mo
         [ $i = 2 ] && stopmo=$mo
     done
     ncatted -h -a time_coverage_start,global,c,c,"${startyr}-${startmo}-${startday}" \
-           -a time_coverage_stop,global,c,c,"${stopyr}-${stopmo}-${startday}" \
+           -a time_coverage_end,global,c,c,"${stopyr}-${stopmo}-${startday}" \
                 $file
 fi
