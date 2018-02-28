@@ -1,9 +1,9 @@
 #!/bin/sh
-set -x
+###et -x
 # add geospatial* metadata variables to netcdf metadata
 [ -z "$file" ] && echo "$0: error: set variable file" && exit -1
 [ ! -s "$file" ] && echo "$0: error: cannot find file $file" && exit -1
-c=`ncdump -h $file | fgrep -c ":geospatial_"`
+c=`ncdump -h $file | fgrep -v _resolution | fgrep -c ":geospatial_"`
 if [ $c != 0 ]; then
     echo "$0: geospatial information already in $file, do nothing"
 else
@@ -73,7 +73,9 @@ else
     fi
     if [ -n "$lonstep" ]; then
         lon1=`echo "$lon1-$lonstep/2" | bc -l | sed -e 's/0*$//'`
+        [ -z "$lon1" ] && lon1=0 # gets deleted completely :-(
         lon2=`echo "$lon2+$lonstep/2" | bc -l | sed -e 's/0*$//'`
+        [ -z "$lon2" ] && lon2=0 # gets deleted completely :-(
     fi
 
     ncatted -h -a "geospatial_lat_min",global,c,f,$lat1 \
@@ -90,7 +92,7 @@ else
         ncatted -h -a "geospatial_lon_resolution",global,c,f,"$lonstep" $file
     fi
 fi
-c=`ncdump -h $file | fgrep -c time_coverage_end`
+c=`ncdump -h $file | fgrep -c ':time_coverage_end'`
 if [ $c != 0 ]; then
     echo "$0: time_coverage information already in $file, do nothing"
 else
