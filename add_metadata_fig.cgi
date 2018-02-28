@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # adds the metadata from the netcdf or ascii file to the graphics file for complete traceability.
 # accepts PNG, EPS and PDF planned
 # expects datfile, pngfile set in calling routine
@@ -41,9 +40,11 @@ if [ ${datfile%.txt} != $datfile -o ${datfile%.dat} != $datfile  -o ${datfile%.p
                 case $key in
     description) key=Description ;;
     title) key=Title;;
-    url|link) sources="$sources $value";;
-    reference*) references="$references $value";;
+    url|link|source_url) sources="$sources $value";key="";;
+    reference*) references="$references $value";key="";;
                 esac
+            fi
+            if [ -n "$key" ]; then
                 cat >> /tmp/exifargs$$.txt <<EOF
 -$key=$value
 EOF
@@ -62,7 +63,7 @@ else
     echo "cannot handle netcdf yet"
 fi
 ###cat /tmp/exifargs$$.txt
-exiftool -@ /tmp/exifargs$$.txt $pngfile
+exiftool -config exiftool/exiftool.config -@ /tmp/exifargs$$.txt $pngfile
 rm /tmp/exifargs$$.txt
 # pngfile
 # pdffile
