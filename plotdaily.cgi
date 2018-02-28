@@ -4,14 +4,15 @@
 # http://www.cpc.ncep.noaa.gov/products/global_monitoring/temperature/global_temp_accum.shtml
 #
 . ./init.cgi
+. ./nosearchengine.cgi
 echo 'Content-Type: text/html'
 echo
 echo
 
 . ./getargs.cgi
 NPERYEAR="$FORM_NPERYEAR"
-if [ $EMAIL = oldenborgh@knmi.nl ]; then
-    lwrite=false # true
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
+    lwrite=true
 fi
 
 TYPE="$FORM_TYPE"
@@ -27,10 +28,6 @@ if [ ! -s ./data/$TYPE$WMO.dat ]; then
     exit
 fi
 
-. ./nosearchengine.cgi
-. ./nperyear2timescale.cgi
-. ./myvinkhead.cgi "$last$nday ${month}s of $station $name" "" "noindex,nofollow"
-
 # arguments trump remembered values
 nday="$FORM_nday"
 yr=$FORM_yr
@@ -44,6 +41,7 @@ if [ "$lwrite" = true ]; then
     echo "After argument processing nday=$nday<br>"
 fi
 
+arg_enddate=$FORM_enddate
 if [ $EMAIL != someone@somewhere ]; then
     def=prefs/$EMAIL.plotdaily.$NPERYEAR
     if [ -f $def ]; then
@@ -57,8 +55,9 @@ fi
 [ -z "$dy" ] && dy=$FORM_dy
 [ -z "$cdf" ] && cdf=$FORM_cdf
 [ -z "$anom" ] && anom=$FORM_anom
-[ -z "$climyear1" ] && climyear1=$FORM_climyear1
-[ -z "$climyear2" ] && climyear2=$FORM_climyear2
+# do not use values from savefile if called with empty arguments from form
+[ -z "$climyear1" -a "$arg_enddate" = last ] && climyear1=$FORM_climyear1
+[ -z "$climyear2" -a "$arg_enddate" = last ] && climyear2=$FORM_climyear2
 if [ "$lwrite" = true ]; then
     echo "After remembering last time nday=$nday<br>"
 fi
@@ -72,13 +71,15 @@ if [ -n "$dy" -a "${dy#0}" = "$dy" ]; then
     [ $dy -le 9 ] && dy=0$dy
 fi
 enddate="$yr$mo$dy"
-if [ -z "$enddate" -o $FORM_enddate = last ]; then
+if [ -z "$enddate" -o "$arg_enddate" = last ]; then
     enddate=last
     last="Last "
 else
     ending=" ending at $enddate"
 fi
 
+. ./nperyear2timescale.cgi
+. ./myvinkhead.cgi "$last$nday ${month}s of $station $name" "" "noindex,nofollow"
 
 if [ -n "$FORM_climyear1" -a -z "$FORM_climyear2" ]; then
     echo "Error: provide begin and end year of reference period"
@@ -122,18 +123,19 @@ else
 fi
 
 echo `date` "$EMAIL ($REMOTE_ADDR) plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdfarg $beginend $anomarg" >> log/log
+[ "$lwrite" = true ] && echo "./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdfarg $beginend $anomarg<br>"
 (./bin/plotdaily ./data/$TYPE$WMO.dat $nday $enddate $cdfarg $beginend $anomarg > $root.txt) 2>&1
 c=`egrep -v '^#' $root.txt | grep '[0-9]' | wc -l`
 if [ $c = 0 ] ; then
-    echo "No valid output, maybe the date $enddate is beyond the end date of the series?"
+    echo "No valid output, maybe the date $enddate is beyond the end date of the series, or the climatology interval before the beginning of the series?"
 else
     lastdate=`egrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
-    [ -z "$yr" -o $FORM_enddate = last ] && yr=`echo "$lastdate" | cut -b 1-4`
-    [ -z "$mo" -o $FORM_enddate = last ] && mo=`echo "$lastdate" | cut -b 5-6`
-    [ -z "$dy" -o $FORM_enddate = last ] && dy=`echo "$lastdate" | cut -b 7-8`
+    [ -z "$yr" -o $arg_enddate = last ] && yr=`echo "$lastdate" | cut -b 1-4`
+    [ -z "$mo" -o $arg_enddate = last ] && mo=`echo "$lastdate" | cut -b 5-6`
+    [ -z "$dy" -o $arg_enddate = last ] && dy=`echo "$lastdate" | cut -b 7-8`
     lastdate=$((lastdate+1))
     firstdate=`fgrep -v '#' $root.txt | grep '[0-9]' | head -n 1 | cut -b 1-8`
-    ###echo firstdate,lastdate = $firstdate,$lastdate
+    [ "$lwrite" = true ] && echo "firstdate,lastdate = $firstdate,$lastdate<br>"
     if [ "$anom" != zero ]; then
         with="with climatology $computed"
     fi
