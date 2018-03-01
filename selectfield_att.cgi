@@ -508,14 +508,22 @@ Observed precipitation in the Brahmaputra basin:
 <a href="getindices.cgi?WMO=Bangladesh2017Data/igpcc_daily_mask0_su&STATION=pr_GPCC_Brahmaputra&TYPE=p&NPERYEAR=366&id=$EMAIL">GPCC</a>, 
 <a href="getindices.cgi?WMO=Bangladesh2017Data/ierai_prcp_daily_mask0_su&STATION=pr_ERAi_Brahmaputra&TYPE=p&NPERYEAR=366&id=$EMAIL">ERA-interim</a>, 
 <br>HIWAVES precipitation in Bangladesh:
-<a href="getindices.cgi?WMO=Bangladesh2017Data/iknmi14_pr_Aday_ECEARTH23_rcp85_mask20_su_%%&STATION=pr_ECEarth_rcp85_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_rcp85</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_PD_mask20_su_%%%&STATION=pr_ECEarth_PD_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_PD</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_2C_mask20_su_%%%&STATION=pr_ECEarth_2C_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_2C</a>
+<a href="getindices.cgi?WMO=Bangladesh2017Data/iknmi14_pr_Aday_ECEARTH23_rcp85_mask20_su_%%&STATION=pr_ECEarth_rcp85_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_rcp85</a>,
+<a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_PD_mask20_su_%%%&STATION=pr_ECEarth_PD_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_PD</a>,
+<a href="getindices.cgi?WMO=Bangladesh2017Data/ihiwaves3_pr_Aday_ECEarth_2C_mask20_su_%%%&STATION=pr_ECEarth_2C_Bangladesh&TYPE=p&NPERYEAR=366&id=$EMAIL">HIWAVES_2C</a>
 <br>Modelled discharge at Bahadurabad
-<a href="getindices.cgi?WMO=Bangladesh2017Data/CPC_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_CPC_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_CPC</a>, <a href="getindices.cgi?WMO=Bangladesh2017Data/ERA_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_ERA_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_ERA</a>
+<a href="getindices.cgi?WMO=Bangladesh2017Data/CPC_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_CPC_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_CPC</a>,
+<a href="getindices.cgi?WMO=Bangladesh2017Data/ERA_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_ERA_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_ERA</a>,
+<a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_rcp85_%%&STATION=discharge_PCR_GLOBWB_ECEarth_rcp85_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_rcp85</a>,
+<a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_PD_%%%&STATION=discharge_PCR_GLOBWB_ECEarth_PD_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_PD</a>,
+<a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_2C_%%%&STATION=discharge_PCR_GLOBWB_ECEarth_2C_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_2C</a>.
 EOF
 fi
 cat << EOF
 <div class=alineakop>European storms January 2018 </div>
-EuroCODEX runs (LSCE bias-corrected) 1971-2069 <a href="getindices.cgi?WMO=CORDEX/Storms/u10max_eurocordex_rcp85_eleanor_1971-2070_%%&STATION=u10max_Eleanor_EuroCORDEX&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
+ISD-lite station average 1976-2017 <a href="getindices.cgi?WMO=ISDData/Storms/isdlite_eleanor&STATION=u10max_Eleanor_ISDlite&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max 3-hourly instantaneous wind in Eleanor region</a>,
+<a href="getindices.cgi?WMO=ISDData/Storms/isdlite_friederike&STATION=u10max_Friederike_ISDlite&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
+<br>EuroCODEX runs (LSCE bias-corrected) 1971-2069 <a href="getindices.cgi?WMO=CORDEX/Storms/u10max_eurocordex_rcp85_eleanor_1971-2070_%%&STATION=u10max_Eleanor_EuroCORDEX&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
 <a href="getindices.cgi?WMO=CORDEX/Storms/u10max_eurocordex_rcp85_friederike_1971-2070_%%&STATION=u10max_Friederike_EuroCORDEX&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
 <br>EC-Earth/RACMO 12km runs (KNMI) 1971-2070 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_eleanor_1971-2070_%%&STATION=u10max_Eleanor_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max hourly wind in Eleanor region</a>,
 <a href="getindices.cgi?WMO=KNMI14Data/Storms/u10max_racmo_rcp85_friederike_1971-2070_%%&STATION=u10max_Friederike_RACMO&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
