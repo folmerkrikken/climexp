@@ -50,43 +50,56 @@ if [ -n "$FORM_field" ]; then
     echo "<tr><td>Climate Explorer URL<td><a href=http://climexp.knmi.nl/select.cgi?$FORM_field>climexp.knmi.nl/select.cgi?$FORM_field<a/>"
 else
     f=${file0%.dat}
-    ce_url=`cat selectindex.cgi | tr ' ' '\n' | fgrep "/${WMO}&" \
+    ce_url=`cat selectindex.cgi selectdailyindex.cgi selectannualindex.cgi \
+        | tr ' ' '\n' | fgrep "/${WMO}&" \
         | sed -e 's/href=//' -e 's/>.*$//' -e 's/["]//g' -e 's/&id=$EMAIL//' -e 's/&TYPE=i//'`
     if [ -n "$ce_url" ]; then
         file=`echo "$ce_url" | sed -e 's/^.*WMO=//' -e 's/\&.*$//'`.dat
         file0=$file
     fi
-    prog=""
-    case $TYPE in
-        # GHCN-D
-        xgdcn) prog=gdcntmax;;
-        ngdcn) prog=gdcntmin;;
-        vgdxn) prog=gdcntave;;
-        pgdcn) prog=gdcnprcp;;
-        pgdcngts) prog=gdcnprcpall;;
-        fgdcn) prog=gdcnsnow;;
-        dgdcn) prog=gdcnsnwd;;
-        # KNMI data
-        tg|tn|tx|t1|tw|dr|rr|rh|preciphom19??|rx|ev|pg|pn|px|dd|fh|fn|fx|dx|dy|td|ug|un|ux|ng|sq|sp|qq|vn|vx|sd|up|upx) 
-            prog=getdutch$TYPE
-            WMO=${WMO#$TYPE}
-            ;;
-        # ECA Data
-        ceca) prog=ecaclou;;
-        peca) prog=ecaprcp;;
-        seca) prog=ecapres;;
-        deca) prog=ecasnow;;
-        teca) prog=ecatemp;;
-        xeca) prog=ecatmax;;
-        neca) prog=ecatmin;;
-        bceca) prog=becaclou;;
-        bpeca) prog=becaprcp;;
-        bseca) prog=becapres;;
-        bdeca) prog=becasnow;;
-        bteca) prog=becatemp;;
-        bxeca) prog=becatmax;;
-        bneca) prog=becatmin;;
-    esac
+    if [ -z "$ce_url" ]; then
+        prog=""
+        case $TYPE in
+            # GHCN-M
+            pa) prog=getprcpall;;
+            ta) prog=gettempall;;
+            ma) prog=getminall;;
+            xa) prog=getmaxall;;
+            p) prog=getprcp;;
+            t) prog=gettemp;;
+            m) prog=getmin;;
+            x) prog=getmax;;
+            s) prog=getslp;;
+            # GHCN-D
+            xgdcn) prog=gdcntmax;;
+            ngdcn) prog=gdcntmin;;
+            vgdxn) prog=gdcntave;;
+            pgdcn) prog=gdcnprcp;;
+            pgdcngts) prog=gdcnprcpall;;
+            fgdcn) prog=gdcnsnow;;
+            dgdcn) prog=gdcnsnwd;;
+            # KNMI data
+            tg|tn|tx|t1|tw|dr|rr|rh|preciphom19??|rx|ev|pg|pn|px|dd|fh|fn|fx|dx|dy|td|ug|un|ux|ng|sq|sp|qq|vn|vx|sd|up|upx) 
+                prog=getdutch$TYPE
+                WMO=${WMO#$TYPE}
+                ;;
+            # ECA Data
+            ceca) prog=ecaclou;;
+            peca) prog=ecaprcp;;
+            seca) prog=ecapres;;
+            deca) prog=ecasnow;;
+            teca) prog=ecatemp;;
+            xeca) prog=ecatmax;;
+            neca) prog=ecatmin;;
+            bceca) prog=becaclou;;
+            bpeca) prog=becaprcp;;
+            bseca) prog=becapres;;
+            bdeca) prog=becasnow;;
+            bteca) prog=becatemp;;
+            bxeca) prog=becatmax;;
+            bneca) prog=becatmin;;
+        esac
+    fi
     if [ -n "$prog" ]; then
         ce_url="$prog.cgi?WMO=$WMO&STATION=$FORM_station"
     fi
