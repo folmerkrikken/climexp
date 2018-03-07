@@ -56,6 +56,9 @@ else
     if [ -n "$ce_url" ]; then
         file=`echo "$ce_url" | sed -e 's/^.*WMO=//' -e 's/\&.*$//'`.dat
         file0=$file
+        if [ ! -s $file0 ]; then
+            file0=${file0%.dat}.nc
+        fi
     fi
     if [ -z "$ce_url" ]; then
         prog=""
