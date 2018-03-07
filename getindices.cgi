@@ -33,7 +33,7 @@ if [ -z "$STATION" ]; then
     file=$WMO.dat
     if [ -s $file ]; then
         eval `./bin/getunits $file`
-        STATION=$VAR
+        STATION=$LVAR
     fi
 fi
 ###echo "TYPE,WMO,STATION=$TYPE,$WMO,$STATION" >> log/log
