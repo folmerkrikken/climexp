@@ -293,7 +293,7 @@ CO<sub>2</sub> concentrations</a> (1958-now, NOAA), <a href="getindices.cgi?WMO=
 <tr><td>&nbsp;<td><div class="kalelink">Lean <a href="getindices.cgi?WMO=NCDCData/tsi_ncdc_yearly&STATION=reconstructed_tsi&TYPE=i&id=$EMAIL&NPERYEAR=1">annual</a> (1610-now), <a href="getindices.cgi?WMO=NCDCData/tsi_ncdc_monthly&STATION=reconstructed_tsi&TYPE=i&id=$EMAIL">monthly</a> (1882-now) reconstructed total solar irradiance</a>
 <td><a href="https://www.ncdc.noaa.gov/cdr/atmospheric/total-solar-irradiance" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=SIDCData/sunspots&STATION=sunspots&TYPE=i&id=$EMAIL">Sunspots</a> (1749-now, SIDC),  <a href="getindices.cgi?WMO=SIDCData/sunspots2&STATION=signed_sunspots&TYPE=i&id=$EMAIL">with alternating signs</a></div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=SIDCData/sunspots&STATION=sunspots&TYPE=i&id=$EMAIL">Sunspots</a> (1749-now, SIDC)</a></div>
 <td><a href="http://sidc.oma.be/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=SRMPData/solarradioflux&STATION=solar_radio_flux&TYPE=i&id=$EMAIL">Solar radio flux</a> (1947-now, DRAO)</div>
