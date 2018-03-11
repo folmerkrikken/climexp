@@ -143,6 +143,7 @@ if [ ${file0%.dat} != $file0 ]; then
         -e 's/\\n/\<br\>/g' \
         -e 's@http://\([^ ")]*\)@<a href=http://\1>\1</a>@' \
         -e 's@https://\([^ ")]*\)@<a href=https://\1>\1</a>@' \
+        -e 's@ftp://\([^ ")]*\)@<a href=ftp://\1>\1</a>@' \
         -e 's@doi:\([^ ]*\)@<a href=https://doi.org/\1>doi:\1</a>@'
 else
     echo "<tr><th colspan=2>Netcdf global metadata"
@@ -162,6 +163,7 @@ else
         -e 's/^}//' \
         -e 's@http://\([^ ")]*\)@<a href=http://\1>\1</a>@' \
         -e 's@https://\([^ ")]*\)@<a href=https://\1>\1</a>@' \
+        -e 's@ftp://\([^ ")]*\)@<a href=ftp://\1>\1</a>@' \
         -e 's@doi:\([^ ]*\)@<a href=https://doi.org/\1>doi:\1</a>@'
 fi
 echo "</table>"
