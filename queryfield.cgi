@@ -670,6 +670,7 @@ ts_heat) file="AOMLData/heat.nc";kindname="AOML";climfield="TC Heat Potential";;
 ts_heat_1) file="AOMLData/heat_1.nc";kindname="AOML";climfield="TC Heat Potential";;
 nhsnow) file=SnowData/nhsnow.ctl;kindname="NOAA";climfield="snowcover";map='set mproj nps';flipcolor=11;;
 rutgers_nhsnow) file=RutgersData/snow_rucl.nc;kindname="Rutgers";climfield="snowcover";map='set mproj nps';flipcolor=11;;
+rutgers_nhsnow_daily) file=RutgersData/snow_rucl_day.nc;kindname="Rutgers";climfield="snowcover";map='set mproj nps';flipcolor=11;NPERYEAR=366;;
 ice_index_n) file=NSIDCData/conc_n.nc;kindname=NSIDC;climfield="ice concentration";map='set mproj nps';;
 ice_index_s) file=NSIDCData/conc_s.nc;kindname=NSIDC;climfield="ice concentration";map='set mproj sps';;
 ice_bootstrap_n) file=NSIDCData/conc_bt_n.ctl;kindname=bootstrap;climfield="ice concentration";map='set mproj nps';;
