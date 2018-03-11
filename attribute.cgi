@@ -51,6 +51,7 @@ fi
 if [ -z "$FORM_hist" ]; then
 	FORM_hist=none
 fi
+export TYPE
 if [ "$TYPE" = gridpoints ]; then
     corrargs="gridpoints $file"
 elif [ "$TYPE" = field ]; then
