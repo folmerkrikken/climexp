@@ -47,7 +47,7 @@ cat <<EOF
 <td><a href="http://www.aoml.noaa.gov/phod/floridacurrent/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td><!--Currents-->&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NOCData/moc_mar_hc10_day&STATION=AMOC_26N&TYPE=i&id=$EMAIL&NPERYEAR=366">AMOC transport at 26.5&deg;N</a>, <a href="getindices.cgi?WMO=NOCData/t_umo10_day&STATION=Upper_Mid-Ocean_Transport_26N&TYPE=i&id=$EMAIL&NPERYEAR=366">upper mid-ocean transport</a>, <a href="getindices.cgi?WMO=NOCData/t_gs10_day&STATION=Florida_Straits_Transport&TYPE=i&id=$EMAIL&NPERYEAR=366">Florida Straits transport</a>, <a href="getindices.cgi?WMO=NOCData/t_ek10_day&STATION=Ekman_Transport_26N&TYPE=i&id=$EMAIL&NPERYEAR=366">Ekman transport</a> (2004-now, Rapid)</div>
-<td><a href="http://www.noc.soton.ac.uk/rapidmoc/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<td><a href="http://www.rapid.ac.uk/rapidmoc/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>UK temperatures<td><div class="kalelink"><a href="getindices.cgi?WMO=UKMOData/daily_cet&STATION=Central_England_Temperature&TYPE=t&id=$EMAIL&NPERYEAR=366">Central England Temperature</a> (1772-now),
 <a href="getindices.cgi?WMO=UKMOData/daily_cet_min&STATION=Central_England_min_temperature&TYPE=t&id=$EMAIL&NPERYEAR=366">minimum</a> (1878-now),
