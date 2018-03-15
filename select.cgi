@@ -227,7 +227,7 @@ if [ $NPERYEAR = 12 ]; then
 EOF
 fi
 
-if [ $NPERYEAR = 1 ]; then
+if [ $NPERYEAR -le 4 ]; then
 cat <<EOF
 <p><div class='formheader'>Create a monthly field</div>
 <div class='formbody'>

@@ -31,7 +31,7 @@ else
       . ./myvinkfoot.cgi
       exit
     fi
-    if [ $EMAIL = oldenborgh@knmi.nl ]; then
+    if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
         lwrite=false # true
     fi
 
@@ -44,8 +44,7 @@ else
         . ./myvinkfoot.cgi
         exit
     fi
-    field=${FORM_field%.${id}.info}
-    outfile=data/`basename ${field}_${FORM_NPERNEW}_${FORM_mon}_${FORM_oper}`
+    outfile=data/`basename ${FORM_field}_${FORM_NPERNEW}_${FORM_mon}_${FORM_oper}`
     corrargs="$file $FORM_NPERNEW mon $FORM_mon $FORM_oper $FORM_sum"
     PROG="./bin/yearly2shorterfield $corrargs"
     [ "$lwrite" = true ] && echo "$PROG $outfile.nc"

@@ -87,11 +87,23 @@ cat <<EOF
 <select class="forminput" name="nperyearnew">
 <option value="-1" $sel_annual_shifted>annual (Jul-Jun)</option>
 <option value="1" $sel_annual>annual (Jan-Dec)</option>
-<option value="4" $sel_seasonal>seasonal</option>
-<option value="12" $sel_monthly>monthly</option>
-<option value="36" $sel_10daily>10-daily</option>
-<option value="73" $sel_5daily>5-daily</option>
-<option value="$NPERYEAR" $sel_daily>daily</option>
+EOF
+if [ $NPERYEAR -gt 4 ]; then
+    echo "<option value=4 $sel_seasonal>seasonal</option>"
+fi
+if [ $NPERYEAR -gt 12 ]; then
+    echo "<option value=12 $sel_monthly>monthly</option>"
+fi
+if [ $NPERYEAR -gt 36 ]; then
+    echo "<option value=36 $sel_10daily>10-daily</option>"
+fi
+if [ $NPERYEAR -gt 73 ]; then
+    echo "<option value=73 $sel_5daily>5-daily</option>"
+fi
+if [ $NPERYEAR -gt 366 ]; then
+    echo "<option value="$NPERYEAR" $sel_daily>daily</option>"
+fi
+cat <<EOF
 </select>
 </td></tr><tr><td>
 New variable:

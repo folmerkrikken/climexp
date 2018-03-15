@@ -21,6 +21,13 @@ Operation:</td><td><p><br>
 <option value="ave" $sel_ave>distribute
 <option value="sum" $sel_sum>divide
 </select>
+EOF
+if [ $NPERYEAR = 1 -o $NPERYEAR = -1 ]; then
+    case $NPERYEAR in
+        1) selected1=selected;;
+        -1) selected7-selected;;
+    esac
+    cat <<EOF
 the annual value into the 
 <select name="sum">
 <option>1
@@ -38,18 +45,55 @@ the annual value into the
 </select>
 months starting in 
 <select name="mon">
-<option value="1" selected>Jan
+<option value="1" $selected1>Jan
 <option value="2">Feb
 <option value="3">Mar
 <option value="4">Apr
 <option value="5">May
 <option value="6">Jun
-<option value="7">Jul
+<option value="7" $selected7>Jul
 <option value="8">Aug
 <option value="9">Sep
 <option value="10">Oct
 <option value="11">Nov
 <option value="12">Dec
+EOF
+elif [ $NPERYEAR = 2 ]; then
+    cat <<EOF
+the biannual values into the 
+<select name="sum">
+<option>1
+<option>2
+<option>3
+<option>4
+<option>5
+<option selected>6
+</select>
+months starting in 
+<select name="mon">
+<option value="1">Jan/Jul
+<option value="2">Feb/Aug
+<option value="3">Mar/Sep
+<option value="4" selected>Apr/Oct
+<option value="5">May/Nov
+<option value="6">Jun/Dec
+EOF
+elif [ $NPERYEAR = 4 ]; then
+    cat <<EOF
+the seasonal values into the 
+<select name="sum">
+<option>1
+<option>2
+<option selected>3
+</select>
+months starting in 
+<select name="mon">
+<option value="1">Jan-Apr-Jul-Oct
+<option value="2">Feb-May-Aug-Nov
+<option value="3" selected>Dec-Mar-Jun-Sep
+EOF
+fi
+cat <<EOF
 </select>
 </td></tr>
 EOF
