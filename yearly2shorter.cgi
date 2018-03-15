@@ -44,7 +44,8 @@ else
         . ./myvinkfoot.cgi
         exit
     fi
-    outfile=data/`basename ${FORM_field}_${FORM_NPERNEW}_${FORM_mon}_${FORM_oper}`
+    field=${FORM_field%.${id}.info}
+    outfile=data/`basename ${field}_${FORM_NPERNEW}_${FORM_mon}_${FORM_oper}`
     corrargs="$file $FORM_NPERNEW mon $FORM_mon $FORM_oper $FORM_sum"
     PROG="./bin/yearly2shorterfield $corrargs"
     [ "$lwrite" = true ] && echo "$PROG $outfile.nc"
