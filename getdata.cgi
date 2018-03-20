@@ -516,6 +516,7 @@ using <select class="forminput" name="ndiff">
 Shift data by 
 <input type="$number" step=any class="forminput" name="shift" $textsize4 value="$FORM_shift"> ${month}s.
 <input type="submit" class="formbutton" value="Shift">
+</form>
 </td></tr><tr><td>Normalise:</td><td>
 <form action="normdiff.cgi" method="POST">
 <input type="hidden" name="EMAIL" value="$EMAIL">
