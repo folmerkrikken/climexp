@@ -144,18 +144,23 @@ run clim ${var:-corr} $NPERYEAR ${date:-$i} ${FORM_plotsum:-1} $FORM_climyear1 $
 		yy1=""
 		yy2=""
 	fi
-	climname=clim${yy1}${yy2}
+	climstring=clim${yy1}${yy2}
 	if [ -z "$FORM_hovmuller" ]; then
 	    climtime="${date%????}2000"
-	    climname="${climname}(time=${climtime})"
+	    climname="${climstring}(time=${climtime})"
 	fi
+	# FORM_var is plotted, var is used in title
 	if [ "$FORM_plotanomalykind" = "logrelative" ]; then
 		FORM_var="log10(${FORM_var:-corr}/${climname})"
+		var="log10(${var}/${climstring})"
 	elif [ "$FORM_plotanomalykind" = "relative" ]; then
 		FORM_var="${FORM_var:-corr}/${climname}-1"
+		var="${var}/${climstring}-1"
 	else
 		FORM_var="${FORM_var:-corr}-${climname}"
+		var="${var}-${climstring}"
 	fi
+	[ "$lwrite" = true ] && echo "<br>var,FORM_var=$var,$FORM_var"
 fi
 
 # generate GrADS metadata file - should be doing this in perl...
