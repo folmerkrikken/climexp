@@ -71,10 +71,6 @@ else
 fi
 corrargs="$file $FORM_nperyearnew $FORM_oper"
 outfile=data/`basename ${FORM_field}_${FORM_nperyearnew}_${FORM_oper}`
-if [ -n "$FORM_minfac" ]; then
-    corrargs="$corrargs minfac $FORM_minfac"
-    outfile=${outfile}_$FORM_minfac
-fi
 if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
   if [ -z "$FORM_cut" -a "$FORM_typecut" != "n" ]; then
     FORM_cut=0
@@ -86,6 +82,10 @@ if [ "$FORM_lgt" = "lt" -o "$FORM_lgt" = "gt" ]; then
   else
       outfile=${outfile}_$FORM_lgt$FORM_cut
   fi    
+fi
+if [ -n "$FORM_minfac" ]; then
+    corrargs="$corrargs minfac $FORM_minfac"
+    outfile=${outfile}_$FORM_minfac
 fi
 if [ -n "$FORM_sum" -a "$FORM_sum" != 0 -a "$FORM_sum" != 1 ]; then
     corrargs="$corrargs ave $FORM_sum"
