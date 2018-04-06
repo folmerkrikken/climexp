@@ -435,6 +435,8 @@ Hadley Centre)</div>
 <a href="getindices.cgi?WMO=UKMOData/HadNSP_monthly_qc&STATION=N_Scotland&TYPE=p&id=$EMAIL">Northern Scotland</a> precipitation</a> (1931-now, Hadley Centre)</div>
 <td><a href="http://hadobs.metoffice.gov.uk/hadukp" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
+<tr><td>Island of Ireland<td><div class="kalelink"><a href="getindices.cgi?WMO=MUData/prcp_ireland&STATION=Island_of_Ireland_rainfall&TYPE=p&id=$EMAIL">Island of Ireland rainfall</a> (1711-now, Maynooth University)</div><td><a href="https://doi.pangaea.de/10.1594/PANGAEA.887593"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
 <tr><td>Sweden<td><div class="kalelink">Haparanda homogenised <a href="getindices.cgi?WMO=MainzData/Haparanda_MeanTemperature_corr_ext&STATION=TG_Haparanda&TYPE=t&id=$EMAIL">mean</a>, <a href="getindices.cgi?WMO=MainzData/Haparanda_MinimumTemperature_corr_ext&STATION=TN_Haparanda&TYPE=t&id=$EMAIL">minimum</a>, <a href="getindices.cgi?WMO=MainzData/Haparanda_MaximumTemperature_corr_ext&STATION=TX_Haparanda&TYPE=t&id=$EMAIL">maximum</a> temperature (1859-2014 U Mainz, 2015-now ECAD)</div><td><a href="MainzData/Dienst_et_al-2017-International_Journal_of_Climatology.pdf"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 
