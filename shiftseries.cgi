@@ -20,7 +20,7 @@ FORM_shift=$FORM_shift;
 EOF
 fi
 
-export WMO="${FORM_WMO}_shift$FORM_shift"
+export WMO="${FORM_wmo}_shift$FORM_shift"
 STATION="${FORM_station} shifted by $FORM_shift ${month}s"
 export TYPE=$FORM_type
 NAME="$FORM_NAME"
