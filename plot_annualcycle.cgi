@@ -9,6 +9,7 @@ name=$FORM_name
 period=$FORM_period
 VAR=$FORM_VAR
 plotunits=$FORM_plotunits
+
 if [ $FORM_type = -1 ]; then
     suffix=yrm1
     setxrange='set xrange ["20000701":"20010630"]
@@ -17,6 +18,9 @@ else
     suffix=yr1
     setxrange='set xrange ["20000101":"20001231"]
 set xtics ("Jan" "20000115", "Feb" "20000214", "Mar" "20000315", "Apr" "20000415", "May" "20000515", "Jun" "20000615", "Jul" "20000715", "Aug" "20000815", "Sep" "20000915", "Oct" "20001015", "Nov" "20001115", "Dec" "20001215")'
+fi
+if [ -n "$period" ]; then
+    suffix=${suffix}_`echo "$period" | tr -d -c '[0-9]'`
 fi
 
 echo 'Content-Type: text/html'
