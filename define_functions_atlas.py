@@ -285,13 +285,13 @@ class DefineVar:
                     self.units = "[dy]"
                     self.cnlevels = "(/-10.,-8.,-6.,-4.,-2.,0.,2.,4.,6.,8.,10./)"
     
-        elif var in ['fd','id', 'gsl', 'r1mm', 'r10mm', 'r20mm']:
+        elif var in ['fd','id', 'tr', 'gsl', 'r1mm', 'r10mm', 'r20mm']:
             self.type = 'yr'
             self.varname = var.upper()
             self.Varname = var.upper()
             if var in ['fd', 'id']:
                 self.rgbcbar = 'tasmm.txt'
-            elif var == 'gsl':
+            elif var in [ 'gsl', 'tr' ]:
                 self.rgbcbar = 'tas.txt'
             elif var in ['r1mm', 'r10mm', 'r20mm']:
                 self.rgbcbar = 'pr.txt'
@@ -300,9 +300,9 @@ class DefineVar:
                 self.cmin = -10
                 self.cmax = 10
                 self.cint = 2
-                if var in ['fd', 'id']:
+                if var in ['fd', 'id' ]:
                     self.cnlevels = "(/-100.,-90.,-80.,-70.,-60.,-50.,-40.,-30.,-20.,-10.,0.,10.,20.,30.,40.,50./)"
-                elif var == 'gsl':
+                elif var in [ 'gsl', 'tr' ]:
                     self.cnlevels = "(/-40.,-30.,-20.,-10.,0.,10.,20.,30.,40.,50.,60.,70.,80.,90.,100./)"
                 elif var in ['r10mm', 'r20mm']:
                     self.cnlevels = "(/-250.,-200.,-150.,-100.,-50.,0.,50.,100.,150.,200.,250./)"
@@ -319,7 +319,7 @@ class DefineVar:
                     self.cnlevels = "(/-25.,-20.,-15.,-10.,-5.,0.,5.,10.,15.,20.,25./)"
                 elif var == 'r20mm':
                     self.cnlevels = "(/-10.,-8.,-6.,-4.,-2.,0.,2.,4.,6.,8.,10./)"
-                elif var == 'gsl':
+                elif var in [ 'gsl', 'tr' ]:
                     self.cnlevels = "(/-40.,-30.,-20.,-10.,0.,10.,20.,30., 40.,50.,60.,80.,100.,120.,140./)"
                 else:
                     self.cnlevels = "(/-140.,-120.,-100.,-80.,-60.,-50.,-40.,-30.,-20.,-10.,0.,10.,20.,30.,40./)"
