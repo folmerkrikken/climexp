@@ -4,7 +4,7 @@
 . ./getargs.cgi
 
 lwrite=false
-if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
+if [ "$EMAIL" = ec8907341dfc63c526d08e36d06b7ed8 ]; then
     lwrite=false # true
 fi
 if [ "$lwrite" = true ]; 
