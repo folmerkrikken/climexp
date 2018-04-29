@@ -1,3 +1,5 @@
+<tr><td>25-apr-2018</td><td>Fixed a bug that caused the last month of a monthly dataset not to be read if the start date was after the first date of the file. In particular, this caused plots of the difference of last month with a climatology to fail. They now still have variance and p-value undefined, so do not use a cutoff (thanks Evgeny).</td></tr>
+<tr><td>25-apr-2018</td><td>Added CL-SAT 1.3 5&deg; homogenised monthly temperature anomaly fields (thanks Qingxiang).</td></tr>
 <tr><td>19-apr-2018</td><td>Added CMIP5 extreme indiex Tropical Nights (TR) (thanks Till).</td></tr>
 <tr><td>19-apr-2018</td><td>Changed the two annual cycle plot to two plots of one annual cycle each, Jan-Dec and Jul-Jun. One of the two should be relevant. They also have tick marks (thanks Sjoukje).</td></tr>
 <tr><td>06-apr-2018</td><td>Added monthly Isle of Ireland rainfall 1711-2016 (thanks Conor). Metadata nightmare due to <a href="https://www.pangaea.de">Pangaea</a> having conventions that are totally incompatible with the CF and DC ones that are standard in the climate world.</td></tr>
