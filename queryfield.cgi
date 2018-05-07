@@ -374,7 +374,9 @@ berkeley_tavg) file=BerkeleyData/TAVG_LatLong1.nc;kindname="Berkeley";climfield=
 berkeley_tmax) file=BerkeleyData/TMAX_LatLong1.nc;kindname="Berkeley";climfield="Tmax";LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_tmin) file=BerkeleyData/TMIN_LatLong1.nc;kindname="Berkeley";climfield="Tmin";LSMASK=BerkeleyData/land_mask.nc;;
 berkeley_txx) file=BerkeleyData/$FORM_field.nc;kindname="Berkeley";climfield="Txx";NPERYEAR=1;LSMASK=BerkeleyData/land_mask.nc;;
-clsat) file=SYSUData/CLSAT_13.nc;kindname="CL-SAT 1.3";climfield="T2m anom";;
+clsat_tavg) file=SYSUData/CLSAT_13_tavg.nc;kindname="CL-SAT 1.3";climfield="T2m anom";;
+clsat_tmin) file=SYSUData/CLSAT_13_tmin.nc;kindname="CL-SAT 1.3";climfield="Tmin anom";;
+clsat_tmax) file=SYSUData/CLSAT_13_tmax.nc;kindname="CL-SAT 1.3";climfield="Tmax anom";;
 
 hadghcnd_tx) file=UKMOData/hadghcnd_tx.ctl;kindname="HadGHCND";climfield="Tmax";NPERYEAR=366;;
 hadghcnd_tn) file=UKMOData/hadghcnd_tn.ctl;kindname="HadGHCND";climfield="Tmin";NPERYEAR=366;;
