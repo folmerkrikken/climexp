@@ -599,6 +599,7 @@ nprcp_cpc_daily_us) file=NCEPData/nprcp_CONUS_daily.nc;kindname="CPC daily";clim
 gpcp_22) file=GPCPData/gpcp_22.ctl;kindname="GPCP v2.2";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_23) file=GPCPData/gpcp.nc;kindname="GPCP v2.3";climfield="precipitation";flipcolor=11;LSMASK=GPCPData/gpcp_25_lsmask.nc;;
 gpcp_daily) file=GPCPData/gpcp_daily.nc;kindname="GPCP v1.3";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
+gpcp_daily_12) file=GPCPData/gpcp_1dd_12.ctl;kindname="GPCP v1.2";climfield="precipitation";flipcolor=11;NPERYEAR=366;;
 cmap) file=NCEPData/cmap.nc;kindname="CMAP";climfield="precipitation";flipcolor=11;;
 cmaperr) file=NCEPData/cmaperr.ctl;kindname="CMAP";climfield="relative error on precipitation";;
 cmapm) file=NCEPData/cmapm.ctl;kindname="CMAP incl model";climfield="precipitation";flipcolor=11;;
@@ -1162,6 +1163,7 @@ erai_tmin_daily_e) file=ERA-interim/erai_tmin_daily_extended.nc;kindname="ERA-in
 erai_tmax_daily) file=ERA-interim/erai_tmax_daily.nc;kindname="ERA-int";climfield="Tmax";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmax_daily_e) file=ERA-interim/erai_tmax_daily_extended.nc;kindname="ERA-int+";climfield="Tmax";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_evap_daily) file=ERA-interim/erai_evap_daily.nc;kindname="ERA-int";climfield="evap";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
+erai_evappot_daily) file=ERA-interim/erai_evappot_daily.nc;kindname="ERA-int";climfield="potential evaporation";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 erai_rsds_daily) file=ERA-interim/erai_rsds_daily.nc;kindname="ERA-int";climfield="rsds";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 
 erai_slp|erai_psl|erai_msl) file=ERA-interim/erai_msl.nc;kindname="ERA-int";climfield="MSL";LSMASK=ERA-interim/lsmask07.nc;;
@@ -1186,6 +1188,7 @@ erai_trbflx) file=ERA-interim/erai_trbflx.nc;kindname="ERA-int";climfield="turbu
 erai_snetflx) file=ERA-interim/erai_snetflx.nc;kindname="ERA-int";climfield="sfc net heat flux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_huss) file=ERA-interim/erai_huss.nc;kindname="ERA-int";climfield="spec humidity";LSMASK=ERA-interim/lsmask075.nc;;
 erai_evap) file=ERA-interim/erai_evap.nc;kindname="ERA-int";climfield="evaporation";LSMASK=ERA-interim/lsmask07.nc;;
+erai_evappot) file=ERA-interim/erai_evappot.nc;kindname="ERA-int";climfield="potential evaporation";LSMASK=ERA-interim/lsmask07.nc;;
 erai_pme) file=ERA-interim/erai_pme.nc;kindname="ERA-int";climfield="P-E";LSMASK=ERA-interim/lsmask07.nc;;
 erai_tp|erai_pr) file=ERA-interim/erai_tp.nc;kindname="ERA-int";climfield="precipitation";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ssr) file=ERA-interim/erai_ssr.nc;kindname="ERA-int";climfield="SSR";LSMASK=ERA-interim/lsmask07.nc;;
