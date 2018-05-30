@@ -5335,6 +5335,19 @@ pr_futureweather_gulfcoast)
 set lat 27 31.5'
     export splitfield=true;;
 
+pr_flor_kenya_preindustrial)
+    file=PrincetonData/PIctl_CMIP6volc.precip_ce_mo.nc;kindname="FLOR pre-industrial";climfield="precipitation";flipcolor=11
+    map='set lon 33 42
+set lat -5 5';;
+pr_flor_kenya_2000)
+    file=PrincetonData/Control_2000.precip_ce_mo.nc;kindname="FLOR 2000";climfield="precipitation";flipcolor=11
+    map='set lon 33 42
+set lat -5 5';;
+pr_flor_kenya_nudged)
+    file=PrincetonData/nudgelongalle.%%_5dy_tigerx86_64.intel16_512PE.precip_ce_mo.nc;kindname="FLOR SST-nudged";climfield="precipitation";flipcolor=11
+    map='set lon 33 42
+set lat -5 5';;
+
 *) echo 
 [ -x ./myvinkhead.cgi ] && . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
 echo "Cannot handle $FORM_field (yet)"

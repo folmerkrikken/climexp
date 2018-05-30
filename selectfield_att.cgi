@@ -496,6 +496,29 @@ cat <<EOF
 Resources not listed are either easily accessible through  other Climate Explorer pages
 or available from the authors (except for non-public data such as the IMD analyses).
 
+<div class=alineakop>Kenya flooding Long Rains 2018: 2&deg;S-4&deg;N, 37-40&deg;E average</div>
+Monthly <a href="get_index.cgi?field=gpccall_10&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&id=$EMAIL">GPCC analyses</a>, 
+<a href="get_index.cgi?field=CenTrendsChirps&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&id=$EMAIL">CenTrends/CHIRPS analyses</a>.<br>
+Monthly <a href="getindices.cgi?WMO=KNMI14Data/Pkenya/knmi14_pr_Amon_ECEARTH23_rcp85_37-40E_-2-4N_n_su_%%&STATION=ECEARTH23_rcp85_pr_37-40E_-2-4N_ensemble&TYPE=i&id=$EMAIL&NPERYEAR=12">EC-Earth 2.3 transient runs</a>,<br>
+Monthly FLOR 50km time series <a href="getindices.cgi?WMO=PrincetonData/PIctl_CMIP6volc.precip_ce_mo_-2_4N_37_40E&STATION=FLOR_preindustrial_2S-4N_37-40E&TYPE=i&id=$EMAIL&NPERYEAR=12">pre-industrial</a>, 
+<a href="getindices.cgi?WMO=PrincetonData/Control_2000.precip_ce_mo_-2_4N_37_40E&STATION=FLOR_2000_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">2000</a> control runs, 
+<a href="getindices.cgi?WMO=PrincetonData/nudgelongalle.%%_5dy_tigerx86_64.intel16_512PE.precip_ce_mo_-2_4N_37_40E&STATION=FLOR_transient_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">5 SST-forced 1871-2016</a> runs<br>
+Monthly FLOR 50km fields <a href="select.cgi?field=pr_flor_kenya_preindustrial&id=$EMAIL">pre-industrial</a>, 
+<a href="select.cgi?field=pr_flor_kenya_2000&id=$EMAIL">2000</a> control ,
+<a href="select.cgi?field=pr_flor_kenya_nudged&id=$EMAIL">5 SST-forced 1871-2016</a> runs.<br>
+Monthly HadGEM3-A N216 time series <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pkenya/eucleia_pr_Amon_HadGEM3-A-N216_historical_37-40E_-2-4N_n_su_%%%&STATION=HadGEM3A_historical_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">historical</a>, 
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pkenya/eucleia_pr_Amon_HadGEM3-A-N216_historicalNat_37-40E_-2-4N_n_su_%%%&STATION=HadGEM3A_historicalNat_2S-4N_37-40E&TYPE=i&id=$EMAIL&NPERYEAR=12">historicalNat</a>.<br>
+Daily <a href="get_index.cgi?field=prcp_cpc_daily&NPERYEAR=366&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&intertype=nearest&id=$EMAIL">CPC analyses</a>, 
+<a href="get_index.cgi?field=cmorph_daily_05&NPERYEAR=366&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&&intertype=nearestid=$EMAIL">CMORPH analyses</a>, 
+<a href="get_index.cgi?field=chirps_20_25&NPERYEAR=366&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&intertype=nearest&id=$EMAIL">CHIRPS analyses</a>.<br> 
+Daily <a href="getindices.cgi?WMO=KNMI14Data/Pkenya/knmi14_pr_Aday_ECEARTH23_rcp85_37-40E_-2-4N_n_su_%%&STATION=ECEARTH23_rcp85_pr_37-40E_-2-4N_ensemble&TYPE=i&id=$EMAIL&NPERYEAR=12">EC-Earth 2.3 transient runs</a>,<br>
+Daily FLOR 50km time series <a href="getindices.cgi?WMO=PrincetonData/PIctl_CMIP6volc.precip_ce_-2_4N_37_40E&TYPE=i&id=$EMAIL&NPERYEAR=12">pre-industrial</a>, 
+<a href="getindices.cgi?WMO=PrincetonData/Control_2000.precip_ce_-2_4N_37_40E&TYPE=i&id=$EMAIL&NPERYEAR=12">2000</a> control runs, 
+<a href="getindices.cgi?WMO=PrincetonData/nudgelongalle.%%_5dy_tigerx86_64.intel16_512PE.precip_ce_-2_4N_37_40E&TYPE=i&id=$EMAIL&NPERYEAR=12">5 SST-forced 1871-2016</a> runs<br>
+Daily FLOR 50km fields <a href="select.cgi?field=pr_flor_kenya_preindustrial_daily&id=$EMAIL&NPERYEAR=366">pre-industrial</a>, 
+<a href="select.cgi?field=pr_flor_kenya_2000_daily&id=$EMAIL">2000</a> control ,
+<a href="select.cgi?field=pr_flor_kenya_nudged_daily&id=$EMAIL">5 SST-forced 1871-2016</a> runs.<br>
+
 EOF
 if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
     -o $EMAIL = e279dd4de035b5fd9edc95ba4df755f7 \
@@ -516,7 +539,8 @@ Observed precipitation in the Brahmaputra basin:
 <a href="getindices.cgi?WMO=Bangladesh2017Data/ERA_discharge_Bahadurabad&STATION=discharge_PCR_GLOBWB_ERA_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_ERA</a>,
 <a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_rcp85_%%&STATION=discharge_PCR_GLOBWB_ECEarth_rcp85_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_rcp85</a>,
 <a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_PD_%%%&STATION=discharge_PCR_GLOBWB_ECEarth_PD_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_PD</a>,
-<a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_2C_%%%&STATION=discharge_PCR_GLOBWB_ECEarth_2C_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_2C</a>.
+<a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_2C_%%%&STATION=discharge_PCR_GLOBWB_ECEarth_2C_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_2C</a>,
+<a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_SWAT_ECEarth_rcp85_%%&STATION=discharge_SWAT_ECEarth_rcp85_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">SWAT_ECEARTH_rcp85</a>.
 EOF
 fi
 cat << EOF
