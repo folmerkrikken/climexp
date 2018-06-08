@@ -146,6 +146,13 @@ EOF
   else
       (./bin/$PROG $wmo > ./data/$TYPE$WMO.dat.$$ ) 2>&1
   fi
+  if [ "$PROG" = getindices ]; then
+    ncfile=${file%.dat}.nc
+    if [ -s $ncfile ]; then
+      cp $ncfile ./data/$TYPE$WMO.nc.$$
+      mv ./data/$TYPE$WMO.nc.$$ ./data/$TYPE$WMO.nc
+    fi
+  fi
   return=$?
   return=0
   if [ "$return" != 0 ]; then
@@ -240,9 +247,13 @@ else
         fi
     fi
     if [ ! -s $ncfile -o $ncfile -ot $firstfile ]; then
-        [ -f $ncfile ] && rm $ncfile
-        [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
-        dat2nc $firstfile ${TYPE:-i} "$STATION" $ncfile
+        if [ "$netcdf_ok" = true ]; then
+            touch $ncfile
+        else
+            [ -f $ncfile ] && rm $ncfile
+            [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
+            dat2nc $firstfile ${TYPE:-i} "$STATION" $ncfile
+        fi
     fi
     eval `./bin/getunits $firstfile`
     if [ -z "$VAR" ]; then
@@ -261,10 +272,14 @@ else
         while [ -s $ensfile ]; do
             ncfile=${ensfile%.dat}.nc
             if [ ! -s $ncfile -o $ncfile -ot $ensfile ]; then
-                [ -f $ncfile ] && rm $ncfile
-                [ "$NPERYEAR" -ge 360 ] && echo "Converting $i to netcdf<p>"
-                [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
-                dat2nc $ensfile ${TYPE:-i} "$STATION" $ncfile
+                if [ "$netcdf_ok" = true ]; then
+                    touch $ncfile
+                else
+                    [ -f $ncfile ] && rm $ncfile
+                    [ "$NPERYEAR" -ge 360 ] && echo "Converting $i to netcdf<p>"
+                    [ "$lwrite" = true ] && echo "dat2nc $firstfile $TYPE "$STATION" $ncfile<br>"
+                    dat2nc $ensfile ${TYPE:-i} "$STATION" $ncfile
+                fi
             fi
             i=$((i+1))
             ii=`printf %02i $i`
