@@ -5348,6 +5348,12 @@ pr_flor_kenya_nudged)
     map='set lon 33 42
 set lat -5 5';;
 
+pr_wah_kenya_actualclim_clim)
+    file=Weather@Home/Kenya/pr_wah_ACTUALCLIM_clim_kenya_longrains.nc;kindname="WAH MAM actual climatology";climfield="precipitation";flipcolor=11;NPERYEAR=1
+    map='set lon 33 42
+set lat -5 5';;
+
+
 *) echo 
 [ -x ./myvinkhead.cgi ] && . ./myvinkhead.cgi "Error" "" "noindex,nofollow"
 echo "Cannot handle $FORM_field (yet)"
