@@ -131,9 +131,16 @@ EOF
     echo "</center>"
 fi # NPERYEAR > 1
 
-if [ "${WMO#corr}" = "$WMO" -a "${WMO#sign}" = "$WMO" ]; then
+doit=true
+if [ -n "$NT" -a -n "$NPERYEAR" ]; then
+    if [ $NT -le $NPERYEAR ]; then
+        echo "Not enogh data to compute anomalies<p>"
+        doit=false
+    fi
+fi
+if [ $doit = true -a "${WMO#corr}" = "$WMO" -a "${WMO#sign}" = "$WMO" ]; then
     if [ ! -s ./${base}a.eps.gz -o ! -s ./${base}a.png -o ! -s ./${base}a.plt -o ./${base}a.plt -ot $firstfile ]; then
-        ###echo ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat
+        [ "$lwrite" = true ] && echo ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat
         if [ ! -s ./${base}a.plt -o ./${base}a.plt -ot $firstfile ]; then
             ( ./bin/plotdat anomal $FORM_climyear1 $FORM_climyear2 ./data/$TYPE$WMO.dat | fgrep -v 'disregarding' > ./${base}a.plt ) 2>&1
         fi
