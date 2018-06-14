@@ -5353,6 +5353,11 @@ pr_wah_kenya_actualclim_clim)
     map='set lon 33 42
 set lat -5 5';;
 
+pr_miroc5_kenya_actualclim_clim)
+    file=Weather@Home/Kenya/pr_miroc5_ACTUALCLIM_clim_kenya_longrains.nc;kindname="MIROC5 MAM actual climatology";climfield="precipitation";flipcolor=11;NPERYEAR=1
+    map='set lon 33 42
+set lat -5 5';;
+
 
 *) echo 
 [ -x ./myvinkhead.cgi ] && . ./myvinkhead.cgi "Error" "" "noindex,nofollow"

@@ -512,7 +512,10 @@ Monthly weather@home time series
 <a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_ACTUAL_monthly_2S-4N_37-40E_longrains_@@@&STATION=wah_actual_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">actual</a>, 
 <a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_NATURAL_monthly_2S-4N_37-40E_longrains_@@@&STATION=wah_natural_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">natural</a>, 
 <a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_ACTUALCLIM_monthly_2S-4N_37-40E_longrains_@@@&STATION=wah_actualclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">actualclim</a>, 
-<a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_NATURALCLIM_monthly_2S-4N_37-40E_longrains_@@@&STATION=wah_naturalclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">naturalclim</a>.<br> 
+<a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_NATURALCLIM_monthly_2S-4N_37-40E_longrains_@@@&STATION=wah_naturalclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">naturalclim</a>.<br>
+Monthly MIROC5 time series
+<a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_miroc5_ACTUALCLIM_monthly_2S-4N_37-40E_@@@&STATION=miroc5_actualclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">actualclim</a>, 
+<a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_miroc5_NATURALCLIM_monthly_2S-4N_37-40E_@@@&STATION=miroc5_naturalclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=12">naturalclim</a>.<br> 
 Daily <a href="get_index.cgi?field=prcp_cpc_daily&NPERYEAR=366&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&intertype=nearest&id=$EMAIL">CPC analyses</a>, 
 <a href="get_index.cgi?field=cmorph_daily_05&NPERYEAR=366&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&&intertype=nearestid=$EMAIL">CMORPH analyses</a>, 
 <a href="get_index.cgi?field=chirps_20_25&NPERYEAR=366&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&intertype=nearest&id=$EMAIL">CHIRPS analyses</a>.<br> 
@@ -529,7 +532,12 @@ Daily weather@home time series
 <a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_ACTUALCLIM_daily_2S-4N_37-40E_longrains_@@@&STATION=wah_actualclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=360">actualclim</a>, 
 <a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_NATURALCLIM_daily_2S-4N_37-40E_longrains_@@@&STATION=wah_naturalclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=360">naturalclim</a><br> 
 Annual weather@home climatology field 
-<a href="select.cgi?field=pr_wah_kenya_actualclim_clim&id=$EMAIL">actualclim</a>, 
+<a href="select.cgi?field=pr_wah_kenya_actualclim_clim&id=$EMAIL">actualclim</a>.<br>
+Daily MIROC5 time series
+<a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_miroc5_ACTUALCLIM_daily_2S-4N_37-40E_@@@&STATION=miroc5_actualclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=360">actualclim</a>, 
+<a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_miroc5_NATURALCLIM_daily_2S-4N_37-40E_@@@&STATION=miroc5_naturalclim_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=360">naturalclim</a><br> 
+Annual MIROC5 climatology field 
+<a href="select.cgi?field=pr_miroc5_kenya_actualclim_clim&id=$EMAIL">actualclim</a>, 
 
 EOF
 if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
