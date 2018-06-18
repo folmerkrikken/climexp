@@ -741,7 +741,7 @@ EOF
 			if [ $datfile = $datafile.nc ]; then
 				cat <<EOF
 <p>
-Get the raw data as <a href="$datafile.nc">netcdf</a> file.
+Get the raw data as <a href="$datafile.nc">netcdf</a> or (big) <a href="netcdf2ascii.cgi?file=$datafile.nc&uniq=$EMAIL&title=$nexttitle">ascii</a> file.
 EOF
 			else
 				cat <<EOF
@@ -749,7 +749,7 @@ EOF
 Get the raw data as GrADS <a href="$datafile.ctl">control</a>
 and (gzipped) <a href="$datfile.gz">data</a> files,
 or generate a <a href="grads2nc.cgi?file=$datafile.ctl&uniq=$EMAIL&title=$nexttitle">netCDF</a> file,
-or download as <a href="grads2ascii.cgi?file=$datafile.ctl&uniq=$EMAIL&title=$nexttitle">ascii</a> (big).
+or download as <a href="netcdf2ascii.cgi?file=$datafile.ctl&uniq=$EMAIL&title=$nexttitle">ascii</a> (big).
 EOF
 			fi
 		fi
