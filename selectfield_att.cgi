@@ -550,6 +550,7 @@ Monthly CESM <a href="getindices.cgi?WMO=CESMData/Pwesterncape/pr_Amon_CESM-LENS
 (<a href="getindices.cgi?WMO=CESMData/Pwesterncape/tas_Amon_CESM-LENS_rcp85_global_%%&STATION=Tglobal_CESM_historical-rcp85&TYPE=i&id=$EMAIL&NPERYEAR=12">Tglobal</a>), 
 <a href="getindices.cgi?WMO=CESMData/Pwesterncape/pr_Amon_CESM-ME_rcp45_18-21E_-35--31N_land_%%&STATION=CESM_historical-rcp45_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">RCP4.5 medium ensemble</a>
 (<a href="getindices.cgi?WMO=CESMData/Pwesterncape/tas_Amon_CESM-ME_rcp45_global_%%&STATION=Tglobal_CESM_historical-rcp45&TYPE=i&id=$EMAIL&NPERYEAR=12">Tglobal</a>),<br>
+Monthly <a href="getindices.cgi?WMO=CMIP5/Pwesterncape/pr_Amon_cmip5one_-35--31N_18-21E_land_%%%&STATION=CMIP5_rcp45_pr_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">CMIP5 historical/RCP4.5 transient runs</a> (one ensemble member per model).<br>
 (make annual mean at the bottom of the page)
 EOF
 if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
