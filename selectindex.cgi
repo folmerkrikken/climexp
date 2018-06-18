@@ -194,7 +194,10 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <td><a href="http://apps.ecmwf.int/datasets/data/interim_full_moda/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 -->
 
-<tr><td>Lower troposphere temperature<td><div class="kalelink"><a href="getindices.cgi?WMO=UAHData/tlt_gl&STATION=TLT&TYPE=i&id=$EMAIL">Global</a>, <a href="getindices.cgi?WMO=UAHData/tlt_nh&STATION=TLT_NH&TYPE=i&id=$EMAIL">NH</a>, <a href="getindices.cgi?WMO=UAHData/tlt_sh&STATION=TLT_SH&TYPE=i&id=$EMAIL">SH</a>, <a href="getindices.cgi?WMO=UAHData/tlt_land&STATION=TLT_land&TYPE=i&id=$EMAIL">land</a>, <a href="getindices.cgi?WMO=UAHData/tlt_sea&STATION=TLT_sea&TYPE=i&id=$EMAIL">sea</a> anomalies (1979-now, UAH v6.0beta3)</div>
+<tr><td>Lower troposphere temperature<td><div class="kalelink"><a href="getindices.cgi?WMO=UAHData/tlt_gl&STATION=TLT&TYPE=i&id=$EMAIL">Global</a>, <a href="getindices.cgi?WMO=UAHData/tlt_nh&STATION=TLT_NH&TYPE=i&id=$EMAIL">NH</a>, <a href="getindices.cgi?WMO=UAHData/tlt_sh&STATION=TLT_SH&TYPE=i&id=$EMAIL">SH</a>, <a href="getindices.cgi?WMO=UAHData/tlt_land&STATION=TLT_land&TYPE=i&id=$EMAIL">land</a>, <a href="getindices.cgi?WMO=UAHData/tlt_sea&STATION=TLT_sea&TYPE=i&id=$EMAIL">sea</a> anomalies (1979-now, UAH v6.0)</div>
+<td><a href="http://www.atmos.uah.edu/data/msu/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+
+<tr><td>&nbsp;<!--Lower troposphere temperature--><td><div class="kalelink"><a href="getindices.cgi?WMO=SSMIData/rss_tlt_gl&STATION=TLT&TYPE=i&id=$EMAIL">Global</a>, <a href="getindices.cgi?WMO=SSMIData/rss_tlt_nh&STATION=TLT_NH&TYPE=i&id=$EMAIL">NH</a>, <a href="getindices.cgi?WMO=SSMIData/rss_tlt_sh&STATION=TLT_SH&TYPE=i&id=$EMAIL">SH</a> anomalies (1978-now, RSS 4.0)</div>
 <td><a href="http://www.atmos.uah.edu/data/msu/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>Ocean heat content<td><div class="kalelink">0-700m: <a href="getindices.cgi?WMO=NODCData/heat700_global&STATION=global_upper_ocean_heat_content&TYPE=i&id=$EMAIL">Global upper ocean</a> (<a href="getindices.cgi?WMO=NODCData/heat700_nh&STATION=NH_upper_ocean_heat_content&TYPE=i&id=$EMAIL">NH</a>, <a href="getindices.cgi?WMO=NODCData/heat700_sh&STATION=SH_upper_ocean_heat_content&TYPE=i&id=$EMAIL">SH</a>),

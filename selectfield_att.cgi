@@ -526,6 +526,8 @@ Daily FLOR 50km time series <a href="getindices.cgi?WMO=PrincetonData/PIctl_CMIP
 Daily FLOR 50km fields <a href="select.cgi?field=pr_flor_kenya_preindustrial_daily&id=$EMAIL&NPERYEAR=366">pre-industrial</a>, 
 <a href="select.cgi?field=pr_flor_kenya_2000_daily&id=$EMAIL">2000</a> control ,
 <a href="select.cgi?field=pr_flor_kenya_nudged_daily&id=$EMAIL">5 SST-forced 1871-2016</a> runs.<br>
+Daily HadGEM3-A N216 time series <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pkenya/eucleia_pr_Aday_HadGEM3-A-N216_historical_37-40E_-2-4N_n_su_%%%&STATION=HadGEM3A_historical_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=366">historical</a>, 
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pkenya/eucleia_pr_Aday_HadGEM3-A-N216_historicalNat_37-40E_-2-4N_n_su_%%%&STATION=HadGEM3A_historicalNat_2S-4N_37-40E&TYPE=i&id=$EMAIL&NPERYEAR=366">historicalNat</a>.<br>
 Daily weather@home time series
 <a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_ACTUAL_daily_2S-4N_37-40E_longrains_@@@&STATION=wah_actual_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=360">actual</a>, 
 <a href="getindices.cgi?WMO=Weather@Home/Kenya/pr_wah_NATURAL_daily_2S-4N_37-40E_longrains_@@@&STATION=wah_natural_2S-4N_37-40E&TYPE=i&TYPE=i&id=$EMAIL&NPERYEAR=360">natural</a>, 
@@ -539,6 +541,16 @@ Daily MIROC5 time series
 Annual MIROC5 climatology field 
 <a href="select.cgi?field=pr_miroc5_kenya_actualclim_clim&id=$EMAIL">actualclim</a>, 
 
+<div class=alineakop>Western Cape drought 2015-2017: 35-31&deg;S, 18-21&deg;E land average</div>
+Monthly <a href="get_index.cgi?field=gpccall_10&lat1=-35&lat2=-31&lon1=18&lon2=21&standardunits=standardunits&id=$EMAIL">GPCC analyses</a>, <br>
+Monthly <a href="getindices.cgi?WMO=KNMI14Data/Pwesterncape/knmi14_pr_Amon_ECEARTH23_rcp85_18-21E_-35--31N_n_5lan_su_%%&STATION=ECEARTH23_rcp85_pr_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">EC-Earth 2.3 transient runs</a>,<br>
+Monthly HadGEM3-A N216 <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pwesterncape/eucleia_pr_Amon_HadGEM3-A-N216_historical_18-21E_-35--31N_n_5lan_su_%%%&STATION=HadGEM3A_historical_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">historical</a>, 
+<a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pwesterncape/eucleia_pr_Amon_HadGEM3-A-N216_historicalNat_18-21E_-35--31N_n_5lan_su_%%%&STATION=HadGEM3A_historicalNat_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">historicalNat</a>,<br>
+Monthly CESM <a href="getindices.cgi?WMO=CESMData/Pwesterncape/pr_Amon_CESM-LENS_rcp85_18-21E_-35--31N_land_%%&STATION=CESM_historical-rcp85_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">RCP8.5 large ensemble</a>
+(<a href="getindices.cgi?WMO=CESMData/Pwesterncape/tas_Amon_CESM-LENS_rcp85_global_%%&STATION=Tglobal_CESM_historical-rcp85&TYPE=i&id=$EMAIL&NPERYEAR=12">Tglobal</a>), 
+<a href="getindices.cgi?WMO=CESMData/Pwesterncape/pr_Amon_CESM-ME_rcp45_18-21E_-35--31N_land_%%&STATION=CESM_historical-rcp45_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">RCP4.5 medium ensemble</a>
+(<a href="getindices.cgi?WMO=CESMData/Pwesterncape/tas_Amon_CESM-ME_rcp45_global_%%&STATION=Tglobal_CESM_historical-rcp45&TYPE=i&id=$EMAIL&NPERYEAR=12">Tglobal</a>),<br>
+(make annual mean at the bottom of the page)
 EOF
 if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
     -o $EMAIL = e279dd4de035b5fd9edc95ba4df755f7 \
