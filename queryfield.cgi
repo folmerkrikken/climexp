@@ -193,7 +193,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amo
        else
           kindname="$model $ip $exp yr$lead $ensave"
        fi
-    elif [ "${model#mod}" != $model -o $model = ens ]; then
+    elif [ "${model#mod}" != $model -o $model = ens -o $model = one ]; then
        if [ 0 = 1 ]; then # use date of file
           ensfile=`echo $file | tr '%' '0'`
           if [ `uname` = Darwin ]; then
