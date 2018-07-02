@@ -542,7 +542,8 @@ Annual MIROC5 climatology field
 <a href="select.cgi?field=pr_miroc5_kenya_actualclim_clim&id=$EMAIL">actualclim</a>, 
 
 <div class=alineakop>Western Cape drought 2015-2017: 35-31&deg;S, 18-21&deg;E land average</div>
-Monthly <a href="get_index.cgi?field=gpccall_10&lat1=-35&lat2=-31&lon1=18&lon2=21&standardunits=standardunits&id=$EMAIL">GPCC analyses</a>, <br>
+Monthly <a href="get_index.cgi?field=cru4_pre&lat1=-35&lat2=-31&lon1=18&lon2=21&standardunits=standardunits&id=$EMAIL">CRU TS 4.01</a>,
+<a href="get_index.cgi?field=gpccall_10&lat1=-35&lat2=-31&lon1=18&lon2=21&standardunits=standardunits&id=$EMAIL">GPCC</a> analyses,<br>
 Monthly <a href="getindices.cgi?WMO=KNMI14Data/Pwesterncape/knmi14_pr_Amon_ECEARTH23_rcp85_18-21E_-35--31N_n_5lan_su_%%&STATION=ECEARTH23_rcp85_pr_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">EC-Earth 2.3 transient runs</a>,<br>
 Monthly HadGEM3-A N216 <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pwesterncape/eucleia_pr_Amon_HadGEM3-A-N216_historical_18-21E_-35--31N_n_5lan_su_%%%&STATION=HadGEM3A_historical_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">historical</a>, 
 <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Pwesterncape/eucleia_pr_Amon_HadGEM3-A-N216_historicalNat_18-21E_-35--31N_n_5lan_su_%%%&STATION=HadGEM3A_historicalNat_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">historicalNat</a>,<br>
