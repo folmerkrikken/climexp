@@ -11,6 +11,7 @@ EOF
 # check email address
 . ./checkemail.cgi
 if [ "$EMAIL" = "someone@somewhere" ]; then
+  . ./myvinkhead.cgi "Error" "noindex,nofollow"
   echo "Anonymous users cannot use this function as it stores new data on the server. Please <a href=\"registerform.cgi\">register or log in</a>"
   . ./myvinkfoot.cgi
   exit
@@ -102,21 +103,39 @@ fi
 if [ -n "$ENSEMBLE" ]; then
     c=`echo $file | fgrep -c '%%%'`
     if [ $c = 1 ]; then
-        testfile=${outfile}_000
-        outfile=${outfile}_%%%
+        format='%03i'
+        percent='%%%'
     else
-        testfile=${outfile}_00
-        outfile=${outfile}_%%
+        format='%02i'
+        percent='%%'
     fi
+    outfile=${outfile}_$percent
+    doit=false
+    iens=0
+    ens=`print $format $iens`
+    inensfile=`echo $file | sed -e "s/$percent/$ens/"`
+    outensfile=`echo $outfile.nc | sed -e "s/$percent/$ens/"`
+    while [ -s $inensfile -o $iens = 0 ]; do
+        if [ ! -s $outensfile -o $outensfile -ot $inensfile ]; then
+            doit=true
+        fi
+        [ -s $outensfile ] && testfile=$outensfile
+        ((iens++))
+        ens=`print $format $iens`
+        inensfile=`echo $file | sed -e "s/$percent/$ens/"`
+        outensfile=`echo $outfile | sed -e "s/$percent/$ens/"`
+    done
 else
-    testfile=$outfile
+    testfile=$outfile.nc
+    if [ ! -s $outfile -o $outfile -ot $file ]; then
+        doit=true
+    else
+        doit=false
+    fi
 fi
 
 [ "$lwrite" = true ] && echo "c=$c<br>file=$file<br>testfile = $testfile<br>outfile=$outfile<br>"
-if [ ! -s $testfile.nc -o $testfile.nc -ot $file ]; then
-    if [ -s $testfile.nc ]; then
-       rm `echo $outfile.nc | sed -e 's/%%%/???/' -e 's/%%/??/'`
-    fi
+if [ $doit = true ]; then
     [ "$lwrite" = true ] && echo "daily2longerfield.sh $corrargs $NOMISSING $outfile.nc"
     echo `date` "$EMAIL ($REMOTE_ADDR) daily2longerfield.sh $corrargs $NOMISSING $outfile.nc" >> log/log
     (./bin/daily2longerfield.sh $corrargs $NOMISSING $outfile.nc) 2>&1

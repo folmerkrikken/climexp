@@ -53,16 +53,20 @@ else
                     outfile=${outfile}_$ifile.nc
                     outfiles="$outfiles $outfile"
                     ((ifile++))
-                    [ "$lwrite" = true ] && echo "$DIR/bin/$PROG $ensfile $restargs $outfile"
-                    $DIR/bin/$PROG $ensfile $restargs $outfile
+                    if [ ! -s $outfile -o $outfile -ot $ensfile ]; then
+                        [ "$lwrite" = true ] && echo "$DIR/bin/$PROG $ensfile $restargs $outfile"
+                        echo 'y' | $DIR/bin/$PROG $ensfile $restargs $outfile
+                    fi
                 done
                 catnc $outfiles $realoutfile
                 outfile=$realoutfile
             else
                 ensargs=(`echo "$@" | sed -e "s:\+\+\+:$ii:g" -e "s:\+\+:$ii:g" -e "s:\%\%\%:$ii:g" -e "s:\%\%:$ii:g"`)
                 outfile=${ensargs[$n]}
-                [ "$lwrite" = true ] && echo "$DIR/bin/$PROG ${ensargs[*]}"
-                $DIR/bin/$PROG ${ensargs[*]}
+                if [ ! -s $outfile -o $outfile -ot $ensfile ]; then
+                    [ "$lwrite" = true ] && echo "$DIR/bin/$PROG ${ensargs[*]}"
+                    echo 'y' | $DIR/bin/$PROG ${ensargs[*]}
+                fi
             fi
             echo "generated $outfile<p>"
         fi
