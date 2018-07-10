@@ -419,6 +419,7 @@ EOF
       corrval=''
       ext1="1"
       echo "<pre>"
+      [ "$lwrite" = true ] && echo "./bin/multifit "data/$TYPE$WMO${FORM_num}.dump" $index"
       ./bin/multifit "data/$TYPE$WMO${FORM_num}.dump" $index
       echo "</pre>"
       taillines=0
