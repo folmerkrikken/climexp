@@ -4,6 +4,9 @@
 User-agent: * 
 Crawl-delay: 5
 
+# too active, and I do not have valuable links anyway
+User-agent: AhrefsBot
+Disallow: /
 # downloading all kind of forbidden links
 User-agent: MegaIndex.ru
 Disallow: /
