@@ -301,6 +301,30 @@ cat <<EOF
 <td><input type=radio class=formradio name=field value=futureweather_uas_Amon_ECEARTH23_209401-209812>
 <td><input type=radio class=formradio name=field value=futureweather_vas_Amon_ECEARTH23_209401-209812>
 <td><input type=radio class=formradio name=field value=futureweather_psl_Amon_ECEARTH23_209401-209812>
+<tr><th>&nbsp;
+<th>&nbsp;
+<th>Rx1day
+<th>Rx3day
+<th>Rx5day
+<th>Txx
+<th>Tx3x
+<th>Txn
+<th>Tnx
+<th>Tnn
+<th>&nbsp;
+<th>&nbsp;
+<tr><td>6 annual
+<td>together
+<td><input type=radio class=formradio name=field value=futureweather_rx1day_Amon_ECEARTH23>
+<td><input type=radio class=formradio name=field value=futureweather_rx3day_Amon_ECEARTH23>
+<td><input type=radio class=formradio name=field value=futureweather_rx5day_Amon_ECEARTH23>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
 <tr><th>HadGEM3A N216 1960-2015<br><a href="EUCLEIA/HadGEM3-A-N216/eucleia_conditions.pdf">conditions of use</a>
 <th>SST forcing
 <th>tas

@@ -139,15 +139,17 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amo
             if [ $period = alldays ]; then
                 export splitfield=true
                 period='????????-????????'
-            fi
-            if [ $period = allmonths ]; then
+            elif [ $period = allmonths ]; then
                 export splitfield=true
                 period='??????-??????'
+            else
+                type=yr
+                NPERYEAR=1
             fi
             if [ "$splitfield" = true ]; then
                 file=${var}_${type}_${model}_${exp}_${period}_%%%.nc
             else
-                file=${var}_${type}_${model}_${exp}_${period}_%%%.nc
+                file=${var}_${type}_${model}_${exp}_%%%.nc
             fi
             file=ECEARTH23/FutureWeather/${type#A}/$var/$file
             LSMASK=ECEARTH23/FutureWeather/fixed/lsmask_ecearth23_t799.nc
@@ -393,6 +395,7 @@ sstoi) file=NCEPData/sstoi.ctl;kindname="Reynolds";climfield="SST";;
 kaplan_ssta) file=LDGOData/kaplan_ssta.nc;kindname="Kaplan";climfield="SSTa";;
 ersstv3b) file=NCDCData/ersstv3b.ctl;kindname="ERSST v3b2";climfield="SST";;
 ersstv4) file=NCDCData/ersstv4.nc;kindname="ERSST v4";climfield="SST";;
+ersstv4a) file=NCDCData/ersstv4a.nc;kindname="ERSST v4";climfield="SSTa";;
 ersstv5) file=NCDCData/ersstv5.nc;kindname="ERSST v5";climfield="SST";;
 ersstv5a) file=NCDCData/ersstv5a.nc;kindname="ERSST v5";climfield="SSTa";;
 dasilva_ssta) file=DaSilvaData/dasilva_sst_anom.cdf;kindname="Da Silva";climfield="SSTa";;
