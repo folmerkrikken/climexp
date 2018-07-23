@@ -577,12 +577,7 @@ Monthly CESM <a href="getindices.cgi?WMO=CESMData/Pwesterncape/pr_Amon_CESM-LENS
 (<a href="getindices.cgi?WMO=CESMData/Pwesterncape/tas_Amon_CESM-ME_rcp45_global_%%&STATION=Tglobal_CESM_historical-rcp45&TYPE=i&id=$EMAIL&NPERYEAR=12">Tglobal</a>),<br>
 Monthly <a href="getindices.cgi?WMO=CMIP5/Pwesterncape/pr_Amon_cmip5one_-35--31N_18-21E_land_%%%&STATION=CMIP5_rcp45_pr_18-21E_35-31S&TYPE=i&id=$EMAIL&NPERYEAR=12">CMIP5 historical/RCP4.5 transient runs</a> (one ensemble member per model).<br>
 (make annual mean at the bottom of the page)
-EOF
-if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
-    -o $EMAIL = e279dd4de035b5fd9edc95ba4df755f7 \
-    -o $EMAIL = bd113ded9265e569c369d53ff59bf69a \
-    -o $EMAIL = f9646e78b5dbcaee3d001eb713252e3e ]; then
-    cat << EOF
+
 <div class=alineakop>Bangladesh flooding 2017</div>
 Observed precipitation in the Brahmaputra basin: 
 <a href="getindices.cgi?WMO=Bangladesh2017Data/iprcp_cpc_daily_mask0_su&STATION=pr_CPC_Brahmaputra&TYPE=p&NPERYEAR=366&id=$EMAIL">CPC</a>, 
@@ -599,9 +594,7 @@ Observed precipitation in the Brahmaputra basin:
 <a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_PD_%%%&STATION=discharge_PCR_GLOBWB_ECEarth_PD_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_PD</a>,
 <a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_hiwaves_monthMax_2C_%%%&STATION=discharge_PCR_GLOBWB_ECEarth_2C_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">PCR_GLOBWB_HIWAVES_2C</a>,
 <a href="getindices.cgi?WMO=Bangladesh2017Data/discharge_SWAT_ECEarth_rcp85_%%&STATION=discharge_SWAT_ECEarth_rcp85_Bahadurabad&TYPE=i&NPERYEAR=366&id=$EMAIL">SWAT_ECEARTH_rcp85</a>.
-EOF
-fi
-cat << EOF
+
 <div class=alineakop>European storms January 2018 </div>
 ISD-lite station average 1976-2017 <a href="getindices.cgi?WMO=ISDData/Storms/isdlite_eleanor&STATION=u10max_Eleanor_ISDlite&TYPE=i&NPERYEAR=1&id=$EMAIL">annual max 3-hourly instantaneous wind in Eleanor region</a>,
 <a href="getindices.cgi?WMO=ISDData/Storms/isdlite_friederike&STATION=u10max_Friederike_ISDlite&TYPE=i&NPERYEAR=1&id=$EMAIL">Friederike region</a>.
