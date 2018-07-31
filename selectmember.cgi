@@ -15,6 +15,18 @@ field=`basename $field .$EMAIL`
 infofile=data/$field.$i.$EMAIL.info
 c=`echo $file | fgrep -c '%%%'`
 member="$FORM_member"
+if [ -z "$member" ]; then
+    c3=`echo "$file" | fgrep -c '%%%'`
+    c2=`echo "$file" | fgrep -c '%%'`
+    if [ $c3 = 1 ]; then
+        ens=`printf %03i $i`
+        pat="%%%"
+    elif [ $c2 = 1 ]; then
+        ens=`printf %02i $i`
+        pat="%%"
+    fi
+    member=`echo $file | sed -e "s/$pat/$ens/"`
+fi
 echo "$member"           > $infofile
 if [ -n "$LSMASK" ]; then
   echo "LSMASK=$LSMASK" >> $infofile
