@@ -520,6 +520,17 @@ cat <<EOF
 Resources not listed are either easily accessible through  other Climate Explorer pages
 or available from the authors (except for non-public data such as the IMD analyses).
 
+<div class=alineakop>Northern European heatwave end of July 2018</div>
+Annual max of 3-day averaged Tmax (Tx3x) at 
+<a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_phoenix_1971-2030_%%&STATION=TX3x_EUROCORDEX_Phoenix_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">Dublin Phoenix Park</a>,
+<a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_debilt_1971-2030_%%&STATION=TX3x_EUROCORDEX_DeBilt_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">De Bilt</a>,
+<a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_copenhagen_1971-2030_%%&STATION=TX3x_EUROCORDEX_Copenhagen_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">Copenhagen</a>,
+<a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_oslo_1971-2030_%%&STATION=TX3x_EUROCORDEX_Oslon_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">Oslo</a>,
+<a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_linkoeping_1971-2030_%%&STATION=TX3x_EUROCORDEX_Linkoeping_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">Link&ouml;ping, Sweden</a>,
+<a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_sodankyla_1971-2030_%%&STATION=TX3x_EUROCORDEX_Sodankyla_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">Sodanyla, Finland</a>,
+<a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_jokioinen_1971-2030_%%&STATION=TX3x_EUROCORDEX_Jokioinen_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">Jokioinen, Finland</a>,
+
+
 <div class=alineakop>Kenya flooding Long Rains 2018: 2&deg;S-4&deg;N, 37-40&deg;E average</div>
 Monthly <a href="get_index.cgi?field=gpccall_10&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&id=$EMAIL">GPCC analyses</a>, 
 <a href="get_index.cgi?field=CenTrendsChirps&lat1=-2&lat2=4&lon1=37&lon2=40&standardunits=standardunits&id=$EMAIL">CenTrends/CHIRPS analyses</a>.<br>
