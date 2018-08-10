@@ -20,7 +20,7 @@ if [ -z "$init_done" ]; then
         maxload=20
     else
         load=`ps axuw | fgrep -v upload | egrep -c '\.cgi$'`
-        maxload=9 # 1 is the grep, we have 4 cores
+        maxload=11 # 1 is the grep, we have 4 cores, correlatefield counts for two
     fi
     if [ ${load:-0} -gt $maxload -a `uname` != Darwin ]; then
         echo 
@@ -87,4 +87,10 @@ if [ -z "$init_done" ]; then
    export PATH=./bin:/sw/bin:/usr/local/bin:/usr/local/free/bin:$PATH
    # finally, avoid commas instead of decimal points :-(
    export LANG=C
+   # start with modest parallel processing
+   host=`uname -a | cut -f 2 -d ' '`
+   export OMP_NUM_THREADS=2
+   if [ $host = bima ]; then
+      export OMP_NUM_THREADS=4
+   fi
 fi
