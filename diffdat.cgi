@@ -19,4 +19,4 @@ NAME="$FORM_name"
 export file=data/$TYPE$FORM_wmo.dat
 PROG="diffdat.sh $DIR/data/$TYPE$FORM_wmo.dat ${FORM_ndiff:-2}"
 
-. $DIR/getdata.cgi
+. ./getdata.cgi

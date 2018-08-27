@@ -66,31 +66,36 @@ if [ -z "$init_done" ]; then
             halfwidth="100%"
         fi
     }
-   # set a standard TTF font for gnuplot.   GNUPLOT_DEFAULT_GDFONT is not used
-   # if all is well, but is there as a fall-back.
-   export gnuplot_version=`./bin/gnuplot --version`
-   if [ "${gnuplot_version#gnuplot 5}" != "$gnuplot_version" ]; then
-      export gnuplot_init="set colors classic"
-      setxzeroaxis="" # bug in gnuplot 5.0 patchlevel 0
-   else
-      setxzeroaxis="set xzeroaxis"
-   fi
-   export GDFONTPATH=`pwd`/truetype
-   export GNUPLOT_DEFAULT_GDFONT="DejaVuSansCondensed"
-   export gnuplot_png_font_hires="size 1280,960 crop font DejaVuSansCondensed 15"
-   export gnuplot_png_font="size 640,480 crop font DejaVuSansCondensed 8.5"
-   # R libraries
-   export R_LIBS=`pwd`/rpacks
-   # netcdf libraries on bhlclim, bvlclim - hard-coded
-   export LD_LIBRARY_PATH=/home/oldenbor/lib:/usr/local/free/lib:$LD_LIBRARY_PATH
-   # for a few routines this seems needed
-   export PATH=./bin:/sw/bin:/usr/local/bin:/usr/local/free/bin:$PATH
-   # finally, avoid commas instead of decimal points :-(
-   export LANG=C
-   # start with modest parallel processing
-   host=`uname -a | cut -f 2 -d ' '`
-   export OMP_NUM_THREADS=2
-   if [ $host = bima ]; then
-      export OMP_NUM_THREADS=4
-   fi
+    # set a standard TTF font for gnuplot.   GNUPLOT_DEFAULT_GDFONT is not used
+    # if all is well, but is there as a fall-back.
+    export gnuplot_version=`./bin/gnuplot --version`
+    if [ "${gnuplot_version#gnuplot 5}" != "$gnuplot_version" ]; then
+        export gnuplot_init="set colors classic"
+        setxzeroaxis="" # bug in gnuplot 5.0 patchlevel 0
+    else
+        setxzeroaxis="set xzeroaxis"
+    fi
+    export GDFONTPATH=`pwd`/truetype
+    export GNUPLOT_DEFAULT_GDFONT="DejaVuSansCondensed"
+    export gnuplot_png_font_hires="size 1280,960 crop font DejaVuSansCondensed 15"
+    export gnuplot_png_font="size 640,480 crop font DejaVuSansCondensed 8.5"
+    # R libraries
+    export R_LIBS=`pwd`/rpacks
+    # netcdf libraries on bhlclim, bvlclim - hard-coded
+    export LD_LIBRARY_PATH=/home/oldenbor/lib:/usr/local/free/lib:$LD_LIBRARY_PATH
+    # for a few routines this seems needed
+    export PATH=./bin:/sw/bin:/usr/local/bin:/usr/local/free/bin:$PATH
+    # finally, avoid commas instead of decimal points :-(
+    export LANG=C
+    # start with modest parallel processing
+    host=`uname -a | cut -f 2 -d ' '`
+    export OMP_NUM_THREADS=2
+    if [ $host = bima ]; then
+        export OMP_NUM_THREADS=4
+    fi
+    if [ `uname` = Darwin ]; then
+        ulimit -s 65532
+    else
+        ulimit -s unlimited
+    fi
 fi
