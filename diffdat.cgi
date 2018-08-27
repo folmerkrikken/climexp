@@ -11,7 +11,7 @@ FORM_ndiff=$FORM_ndiff;
 EOF
 fi
 
-export WMO="d${FORM_wmo}dT_$FORM_ndiff"
+export WMO="d${FORM_wmo}_dt_$FORM_ndiff"
 STATION="trend $FORM_station"
 EMAIL=$FORM_EMAIL
 export TYPE=$FORM_type
