@@ -198,30 +198,29 @@ else
           'd 'field
           say 'result = 'result
           i=1
-          if ( subwrd(result,1) = 'Averaging.' )
-            i=i+1
-            result=sublin(result,1)
-            say 'result = 'result
-          endif
           line=sublin(result,i)
+          if ( subwrd(line,1) = 'Averaging.' )
+            i=i+1
+            line=sublin(result,i)
+            say 'line = 'line
+          endif
           while ( subwrd(line,1) = '***' )
             i=i+1
             line=sublin(result,i)
           endwhile
-          result=line
-          if ( subwrd(result,i) = 'Constant' )
-            cmax=subwrd(result,5)
+          if ( subwrd(line,i) = 'Constant' )
+            cmax=subwrd(line,5)
             cmin=-cmax
             cint = (cmax-cmin)/10
           else
             if ( cmin = '' )
-              cmin=subwrd(result,2)
+              cmin=subwrd(line,2)
             endif
             if ( cmax = '' )
-              cmax=subwrd(result,4)
+              cmax=subwrd(line,4)
             endif
             if ( cint = '' )
-              cint=subwrd(result,6)
+              cint=subwrd(line,6)
             endif
           endif
 * make sure we get 10 intervals
