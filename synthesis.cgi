@@ -103,7 +103,8 @@ esac
 
 cat <<EOF
 <font color=Red>This is a very first test version. Use at your own risk. 
-Please check results and report errors back.</font><p>
+Please check results and report errors back.
+<br>Note: I fixed a big bug on 29 August that caused too large uncertainties on the average.</font><p>
 
 <div class='formheader'>Synthesis input</div>
 <div class='formbody'>
