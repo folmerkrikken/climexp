@@ -5,6 +5,7 @@ echo
 echo
 
 export DIR=`pwd`
+. ./init.cgi
 . ./getargs.cgi
 WMO=$FORM_WMO
 listname=$WMO
@@ -208,8 +209,9 @@ if [ "$FORM_plot" = "hist" ]; then
 	if [ -n "$FORM_detrend" ]; then
 		title="$title (detrend)"
 	fi
+    title=`echo $title | tr '_' ' '`
 
-	./bin/gnuplot << EOF
+	cat > $root.gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
@@ -226,6 +228,7 @@ set output "$root.eps"
 replot
 quit
 EOF
+	./bin/gnuplot $root.gnuplot
 
 fi
 
@@ -257,8 +260,9 @@ if [ $FORM_plot = "qq" ]; then
 	if [ -n "$FORM_detrend" ]; then
 		title="$title (detrend)"
 	fi
+    title=`echo $title | tr '_' ' '`
 
-	./bin/gnuplot << EOF
+	cat > $root.gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.7
 set term png $gnuplot_png_font_hires
@@ -272,6 +276,7 @@ set output "${root}.eps"
 replot
 quit
 EOF
+	./bin/gnuplot $root.gnuplot
 
 fi
 
@@ -299,6 +304,8 @@ if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; th
 		title="$title (detrend)"
 	fi
 	title="$title (${FORM_ci}% CI)"
+    title=`echo $title | tr '_' ' '`
+
 	xtics=`fgrep '#@' $root.txt | sed -e 's/^#@ //'`
 	if [ -n "$FORM_xlo" ]; then
 		case $FORM_plot in
