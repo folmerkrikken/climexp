@@ -21,7 +21,7 @@ if [ -z "$EMAIL" ]; then
    echo "getstations: internal error: EMAIL undefined" 1>&2   
    EMAIL=someone@somewhere
 fi
-if [ $EMAIL = oldenborgh@knmi.nl ]; then
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
     lwrite=false # true
 fi
 if [ $save_preferences = true -a $EMAIL != someone@somewhere ]; then
@@ -104,6 +104,12 @@ if [ -z "$listname" ]; then
       fortargs="$fortargs end $FORM_yr2"
     fi
     . ./myvinkhead.cgi "Found station data" "$timescale$FORM_climate station $fortargs"
+  elif [ -n "$FORM_maskmetadata" ] ; then
+      polygonfile=`head -1 $FORM_maskmetadata`
+      polygonname=`head -2 $FORM_maskmetadata | tail -n 1`
+      location="inside $polygonname"
+      . ./myvinkhead.cgi "Found station data" "$timescale$FORM_climate stations $location"
+      fortargs="polygon $polygonfile"
   elif [ -z "$FORM_lon" -a -z "$FORM_lat" \
       -a -z "$FORM_lon1" -a -z "$FORM_lon2" \
       -a -z "$FORM_lat1" -a -z "$FORM_lat2" -a -n "$FORM_list" ]; then
@@ -132,6 +138,7 @@ EOF
       . ./myvinkhead.cgi "Found station data" "$timescale$FORM_climate stations $location"
       fortargs="$FORM_lat $FORM_lon $FORM_num"
     fi
+  fi
     if [ -n "$FORM_min" ] ; then
       fortargs="$fortargs min $FORM_min"
       if [ -n "$FORM_month" -a "$FORM_month" != "-1" ]; then
@@ -153,7 +160,6 @@ EOF
     if [ -n "$FORM_yr2" ] ; then
       fortargs="$fortargs end $FORM_yr2"
     fi
-  fi
   format=new
   if [ "$FORM_climate" = "precipitation" ]; then
     prog=getprcp

@@ -58,4 +58,8 @@ ${FORM_sp:-off}
 EOF
 fi
 
-. ./select.cgi
+if [ "$FORM_field" = dailystation ]; then
+    . ./selectdailyseries.cgi
+else
+    . ./select.cgi
+fi

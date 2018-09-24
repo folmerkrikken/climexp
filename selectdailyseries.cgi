@@ -113,6 +113,30 @@ cat <<EOF
 <input type="$number" step=any class="forminput" name="lat2" $textsize4 value="$FORM_lat2">&deg;N, 
 <input type="$number" step=any class="forminput" name="lon1" $textsize4 value="$FORM_lon1">&deg;E - 
 <input type="$number" step=any class="forminput" name="lon2" $textsize4 value="$FORM_lon2">&deg;E</ul>
+
+</td></tr><tr><td colspan="4">
+<ul><li>mask (only for GHCN-D):
+<select name=maskmetadata>
+<option value="">no mask</option>
+EOF
+	for maskmetadata in data/*.$EMAIL.poly
+	do
+		if [ -f $maskmetadata ]; then
+			this=`head -1 $maskmetadata`
+			name=`head -2 $maskmetadata | tail -n -1`
+			if [ "$this" = "$maskfile" -o \( -z "$maskfile" -a "$maskmetadata" = "$FORM_maskmetadata" \) ]; then
+				selected=selected
+			else
+				selected=""
+			fi
+			echo "<option value=\"$maskmetadata\" $selected>$name</option>"
+		fi
+	done
+	cat <<EOF
+	</select>
+&nbsp <a href="upload_mask_form.cgi?id=$EMAIL&field=dailystation">add a mask to the list</a>
+<a href="javascript:pop_page('help/mask.shtml',284,450)"><img src="images/info-i.gif" alt="help" border="0"></a>
+
 </td></tr><tr><td colspan="4">
 <ul><li>the stations with station numbers <br>
  <textarea name="list" rows="2" cols="35" class="forminput">

@@ -32,7 +32,7 @@ if [ ${script#beca} != $script ]; then
 fi
 WMO=""
 # if it is called with two arguments and the second one has letters in it I think it is a ID, filename pair and not lat/lon
-if [ -n "$2" -a -z "$3" -a "$1" != list ]; then
+if [ -n "$2" -a -z "$3" -a "$1" != list -a "$1" != polygon ]; then
     c=`echo $1 $2 | egrep -c '[A-Z]|[a-z]'`
     if [ $c = 1 ]; then
         WMO=$1
