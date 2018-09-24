@@ -520,6 +520,11 @@ cat <<EOF
 Resources not listed are either easily accessible through  other Climate Explorer pages
 or available from the authors (except for non-public data such as the IMD analyses).
 
+<div class=alineakop>Kerala flooding 2018</div>
+Daily <a href="getindices.cgi?WMO=KNMI14Data/Pkerala/iknmi14_pr_Aday_ECEARTH23_rcp85_India_Kerala_su_%%&STATION=ECEARTH23medres_rcp85_pr_kerala&TYPE=i&id=$EMAIL&NPERYEAR=366">EC-Earth 2.3 T159 coupled transient runs</a>,<br>
+Daily <a href="getindices.cgi?WMO=KNMI14Data/Pkerala/ifutureweather_pr_Aday_ECEARTH23_alldays_India_Kerala_su_%%%&STATION=ECEARTH23hires_rcp45_pr_kerala&TYPE=i&id=$EMAIL&NPERYEAR=366">EC-Earth 2.3 T799 SST-forced time slices</a>,<br>
+
+
 <div class=alineakop>Northern European heatwave end of July 2018</div>
 Annual max of 3-day averaged Tmax (Tx3x) at 
 <a href="getindices.cgi?WMO=CORDEX/Heat/tmax_eurocordex_rcp85_phoenix_1971-2030_%%&STATION=TX3x_EUROCORDEX_Phoenix_1971-2030&TYPE=i&id=$EMAIL&NPERYEAR=1">Dublin Phoenix Park</a>,
@@ -750,6 +755,7 @@ EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Pcumbria/pr_day_ECEARTH
 EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_muladdcorr_ydrun_retrend_%%&STATION=Tmean_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmean De Bilt bias-corrected</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_muladdcorr_ydrun_retrend_%%&STATION=Tmax_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmax De Bilt bias-corrected</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmin_muladdcorr_ydrun_retrend_%%&STATION=Tmin_debilt_EC-Earth23_debias&TYPE=t&NPERYEAR=366&id=$EMAIL">Tmin De Bilt bias-corrected</a>,
 <br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tas_day_ECEARTH23_rcp85_%%_18600101-21001231_52N_5E&STATION=Tdebilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">temperature at 52&deg;N, 5&deg;E</a>, <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5&deg;E</a>,
 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/tasmax_Aday_ECEARTH23_rcp85_5.2E_52N_n_su_%%&STATION=Tmax_debilt_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">maximum temperature at 52&deg;N, 5.2&deg;E</a>,
+<br>RACMO 12km <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/t2m_racmo_debilt_%%&STATION=T2m_debilt_RACMO_EC-Earth23&TYPE=t&NPERYEAR=366&id=$EMAIL">mean temperature at 52&deg;N, 5.2&deg;E</a>,
 <br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tdebilt/pr_Aday_ECEARTH23_rcp85_5E_52N_n_su_%%&STATION=Pdebilt_EC-Earth23&TYPE=p&NPERYEAR=366&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>,
 <br>EC-Earth 2.3 T159 <a href="getindices.cgi?WMO=KNMI14Data/Tglobal/tas_Amon_ECEARTH23_rcp85_0-360E_-90-90N_n_su_mean_mean1&STATION=Tglobal_EC-Earth23&TYPE=i&NPERYEAR=1&id=$EMAIL">annual mean ensemble mean global mean temperature</a>,
 <br>HadGEM3A N216 historical <a href="getindices.cgi?WMO=EUCLEIA/HadGEM3-A-N216/Tdebilt/ieucleia_pr_Aday_HadGEM3-A-N216_historical_5E_52N_n_su_%%%&STATION=Pdebilt_HadGEM3A_obs&TYPE=p&NPERYEAR=360&id=$EMAIL">precipitation at 52&deg;N, 5&deg;E</a>, 
