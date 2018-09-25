@@ -8,8 +8,11 @@ $query = CGI::new();
 # we have version 2.36, so upload() is unavailable
 $NCFILE  = $query->param('myfield.nc');
 $kindname = $query->param('kindname');
+$kindname =~ s/[^A-Za-z0-9 _.,-]*//g;
 $climfield = $query->param('climfield');
+$climfield =~ s/[^A-Za-z0-9 _.,-]*//g;
 $EMAIL = $query->param('email');
+$EMAIL =~ s/[^A-Za-z0-9 _@.-]*//g;
 
 if ( $NCFILE ) {
   # copy dat (big binary) file to upload area
