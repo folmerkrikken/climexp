@@ -27,19 +27,19 @@ print LOGFILE "outfile = $outfile\n";
 print LOGFILE "type = $type\n";
 if ( $type =~ /p/ ) {
   $type='p';
-  $NAME = 'Precipitation';
+  $NAME = 'precipitation';
 } elsif ( $type =~ /t/ ) {
   $type='t';
-  $NAME = 'Temperature';
+  $NAME = 'temperature';
 } elsif ( $type =~ /s/ ) {
   $type='s';
-  $NAME = 'Pressure';
+  $NAME = 'pressure';
 } elsif ( $type =~ /l/ ) {
   $type='s';
-  $NAME = 'Sea level';
+  $NAME = 'sea level';
 } else {
   $type = 'i';
-  $NAME = 'Index';
+  $NAME = 'index';
 }
 print LOGFILE "NAME = $NAME\n";
 chomp($cwd = `pwd`);
