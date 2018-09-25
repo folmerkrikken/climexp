@@ -22,6 +22,7 @@ close OUTFILE;
 
 open (LOGFILE,">/tmp/uploadseries.log");
 $type = $query->param('type');
+$type =~ s/[^A-Za-z0-9 ]*//g;
 print LOGFILE "outfile = $outfile\n";
 print LOGFILE "type = $type\n";
 if ( $type =~ /p/ ) {
@@ -44,8 +45,10 @@ print LOGFILE "NAME = $NAME\n";
 chomp($cwd = `pwd`);
 print LOGFILE "cwd = $cwd\n";
 $email = $query->param('email');
+$email =~ s/[^A-Za-z0-9 @.]*//g;
 print LOGFILE "email = $email\n";
 $station = $query->param('station');
+$station =~ s/[^A-Za-z0-9 _-]*//g;
 if ( $station =~ /^$/ ) {
     $station = $email;
 }
