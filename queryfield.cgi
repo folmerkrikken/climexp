@@ -1026,9 +1026,9 @@ cfsr_ttr) file=CFSR/cfsr_ulwrf_toa.nc;kindname=CFSR;climfield="net LW TOA";LSMAS
 
 jra_*) var=${FORM_field#jra_};file="JRA-55/jra_${var}_mo.nc";kindname="JRA-55";climfield="$var";;
 
-cslp|cpsl|cprmsl) file=20C/prmsl.mon.mean.nc;kindname="20C";climfield="SLP";LSMASK=unknown;;
-cprmsl_daily) file=20C/prmsl_daily.nc;kindname="20C";climfield="SLP";NPERYEAR=366;LSMASK=unknown;;
-cslp_extended) file=20C/prmsl.mon.mean_extended.nc;kindname="20C+";climfield="SLP";LSMASK=unknown;;
+cslp|cpsl|cprmsl) file=20C/prmsl.mon.mean.nc;kindname="20C";climfield="SLP";LSMASK=20C/land.nc;;
+cprmsl_daily) file=20C/prmsl_daily.nc;kindname="20C";climfield="SLP";NPERYEAR=366;LSMASK=20C/land.nc;;
+cslp_extended) file=20C/prmsl.mon.mean_extended.nc;kindname="20C+";climfield="SLP";LSMASK=20C/land.nc;;
 cz850) file=20C/hgt850.nc;kindname="20C";climfield="850mb height";;
 cz700) file=20C/hgt700.nc;kindname="20C";climfield="700mb height";;
 cz500_daily) file=20C/hgt500_daily.nc;kindname="20C";climfield="500mb height";NPERYEAR=366;;
