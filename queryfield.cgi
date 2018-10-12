@@ -621,10 +621,8 @@ emulate) file=CRUData/emulate_3.2_1850-2003.nc;kindname="EMULATE 3.2";climfield=
 set lat 25 70";;
 trenberthslp) file=UCARData/ds010_1.nc;kindname="Trenberth";climfield="SLP";map='set mproj nps';;
 gmslp) file=UKMOData/gmslp.ctl;kindname="UKMO";climfield="SLP";;
-hadslp1) file=UKMOData/hadslp1.ctl;kindname="HadSLP1";climfield="SLP";;
-hadslp1.0) file=UKMOData/hadslp1_0.ctl;kindname="HadSLP1.0";climfield="SLP";;
-hadslp2r) file=UKMOData/hadslp2r.ctl;kindname="HadSLP2r";climfield="SLP";;
-hadslp2.0) file=UKMOData/hadslp2_0.ctl;kindname="HadSLP2.0";climfield="SLP";;
+hadslp2r) file=UKMOData/hadslp2r.nc;kindname="HadSLP2r";climfield="SLP";;
+hadslp2.0) file=UKMOData/hadslp2_0.nc;kindname="HadSLP2.0";climfield="SLP";;
 hadsst2) file=UKMOData/hadsst2.ctl;kindname="HadSST2";climfield="SSTa";;
 hadsst3) file=UKMOData/HadSST.3.1.1.0.median.nc;kindname="HadSST3110";climfield="SSTa";;
 hadisst1) file=UKMOData/HadISST_sst.nc;kindname="HadISST1";climfield="SST";;
