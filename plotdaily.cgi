@@ -130,9 +130,9 @@ if [ $c = 0 ] ; then
     echo "No valid output, maybe the date $enddate is beyond the end date of the series, or the climatology interval before the beginning of the series?"
 else
     lastdate=`egrep -v '^#' $root.txt | grep '[0-9]' | tail -n 1 | cut -b 1-8`
-    [ -z "$yr" -o $arg_enddate = last ] && yr=`echo "$lastdate" | cut -b 1-4`
-    [ -z "$mo" -o $arg_enddate = last ] && mo=`echo "$lastdate" | cut -b 5-6`
-    [ -z "$dy" -o $arg_enddate = last ] && dy=`echo "$lastdate" | cut -b 7-8`
+    [ -z "$yr" -o "$arg_enddate" = last ] && yr=`echo "$lastdate" | cut -b 1-4`
+    [ -z "$mo" -o "$arg_enddate" = last ] && mo=`echo "$lastdate" | cut -b 5-6`
+    [ -z "$dy" -o "$arg_enddate" = last ] && dy=`echo "$lastdate" | cut -b 7-8`
     lastdate=$((lastdate+1))
     firstdate=`fgrep -v '#' $root.txt | grep '[0-9]' | head -n 1 | cut -b 1-8`
     [ "$lwrite" = true ] && echo "firstdate,lastdate = $firstdate,$lastdate<br>"
@@ -146,7 +146,7 @@ else
     else
         timefmt="'%Y%m'"
     fi
-    if [ "$NEWUNITS" = "mm/day" -o "$VAR" = "soilw" ]; then
+    if [ \( "$NEWUNITS" = "mm/dy" -a "${VAR#ev}" = "$VAR" \) -o "$VAR" = "soilw" ]; then
         above=3
         below=1
     else
