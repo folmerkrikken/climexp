@@ -31,6 +31,7 @@ NAME=$FORM_NAME
 # common options
 sfile="./data/$TYPE$WMO.dat"
 corrargs=$sfile
+eval `bin/getunits.sh $sfile`
 c1=`echo $WMO | fgrep -c "++"`
 c2=`echo $WMO | fgrep -c "%%"`
 [ $c1 != 0 -o $c2 != 0 ] && ENSEMBLE=true
