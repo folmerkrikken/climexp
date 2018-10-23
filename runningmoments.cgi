@@ -64,7 +64,7 @@ if [ -z "$FORM_separate" ]; then
   fi
   rm /tmp/runningmoments$$.log
   mv data/$TYPE$WMO${FORM_num}.runcor $root.txt
-  egrep '^#' $root.txt | sed -e 's/# *//'
+  egrep '^#' $root.txt | fgrep -v ' :: ' | sed -e 's/# *//'
   mean=`egrep '^#' $root.txt | fgrep '<td>' |  cut -b 24-43`
   ###echo "mean = $mean"
   lowerr=`egrep '^#' $root.txt | fgrep '<td>' |  cut -b 53-72`
@@ -113,6 +113,7 @@ if [ -n "$FORM_sum" ]; then
   seriesmonth="$seriesmonth "
   ylabel="$seriesmonth $ylabel"
 fi
+ylabel=`echo $ylabel | tr '_' ' '`
 
 title="${FORM_runwindow}-yr running $FORM_moment of $seriesmonth$CLIM $station"
 c=`echo "$title" | wc -c | tr -d ' '`
@@ -129,6 +130,7 @@ fi
 if [ -n "$FORM_detrend" ]; then
   title="$title (detrend)"
 fi
+title=`echo $title | tr '_' ' '`
 
 ./bin/gnuplot << EOF
 $gnuplot_init
@@ -150,7 +152,7 @@ pngfile=$root.png
 getpngwidth
 echo "<div class=\"bijschrift\">$title (<a href=\"${root}.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}.eps.gz\">pdf</a>, <a href=\"$root.txt\">raw data</a>, "
 echo "<a href=\"txt2dat.cgi?id=$EMAIL&WMO="`echo $root.txt | sed -e 's/+++/@@@/' -e 's/++/@@/'`"&STATION=running_${FORM_moment}_of_$FORM_STATION\">analyze as time series</a>)</div>"
-echo "<center><img src=\"${root}.png\" alt=\"$FORM_moment\" width=\"$halfwidth\"></center>"
+echo "<center><img src=\"${root}.png\" alt=\"$title\" width=\"$halfwidth\"></center>"
 
 done
 . ./myvinkfoot.cgi

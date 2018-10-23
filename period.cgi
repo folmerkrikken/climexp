@@ -104,6 +104,7 @@ if [ $FORM_which = period ]; then
       rm $startstop
       title="$title ${yrstart}:${yrstop}"
     fi
+    title=`echo $title | tr '_' ' '`
     timeunits=`fgrep 'frequency in [' $root.txt | sed -e 's/^.*\[//' -e 's/\^..\].*//'`
     xlabel="period [$timeunits]"
     ./bin/gnuplot << EOF

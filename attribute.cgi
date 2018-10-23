@@ -410,8 +410,8 @@ plot \
 "$obsplotfile" index 1 using $x:2 notitle with points lt 4,\\
 "$obsplotfile" index 2 using $x:2 notitle with line lt 1 lw 3,\\
 "$obsplotfile" index 3 using $x:2:3:4 notitle with errorbars lt 1 lw 3,\\
-"$obsplotfile" index 2 using $x:(\$2+\$3) notitle with line lt 1,\\
-"$obsplotfile" index 2 using $x:(\$2+2*\$3) notitle with line lt 1
+"$obsplotfile" index 2 using $x:3 notitle with line lt 1,\\
+"$obsplotfile" index 2 using $x:4 notitle with line lt 1
 set term postscript epsf color solid
 set output "${root}_obsplot.eps"
 replot
@@ -440,7 +440,7 @@ EOF
         else
             plotvariable="position parameter"
         fi
-        echo "<div class=\"bijschrift\">Fitted points, value in $FORM_year,  $plotvariable &mu;, &mu;${plus}&sigma; and &mu;${plus}2&sigma;"
+        echo "<div class=\"bijschrift\">Fitted points, value in $FORM_year,  $plotvariable &mu; and the 6 and 40 yr return values"
         echo "(<a href=\"${root}_obsplot.eps.gz\">eps</a>, <a href=\"ps2pdf.cgi?file=${root}_obsplot.eps.gz\">pdf</a>, <a href=\"${obsplotfile}\">raw data</a>, <a href=\"${root}_obsplot.gnuplot\">plot script</a>)</div>"
         echo "<center><img src=\"${root}_obsplot.png\" alt=\"$FORM_which\" width=\"$halfwidth\" border=0 class=\"realimage\" hspace=0 vspace=0></center>"
     fi
