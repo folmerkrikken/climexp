@@ -28,6 +28,7 @@ days</div>
 EOF
 elif [ "${NPERYEAR#-}" = 1 ]; then
   cat << EOF
+<div class="menulink">View per <a href="plotseries.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&KIND=yr">year</a></div>
 <div class="menulink">View last 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=10&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}&enddate=last">10</a>, 
 <a href="plotdaily.cgi?id=$EMAIL&TYPE=$TYPE&WMO=$wmo&STATION=$STATION&NAME=$name&nday=20&climyear1=1981&climyear2=2010&NPERYEAR=${NPERYEAR:-12}&enddate=last">20</a>,

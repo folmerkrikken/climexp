@@ -15,6 +15,7 @@ NAME="$FORM_NAME"
 name=`echo "$NAME" | tr '_' ' '`
 KIND="$FORM_KIND"
 case $KIND in
+    yr) kind="year";;
     yr0) kind="year (Jan-Dec)";;
     yr1) kind="year (Jul-Jun)";;
     half) kind="half year";;
@@ -26,7 +27,13 @@ esac
 . ./myvinkhead.cgi "Time series plots per $kind" "$station $name" "noindex,nofollow"
 
 eval `./bin/getunits ./data/$TYPE$WMO.dat`
-(./bin/series ./data/$TYPE$WMO.dat plot ./data/ts$TYPE$WMO.plt > ./data/ts$TYPE$WMO.txt) 2>&1
+if [ "$NPERYEAR" = 1 ]; then
+    WMO_new=${WMO}_ave12
+    yearly2shorter ./data/$TYPE$WMO.dat 12 > ./data/$TYPE$WMO_new.dat
+else
+    WMO_new=$WMO
+fi
+(./bin/series ./data/$TYPE$WMO_new.dat plot ./data/ts$TYPE$WMO.plt > ./data/ts$TYPE$WMO.txt) 2>&1
 echo "<div class=\"bijschrift\">Time series plots of $station $name per $kind. The thick line is a 10-year running average "
 echo "(<a href=\"data/ts$TYPE$WMO$KIND.eps.gz\">eps</a>, <a href="ps2pdf.cgi?file=data/ts$TYPE$WMO$KIND.eps.gz">pdf</a>, <a href=\"data/ts$TYPE$WMO.txt\">raw data</a>)</div>"
 
@@ -35,7 +42,7 @@ var=`echo "$VAR" | tr '_' ' '`
 
 for ext in eps png
 do
-    if [ $ext = eps ];then
+    if [ $ext = eps ]; then
         term="postscript epsf color solid"
         mosize="4.5,12.5"
     elif [ $ext = png ]; then
@@ -238,6 +245,22 @@ set title "Apr-Sep $name $station ($wmo)"
 plot "./data/ts$TYPE$WMO.plt" u 1:39 notitle with lines lt 2 lw 5, \
      "./data/ts$TYPE$WMO.plt" u 1:19 notitle with steps lt 1
 set nomultiplot
+quit
+EOF
+            ;;
+        yr)
+            ./bin/gnuplot << EOF
+$gnuplot_init
+set datafile missing "-999.900"
+set zero 1e-40
+set xzeroaxis
+set size 0.7,0.5
+set term $term
+set title "$name $station ($wmo)"
+set ylabel "$var [$UNITS]"
+set output "./data/ts$TYPE$WMO$KIND.$ext"
+plot "./data/ts$TYPE$WMO.plt" u 1:40 notitle with lines lt 2 lw 5, \
+     "./data/ts$TYPE$WMO.plt" u 1:20 notitle with steps lt 1
 quit
 EOF
             ;;
