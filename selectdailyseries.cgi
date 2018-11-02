@@ -25,11 +25,11 @@ cat <<EOF
 <table class="realtable" width="100%" border=0 cellpadding=0 cellspacing=0>
 <tr>
 <th>
-<a href="javascript:pop_page('help/ghcnd.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>GHCN-D v2
+<a href="https://www.ncdc.noaa.gov/ghcn-daily-description" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>GHCN-D v2
 </th><th>
-<a href="javascript:pop_page('help/ecad.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>pure ECA&amp;D
+<a href="https://www.ecad.eu" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>pure ECA&amp;D
 </th><th>
-<a href="javascript:pop_page('help/ecad.shtml',568,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>blended ECA&amp;D
+<a href="https://www.ecad.eu" target=_new><img align="right" src="images/info-i.gif" alt="help" border="0"></a>blended ECA&amp;D
 </th><th>
 <a href="javascript:pop_page('help/hcdn.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0"></a>HCDN
 </th></tr><tr><td>
