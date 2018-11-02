@@ -529,7 +529,7 @@ if [ "$FORM_mapformat" = kml ]; then
 		kmlfile=data/g${uniq}_$i.kml
 		kmlbase=$SERVER_NAME
 		[ $SERVER_NAME = zuidzee.knmi.nl -o $SERVER_NAME = bhw080.knmi.nl ] && kmlbase="$kmlbase/~oldenbor/climexp"
-		kmltitle=`echo "$title" | tr '\\\\' ' '`
+		kmltitle=`echo "$title" | tr '\\\\' ' ' | sed -e 's/</\&lt;/g' -e 's/>/\&gt;/g'`
 		cat > $kmlfile <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
