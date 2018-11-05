@@ -89,6 +89,7 @@ cat <<EOF
 <option value="1" $sel_annual>annual (Jan-Dec)</option>
 EOF
 if [ $NPERYEAR -gt 4 ]; then
+    echo "<option value=2 $sel_seasonal>biannual</option>"
     echo "<option value=4 $sel_seasonal>seasonal</option>"
 fi
 if [ $NPERYEAR -gt 12 ]; then
