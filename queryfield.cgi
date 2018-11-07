@@ -5391,4 +5391,7 @@ if [ "${FORM_field%20c3m}" != "${FORM_field}" -o "${FORM_field%sresa1b}" != "${F
 fi
 fi # rapid
 
+if [ "$NPERYEAR" = 12 -a "${file%_daily.nc}" != "$file" ]; then
+    NPERYEAR=366
+fi
 ###echo "file=$file"
