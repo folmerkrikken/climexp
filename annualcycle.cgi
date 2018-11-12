@@ -8,11 +8,11 @@ echo
 export DIR=`pwd`
 . ./getargs.cgi
 . ./queryfield.cgi
-. ./myvinkhead.cgi "Zonal mean" "$kindname $climfield" "nofollow,index"
+. ./myvinkhead.cgi "Annual cycle" "$kindname $climfield" "nofollow,index"
 
 infile=$file
 file=${infile%.nc}
-file=${file%.ctl}_zonalmean.nc
+file=${file%.ctl}_annualcycle.nc
 file=data/`basename $file`
 
 if [ ${infile%.ctl} != "$infile" ]; then
@@ -20,20 +20,15 @@ if [ ${infile%.ctl} != "$infile" ]; then
     bin/grads2nc $infile $ncfile
     infile=$ncfile
 fi
-if [ -n "$FORM_lon1" -a "$FORM_lon1" != 0 -o -n "$FORM_lon2" -a "$FORM_lon2" != 360 ]; then
-    echo "Sorry, cannot average over ${FORM_lon1}&deg;E to ${FORM_lon2}&deg; yet."
-    . ./myvinkfoot.cgi
-    exit
-fi
 
 iens=0
-echo "$EMAIL ($REMOTE_ADDR) cdo zonmean $infile $file" >> log/log
+echo "$EMAIL ($REMOTE_ADDR) cdo ydaymean $infile $file" >> log/log
 if [ -z "$ENSEMBLE" ]; then
     if [ -s $file -a $file -nt $infile ]; then
         echo "Using cached data<p>"
     else
-        echo "Computing zonal mean using <a href="https://code.zmaw.de/projects/cdo">cdo</a> ...<p>"
-        cdo zonmean $infile $file.$$
+        echo "Computing annual cycle using <a href="https://code.zmaw.de/projects/cdo">cdo</a> ...<p>"
+        cdo ydaymean $infile $file.$$
         mv $file.$$ $file
     fi
 else
@@ -41,13 +36,13 @@ else
     ens=00
     ensinfile=`echo $infile | sed -e "s:\+\+:$ens:g" -e "s:\%\%:$ens:g"`
     ensfile=`echo $file | sed -e "s:\+\+:$ens:g" -e "s:\%\%:$ens:g"`
-    echo "Computing zonal mean using <a href=\"https://code.zmaw.de/projects/cdo\" target=_new>cdo</a> ...<p>"
+    echo "Computing annual cycle using <a href=\"https://code.zmaw.de/projects/cdo\" target=_new>cdo</a> ...<p>"
     while [ -s $ensinfile ]; do
         if [ -s $ensfile -a $ensfile -nt $ensinfile ]; then
             echo "Using cached data<p>"
         else
-            echo "cdo zonmean $ensinfile $ensfile"
-            cdo zonmean $ensinfile $ensfile.$$
+            echo "cdo ydaymean $ensinfile $ensfile"
+            cdo ydaymean $ensinfile $ensfile.$$
             mv $ensfile.$$ $ensfile
             if [ ! -s $ensfile ]; then
                 echo "Something went wrong in the averaging routine."
@@ -68,7 +63,7 @@ fi
 
 eval `bin/getunits.sh $file`
 ENSEMBLE=""
-kindname="zonal mean $kindname"
+kindname="annual cycle $kindname"
 FORM_field=data/`basename $file .nc`.$EMAIL.info
 cat > $FORM_field <<EOF
 $file

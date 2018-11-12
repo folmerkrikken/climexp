@@ -266,6 +266,22 @@ Longitude:
 </div>
 EOF
 fi
+if [ $NPERYEAR -ge 360 ]; then
+    cat <<EOF
+<p><div class="formheader">Compute annual cycle</div>
+<div class='formbody'>
+<table style='width:443px' border='0' cellpadding='0' cellspacing='0'>
+<tr><td>
+<form action="annualcycle.cgi" method="POST">
+<input type="hidden" name="EMAIL" value="$EMAIL">
+<input type="hidden" name="field" value="$FORM_field">
+<input type="submit" class="formbutton" value="Average">
+</form>
+</td></tr>
+</table>
+</div>
+EOF
+fi
 
 extended=false
 # add more later, not foolproof but OK for the moment
