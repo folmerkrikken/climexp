@@ -28,7 +28,7 @@ cat << EOF
 <input type="radio" class="formradio" name="var" value="regr" $regr_checked>regression
 (<input type="radio" class="formradio" name="var" value="errorregr" $errorregr_checked>error)
 <input type="radio" class="formradio" name="var" value="regr1" $regr1_checked>reverse
-<!--<input type="radio" class="formradio" name="var" value="relregr" $relregr_checked>relative regression-->
+<input type="radio" class="formradio" name="var" value="relregr" $relregr_checked>relative regression
 <br>
 <input type="radio" class="formradio" name="var" value="composite" $composite_checked>composite
 (<input type="radio" class="formradio" name="var" value="errorcomp" $errorcomp_checked>error)
