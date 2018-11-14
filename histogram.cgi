@@ -75,7 +75,7 @@ else
 fi
 [ $TYPE != "set" -a $TYPE != "setmap" ] && listname="" # otherwise we get the wrong menu
 
-if [ "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
+if [ "$FORM_fit" = poisson -o  "$FORM_fit" = gamma -o "$FORM_fit" = gumbel -o "$FORM_fit" = gev -o "$FORM_fit" = gpd ]; then
 	echo "Using sub-optimal algorithms to compute the error estimates.  This may take a while.<p>"
     echo "<small>If it takes too long you can abort the job <a href=\"killit.cgi?id=$EMAIL&pid=$$\" target=\"_new\">here</a> (using the [back] button of the browser does <it>not</it> kill the histogram job)</small><p>"
     cat | sed -e "s:$DIR::g" > pid/$$.$EMAIL <<EOF
