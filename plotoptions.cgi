@@ -117,9 +117,7 @@ if [ -z "$tworegions" ]; then
 else
     echo '<tr valign="baseline"><td>Region first field:<td>'
 fi
-if [ -z "$NX" -a -z "$NY" -a -z "$NY" ]; then
-  eval `bin/getunits.sh $file | egrep v 'warning|error|getfileunits'`
-fi
+eval `bin/getunits.sh $file | egrep -v 'warning|error|getfileunits'`
 if [ -z "$NY" -o "${NY:-0}" -gt 1 ]; then
 cat <<EOF
 <input type="$number" step=any class="forminput" name="lat1" value="$FORM_lat1" $textsize4>&deg;N 
