@@ -4,6 +4,9 @@
 User-agent: * 
 Crawl-delay: 5
 
+# too active
+User-agent: MJ12bot
+Disallow: /
 # too active, and I do not have valuable links anyway
 User-agent: AhrefsBot
 Disallow: /
