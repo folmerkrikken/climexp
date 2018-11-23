@@ -3,6 +3,7 @@
 # print an ensemble of time series
 . ./init.cgi
 . ./getargs.cgi
+export DIR=`pwd`
 
 # no ensemble member selection yet
 
