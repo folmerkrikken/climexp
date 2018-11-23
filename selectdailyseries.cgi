@@ -163,7 +163,7 @@ At least <input type="$number" step=any class="forminput" name="dist" $textsize4
 <tr><th colspan="3"><a href="javascript:pop_page('help/dutchdailydata.shtml',284,450)"><img align="right" src="images/info-i.gif" alt="help" border="0">Dutch daily data</th></tr>
 <tr><td colspan="3">1901-now, <a
 href="http://www.knmi.nl/klimatologie/daggegevens/download.cgi?language=eng">KNMI Climatological Service</a>.  These series have not
-yet been homogenised. Homogenised daily precipitation series are available <a href="/PhomNL.cgi?id=$EMAIL">here</a> and monthly homogenised mean temperature series <a href="getdutchstations.cgi?id=$EMAIL&TYPE=temp_hom">here</a></td><tr>
+yet been homogenised. Homogenised daily precipitation series are available <a href="/PhomNL.cgi?id=$EMAIL">here</a> and monthly homogenised mean temperature series <a href="getdutchstations.cgi?id=$EMAIL&TYPE=temphom">here</a></td><tr>
 <tr><td>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=tg">mean temperature</a><br>
 <a href="getdutchstations.cgi?id=$EMAIL&TYPE=tn">minimum temperature</a><br>

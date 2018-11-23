@@ -446,7 +446,7 @@ Hadley Centre)</div>
 <tr><td>Netherlands<td><div class="kalelink"><a href="getindices.cgi?WMO=KNMIData/cnt_v11&STATION=CNT&TYPE=t&id=$EMAIL">Central Netherlands Temperature</a> (1906-now, KNMI) (<a href="getindices.cgi?WMO=KNMIData/cnt&STATION=CNT_v1.0&TYPE=t&id=$EMAIL">v1.0</a>)</div>
 <td><a href="http://www.knmi.nl/publications/fulltexts/CNT.pdf"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getdutchstations.cgi?id=$EMAIL&TYPE=temp_hom">Homogenised Dutch temperatures</a> (10 stations, 1906-now, KNMI)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getdutchstations.cgi?id=$EMAIL&TYPE=temphom">Homogenised Dutch temperatures</a> (10 stations, 1906-now, KNMI)</div>
 <td><a href="http://www.knmi.nl/publications/fulltexts/CNT.pdf"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=KNMIData/Tdebilt_hom&STATION=Tg_Debilt_homogenized&TYPE=t&id=$EMAIL">Homogenized monthly mean temperature in De Bilt</a> (1901-now, KNMI)</div>

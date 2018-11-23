@@ -3,7 +3,22 @@ WMO=$1
 outfile=$2
 TYPE=`basename $0`
 TYPE=${TYPE#getdutch}
-if [ ${TYPE#precip} = $TYPE ]; then
+if [ $TYPE = temphom ]; then
+    case $WMO in
+	240) homfile=temp_Schiphol_hom;;
+	260) homfile=temp_De_Bilt_hom;;
+	280) homfile=temp_Groningen_Eelde_hom;;
+	344) homfile=temp_Rotterdam_hom;;
+	370) homfile=temp_Eindhoven_hom;;
+	380) homfile=temp_Maastricht_Beek_hom;;
+	283) homfile=temp_Winterswijk_Hupsel_hom;;
+	350) homfile=temp_Oudenbosch_Gilze-Rijen_hom;;
+	375) homfile=temp_Gemert_Volkel_hom;;
+	275) homfile=temp_Deelen_hom;;
+	*) echo 'HELP! UNKNOWN STATION ' $station; exit -1;;
+    esac
+    infile=KNMIData/$homfile.dat
+elif [ ${TYPE#precip} = $TYPE ]; then
     infile=KNMIData/$TYPE$WMO.gz
 else
     infile=KNMIData/precip${WMO}${TYPE#precip}.gz

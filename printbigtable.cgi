@@ -20,6 +20,7 @@ else
         prog=${prog}_$FORM_extraargs
     fi
     table=data/`basename $FORM_listname .txt`_table.txt
+    echo `date` "$EMAIL ($REMOTE_ADDR) printbigtable file $FORM_listname $prog" >> log/log
     (./bin/printbigtable file $FORM_listname $prog > $table ) 2>&1
 fi
 echo "<p>The table is available <a href=\"$table\">here</a>"

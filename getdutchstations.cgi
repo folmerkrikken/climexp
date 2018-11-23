@@ -46,7 +46,7 @@ si) FORM_climate="circulation-independent_global_shortwave_radiation";;
 sr) FORM_climate="circulation-dependent_global_shortwave_radiation";;
 sd) FORM_climate="snow depth";;
 sdhom) FORM_climate="homogenised snow depth";;
-temp_hom) FORM_climate="homogenised_temperature";;
+temphom) FORM_climate="homogenised_temperature";;
 precipraw1910-2009) FORM_climate="raw precipitation";;
 preciphom1910) FORM_climate="homogenised precipitation";;
 precipraw1951-2009) FORM_climate="raw precipitation";;
@@ -62,7 +62,7 @@ TYPE=${TYPE%_land}
 prog="getdutch$TYPE"
 type=$TYPE
 NPERYEAR=366
-if [ "$TYPE" = sw -o "$TYPE" = si -o "$TYPE" = sr -o "$TYPE" = temp_hom ]; then
+if [ "$TYPE" = sw -o "$TYPE" = si -o "$TYPE" = sr -o "$TYPE" = temphom ]; then
   NPERYEAR=12
 fi
 format=new

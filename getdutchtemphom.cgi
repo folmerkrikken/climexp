@@ -13,22 +13,22 @@ NPERYEAR=12
     case $WMO in
 	240) name="Amsterdam Schiphol"
 	    homfile=temp_Schiphol_hom
-            lat="52.30"; lon="4.77"; lev=" -4.4";;
+        lat="52.30"; lon="4.77"; lev=" -4.4";;
 	260) name="De Bilt"
 	    homfile=temp_De_Bilt_hom
-            lat="52.10"; lon="5.18"; lev="  2.0";;
+        lat="52.10"; lon="5.18"; lev="  2.0";;
 	280) name="Groningen/Eelde"
 	    homfile=temp_Groningen_Eelde_hom
-            lat="53.13"; lon="6.58"; lev="  3.5";;
+        lat="53.13"; lon="6.58"; lev="  3.5";;
 	344) name="Rotterdam"
 	    homfile=temp_Rotterdam_hom
-            lat="51.95"; lon="4.45"; lev=" -4.8";;
+        lat="51.95"; lon="4.45"; lev=" -4.8";;
 	370) name="Eindhoven"
 	    homfile=temp_Eindhoven_hom
-            lat="51.45"; lon="5.42"; lev=" 22.4";;
+        lat="51.45"; lon="5.42"; lev=" 22.4";;
 	380) name="Maastricht/Beek"
 	    homfile=temp_Maastricht_Beek_hom
-            lat="50.92"; lon="5.78"; lev="114.0";;
+        lat="50.92"; lon="5.78"; lev="114.0";;
 	283) name="Winterswijk/Hupsel"
 	    homfile=temp_Winterswijk_Hupsel_hom
 	    lat="52.07";lon="6.65";lev="29.0";;
