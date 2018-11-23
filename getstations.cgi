@@ -22,7 +22,7 @@ if [ -z "$EMAIL" ]; then
    EMAIL=someone@somewhere
 fi
 if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
-    lwrite=flse # true
+    lwrite=false # true
 fi
 if [ $save_preferences = true -a $EMAIL != someone@somewhere ]; then
   if [ -n "$FORM_name" ]; then
@@ -259,6 +259,9 @@ EOF
   fi
 
   listname=data/list_${FORM_climate}_${FORM_lon1:-$FORM_lon}:${FORM_lon2}_${FORM_lat1}:${FORM_lat2:-$FORM_lat}_${FORM_min}_${FORM_sum}_${FORM_month}_${FORM_elevmin}:${FORM_elevmax}_${FORM_dist}_${FORM_name}.txt
+if [ -n "$FORM_yr1" -o -n "$FORM_yr2" ]; then
+    listname=${listname%.txt}_${FORM_yr1}:${FORM_yr2}.txt
+fi
   if [ "$lwrite" = true ]; then
     echo "<pre>"
     echo ./bin/$prog $fortargs
