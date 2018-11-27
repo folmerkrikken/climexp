@@ -16,7 +16,7 @@ do
   then
     file=data/$file
   else
-    file=`find atlas -name $file`
+    file=`find atlas/maps -name $file`
   fi
   if [ -s "$file"  -a "$file" != "data/randomimage.png" ]
   then
