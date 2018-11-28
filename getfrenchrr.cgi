@@ -1,1 +1,0 @@
-getfrench.cgi
