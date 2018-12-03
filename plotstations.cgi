@@ -15,7 +15,7 @@ if [ "$hiresmap" = true ]; then
 else
 	doublesize="x902 y697"
 fi
-grads=./bin/grads
+grads=grads
 config=`$grads -b -l -c quit| fgrep Config`
 gradsver=`echo $config | cut -f 2 -d ' '`
 if [ ${gradsver#v2.1} != $gradsver ]; then

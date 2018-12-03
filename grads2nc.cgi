@@ -42,44 +42,10 @@ grads2nc)
     $DIR/bin/grads2nc $tmpfile.ctl $outfile > /tmp/grads2nc$$.log 2>&1
   fi
   ;;
-grads2hdf)
-  mime="x-hdf"
-  outfile=$DIR/data/$tmpfile.hdf
-  if [ ! -f $outfile ]; then  
-    export GADDIR=$DIR/grads
-    export GASCRP=$GADDIR
-    export UDUNITS_PATH=$GADDIR/udunits.dat
-    export HOME=/tmp
-    $DIR/bin/gradshdf -bl <<EOF >> /tmp/grads2nc$$.log 2>&1
-run lats4d.gs -q -i $tmpfile -o $tmpfile
-EOF
-    mv $tmpfile.nc $outfile
-    ###echo 'compressing <p>'
-    ###gzip $outfile
-  fi
-  ;;
-grads2hdf5)
-  mime="x-hdf5"
-  outfile=$DIR/data/$tmpfile.h5
-  if [ ! -f $outfile ]; then
-    export GADDIR=$DIR/grads
-    export GASCRP=$GADDIR
-    export HOME=/tmp
-    $DIR/bin/gradshdf -bl <<EOF >> /tmp/grads2nc$$.log 2>&1
-run lats4d.gs -q -i $tmpfile -o $tmpfile
-EOF
-    mv $tmpfile.nc $tmpfile.hdf
-    $DIR/bin/h4toh5 $tmpfile.hdf
-    rm $tmpfile.hdf
-    mv $tmpfile.h5 $outfile
-    ###echo 'compressing <p>'
-    ###gzip $outfile
-  fi
-  ;;
 esac
 
 if [ ! -f $outfile ]; then
-  echo 'Something went wrong in the netCDF/HDF/HDF5 generation routine.  Please send the following cryptic output to <a href="mailto:oldenborgh@knmi.nl">me</a> and I will try to fix it.<pre>'
+  echo 'Something went wrong in the netCDF generation routine.  Please send the following cryptic output to <a href="mailto:oldenborgh@knmi.nl">me</a> and I will try to fix it.<pre>'
   cat /tmp/grads2nc$$.log
   de $DIR
   . ./myvinkfoot.cgi

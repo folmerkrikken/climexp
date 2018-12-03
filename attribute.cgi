@@ -313,7 +313,7 @@ set output "$root.eps"
 replot
 quit
 EOF
-	./bin/gnuplot < $root.gnuplot
+	gnuplot < $root.gnuplot
 fi
 
 if [ $FORM_plot = "gumbel" -o $FORM_plot = "log" -o $FORM_plot = "sqrtlog" ]; then
@@ -423,7 +423,7 @@ EOF
 		    cat ${root}_obsplot.gnuplot
 		    echo '</pre>'
 	    fi
-    	./bin/gnuplot < ${root}_obsplot.gnuplot 2>&1
+    	gnuplot < ${root}_obsplot.gnuplot 2>&1
 	    if [ ! -s ${root}_obsplot.png ]; then
 		    echo "Something went wrong while making the plot, cannot find ${root}_obsplot.png."
 		    echo "The plot command are <a href=\"${root}_obsplot.gnuplot\">here</a>."
@@ -513,7 +513,7 @@ EOF
 		cat $root.gnuplot
 		echo '</pre>'
 	fi
-	./bin/gnuplot < $root.gnuplot 2>&1 | fgrep -v "'unknown' terminal" | fgrep -v 'select a terminal' \
+	gnuplot < $root.gnuplot 2>&1 | fgrep -v "'unknown' terminal" | fgrep -v 'select a terminal' \
 	    | fgrep -v Skipping
 	# the filtering is necessary since gnuplot 5, I could not yet find another way 
 	# to plot nowhere
@@ -591,7 +591,7 @@ if [ "$lwrite" = true ]; then
     cat ${root}_cdf.gnuplot
     echo '</pre>'
 fi
-./bin/gnuplot < ${root}_cdf.gnuplot 2>&1
+gnuplot < ${root}_cdf.gnuplot 2>&1
 if [ ! -s ${root}_cdf.png ]; then
     echo "Something went wrong while making the plot."
     echo "The plot commands are <a href=\"${root}_cdf.gnuplot\">here</a>."
@@ -639,7 +639,7 @@ if [ "$lwrite" = true ]; then
     cat /tmp/cdfdiff$$.gnuplot
     echo '</pre>'
 fi
-./bin/gnuplot < ${root}_cdfdiff.gnuplot 2>&1
+gnuplot < ${root}_cdfdiff.gnuplot 2>&1
 if [ ! -s ${root}_cdfdiff.png ]; then
     echo "Something went wrong while making the plot."
     echo "The plot commands are <a href=\"${root}_cdfdiff.gnuplot\">here</a>."
@@ -678,7 +678,7 @@ if [ "$lwrite" = true ]; then
     cat /tmp/far$$.gnuplot
     echo '</pre>'
 fi
-./bin/gnuplot < ${root}_far.gnuplot 2>&1
+gnuplot < ${root}_far.gnuplot 2>&1
 if [ ! -s ${root}_far.png ]; then
     echo "Something went wrong while making the plot."
     echo "The plot commands are <a href=\"${root}_far.gnuplot\">here</a>."

@@ -68,7 +68,7 @@ if [ -z "$init_done" ]; then
     }
     # set a standard TTF font for gnuplot.   GNUPLOT_DEFAULT_GDFONT is not used
     # if all is well, but is there as a fall-back.
-    export gnuplot_version=`./bin/gnuplot --version`
+    export gnuplot_version=`gnuplot --version`
     if [ "${gnuplot_version#gnuplot 5}" != "$gnuplot_version" ]; then
         export gnuplot_init="set colors classic"
         setxzeroaxis="" # bug in gnuplot 5.0 patchlevel 0

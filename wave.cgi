@@ -70,7 +70,7 @@ fi
 ###echo ./bin/wave $corrargs $root.ctl
 (./bin/wave $corrargs $root.ctl > $root.log ) 2>&1
 
-./bin/gnuplot <<EOF
+gnuplot <<EOF
 $gnuplot_init
 set term png $gnuplot_png_font_hires
 set size 0.5,0.5
@@ -196,7 +196,7 @@ if [ "$hiresmap" = true ]; then
 else
 	doublesize="x902 y697"
 fi
-grads=$DIR/bin/grads
+grads=grads
 config=`$grads -b -l -c quit| fgrep Config`
 c=`echo $config | fgrep -c v2.0`
 if [ $c -gt 0 ]; then

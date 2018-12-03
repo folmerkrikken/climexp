@@ -165,7 +165,7 @@ if [ -n "$FORM_runcorr" -a -n "$FORM_runwindow" ]; then
   else
     linetitle=$FORM_runvar
   fi
-  ./bin/gnuplot <<EOF
+  gnuplot <<EOF
 $gnuplot_init
 set size 0.7,0.5
 set zeroaxis
@@ -332,7 +332,7 @@ if [ -z "$tmp" ]; then
           fi
 	fi
 
-        ./bin/gnuplot << EOF
+        gnuplot << EOF
 $gnuplot_init
 set size 0.7,1
 set zeroaxis
@@ -486,7 +486,7 @@ EOF
     fi
     echo "<pre>"
 ###    cat <<EOF
-    ./bin/gnuplot << EOF 2>&1 | sed -e '/^ *$/d' -e '/====/d' | tail -$taillines
+    gnuplot << EOF 2>&1 | sed -e '/^ *$/d' -e '/====/d' | tail -$taillines
 $gnuplot_init
 set size 0.7,0.93
 set size square
@@ -521,7 +521,7 @@ EOF
     echo "</ol><p>Therefore, use with care."
     echo "<pre>"
     ./bin/getchance : 3 $DIR/data/$TYPE$WMO${FORM_num}.dump$ext1
-    ./bin/gnuplot << EOF
+    gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.5
 $xrange
@@ -644,7 +644,7 @@ else
 	    corr2='using 2:10'
 	    corr3='using 2:14'
 	fi
-        ./bin/gnuplot << EOF
+        gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.5
 set zeroaxis
@@ -664,7 +664,7 @@ set output "$corrroot.png"
 replot
 EOF
       else
-        ./bin/gnuplot << EOF
+        gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.5
 $xrange

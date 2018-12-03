@@ -328,7 +328,7 @@ if [ -s $firstfile ]; then
     name_=`echo $NAME | tr '_' ' '`
     station_=`echo $station | tr '_' ' '`
     title="$name_ $station_ ($wmo_)"
-    ./bin/gnuplot << EOF
+    gnuplot << EOF
 $gnuplot_init
 set xzeroaxis
 set size .7057,.4

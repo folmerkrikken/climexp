@@ -227,7 +227,7 @@ if [ -n "$myprog" ]; then
     fi
     ($myprog > $txtfile) 2>&1
     area=`tail -1 $txtfile | cut -b 3-`
-    ./bin/gnuplot <<EOF
+    gnuplot <<EOF
 $gnuplot_init
 set size 0.6
 set size square

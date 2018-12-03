@@ -228,7 +228,7 @@ set output "$root.eps"
 replot
 quit
 EOF
-	./bin/gnuplot $root.gnuplot
+	gnuplot $root.gnuplot
 
 fi
 
@@ -276,7 +276,7 @@ set output "${root}.eps"
 replot
 quit
 EOF
-	./bin/gnuplot $root.gnuplot
+	gnuplot $root.gnuplot
 
 fi
 
@@ -367,7 +367,7 @@ EOF
 		cat $root.gnuplot
 		echo '</pre>'
 	fi
-	./bin/gnuplot < $root.gnuplot 2>&1
+	gnuplot < $root.gnuplot 2>&1
 	if [ ! -s ${root}.png ]; then
 		echo "Something went wrong while making the plot."
 		echo "The plot command are <a href=\"$root.gnuplot\">here</a>."
@@ -420,7 +420,7 @@ EOF
 			cat $root.gnuplot
 			echo '</pre>'
 		fi
-		./bin/gnuplot < $root.gnuplot 2>&1
+		gnuplot < $root.gnuplot 2>&1
 		if [ ! -s ${root}.png ]; then
 			echo "Something went wrong while making the plot."
 			echo "The plot command are <a href=\"$root.gnuplot\">here</a>."

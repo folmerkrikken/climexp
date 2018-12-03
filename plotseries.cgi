@@ -54,9 +54,9 @@ do
     
     case $KIND in
         month)
-        version=`./bin/gnuplot -V | cut -d ' ' -f 2 | tr -d '.'`
+        version=`gnuplot -V | cut -d ' ' -f 2 | tr -d '.'`
         if [ $version -le 40 ]; then # this works in old gnuplot
-            ./bin/gnuplot << EOF
+            gnuplot << EOF
 set size 0.7,2.4
 set origin 0,0
 set datafile missing "-999.900"
@@ -120,7 +120,7 @@ set nomultiplot
 quit
 EOF
         else # more modern version of gnuplot
-            ./bin/gnuplot << EOF
+            gnuplot << EOF
 $gnuplot_init
 set origin 0,0
 set datafile missing "-999.900"
@@ -186,7 +186,7 @@ EOF
         fi
             ;;
         season)
-            ./bin/gnuplot << EOF
+            gnuplot << EOF
 $gnuplot_init
 set size 0.7,1
 set origin 0,0
@@ -224,7 +224,7 @@ quit
 EOF
             ;;
         half)
-            ./bin/gnuplot << EOF
+            gnuplot << EOF
 $gnuplot_init
 set size 0.7,1
 set datafile missing "-999.900"
@@ -249,7 +249,7 @@ quit
 EOF
             ;;
         yr)
-            ./bin/gnuplot << EOF
+            gnuplot << EOF
 $gnuplot_init
 set datafile missing "-999.900"
 set zero 1e-40
@@ -265,7 +265,7 @@ quit
 EOF
             ;;
         yr0)
-            ./bin/gnuplot << EOF
+            gnuplot << EOF
 $gnuplot_init
 set datafile missing "-999.900"
 set zero 1e-40
@@ -281,7 +281,7 @@ quit
 EOF
             ;;
         yr1)
-            ./bin/gnuplot << EOF
+            gnuplot << EOF
 $gnuplot_init
 set datafile missing "-999.900"
 set zero 1e-40

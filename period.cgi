@@ -107,7 +107,7 @@ if [ $FORM_which = period ]; then
     title=`echo $title | tr '_' ' '`
     timeunits=`fgrep 'frequency in [' $root.txt | sed -e 's/^.*\[//' -e 's/\^..\].*//'`
     xlabel="period [$timeunits]"
-    ./bin/gnuplot << EOF
+    gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.4
 set logscale x
@@ -154,7 +154,7 @@ else
   title=`echo $title | tr '_' ' '`
   units=`fgrep '# lag in' $root.txt | cut -b 10-11`
   xlabel="lag [${units}]"
-  ./bin/gnuplot << EOF
+  gnuplot << EOF
 $gnuplot_init
 set size 0.7,0.4
 set zeroaxis

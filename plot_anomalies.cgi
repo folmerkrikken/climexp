@@ -85,7 +85,7 @@ set xtics add ("Jan" "20000115", "Feb" "20000214", "Mar" "20000315", "Apr" "2000
 <a href=\"${base}_yr.txt\">raw data</a>$bijschrifteind."
 ylabel=`echo "$VAR $plotunits" | tr '_' ' '`
         if [ \( ! -s ${base}_$suffix.png \) -o ${base}_$suffix.png -ot ${base}_yr.plt ]; then
-	        ./bin/gnuplot << EOF
+	        gnuplot << EOF
 $gnuplot_init
 ###set title "$title"
 set datafile missing "0.300000E+34"
@@ -148,7 +148,7 @@ if [ $doit = true -a "${WMO#corr}" = "$WMO" -a "${WMO#sign}" = "$WMO" ]; then
             fgrep -v "# repeat last"  ./${base}a.plt > ./${base}a.txt
         fi
 	    ###title="anomalies of $station $NAME$period"
-        ./bin/gnuplot << EOF
+        gnuplot << EOF
 $gnuplot_init
 set size .7057,.4
 ###set title "$title"

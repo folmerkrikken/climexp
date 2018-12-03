@@ -155,7 +155,7 @@ else
     fi
 
     wmo_=`echo "$WMO" | tr '_' ' '`
-    ./bin/gnuplot << EOF
+    gnuplot << EOF
 $gnuplot_init
 set size 0.8,0.6
 set datafile missing "-999.900"

@@ -112,7 +112,7 @@ else
             fi
             title="$indexmonth $title"
         fi
-        ./bin/gnuplot << EOF
+        gnuplot << EOF
 $gnuplot_init
 set size .7057,.4
 set ylabel "fraction missing [1]"

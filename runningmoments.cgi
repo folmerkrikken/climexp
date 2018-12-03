@@ -132,7 +132,7 @@ if [ -n "$FORM_detrend" ]; then
 fi
 title=`echo $title | tr '_' ' '`
 
-./bin/gnuplot << EOF
+gnuplot << EOF
 $gnuplot_init
 set size 0.7,.4
 set term png $gnuplot_png_font_hires
