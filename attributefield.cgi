@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 . ./myvinkhead.cgi "Trends in extremes" "$kindname $climfield" "noindex,nofollow"
 

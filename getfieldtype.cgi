@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ "$VAR" = "temp" -a "$kindname" = "SODA  " ]; then
   VAR=sst
 fi

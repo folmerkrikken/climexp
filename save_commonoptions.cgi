@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # save all the commonn options in a preferences file
 
 if [ -n "$EMAIL" -a "$EMAIL" != "someone@somewhere" ]; then

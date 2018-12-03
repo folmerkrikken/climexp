@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # subtract two (normalized) time series
 #

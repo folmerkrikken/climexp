@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 export PATH=$PATH:/usr/local/bin
 # average an ensemble of fields

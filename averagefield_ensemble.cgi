@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 # average an ensemble of fields
 echo "Content-type: text/html"

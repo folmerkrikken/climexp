@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ "$NPERYEAR" = 366 ]; then
   timescale="daily "
   month=day

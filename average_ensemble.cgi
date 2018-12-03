@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # average an ensemble of time series
 

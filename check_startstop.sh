@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 for file in data/regionver*.startstop
 do
   yr1=`head -1 $file`

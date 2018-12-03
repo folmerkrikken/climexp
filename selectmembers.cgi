@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # select an ensemble member from an ensemble of time series
 

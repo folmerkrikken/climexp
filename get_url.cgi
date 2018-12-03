@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # I should not include this as argument
 case $file in
     IPCCData*) url="http://www-pcmdi.llnl.gov/ipcc/about_ipcc.php";;

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ -z "$NAME" ] && NAME=$FORM_NAME
 name=`echo $NAME | tr ' +' '_%'`
 wmo=` echo $WMO | tr ' +' '_%'`

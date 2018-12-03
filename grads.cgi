@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 # to be sourced from various scripts.
 if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then

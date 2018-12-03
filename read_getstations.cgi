@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be sourced from other scripts
 # read getstation defaults from file and sets the appropriate variables
 # for switches

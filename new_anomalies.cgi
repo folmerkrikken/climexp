@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # select a period over which to compute the climatology
 DIR=`pwd`

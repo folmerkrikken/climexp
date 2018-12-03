@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # make a list of years in a select statement
 # expects variable $yrbeg and $yrend to be set
 [ -z "$yrbeg" ] && yrbeg=1958

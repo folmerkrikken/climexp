@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be called from other scripts
 # we can finally figure out where the data is ...
 case ${FORM_var:-choose} in

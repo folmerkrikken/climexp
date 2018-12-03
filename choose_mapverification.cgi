@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 case "$FORM_verif" in
 mapcorr)        checked_mapcorr="checked";;
 mapdiscmean)    checked_mapdiscmean="checked";;

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be sourced from other scripts
 ###echo "<div class=\"alineakop\">Annual cycle and anomalies</div>"
 if [ -z "$EMAIL" ]; then

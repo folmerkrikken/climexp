@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # set the time-independent part of the title
 case "${NPERYEAR:-12}" in
 -1) timescale="year";timely="annual (Jul-Jun)";;

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # plot the last N days of a dailytime series, inspired by the CPC/NCEP graphs at 
 # http://www.cpc.ncep.noaa.gov/products/global_monitoring/temperature/global_temp_accum.shtml

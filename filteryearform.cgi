@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ $EMAIL != someone@somewhere ]; then
    def=./prefs/$EMAIL.filteryearoptions
    if [ -f $def ]; then

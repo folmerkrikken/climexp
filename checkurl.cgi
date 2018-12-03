@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # check and santize the variable FORM_url
 
 if [ ${FORM_url#http://} = ${FORM_url} ]; then

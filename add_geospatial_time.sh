@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ###et -x
 # add geospatial* metadata variables to netcdf metadata
 [ -z "$file" ] && echo "$0: error: set variable file" && exit -1

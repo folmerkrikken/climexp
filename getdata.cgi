@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 # should be sourced from one of the get* scripts
 lwrite=false

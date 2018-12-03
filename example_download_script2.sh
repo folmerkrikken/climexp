@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 email=insert_your_Climate_Explorer_email_address_here
 lat1=-85
 lat2=85

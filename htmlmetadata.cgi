@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # get metadata from HTML view of opendap server
 # in particluar from the DMI ENSEMBLES RCM archive
 # may not waork for other archives...

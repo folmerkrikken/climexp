@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ $EMAIL != someone@somewhere ]; then
   if [ -f ./prefs/$EMAIL.commonoptions.$NPERYEAR ]; then
     eval `egrep '^FORM_[a-z0-9]*=[a-zA-Z]*[-+0-9.:]*;$' ./prefs/$EMAIL.commonoptions.$NPERYEAR`

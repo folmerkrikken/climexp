@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ "$EMAIL" = someone@somehere ] && EMAIL=someone@somewhere
 # to be sourced from other scripts
 # checks whether the UA is a search engine, if so set to anonymous

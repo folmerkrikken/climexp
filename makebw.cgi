@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 . ./getargs.cgi
 # make sure the file is in data/...

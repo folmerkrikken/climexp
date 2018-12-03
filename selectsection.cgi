@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 export PATH=./bin:/usr/local/bin:/sw/bin:/usr/local/free/installed/nco-3.9.1/bin:/usr/local/free/bin:$PATH
 

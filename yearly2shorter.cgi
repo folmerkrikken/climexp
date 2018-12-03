@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # make a time series with a shorter time scale than the original
 
 export DIR=`pwd`

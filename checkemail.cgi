@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # redefine anonymous
 [ -z "$id" ] && id=$EMAIL
 [ -z "$EMAIL" ] && EMAIL=$id

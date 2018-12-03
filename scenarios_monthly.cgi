@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 export DIR=`pwd`
 . ./getargs.cgi

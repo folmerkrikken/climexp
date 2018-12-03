@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 if [ "$FORM_type" != attribute ]; then
     export DIR=`pwd`

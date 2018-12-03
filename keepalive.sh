@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 sleep 30 &
 c=1
 while [ $c -gt 0 ]

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ "$FORM_month" = "-1" ]; then
   corrargs="$corrargs"
   FORM_month=0

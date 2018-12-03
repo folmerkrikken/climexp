@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -z "$myvinkhead" ]; then
     echo "Content-Type:text/html"
     . ./expires.cgi

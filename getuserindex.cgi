@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 n=0
 [ -n "$FORM_soi" ] && corrargs="$corrargs soi"        && let n=n+1 && index="$index SOI"
 [ -n "$FORM_nino12" ] && corrargs="$corrargs nino12"  && let n=n+1 && index="$index NINO12"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ -z "$prog" ] && prog=$FORM_prog
 [ -z "$shortclinate" ] && shortclimate=$FORM_shortclimate
 [ -z "$shortclimate" ] && shortclimate=$FORM_climate

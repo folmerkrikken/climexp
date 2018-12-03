@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -n "$describefield" ]; then
 # the quotes are essential to keep lines apart
   line=`echo "$describefield"  | fgrep -i available`

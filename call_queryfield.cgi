@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # script to be able to use queryfield.cgi from python
 
 . ./queryfield.cgi

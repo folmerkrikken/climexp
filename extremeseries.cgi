@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # make a time series using the ETCCDI/ECA&D extreme indiex routines
 # These may be subtly different from the ones I have in daily2longer.
 

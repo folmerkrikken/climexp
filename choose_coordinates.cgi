@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 def=./prefs/$EMAIL.coordinates
 if [ -s $def ]; then

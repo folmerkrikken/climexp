@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 # plot a 3D view of a correlation coefficient with both month and lag varying
 

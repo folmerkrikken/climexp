@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # select a period from a data file
 

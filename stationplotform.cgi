@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
 # read defaults if they exist, they are in the commonoptions file

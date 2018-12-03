@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -z "$alreadycalledgetargs" ]; then
     export alreadycalledgetargs=true
     eval `./bin/proccgi "$@"`

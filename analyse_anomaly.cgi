@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # wrapper for getdata.cgi to analyse anomalies as a time series
 export DIR=`pwd`
 

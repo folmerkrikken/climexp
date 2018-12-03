@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # print an ensemble of time series
 . ./init.cgi

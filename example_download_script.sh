@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 email=insert_your_Climate_Explorer_email_address_here
 lats="latitudes where you want the data"
 lons="longitudes where you want the data"

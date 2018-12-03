@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo '<tr>'
 echo '<th colspan="11"><a href="http://www.knmi.nl/scatterometer/">ERS reprocessed scattermometer</a> 0.5&deg;&times;0.5&deg;</th>'
 

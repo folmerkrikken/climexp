@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # adds the metadata from the netcdf or ascii file to the graphics file for complete traceability.
 # accepts PNG, EPS and PDF planned
 # expects datfile, pngfile set in calling routine

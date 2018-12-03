@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ "$NPERYEAR" = 366 -o "$NPERYEAR" = 365 -o "$NPERYEAR" = 360 ]; then
   eval `$DIR/bin/month2string "$FORM_month" "${sumstring}" "$FORM_lag" "$FORM_operation" $FORM_fix | sed -e 's/monthly/daily/g'`
 elif [ "$NPERYEAR" = 12 ]; then

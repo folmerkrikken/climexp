@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ncatted -O \
 -a long_name,lon,a,c,"Longitude" \
 -a units,lon,a,c,"degrees_east" \

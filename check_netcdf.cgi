@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # check whether $file really is a netcdf file
 
 . ./init.cgi

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # select part of a time series based on the values of another one
 

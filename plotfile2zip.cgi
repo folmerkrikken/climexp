@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # extract the raw data used in a gnuplot plotfile and zips it
 . ./getargs.cgi
 

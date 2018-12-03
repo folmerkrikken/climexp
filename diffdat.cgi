@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Take time derivative of a time series
 . ./init.cgi

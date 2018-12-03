@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 email=insert_your_Climate_Explorer_email_address_here
 scenario=rcp85
 countries="countries you want to retrieve" # eg "France_metropolitan Faroe_Is. US_New_Hampshire", as in get_+index.cgi

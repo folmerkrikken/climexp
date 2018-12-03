@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # add a max-age HTTP/1.1 header for easier control, also works on 
 # machine where convdate is absent
 ###echo "Cache-Control: max-age=86400"

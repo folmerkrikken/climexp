@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be sourced from other scripts
 
 # retrieve last values as defaults

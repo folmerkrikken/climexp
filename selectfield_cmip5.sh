@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # constructs automatically but off-line the HTML file for the CMIP5 ensemble field selection.
 timescale="$1"
 if [ -z "$timescale" ]; then

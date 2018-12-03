@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # across all time scales, so without suffix NPERYEAR
 echo "$FORM_timeseries" | head -1 > ./prefs/$EMAIL.series
 if [ -z "$FORM_plot" ]; then

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # sourced from other scripts, just for nice colouring in emacs...
 #
 # show a selection of time series with this e-mail address and nperyear

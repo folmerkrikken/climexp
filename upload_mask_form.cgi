@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -z "$myvinkhead" ]; then
   . ./httpheaders_nocache.cgi
   # check if a search engine, if so set user to anonymous

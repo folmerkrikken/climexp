@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ "$FORM_EMAIL" != someone@somewhere ]; then
 # remember plotoptions for next plot
 ###echo "saving preferences in ./prefs/$FORM_EMAIL.plotoptions"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ -z "$EOFID" ] && EOFID=$2
 if [ -z "$EOFID" ]
 then

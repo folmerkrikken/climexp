@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ -z "$file" ] && echo "$0: error: set variable file" && exit -1
 [ ! -s "$file" ] && echo "$0: error: cannot find file $file" && exit -1
 . $HOME/climexp/add_geospatial_time.sh

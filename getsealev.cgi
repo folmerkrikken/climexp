@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 . ./getargs.cgi
 WMO="$FORM_WMO"

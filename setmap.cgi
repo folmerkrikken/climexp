@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # sets correct map for GrADS, called from grads.cgi and plotstations.cgi
 #
 if [ -n "$FORM_lat1" -a -n "$FORM_lat2" ]; then

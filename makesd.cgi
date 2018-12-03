@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 export PATH=$PATH:/sw/bin # for nco, ncdump/ncgen on Mac
 # script to compute estimates of the sd of N-yr means based on Jan's Atlas script in NCL
 length_of_period="$1"

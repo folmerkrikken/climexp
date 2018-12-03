@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 export PATH=$PATH:/sw/bin # for nco, ncdump/ncgen on Mac
 # script to combine estimates of the sd of N-yr means to get the estimate for unequal intervals
 sd1file="$1"

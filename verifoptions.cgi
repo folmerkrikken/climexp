@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # for pretty colours in emacs...
 
 if [ -z "$NPERYEAR" ]; then

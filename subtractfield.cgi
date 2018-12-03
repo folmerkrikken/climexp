@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # subtract the influence of an index on a field, returning the new field
 # Geert Jan van Oldenborgh, KNMI, 29-dec-2004
 lwrite=false

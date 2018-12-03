@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $NPERYEAR = 12 ]; then
   if [ -z "$NO_OBS" ]; then

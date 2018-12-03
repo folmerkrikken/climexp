@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./nosearchenginewithheader.cgi
 
 PATH=$PATH:/usr/local/free/bin

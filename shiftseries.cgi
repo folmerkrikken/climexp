@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Shift a time series in time
 . ./init.cgi

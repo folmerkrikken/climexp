@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # form with options for extremeseries.cgi
 
 if [ "$EMAIL" != someone@somewhere ]; then

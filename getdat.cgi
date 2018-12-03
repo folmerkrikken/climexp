@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./nosearchenginewithheader.cgi
 echo "Content-Type: data"
 echo "Content-Encoding: x-gzip"

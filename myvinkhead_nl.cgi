@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # generates the vink headers with a user-defied title and subtitle
 if [ -z "$myvinkhead" ]; then
 myvinkhead="done"

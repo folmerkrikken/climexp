@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # various environment variables that come in useful later on
 # plus a check on the state of the server
 if [ -z "$init_done" ]; then
@@ -40,7 +40,7 @@ if [ -z "$init_done" ]; then
         fi
     fi
 
-   init_done=done
+    init_done=done
 
     function getpngwidth {
         use_exact_pixels=false

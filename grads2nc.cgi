@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 . ./nosearchenginewithheader.cgi
 echo "Content-type: text/html"

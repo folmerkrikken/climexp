@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -z "$EOFID" ]
 then
   echo '$0: cannot find EOFID'

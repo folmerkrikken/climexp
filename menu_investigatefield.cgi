@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -n "$EMAIL" ]; then
 if [ -n "$field2" ]; then
 echo "<div class=\"menukopje\">Investigate $kindname $climfield</div>"

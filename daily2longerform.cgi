@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # form with options for daily2longer.cgi
 
 if [ "$EMAIL" != someone@somewhere ]; then

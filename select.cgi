@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 if [ -z "$myvinkhead" ]; then
     . ./httpheaders_nocache.cgi

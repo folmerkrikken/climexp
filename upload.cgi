@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 scriptname=`basename $0 .cgi`
 if [ $scriptname = upload ]; then

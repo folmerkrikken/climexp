@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -n "$FORM_minfac" ]; then
   corrargs="$corrargs minfac $FORM_minfac"
 fi

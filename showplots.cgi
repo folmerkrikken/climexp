@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # show the plots produced by scripts above.
 
 for ext in "$stack" ".trc"

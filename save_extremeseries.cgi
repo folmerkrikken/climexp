@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -z "$NPERYEAR" ]; then
     NPERYEAR=$FORM_NPERYEAR
 fi

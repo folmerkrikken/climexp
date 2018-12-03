@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be called from other scripts
 # we can finally figure out where the data is ...
 if [ "$FORM_id" != cerfacs-fd1 ]; then

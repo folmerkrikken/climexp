@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be sourced from other scripts
 NPERYEAR=12
 timescale=monthly

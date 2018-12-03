@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 cat selectfield_rea1.html | tr ',' '\n' | sed -e 's/^.*value=\"//' -e 's/\".*$//' > /tmp/aap
 for name in `cat /tmp/aap`
 do

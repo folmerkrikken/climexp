@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cat <<EOF
 <div class="formheader">Time series to verify against</div>

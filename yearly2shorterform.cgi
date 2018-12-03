@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # form with options for yearly2shorter.cgi
 
 if [ "$TYPE" = "p" ]; then

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # select a member of an ensemble
 # Geert Jan van Oldenborgh, KNMI, 13-jan-2005
 

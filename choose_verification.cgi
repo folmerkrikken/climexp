@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 case "$FORM_verif" in
 likelihood)       checked_likelihood="checked";;
 deterministic)    checked_deterministic="checked";;

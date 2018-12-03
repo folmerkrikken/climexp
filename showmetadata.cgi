@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # show some metadata about the file from the netcdf global attributes
 echo "Content-Type: text/html"
 echo

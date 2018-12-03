@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./searchengine.cgi
 if [ -n "$ROBOT" ]
 then

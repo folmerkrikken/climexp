@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # usage: $0 < file_with_lats_lons.txt
 email=insert_your_Climate_Explorer_email_address_here
 vars="rr tx tg tn"

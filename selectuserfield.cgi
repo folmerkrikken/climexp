@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo '<p><b><a name="field_user">user-defined</a>: </b><br>'
 

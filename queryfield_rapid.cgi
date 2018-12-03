@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be sourced from various scripts
 # my database of field info, listing GrADS .ctl file or netCDF file, 
 # full name, and special mappings or colour properties.

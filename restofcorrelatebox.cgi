@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # to be source from correlatebox.cgi
 ###kop=`echo "${htmltitle}" | sed -e 's/\\.*$//'`
 ###subkop=`echo "${htmltitle}" | sed -e 's/^.*\\//'`

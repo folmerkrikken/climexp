@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # generates the rijkshuisstijl headers with a user-defied title and subtitle
 if [ -z "$myrijkshead" ]; then
 myrijkshead="done"

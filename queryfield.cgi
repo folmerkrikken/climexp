@@ -846,6 +846,7 @@ set lat 25 80';NPERYEAR=1;;
 ndvi) file=UMDData/gimms_ndvi_mo.nc;kindname="GIMMS";climfield="ndvi";;
 ndvi_old) file=NASAData/ndvi.ctl;kindname="pathfinder";climfield="vegetation";;
 merra_refet) file=UCSBData/ETos_p05.monthly_01.nc;kindname="MERRA/ASCE";climfield="RefET";;
+fldas_sm0_10) file=FLDASData/FLDAS_NOAH01_C_GL_M.A1982_2018_sm00_10.nc;kindname="FLDAS";climfield="soil moisture 0-10cm";;
 pdsi-old) file=UCARData/pdsi.ctl;kindname="UCAR";climfield="drought index";;
 pdsi) file=UCARData/pdsi.mon.mean.nc;kindname="UCAR";climfield="PDSI";;
 sc_pdsi) file=UCARData/pdsisc.monthly.maps.1850-now.fawc=1.r2.5x2.5.ipe=2.nc;kindname="UCAR";climfield="scPDSI";;

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ $EMAIL != someone@somewhere ]; then
    def=./prefs/$EMAIL.filtermonthoptions
    if [ -f $def ]; then

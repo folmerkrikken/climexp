@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # is called from verification.cgi and regionverification.cgi
 # or directly from this page
 . ./init.cgi

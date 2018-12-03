@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./init.cgi
 # to be sourced from other scripts
 # common options for lots of plots

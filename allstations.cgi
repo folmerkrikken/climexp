@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set up the information that getstations.cgi expects
 

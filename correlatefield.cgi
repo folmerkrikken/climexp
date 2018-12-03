@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 lwrite=false
 if [ $EMAIL = oldenborgh@knmi.nl ]; then

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #if [ "$ENSEMBLE" = true ]; then
 case $FORM_threshold_type in
 FALSE) checked_threshold_type_false="selected";;

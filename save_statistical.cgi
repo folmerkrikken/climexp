@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
   def=./prefs/$EMAIL.statistical.$NPERYEAR
   cat > $def << EOF

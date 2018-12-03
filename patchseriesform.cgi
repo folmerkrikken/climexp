@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . ./httpheaders_nocache.cgi
 . ./getargs.cgi
 TYPE="$FORM_TYPE"

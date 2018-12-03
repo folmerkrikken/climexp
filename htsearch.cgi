@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # according to the manual, setting the environment variable should work
 # but it does not for me.  The third method in the FAQ does work
 . ./getargs.cgi
