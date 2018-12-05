@@ -150,7 +150,8 @@ else
     if [ "$file0" != "$file" ]; then
         echo "of first ensemble member"
     fi
-    ncdump -h $file0 | sed \
+    # sed only accepts lines up to about 15000 chars in Fedora 28
+    ncdump -h $file0 | cut -b 1-10000 | sed \
         -e '/{/,/global attributes/d' \
         -e 's/^[ \t]*:/\<tr\>\<td\>/' \
         -e 's/ = */\<td\>/' \
