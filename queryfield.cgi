@@ -21,7 +21,22 @@ if [ ${FORM_field#Rapid} != $FORM_field ]; then
 else
 [ "$lwrite" = true ] && echo "queryfield.cgi: entering case switch with FORM_field=$FORM_field<br>"
 NPERYEAR=12 # default
+
 case $FORM_field in
+
+knmi14pcglob*)
+    field=$FORM_field
+    dataset=${field%%_*}
+    field=${field#*_}
+    var=${field%%_*}
+    field=${field#*_}
+    type=${field%%_*}
+    field=${field#*_}
+    model=${field%%_*}
+    scen=${field#*_}
+    file=UUData/$var/${var}_d_ECEarth_RCP85_s%%_mo.nc
+    ;;
+
 cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amon_model_exp
     field=$FORM_field
     dataset=${field%%_*}
@@ -340,6 +355,22 @@ ens_ecmwf4*|ecmwf4*)
     climfield=$var
     LSMASK=ECMWF/S4/lsmask07.nc
     ;;
+isimip*)
+    field=$FORM_field
+    dataset=${field%%_*}
+    field=${field#*_}
+    var=${field%%_*}
+    field=${field#*_}
+    gcm=${field%%_*}
+    field=${field#*_}
+    hydro=${field%%_*}
+    scen=${field#*_}
+    if [ $gcm = all -a $hydro = all ]; then
+        file=ISIMIP/$var/isimip_${var}_${scen}_%%%.nc
+    else
+        file=ISIMIP/$var/${gcm}_${hydro}_${var}.nc
+    fi
+    ;;
 
 tempa) file=NCDCData/temp_anom.nc;kindname="NCDC v3";climfield="T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
 ncdc_temp) file=NCDCData/ncdc-merged-sfc-mntp.nc;kindname="NCDC v3";climfield="SST/T2m anom";LSMASK=NCDCData/ls_temp_anom.nc;;
@@ -563,20 +594,20 @@ spei_*) n=${FORM_field#spei_};file=CSICData/SPEI_$n.nc;kindname="CSIC";climfield
 PSI_*) dataset=${FORM_field#PSI_};file=UCData/PSI_$dataset.nc;kindname="GIDMaPS";climfield="PSI $dataset";flipcolor=11;;
 SPI_*) dataset=${FORM_field#SPI_};file=UCData/SPI_$dataset.nc;kindname="GIDMaPS";climfield="SPI $dataset";flipcolor=11;;
 SSI_*) dataset=${FORM_field#SSI_};file=UCData/SSI_$dataset.nc;kindname="GIDMaPS";climfield="SSI $dataset";flipcolor=11;;
-gpcc_25_7) file=GPCCData/gpcc_V7_25.nc;kindname="GPCC V7 2.5";climfield="precipitation";flipcolor=11;;
-gpcc_10_7) file=GPCCData/gpcc_V7_10.nc;kindname="GPCC V7 1.0";climfield="precipitation";flipcolor=11;;
-gpcc_05_7) file=GPCCData/gpcc_V7_05.nc;kindname="GPCC V7 0.5";climfield="precipitation";flipcolor=11;;
-gpcc_25_n1_7) file=GPCCData/gpcc_V7_25_n1.nc;kindname="GPCC V7 2.5";climfield="precipitation";flipcolor=11;;
-gpcc_10_n1_7) file=GPCCData/gpcc_V7_10_n1.nc;kindname="GPCC V7 1.0";climfield="precipitation";flipcolor=11;;
-gpcc_05_n1_7) file=GPCCData/gpcc_V7_05_n1.nc;kindname="GPCC V7 0.5";climfield="precipitation";flipcolor=11;;
-gpcc_25) file=GPCCData/gpcc_V8_25.nc;kindname="GPCC V8 2.5";climfield="precipitation";flipcolor=11;;
-gpcc_10) file=GPCCData/gpcc_V8_10.nc;kindname="GPCC V8 1.0";climfield="precipitation";flipcolor=11;;
-gpcc_05) file=GPCCData/gpcc_V8_05.nc;kindname="GPCC V8 0.5";climfield="precipitation";flipcolor=11;LSMASK=GPCCData/lsmask_05.nc;;
-gpcc_025) file=GPCCData/gpcc_V8_025.nc;kindname="GPCC V8 0.25";climfield="precipitation";flipcolor=11;;
-gpcc_25_n1) file=GPCCData/gpcc_V8_25_n1.nc;kindname="GPCC V8 2.5";climfield="precipitation";flipcolor=11;;
-gpcc_10_n1) file=GPCCData/gpcc_V8_10_n1.nc;kindname="GPCC V8 1.0";climfield="precipitation";flipcolor=11;;
-gpcc_05_n1) file=GPCCData/gpcc_V8_05_n1.nc;kindname="GPCC V8 0.5";climfield="precipitation";flipcolor=11;;
-gpcc_025_n1) file=GPCCData/gpcc_V8_025_n1.nc;kindname="GPCC V8 0.25";climfield="precipitation";flipcolor=11;;
+gpcc_25_8) file=GPCCData/gpcc_V8_25.nc;kindname="GPCC V8 2.5";climfield="precipitation";flipcolor=11;;
+gpcc_10_8) file=GPCCData/gpcc_V8_10.nc;kindname="GPCC V8 1.0";climfield="precipitation";flipcolor=11;;
+gpcc_05_8) file=GPCCData/gpcc_V8_05.nc;kindname="GPCC V8 0.5";climfield="precipitation";flipcolor=11;;
+gpcc_25_n1_8) file=GPCCData/gpcc_V8_25_n1.nc;kindname="GPCC V8 2.5";climfield="precipitation";flipcolor=11;;
+gpcc_10_n1_8) file=GPCCData/gpcc_V8_10_n1.nc;kindname="GPCC V8 1.0";climfield="precipitation";flipcolor=11;;
+gpcc_05_n1_8) file=GPCCData/gpcc_V8_05_n1.nc;kindname="GPCC V8 0.5";climfield="precipitation";flipcolor=11;;
+gpcc_25) file=GPCCData/gpcc_25.nc;kindname="GPCC 2.5";climfield="precipitation";flipcolor=11;;
+gpcc_10) file=GPCCData/gpcc_10.nc;kindname="GPCC 1.0";climfield="precipitation";flipcolor=11;;
+gpcc_05) file=GPCCData/gpcc_05.nc;kindname="GPCC 0.5";climfield="precipitation";flipcolor=11;LSMASK=GPCCData/lsmask_05.nc;;
+gpcc_025) file=GPCCData/gpcc_025.nc;kindname="GPCC 0.25";climfield="precipitation";flipcolor=11;;
+gpcc_25_n1) file=GPCCData/gpcc_25_n1.nc;kindname="GPCC 2.5";climfield="precipitation";flipcolor=11;;
+gpcc_10_n1) file=GPCCData/gpcc_10_n1.nc;kindname="GPCC 1.0";climfield="precipitation";flipcolor=11;;
+gpcc_05_n1) file=GPCCData/gpcc_05_n1.nc;kindname="GPCC 0.5";climfield="precipitation";flipcolor=11;;
+gpcc_025_n1) file=GPCCData/gpcc_025_n1.nc;kindname="GPCC 0.25";climfield="precipitation";flipcolor=11;;
 gpccall_10) file=GPCCData/gpcc_10_combined.nc;kindname="GPCC V8+monitoring";climfield="precipitation";flipcolor=11;;
 gpccpatch_10) file=GPCCData/gpcc_10_patched.nc;kindname="GPCC V8+monitoring";climfield="precipitation";flipcolor=11;;
 gpccall_10_n1) file=GPCCData/gpcc_10_n1_combined.nc;kindname="GPCC V8+monitoring";climfield="precipitation";flipcolor=11;;
@@ -588,10 +619,10 @@ gpccpatch_25_n1) file=GPCCData/gpcc_25_n1_patched.nc;kindname="GPCC V8+monitorin
 gpcc) file=GPCCData/gpcc_10_mon.nc;kindname="GPCC monitoring";climfield="precipitation";flipcolor=11;;
 gpcc_n1) file=GPCCData/gpcc_10_n1_mon.nc;kindname="GPCC monitoring";climfield="precipitation";flipcolor=11;;
 ngpcc) file=GPCCData/gpcc_10_n_mon.nc;kindname="GPCC monitoring";climfield="#gauges";;
-ngpcc_025) file=GPCCData/gpcc_V8_025_n.nc;kindname="GPCC V8";climfield="#gauges";;
-ngpcc_05) file=GPCCData/gpcc_V8_05_n.nc;kindname="GPCC V8";climfield="#gauges";;
-ngpcc_10) file=GPCCData/gpcc_V8_10_n.nc;kindname="GPCC V8";climfield="#gauges";;
-ngpcc_25) file=GPCCData/gpcc_V8_25_n.nc;kindname="GPCC V8";climfield="#gauges";;
+ngpcc_025) file=GPCCData/gpcc_025_n.nc;kindname="GPCC";climfield="#gauges";;
+ngpcc_05) file=GPCCData/gpcc_05_n.nc;kindname="GPCC";climfield="#gauges";;
+ngpcc_10) file=GPCCData/gpcc_10_n.nc;kindname="GPCC";climfield="#gauges";;
+ngpcc_25) file=GPCCData/gpcc_25_n.nc;kindname="GPCC";climfield="#gauges";;
 gpcc_daily) file=GPCCData/gpcc_combined_daily.nc;kindname="GPCC daily V1";climfield="precipitation";NPERYEAR=366;;
 gpcc_daily_n1) file=GPCCData/gpcc_combined_daily_n1.nc;kindname="GPCC daily V1";climfield="precipitation"NPERYEAR=366;;
 ngpcc_daily) file=GPCCData/gpcc_combined_daily_n.nc;kindname="GPCC daily V1";climfield="#gauges"NPERYEAR=366;;

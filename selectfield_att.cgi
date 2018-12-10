@@ -57,6 +57,43 @@ Choose a field and press this button</td></tr>
 <td><input type=radio class=formradio name=field value=knmi14_sfcWind_Amon_ECEARTH23_rcp85>
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=knmi14_psl_Amon_ECEARTH23_rcp85>
+EOF
+if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
+    -o $EMAIL = e279dd4de035b5fd9edc95ba4df755f7 \
+    -o $EMAIL = bd113ded9265e569c369d53ff59bf69a \
+    -o $EMAIL = f9646e78b5dbcaee3d001eb713252e3e ]; then
+    cat << EOF
+<tr><th>with PCGLOB
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>pot evap
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<th>&nbsp;
+<tr><td>&nbsp;
+<td>RCP8.5
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td><input type=radio class=formradio name=field value=knmi14pcglob_evappot_Amon_ECEARTH23_rcp85>
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+EOF
+fi
+cat << EOF
 <tr><td>&nbsp;
 <td>RCP8.5
 <td colspan=12>
@@ -513,6 +550,31 @@ cat <<EOF
 <td><input type=radio class=formradio name=field value=knmi14_TN3x_yr_RACMO22E_rcp85_AMJJAS>
 <td><input type=radio class=formradio name=field value=knmi14_TNn_yr_RACMO22E_rcp85_AMJJAS>
 <td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_AMJJAS>
+<tr><th>ISIMIP 1861-2099<th>scenario<th>potevap<th colspan=11>&nbsp
+<tr><td>16 monthly<td>RCP6.0
+<td><input type=radio class=formradio name=field value=isimip_potevap_all_all_rcp60>
+<td colspan=11>&nbsp;
+<tr><th>&nbsp;<th>potevap<th>GFDL<th>HadGEM<th>IPSL<th>MIROC5<th colspan=8>&nbsp
+<tr><td>H08<td>RCP6.0
+<td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_H08_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_H08_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_H08_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_H08_rcp60>
+<tr><td>LPJML<td>RCP6.0
+<td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_LPJML_rcp60>
+<tr><td>PCR-globwb<td>RCP6.0
+<td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_PCR-globwb_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_PCR-globwb_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_PCR-globwb_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_PCR-globwb_rcp60>
+<tr><td>watergap<td>RCP6.0
+<td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_watergap_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_watergap_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_watergap_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_watergap_rcp60>
 </table>
 </form>
 
