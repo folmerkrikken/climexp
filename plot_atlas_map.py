@@ -6,6 +6,7 @@ import logging
 import sys
 import util
 import shutil
+import resource
 import subprocess
 import tempfile
 from time import gmtime, strftime
@@ -64,6 +65,12 @@ class PlotAtlasMap:
         self.uncert = None
         self.normsdmessage = None
         self.ensemble = False
+
+        # increase the stack size
+        try:
+            resource.setrlimit(resource.RLIMIT_STACK, (resource.RLIM_INFINITY, resource.RLIM_INFINITY))
+        except ValueError as e:
+            self.log.warning("Cannot increase stack size")
 
         # Set temporary folder
         if True:
