@@ -4,6 +4,7 @@ import os
 import re
 import logging
 import sys
+import resource
 import subprocess
 import tempfile
 from time import gmtime, strftime
@@ -48,6 +49,12 @@ class PlotAtlasSeries:
         self.params = params
         self.typeVar = None
         self.ensemble = False
+
+        # increase the stack size
+        try:
+            resource.setrlimit(resource.RLIMIT_STACK, (resource.RLIM_INFINITY, resource.RLIM_INFINITY))
+        except ValueError as e:
+            self.log.warning("Cannot increase stack size")
 
         # Set temporary folder
         self.tempDir = tempfile.mkdtemp()
