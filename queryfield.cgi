@@ -649,16 +649,16 @@ set lat -15 18";;
 CenTrendsChirps) file=CHIRPSData/centrends_chirps.nc;kindname="CenTrends/CHIRPS";climfield="precipitation";flipcolor=11;map="set lon 28 54
 set lat -15 18";;
 
-clm_cru_soil01) file=ETHData/SOILLIQ_cru_clm_01.nc;kindname="CLM/CRU";climfield="soil moisture 0-10cm";flipcolor=11;;
-clm_cru_soil1) file=ETHData/SOILLIQ_cru_clm_1.nc;kindname="CLM/CRU";climfield="soil moisture 0-1m";flipcolor=11;;
-clm_cru_rain) file=ETHData/RAIN_cru_clm.nc;kindname="CLM/CRU";climfield="rain";flipcolor=11;;
-clm_cru_et) file=ETHData/ET_cru_clm.nc;kindname="CLM/CRU";climfield="evapotranspiration";;
-clm_cru_etp) file=ETHData/ETp_cru_clm.nc;kindname="CLM/CRU";climfield="potential evaporation";;
 clm_era_soil01) file=ETHData/SOILLIQ_era_clm_01.nc;kindname="CLM/ERAi";climfield="soil moisture 0-10cm";flipcolor=11;;
 clm_era_soil1) file=ETHData/SOILLIQ_era_clm_1.nc;kindname="CLM/ERAi";climfield="soil moisture 0-1m";flipcolor=11;;
 clm_era_rain) file=ETHData/RAIN_era_clm.nc;kindname="CLM/ERAi";climfield="rain";flipcolor=11;;
 clm_era_et) file=ETHData/ET_era_clm.nc;kindname="CLM/ERAi";climfield="evapotranspiration";;
 clm_era_etp) file=ETHData/ETp_era_clm.nc;kindname="CLM/ERAi";climfield="potential evaporation";;
+clm_wfdei_soil01) file=ETHData/SOILLIQ_wfdei_clm_01.nc;kindname="CLM/WFDEI";climfield="soil moisture 0-10cm";flipcolor=11;;
+clm_wfdei_soil1) file=ETHData/SOILLIQ_wfdei_clm_1.nc;kindname="CLM/WFDEI";climfield="soil moisture 0-1m";flipcolor=11;;
+clm_wfdei_rain) file=ETHData/RAIN_wfdei_clm.nc;kindname="CLM/WFDEI";climfield="rain";flipcolor=11;;
+clm_wfdei_et) file=ETHData/ET_wfdei_clm.nc;kindname="CLM/WFDEI";climfield="evapotranspiration";;
+clm_wfdei_etp) file=ETHData/ETp_wfdei_clm.nc;kindname="CLM/WFDEI";climfield="potential evaporation";;
 
 emulate) file=CRUData/emulate_3.2_1850-2003.nc;kindname="EMULATE 3.2";climfield="SLP";NPERYEAR=366;map="set lon -70 50
 set lat 25 70";;
