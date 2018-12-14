@@ -550,31 +550,52 @@ cat <<EOF
 <td><input type=radio class=formradio name=field value=knmi14_TN3x_yr_RACMO22E_rcp85_AMJJAS>
 <td><input type=radio class=formradio name=field value=knmi14_TNn_yr_RACMO22E_rcp85_AMJJAS>
 <td><input type=radio class=formradio name=field value=knmi14_TN3n_yr_RACMO22E_rcp85_AMJJAS>
-<tr><th>ISIMIP 1861-2099<th>scenario<th>potevap<th colspan=11>&nbsp
+<tr><th>ISIMIP 1861-2099<th>scenario<th>potevap<th colspan=3>&nbsp<th>soilmoist<th colspan=7>&nbsp
 <tr><td>16 monthly<td>RCP6.0
 <td><input type=radio class=formradio name=field value=isimip_potevap_all_all_rcp60>
-<td colspan=11>&nbsp;
-<tr><th>&nbsp;<th>potevap<th>GFDL<th>HadGEM<th>IPSL<th>MIROC5<th colspan=8>&nbsp
+<td colspan=3>&nbsp;
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_all_all_rcp60>
+<td colspan=7>&nbsp;
+<tr><th>&nbsp;<th>&nbsp;
+<th>GFDL<th>HadGEM<th>IPSL<th>MIROC5
+<th>GFDL<th>HadGEM<th>IPSL<th>MIROC5
+<th colspan=4>&nbsp
 <tr><td>H08<td>RCP6.0
 <td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_H08_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_H08_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_H08_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_H08_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_GFDL_H08_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_HadGEM_H08_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_IPSL_H08_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_MIROC5_H08_rcp60>
 <tr><td>LPJML<td>RCP6.0
 <td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_LPJML_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_LPJML_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_LPJML_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_GFDL_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_HadGEM_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_IPSL_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_MIROC5_LPJML_rcp60>
 <tr><td>PCR-globwb<td>RCP6.0
 <td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_PCR-globwb_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_PCR-globwb_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_PCR-globwb_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_PCR-globwb_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_GFDL_PCR-globwb_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_HadGEM_PCR-globwb_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_IPSL_PCR-globwb_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_MIROC5_PCR-globwb_rcp60>
 <tr><td>watergap<td>RCP6.0
 <td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_watergap_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_watergap_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_watergap_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_watergap_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_GFDL_watergap_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_HadGEM_watergap_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_IPSL_watergap_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_MIROC5_watergap_rcp60>
 </table>
 </form>
 
