@@ -574,10 +574,10 @@ cat <<EOF
 <td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_LPJML_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_IPSL_LPJML_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_MIROC5_LPJML_rcp60>
-<td><input type=radio class=formradio name=field value=isimip_soilmoist_GFDL_LPJML_rcp60>
-<td><input type=radio class=formradio name=field value=isimip_soilmoist_HadGEM_LPJML_rcp60>
-<td><input type=radio class=formradio name=field value=isimip_soilmoist_IPSL_LPJML_rcp60>
-<td><input type=radio class=formradio name=field value=isimip_soilmoist_MIROC5_LPJML_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_GFDL_LPJMLlev1_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_HadGEM_LPJMLlev1_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_IPSL_LPJMLlev1_rcp60>
+<td><input type=radio class=formradio name=field value=isimip_soilmoist_MIROC5_LPJMLlev1_rcp60>
 <tr><td>PCR-globwb<td>RCP6.0
 <td><input type=radio class=formradio name=field value=isimip_potevap_GFDL_PCR-globwb_rcp60>
 <td><input type=radio class=formradio name=field value=isimip_potevap_HadGEM_PCR-globwb_rcp60>
