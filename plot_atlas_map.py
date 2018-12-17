@@ -1230,7 +1230,7 @@ class PlotAtlasMap:
         # TODO: implement this
         pdfFilename = '{root}.pdf'.format(root=root)
         if force or not os.path.exists(pdfFilename) or (os.path.getsize(pdfFilename) == 0) or (os.path.getmtime(pdfFilename) < os.path.getmtime(epsFilename)):
-            cmd = './bin/epstopdf {root}.eps'.format(root=root)
+            cmd = 'epstopdf {root}.eps'.format(root=root)
             self.log.debug('Launch: %s' % cmd)
             subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
 

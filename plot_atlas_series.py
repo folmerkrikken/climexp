@@ -594,10 +594,7 @@ var=var, rel=rel, region_extension=self.region_extension, anom1=anom1, anom2=ano
             f.write('{datetime} {EMAIL} ({REMOTE_ADDR}) plot_atlas_series {title} {FORM_begin}:{FORM_end}\n'.format(datetime=strftime("%a %b %d %H:%M:%S %Z %Y", gmtime()), title=plottitle, **paramsDict))
         if not os.path.exists(epsfile) or os.path.getsize(epsfile) == 0:
             # update when gnuplot is upgraded to gnuplot 5 on linux...
-            if sys.platform == 'darwin':
-                gnuplot_init = 'set colors classic'
-            else:
-                gnuplot_init = ''
+            gnuplot_init = 'set colors classic'
             plotFileStr = """#!/usr/bin/env gnuplot
 # {region_extension} {var} {sname} ref{anom1}-{anom2} {scenarios}
 {gnuplot_init}

@@ -23,12 +23,12 @@ else:
        WORKING_DIR=WORKING_DIR) + os.environ['PATH']
 
     # For NCL
-    os.environ['PATH'] = '{WORKING_DIR}/ncl/bin:'.format(
+    os.environ['PATH'] = '/usr/local/ncl/bin:'.format(
        WORKING_DIR=WORKING_DIR) + os.environ['PATH']
-    os.environ['NCARG_ROOT'] = '{WORKING_DIR}/ncl'.format(WORKING_DIR=WORKING_DIR)
-    os.environ['HDF5_DISABLE_VERSION_CHECK'] = '1'
+    os.environ['NCARG_ROOT'] = '/usr/local/ncl'.format(WORKING_DIR=WORKING_DIR)
+    ### os.environ['HDF5_DISABLE_VERSION_CHECK'] = '1'
 
     # For the NetCDF library
-    os.environ['LD_LIBRARY_PATH'] = '{HOME_DIR}/lib:'.format(HOME_DIR=HOME_DIR)
+    ## os.environ['LD_LIBRARY_PATH'] = '{HOME_DIR}/lib:'.format(HOME_DIR=HOME_DIR)
 
 os.chdir(WORKING_DIR)
