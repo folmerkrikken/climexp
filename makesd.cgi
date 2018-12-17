@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=$PATH:/sw/bin # for nco, ncdump/ncgen on Mac
+export PATH=$PATH:/sw/bin:/usr/local/ncl/bin # for nco, ncdump/ncgen on Mac
 # script to compute estimates of the sd of N-yr means based on Jan's Atlas script in NCL
 length_of_period="$1"
 orgvar="$2"
@@ -36,9 +36,9 @@ if [ ! -s $natvarfile ]; then
     echo "computing $natvarfile ...<p>"
     nclfile=/tmp/get_natvar_$$.ncl
     sed -e "s/LENGTH_OF_PERIOD/$length_of_period/" -e "s/VAR_NAME/$orgvar/" -e "s/RELATIVE/$rel/" get_natvar.ncl > $nclfile
-    export NCARG_ROOT=./ncl
+    export NCARG_ROOT=/usr/local/ncl
     klaarfile=/tmp/klaar$$.txt
-    ( ./ncl/bin/ncl -Q < $nclfile > $nclfile.log; echo klaar > $klaarfile) &
+    ( ncl -Q < $nclfile > $nclfile.log; echo klaar > $klaarfile) &
     i=0
     while [ ! -s $klaarfile ]; do
         sleep 30
