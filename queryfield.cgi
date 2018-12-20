@@ -725,8 +725,8 @@ rutgers_nhsnow) file=RutgersData/snow_rucl.nc;kindname="Rutgers";climfield="snow
 rutgers_nhsnow_daily) file=RutgersData/snow_rucl_day.nc;kindname="Rutgers";climfield="snowcover";map='set mproj nps';flipcolor=11;NPERYEAR=366;;
 ice_index_n) file=NSIDCData/conc_n.nc;kindname=NSIDC;climfield="ice concentration";map='set mproj nps';;
 ice_index_s) file=NSIDCData/conc_s.nc;kindname=NSIDC;climfield="ice concentration";map='set mproj sps';;
-ice_bootstrap_n) file=NSIDCData/conc_bt_n.ctl;kindname=bootstrap;climfield="ice concentration";map='set mproj nps';;
-ice_bootstrap_s) file=NSIDCData/conc_bt_s.ctl;kindname=bootstrap;climfield="ice concentration";map='set mproj sps';;
+ice_bootstrap_n) file=NSIDCData/conc_bt_n.nc;kindname=bootstrap;climfield="ice concentration";map='set mproj nps';;
+ice_bootstrap_s) file=NSIDCData/conc_bt_s.nc;kindname=bootstrap;climfield="ice concentration";map='set mproj sps';;
 frz_depth) file=NSIDCData/frz_depth.ctl;kindname=NSIDC;climfield="freeze depth";NPERYEAR=1;map='set mproj nps';;
 thw_depth) file=NSIDCData/thw_depth.ctl;kindname=NSIDC;climfield="thaw depth";NPERYEAR=1;map='set mproj nps';;
 frz_depth_m) file=NSIDCData/frz_depth_m.ctl;kindname=NSIDC;climfield="freeze depth";map='set mproj nps';;
