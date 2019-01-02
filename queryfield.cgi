@@ -423,13 +423,11 @@ sstoiv2_daily_mean) file=NCEPData/oisst_v2_mean_daily.nc;kindname="NCEP OIv2 1/4
 sstoiv2_daily_anom) file=NCEPData/oisst_v2_anom_daily.nc;kindname="NCEP OIv2 1/4";climfield="SST anom";NPERYEAR=366;;
 iceoi_v2) file=NCEPData/iceoi_v2.nc;kindname="Reynolds v2";climfield="ice cover";;
 sstoi) file=NCEPData/sstoi.ctl;kindname="Reynolds";climfield="SST";;
-kaplan_ssta) file=LDGOData/kaplan_ssta.nc;kindname="Kaplan";climfield="SSTa";;
 ersstv3b) file=NCDCData/ersstv3b.ctl;kindname="ERSST v3b2";climfield="SST";;
 ersstv4) file=NCDCData/ersstv4.nc;kindname="ERSST v4";climfield="SST";;
 ersstv4a) file=NCDCData/ersstv4a.nc;kindname="ERSST v4";climfield="SSTa";;
 ersstv5) file=NCDCData/ersstv5.nc;kindname="ERSST v5";climfield="SST";;
 ersstv5a) file=NCDCData/ersstv5a.nc;kindname="ERSST v5";climfield="SSTa";;
-dasilva_ssta) file=DaSilvaData/dasilva_sst_anom.cdf;kindname="Da Silva";climfield="SSTa";;
 ssmi_sst) file=SSMIData/ssmi_sst.ctl;kindname="SSMI";climfield="SST";;
 tlt_60) file=UAHData/tlt_60.nc;kindname="UAH MSU v6.0";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
 tlt_56) file=UAHData/tlt_56.nc;kindname="UAH MSU v5.6";climfield="Tlt anomaly";LSMASK=UAHData/lsmask_25_180.nc;;
@@ -673,16 +671,10 @@ hadisst1_ice) file=UKMOData/HadISST_ice.nc;kindname="HadISST1";climfield="ice";;
 gisst22) file=UKMOData/gisst22_sst.ctl;kindname="GISST2.2";climfield="SST";;
 gisst22_ice) file=UKMOData/gisst22_ice.ctl;kindname="GISST2.2";climfield="ice";;
 mslpnh) file=CRUData/mslpnh.ctl;kindname="Jones";climfield="SLP";map='set mproj nps';;
-eurqual) file=LundData/eurqual.ctl;kindname="ADVICE";climfield="SLP";map="set lon -35 45
-set lat 30 70";;
 slp_mm) file=BernData/slp_mm.ctl;kindname="Luterbacher Maunders";climfield="SLP";map="set lon -25 30";;
 slp_mm_1) file=BernData/slp_mm_1.ctl;kindname="Luterbacher Modern";climfield="SLP";map="set lon -25 30";;
 Luterbacherslp) file=RapidData/recon.1750.1849.hadslp2r.1850.2008.seasonal.nc;kindname="Kuettel et al.";climfield="Sea Level Pressure";NOMISSING=nomissing;NPERYEAR=4;map='set lat 20 70
 set lon -40 50';;
-coads_slpa) file=LDGOData/coads_slpa.nc;kindname="ICOADS v2.5";climfield="SLPa";;
-dasilva_slpa) file=DaSilvaData/dasilva_slp.cdf;kindname="Da Silva";climfield="SLPa";;
-kaplan_slpa) file=LDGOData/kaplan_slpa.ctl;kindname="Kaplan";climfield="SLPa";;
-clouds) file=ISCCPData/isccp_ca.ctl;kindname="ISCCP";climfield="clouds";flipcolor=11;;
 fresco_cloud) file=FRESCO/fresco_cloud.nc;kindname="FRESCO";climfield="cloud fraction";flipcolor=11;;
 fresco_cloud_1) file=FRESCO/fresco_cloud_1.nc;kindname="FRESCO";climfield="cloud fraction";flipcolor=11;;
 fresco_cloud_5) file=FRESCO/fresco_cloud_5.nc;kindname="FRESCO";climfield="cloud fraction";flipcolor=11;LSMASK=FRESCO/lsmask_5.nc;;
@@ -704,10 +696,6 @@ hadnmat2) file="UKMOData/HadNMAT2.nc";kindname="HadNMAT2";climfield="Tair night"
 hadnmat2a) file="UKMOData/HadNMAT2a.nc";kindname="HadNMAT2";climfield="Tair night anom";;
 hadnmat2u) file="UKMOData/HadNMAT2u.nc";kindname="HadNMAT2";climfield="Tair night uncert";;
 
-loclouds) file=ISCCPData/isccp_lo.ctl;kindname="ISCCP";climfield="low clouds";flipcolor=11;;
-midclouds) file=ISCCPData/isccp_mi.ctl;kindname="ISCCP";climfield="medium clouds";flipcolor=11;;
-hiclouds) file=ISCCPData/isccp_hi.ctl;kindname="ISCCP";climfield="high clouds";flipcolor=11;;
-isccp_si) file=ISCCPData/isccp_si.ctl;kindname="ISCCP";climfield="snow/ice";flipcolor=11;;
 tc_sio) file=UCLData/tc_sio.ctl;kindname="JISAO";climfield="no.tc";map='set lat -50 0
 set lon 10 140';;
 tc_sio_monthly) file=UCLData/tc_sio_monthly.ctl;kindname="JISAO";climfield="no.tc";map='set lat -50 0
@@ -735,8 +723,6 @@ camsopi) file=NCEPData/camsopi.nc;kindname="CAMSOPI";climfield="prcp";;
 camsopi_perc) file=NCEPData/camsopi_perc.nc;kindname="CAMSOPI";climfield="perc";;
 noaa_olr) file=NOAAData/olr.mon.mean.nc;kindname="NOAA";climfield="OLR";;
 msla) file=CLSData/msla_merged_1deg.ctl;kindname="CLS merged";climfield="sea level anomalies";;
-ssh) file=DEOSData/ssh_500_1x1_monthly.nc;kindname="DEOS/KNMI";climfield="sea level anomalies";;
-sshold) file=DEOSData/ssh.nc;kindname="old DEOS";climfield="sea level anomalies";;
 nodc_heat700) file=NODCData/heat700.nc;kindname="NODC";climfield="0-700m heat content";;
 nodc_heat2000) file=NODCData/heat2000.nc;kindname="NODC";climfield="0-2000m heat content";;
 nodc_temp100) file=NODCData/temp100.nc;kindname="NODC";climfield="0-100m mean temperature";;
@@ -746,7 +732,6 @@ heat700_jma) file=JMAData/heat700_jma.nc;kindanme="JMA";climfield="0-700m heat c
 soda_heat750) file=SODAData/soda_750int.nc;kindanme="SODA";climfield="0-750m heat content";;
 grace_land) file=GRACEData/grace_land.nc;kindname="GRACE";climfield="LWE";;
 grace_ocean) file=GRACEData/grace_ocean.nc;kindname="GRACE";climfield="LWE";;
-dasilva_lat_heat) file=DaSilvaData/dasilva_lat_heat.cdf;kindname="Da Silva";climfield="latent heat flux";;
 luge_crop) file=McGillData/glcrop_1700-2007_05.nc;kindname="LUGE";climfield="cropland fraction";NPERYEAR=1;;
 luge_past) file=McGillData/glpast_1700-2007_05.nc;kindname="LUGE";climfield="pasture fraction";NPERYEAR=1;;
 en3_sos) file=UKMOData/salt_EN3_v2a_ObjectiveAnalysis_5m.nc;kindname="EN3";climfield="SSS";;
@@ -766,8 +751,6 @@ erswindu) file=CERSATData/erswindu.ctl;kindname="ERS";climfield="zonal wind";;
 erswindv) file=CERSATData/erswindv.ctl;kindname="ERS";climfield="meridional wind";;
 ersstrsu) file=CERSATData/ersstrsu.ctl;kindname="ERS";climfield="zonal wind stress";;
 ersstrsv) file=CERSATData/ersstrsv.ctl;kindname="ERS";climfield="meridional wind stress";;
-dasilva_taux) file=DaSilvaData/dasilva_taux.cdf;kindname="Da Silva";climfield="zonal windstress";;
-dasilva_tauy) file=DaSilvaData/dasilva_tauy.cdf;kindname="Da Silva";climfield="meridional windstress";;
 
 tao_sst) file=TAOData/tao_sst.nc;kindname="TAO";climfield="SST";map='set lat -10 10
 set lon 130 280';;
@@ -898,14 +881,6 @@ mm10_t100) file=FUBData/mm10_t100.ctl;kindname="FUB";climfield="t100";map='set m
 mm10_t50) file=FUBData/mm10_t50.ctl;kindname="FUB";climfield="t50";map='set mproj nps';;
 mm10_t30) file=FUBData/mm10_t30.ctl;kindname="FUB";climfield="t30";map='set mproj nps';;
 mm10_t10) file=FUBData/mm10_t10.ctl;kindname="FUB";climfield="t10";map='set mproj nps';;
-
-hoaps_sst) file=HOAPSData/hoaps_sst.nc;kindname="HOAPS";climfield="SST";;
-hoaps_rain) file=HOAPSData/hoaps_rain.nc;kindname="HOAPS";climfield="rain";;
-hoaps_evap) file=HOAPSData/hoaps_evap.nc;kindname="HOAPS";climfield="evaporation";;
-hoaps_budg) file=HOAPSData/hoaps_budg.nc;kindname="HOAPS";climfield="E-P";;
-hoaps_late) file=HOAPSData/hoaps_late.nc;kindname="HOAPS";climfield="latent heat flux";;
-hoaps_heat) file=HOAPSData/hoaps_heat.nc;kindname="HOAPS";climfield="sensible heat flux";;
-hoaps_fnet) file=HOAPSData/hoaps_fnet.nc;kindname="HOAPS";climfield="net longwave";;
 
 coads_sst) file=COADSData/sst.mean.nc;kindname="ICOADS v2.5";climfield="SST";;
 coads_air) file=COADSData/air.mean.nc;kindname="ICOADS v2.5";climfield="Tair";;
@@ -2595,19 +2570,6 @@ ens_ecmwf3_sst_oct) file=ECMWFData/S3/monthly/ecmwf3_sst_oct_m%%.ctl;kindname="e
 ens_ecmwf3_sst_nov) file=ECMWFData/S3/monthly/ecmwf3_sst_nov_m%%.ctl;kindname="ensemble ECMWF-3";climfield="1Nov sst";;
 ens_ecmwf3_sst_dec) file=ECMWFData/S3/monthly/ecmwf3_sst_dec_m%%.ctl;kindname="ensemble ECMWF-3";climfield="1Dec sst";;
 
-ens_eurosip2_t2m_jan) file=EUROSIP/eurosip2_t2m_jan_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Jan T2m";;
-ens_eurosip2_t2m_feb) file=EUROSIP/eurosip2_t2m_feb_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Feb T2m";;
-ens_eurosip2_t2m_mar) file=EUROSIP/eurosip2_t2m_mar_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Mar T2m";;
-ens_eurosip2_t2m_apr) file=EUROSIP/eurosip2_t2m_apr_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Apr T2m";;
-ens_eurosip2_t2m_may) file=EUROSIP/eurosip2_t2m_may_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1May T2m";;
-ens_eurosip2_t2m_jun) file=EUROSIP/eurosip2_t2m_jun_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Jun T2m";;
-ens_eurosip2_t2m_jul) file=EUROSIP/eurosip2_t2m_jul_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Jul T2m";;
-ens_eurosip2_t2m_aug) file=EUROSIP/eurosip2_t2m_aug_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Aug T2m";;
-ens_eurosip2_t2m_sep) file=EUROSIP/eurosip2_t2m_sep_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Sep T2m";;
-ens_eurosip2_t2m_oct) file=EUROSIP/eurosip2_t2m_oct_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Oct T2m";;
-ens_eurosip2_t2m_nov) file=EUROSIP/eurosip2_t2m_nov_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Nov T2m";;
-ens_eurosip2_t2m_dec) file=EUROSIP/eurosip2_t2m_dec_m%%.ctl;kindname="ensemble S3+UKMO";climfield="1Dec T2m";;
-
 cfs_t2m_1) file=CFSData/Monthly/tmp2m.ensm.1.cfs.ctl;kindname="CFS";climfield="+0 tmp2m";;
 cfs_t2m_2) file=CFSData/Monthly/tmp2m.ensm.2.cfs.ctl;kindname="CFS";climfield="+1 tmp2m";;
 cfs_t2m_3) file=CFSData/Monthly/tmp2m.ensm.3.cfs.ctl;kindname="CFS";climfield="+2 tmp2m";;
@@ -4237,11 +4199,6 @@ gfdl_b2_temp) file=IPCCData/GFDL_SRES_B2_TMP.ctl;kindname="GFDL A2";climfield="T
 gfdl_b2_prcp) file=IPCCData/GFDL_SRES_B2_PREC.new.ctl;kindname="GFDL A2";climfield="prcp";;
 gfdl_b2_prssfc) file=IPCCData/GFDL_SRES_B2_PRES.ctl;kindname="GFDL A2";climfield="prssfc";;
 
-remo_c142) file=DWDData/remo-rain7993_c142.ctl;kindname="REMO";climfield="c142";map='set lat -7 3
-set lon 117 129';;
-remo_c143) file=DWDData/remo-rain7993_c143.ctl;kindname="REMO";climfield="c143";map='set lat -7 3
-set lon 117 129';;
-
 t2m_racmo_era40) file=ENSEMBLES/n_KNMI-RACMO2_CTL_ERA40_MM_25km_tas.nc;kindname="RACMO ERA40";climfield="t2m";map='set lat 30 72
 set lon -30 50';;
 slp_racmo_era40) file=ENSEMBLES/n_KNMI-RACMO2_CTL_ERA40_MM_25km_tas.nc;kindname="RACMO ERA40";climfield="t2m";map='set lat 30 72
@@ -5156,13 +5113,6 @@ vas_A2_mpi_echam5_20c3m) file="IPCCData/20c3m_daily/vas_A2_mpi_echam5_1961-2000.
     kindname="hadgem1 20c3m"
     climfield="$var"
     LSMASK="IPCCData/picntrl/sftlf_A1_ukmo_hadgem1.nc";;
-
-tas_mrijma_tl959l60_20c3m) file="MRIJMAData/m2_TA_AJ.ctl";kindname="MRI/JMA TL959L60 control";climfield="TA";map='set lon -30 50';;
-tas_mrijma_tl959l60_sresa1b) file="MRIJMAData/m2_TA_AK.ctl";kindname="MRI/JMA TL959L60 sresa1b";climfield="TA";map='set lon -30 50';;
-pr_mrijma_tl959l60_20c3m) file="MRIJMAData/m2_PP_AJ.ctl";kindname="MRI/JMA TL959L60 control";climfield="PP";map='set lon -30 50';;
-pr_mrijma_tl959l60_sresa1b) file="MRIJMAData/m2_PP_AK.ctl";kindname="MRI/JMA TL959L60 sresa1b";climfield="PP";map='set lon -30 50';;
-psl_mrijma_tl959l60_20c3m) file="MRIJMAData/m2_SLP_AJ.ctl";kindname="MRI/JMA TL959L60 control";climfield="SLP";map='set lon -30 50';;
-psl_mrijma_tl959l60_sresa1b) file="MRIJMAData/m2_SLP_AK.ctl";kindname="MRI/JMA TL959L60 sresa1b";climfield="SLP";map='set lon -30 50';;
 
 temp2_essence_a1b) file="ESSENCE/temp2_a1b_%%.nc";kindname="Essence (ECHAM5/MPI-OM)";climfield="t2m";LSMASK="ESSENCE/lsmask.ctl";;
 temp2_essence_hosing) file="ESSENCE/temp2_hosing_%%.nc";kindname="Essence hosing";climfield="t2m";LSMASK="ESSENCE/lsmask.ctl";;
