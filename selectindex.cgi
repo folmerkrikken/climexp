@@ -310,11 +310,6 @@ Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/sl_glob
 <tr><td>Rotation<td><div class="kalelink"><a href="getindices.cgi?WMO=IERSData/lod_12&STATION=length_of_day&TYPE=i&id=$EMAIL">Length Of Day</a> (1962-now, IERS)</div>
 <td><a href="http://www.iers.org/IERS/EN/DataProducts/EarthOrientationData/eop.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<!--
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=ASUData/mld&STATION=maximum_lunar_declination&TYPE=i&id=$EMAIL">Maximum Lunar Declination</a>
-(1900-1996, Randall. S. Cerveny)</div>
--->
-
 <tr><td>Tropical cyclones<td><div class="kalelink">Number of <a href="getindices.cgi?WMO=AOMLData/landsea_ns&STATION=Number_of_named_storms_(Atl)&TYPE=i&id=$EMAIL">named storms</a>, <a href="getindices.cgi?WMO=AOMLData/landsea_ih&STATION=Number_of_intense_hurricanes_(Atl)&TYPE=i&id=$EMAIL">intense hurricanes</a> per season over the North Atlantic (1944-2008, Landsea plus FAQ</a>)</div>
 <td><a href="http://www.aoml.noaa.gov/hrd/Landsea/predAtl/table.html#table1" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a><br><a href="http://www.aoml.noaa.gov/hrd/tcfaq/tcfaqF.html#F3" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
@@ -384,7 +379,7 @@ Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/sl_glob
 
 <tr><td>Land ice</td><td><div class="kalelink">GRACE <a href="getindices.cgi?WMO=GRACEData/data_grs&STATION=Greenland_mass&TYPE=i&id=$EMAIL">Greenland</a>, <a href="getindices.cgi?WMO=GRACEData/data_ant&STATION=Antarctica_mass&TYPE=i&id=$EMAIL">Antarctica</a> mass changes,  (2003-2013, TU Delft)</td><td>&nbsp;</a>
 
-<tr><td>India<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/ALLIN&STATION=All-India_Rainfall&TYPE=p&id=$EMAIL">All-India Rainfall</a> (1871-2014, 29 subdivision, 2880000 km2, IITM)</div>
+<tr><td>India<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/ALLIN&STATION=All-India_Rainfall&TYPE=p&id=$EMAIL">All-India Rainfall</a> (1871-2016, 29 subdivision, 2880000 km2, IITM)</div>
 <td><a href="http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/HOMIN&STATION=Homogeneous_India_RAINFALL&TYPE=p&id=$EMAIL">Homogeneous India Rainfall</a> (1871-2014, 14 subdivisions, 1596970 km2, IITM)</div>
@@ -393,10 +388,10 @@ Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/sl_glob
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=IITMData/CORIN&STATION=Core-Monsoon_India_Rainfall&TYPE=p&id=$EMAIL">Core-Monsoon India Rainfall</a> (1871-1999, 7 subdivisions, 776942 km2, IITM)</div>
 <td><a href="http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=p">Indian rainfall per region</a> (<a href="IITMData/ismreg.png" target="_new">map</a>, 1871-2014, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=p">Indian rainfall per region</a> (<a href="IITMData/ismreg.png" target="_new">map</a>, 1871-2016, IITM)</div>
 <td><a href="http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=subdiv&type=p">Indian rainfall per subdivision</a> (<a href="IITMData/india-subdiv-rev1.png" target="_new">map</a>, 1871-2014, IITM)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=subdiv&type=p">Indian rainfall per subdivision</a> (<a href="IITMData/india-subdiv-rev1.png" target="_new">map</a>, 1871-2016, IITM)</div>
 <td><a href="http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=n">Indian minimum temperature per region</a> (1871-2007, IITM)</div>
@@ -404,9 +399,6 @@ Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/sl_glob
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindia.cgi?id=$EMAIL&where=region&type=x">Indian maximum temperature per region</a> (1871-2007, IITM)</div>
 <td><a href="http://www.tropmet.res.in" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
-
-<tr><td>&nbsp;<td><div class="kalelink">yearly <a href="getindices.cgi?WMO=LDGOData/AIR&STATION=All_India_Rainfall&TYPE=p&id=$EMAIL">All India Rainfall</a> (1813-1998, LDGO archive)</div>
-<td><a href="http://ingrid.ldgo.columbia.edu/SOURCES/.Indices/.india/rainfall/?help&STATION=datafiles" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>Indonesia<td><div class="kalelink"><a href="getindices.cgi?WMO=KNMIData/Konnen/jakarta_raindays&STATION=Jakarta_Raindays&TYPE=p&id=$EMAIL">Jakarta Rain Days</a> (1829-1997, KNMI)</div>
 <td><a href="http://www.knmi.nl/publicaties/abstract.php?id=744" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
