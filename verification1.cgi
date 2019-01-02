@@ -109,7 +109,7 @@ fairCRPSanalysis)
 rankhistogram)
 	args="data,graphvaluefile=\"data/R$$.txt\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel\"";
 	needsthreshold="false";
-	lvar="Fair CRPS Analysis";;
+	lvar="rank histogram";;
 
 reliability) 
 	args="data,u=$FORM_threshold,nbins=$FORM_nbins,threshold=$FORM_threshold_type,reliabfile=\"data/R$$.reliab\",graphvaluefile=\"data/R$$.txt\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel, threshold=$FORM_threshold$threshold_units$area\"";
@@ -408,12 +408,20 @@ EOF
   fi
 
   if [ -z "$makemap" -a -z "$noplot" ]; then
-###echo "<a name=\"plots\"><h3>Plots</h3></a>"
-#. $DIR/showplots.cgi
-    gs -q -r75 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -dNOPAUSE -sDEVICE=pnmraw -sOutputFile=data/R$$.pnm data/R$$.pdf -c quit
-    (pnmcrop data/R$$.pnm | pnmtopng > data/R$$.png) > /dev/null 2>&1 # 
+    gs -q -r75 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -dNOPAUSE -sDEVICE=pnmraw -sOutputFile=data/R$$.pnm data/R$$.pdf -c quit &
+    status=running
+    i=0
+    while [ $status = running ]; do
+        i=$((i+1))
+        sleep 3
+        if [ $((i%10)) = 0 ]; then
+            echo "converting graphics $((i/10)) `date`<p>"
+        fi
+        c=`ps axuw | fgrep -v grep | fgrep -c "data/R$$.pnm"`
+        [ $c = 0 ] && status=ready
+    done
+    (pnmcrop data/R$$.pnm | pnmtopng > data/R$$.png) > /dev/null 2>&1
     rm data/R$$.pnm
-    #convert data/R$$.ps data/R$$.png
     echo "<div class=\"bijschrift\">$verifylabel verified against $verifxlabel"
     if [ -n "$FORM_lat1" ]; then
       echo "in ${FORM_lat1}:${FORM_lat2}N, ${FORM_lon1}:${FORM_lon2}E"
