@@ -1,0 +1,144 @@
+<html>
+<head>
+<BASE HREF="http://www.knmi.nl.wstub.archive.org/onderzk/oceano/climexp/">
+
+<title>KNMI Climate Explorer</title>
+</head>
+<body bgcolor="#ffffff">
+
+<h2>KNMI Climate Explorer</h2>
+
+<i>by Geert Jan van Oldenborgh, KNMI</i>
+
+<h3>Introduction</h3>
+
+The last few years a lot of monthly mean climate data have become
+available for research: station data (<a
+href="http://cdiac.esd.ornl.gov/ghcn/ghcn.html" target=_top>GHCN</a>),
+gridded observations of temperature and sea-level pressure (<a
+href="http://www.cru.uea.ac.uk/cru/data/" target=_top>CRU</a>) and
+precipitation (<a
+href="http://www.ncdc.noaa.gov/onlinedata/climatedata"
+target=_top>NCDC</a>), and a 40-year reanalysis (<a
+href="http://www.cdc.noaa.gov/cdc/reanalysis/reanalysis.shtml"
+target=_top>NCEP/NCAR</a>).  This site gives the opportunity to
+explore these data and the relationships between them.  This may lead
+to more insight how the climate system changes on seasonal time
+scales, and empirical statistical forecast models.  You will have to
+judge for yourself whether the data you use are good enough to explore
+decadal or longer trends.  The system is still under development, I
+appreciate <a href="mailto:oldenbor@knmi.nl">feedback</a>.  (You can
+have a look at my <a href="TODO">TODO</a> list).
+
+<h3>Overview</h3>
+
+The Climate Explorer system has the following structure.  First you
+select a time series of climate data.  This can be either 
+<ul>
+<li>a time series: station data (by name or
+location), some climate index (e.g. NAO, NINO3), a region from a
+gridded field, your own series, or
+<li>a set of stations, or
+<li>a gridded field: gridded observations, reconstructions or a reanalysis.
+</ul>
+This data is presented, and can then be further investigated and
+correlated with other time series or fields.
+
+<p>The unit of time is the month.  The seasonal cycle is always taken
+into account..
+
+<p>If you are new to the system, it may pay to study a few <a
+href="examp.html" target=_new>examples</a>.
+
+<h3>Register/Log in</h3>
+
+To trace the usage of this system please register</a> as a user.  If
+you have already registered just give your e-mail address.
+
+<form action="register.cgi" method="POST">
+<p><table>
+<tr>
+<td>E-mail address</td>
+<td><input type="text" name="email" size=40></td>
+<td> (required)</td>
+</tr>
+<tr>
+<td>Name</td>
+<td><input type="text" name="username" size=40></td>
+</tr>
+<tr>
+<td>Institute</td>
+<td><input type="text" name="institute" size=40></td>
+</tr>
+</table>
+<input type="submit" value="Log in">
+</form>
+
+<p><address>Copyright <a href="http:/~oldenbor">G. J. van
+Oldenborgh</a>, 22-dec-1999</address>
+</body>
+
+<SCRIPT language="Javascript">
+<!--
+
+// FILE ARCHIVED ON 20010428150045 AND RETRIEVED FROM THE
+// INTERNET ARCHIVE ON 20091004212951.
+// JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+// ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+// SECTION 108(a)(3)).
+
+   var sWayBackCGI = "http://web.archive.org/web/20010428150045/";
+
+   function xResolveUrl(url) {
+      var image = new Image();
+      image.src = url;
+      return image.src;
+   }
+   function xLateUrl(aCollection, sProp) {
+      var i = 0;
+      for(i = 0; i < aCollection.length; i++) {
+         var url = aCollection[i][sProp];         if (typeof(url) == "string") { 
+          if (url.indexOf("mailto:") == -1 &&
+             url.indexOf("javascript:") == -1
+             && url.length > 0) {
+            if(url.indexOf("http") != 0) {
+                url = xResolveUrl(url);
+            }
+            url = url.replace('.wstub.archive.org','');
+            aCollection[i][sProp] = sWayBackCGI + url;
+         }
+         }
+      }
+   }
+
+   xLateUrl(document.getElementsByTagName("IMG"),"src");
+   xLateUrl(document.getElementsByTagName("A"),"href");
+   xLateUrl(document.getElementsByTagName("AREA"),"href");
+   xLateUrl(document.getElementsByTagName("OBJECT"),"codebase");
+   xLateUrl(document.getElementsByTagName("OBJECT"),"data");
+   xLateUrl(document.getElementsByTagName("APPLET"),"codebase");
+   xLateUrl(document.getElementsByTagName("APPLET"),"archive");
+   xLateUrl(document.getElementsByTagName("EMBED"),"src");
+   xLateUrl(document.getElementsByTagName("BODY"),"background");
+   xLateUrl(document.getElementsByTagName("TD"),"background");
+   xLateUrl(document.getElementsByTagName("INPUT"),"src");
+   var forms = document.getElementsByTagName("FORM");
+   if (forms) {
+       var j = 0;
+       for (j = 0; j < forms.length; j++) {
+              f = forms[j];
+              if (typeof(f.action)  == "string") {
+                 if(typeof(f.method)  == "string") {
+                     if(typeof(f.method) != "post") {
+                        f.action = sWayBackCGI + f.action;
+                     }
+                  }
+              }
+        }
+    }
+
+
+//-->
+</SCRIPT>
+
+</html>

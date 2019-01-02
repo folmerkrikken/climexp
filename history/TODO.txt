@@ -1,0 +1,302 @@
+KNMI Climate Explorer
+
+KNOWN PROBLEMS
+- Older versions of Netscape (3.1 at least) do not support PNG images.
+  I am afraid you will have to upgrade, or get one of the PNG plug-ins.
+  Due to patent problems I cannot use GIF.
+- On the KNMI computers Internet Explorer refuses to download raw data 
+  (.dat) and postscript (.ps.gz) files.  On at least one other it works.
+  Workaround: use Netscape; KNMI does not support IE.
+- OmniWeb 2.7 has a bug that means your email address is lost when you 
+  click on the map.  Workaround: fill it out by hand (right-click and modify)
+
+TODO
+- make plots of correlations of station data with an (interpolated) field
+- fieldcorrelations => time series
+- make anomalies better-defined
+- kill bugs when reading data not starting from Jan.
+- wavelet transform?
+- investigate possibility to add 3D ocean analyses, 3D atmophere data
+- try to get Lisboa-Iceland NAO? (Stephenson)
+- add bandpass filtering
+- add possibility to combine timeseries to a longer one (tough one)
+- add ocean subsurface data
+- add possibility to project a pattern (correlation field) onto a field
+- add K-S test to fit of histograms
+
+DONE
+12-apr-2001
+- Added the possibility to select only part of a time series (handy if part
+  looks unreliable) (Femke)
+- Added an anomaly plot on the data presentation page, with the possibility 
+  to specify the base period (Magdalena).
+8-mar-2001
+- Fixed "fields too large" Y2K+1 bug, fixed error message for significances
+  Kaplan (Andreas)
+3-mar-2001
+- Added a few NCEPNCAR fields from their web site ("hours since 1-1-1 0:0:0")
+2-mar-2001
+- Added a few ERA15 fields that I needed to compare with NCEP/NCAR
+23-feb-2001
+- Added the possibility to have coloured stationmaps, either red/blue with
+  the size proportional to r, or a rainbow with fixed size; indignificant
+  correlations are greyed out.
+- Select stations with n yers of data in Jan or DJF or so, at the moment 
+  only for GHCN precip and temperatures (Gerrit)
+8-feb-2001
+- added 2000 data for dutch temperature stations
+5-feb-2001
+- Redesigned fields user interface completely.  Please comment.
+- fixed a few bugs in stationplots (did not handle missing data well) (Thomas)
+- added possibility to demand a minimum separation between stations, this
+  necessitated a complete rewrite of all get* programs.
+31-jan-2001
+- polished stationplots a bit (title, legenda)
+30-jan-2001
+- Fixed bug in getprcp, gettemp, getrunoff: there are some stations with 
+  lowercase names that would not show up when searching for a name
+29-jan-2001
+- implemented box in getsealevel, getrunoff, getusrunoff
+- make plots with circles for the correlation on the spots of these stations
+24-jan-2001
+- added an option to select all stations in a rectangular box (with minyr)
+  implemented in getprcp, gettemp, getpress, getsealev.
+10-jan-2001
+- Added ERS wind and wind stress fields
+- Squashed bug in f2c (webserver) version - did not handle little_endian files
+ 8-jan-2001
+- Fixed bug in gettting index (=averaging region) of netCDF files (Pagano)
+ 5-jan-2001
+- Added Luterbachers Maunder Minimum SLP reconstruction
+- Changed starting date timeseries to 1500 (was 1749)
+29-dec-2000
+- Added the possibility to study histograms of timeseries and fit to
+  various distribution
+22-nov-2000
+- Added NCEP-NCAR P-E (Daqing Yang)
+21-nov-2000
+- Slightly decreased the field-field correlation job so that it also runs 
+  on our internal server (www2)
+16-nov-2000
+- Added log & sqrt options to getmomentsfield for statistics exercise group
+8-nov-2000
+- Reynolds SST was often shifted by one year, reading data not starting from
+  JAN obviously still is buggy.  Addded 10 undefined months in front.
+7-nov-2000
+- added Reynolds OI SST nov1981-now
+3-nov-2000
+- fixed bug introduced on 9-oct-2000 that caused the first year of each time 
+  series to be skipped when computing anything..
+27-oct-2000
+- added 1,2sigma error ranges on correlations
+- split up user interface for timeseries branch
+16-oct-2000
+- added NCEP SOI, the normalization is of course slightly different from CRU SOI
+12-oct-2000
+- fixed one bug resulting from the reprogramming: sunspot data was not read.
+9-oct-2000
+- fixed bug in titles lagged field-field correlations (GJ)
+- major reprogramming to prepare for daily, weekly & yearly data
+  please mail me any bugs you discover...
+29-sep-2000
+- added a few ERA15 fields (yes, I have permission)
+27-sep-2000
+- added Lobith (Rijn), Borgharen (Maas) by hand
+20-sep-2000
+- fixed bug in plotting uploaded netCDF files (Andreas)
+- fixed bug in correlating field with user-defined index (Andreas)
+- removed limitation that when correlating two field the lower-resolution one
+  could not be netCDF (nx!=nxf)
+13-sep-2000
+- added RivDis v1.1 river discharge database (station data)
+- added HCDN USA river discharge database (station data)
+- fixed bug in colour scales (missing contour) (Andreas)
+- fixed bug in detrend - seasonal cycle was not subtracted (Andreas)
+- added NCEP/NCAR wind stresses, latent heat flux (Andreas)
+8-sep-2000
+- fixed a bug in bounds on indices, data (were reversed), cleaned up titles
+- repaired get_index, broken two days ago when I added Da Silva.
+- you can also upload a netCDF time series (it *is* the official standard here)
+6-sep-2000
+- fixed bug in detrend, results with selected months or anomalies were wrong
+5-sep-2000
+- added Da Silva fields.  Use at own risk.
+25-aug-2000
+- added the Hadley Centre global mean sealevel pressure (GMSLP21f)
+- all programs reading field data did not work due to an error in the 
+  recordlength.  Fixed
+- fixed bug in EOFs, moments when summing across years.  Looks OK now, actually.
+24-aug-2000
+- added principal components to EOF analysis, easy to extend to projecting 
+  correlation patterns (not yet done).
+21-aug-2000
+- added PSMSL tide-gauge stations, lots more data in Europe than JASL
+18-aug-2000
+- When I changed the setup to enable the Climate Explorer to run on SGI and 
+  linux at the same time I messed up and nothing ran for a while.  Sorry.
+14-aug-2000
+- added GHCN station and sealevel pressure (~1800 stations, but few with 
+  long timeseries)
+- added JASL (SOEST) tide-gauge stations, again too many short ones
+- fixed another bug in EOF routine, seems to work now.
+10-aug-2000
+- the bugs in EOFs are in the BLAS library.  Rolled my own.
+9-aug-2000
+- enabled EOFs, there still seem to be bugs though...
+- fixed bug in get_index, which caused invalid points to turn up in timeseries
+2-aug-2000
+- the file upload mechanism is now public.  Please contact me if your netCDF
+  files cause problems; I wrote a quick parser that could be much improved.
+31-jul-2000
+- added possibility to upload fields as well as timeseries:
+- made possibility to study *fields* instead of *timeseries*
+  plot, statistics, correlate with timeseries/other field.
+25-jul-2000
+- big simplification of the field-handling logic, the meta-data are now 
+  stored with the fields to a large extend.  Everything *should* work the 
+  same, if not bug me.
+20-jul-2000
+- added contingency tables, as function of season. (Pagano)
+13-jul-2000
+- changed get_index, so that missing points do not affect the average in
+  case of a steep gradient across the region (like NINO3).
+12-jul-2000
+- added "r=..." to scatter plots
+- fixed bug in display of months in postscript scatterplots (was left out 
+  in case of missing data).
+- started work on fields
+11-jul-2000
+- added possibility to do monthly correlations in selected months only
+10-jul-2000
+- rewrote get_index to accept unevenly spaced grids, added cos(lat) factor
+- added possibility to add sensible name to makeindex (Frank Cuypers)
+4-jul-2000
+- made correlation data files downloadable; netCDF does not yet work
+29-jun-2000
+- added FSU winds
+- added some 2D TAO data, working on rest
+- fixed bug in getdata which caused a non-unique standard correlations page
+28-jun-2000
+- added Juerg Luterbacher's NAO reconstructions
+16-jun-2000
+- added possibility to specify decorrelation scale for computation 
+  significances (Andreas Sterl)
+- fixed too strict flitering of characters in title plots
+5-jun-2000
+- changed plot of lagcorrelations for series of months to 3D (gnuplot) plot
+  this necessitated a fair amount of reorganization...
+29-may-2000
+- added COADS SLPA, Kaplan SSTA and Kaplan SLPA; inhibited significance fields 
+  on reconstructions.
+12-may-2000
+- added North Pacific index to list of inices
+- added Hulme precipitation to list of fields
+23-apr-2000
+- fixed linux bugs in a few scripts (getmin, getmax, getindices)
+- fixed uninitialized variable in correlatefield.F, error with g77
+21-apr-2000
+- put standard correlations in a separate file (Nanne)
+14-apr-2000
+- added yearly numbers of hurricanes (Landsea)
+1-apr-2000
+- fixed bug in region-selecting OLR (Martis)
+31-mar-2000
+- reinstalled vertical velocity (omega) (Martis)
+- added verical shear (vs) (Martis)
+9-mar-2000
+- SGI bc does not accept leading +: stripped in range (cmax)
+3-mar-2000
+- fixed bug in upload.cgi: a filename with .txt was read wrongly by correlate*
+24-feb-2000
+- replaced NCEP/NCAR omega by relative vorticity (Martis)
+21-feb-2000
+- in the postscript scatterplots replaced crosses by month.year in a small font
+18-feb-2000
+- added Lean et al  solar constant reconstruction
+17-feb-2000
+- added Hoyt & Schatten solar constant reconstruction, searching for Lean
+- fixed bug in autocorrelation without anomalies
+16-feb-2000
+- added measured solar constant 1978-now
+9-feb-2000
+- Changed minfac (minimum fraction of valid points) to be more flexible,
+  user-settable and otherwise perfect
+8-feb-2000
+- changed T2m to Tsurface in NCEP/NCAR (Wilco)
+7-feb-2000
+- fixed split in horizontal divergence at 0o
+- added TOMS ozon to the list
+- added times eries "time" to the list
+- changed "2000" to "2010" in all programs to avoid y2k+1-problems
+4-feb-2000
+- downloaded ozon from TOMS, to be added
+- added SSH from DEOS
+- added NCEP/NCAR horizontal divergence, still have to fix the split
+  at 0 longitude
+3-feb-2000
+- fixed bug in NCEP/NCAR SLP filed - starts at 1948, not 1958 (Wilco)
+- added control over scale (Wilco)
+- added NCEP/NCAR OLR (Albert)
+2-feb-2000
+- demand at least 30% valid points in field correlations (was 10%).
+- extended snowcover to 1999
+- fixed bug in significances: if sum>12 reduce degrees of freedom (Wilco)
+27-jan-2000
+- added more dutch stations (KD)
+25-jan-2000
+- flipped colour scale for precipitation, snowcover (blue=wetter) (GJ)
+- fixed showing data when only one station matched name (GJ)
+24-jan-2000
+- added autocorrelation (GJ)
+- investigated selectstation bug - bug in OmniWeb, workaround by hand.
+- fixed renice bug on linux
+23-jan-2000
+- fixed click bug (selectfield.html was not included) (GJ)
+- fixed erroneous warning statement in readdat (introduced on 21-jan) (GJ)
+- move periodogram to end (GJ)
+21-jan-2000
+- added a (+) or (-) to the lagged months when the lag is six months or more 
+  to remove an ambiguity between dec->jan and dec->jan.
+- updated timeseries
+- implemented (Lomb) periodogram
+- extended fixed-width fields in many programs to accommodate NCEPNCAR SLP [Pa]
+- rewrote readdat to accept values around 100000 -""-
+20-jan-2000
+- fixed bug in select-region NCEP/NCAR fields (Martis)
+18-jan-2000
+- added restrictions to index to title 2D plots (GJ)
+- added NCEP/NCAR QBO (GJ)
+17-jan-2000
+- added NOAA NH snow cover (GJ).  Not yet in the external version.
+14-jan-2000
+- made cutting-out button sign-insensitive (Wilco)
+- fixed bug get_index with negative coordinates (Martis)
+- fixed bug in dump with restricted indices (GJ)
+- changed method of parameterpassing to a proccgi (GJ)
+- implemented upload (GJ)
+- sorted out NAO indices (Stephenson)
+- added B/W maps (Stephenson)
+11-jan-2000
+- fixed bug that prevented field correlations of more than one year lag
+- added JEDA heat content
+- renice all jobs to 10
+10-jan-2000
+- got Bert to fix PNG bug
+- got Bert not to synch log, data.
+- added Xie&Arkin rainfall, NCEP/NCAR rainfall (Stephenson)
+7-jan-2000
+- fixed bug in getprcp: "+" in name is now replaced by " ".
+- subtract average of previous n years (Stockdale,Wilco)
+5-jan-1000
+- add raw data multifit (Stockdale)
+- add link to NCEP/NCAR correlation page (Stephenson)
+- get rid of ppm with new gnuplot (GJ)
+- make added timeseries personal (GJ)
+- make "Month" pop-up (copy from NCEP/NCAR)
+
+
+NOTE TO MYSELF; to add a field follow the following 3 easy steps
+1. make the field available in GrADS format (.dat and .ctl files), netCDF to come RSN
+2. edit selectfield.html to include it in the list
+3. edit queryfield.cgi to include it in the list
+[Already quite streamlined, isn't it?]
