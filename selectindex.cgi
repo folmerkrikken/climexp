@@ -453,9 +453,6 @@ Hadley Centre)</div>
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=WURData/BVnootjes&STATION=beechnuts&TYPE=i&id=$EMAIL">beech nuts</a> (1930-1967), <a href="getindices.cgi?WMO=WURData/HPnootjes&STATION=beechcrop&TYPE=i&id=$EMAIL">beech crop</a> (1930-1996)</div>
 <td>&nbsp;
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=CBSData/windex&STATION=windex&TYPE=i&id=$EMAIL&NPERYEAR=4">Windex</a> (2002-now) index for wind energy</div>
-<td><a href="http://statline.cbs.nl/StatWeb/publication/default.aspx?DM=SLNL&PA=70802ned&D1=5&D2=1&D3=3%2c7%2c11%2c15%2c20%2c24%2c28%2c32%2c37%2c41%2c45%2c49%2c54%2c58%2c62%2c66%2c71%2c75%2c79%2c83%2c88%2c92%2c96%2c100%2c105%2c109%2c113%2c117-118%2c122%2c126%2c130%2c134-152%2c156%2c160%2c164%2c168-169%2c173%2c177%2c181%2c185-186%2cl&HDR=T%2cG1&STB=G2&CHARTTYPE=1&VW=D"><img src="images/info-i.gif" alt="more information" border="0"></a>
-
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=KNMIData/hist_Ptekort&STATION=potential_precipitation_deficit&TYPE=i&NPERYEAR=1&id=$EMAIL">Annual maximum of the potential evaporation deficit</a> (1906-2017)</div>
 <td><a href="https://www.knmi.nl/nederland-nu/klimatologie/geografische-overzichten/neerslagtekort_droogte" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
