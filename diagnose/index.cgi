@@ -1,10 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 echo "Content-Type: text/html"
 echo
 echo
 
 cwd=`pwd`
-cd ..
+if [ `uname` = Linux ]; then
+    climexp_dir=/home/oldenbor/climexp
+else
+    climexp_dir=/home/oldenbor/climexp
+fi
+export HOME=
+cd $climexp_dir
 . ./init.cgi
 . ./getargs.cgi
 cd $cwd
@@ -350,13 +356,13 @@ if [ "$FORM_anomalie" = ja ]; then
 fi
 
 if [ $NPERYEAR = 12 ]; then
-    (cd ..; . ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
+    (cd $climexp_dir; . ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$naam $dezemaand $FORM_year1" "nofollow,index")
 elif [ $NPERYEAR = 4 ]; then
-    (cd ..;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
+    (cd $climexp_dir;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$naam $dezemaand $FORM_year1" "nofollow,index")
 elif [ $NPERYEAR = 2 ]; then
-    (cd ..;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
+    (cd $climexp_dir;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1" "nofollow,index")
 else
-    (cd ..;. ./myvinkhead$langext.cgi "$jaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1")
+    (cd $climexp_dir;. ./myvinkhead$langext.cgi "$jaaroverzicht_wereldweer" "$naam $dezemaand $FORM_year1" "nofollow,index")
 fi
 
 field=$var
@@ -534,9 +540,9 @@ if [ $NPERYEAR = 12 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        (cd ..;. ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$naam $tm $maa $yr")
+        (cd $climexp_dir;. ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        (cd ..;. ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$maa $naam $tm $yr")
+        (cd $climexp_dir;. ./myvinkhead$langext.cgi "$maandoverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
 elif [ $NPERYEAR = 4 ]; then
     if [ "$prefix" != tsi ]; then
@@ -566,9 +572,9 @@ elif [ $NPERYEAR = 4 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        (cd ..;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$naam $tm $maa $yr")
+        (cd $climexp_dir;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        (cd ..;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$maa $naam $tm $yr")
+        (cd $climexp_dir;. ./myvinkhead$langext.cgi "$seizoensoverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
     ###echo "txtfile=$txtfile<br>"
     ###echo "mo,yr=$mo,$yr<br>"
@@ -596,9 +602,9 @@ elif [ $NPERYEAR = 2 ]; then
         *) echo "error 867yghj"; maa="";;
     esac
     if [ "$prefix" != tsi ]; then
-        (cd ..;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$naam $tm $maa $yr")
+        (cd $climexp_dir;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$naam $tm $maa $yr")
     else
-        (cd ..;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$maa $naam $tm $yr")
+        (cd $climexp_dir;. ./myvinkhead$langext.cgi "$halfjaaroverzicht_wereldweer" "$maa $naam $tm $yr")
     fi
     ###echo "txtfile=$txtfile<br>"
     ###echo "mo,yr=$mo,$yr<br>"
@@ -619,7 +625,7 @@ else # NPERYEAR = 1
     else
         yr=""
     fi
-    (cd ..;. ./myvinkhead$langext.cgi "$jaaroverzicht_wereldweer" "$naam $tm $maa $yr")
+    (cd $climexp_dir;. ./myvinkhead$langext.cgi "$jaaroverzicht_wereldweer" "$naam $tm $maa $yr")
 fi
 
 if [ $var != maunaloa_ch4 ]; then
