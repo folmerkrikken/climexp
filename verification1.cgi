@@ -107,12 +107,12 @@ fairCRPSanalysis)
 	lvar="Fair CRPS Analysis";;
 
 rankhistogram)
-	args="data,graphvaluefile=\"data/R$$.txt\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel\"";
+	args="data,graphvaluefile=\"data/R$$.txt\",maintitle=\"Rank histogram $seriesmonth $verifylabel against\n$verifxlabel\"";
 	needsthreshold="false";
 	lvar="rank histogram";;
 
 reliability) 
-	args="data,u=$FORM_threshold,nbins=$FORM_nbins,threshold=$FORM_threshold_type,reliabfile=\"data/R$$.reliab\",graphvaluefile=\"data/R$$.txt\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel, threshold=$FORM_threshold$threshold_units$area\"";
+	args="data,u=$FORM_threshold,nbins=$FORM_nbins,threshold=$FORM_threshold_type,reliabfile=\"data/R$$.reliab\",graphvaluefile=\"data/R$$.txt\",maintitle=\"Reliability $seriesmonth $verifylabel against\n$verifxlabel, threshold=$FORM_threshold$threshold_units$area\"";
 	needsthreshold="true";
 	lvar="reliability";;
 
@@ -123,49 +123,49 @@ deterministic)
 
 rps) args="data,\"$DIR/data/R$$.rps\""; lvar="tercile RPS";noplot=true;;
 
-rocrclim) args="data,u=$FORM_threshold, threshold=$FORM_threshold_type, rocfile=\"$DIR/data/R$$.rocarea\",maintitle=\"$seriesmonth $verifylabel against\n$verifxlabel\""; needsthreshold="true"; lvar="ROC curve";;
+rocrclim) args="data,u=$FORM_threshold, threshold=$FORM_threshold_type, rocfile=\"$DIR/data/R$$.rocarea\",maintitle=\"ROC $seriesmonth $verifylabel against\n$verifxlabel\""; needsthreshold="true"; lvar="ROC curve";;
 
-rocdeb) myprog="./bin/rocdeb $threshold $table"; maintitle="$seriesmonth $verifylabel against $verifxlabel"; needsthreshold="true"; lvar="ROC curve";;
+rocdeb) myprog="./bin/rocdeb $threshold $table"; maintitle="ROC $seriesmonth $verifylabel against $verifxlabel"; needsthreshold="true"; lvar="ROC curve";;
 
-rocprob) myprog="./bin/roc prob $threshold same $table"; maintitle="$seriesmonth $verifylabel against $verifxlabel"; needsthreshold="true"; lvar="ROC curve";;
+rocprob) myprog="./bin/roc prob $threshold same $table"; maintitle="ROC prob $seriesmonth $verifylabel against $verifxlabel"; needsthreshold="true"; lvar="ROC curve";;
 
-rocthreshold) myprog="./bin/roc threshold $threshold same $table"; maintitle="$seriesmonth $verifylabel against $verifxlabel"; needsthreshold="true"; lvar="ROC curve";;
+rocthreshold) myprog="./bin/roc threshold $threshold same $table"; maintitle="ROC threshold $seriesmonth $verifylabel against $verifxlabel"; needsthreshold="true"; lvar="ROC curve";;
 
-mapcorr) PROG="cortwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$correlation";FORM_var="cor";lvar="correlation of ensemble mean";;
+mapcorr) PROG="cortwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$correlation";FORM_var="cor";var="correlation";lvar="correlation of ensemble mean";;
 
-mapdiscmean) PROG="discrim";args="data1=fcst\$data,data2=obs\$data";comp="\$discrimination";FORM_var="disc";lvar="discrimination of ensemble mean";;
+mapdiscmean) PROG="discrim";args="data1=fcst\$data,data2=obs\$data";comp="\$discrimination";FORM_var="disc";var="discrimination";lvar="discrimination of ensemble mean";;
 
-mapmae) PROG="maetwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$mae";FORM_var="mae";lvar="mean absolute error of ensemble mean";;
+mapmae) PROG="maetwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$mae";FORM_var="mae";var="MAE";lvar="mean absolute error of ensemble mean";;
 
-maprmse) PROG="rmsetwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rmse";FORM_var="rmse";lvar="root mean square error of ensemble mean";;
+maprmse) PROG="rmsetwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rmse";FORM_var="rmse";var="RMSE";lvar="root mean square error of ensemble mean";;
 
-mapbrier) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$bs";FORM_var="bs";lvar="Brier Score";;
+mapbrier) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$bs";FORM_var="bs";var="Brier";lvar="Brier Score";;
 
-mapbriar) myprog="./bin/Briar $threshold $obsfile $table data/R$$.nc";FORM_var="bs";lvar="Brier Score";;
+mapbriar) myprog="./bin/Briar $threshold $obsfile $table data/R$$.nc";FORM_var="bs";var="Brier";lvar="Brier Score";;
 
-mapresolution) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$res";FORM_var="resolution";lvar="Resolution component of the Brier Score";;
+mapresolution) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$res";FORM_var="resolution";var="Resolution";lvar="Resolution component of the Brier Score";;
 
-mapreliability) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$rel";FORM_var="reliability";lvar="Reliability component of the Brier Score";;
+mapreliability) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$rel";FORM_var="reliability";var="Reliability";lvar="Reliability component of the Brier Score";;
 
-mapuncertainty) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$unc";FORM_var="uncertainty";lvar="Uncertainty component of the Brier Score";;
+mapuncertainty) PROG="bstwo3d";args="data1=fcst\$data,data2=obs\$data,nbins=$FORM_nbins,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$unc";FORM_var="uncertainty";var="Uncertainty";lvar="Uncertainty component of the Brier Score";;
 
-mapbss) PROG="bsstwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$bss";FORM_var="bss";lvar="BSS wrt climatology";;
+mapbss) PROG="bsstwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$bss";FORM_var="bss";var="BSS";lvar="BSS wrt climatology";;
 
-maprps) PROG="rpstwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rps";FORM_var="rps3";lvar="tercile RPS";;
+maprps) PROG="rpstwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rps";FORM_var="rps3";var="BSS";lvar="tercile RPS";;
 
-maprpss) PROG="rpsstwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rpss";FORM_var="rpss3";lvar="tercile RPSS wrt climatology";;
+maprpss) PROG="rpsstwo3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rpss";FORM_var="rpss3";var="RPSS3";lvar="tercile RPSS wrt climatology";;
 
-maprpss5) PROG="rpssfive3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rpss";FORM_var="rpss5";lvar="quintile RPSS wrt climatology";;
+maprpss5) PROG="rpssfive3d";args="data1=fcst\$data,data2=obs\$data";comp="\$rpss";FORM_var="rpss5";var="RPSS5";lvar="quintile RPSS wrt climatology";;
 
-maprps3) myprog="./bin/RPS 3 33.33333 33.33333 $obsfile $table data/R$$.nc";FORM_var="rps3";lvar="tercile RPS";;
+maprps3) myprog="./bin/RPS 3 33.33333 33.33333 $obsfile $table data/R$$.nc";FORM_var="rps3";var="RPS3";lvar="tercile RPS";;
 
-maprps5) myprog="./bin/RPS 5 20 20 20 20 $obsfile $table data/R$$.nc";FORM_var="rps5";lvar="tercile RPS";;
+maprps5) myprog="./bin/RPS 5 20 20 20 20 $obsfile $table data/R$$.nc";FORM_var="rps5";var="RPS5";lvar="tercile RPS";;
 
-maprocarea) PROG="rocareatwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$ra";FORM_var="roc";lvar="area under the ROC curve";;
+maprocarea) PROG="rocareatwo3d";args="data1=fcst\$data,data2=obs\$data,u=$FORM_threshold,threshold=$FORM_threshold_type";needsthreshold="true";comp="\$ra";FORM_var="roc";var="ROC";lvar="area under the ROC curve";;
 
-maproc) myprog="./bin/rocmap $threshold same $obsfile $table data/R$$.nc";needsthreshold="true";FORM_var="roc";lvar="area under the ROC curve";;
+maproc) myprog="./bin/rocmap $threshold same $obsfile $table data/R$$.nc";needsthreshold="true";FORM_var="roc";var="ROC";lvar="area under the ROC curve";;
 
-maprocdeb) myprog="./bin/ROCscoremap $threshold $obsfile $table data/R$$.nc";needsthreshold="true";FORM_var="ROCarea";lvar="area under the ROC curve";;
+maprocdeb) myprog="./bin/ROCscoremap $threshold $obsfile $table data/R$$.nc";needsthreshold="true";FORM_var="ROCarea";var="ROC";lvar="area under the ROC curve";;
 
 debug) lvar="verification table";;
 
