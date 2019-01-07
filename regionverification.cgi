@@ -55,6 +55,7 @@ else # called from forecast_verification.cgi
 fi # the rest is shared with forecast_verification.cgi
 
 . ./getopts.cgi
+. ./getfieldopts.cgi
 commonargs=$corrargs
 corrargs="$file1 $file2 $corrargs"
 if [ ${FORM_verif%persist} != $FORM_verif -o ${FORM_verif%nino34} != $FORM_verif ]; then
