@@ -71,8 +71,8 @@ bstwo3d <- function(data1,data2,nbins,u,threshold=TRUE) {
     for (i in 1:nlon) {
         .Fortran("rkeepalive",i=as.integer(i),n=as.integer(nlon))
         for (j in 1:nlat) {
-            terms <- SpecsVerification::BrierScoreDecomposition(
-                p=p[i,j,],y=y[i,j,],calibration=list(method="bin",bins=((0:nbins)/nbins)) )
+            py <- na.omit(cbind(p[i, j, ], y[i, j,]))
+            terms <- SpecsVerification::BrierScoreDecomposition(p=py[,1], y=py[,2])
             bs [i,j] <- sum(terms)
             rel[i,j] <- terms[1]
             res[i,j] <- terms[2]

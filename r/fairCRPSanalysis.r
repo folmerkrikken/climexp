@@ -30,20 +30,10 @@ fairCRPSanalysis <- function(data,fcafile) {
     
     data[data == -999.9] <- NA
 
-    observations <- data[,3]
-    ensemble     <- data[,4:(dim(data)[2])]
+    observations <- as.vector(data[,3])
+    ensemble     <- as.matrix(data[,4:(dim(data)[2])])
 
-    #fca <- mean(SpecsVerification::FairCrps(ens=ensemble,obs=observations))
-    child <- mcparallel( SpecsVerification::FairCrps(ens=ensemble,obs=observations) )
-    i <- 0
-    n <- 100
-    repeat {
-        result <- mccollect(child,wait=FALSE,timeout=10)
-        if (length(result) > 0) break
-        i <- i + 1
-        .Fortran("rkeepalive",i=as.integer(i),n=as.integer(n))
-    }
-    fca <- mean(result[[1]],rm.na=TRUE)
+    fca <- mean(SpecsVerification::FairCrps(ens=ensemble,obs=observations))
 
     write(paste("Fair CRPS analysis",fca,sep="="),fcafile,1,append=FALSE)
 }

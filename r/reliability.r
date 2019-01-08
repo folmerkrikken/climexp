@@ -52,7 +52,7 @@ reliability <- function(data, u, nbins=10, threshold = TRUE,reliabfile,graphvalu
   p <- rowMeans(ensemble <= thresh,na.rm=TRUE)
   y <- 1*(observations <= thresh)
 
-  rd <- SpecsVerification::ReliabilityDiagram(probs=p,obs=y,bins=((0:nbins)/nbins),plot=TRUE,nboot=500,mc.cores=8)
+  rd <- SpecsVerification::ReliabilityDiagram(probs=p,obs=y,plot=TRUE,nboot=500)
   
   write.table(round(rd,4),file=reliabfile)
   write.table(round(rd,4),file=graphvaluefile)

@@ -64,7 +64,7 @@ likelihood<- function(table,xlab,ylab){
 	regr <- lsfit(obs, ensmean)
 	intercept <- regr$coef[1]
 	slope <- regr$coef[2]
-	abline(intercept, slope, type = "b", lwd = 2)
+	abline(intercept, slope, lwd = 2)
 	rsquared <- summary(lm(ensmean ~ obs))$r.squared
 
         corr <- cor(ensmean,obs,use="pairwise.complete.obs")
