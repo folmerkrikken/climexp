@@ -1130,7 +1130,7 @@ fi
 
 export HOME=/tmp
 if [ ${FORM_mapformat:-png} = geotiff ]; then
-	$DIR/bin/grads -l -b -c 'run grads/startup.gs' << EOF > /tmp/grads$id.log
+	$grads -l -b -c 'run grads/startup.gs' << EOF > /tmp/grads$id.log
 $map
 set xlab off
 set ylab off
@@ -1162,7 +1162,7 @@ EOF
 	echo "<a href=\"$f.tif\">GeoTIFF</a> of"
 
 else # normal PNG figure
-	$DIR/bin/grads -l -b -c 'run grads/startup.gs' << EOF > /tmp/grads$id.log
+	$grads -l -b -c 'run grads/startup.gs' << EOF > /tmp/grads$id.log
 $map
 $setxlint
 $setylint
