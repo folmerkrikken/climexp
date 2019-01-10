@@ -9,6 +9,10 @@ WMO="${FORM_wmo}_${FORM_factor}"
 STATION="$FORM_station"
 TYPE=$FORM_type
 NAME=$FORM_name
-PROG="scaleseries ${FORM_factor} $DIR/data/$TYPE$FORM_wmo.dat"
+file=./data/$TYPE$FORM_wmo.dat
+export WMO
+export file
+export TYPE
+PROG="scaleseries.sh ${FORM_factor} $file"
 
 . $DIR/getdata.cgi
