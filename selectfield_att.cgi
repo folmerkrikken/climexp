@@ -70,7 +70,7 @@ if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
 <th>&nbsp;
 <th>&nbsp;
 <th>pot evap
-<th>&nbsp;
+<th>soil moist.
 <th>&nbsp;
 <th>&nbsp;
 <th>&nbsp;
@@ -84,7 +84,7 @@ if [   $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 \
 <td>&nbsp;
 <td>&nbsp;
 <td><input type=radio class=formradio name=field value=knmi14pcglob_evappot_Amon_ECEARTH23_rcp85>
-<td>&nbsp;
+<td><input type=radio class=formradio name=field value=knmi14pcglob_soilmoisture_Lmon_ECEARTH23_rcp85>
 <td>&nbsp;
 <td>&nbsp;
 <td>&nbsp;
