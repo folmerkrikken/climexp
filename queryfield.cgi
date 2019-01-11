@@ -1197,14 +1197,18 @@ erai_evappot_daily) file=ERA-interim/erai_evappot_daily.nc;kindname="ERA-int";cl
 erai_rsds_daily) file=ERA-interim/erai_rsds_daily.nc;kindname="ERA-int";climfield="rsds";NPERYEAR=366;LSMASK=ERA-interim/lsmask07.nc;;
 
 erai_slp|erai_psl|erai_msl) file=ERA-interim/erai_msl.nc;kindname="ERA-int";climfield="MSL";LSMASK=ERA-interim/lsmask07.nc;;
+erai_slp_e|erai_msl_e) file=ERA-interim/erai_msl_extended.nc;kindname="ERA-int+";climfield="MSL";LSMASK=ERA-interim/lsmask07.nc;;
 erai_taux) file=ERA-interim/erai_ustrs.nc;kindname="ERA-int";climfield="taux";LSMASK=ERA-interim/lsmask07.nc;;
 erai_tauy) file=ERA-interim/erai_vstrs.nc;kindname="ERA-int";climfield="tauy";LSMASK=ERA-interim/lsmask07.nc;;
 erai_u10m) file=ERA-interim/erai_u10.nc;kindname="ERA-int";climfield="u10";LSMASK=ERA-interim/lsmask07.nc;;
 erai_v10m) file=ERA-interim/erai_v10.nc;kindname="ERA-int";climfield="v10";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ts) file=ERA-interim/erai_ts.nc;kindname="ERA-int";climfield="Tsfc";LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2m|erai_tas) file=ERA-interim/erai_t2m.nc;kindname="ERA-int";climfield="T2m";LSMASK=ERA-interim/lsmask07.nc;;
+erai_t2m_e) file=ERA-interim/erai_t2m_extended.nc;kindname="ERA-int+";climfield="T2m";LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmin) file=ERA-interim/erai_tmin.nc;kindname="ERA-int";climfield="Tmin";LSMASK=ERA-interim/lsmask07.nc;;
+erai_tmin_e) file=ERA-interim/erai_tmin_extended.nc;kindname="ERA-int+";climfield="Tmin";LSMASK=ERA-interim/lsmask07.nc;;
 erai_tmax) file=ERA-interim/erai_tmax.nc;kindname="ERA-int";climfield="Tmax";LSMASK=ERA-interim/lsmask07.nc;;
+erai_tmax_e) file=ERA-interim/erai_tmax_extended.nc;kindname="ERA-int+";climfield="Tmax";LSMASK=ERA-interim/lsmask07.nc;;
 erai_t2msst) file=ERA-interim/erai_t2msst.nc;kindname="ERA-int";climfield="T2m/SST";LSMASK=ERA-interim/lsmask07.nc;;
 erai_wspd) file=ERA-interim/erai_wspd.nc;kindname="ERA-int";climfield="wind speed";LSMASK=ERA-interim/lsmask07.nc;;
 erai_wspd_daily) file=ERA-interim/erai_wspd_daily.nc;kindname="ERA-int";climfield="wind speed";LSMASK=ERA-interim/lsmask07.nc;;
@@ -1223,6 +1227,7 @@ erai_pme) file=ERA-interim/erai_pme.nc;kindname="ERA-int";climfield="P-E";LSMASK
 erai_tp|erai_pr) file=ERA-interim/erai_tp.nc;kindname="ERA-int";climfield="precipitation";LSMASK=ERA-interim/lsmask07.nc;;
 erai_ssr) file=ERA-interim/erai_ssr.nc;kindname="ERA-int";climfield="SSR";LSMASK=ERA-interim/lsmask07.nc;;
 erai_str) file=ERA-interim/erai_str.nc;kindname="ERA-int";climfield="STR";LSMASK=ERA-interim/lsmask07.nc;;
+erai_z*_e) lev=${FORM_field#erai_z};file=ERA-interim/${FORM_field}xtended.nc;kindname="ERA-int+";climfield="z$lev";;
 erai_z*) lev=${FORM_field#erai_z};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="z$lev";;
 erai_t*) lev=${FORM_field#erai_t};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="t$lev";;
 erai_u*) lev=${FORM_field#erai_u};file=ERA-interim/${FORM_field}.nc;kindname="ERA-int";climfield="u$lev";;
