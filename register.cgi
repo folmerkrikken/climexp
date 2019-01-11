@@ -7,6 +7,7 @@ export DIR=`pwd`
 . ./init.cgi
 . ./getargs.cgi
 
+lwrite=false
 if [ "$lwrite" = true ]; then
     echo "EMAlL = $EMAIL<br>"
     echo "FORM_email = $FORM_email<br>"
@@ -14,10 +15,11 @@ if [ "$lwrite" = true ]; then
     echo "FORM_institute = $FORM_institute<br>"
 fi
 . ./nosearchengine.cgi
-[ -z "$EMAIL" ] && EMAIL=FORM_email
 
 if [ "$EMAIL" = someone@somewhere -o -z "$FORM_username" ]; then
+    [ "$lwrite" = true ] && echo "calling checkemail.cgi"
     . ./checkemail.cgi
+    [ "$lwrite" = true ] && echo "md5=$md5<br>"
 else
     c1=`echo "$EMAIL" | fgrep -c @`
     c2=`echo "$EMAIL" | fgrep -c http`
