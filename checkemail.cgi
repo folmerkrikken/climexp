@@ -21,7 +21,7 @@ if [ $c != 0 ]; then
 fi
 
 # convert from old system
-if [ $c = 0 ]; then
+if [ $c = 0 -a $EMAIL != someone@somewhere ]; then
     c=`fgrep -c "^$EMAIL " ./log/newlist`
     if [ $c != 0 ]; then
         md5=`fgrep "^$EMAIL " ./log/newlist | cut -f 4 -d ' ' | tail -1`
