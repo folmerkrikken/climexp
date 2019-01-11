@@ -284,49 +284,21 @@ EOF
 fi
 
 extended=false
-# add more later, not foolproof but OK for the moment
-for realemail in "oldenborgh@knmi.nl" \
-                 "schrier@knmi.nl" \
-                 "pascal.yiou@lsce.ipsl.fr" \
-                 "robert.vautard@lsce.ipsl.fr" \
-                 "mathias.hauser@env.ethz.ch" \
-                 "rene.orth@env.ethz.ch" \
-                 "sonia.seneviratne@env.ethz.ch" \
-                 "b.dong@reading.ac.uk" \
-                 "l.c.shaffrey@reading.ac.uk" \
-                 "e.hawkins@reading.ac.uk" \
-                 "nikos.christidis@metoffice.gov.uk" \
-                 "peter.stott@metoffice.gov.uk" \
-                 "antje.weisheimer@ecmwf.int" \
-                 "f.doblas-reyes@ic3.cat" \
-                 "omar.bellprat@ic3.cat" \
-                 "kew@knmi.nl" "sarah.teulingkew@gmail.com" \
-                 "philip@knmi.nl"  "sjoukje.knmi@gmail.com" \
-                 "karin.vanderwiel@noaa.gov" \
-                 "friederike.otto@ouce.ox.ac.uk" \
-                 "peter.uhe@ouce.ox.ac.uk" \
-                 "marcel.bult@knmi.nl" \
-                 "hylke.de.vries@knmi.nl" \
-                 "wiel@knmi.nl" \
-                 "metl@knmi.nl"
-do
-    md5=`echo $realemail | md5sum | cut -f 1 -d ' '`
-    if [ "${FORM_field#era}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc -a $EMAIL = $md5 ]; then
-        extended=true
-        text="(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
-        extension="operational analyses"
-    fi
-    if [ "${FORM_field#berkeley}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc -a $EMAIL = $md5 ]; then
-        extended=true
-        text="(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
-        extension="ERA-interim / ECMWF operational analyses"
-    fi
-    if [ "${FORM_field#ensembles_025}" != "${FORM_field}" -a -s ${file%u.nc}e.nc ]; then
-        extended=true
-        text="(Preliminary data, should be updated every morning)<br>"
-        extension="SYNOPs"
-    fi
-done
+if [ "${FORM_field#era}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc -a $EMAIL != someone@somewhere ]; then
+    extended=true
+    text="(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
+    extension="operational analyses"
+fi
+if [ "${FORM_field#berkeley}" != "${FORM_field}" -a -s ${file%.nc}_extended.nc -a $EMAIL != someone@somewhere ]; then
+    extended=true
+    text="(Please contact <a href=\"mailto:oldenborgh@knmi.nl\">me</a> if you need an up-to-date version)<br>"
+    extension="ERA-interim / ECMWF operational analyses"
+fi
+if [ "${FORM_field#ensembles_025}" != "${FORM_field}" -a -s ${file%u.nc}e.nc ]; then
+    extended=true
+    text="(Preliminary data, should be updated every morning)<br>"
+    extension="SYNOPs"
+fi
 if [ $extended = true ]; then
     echo "<div class=\"alineakop\"><a name=\"extend\">Analyse $kindname $climfield extended with $extension</a></div>"
     echo $text 
