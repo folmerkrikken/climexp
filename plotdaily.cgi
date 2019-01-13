@@ -155,6 +155,7 @@ else
     fi
 
     wmo_=`echo "$WMO" | tr '_' ' '`
+    var_=`echo "$VAR" | tr '_' ' '`
     gnuplot << EOF
 $gnuplot_init
 set size 0.8,0.6
@@ -167,7 +168,7 @@ set xdata time
 set timefmt $timefmt
 set format x $timefmt
 set xrange ["$firstdate":"$lastdate"]
-set ylabel "$VAR [$UNITS]"
+set ylabel "$var_ [$UNITS]"
 set title "$name $station ($wmo_)"
 plot "./$root.txt" using 1:2:3 notitle with filledcurves above lt $above, \
      "./$root.txt" using 1:2:3 notitle with filledcurves below lt $below, \
