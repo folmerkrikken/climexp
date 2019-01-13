@@ -7,7 +7,7 @@ cwd=`pwd`
 if [ `uname` = Linux ]; then
     climexp_dir=/home/oldenbor/climexp
 else
-    climexp_dir=/home/oldenbor/climexp
+    climexp_dir=/Users/gj/climexp
 fi
 export HOME=
 cd $climexp_dir
@@ -35,7 +35,7 @@ fi
 if [ -z "$FORM_mon1" -a -z "$FORM_year1" ]; then
     FORM_mon1=`date -d "1 month ago" "+%b" | tr "[:upper:]" "[:lower:]"`
     FORM_year1=`date -d "1 month ago" "+%Y"`
-    if [ ! -s $FORM_year1/t2m_ghcncams_$FORM_mon1$FORM_year1.png ]; then
+    if [ ! -s $FORM_year1/t2m_ecmwf_$FORM_mon1$FORM_year1.png ]; then
         FORM_mon1=`date -d "2 months ago" "+%b" | tr "[:upper:]" "[:lower:]"`
         FORM_year1=`date -d "2 months ago" "+%Y"`
     fi
@@ -71,7 +71,7 @@ if [ $NPERYEAR = 12 ]; then
         summer) FORM_mon1=sep;;
     esac
 fi
-[ -z "$FORM_var" ] && FORM_var="t2m_ghcncams_w"
+[ -z "$FORM_var" ] && FORM_var="t2m_ecmwf_w"
 [ -z "$FORM_anomalie" ] && FORM_anomalie=ja
 [ -z "$FORM_kort" ] && FORM_kort=nee
 [ -z "$FORM_expert" ] && FORM_expert=nee
@@ -498,8 +498,8 @@ if [ "$FORM_lang" = nl ]; then
     else
         if [ "$field" = sst_ncep_w ]; then
             txtfile=${FORM_year1}/ssta_${mon1}${FORM_year1}$ext.txt
-        elif [ "$field" = t2m_ghcncams_w ]; then
-            txtfile=${FORM_year1}/t2m_ghcncams_${mon1}${FORM_year1}$ext.txt
+        elif [ "$field" = t2m_ecmwf_w ]; then
+            txtfile=${FORM_year1}/t2m_ecmwf_${mon1}${FORM_year1}$ext.txt
         fi
         if [ -s $txtfile ]; then
             cat $txtfile
