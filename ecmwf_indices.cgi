@@ -13,6 +13,78 @@ cat <<EOF
 
 <table class="realtable" width="100%" border='0' cellpadding='0' cellspacing='0'>
 <tr>
+<th colspan="19">ECMWF System-4 ensemble mean</th>
+</tr><tr>
+<td>NINO12</td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_jan_ensm&STATION=ECMWF4_jan_nino12_ensm&TYPE=i&id=$EMAIL">jan</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_feb_ensm&STATION=ECMWF4_feb_nino12_ensm&TYPE=i&id=$EMAIL">feb</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_mar_ensm&STATION=ECMWF4_mar_nino12_ensm&TYPE=i&id=$EMAIL">mar</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_apr_ensm&STATION=ECMWF4_apr_nino12_ensm&TYPE=i&id=$EMAIL">apr</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_may_ensm&STATION=ECMWF4_may_nino12_ensm&TYPE=i&id=$EMAIL">may</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_jun_ensm&STATION=ECMWF4_jun_nino12_ensm&TYPE=i&id=$EMAIL">jun</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_jul_ensm&STATION=ECMWF4_jul_nino12_ensm&TYPE=i&id=$EMAIL">jul</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_aug_ensm&STATION=ECMWF4_aug_nino12_ensm&TYPE=i&id=$EMAIL">aug</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_sep_ensm&STATION=ECMWF4_sep_nino12_ensm&TYPE=i&id=$EMAIL">sep</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_oct_ensm&STATION=ECMWF4_oct_nino12_ensm&TYPE=i&id=$EMAIL">oct</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_nov_ensm&STATION=ECMWF4_nov_nino12_ensm&TYPE=i&id=$EMAIL">nov</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino12a_dec_ensm&STATION=ECMWF4_dec_nino12_ensm&TYPE=i&id=$EMAIL">dec</a></td>
+</tr><tr>
+<td>NINO3</td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_jan_ensm&STATION=ECMWF4_jan_nino3_ensm&TYPE=i&id=$EMAIL">jan</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_feb_ensm&STATION=ECMWF4_feb_nino3_ensm&TYPE=i&id=$EMAIL">feb</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_mar_ensm&STATION=ECMWF4_mar_nino3_ensm&TYPE=i&id=$EMAIL">mar</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_apr_ensm&STATION=ECMWF4_apr_nino3_ensm&TYPE=i&id=$EMAIL">apr</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_may_ensm&STATION=ECMWF4_may_nino3_ensm&TYPE=i&id=$EMAIL">may</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_jun_ensm&STATION=ECMWF4_jun_nino3_ensm&TYPE=i&id=$EMAIL">jun</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_jul_ensm&STATION=ECMWF4_jul_nino3_ensm&TYPE=i&id=$EMAIL">jul</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_aug_ensm&STATION=ECMWF4_aug_nino3_ensm&TYPE=i&id=$EMAIL">aug</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_sep_ensm&STATION=ECMWF4_sep_nino3_ensm&TYPE=i&id=$EMAIL">sep</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_oct_ensm&STATION=ECMWF4_oct_nino3_ensm&TYPE=i&id=$EMAIL">oct</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_nov_ensm&STATION=ECMWF4_nov_nino3_ensm&TYPE=i&id=$EMAIL">nov</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3a_dec_ensm&STATION=ECMWF4_dec_nino3_ensm&TYPE=i&id=$EMAIL">dec</a></td>
+</tr><tr>
+<td>NINO3.4</td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_jan_ensm&STATION=ECMWF4_jan_nino3.4_ensm&TYPE=i&id=$EMAIL">jan</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_feb_ensm&STATION=ECMWF4_feb_nino3.4_ensm&TYPE=i&id=$EMAIL">feb</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_mar_ensm&STATION=ECMWF4_mar_nino3.4_ensm&TYPE=i&id=$EMAIL">mar</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_apr_ensm&STATION=ECMWF4_apr_nino3.4_ensm&TYPE=i&id=$EMAIL">apr</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_may_ensm&STATION=ECMWF4_may_nino3.4_ensm&TYPE=i&id=$EMAIL">may</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_jun_ensm&STATION=ECMWF4_jun_nino3.4_ensm&TYPE=i&id=$EMAIL">jun</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_jul_ensm&STATION=ECMWF4_jul_nino3.4_ensm&TYPE=i&id=$EMAIL">jul</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_aug_ensm&STATION=ECMWF4_aug_nino3.4_ensm&TYPE=i&id=$EMAIL">aug</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_sep_ensm&STATION=ECMWF4_sep_nino3.4_ensm&TYPE=i&id=$EMAIL">sep</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_oct_ensm&STATION=ECMWF4_oct_nino3.4_ensm&TYPE=i&id=$EMAIL">oct</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_nov_ensm&STATION=ECMWF4_nov_nino3.4_ensm&TYPE=i&id=$EMAIL">nov</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4a_dec_ensm&STATION=ECMWF4_dec_nino3.4_ensm&TYPE=i&id=$EMAIL">dec</a></td>
+</tr><tr>
+<td>NINO3.4 rel</td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_jan_ensm&STATION=ECMWF4_jan_nino3.4r_ensm&TYPE=i&id=$EMAIL">jan</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_feb_ensm&STATION=ECMWF4_feb_nino3.4r_ensm&TYPE=i&id=$EMAIL">feb</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_mar_ensm&STATION=ECMWF4_mar_nino3.4r_ensm&TYPE=i&id=$EMAIL">mar</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_apr_ensm&STATION=ECMWF4_apr_nino3.4r_ensm&TYPE=i&id=$EMAIL">apr</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_may_ensm&STATION=ECMWF4_may_nino3.4r_ensm&TYPE=i&id=$EMAIL">may</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_jun_ensm&STATION=ECMWF4_jun_nino3.4r_ensm&TYPE=i&id=$EMAIL">jun</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_jul_ensm&STATION=ECMWF4_jul_nino3.4r_ensm&TYPE=i&id=$EMAIL">jul</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_aug_ensm&STATION=ECMWF4_aug_nino3.4r_ensm&TYPE=i&id=$EMAIL">aug</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_sep_ensm&STATION=ECMWF4_sep_nino3.4r_ensm&TYPE=i&id=$EMAIL">sep</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_oct_ensm&STATION=ECMWF4_oct_nino3.4r_ensm&TYPE=i&id=$EMAIL">oct</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_nov_ensm&STATION=ECMWF4_nov_nino3.4r_ensm&TYPE=i&id=$EMAIL">nov</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino3.4r_dec_ensm&STATION=ECMWF4_dec_nino3.4r_ensm&TYPE=i&id=$EMAIL">dec</a></td>
+</tr><tr>
+<td>NINO4</td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_jan_ensm&STATION=ECMWF4_jan_nino4_ensm&TYPE=i&id=$EMAIL">jan</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_feb_ensm&STATION=ECMWF4_feb_nino4_ensm&TYPE=i&id=$EMAIL">feb</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_mar_ensm&STATION=ECMWF4_mar_nino4_ensm&TYPE=i&id=$EMAIL">mar</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_apr_ensm&STATION=ECMWF4_apr_nino4_ensm&TYPE=i&id=$EMAIL">apr</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_may_ensm&STATION=ECMWF4_may_nino4_ensm&TYPE=i&id=$EMAIL">may</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_jun_ensm&STATION=ECMWF4_jun_nino4_ensm&TYPE=i&id=$EMAIL">jun</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_jul_ensm&STATION=ECMWF4_jul_nino4_ensm&TYPE=i&id=$EMAIL">jul</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_aug_ensm&STATION=ECMWF4_aug_nino4_ensm&TYPE=i&id=$EMAIL">aug</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_sep_ensm&STATION=ECMWF4_sep_nino4_ensm&TYPE=i&id=$EMAIL">sep</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_oct_ensm&STATION=ECMWF4_oct_nino4_ensm&TYPE=i&id=$EMAIL">oct</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_nov_ensm&STATION=ECMWF4_nov_nino4_ensm&TYPE=i&id=$EMAIL">nov</a></td>
+<td><a href="getindices.cgi?WMO=ENSOIndices/ecmwf4_nino4a_dec_ensm&STATION=ECMWF4_dec_nino4_ensm&TYPE=i&id=$EMAIL">dec</a></td>
+</tr><tr>
 <th colspan="19">ECMWF System-3 ensemble mean</th>
 </tr><tr>
 <td>NINO12</td>
