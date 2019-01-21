@@ -144,7 +144,7 @@ if [ ${file0%.dat} != $file0 ]; then
         -e 's@http://\([^ ")]*\)@<a href=http://\1>\1</a>@' \
         -e 's@https://\([^ ")]*\)@<a href=https://\1>\1</a>@' \
         -e 's@ftp://\([^ ")]*\)@<a href=ftp://\1>\1</a>@' \
-        -e 's@doi:\([^ ]*\)@<a href=https://doi.org/\1>doi:\1</a>@'
+        -e 's@doi:\([^ ]*\)@<a href=https://doi.org/\1>doi:\1</a>@g'
 else
     echo "<tr><th colspan=2>Netcdf global metadata"
     if [ "$file0" != "$file" ]; then
