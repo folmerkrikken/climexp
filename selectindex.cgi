@@ -304,8 +304,8 @@ Sea level--><td><div class="kalelink"><a href="getindices.cgi?WMO=CUData/sl_glob
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=SRMPData/solarradioflux&STATION=solar_radio_flux&TYPE=i&id=$EMAIL">Solar radio flux</a> (1947-now, DRAO)</div>
 <td><a href="http://www.drao-ofr.hia-iha.nrc-cnrc.gc.ca/icarus/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink">Annual <a href="getindices.cgi?WMO=RALData/osf&STATION=open_solar_flux&TYPE=i&id=$EMAIL&NPERYEAR=1">reconstructed open solar flux</a> (1675-2010),  <a href="getindices.cgi?WMO=RALData/osf_obs&STATION=open_solar_flux&TYPE=i&id=$EMAIL&NPERYEAR=1">observed open solar flux</a> (1967-2010), Lockwood</div>
-<td><a href="http://www.eiscat.rl.ac.uk/Members/mike/Open%20solar%20flux%20data/openflux1675to2010.txt" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=RALData/osf&STATION=open_solar_flux&TYPE=i&id=$EMAIL&NPERYEAR=1">Annual reconstructed open solar flux</a> (1675-2017), <a href="getindices.cgi?WMO=RALData/osf_mo&STATION=open_solar_flux&TYPE=i&id=$EMAIL">almost monthly</a> (1964-2018), Lockwood</div>
+<td><a href="http://iopscience.iop.org/article/10.1088/0004-637X/700/2/937/meta" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>Rotation<td><div class="kalelink"><a href="getindices.cgi?WMO=IERSData/lod_12&STATION=length_of_day&TYPE=i&id=$EMAIL">Length Of Day</a> (1962-now, IERS)</div>
 <td><a href="http://www.iers.org/IERS/EN/DataProducts/EarthOrientationData/eop.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
