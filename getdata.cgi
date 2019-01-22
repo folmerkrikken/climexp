@@ -383,14 +383,14 @@ if [ -s ./data/$TYPE$WMO.dat -a "$WMO" != "time" ]; then
   . ./plot_anomalies.cgi
 fi
 
-if [ $NPERYEAR -gt 12 ]; then
-    . ./count_missing.cgi
-fi
-
 if [ -n "$ROBOT" ]; then
   . ./myvinkfoot.cgi
   exit
 fi  
+
+if [ $NPERYEAR -gt 12 ]; then
+    . ./count_missing.cgi
+fi
 
 if [ -n "$EMAIL" -a "$EMAIL" != someone@somewhere ]; then
   def=./prefs/$EMAIL.selectyears
