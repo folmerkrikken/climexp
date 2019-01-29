@@ -1,6 +1,8 @@
 #!/bin/bash
-. ./init.cgi
-. ./getargs.cgi
+if [ -z "$EMAIL" ]; then
+    . ./init.cgi
+    . ./getargs.cgi
+fi
 lwrite=false
 if [ "$EMAIL" = oldenborgh@knmi.nl ]; then
     lwrite=false # true
