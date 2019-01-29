@@ -52,7 +52,7 @@ href="http://hadobs.metoffice.gov.uk/hadisst/" target="_new"><img src="images/in
 <td><a href="help/prcp_nino_indices.shtml" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=NOAAData/mei&STATION=MEI&TYPE=i&id=$EMAIL">MEI</a>
-(1950-now, NOAA/ESRL/PSD)</div>
+(1950-2018, NOAA/ESRL/PSD)</div>
 <td><a href="http://www.cdc.noaa.gov/people/klaus.wolter/MEI/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=TAOData/tao_wwv&STATION=WWV&TYPE=i&id=$EMAIL">Warm Water Volume</a>
@@ -178,12 +178,10 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <tr><td>&nbsp;<td><div class="kalelink">NOAA/NCEI <a href="getindices.cgi?WMO=NCDCData/ncdc_gl&STATION=NCDC_global_temperature&TYPE=i&id=$EMAIL">Global average temperature</a> (<a href="getindices.cgi?WMO=NCDCData/ncdc_gl_land&STATION=NCDC_global_land_temperature&TYPE=i&id=$EMAIL">land</a>, <a href="getindices.cgi?WMO=NCDCData/ncdc_gl_ocean&STATION=NCDC_global_ocean_temperature&TYPE=i&id=$EMAIL">ocean</a>), (1880-now)</div>
 <td><a href="https://www.ncdc.noaa.gov/cag/global/time-series" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<!--
-<tr><td>&nbsp;<td><div class="kalelink">ERA-interim T2m <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_gl&STATION=ERA_global_t2m&TYPE=i&id=$EMAIL">global</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_land&STATION=ERA_land_t2m&TYPE=i&id=$EMAIL">land</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_sea&STATION=ERA_sea_t2m&TYPE=i&id=$EMAIL">sea</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_nh&STATION=ERA_nh_t2m&TYPE=i&id=$EMAIL">NH</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_sh&STATION=ERA_sh_t2m&TYPE=i&id=$EMAIL">SH</a> T2m  (1979-now)</div>
-<td><a href="http://apps.ecmwf.int/datasets/data/interim_full_moda/" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
--->
+<tr><td>&nbsp;<td><div class="kalelink">ERA-interim <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_gl&STATION=ERA_global_t2m&TYPE=i&id=$EMAIL">global T2m</a>  (1979-now, adjusted over sea for the 0.1&deg;C between 2001 and 2002) </div>
+<td><a href="https://climate.copernicus.eu/node/74" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=YorkData/had4_krig_v2_0_0&STATION=CowtanWay_global_temperature&TYPE=i&id=$EMAIL">HadCRUT4 filled in with kriging</a> (1850-now, Cowtan and Way)</div>
+<tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=YorkData/had4_krig_v2_0_0_gl&STATION=CowtanWay_global_temperature&TYPE=i&id=$EMAIL">HadCRUT4 filled in with kriging</a> (1850-now, Cowtan and Way)</div>
 <td><a href="http://www-users.york.ac.uk/~kdc3/papers/coverage2013/series.html" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink">1850-now <a href="getindices.cgi?WMO=BerkeleyData/t2m_land_ocean_best&STATION=Berkeley_land_ocean_temperature&TYPE=i&id=$EMAIL">Land-ocean temperature</a>, 1750-now <a href="getindices.cgi?WMO=BerkeleyData/t2m_land_best&STATION=Berkeley_land_temperature&TYPE=i&id=$EMAIL">land temperature</a> Berkeley</div>
