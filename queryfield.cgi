@@ -39,6 +39,7 @@ knmi14pcglob*)
     else
         file=UUData/$var/${var}_${type}_${model}_${scen}_%%.nc
     fi
+    LSMASK=UUData/lsmask.nc
     ;;
 
 cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amon_model_exp
