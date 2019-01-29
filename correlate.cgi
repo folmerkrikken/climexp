@@ -55,6 +55,7 @@ echo `date` "$EMAIL ($REMOTE_ADDR) correlate $corrargs" | sed -e  "s:$DIR/::g" >
 corrargs="$corrargs plot ./data/$TYPE$WMO${FORM_num}.cor dump ./data/$TYPE$WMO${FORM_num}.dump"
 . ./myvinkhead.cgi "Time series correlations" "$CLIM $station with $index" "noindex,nofollow"
 
+[ -z "$FORM_runwindow" ] && FORM_runwindow=$FORM_minnum
 if [ -n "$FORM_runcorr" -a -n "$FORM_runvar" ]; then
 	if [ -n "$FORM_minnum" -a "$FORM_minnum" -gt $FORM_runwindow ]; then
 		echo "Warning: you requested a minimum number of points ($FORM_minnum) that is higher then the running correlation window length ($FORM_runwindow). Adjusted it to be the same.<p>"
