@@ -248,7 +248,7 @@ cmip5*|thor*|knmi14*|eucleia*|futureweather*|hiwaves*) # expecting cmip5_var_Amo
                 GISS-E2-R-CC) trylsmask=CMIP5/fixed/sftlf_fx_GISS-E2-R_historical_r0i0p0.nc;; # tmp
                 HadGEM2*)  trylsmask=CMIP5/fixed/sftlf_fx_HadGEM2-ES_historical_r1i1p1.nc;;
                 inmcm4)    trylsmask=CMIP5/fixed/sftlf_fx_${model}_rcp45_r0i0p0.nc;;
-                *)         trylsmask=CMIP5/fixed/sftlf_fx_${model}_historical_r0i0p0.nc;;
+                *)         trylsmask=CMIP5/fixed/sftlf_fx_${model%_p?}_historical_r0i0p0.nc;;
            esac
        fi
        if [ -n "$trylsmask" -a \( -s "$trylsmask" -o -s $HOME/climexp/$trylsmask \) ]; then
