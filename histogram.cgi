@@ -1,12 +1,13 @@
 #!/bin/bash
-. ./init.cgi
-echo 'Content-Type: text/html'
-echo
-echo
 
+if [ -z "$EMAIL " ]; then
+    . ./init.cgi
+    . ./getargs.cgi
+    echo 'Content-Type: text/html'
+    echo
+    echo
+fi
 export DIR=`pwd`
-. ./init.cgi
-. ./getargs.cgi
 WMO=$FORM_WMO
 listname=$WMO
 TYPE=$FORM_TYPE
@@ -14,20 +15,23 @@ NPERYEAR=$FORM_NPERYEAR
 STATION=$FORM_STATION
 NAME=$FORM_NAME
 prog=$NAME
-FORM_dgt=${FORM_dgt%%%}
-FORM_dgt=${FORM_dgt}%
+if [ -n "$FORM_dgt" ]; then
+    FORM_dgt=${FORM_dgt%%%}
+    FORM_dgt=${FORM_dgt}%
+fi
 extraargs="$FORM_extraargs"
 if [ -n "$extraargs" ]; then
   NPERYEAR=`echo "$extraargs" | cut -f 1 -d '_'`
   extraname=`echo "$extraargs " | cut -f 2- -d '_' | tr '_' ' '`
 fi
-. ./nperyear2timescale.cgi
-
+if [ -z "$notimescale" ]; then
+    . ./nperyear2timescale.cgi
+fi
 # check email address
 . ./checkemail.cgi
 
 lwrite=false
-if [ $EMAIL = oldenborgh@knmi.nl ]; then
+if [ $EMAIL = ec8907341dfc63c526d08e36d06b7ed8 ]; then
 	lwrite=false # true
 fi
 
@@ -96,8 +100,12 @@ if [ -n "$FORM_year" ]; then
     fi
 fi
 echo `date` "$EMAIL ($REMOTE_ADDR) histogram $corrargs" >> log/log
-startstop="/tmp/startstop$$.txt"
-corrargs="$corrargs startstop $startstop"
+if [ -z "$nostartstop" ]; then
+    startstop="/tmp/startstop$$.txt"
+    corrargs="$corrargs startstop $startstop"
+else
+    startstop=""
+fi
 root=data/h${TYPE}${WMO}_$$
 
 [ "$lwrite" = true ] && echo bin/histogram $corrargs

@@ -114,6 +114,8 @@ fi
 if [ "$FORM_fitfunc" = "fittime" ]; then
   corrargs="$corrargs fittime"
   [ -n "$FORM_nfittime" ] && corrargs="$corrargs $FORM_nfittime"
+elif [ "$FORM_fitfunc" = histogram ]; then
+  corrargs=$corrargs
 elif [ -n "$FORM_fitfunc" -a "$FORM_fitfunc" != phase ]; then
   corrargs="$corrargs fitfunc $FORM_fitfunc"
 fi

@@ -256,6 +256,7 @@ cubic) cubic_checked="checked";;
 fittime) fittime_checked="checked";;
 fittime_quadratic) fittime_quadratic="checked";;
 phase) phase_checked="checked";;
+histogram) histogram_checked="checked";;
 *) linear_checked="checked";;
 esac
 
@@ -653,8 +654,14 @@ EOF
 <!-- or <input type="radio" class="formradio" name="fitfunc" value="fittimequadratic" $fittime_quadratic>parabola-->
  + a
 <input type="$number" min=2 step=1 class="forminput" name="nfittime" size="2" style="width: 4em;" value="$FORM_nfittime">month time derivative, 
-<input type="radio" class="formradio" name="fitfunc" value="phase" $phase_checked>phase diagram, ...
+<input type="radio" class="formradio" name="fitfunc" value="phase" $phase_checked>phase diagram, 
 EOF
+        if [ -n "$ENSEMBLE" ]; then
+            cat <<EOF
+<input type="radio" class="formradio" name="fitfunc" value="histogram" $histogram_checked>histogram, 
+EOF
+        fi
+        echo '...'
     fi
     echo "<td><a href=\"javascript:pop_page('help/fitfunction.shtml',426,450)\"><img align=\"right\" src=\"images/info-i.gif\" alt=\"help\" border=\"0\"></a>"
     if [ -n "$XYplot" ]; then

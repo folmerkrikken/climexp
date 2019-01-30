@@ -48,12 +48,24 @@ if [ ${FORM_field:-none} != none ]; then
 fi
 # no field...
 . ./getuserindex.cgi
-startstop="/tmp/startstop$$.txt"
-corrargs="$corrargs bootstrap startstop $startstop"
+if [ $FORM_fitfunc != histogram ]; then
+    startstop="/tmp/startstop$$.txt"
+    corrargs="$corrargs bootstrap startstop $startstop"
+fi
 
 echo `date` "$EMAIL ($REMOTE_ADDR) correlate $corrargs" | sed -e  "s:$DIR/::g" >> log/log
-corrargs="$corrargs plot ./data/$TYPE$WMO${FORM_num}.cor dump ./data/$TYPE$WMO${FORM_num}.dump"
+plotfile=./data/$TYPE$WMO${FORM_num}.cor
+corrargs="$corrargs plot $plotfile"
+if [ "$FORM_fitfunc" != histogram ]; then
+    corrargs="$corrargs dump ./data/$TYPE$WMO${FORM_num}.dump"
+fi
+corrroot=./data/$TYPE${WMO}corr${FORM_num}
 . ./myvinkhead.cgi "Time series correlations" "$CLIM $station with $index" "noindex,nofollow"
+
+if [ $FORM_fitfunc = histogram ]; then
+    . ./fit_histogram.cgi
+    exit
+fi
 
 [ -z "$FORM_runwindow" ] && FORM_runwindow=$FORM_minnum
 if [ -n "$FORM_runcorr" -a -n "$FORM_runvar" ]; then
@@ -70,7 +82,6 @@ if [ -n "$FORM_runcorr" -a -n "$FORM_runvar" ]; then
         echo "Varying starting dates are under development, please check results<p>"
     fi
 fi
-corrroot=$DIR/data/$TYPE${WMO}corr${FORM_num}
 [ "$lwrite" = true ] && echo "correlate $corrargs <p>"
 ./bin/correlate $corrargs
 if [ -s "$startstop" ]; then
