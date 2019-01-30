@@ -178,7 +178,7 @@ target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a
 <tr><td>&nbsp;<td><div class="kalelink">NOAA/NCEI <a href="getindices.cgi?WMO=NCDCData/ncdc_gl&STATION=NCDC_global_temperature&TYPE=i&id=$EMAIL">Global average temperature</a> (<a href="getindices.cgi?WMO=NCDCData/ncdc_gl_land&STATION=NCDC_global_land_temperature&TYPE=i&id=$EMAIL">land</a>, <a href="getindices.cgi?WMO=NCDCData/ncdc_gl_ocean&STATION=NCDC_global_ocean_temperature&TYPE=i&id=$EMAIL">ocean</a>), (1880-now)</div>
 <td><a href="https://www.ncdc.noaa.gov/cag/global/time-series" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
-<tr><td>&nbsp;<td><div class="kalelink">ERA-interim <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_gl&STATION=ERA_global_t2m&TYPE=i&id=$EMAIL">global T2m</a>  (1979-now, adjusted over sea for the 0.1&deg;C between 2001 and 2002) </div>
+<tr><td>&nbsp;<td><div class="kalelink">ERA-interim <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_gl&STATION=ERA_global_t2m&TYPE=i&id=$EMAIL">global T2m</a>, <a href="getindices.cgi?WMO=ERA-interim/erai_t2m_eu&STATION=ERA_europe_t2m&TYPE=i&id=$EMAIL">Europe land T2m</a> (1979-now, adjusted over sea for the 0.1&deg;C between 2001 and 2002) </div>
 <td><a href="https://climate.copernicus.eu/node/74" target="_new"><img src="images/info-i.gif" alt="more information" border="0"></a>
 
 <tr><td>&nbsp;<td><div class="kalelink"><a href="getindices.cgi?WMO=YorkData/had4_krig_v2_0_0_gl&STATION=CowtanWay_global_temperature&TYPE=i&id=$EMAIL">HadCRUT4 filled in with kriging</a> (1850-now, Cowtan and Way)</div>
