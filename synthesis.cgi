@@ -204,6 +204,11 @@ if [ -z "$nocomputation" ]; then
     else
         xmax="(SSTATS_max*1.1)"
     fi
+    if [  -n "$FORM_log" ]; then
+        line=1
+    else
+        line=0
+    fi
 
     cat > ${root}.gnuplot <<EOF
 #!/usr/bin/gnuplot
@@ -222,7 +227,7 @@ stats '${root}.txt' using 4
 set xrange[-0.5:(STATS_records-0.5)]
 set yrange [$xmin:$xmax]
 $setlogscaley
-plot 1 notitle w line lt 0, \
+plot ${line} notitle w line lt 0, \
     '${root}.txt' using (\$0):(STATS_min/1.1):7 notitle with labels rotate right, \
     '${root}.txt' using (\$0):3:(\$0-0.2):(\$0+0.2):4:5:6 notitle with boxxyerrorbars fs solid lc variable, \
     '${root}.txt' using (\$0):3:(0.2) notitle with xerrorbars lt -1 lw 5
