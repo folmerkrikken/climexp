@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$EMAIL " ]; then
+if [ -z "$EMAIL" ]; then
     . ./init.cgi
     . ./getargs.cgi
     echo 'Content-Type: text/html'
