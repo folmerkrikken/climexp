@@ -1,1 +1,4 @@
-/usr/bin/gunzip
+#!/bin/sh
+# macOS only has /usr/bin/gunzip, Ubuntu only /bin/gunzip, Fedora both.
+export PATH=/bin:/usr/bin
+gunzip "$@"
