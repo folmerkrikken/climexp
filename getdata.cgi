@@ -44,6 +44,31 @@ if [ -n "$warning" ]; then
     echo "$warning<p>"
 fi
 
+if [ ${file#data/uploaded} != $file -a ${file%.nc} != $file ]; then # uploaded netcdf file
+    [ "$lwrite" = true ] && echo "investigating $file<br>"
+    describefield $file > /tmp/getdata$$.txt 2>&1
+    line=`fgrep "ound ensemble members" /tmp/getdata$$.txt`
+    if [ -n "$line" ]; then
+        echo $line
+        nens1=`echo $line | awk '{print $4}'`
+        nens2=`echo $line | awk '{print $6}'`
+        nens2=${nens2%<*}
+        if [ $nens1 != $nens2 ]; then
+            i=0
+            newfile=data/iuploaded@@@_$i.nc
+            while [ -s $newfile -a $i -lt 1000 ]; do
+                ((i++))
+                newfile=data/iuploaded@@@_$i.nc
+            done
+            mv $file $newfile
+            file=$newfile
+            WMO=data/uploaded@@@_$i
+            PROG="netcdf2dat $file"
+            lwrite=true
+        fi
+    fi
+fi
+
 if [ "$lwrite" = true ]; then
     echo "WMO=$WMO<br>"
     echo "PROG=$PROG<br>"
@@ -152,6 +177,9 @@ EOF
       cp $ncfile ./data/$TYPE$WMO.nc.$$
       mv ./data/$TYPE$WMO.nc.$$ ./data/$TYPE$WMO.nc
     fi
+  elif [ "${PROG#netcdf2dat}" != "$PROG" ]; then
+    # do not regenerate .nc file
+    touch $file
   fi
   return=$?
   return=0
@@ -269,7 +297,7 @@ else
         # also generate netcdf files for the rest of the ensemble
         ensfile=$firstfile
         i=0
-        while [ -s $ensfile ]; do
+        while [ -s $ensfile -a $i -lt 1000 ]; do
             ncfile=${ensfile%.dat}.nc
             if [ ! -s $ncfile -o $ncfile -ot $ensfile ]; then
                 if [ "$netcdf_ok" = true ]; then
