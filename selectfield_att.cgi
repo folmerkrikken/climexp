@@ -604,7 +604,7 @@ Resources not listed are either easily accessible through  other Climate Explore
 or available from the authors (except for non-public data such as the IMD analyses).
 
 <div class=alineakop>East African droughts</div>
-<a href="EastAfrica_timeseries.cgi&id=$EMAIL">Separate page</a>
+<a href="EastAfrica_timeseries.cgi?id=$EMAIL">Separate page</a>
 
 <div class=alineakop>Heat waves summer 2018</div>
 Daily SLP 65-75N, 10-30E <a href="getindices.cgi?WMO=KNMI14Data/Blocking/ierai_slp_daily_10-30E_65-75N_n&STATION=ERAi_slp_scandinavia&TYPE=i&id=$EMAIL&NPERYEAR=366">ERA-interim</a>, <a href="getindices.cgi?WMO=KNMI14Data/Blocking/iknmi14_psl_Aday_ECEARTH23_rcp85_10-30E_65-75N_n_%%&STATION=ECEARTH23medres_rcp85_slp_scandinavia&TYPE=i&id=$EMAIL&NPERYEAR=366">EC-Earth 2.3 T159 coupled transient runs</a>,<br>
