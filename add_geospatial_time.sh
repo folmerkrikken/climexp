@@ -51,7 +51,7 @@ else
     fi
     lonline=`cat $tmpfile | fgrep "X axis"`
     gridtype=`echo $lonline | awk '{print $3}'`
-    if [ $gridtype = irregular ]; then
+    if [ "$gridtype" = irregular ]; then
         lon1=`echo $lonline | awk '{print $9}'`
         n=8
         l=start
@@ -61,7 +61,7 @@ else
             l=`echo $lonline | awk "{print \$"$n"}"`
             ###echo "l=$l"
         done
-    else
+    elif [ -n "$gridtype" ]; then
         lonstep=`echo $lonline | awk '{print $7}' | sed -e 's/&deg;//' | tr -d ' -'`
         lonline=`cat $tmpfile | fgrep 'first point' | head -n 1`
         lon1=`echo $lonline | awk '{print $4}' | sed -e 's/&deg;//'`
