@@ -42,3 +42,4 @@ else
     ylabel="$ylabel (anomalies)"
   fi
 fi
+ylabel=`echo "$ylabel" | tr '_' ' '`
