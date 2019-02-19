@@ -14,15 +14,15 @@ The following datasets are available in the KNMI Climate Change Atlas:
 <li>Temperature:
 <ul>
 <li>GISS 1200km interpolated: relatively low-resolution temperature dataset, more accurate over large spatial (more than 1000km) and temporal (annual and longer) time scales.
-<li>NCDC MOST: less interpolated dataset with other homogeneities, 5&deg; resolution.
+<li>NCDC globaltemp: less interpolated dataset with other homogeneities, 5&deg; resolution.
 <li>HadCRUT4: dataset with most holes, with advanced SST corrections; area averages are less accurate due to the missing data.
 <li>CRU TS 3.10: fully interpolated dataset with high resolution (0.5&deg;), in areas without observations it gives climatology.
 </ul>
 <li>Precipitation:
 <ul>
-<li>GPCC v6: high-resolution reconstruction of precipitation, contains climatology in areas without observations.
+<li>GPCC: high-resolution reconstruction of precipitation, contains climatology in areas without observations.
 <li>NCDC anomalies: low-resolution (5&deg;) analysis with missing data.
-<li>CRU TS 3.10.01: high-resolution reconstruction of precipitation, contains climatology in areas without observations.
+<li>CRU TS 4: high-resolution reconstruction of precipitation, contains climatology in areas without observations.
 </ul>
 <li>Sea-level pressure
 <ul>
