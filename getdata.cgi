@@ -730,5 +730,5 @@ Ensemble members: <input type="$number" min=0 step=1 size="3" style="width: 4em;
 
 EOF
 fi
-
+FORM_field=""
 . ./myvinkfoot.cgi
