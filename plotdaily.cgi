@@ -146,7 +146,7 @@ else
     else
         timefmt="'%Y%m'"
     fi
-    if [ \( "$NEWUNITS" = "mm/dy" -a "${VAR#ev}" = "$VAR" \) -o "$VAR" = "soilw" ]; then
+    if [ \( \( "$NEWUNITS" = "mm/day" -o "$NEWUNITS" = "mm/dy" \) -a "${VAR#ev}" = "$VAR" \) -o "$VAR" = "soilw" ]; then
         above=3
         below=1
     else
