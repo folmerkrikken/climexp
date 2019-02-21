@@ -347,7 +347,7 @@ for p,predictand in enumerate(predictands):
                
         data_fit_tot.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+mon+'.nc')
         beta_xr_tot.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+mon+'.nc')
-        del(data_fit_tot,beta_xr_tot)
+        
     # Sort all data by time dimension
     #filn = ['pred_v2_','beta_v2_','predictors_v2_','predictors_fit_v2_']
     #for fil in filn:
@@ -517,7 +517,7 @@ for p,predictand in enumerate(predictands):
                             )
                             #plt.annotate('<---- below lower tercile        
             
-            
+            del(data_fit_tot,beta_xr_tot)
         
                 
     import time        
