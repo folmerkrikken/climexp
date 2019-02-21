@@ -200,7 +200,7 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
 
     
     print('     Writing to netcdf')
-    print(bdnc+'pred_v2_'+predictand)
+    #print(bdnc+'pred_v2_'+predictand)
     #to_nc2(data_fit,bdnc + 'pred_v2_'+predictand)
     #data_fit.to_netcdf(bdnc + 'pred_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')
     #to_nc2(beta_xr,bdnc+ 'beta_v2_'+predictand)

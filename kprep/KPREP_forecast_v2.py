@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
-
-
 import os, sys, glob, re, pickle, time
 import numpy as np
 import scipy
@@ -9,7 +7,7 @@ import matplotlib
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import urllib.request, urllib.error, urllib.parse
-from SPECS_forecast_v5_tools import *
+from KPREP_forecast_v2_tools import *
 import xarray as xr
 import pandas as pd
 import datetime
@@ -25,7 +23,7 @@ dt = datetime.date.today()
 start0 = time.time()
 
 predictands = ["GCEcom"]#,"20CRslp","GPCCcom"]
-predictands = ["20CRslp","GPCCcom"]
+#predictands = ["20CRslp","GPCCcom"]
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
 predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
@@ -36,7 +34,7 @@ predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
 resolution = 25             # 10, 25 or 50
 
 ## Redo full hindcast period and remove original nc output file?
-overwrite = False
+overwrite = True
 ## Redo a specific month / year?
 overwrite_m = False          # Overwrite only the month specified with overw_m and overw_y
 overw_m = 2                 # Jan = 1, Feb = 2.. etc
@@ -69,13 +67,22 @@ endyear =       dt.year
 endmonth =      dt.month-1  # -1 as numpy arrays start with 0
 
 # Set working directories
-bd = '/home/oldenbor/climexp/kprep/'
-bd_data = '/home/oldenbor/climexp_data/KPREPData/'
-#bd = os.getcwd()+'/'
+bd = os.getcwd()
+if bd == '/home/folmer/climexp/kprep': # We're home
+    bd_data = '/home/folmer/climexp_data/KPREPData/'
+else: # We're on climate explorer
+    bd_data = '/home/oldenbor/climexp_data/KPREPData/'
+
 bdid = bd_data+'inputdata/'
 bdp = bd+'plots/'
 bdnc = bd_data+'ncfiles/'
 
+# Make directories if not already present
+if not os.path.isfile(bd_data+'targetgrid'): os.system('mkdir -p '+bd_data+'targetgrid')
+if not os.path.isfile(bdid): os.system('mkdir -p '+bdid)
+if not os.path.isfile(bdp): os.system('mkdir -p '+bdp)
+if not os.path.isfile(bdnc): os.system('mkdir -p '+bdnc)
+if not os.path.isfile(bdnc+'cor_pred'): os.system('mkdir -p '+bdnc+'cor_pred')
 
 # Defining some arrays used for writing labels and loading data
 months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
@@ -238,6 +245,7 @@ for p,predictand in enumerate(predictands):
         for fil in filez: os.remove(fil)
     elif overwrite_m:
         mon_range = [overw_m]
+        
         #filez = glob.glob(bdnc+'*'+predictand+'_'+str(overw_m).zfill(2)+'.nc')
         #for fil in filez: os.remove(fil)
         
@@ -339,6 +347,7 @@ for p,predictand in enumerate(predictands):
                
         data_fit_tot.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+mon+'.nc')
         beta_xr_tot.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+mon+'.nc')
+        del(data_fit_tot,beta_xr_tot)
     # Sort all data by time dimension
     #filn = ['pred_v2_','beta_v2_','predictors_v2_','predictors_fit_v2_']
     #for fil in filn:

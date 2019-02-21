@@ -7,9 +7,9 @@
 res=$1
 
 # Copy grid description file to correct place
-cp griddes${res}.txt /home/oldenbor/climexp_data/KPREPData/targetgrid/
+cp griddes${res}.txt ~/climexp_data/KPREPData/targetgrid/
 # Change working directory to where to store data / files / plots / etc.
-cd /home/oldenbor/climexp_data/KPREPData
+cd ~/climexp_data/KPREPData
 # First get resolution..
 # Download ERSSTV5 from climexp
 wget -N http://climexp.knmi.nl/NCDCData/ersstv5.nc -P inputdata/
