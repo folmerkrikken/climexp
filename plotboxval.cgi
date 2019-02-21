@@ -4,7 +4,7 @@ export DIR=`pwd`
 . ./getargs.cgi
 # printenv
 email="$EMAIL"
-. ./nosearchengine.cgi
+. ./nosearchenginewithheader.cgi
 climate="$FORM_climate"
 prog="$FORM_prog"
 listname="$FORM_listname"
