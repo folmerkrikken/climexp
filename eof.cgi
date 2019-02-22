@@ -89,6 +89,7 @@ while [ $ieof -lt ${FORM_neof:-4} ]
 do
   ieof=$(($ieof+1))
   FORM_var=eof$ieof
+  var=EOF$ieof
   uniq=${root}_$ieof
   if [ $ieof -lt ${FORM_neof:-4} ]; then
     insideloop=true
