@@ -1,4 +1,4 @@
-
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 
@@ -7,6 +7,7 @@ import xarray as xr
 import numpy as np           
 from mpl_toolkits.basemap import Basemap
 import numpy as np
+import os
 
 import plotly.plotly as py
 from plotly.graph_objs import *
@@ -18,20 +19,24 @@ from dash.dependencies import Input, Output
 import dash_html_components as html
 import dash_core_components as dcc
 
-
-# Online modus
-app = dash.Dash(__name__)#, external_stylesheets=external_stylesheets)
-app.config.requests_pathname_prefix = app.config.routes_pathname_prefix.split('/')[-1]
-server = app.server
-
-# Offline modus
-#app = dash.Dash()
-##Run offline?
-#app.css.config.serve_locally = True
-#app.scripts.config.serve_locally = True
+ONLINE=True
+if ONLINE:
+    # Online modus
+    app = dash.Dash(__name__)#, external_stylesheets=external_stylesheets)
+    app.config.requests_pathname_prefix = app.config.routes_pathname_prefix.split('/')[-1]
+    server = app.server
+else:
+    # Offline modus
+    app = dash.Dash()
+    app.css.config.serve_locally = True
+    app.scripts.config.serve_locally = True
 
 # Where is the data stored?
-bd = '/home/oldenbor/climexp_data/KPREPData'
+
+bd = '/home/oldenbor/climexp_data/KPREPData/'
+if not os.path.isfile(bd):
+    bd = '/home/folmer/climexp_data/KPREPData/'
+    
 #bd = '/home/folmer/KPREP/'
 bdnc = bd+'ncfiles/'
 
@@ -371,9 +376,10 @@ def create_bar_plot(clickData,variable,fc_time):
 
     # Load data
     pred_1d = xr.open_dataset(bdnc+'pred_v2_'+variables[variable]+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
-    for_anom = pred_1d['kprep'].mean(dim='ens')
-    #for_anom = pred_1d['kprep'].isel(ens=0)
-    co2_anom = pred_1d['trend'].mean(dim='ens')
+    #for_anom = pred_1d['kprep'].mean(dim='ens')
+    for_anom = pred_1d['kprep'].isel(ens=0)
+    #co2_anom = pred_1d['trend'].mean(dim='ens')
+    co2_anom = pred_1d['trend'].isel(ens=0)
     beta_1d = xr.open_dataset(bdnc+'beta_v2_'+variables[variable]+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
     predo_1d = xr.open_dataset(bdnc+'predodata_3m_fit_'+variables[variable]+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
     predos = list(predo_1d.data_vars)
