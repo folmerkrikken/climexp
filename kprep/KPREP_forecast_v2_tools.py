@@ -162,15 +162,23 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     X_tr = predodata_3m_fit.sel(time=train).to_array().values       # Detrended predictor training data
     X_te = predodata_3m_fit.sel(time=test).to_array().values        # Detrended predictor test data
 
-    # Parallelized regression
-    regr_output = np.asarray(Parallel(n_jobs=8)(delayed(regrezzion)(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[:,i,j])for i,j in zip(ii,jj)))
     
-    # Put data obtained in regression back to right place..
     fit_train = np.full_like(Y_tr,np.nan)
-    fit_train[:,rest] = np.vstack(regr_output[:,0]).T
-    kprep[:,0,rest] = np.vstack(regr_output[:,1]).T 
-    beta[:,1:,rest] = np.vstack(regr_output[:,2]).T
+    # Parallelized regression input > y,X_tr,X_te,sig, output > fit_train,fit_test,beta
     
+    PARALLEL = False
+    if PARALLEL:
+        regr_output = np.asarray(Parallel(n_jobs=8)(delayed(regrezzion)(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[:,i,j])for i,j in zip(ii,jj)))
+        
+        
+        # Put data obtained in regression back to right place..
+        fit_train[:,rest] = np.vstack(regr_output[:,0]).T
+        kprep[:,0,rest] = np.vstack(regr_output[:,1]).T 
+        beta[:,1:,rest] = np.vstack(regr_output[:,2]).T
+    else:    
+        for i,j in zip(ii,jj):
+            fit_train[:,i,j],kprep[:,0,i,j],beta[:,1:,i,j] = regrezzion(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[:,i,j])
+        
     # Generate ensemble based on random sampling 50 years from residuals (fit_train - Y_tr)
     # The transpose is needed because numpy changes the axis order when combining advanced and normal indexing
     for n in range(len(test)): 
