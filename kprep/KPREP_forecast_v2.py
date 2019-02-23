@@ -22,8 +22,8 @@ dt = datetime.date.today()
 #date_list = [dt.year, dt.month, dt.day]
 start0 = time.time()
 
-#predictands = ["GCEcom"]#,"20CRslp","GPCCcom"]
-predictands = ["20CRslp","GPCCcom"]
+predictands = ["GCEcom","20CRslp","GPCCcom"]
+#predictands = ["20CRslp","GPCCcom"]
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
 predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
