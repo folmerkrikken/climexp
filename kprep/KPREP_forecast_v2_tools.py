@@ -183,8 +183,11 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     # The transpose is needed because numpy changes the axis order when combining advanced and normal indexing
     for n in range(len(test)): 
         kprep[n,1:,rest] = (kprep[n,0,rest] + (fit_train[:,rest] - Y_tr[:,rest])[rand_yrs[n,1:],:]).T
-
-    kprep[:,:,rest] = kprep[:,:,rest] + trend[:,0,rest][:,None,:]  # Manually add trend due to CO2 after regression
+    
+    # Create boolean array where to apply trend is significant and rest = True
+    rest_sig = rest & (sig_nc[0,:]<0.1)
+    
+    kprep[:,:,rest_sig] = kprep[:,:,rest_sig] + trend[:,0,rest_sig][:,None,:]  # Manually add trend due to CO2 after regression
             
     t2 = time.time()
     
@@ -196,8 +199,8 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     data_fit['obs'] = (('time','lat','lon'),obs)
     beta_xr['beta'] = (('time','predictors','lat','lon'),beta)
 
-
-    
+    #import pdb; pdb.set_trace()
+    #sys.exit()
     t3=time.time()
 
     ### WRITE OUTPUT TO NETCDF
@@ -995,11 +998,11 @@ def plot_climexp(data,line1,line2,line3,cmap=[],cmap_under=[],cmap_over=[],predi
 
     if data.name in ['tercile','cor']:
         cs = ax.contourf(lons,lats,data.values,clevs,norm=norm,cmap=cmap)#,clevs,norm,cmap)
-    elif data.name in ['crpss','rmsess','kprep','crpss_co2']:
+    elif data.name in ['crpss','rmsess','kprep','crpss_co2','for_anom']:
         cs = ax.contourf(lons,lats,data.values,clevs,norm=norm,cmap=cmap,extend='both')
     ax.coastlines()
     if sig != []:
-       if data.name == 'kprep': sigvals = np.where(np.logical_and(sig[:,:]>0.1,sig[:,:]<1.))
+       if data.name == 'for_anom': sigvals = np.where(np.logical_and(sig[:,:]>0.1,sig[:,:]<1.))
        else: sigvals = np.where(sig[:,:]<0.05)
        ax.scatter(lon2d[sigvals],lat2d[sigvals],marker='.',c='k',s=5.,lw=0.)
                     

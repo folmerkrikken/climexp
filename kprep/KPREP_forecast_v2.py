@@ -23,7 +23,7 @@ dt = datetime.date.today()
 start0 = time.time()
 
 predictands = ["GCEcom","20CRslp","GPCCcom"]
-#predictands = ["20CRslp","GPCCcom"]
+predictands = ["GPCCcom"]
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
 predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
@@ -38,7 +38,7 @@ overwrite = True
 ## Redo a specific month / year?
 overwrite_m = False          # Overwrite only the month specified with overw_m and overw_y
 overw_m = 2                 # Jan = 1, Feb = 2.. etc
-overw_y = 2017
+overw_y = 2019
 
 ## Update indices if possible
 UPDATE = True
@@ -157,7 +157,7 @@ for p,predictand in enumerate(predictands):
 
     elif predictand == 'GPCCcom':
         # These predictors are selelected for GPCCcom in the first predictor selection step
-        predictorz.append(['CO2EQ','NINO34','AMO','IOD','PERS','PERS_TREND'])
+        predictorz.append(['CO2EQ','NINO34','PDO','AMO','IOD','PERS','PERS_TREND'])
         gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc')
         # Create anomalies with 1980-2010 as baseline climatology
         gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
@@ -305,7 +305,7 @@ for p,predictand in enumerate(predictands):
                 test = timez[y:y+3]
                 train = timez.drop(test)
                 
-                if predictand == 'GPCCcom':
+                if predictand == 'GPCCcom': # Disregard all precipitation data before 1951
                     train = train[50:]
                 
                 print('test years: ',test)
@@ -369,6 +369,14 @@ for p,predictand in enumerate(predictands):
                     'lon': data_fit_tot['lon'],
                     'time': timez[-1]}).expand_dims('time')
 
+            # Calculate significance of ensemble mean
+            tmp = data_fit_tot.kprep.isel(time=-1).mean('ens').values
+            posneg = tmp > 0.
+            above = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values>0,axis=0)/51.)
+            below = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values<0,axis=0)/51.)
+            sig_ensmean = np.ones((len(data_fit.lat),len(data_fit.lon)))
+            sig_ensmean[posneg] = above[posneg]
+            sig_ensmean[~posneg] = below[~posneg]
 
             print('month = ',str(m+1))
             # Create correlation scores and its significance
@@ -387,6 +395,8 @@ for p,predictand in enumerate(predictands):
             scores['tercile'] = (('time','lat','lon'), tercile_category(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['kprep'].isel(time=-1).values)[np.newaxis,:,:])
             
             scores['for_anom'] = (('time','lat','lon'),data_fit_tot['kprep'].isel(time=-1).mean(dim='ens').values[np.newaxis,:,:])
+            
+            scores['for_anom_sig'] = (('time','lat','lon'),sig_ensmean[np.newaxis,:,:])
             
             scores.to_netcdf(bdnc+'scores_v2_'+predictand+'_'+mon+'.nc')
             #to_nc2(scorez,bdnc + 'scores_v2_'+predictand)
@@ -441,14 +451,7 @@ for p,predictand in enumerate(predictands):
             if not os.path.exists(bdpo):
                 os.makedirs(bdpo)
                
-            # Calculate significance of ensemble mean
-            tmp = data_fit_tot.kprep.isel(time=-1).mean('ens').values
-            posneg = tmp > 0.
-            above = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values>0,axis=0)/51.)
-            below = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values<0,axis=0)/51.)
-            sig_ensmean = np.ones((len(data_fit.lat),len(data_fit.lon)))
-            sig_ensmean[posneg] = above[posneg]
-            sig_ensmean[~posneg] = below[~posneg]
+
             
             plot_climexp(scores.rmsess.isel(time=-1),
                             'RMSESS hindcasts, climatology as reference (1961-current)',
@@ -484,11 +487,11 @@ for p,predictand in enumerate(predictands):
                             fname=bdpo+predictand+'_crpss_detrended_clim_'+year+mon+'.png',
                             clevs = np.array((-0.5,-0.35,-0.2,-0.1,0.1,0.2,0.35,0.5)),
                             )    
-            plot_climexp(data_fit_tot.kprep.isel(time=-1).mean('ens'),
+            plot_climexp(scores.for_anom.isel(time=-1),
                             'Ensemble mean anomaly (wrt 1980-2010)',
                             'SPECS Empirical Seasonal Forecast: '+var+' ('+season+' '+year+')',
                             'Ensemble size: 51 | Forecast generation date: '+dt.strftime("%d/%m/%Y")+'  |  Stippled where NOT significant at 10% level'+' | base time: '+months[m]+' '+year,
-                            sig=sig_ensmean,
+                            sig=scores.for_anom_sig.isel(time=-1).values,
                             cmap=cmap2,
                             predictand = predictand,
                             cmap_under = cmap_under,
