@@ -21,7 +21,7 @@ from dash.dependencies import Input, Output
 import dash_html_components as html
 import dash_core_components as dcc
 
-ONLINE=True
+ONLINE=False
 if ONLINE:
     # Online modus
     app = dash.Dash(__name__)#, external_stylesheets=external_stylesheets)
@@ -104,28 +104,28 @@ def get_country_traces():
 # Get list of of coastline and country lon/lat traces
 traces_cc = get_coastline_traces()#+get_country_traces()
 
-## Get all plotting info
+## Get all plotting infoH<sub>2</sub>O
 
-plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.},
-                       'RMSESS':{'vmin':-0.5,'vmax':0.5},
-                       'CRPSS':{'vmin':-0.5,'vmax':0.5},
-                       'Tercile summary plot':{'vmin':-100.,'vmax':100.},
-                       'Correlation':{'vmin':0,'vmax':1.},
+plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.,'units':'[<sup>o</sup>C]'},
+                       'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
+                       'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':['#000099','#3355ff','#66aaff','#77ffff','#ffffff','#ffff33','#ffaa00','#ff4400','#cc0022']
                        },
-            'GPCCcom':{'Forecast anomalies':{'vmin':-50.,'vmax':50.},
-                       'RMSESS':{'vmin':-0.5,'vmax':0.5},
-                       'CRPSS':{'vmin':-0.5,'vmax':0.5},
-                       'Tercile summary plot':{'vmin':-100.,'vmax':100.},
-                       'Correlation':{'vmin':0,'vmax':1.},
+            'GPCCcom':{'Forecast anomalies':{'vmin':-50.,'vmax':50.,'units':'[mm]'},
+                       'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
+                       'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':
                         ['#993300','#cc8800','#ffcc00','#ffee99','#ffffff','#ccff66','#33ff00','#009933','#006666']
                        },
-            '20CRslp':{'Forecast anomalies':{'vmin':-4.,'vmax':4.},
-                       'RMSESS':{'vmin':-0.5,'vmax':0.5},
-                       'CRPSS':{'vmin':-0.5,'vmax':0.5},
-                       'Tercile summary plot':{'vmin':-100.,'vmax':100.},
-                       'Correlation':{'vmin':0,'vmax':1.},
+            '20CRslp':{'Forecast anomalies':{'vmin':-4.,'vmax':4.,'units':'[hPa]'},
+                       'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
+                       'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':
                        ['#000099','#3355ff','#66aaff','#77ffff','#ffffff','#ffff33','#ffaa00','#ff4400','#cc0022']
                        }
@@ -151,7 +151,7 @@ variables={'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure'
 
 anno_text = "Data courtesy of Folmer Krikken"
 
-clickData_start = dict({u'points': [{u'y': 0., u'x': 0., u'pointNumber': 6, u'curveNumber': 632}]})
+clickData_start = dict({u'points': [{u'y': -8., u'x': 21., u'pointNumber': 6, u'curveNumber': 632}]})
 
 
 axis_style = dict(
@@ -227,8 +227,6 @@ app.layout = html.Div(children=[
 
 ## Start plotting functions
 
-# Predefine clickdata, otherwise no figures besides the map
-
     
 def create_map(clickData,plot_type,variable,fc_time):
     print(' ')
@@ -236,8 +234,7 @@ def create_map(clickData,plot_type,variable,fc_time):
     print(' ')
     if clickData == None: clickData = clickData_start
     predictand = variables[variable]
-        
-    print(clickData)
+
     lat_click=clickData['points'][0]['y']
     lon_click=clickData['points'][0]['x']
     
@@ -254,25 +251,65 @@ def create_map(clickData,plot_type,variable,fc_time):
     #data_xr = scores[plottypes[plot_type]].isel(time=-dict_times[fc_time]).values
     #data = scores[plottypes[plot_type]].sel(times_m == m).values
     #scores_1t = scores.isel(time=-dict_times[fc_time])
+    
+    if plot_type == 'Forecast anomalies': # Calculate significance of ensemble mean
+        print('still to implement')
+        #sig = scores.for_anom_sig
+        sig = scores.cor_sig.values.squeeze()
+    elif plot_type == 'Correlation':
+        sig = scores.cor_sig.values.squeeze()
+        
+    if 'sig' in locals():
+       if plot_type == 'Forecast anomalies': 
+           #sigvals = np.where(np.logical_and(sig[:,:]>0.1,sig[:,:]<1.))
+           sigvals = np.where(sig[:,:]<0.05)
+           
+       else: sigvals = np.where(sig[:,:]<0.05)
+       lon2d, lat2d = np.meshgrid(scores.lon.values, scores.lat.values)
+
+    
     titel = u"variable = "+variable+", plot type = "+plot_type+', valid for: '+season+' '+str(year)
     colorz = plot_dict[variables[variable]]['colors']
     
     colorsceel=[ [0, colorz[0]],[0.1, colorz[1]], [0.3, colorz[2]], [0.45, colorz[3]], [0.55, colorz[4]], [0.67, colorz[5]], [0.9, colorz[6]], [1,colorz[7]]]
     
-
-    print(variable,plot_type)
-
-    return( 
-            #go.contour(z=data_xr,x=scores.lon.values,y=scores.lat.values,contours=dict(start=-2,end=2))autocolorscale=False,zauto=False,
-            go.Figure(
-            data=
-                traces_cc+[Contour(z=data_xr,
+    # Make traces of contour plot, marker where clicked and if possible significant markers
+    
+    trace_contour = [Contour(z=data_xr,
                                    x=scores.lon.values,
                                    y=scores.lat.values,
                                    zmin=plot_dict[predictand][plot_type]['vmin'],
                                    zmax=plot_dict[predictand][plot_type]['vmax'],
                                    colorscale=colorsceel,
-                                   opacity=1.)],
+                                   opacity=1.,
+                                   colorbar=dict(
+                                    title=plot_dict[predictand][plot_type]['units'],
+                                    titleside='right',
+                                    titlefont=dict(size=18)),
+                                   )]
+
+    trace_clickpoint = [Scatter(x=[lon_click]
+                         ,y=[lat_click]
+                         ,mode='markers'
+                         ,marker=dict(size=10,color='black',line=dict(width=2)))]
+    
+    
+    
+    if 'sig' in locals():
+        trace_sig = [Scatter(x=lon2d[sigvals],
+                            y=lat2d[sigvals],
+                            mode='markers',
+                            marker=dict(size=1,color='black'),
+                            )]
+        traces = traces_cc + trace_contour + trace_sig + trace_clickpoint
+    else:
+        traces = traces_cc + trace_contour + trace_clickpoint    
+
+    print(variable,plot_type,lon_click,lat_click)
+
+    return( 
+            go.Figure(
+            data=traces,
             layout = Layout(
                 title=titel,
                 showlegend=False,
@@ -330,13 +367,11 @@ def create_time_series(clickData,variable,fc_time):
     obs_nc = xr.open_dataset(bdnc+'predadata_v2_'+predictand+'.nc')
     obs1d = obs_nc.to_array().sel(lat=lat_click,lon=lon_click,method='nearest').sel(time=(obs_nc['time.month']==month)).load()
     time_pd_long = obs1d.time.to_pandas()
-    print(obs1d.values.squeeze())
-    print('test')
     #print(time_pd)
     #print(len(time_pd))
     return(
         go.Figure(
-        data=#Data(
+        data=
             [go.Scatter(x=time_pd,y=kprep_mean+kprep_std,mode='lines',fillcolor='rgba(0,100,80,0.2)',line=Line(color='rgba(0,100,80,0.2)'),opacity=0.9,showlegend=False)]
             +
             [go.Scatter(x=time_pd,y=kprep_mean-kprep_std,mode='lines',fill='tonexty',fillcolor='rgba(0,100,80,0.2)',line=Line(color='rgba(0,100,80,0.2)'),opacity=0.9,name='For. spread (2'+u"\u03C3"+')')]
@@ -351,9 +386,9 @@ def create_time_series(clickData,variable,fc_time):
             #),
 
         layout = Layout(
-            title = 'Time series of the forecast, climatology and observations',
+            title = 'Time series of the forecast, forecast only on CO2, climatology and observations (lat='+str(lat_click)+', lon='+str(lon_click)+')',
             #height =  225,
-            margin = {'l': 20, 'b': 30, 'r': 10, 't': 10},
+            #margin = {'l': 20, 'b': 30, 'r': 10, 't': 10},
             autosize=False,
             width=1000.,
             height=400.,
@@ -369,20 +404,21 @@ def create_time_series(clickData,variable,fc_time):
                      step='year',
                      stepmode='backward'),
                 #dict(step='all')
-                ])
+                ]),
             ),
             rangeslider=dict(),
             type='date'
-            )
+            ),
+            yaxis=dict(title=variable+' '+plot_dict[predictand]['Forecast anomalies']['units']),     
             )
         ))   
       
-def create_bar_plot(clickData,variable,fc_time):
+def create_bar_plot(clickData,plot_type,variable,fc_time):
     print(' ')
     print('>>> Starting create_bar_plot <<<')
     print(' ')
     
-
+    predictand = variables[variable]
     if clickData == None: clickData = clickData_start
 
     lat_click=clickData['points'][0]['y']
@@ -391,13 +427,13 @@ def create_bar_plot(clickData,variable,fc_time):
     month = np.int(fc_time[5:])
 
     # Load data
-    pred_1d = xr.open_dataset(bdnc+'pred_v2_'+variables[variable]+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
+    pred_1d = xr.open_dataset(bdnc+'pred_v2_'+predictand+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
     #for_anom = pred_1d['kprep'].mean(dim='ens')
     for_anom = pred_1d['kprep'].isel(ens=0)
     #co2_anom = pred_1d['trend'].mean(dim='ens')
     co2_anom = pred_1d['trend'].isel(ens=0)
-    beta_1d = xr.open_dataset(bdnc+'beta_v2_'+variables[variable]+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
-    predo_1d = xr.open_dataset(bdnc+'predodata_3m_fit_'+variables[variable]+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
+    beta_1d = xr.open_dataset(bdnc+'beta_v2_'+predictand+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
+    predo_1d = xr.open_dataset(bdnc+'predodata_3m_fit_'+predictand+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
     predos = list(predo_1d.data_vars)
     sigp = ~np.isnan(beta_1d.beta.values)
     nr_sigp = np.sum(sigp)
@@ -405,6 +441,8 @@ def create_bar_plot(clickData,variable,fc_time):
     fig = tls.make_subplots(rows=1,cols=1)
     if nr_sigp == 0:
         print('no significant predictors..')
+        return()
+    
     else:
         print('barplot - nr of significant predictors is ',nr_sigp)
         print(np.asarray(predos))
@@ -412,12 +450,16 @@ def create_bar_plot(clickData,variable,fc_time):
         print('sig predictors: ',np.asarray(predos)[sigp])
         print(predo_1d.to_array(dim='predictors').values*beta_1d.beta.values)
         print(sigp)
-        vals = np.asarray(np.append((predo_1d.to_array(dim='predictors').values*beta_1d.beta.values)[sigp],for_anom))
+        print('anomaly forecast is: ',for_anom.values)
+        print(predo_1d.to_array(dim='predictors').values)
+        print(beta_1d.beta.values)
+        vals = np.asarray(np.append((predo_1d.to_array(dim='predictors').values*beta_1d.beta.values)[sigp],for_anom.values))
         
-        if 'CO2EQ' in np.asarray(predos)[sigp]:
+        if 'CO2EQ' in np.asarray(predos)[sigp]: # add CO2 to first value of predictors
                 vals[0]=co2_anom  
-        dif = for_anom-np.sum(vals[:-1])
-        if abs(dif) > 0.05: # Difference too big, why?
+        # Check if sum of predictors matches the forecasted anomalie
+        dif = for_anom.values-np.sum(vals[:-1])
+        if abs(dif) > 0.001: # Difference too big, why?
             vals = np.append(vals,dif)   
             trace = Bar(
                 x=np.append(np.asarray(predos)[sigp],np.asarray(['Total','dif'])),
@@ -434,11 +476,12 @@ def create_bar_plot(clickData,variable,fc_time):
             width=500.,
             autosize=False,
             title='Individual contribution predictors (lat='+str(lat_click)+', lon='+str(lon_click)+')',
+            yaxis=dict(title=variable+' '+plot_dict[predictand]['Forecast anomalies']['units']),
             )
    
-    #fig = go.Figure(data=Data([trace]), layout=layout)
-    fig = go.Figure(data=[trace], layout=layout)     
-    return(fig)
+        #fig = go.Figure(data=Data([trace]), layout=layout)
+        fig = go.Figure(data=[trace], layout=layout)     
+        return(fig)
         
 def create_po_timeseries(clickData,variable,fc_time):
     print(' ')
@@ -475,6 +518,7 @@ def create_po_timeseries(clickData,variable,fc_time):
     yaxs = ['y1','y2','y3','y4','y5','y6','y7','y8']
     if nr_sigp == 0:
         print('no significant predictors..')
+        return()
     else:
         print('timeseries plot - nr of significant predictors is ',nr_sigp)
         print('sig predictors: ',np.asarray(predos)[sigp])
@@ -490,16 +534,16 @@ def create_po_timeseries(clickData,variable,fc_time):
                 ))
                 
     
-    fig = tls.make_subplots(rows=np.int(nr_sigp),cols=1)
-    for ii in range(nr_sigp):
-        fig.append_trace(traces[ii],ii+1,1)
-    fig['layout'].update(   height=600,
-                            width=1000.,
-                            autosize=False,
-                            title='Time series of (fitted) predictor data',
-                         )
-    
-    return(fig)
+        fig = tls.make_subplots(rows=np.int(nr_sigp),cols=1)
+        for ii in range(nr_sigp):
+            fig.append_trace(traces[ii],ii+1,1)
+        fig['layout'].update(   height=600,
+                                width=1000.,
+                                autosize=False,
+                                title='Time series of (fitted) predictor data (lat='+str(lat_click)+', lon='+str(lon_click)+')',
+                            )
+        
+        return(fig)
     
 ## End plotting functions
 
@@ -519,10 +563,11 @@ def update_map(clickData,plot_type,variable,fc_time):
 @app.callback(
     dash.dependencies.Output('bar_plot', 'figure'),
     [dash.dependencies.Input('basemap_plot', 'clickData'),
+     dash.dependencies.Input('plot_type','value'),
      dash.dependencies.Input('variable','value'),
      dash.dependencies.Input('fc_time','value')])
-def update_bar_plot(clickData,variable,fc_time):
-    return create_bar_plot(clickData,variable,fc_time)
+def update_bar_plot(clickData,plot_type,variable,fc_time):
+    return create_bar_plot(clickData,plot_type,variable,fc_time)
     
 # Update predictand timeseries                    
 @app.callback(
