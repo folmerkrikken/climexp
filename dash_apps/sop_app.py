@@ -21,7 +21,7 @@ from dash.dependencies import Input, Output
 import dash_html_components as html
 import dash_core_components as dcc
 
-ONLINE=False
+ONLINE=True
 if ONLINE:
     # Online modus
     app = dash.Dash(__name__)#, external_stylesheets=external_stylesheets)
