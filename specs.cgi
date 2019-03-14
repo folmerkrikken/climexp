@@ -14,7 +14,9 @@ in the last three months (up to the beginning of the month) and the weather over
 <p>This web page is under construction. Please give feedback if it does not work properly.
 -->
 
-<p><font color=#FF1010"><blink>We are debugging a new version, please disregard the plots for a few days...</blink></font>
+
+<p><font color=#FF1010"><blink>For an interactive version of these plots and to better understand the sources of predictability go to <a href="myapp/kprep-sop">KPREP sources of predictability</a>.
+
 
 EOF
 
@@ -139,7 +141,8 @@ cat <<EOF
       <td width="81.5%" valign=top>
          <div id="printable" name="printable">
 <div class=bijschrift id=caption>$plotname $units of $nextseasonname $yy $varname made in early $analysismonth.</div>
-<img id="imageToSwap" src="SPES/plots/$dataset/25/$date/${dataset}_${prefix}$date.png" width="100%" />
+#<img id="imageToSwap" src="SPES/plots/$dataset/25/$date/${dataset}_${prefix}$date.png" width="100%" />
+<img id="imageToSwap" src="KPREP_data/plots/$dataset/25/$date/${dataset}_${prefix}$date.png" width="100%" />
 <p>The development of this forecast system was supported by the EU-project <a href="http://www.specs-fp7.eu">SPECS</a>.
         </div>
       </td>
