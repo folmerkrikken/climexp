@@ -23,7 +23,7 @@ dt = datetime.date.today()
 start0 = time.time()
 
 predictands = ["GCEcom","20CRslp","GPCCcom"]
-predictands = ["GPCCcom"]
+predictands = ["GCEcom"]#,"20CRslp"]
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
 predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
@@ -57,6 +57,8 @@ HINDCAST = True             # Validate forecast based on hindcasts?
 CROSVAL = True              # Use cross-validation for validation
 CAUSAL = False              # Use causal method for validation
 cv_years = 3                # Leave n out cross validation
+
+
 
 ## Validation period is 1961 - current
 
@@ -105,7 +107,8 @@ start1 = time.time()
 print('-- Read in predictand data for fitting --')
 predictorz = []     # Predefine empty array, fill with specified predictors for predictand
 
-UPDATE_INDICES = check_updates2(inputdir=bdid) # if data can be update then returns TRUE
+#UPDATE_INDICES = check_updates2(inputdir=bdid) # if data can be update then returns TRUE
+UPDATE_INDICES=False
 if UPDATE_INDICES and UPDATE:
     import subprocess
     print("start updating monthly observations")
@@ -133,7 +136,7 @@ for p,predictand in enumerate(predictands):
         
         # Create anomalies with 1980-2010 as baseline climatology
         
-        hadcrucw = xr.open_dataset(bdid+'had4_krig_v2_0_0_r'+str(resolution)+'.nc')
+        hadcrucw = xr.open_dataset(bdid+'had4_krig_v2_0_0_r'+str(resolution)+'.nc').squeeze()
         hadcrucw = hadcrucw.rename({'temperature_anomaly':'tas'})
         hadcrucw = hadcrucw.drop('year')
         hadcrucw = hadcrucw.drop('month')
@@ -158,7 +161,9 @@ for p,predictand in enumerate(predictands):
     elif predictand == 'GPCCcom':
         # These predictors are selelected for GPCCcom in the first predictor selection step
         predictorz.append(['CO2EQ','NINO34','PDO','AMO','IOD','PERS','PERS_TREND'])
-        gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc')
+        #gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc').squeeze()
+        gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze()
+        gpcccom = decode_timez(gpcccom)
         # Create anomalies with 1980-2010 as baseline climatology
         gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
         gpcccom.time.values = rewrite_time(gpcccom)
@@ -171,7 +176,7 @@ for p,predictand in enumerate(predictands):
     elif predictand == '20CRslp':
         # These predictors are selelected for 20CRslp in the first predictor selection step
         predictorz.append(['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND'])
-        slp = xr.open_dataset(bdid+'slp_mon_mean_1901-current_r25.nc')
+        slp = xr.open_dataset(bdid+'slp_mon_mean_1901-current_r25.nc').squeeze()
         slp.prmsl.values = anom_df(slp.prmsl,1980,2010,styear)
         slp = slp.prmsl.rename('20CRslp')
         slp.time.values = rewrite_time(slp)
@@ -207,7 +212,8 @@ for i,pred in enumerate(predictors):
         continue
 
     elif pred == 'CPREC':    # Cum precip [time,lat,lon] - 1901 -current
-        gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc')
+        gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze()
+        gpcccom = decode_timez(gpcccom)
         gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
         gpcccom = gpcccom.precip.rename('CPREC')
         #gpcccom.time.values = rewrite_time(gpcccom)
@@ -241,7 +247,7 @@ for p,predictand in enumerate(predictands):
     if overwrite:
         print('overwrite is True, so remove all data and redo complete forecast cycle')
         mon_range = list(range(12))
-        filez = glob.glob(bdnc+'*'+predictand+'*.nc')
+        filez = glob.glob(bdnc+'*'+predictand+'*.nc') + glob.glob(bdnc+'cor_pred/*'+predictand+'*.nc')
         for fil in filez: os.remove(fil)
     elif overwrite_m:
         mon_range = [overw_m]
@@ -448,7 +454,7 @@ for p,predictand in enumerate(predictands):
             print('validation for '+season+' '+year)
             
             bdpo = bdp+predictand+'/'+str(resolution)+'/'+year+mon+'/'
-            if not os.path.exists(bdpo):
+            if not os.path.isdir(bdpo):
                 os.makedirs(bdpo)
                
 

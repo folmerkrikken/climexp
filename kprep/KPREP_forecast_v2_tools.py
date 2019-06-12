@@ -46,7 +46,7 @@ month_ss = ['FMA', 'MAM', 'AMJ', 'MJJ', 'JJA', 'JAS', 'ASO', 'SON', 'OND', 'NDJ'
     #return mask
 
 
-def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test, ens_size, bdnc, resolution, predictand,predictors,MLR_PRED, FC=True, sig_val=0.1):
+def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test, ens_size, bdnc, resolution, predictand,predictors,MLR_PRED, FC=True, sig_val=0.1,MDC=False,lt=0):
     ## Some notes..
     # 1 - The times written in the output files are all set to the month when the model is run, so the predictand data and the predictor data get the same timestamp in the output files, though they represent past (-2 months) and future (+2 months) data relative to the time stamp. The time stamp is the month the model is run. Hence, e.g. 2015-05-01 represent the forecast of May in 2015, with predictand data from FMA and predictor season is JJA.
     # 2 - ...
@@ -65,10 +65,12 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     mo = timez.month[0]       
        
     # Detrend data trough removing linear relation with co2, using only training data to determine the fit    
+    #import pdb;pdb.set_trace()
     predodata_3m_nc = remove_co2_po(predodata_3m.sel(time=timez), predodata_3m['CO2EQ'].sel(time=timez), train)
     predadata_3m_nc = remove_co2_pa(predadata_3m.sel(time=train), predodata_3m['CO2EQ'].sel(time=train), train)
     
     # If MLR, then use mean and trend of last 3 months of predictor to predict the future state of the predictor
+    #import pdb;pdb.set_trace()
     if MLR_PRED:
         print('     MLR_PRED is True, fitting individual models for better estimate of future state of predictor')
         # Detrend trend data..
@@ -80,28 +82,41 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
             predodata_3m_f_nc = remove_co2_po(predodata_3m.sel(time=timez_f), predodata_3m['CO2EQ'].sel(time=timez_f), train+pd.DateOffset(months=4))
 
         predodata_3m_fit = fit_predictors(y=predodata_3m_f_nc, x1=predodata_3m_nc, x2=predodata_3m_trend_nc, train_p=train, train_f=train+pd.DateOffset(months=4))
-        predodata_3m_fit['PERS_TREND'] = predodata_3m_trend_nc['PERS']
+        if 'PERS' in predictors:
+            predodata_3m_fit['PERS_TREND'] = predodata_3m_trend_nc['PERS']
     else:
         predodata_3m_fit = predodata_3m_nc  # Check if I shouldn't add .sel(time=timez)
     #print(predodata_3m_fit)
-    # Get correlation between predictor and predictand   
-    bdp = bdnc+'../plots/'
-    if FC:
-        # Get the correlation between predictor and predictand without stepwise selection
-        cor_nc, sig_nc = cor_pred(predodata_3m_fit.sel(time=train), predadata_3m_nc.sel(time=train), y=predadata_3m.sel(time=train))
-        plotcor_pred(cor_nc,sig=sig_nc,bd=bdp+predictand+'/predcor/',savename='corr_pred_orig_'+str(test[0])[:7],suptitle=predictand+' '+str(test[0])[:7])
-        cor_nc.to_netcdf(bdnc+'cor_pred/cor_predictors_'+predictand+'_'+str(mo).zfill(2)+'.nc')
-        sig_nc.to_netcdf(bdnc+'cor_pred/sig_predictors_'+predictand+'_'+str(mo).zfill(2)+'.nc')
-    
     # Get the correlation between predictor and predictand with stepwise selection
     cor_nc, sig_nc = get_sig_pred(predodata_3m_fit.sel(time=train), predadata_3m_nc.sel(time=train), predadata_3m.sel(time=train))
     #print(cor_nc)
-    #sys.exit()
-    if FC:    # save figure with correlation between predictor and predictand
-        #plot_corr_pred(cor_nc,sig_nc,predictand,predictors,test[0].year,test[0].month,'/nobackup/users/krikken/SPESv2/plots/'+predictand+'/predcor/',CLICK_PREDCOR=True)
+    # Get correlation between predictor and predictand   
+    if FC:
+        bdp = bdnc+'../plots/'
+        # Get the correlation between predictor and predictand without stepwise selection
+        cor_nc_orig, sig_nc_orig = cor_pred(predodata_3m_nc.sel(time=train), predadata_3m_nc.sel(time=train), y=predadata_3m.sel(time=train))
+        plotcor_pred(cor_nc_orig,sig=sig_nc_orig,bd=bdp+predictand+'/predcor/',savename='corr_pred_orig_'+str(test[0])[:7],suptitle=predictand+' '+str(test[0])[:7])
+        if MDC: name = predictand+'_'+str(mo)+'_'+str(lt)+'.nc'
+        else: name = predictand+'_'+str(mo).zfill(2)+'.nc'
+        cor_nc_orig.to_netcdf(bdnc+'cor_pred/cor_predictors_nofit_'+name)
+        sig_nc_orig.to_netcdf(bdnc+'cor_pred/sig_predictors_nofit_'+name)
+    
+        # Get the correlation between predictor and predictand without stepwise selection
+        cor_nc_fit, sig_nc_fit = cor_pred(predodata_3m_fit.sel(time=train), predadata_3m_nc.sel(time=train), y=predadata_3m.sel(time=train))
+        plotcor_pred(cor_nc_fit,sig=sig_nc_fit,bd=bdp+predictand+'/predcor/',savename='corr_pred_fit_'+str(test[0])[:7],suptitle=predictand+' '+str(test[0])[:7])
+        if MDC: name = predictand+'_'+str(mo)+'_'+str(lt)+'.nc'
+        else: name = predictand+'_'+str(mo).zfill(2)+'.nc'
+        cor_nc_fit.to_netcdf(bdnc+'cor_pred/cor_predictors_fit_'+name)
+        sig_nc_fit.to_netcdf(bdnc+'cor_pred/sig_predictors_fit_'+name)
+
+        # Plot and save the correlation obtained with the stepwise selection
         plotcor_pred(cor_nc,sig=sig_nc,bd=bdp+predictand+'/predcor/',savename='corr_pred_stepwise_'+str(test[0])[:7],suptitle=predictand+' '+str(test[0])[:7])
-        cor_nc.to_netcdf(bdnc+'cor_pred/cor_predictors_stepwise_'+predictand+'_'+str(mo).zfill(2)+'.nc')
-        sig_nc.to_netcdf(bdnc+'cor_pred/sig_predictors_stepwise_'+predictand+'_'+str(mo).zfill(2)+'.nc')
+        if MDC: name = predictand+'_'+str(mo)+'_'+str(lt)+'.nc'
+        else: name = predictand+'_'+str(mo).zfill(2)+'.nc'
+        cor_nc.to_netcdf(bdnc+'cor_pred/cor_predictors_stepwise_'+name)
+        sig_nc.to_netcdf(bdnc+'cor_pred/sig_predictors_stepwise_'+name)
+    
+    #import pdb;pdb.set_trace()
     
     # Predefine dataset to write output to, and fill with nans
     data_fit = xr.Dataset(coords={'lat': predadata_3m.lat,
@@ -126,8 +141,10 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
         else: rand_yrs = np.vstack((rand_yrs,np.random.choice(list(range(len(train))), 51, replace=True)))
     
     # Put linear relation CO2EQ with predictand (trend) as separate variable in ouput dataset. Linear trend is calculated by removing the detrended predictor data from the original predictor data
-    trend[:,0,:,:] =  trend_pred(predadata_3m.sel(time=train),predodata_3m['CO2EQ'].sel(time=timez),xr.full_like(predodata_3m['PERS'].sel(time=timez),np.nan),train).sel(time=test).values
-    
+    if MDC:
+        trend[:,0,:,:] =  trend_pred(predadata_3m.sel(time=train),predodata_3m['CO2EQ'].sel(time=timez),xr.full_like(predodata_3m[predictors[-1]].sel(time=timez),np.nan),train).sel(time=test).values
+    else:
+        trend[:,0,:,:] =  trend_pred(predadata_3m.sel(time=train),predodata_3m['CO2EQ'].sel(time=timez),xr.full_like(predodata_3m['PERS'].sel(time=timez),np.nan),train).sel(time=test).values
     # Loop over different test years to fill the trend and climatolgy ensembles
     for n in range(len(test)):
         trend[n,1:,:,:] = trend[n,0,:,:] + predadata_3m_nc.sel(time=train).values[rand_yrs[n,1:], :, :]
@@ -219,12 +236,17 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     #predodata_3m_nc.to_netcdf(bdnc+'predictors_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')
     #predodata_3m_fit.to_netcdf(bdnc+'predictors_fit_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')
     if FC:
+        if MDC: name = str(mo)+'_'+str(lt)+'.nc'
+        else: name = str(mo).zfill(2)+'.nc'
         #to_nc3(predodata_3m_nc,bdnc + 'predictors_v2_'+predictand)
         #to_nc3(predodata_3m_fit,bdnc + 'predictors_fit_v2_'+predictand)
-        predadata_3m.to_netcdf(bdnc + 'predadata_v2_'+predictand+'.nc','w')
-        predodata_3m_nc.to_netcdf(bdnc + 'predodata_3m_nc_'+predictand+'_'+str(mo).zfill(2)+'.nc')
-        predodata_3m_fit.to_netcdf(bdnc + 'predodata_3m_fit_'+predictand+'_'+str(mo).zfill(2)+'.nc')
-        predadata_3m_nc.to_netcdf(bdnc + 'predadata_3m_nc_'+predictand+'_'+str(mo).zfill(2)+'.nc')
+        print(predadata_3m.attrs)
+        if MDC: predadata_3m.to_netcdf(bdnc + 'predadata_v2_'+predictand+name,'w')
+        else: predadata_3m.to_netcdf(bdnc + 'predadata_v2_'+predictand+'.nc','w')
+        
+        predodata_3m_nc.to_netcdf(bdnc + 'predodata_3m_nc_'+predictand+'_'+name)
+        predodata_3m_fit.to_netcdf(bdnc + 'predodata_3m_fit_'+predictand+'_'+name)
+        predadata_3m_nc.to_netcdf(bdnc + 'predadata_3m_nc_'+predictand+'_'+name)
     #if FC:
     #    predodata_3m_nc.to_netcdf(bdnc + 'predictors_v2_'+predictand+'.nc')
     #    predodata_3m_fit.to_netcdf(bdnc + 'predictors_fit_v2_'+predictand+'.nc')
@@ -638,7 +660,7 @@ from statsmodels.api import add_constant
 def fit_predictors(y=[], x1=[], x2=[], train_p=[], train_f=[]):
     data_out = xr.full_like(x1, np.nan)
     for pred in y.data_vars:
-        if pred in ('CO2EQ', 'PERS', 'CPREC'):
+        if pred in ('CO2EQ', 'PERS', 'CPREC','TMAX','PRECIP'):
             data_out[pred].values = x1[pred].values
         else:
             x_pred_train = xr.merge([x1[pred].sel(time=train_p), x2[pred].sel(time=train_p).rename('TREND')]).to_array(dim='predictors').values.T
@@ -872,7 +894,66 @@ def cor_pred(x_nc, y_nc, y=[]):
     #if y != []: cor[0,:],sig[0,:] = linregrez(x_nc[0,:],y,taxis=0,COR=True)
     #return cor,sig 
 
+def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
+    # First select only AMJJASO
+    tm = tmax['time.month']
+    #tmax_ss = tmax.sel(time=(tm>3) & (tm<11))
+    #prec_ss = prec.sel(time=(tm>3) & (tm<11))
+    #mdc = xr.full_like(prec_ss,np.nan).rename({'precip':'mdc'})
+    #nr_years = len(np.unique(tmax_ss.time['time.year'].values))
+    #print(tmax_ss)
+    if 'leadtime' in tmax.coords:
+        tmax_ss = tmax
+        prec_ss = prec
+        mdc = xr.full_like(prec_ss,np.nan).rename({'precip':'mdc'})
+        tmax_np = np.moveaxis(tmax_ss.values,1,0)
+        prec_np = np.moveaxis(prec_ss.precip.values,1,0)
+    else:
+        tmax_ss = tmax.sel(time=(tm>3) & (tm<11))
+        prec_ss = prec.sel(time=(tm>3) & (tm<11))
+        mdc = xr.full_like(prec_ss,np.nan).rename({'precip':'mdc'})
+        nr_years = len(np.unique(tmax_ss.time['time.year'].values))
+        tmax_np = np.reshape(tmax_ss.values,(nr_years,7,len(tmax_ss.lat),len(tmax_ss.lon)))
+        prec_np = np.reshape(prec_ss.precip.values,(nr_years,7,len(prec_ss.lat),len(prec_ss.lon)))
+    print(tmax_np.shape)
+    tmax_np[tmax_np<0.]=0.    # Remove freezing days
+    ndays_NH = np.array([30,31,30,31,31,30,31])
+    ndays_SH = np.array([31,30,31,31,28,31,30])
+    Lf = np.array([0.9,3.8,5.8,6.4,5.0,2.4,0.4])
+    MDC_0 = 15. # Initiate with no drought.. assuming fully saturated at spring
+    MDC = nans_like(tmax_np)
+    #print(tmax_np.shape[1],MDC.shape)
+    for m in range(tmax_np.shape[1]):
+        Em = ndays_NH[m] * (0.36 * tmax_np[:,m,:] + Lf[m])
+        RMeff = 0.83 * prec_np[:,m,:]
 
+        DC_half = MDC_0 + 0.25 * Em
+
+        Qmr = 800. * np.exp(-DC_half / 400.) + 3.937 * RMeff
+        Qmr[Qmr>800.] = 800.
+
+        MDC_m = 400.*np.log(800./Qmr) + 0.25* Em
+        MDC[:,m,:] = (MDC_0 + MDC_m) / 2.
+        MDC_0 = MDC_m
+    #print(MDC)    
+    if 'leadtime' in tmax.coords:
+        mdc.mdc.values = np.moveaxis(MDC,0,1)
+    else:
+        mdc.mdc.values = np.reshape(MDC,tmax_ss.values.shape)
+    
+    mdc.attrs = []
+    mdc.time.attrs = []
+    
+    # Put nans at times when no mdc is calculated, i.e. november to march
+    mdc_filled = xr.full_like(tmax,np.nan).combine_first(mdc)
+
+    return mdc_filled
+
+def decode_timez(ds):
+    timez = pd.date_range(ds.time.units.split(' ')[-1],periods=len(ds.time),freq='MS')
+    ds.time.values = timez
+    ds.time.attrs = []
+    return ds
     
 def plotcor_pred(cor,sig=[],bd=[],savename=None,sig_val=0.1,suptitle=''):
     '''Plot the correlation between the predictor and predictand
@@ -983,7 +1064,10 @@ def plot_climexp(data,line1,line2,line3,cmap=[],cmap_under=[],cmap_over=[],predi
     ax = plt.subplot(111, projection=ccrs.PlateCarree())
     ax.set_facecolor('red')
     ax.set_global()
-    ax.set_extent([-180,180,90,-90], ccrs.PlateCarree())
+    if data.shape[1] == 360: # only northern hemisphere for MDC
+        ax.set_extent([-180,180,90,0], ccrs.PlateCarree())
+    else:
+        ax.set_extent([-180,180,90,-90], ccrs.PlateCarree())
     lons,lats = data.lon.values,data.lat.values
     lon2d, lat2d = np.meshgrid(lons, lats)
     ax.annotate(line1, xy=(0, 1.10), xycoords='axes fraction',fontsize=14,ha='left',va='center')
