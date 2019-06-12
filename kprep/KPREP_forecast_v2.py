@@ -23,7 +23,7 @@ dt = datetime.date.today()
 start0 = time.time()
 
 predictands = ["GCEcom","20CRslp","GPCCcom"]
-predictands = ["GCEcom"]#,"20CRslp"]
+#predictands = ["GCEcom"]#,"20CRslp"]
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
 predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
