@@ -1047,7 +1047,17 @@ def f_crps(data,obs,ref=[],MDI=False,ens_axis=1,mean=False):
     #print time.time()-t0
     #return crps
 
-def tercile_category(hc,fc): # Note, last hindcast is forecast..
+
+#def tercile_category_xr(hc,fc,yrs=None): # Note, last hindcast is forecast..
+#    lt = hc.quantile([0.33,0.67],dim=['time','ens'])
+    #lower_tercile = np.nanpercentile(hc[:,:].reshape(((hc.shape[0])*hc.shape[1],hc.shape[2],hc.shape[3])),33.33,axis=0)
+    #upper_tercile = np.nanpercentile(hc[:,:].reshape(((hc.shape[0])*hc.shape[1],hc.shape[2],hc.shape[3])),66.67,axis=0)
+#    sum_ut = np.sum(fc>upper_tercile,axis=0)
+    #sum_lt = np.sum(fc<lower_tercile,axis=0)
+    #tercile = np.where(sum_ut>sum_lt,sum_ut/0.51,-sum_lt/0.51)
+#    return tercile
+
+def tercile_category(hc,fc,yrs=None): # Note, last hindcast is forecast..
     lower_tercile = np.nanpercentile(hc[:,:].reshape(((hc.shape[0])*hc.shape[1],hc.shape[2],hc.shape[3])),33.33,axis=0)
     upper_tercile = np.nanpercentile(hc[:,:].reshape(((hc.shape[0])*hc.shape[1],hc.shape[2],hc.shape[3])),66.67,axis=0)
     sum_ut = np.sum(fc>upper_tercile,axis=0)

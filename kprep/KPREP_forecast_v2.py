@@ -23,7 +23,7 @@ dt = datetime.date.today()
 start0 = time.time()
 
 predictands = ["GCEcom","20CRslp","GPCCcom"]
-#predictands = ["GCEcom"]#,"20CRslp"]
+#predictands = ["GPCCcom"]#,"20CRslp"]
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
 predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
@@ -69,8 +69,8 @@ endyear =       dt.year
 endmonth =      dt.month-1  # -1 as numpy arrays start with 0
 
 # Set working directories
-bd = os.getcwd()
-if bd == '/home/folmer/climexp/kprep': # We're home
+bd = os.getcwd()+'/'
+if bd == '/home/folmer/climexp/kprep/': # We're home
     bd_data = '/home/folmer/climexp_data/KPREPData/'
 else: # We're on climate explorer
     bd_data = '/home/oldenbor/climexp_data/KPREPData/'
@@ -145,9 +145,10 @@ for p,predictand in enumerate(predictands):
         # Create anomalies with 1980-2010 as baseline climatology
         gcecom.tas.values = anom_df(gcecom.tas,1980,2010,1948)
         hadcrucw.tas.values = anom_df(hadcrucw.tas,1980,2010,styear)
-         
-        # Hadcrucw until 1957, and gcecom from 1958
-        com = xr.concat([hadcrucw.tas[:684,:],gcecom.tas[120:,:]],dim='time')
+        #sys.exit()
+        # Hadcrucw until 1979 and gcecom from 1980
+        com = xr.concat([hadcrucw.tas.sel(time=slice(None,'1979-12-01')),gcecom.tas.sel(time=slice('1980-01-01',None))],dim='time')
+        #com = xr.concat([hadcrucw.tas[:684,:],gcecom.tas[120:,:]],dim='time')
         com.values[:,mask] = np.nan
         #com = com.rename('GCEcom')
         if p == 0: predadata = xr.Dataset({'GCEcom':com.astype('float32')}) 
@@ -164,6 +165,8 @@ for p,predictand in enumerate(predictands):
         #gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc').squeeze()
         gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze()
         gpcccom = decode_timez(gpcccom)
+        # Remove too much of the data
+        gpcccom = gpcccom.dropna(dim='time',how='all')
         # Create anomalies with 1980-2010 as baseline climatology
         gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
         gpcccom.time.values = rewrite_time(gpcccom)
@@ -214,6 +217,7 @@ for i,pred in enumerate(predictors):
     elif pred == 'CPREC':    # Cum precip [time,lat,lon] - 1901 -current
         gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze()
         gpcccom = decode_timez(gpcccom)
+        gpcccom = gpcccom.dropna(dim='time',how='all')
         gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
         gpcccom = gpcccom.precip.rename('CPREC')
         #gpcccom.time.values = rewrite_time(gpcccom)
@@ -228,12 +232,27 @@ for i,pred in enumerate(predictors):
 
         
 print('-- Done reading in predictor data for fitting, time = ',str(np.int(time.time()-start1)),' seconds --') 
+#sys.exit()
 
-# TODO > Sanity check on data, put somewhere here..
+# Sanity check on predictor data..
+for var in predodata:
+    if predodata[var].isel(time=-1).max() < -900:
+        print(var+' not updated yet')
+        if overwrite:
+            print('removing last month from data in order to continue overwriting data')
+            predodata = predodata.isel(time=slice(None,-1))
+            predadata = predadata.isel(time=slice(None,-1))
+        else:
+            print('exiting..')
+            sys.exit()
+
 
 # *************************************************************************   
 # Now start the predictor selection and the forecasting / hindcasting loop
 # *************************************************************************
+
+
+#sys.exit()
 
 for p,predictand in enumerate(predictands):
     # Fill persistence predictor with predictand data
@@ -254,10 +273,10 @@ for p,predictand in enumerate(predictands):
         
         #filez = glob.glob(bdnc+'*'+predictand+'_'+str(overw_m).zfill(2)+'.nc')
         #for fil in filez: os.remove(fil)
-        
     else:
         mon_range = [dt.month-1]
 
+    print(mon_range)
     # Rolling 3-month mean, first and last timestep become nans, so remove last timestep (slice(None,-1))
     # use predictorz[p][:-1] to exclude 'PERS_TREND' from this operation as this predictor is added later
     predodata_3m = predodata[predictorz[p][:-1]].rolling(time=3,center=True).mean().isel(time=slice(None,-1))
@@ -375,7 +394,7 @@ for p,predictand in enumerate(predictands):
                     'lon': data_fit_tot['lon'],
                     'time': timez[-1]}).expand_dims('time')
 
-            # Calculate significance of ensemble mean
+            # Calculate significance of ensemble mean. Calculate fraction of ensemble above or below zero
             tmp = data_fit_tot.kprep.isel(time=-1).mean('ens').values
             posneg = tmp > 0.
             above = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values>0,axis=0)/51.)
@@ -398,7 +417,9 @@ for p,predictand in enumerate(predictands):
             scores['crpss_co2'] = (('time','lat','lon'),
             f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,SS=True,ref=data_fit_tot['trend'].isel(time=slice(None,-1)).values)[np.newaxis,:,:])                                   
             
-            scores['tercile'] = (('time','lat','lon'), tercile_category(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['kprep'].isel(time=-1).values)[np.newaxis,:,:])
+            #scores['tercile'] = (('time','lat','lon'), tercile_category(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['kprep'].isel(time=-1).values)[np.newaxis,:,:])
+            # use 1980-2010 for tercile data
+            scores['tercile'] = (('time','lat','lon'), tercile_category(data_fit_tot['kprep'].sel(time=slice('1980-01-01','2010-12-31')).values,data_fit_tot['kprep'].isel(time=-1).values)[np.newaxis,:,:])
             
             scores['for_anom'] = (('time','lat','lon'),data_fit_tot['kprep'].isel(time=-1).mean(dim='ens').values[np.newaxis,:,:])
             
