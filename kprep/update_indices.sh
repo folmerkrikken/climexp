@@ -11,6 +11,8 @@ cp griddes${res}.txt ~/climexp_data/KPREPData/targetgrid/
 # Change working directory to where to store data / files / plots / etc.
 cd ~/climexp_data/KPREPData
 # First get resolution..
+wget -N http://climexp.knmi.nl/BerkeleyData/land_mask.nc inputdata/
+wget -N http://climexp.knmi.nl/BerkeleyData/TMAX_LatLong1.nc inputdata/
 # Download ERSSTV5 from climexp
 wget -N http://climexp.knmi.nl/NCDCData/ersstv5.nc -P inputdata/
 # Download GHCN_CAMS from NCEP
@@ -42,8 +44,9 @@ cdo mergetime -selyear,1901/1947 -remapbil,targetgrid/griddes${res}.txt -selvar,
 
 # Download precipitation data from 
 wget -N http://climexp.knmi.nl/GPCCData/gpcc_10_combined.nc -P inputdata/
+cdo muldpm inputdata/gpcc_10_combined.nc inputdata/gpcc_10_combined_mon.nc
 
-cdo remapbil,targetgrid/griddes${res}.txt inputdata/gpcc_10_combined.nc inputdata/gpcc_10_combined_r${res}.nc
+cdo remapbil,targetgrid/griddes${res}.txt inputdata/gpcc_10_combined_mon.nc inputdata/gpcc_10_combined_r${res}.nc
 
 # Download the climate indices from climate explorer
 wget -N http://climexp.knmi.nl/CDIACData/RCP45_CO2EQ_mo.dat -P inputdata/
