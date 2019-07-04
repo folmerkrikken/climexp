@@ -79,14 +79,18 @@ def get_country_traces():
 traces_cc = get_coastline_traces()#+get_country_traces()
 monthzz = 'JFMAMJJASONDJFMAMJJASOND'
 
-plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.,'units':'[<sup>o</sup>C]'},
-                       'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
-                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.,'units':'[<sup>o</sup>C]',
+                                 'fr':[0.0,0.01,0.25,0.375,0.46,0.54,0.625,0.75,0.99,1.0],
+                                 'tv':[-2,-1,-0.5,-0.2,0.2,0.5,1.0,2.0]},
+                       'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-',},
+                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-',},
                        'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
                        'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':['#000099','#3355ff','#66aaff','#77ffff','#ffffff','#ffff33','#ffaa00','#ff4400','#cc0022']
                        },
-            'GPCCcom':{'Forecast anomalies':{'vmin':-50.,'vmax':50.,'units':'[mm]'},
+            'GPCCcom':{'Forecast anomalies':{'vmin':-50.,'vmax':50.,'units':'[mm]',
+                                'fr':[0.0,0.01,0.25,0.4,0.45,0.55,0.6,0.75,0.99,1.0],
+                                'tv':[-50,-25,-10.,-5.,5,10,25,50]},
                        'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
                        'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
                        'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
@@ -94,14 +98,20 @@ plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.,'units':'[<sup
                        'colors':
                         ['#993300','#cc8800','#ffcc00','#ffee99','#ffffff','#ccff66','#33ff00','#009933','#006666']
                        },
-            '20CRslp':{'Forecast anomalies':{'vmin':-4.,'vmax':4.,'units':'[hPa]'},
+            '20CRslp':{'Forecast anomalies':{'vmin':-4.,'vmax':4.,'units':'[hPa]',
+                                'fr':[0.0,0.01,0.25,0.375,0.45,0.55,0.625,0.75,0.99,1.0],
+                                'tv':[-4,-2,-1,-0.5,0.5,1,2,4]},
                        'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
                        'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
                        'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
                        'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':
                        ['#000099','#3355ff','#66aaff','#77ffff','#ffffff','#ffff33','#ffaa00','#ff4400','#cc0022']
-                       }
+                       },
+            'RMSESS':{'fr':[0.0,0.01,0.15,0.3,0.4,0.6,0.7,0.85,0.99,1.0],'tv':[-0.5,-0.35,-0.2,-0.1,0.1,0.2,0.35,0.5]},
+            'CRPSS': {'fr':[0.0,0.01,0.15,0.3,0.4,0.6,0.7,0.85,0.99,1.0],'tv':[-0.5,-0.35,-0.2,-0.1,0.1,0.2,0.35,0.5]},
+            'Tercile summary plot':{'fr':[0.0,0.15,0.2,0.25,0.3,0.7,0.75,0.8,0.85,1.0],'tv':[-100,-70,-60,-50,-40,40,50,60,70,100]},
+            'Correlation':{'fr':[0.0,0.1,0.2,0.3,0.4,0.6,0.7,0.8,0.9,1.0],'tv':[-1,-0.8,-0.6,-0.4,-0.2,0.2,0.4,0.6,0.8,1.0]},
             }
 
 clickData_start = dict({u'points': [{u'y': -8., u'x': 21., u'pointNumber': 6, u'curveNumber': 632}]})
@@ -163,38 +173,64 @@ def create_map(clickData,plot_type,variable,fc_time):
     
     if plot_type == 'Forecast anomalies': # Calculate significance of ensemble mean
         print('still to implement')
-        #sig = scores.for_anom_sig
-        sig = scores.cor_sig.values.squeeze()
+        sig = scores.for_anom_sig.squeeze()
+        #sig = scores.cor_sig.values.squeeze()
     elif plot_type == 'Correlation':
         sig = scores.cor_sig.values.squeeze()
         
     if 'sig' in locals():
        if plot_type == 'Forecast anomalies': 
            #sigvals = np.where(np.logical_and(sig[:,:]>0.1,sig[:,:]<1.))
-           sigvals = np.where(sig[:,:]<0.05)
+           sigvals = np.where(sig[:,:]<0.1)
            
        else: sigvals = np.where(sig[:,:]<0.05)
        lon2d, lat2d = np.meshgrid(scores.lon.values, scores.lat.values)
 
-    
-    titel = u"variable = "+variable+", plot type = "+plot_type+', valid for: '+season+' '+str(year)
+    titel = variable+", "+plot_type+', valid for: '+season+' '+str(year)
+    #titel = u"variable = "+variable+", plot type = "+plot_type+', valid for: '+season+' '+str(year)
     colorz = plot_dict[variables[variable]]['colors']
     
-    colorsceel=[ [0, colorz[0]],[0.1, colorz[1]], [0.3, colorz[2]], [0.45, colorz[3]], [0.55, colorz[4]], [0.67, colorz[5]], [0.9, colorz[6]], [1,colorz[7]]]
+    #colorsceel=[ [0, colorz[0]],[0.1, colorz[1]], [0.3, colorz[2]], [0.45, colorz[3]], [0.55, colorz[4]], [0.67, colorz[5]], [0.9, colorz[6]], [1,colorz[7]]]
+    #colorsceel=[ [0, colorz[0]],[0.1, colorz[1]], [0.3, colorz[2]], [0.45, colorz[4]], [0.55, colorz[4]], [0.67, colorz[5]], [0.9, colorz[6]], [1,colorz[7]]]
+    #print(colorsceel)
+    if plot_type == 'Forecast anomalies':
+        fr = plot_dict[predictand][plot_type]['fr']
+        tv = plot_dict[predictand][plot_type]['tv']
+    else: 
+        fr = plot_dict[plot_type]['fr']
+        tv = plot_dict[plot_type]['tv']
+    
+    colorsceel=[ 
+                 [fr[0], colorz[0]], [fr[1], colorz[0]],   
+                 [fr[1], colorz[1]], [fr[2], colorz[1]],  
+                 [fr[2], colorz[2]], [fr[3], colorz[2]], 
+                 [fr[3], colorz[3]], [fr[4], colorz[3]], 
+                 [fr[4], colorz[4]], [fr[5], colorz[4]],
+                 [fr[5], colorz[5]], [fr[6], colorz[5]],
+                 [fr[6], colorz[6]], [fr[7], colorz[6]],
+                 [fr[7], colorz[7]], [fr[8], colorz[7]],
+                 [fr[8], colorz[8]], [fr[9], colorz[8]],
+               ]
+
     
     # Make traces of contour plot, marker where clicked and if possible significant markers
     
-    trace_contour = [Contour(z=data_xr,
+    trace_contour = [Heatmap(z=data_xr,
                                    x=scores.lon.values,
                                    y=scores.lat.values,
                                    zmin=plot_dict[predictand][plot_type]['vmin'],
                                    zmax=plot_dict[predictand][plot_type]['vmax'],
+                                   zsmooth = 'best',
                                    colorscale=colorsceel,
                                    opacity=1.,
                                    colorbar=dict(
+                                    lenmode='fraction', len=0.75, 
                                     title=plot_dict[predictand][plot_type]['units'],
                                     titleside='right',
-                                    titlefont=dict(size=18)),
+                                    titlefont=dict(size=18),
+                                    tickvals = tv
+                                    ),
+                                   name=predictand,
                                    )]
 
     trace_clickpoint = [Scatter(x=[lon_click]
@@ -210,9 +246,10 @@ def create_map(clickData,plot_type,variable,fc_time):
                             mode='markers',
                             marker=dict(size=1,color='black'),
                             )]
-        traces = traces_cc + trace_contour + trace_sig + trace_clickpoint
+        traces = traces_cc + trace_clickpoint + trace_sig + trace_contour
+        #traces = traces_cc + trace_contour + trace_clickpoint
     else:
-        traces = traces_cc + trace_contour + trace_clickpoint    
+        traces = traces_cc + trace_clickpoint + trace_contour   
 
     print(variable,plot_type,lon_click,lat_click)
 
@@ -225,6 +262,7 @@ def create_map(clickData,plot_type,variable,fc_time):
                 #clickmode="event",
                 #autorange=False,
                 hovermode='closest',        # highlight closest point on hover
+                #hoverlabel='test',
                 margin=go.layout.Margin(
                     l=50,
                     r=50,
@@ -240,8 +278,9 @@ def create_map(clickData,plot_type,variable,fc_time):
                     axis_style,
                 ),
                 autosize=False,
-                width=1000,
-                height=500,)
+                #width='100px',
+                #height=400,)
+            )
             ))      
    
    
@@ -278,8 +317,7 @@ def create_time_series(clickData,variable,fc_time):
     time_pd_long = obs1d.time.to_pandas()
     #print(time_pd)
     #print(len(time_pd))
-    return(
-        go.Figure(
+    fig = go.Figure(
         data=
             [go.Scatter(x=time_pd,y=kprep_mean+kprep_std,mode='lines',fillcolor='rgba(0,100,80,0.2)',line=Line(color='rgba(0,100,80,0.2)'),opacity=0.9,showlegend=False)]
             +
@@ -295,24 +333,23 @@ def create_time_series(clickData,variable,fc_time):
             #),
 
         layout = Layout(
-            title = 'Time series of the forecast, forecast only on CO2, climatology and observations (lat='+str(lat_click)+', lon='+str(lon_click)+')',
+            title = 'Time series of the forecast, forecast only on CO2, climatology and observations <br>latitude = '+str(lat_click)+', longitude = '+str(lon_click),
             #height =  225,
             #margin = {'l': 20, 'b': 30, 'r': 10, 't': 10},
             autosize=False,
-            width=1000.,
-            height=400.,
+            #width=1000.,
+            #height=400.,
             xaxis=dict(
                 rangeselector=dict(
                 buttons=list([
+                dict(count=len(time_pd),
+                     label='1961-current',
+                     step='year',
+                     stepmode='backward'),                    
                 dict(count=len(time_pd_long),
                      label='1901-current',
                      step='year',
                      stepmode='backward'),
-                dict(count=len(time_pd),
-                     label='1961-current',
-                     step='year',
-                     stepmode='backward'),
-                #dict(step='all')
                 ]),
             ),
             rangeslider=dict(),
@@ -320,7 +357,12 @@ def create_time_series(clickData,variable,fc_time):
             ),
             yaxis=dict(title=variable+' '+plot_dict[predictand]['Forecast anomalies']['units']),     
             )
-        ))   
+    )
+    initial_range=['1961-01-01', time_pd[-1]]
+    fig['layout']['xaxis'].update(range=initial_range)   
+    return(fig)
+            
+            
       
 def create_bar_plot(clickData,plot_type,variable,fc_time):
     print(' ')
@@ -381,10 +423,10 @@ def create_bar_plot(clickData,plot_type,variable,fc_time):
                 )
         
         layout = go.Layout(
-            height=500,
-            width=500.,
+            #height=500,
+            #width='30%',
             autosize=False,
-            title='Individual contribution predictors (lat='+str(lat_click)+', lon='+str(lon_click)+')',
+            title='Individual contribution predictors <br> latitude = '+str(lat_click)+', longitude = '+str(lon_click),
             yaxis=dict(title=variable+' '+plot_dict[predictand]['Forecast anomalies']['units']),
             )
    
@@ -446,9 +488,10 @@ def create_po_timeseries(clickData,variable,fc_time):
         fig = tls.make_subplots(rows=np.int(nr_sigp),cols=1)
         for ii in range(nr_sigp):
             fig.append_trace(traces[ii],ii+1,1)
-        fig['layout'].update(   height=600,
-                                width=1000.,
-                                autosize=False,
+        fig['layout'].update(   
+                                #height=600,
+                                #width=1000.,
+                                #autosize=False,
                                 title='Time series of (fitted) predictor data (lat='+str(lat_click)+', lon='+str(lon_click)+')',
                             )
         
@@ -471,28 +514,67 @@ def create_mapp(clickData,predictand,predictor,fc_time,data_name):
     #    data_name2 = 'cor_orig'
     #else: data_name2 = 'cor_stepwise'
     data_name2 = 'sig'+data_name[3:]
-        
-    cor_pred = xr.open_dataset(bdnc+'cor_pred/'+data_name+'_'+variables_prad[predictand]+'_'+str(month).zfill(2)+'.nc')[variables_pred[predictor]]
-    sig_pred = xr.open_dataset(bdnc+'cor_pred/'+data_name2+'_'+variables_prad[predictand]+'_'+str(month).zfill(2)+'.nc')[variables_pred[predictor]]
+    if data_name == 'diff':
+        cor_pred = xr.open_dataset(bdnc+'cor_pred/'+'cor_predictors_fit'+'_'+variables_prad[predictand]+'_'+str(month).zfill(2)+'.nc')[variables_pred[predictor]]
+        cor_pred2 = xr.open_dataset(bdnc+'cor_pred/'+'cor_predictors_nofit'+'_'+variables_prad[predictand]+'_'+str(month).zfill(2)+'.nc')[variables_pred[predictor]]
+        sig_pred = xr.open_dataset(bdnc+'cor_pred/'+'sig_predictors_fit'+'_'+variables_prad[predictand]+'_'+str(month).zfill(2)+'.nc')[variables_pred[predictor]]
+        cor1 = 0.5 * np.log((1+cor_pred.values) / (1-cor_pred.values))
+        cor2 = 0.5 * np.log((1+cor_pred2.values) / (1-cor_pred2.values))
+        data_xr = cor1 - cor2
+        print(data_xr)
+        zmin = -0.3; zmax=0.3
+        #fr = [0.0,0.167,0.25,0.333,0.4,0.6,0.7,0.8,0.9,1.0]
+        tv = [-0.3,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.3]
+        fr = (np.array(tv) / zmax + 1) / 2.
+    else:
+        cor_pred = xr.open_dataset(bdnc+'cor_pred/'+data_name+'_'+variables_prad[predictand]+'_'+str(month).zfill(2)+'.nc')[variables_pred[predictor]]
+        sig_pred = xr.open_dataset(bdnc+'cor_pred/'+data_name2+'_'+variables_prad[predictand]+'_'+str(month).zfill(2)+'.nc')[variables_pred[predictor]]
+        data_xr = cor_pred.values#.isel(time=-dict_times[fc_time]).values
+        zmin = -1.; zmax=1.
+        #fr = [0.0,0.1,0.2,0.3,0.4,0.6,0.7,0.8,0.9,1.0]
+        tv = [-1,-0.8,-0.6,-0.4,-0.2,0.2,0.4,0.6,0.8,1.0]
+        fr = (np.array(tv) / zmax + 1) / 2.
     #cor_pred = xr.open_dataset(bdnc+'cor_predictors_stepwise_'+variables_prad[predictand]+'.nc')
     #times_m = cor_pred['time.month']
-    data_xr = cor_pred.values#.isel(time=-dict_times[fc_time]).values
-    titel = u'variable = '+predictand+', valid for: '+season+' '+str(year)
+    colorz = ['#000099','#3355ff','#66aaff','#77ffff','#ffffff','#ffff33','#ffaa00','#ff4400','#cc0022']
+    colorsceel=[ 
+                [fr[0], colorz[0]], [fr[1], colorz[0]],   
+                [fr[1], colorz[1]], [fr[2], colorz[1]],  
+                [fr[2], colorz[2]], [fr[3], colorz[2]], 
+                [fr[3], colorz[3]], [fr[4], colorz[3]], 
+                [fr[4], colorz[4]], [fr[5], colorz[4]],
+                [fr[5], colorz[5]], [fr[6], colorz[5]],
+                [fr[6], colorz[6]], [fr[7], colorz[6]],
+                [fr[7], colorz[7]], [fr[8], colorz[7]],
+                [fr[8], colorz[8]], [fr[9], colorz[8]],
+            ]
+
+    
+    titel = u'Correlation between '+predictand+' and '+predictor+', valid for: '+season+' '+str(year)
+    if data_name == 'cor_predictors_fit':
+        titel2 = 'Fitted, The predictor data is fitted on previous 3 month mean and trend'
+    elif data_name == 'cor_predictors_nofit':
+        titel2 = 'No fit, The predictor data is the previous 3 month mean'
+    else:
+        titel2 = 'Differce in correlation (fisher transformed), fitted - nofit'
     #fig = go.Contour(
     print(sig_pred)
     sigvals = np.where(sig_pred.values[:,:]<0.05)
     lon2d, lat2d = np.meshgrid(sig_pred.lon.values, sig_pred.lat.values)
 
     
-    trace_contour = [Contour(z=data_xr,
+    trace_contour = [Heatmap(z=data_xr,
                                    x=cor_pred.lon.values,
                                    y=cor_pred.lat.values,
-                                   zmin=-1.,
-                                   zmax=1.,
+                                   zmin=zmin,
+                                   zmax=zmax,
+                                   colorscale=colorsceel,
                                    colorbar=dict(
-                                    title='test',
+                                    title='[-]',
                                     titleside='right',
-                                    titlefont=dict(size=18)),
+                                    titlefont=dict(size=18),
+                                    tickvals = tv,
+                                    )
                                    )]
 
     trace_clickpoint = [Scatter(x=[lon_click]
@@ -506,56 +588,41 @@ def create_mapp(clickData,predictand,predictor,fc_time,data_name):
                             mode='markers',
                             marker=dict(size=1,color='black'),
                             )]
-    traces = traces_cc + trace_contour + trace_sig + trace_clickpoint
+    traces = traces_cc + trace_sig + trace_clickpoint + trace_contour
     
     return( 
             go.Figure(
             data = traces,
             layout = Layout(
-                title=titel,
+                title=titel+'<br>'+titel2,
                 showlegend=False,
                 #clickmode="event",
                 hovermode='closest',        # highlight closest point on hover
-                #colorscale=[[0, 'rgb(166,206,227)'], [0.25, 'rgb(31,120,180)'], [0.45, 'rgb(178,223,138)'], [0.65, 'rgb(51,160,44)'], [0.85, 'rgb(251,154,153)'], [1, 'rgb(227,26,28)']],
-                #colorscale=colorsceel,
-                margin=go.Margin(
+                margin=go.layout.Margin(
                     l=50,
                     r=50,
                     b=10,
                     t=70,
                     pad=4
                     ),
-                xaxis=XAxis(
+                xaxis=go.layout.XAxis(
                     axis_style,
-                       range=[-180,180]
-                ),
-                yaxis=YAxis(
-                    axis_style,
-                ),
-                annotations=Annotations([
-                    Annotation(
-                        text=anno_text,
-                        xref='paper',
-                        yref='paper',
-                        x=0,
-                        y=1,
-                        yanchor='bottom',
-                        showarrow=False
-                    )
-                ]),
-
-                autosize=False,
-                width=1000,
-                height=500,)
+                       range=[-180,180]),
+                yaxis=go.layout.YAxis(
+                    axis_style),
+                )
             ))      
    
 def create_map1(clickData,predictand,predictor,fc_time):
-    return create_mapp(clickData,predictand,predictor,fc_time,'cor_predictors')
+    return create_mapp(clickData,predictand,predictor,fc_time,'cor_predictors_fit')
     
     
 def create_map2(clickData,predictand,predictor,fc_time):    
-    return create_mapp(clickData,predictand,predictor,fc_time,'cor_predictors_stepwise')
+    return create_mapp(clickData,predictand,predictor,fc_time,'cor_predictors_nofit')
    
+def create_map3(clickData,predictand,predictor,fc_time):    
+    return create_mapp(clickData,predictand,predictor,fc_time,'diff')
+      
    
 def create_xyplot(clickData,predictand,predictor,fc_time):
     mo = np.int(fc_time[5:])
@@ -592,45 +659,31 @@ def create_xyplot(clickData,predictand,predictor,fc_time):
         
     prad1d = prad.sel(lon=lon_click,lat=lat_click,
         method=str('nearest')).sel(time=(prad['time.month']==mo))
-    #print(pred1d)
+
     time_pd = pred1d.time.to_pandas()
     xdata = prad1d.to_array().values[0]
     y_orig = pred1d.values[:len(xdata)]
     y_fit = pred1d_fit.values[:len(xdata)]
-    #print(xdata)
-    #print(y_orig)
+
     cor_orig = str(scipy.stats.pearsonr(xdata[10:],y_orig[10:]))[1:5]
     cor_fit = str(scipy.stats.pearsonr(xdata[10:],y_fit[10:]))[1:5]
-    #print(cor_fit,cor_orig)
-    #np.save('xdata.npy',xdata)
-    #np.save('ydata.npy',y_orig)
-    
-    #print(y_fit)
-    #print('hi there..')
-    #print(xdata[0])
-    #print(len(xdata),len(y_orig),len(y_fit))
-    
+   
     
     trace1 = go.Scatter(x=xdata[10:],y=y_orig[10:],mode='markers',name='original  '+cor_orig,marker=dict(color='blue'))
     trace2 = go.Scatter(x=xdata[10:],y=y_fit[10:],mode='markers',name='model fit '+cor_fit,marker=dict(color='green'))
     
-    #data = [trace1,trace2]
-    #return go.Figure(data=data)
-    #fig = go.Figure()
-    #fig.append_trace(trace1)
-    #fig.append_trace(trace2)
-    #return fig
         
-    return( go.Figure(data = Data([trace1,trace2]),
+    return( go.Figure(data = [trace1,trace2],
                        layout = Layout(
                             title = 'Scatter plot of '+predictand+' with '+predictor+', lat='+str(lat_click)+', lon='+str(lon_click),
                             #height =  225,
-                            margin = {'l': 20, 'b': 30, 'r': 10, 't': 30},
+                            margin = {'l': 70, 'b': 70, 'r': 10, 't': 100},
                             autosize=False,
-                            width=500.,
-                            height=500.,
+                            #width=500.,
+                            #height=500.,
                             xaxis=dict(title=predictand),
                             yaxis=dict(title=predictor),
+                            legend=dict(x=0,y=1,font=dict(size=14)),
                             )
                         )
         )    

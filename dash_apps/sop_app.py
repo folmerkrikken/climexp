@@ -47,8 +47,8 @@ bd = '/home/oldenbor/climexp_data/KPREPData/'
 if not os.path.isdir(bd):
     bd = '/home/folmer/climexp_data/KPREPData/'
 
-bd2 = ''            # For local running
-bd2 = '/myapp'      # For local and remote climexp.knmi.nl
+#bd2 = ''            # For local (python) running
+bd2 = '/myapp'      # For local (through apache) and remote climexp.knmi.nl
 
     
 #bd = '/home/folmer/KPREP/'
@@ -70,9 +70,9 @@ styles = {
 }
 
 plottypes={'Correlation':'cor','RMSESS':'rmsess','CRPSS':'crpss','Tercile summary plot':'tercile','Forecast anomalies':'for_anom'}
-variables={'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'}
+variables={'Temperature':'GCEcom','Precipitation':'PRECIP','Sea-level pressure':'20CRslp'}
 #fc_time={'Stepwise':'stepwise','Not stepwise':'cor'}
-variables_prad={'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'}
+variables_prad={'Temperature':'GCEcom','Precipitation':'PRECIP','Sea-level pressure':'20CRslp'}
 variables_pred={'CO2':'CO2EQ','NINO34':'NINO34','PDO':'PDO','AMO':'AMO','IOD':'IOD','PREC':'CPREC','PERS':'PERS','PERS_TREND':'PERS_TREND'}
 
 
@@ -97,9 +97,9 @@ app.layout = html.Div([
 
 
 index_page = html.Div([
-    dcc.Link('Go to the KPREP sources of predictabily app '+bd2, href=bd2+'/kprep-sop'),
+    dcc.Link('Go to the KPREP sources of predictabily app ', href=bd2+'/kprep-sop'),
     html.Br(),
-    dcc.Link('Go to the KRPEP predictor-predictand relations app '+bd2, href=bd2+'/kprep-pp'),
+    dcc.Link('Go to the KRPEP predictor-predictand relations app ', href=bd2+'/kprep-pp'),
 ])
 
 #page_1_layout = html.Div([
@@ -122,13 +122,21 @@ page_1_layout = html.Div(children=[
     html.Div(children='''
         This app is constructed using Dash, a web application framework for Python. Any questions, suggestion or comments mail folmer.krikken@knmi.nl
     '''),
-    html.ObjectEl(type="text/html",name='../myvinkhead.cgi'),
+    #html.ObjectEl(type="text/html",name='../myvinkhead.cgi'),
     html.Br(),
-    html.Div(children='This website can be used to study the sources of predictability in the KPREP empirical forecasting system. The dropdown menu allow to change the predictand, plot type and forecasting time. By clicking on the map the barplot gives the contribution of the predictors to the forecasted anomalie, and the line plots give more information on the forecasts and predictors over time'),
+    html.Div(children="This website can be used to study the sources of predictability in the KPREP empirical forecasting system. The dropdown menu's allow to change the predictand, plot type and forecasting time. By clicking on the map the barplot gives the contribution of the predictors to the forecasted anomalie, and the line plots give more information on the forecasts and predictors over time"),
     html.Br(),
     dcc.Link('Click here to examine predictor-predictand relations', href=bd2+'/kprep-pp'),
     html.Br(),
     html.Br(),
+    html.Br(),
+    html.Br(),
+    #html.Div(children='Select region',style={'width': '20%', 'display': 'inline-block'}),
+    html.Div(children=' Select forecasted variable',style={'width': '25vh', 'display': 'inline-block'}),
+    html.Div(children=' Select plot type',style={'width': '25vh', 'display': 'inline-block'}),
+    html.Div(children=' Select forecast base time',style={'width': '25vh', 'display': 'inline-block'}),
+    html.Br(),
+    #html.Div(children='Select forecast valid time',style={'width': '20%', 'display': 'inline-block'}),
     # Create dropdown menu to choose variable, and specify with which to start
     
     html.Div([
@@ -139,7 +147,7 @@ page_1_layout = html.Div(children=[
             ),
 
         ],
-        style={'width': '20%', 'display': 'inline-block'}),
+        style={'width': '25vh', 'display': 'inline-block'}),
     # Create dropdown menu to choose plot type, and specify with which to start
     html.Div([
             dcc.Dropdown(
@@ -149,7 +157,7 @@ page_1_layout = html.Div(children=[
             ),
 
         ],
-        style={'width': '20%', 'display': 'inline-block'}),
+        style={'width': '25vh', 'display': 'inline-block'}),
 
     # Create dropdown menu to choose time step, and specify with which to start (latest time)
     html.Div([
@@ -160,31 +168,32 @@ page_1_layout = html.Div(children=[
             ),
 
         ],
-        style={'width': '30%', 
+        style={'width': '25vh', 
                'display': 'inline-block',
                'margin': {'b': 50, 'r': 10, 'l': 30, 't': 10}
                 }),
     # Create the different figures and specify the sizes    
+    html.Br(),
     html.Div([
         dcc.Graph(id='basemap_plot')],
-        style={'width':'65%','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10}}),
+        style={'width':'80vh','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10}}),
     html.Div([
         dcc.Graph(id='bar_plot')],
-        style={'width':'25%','display': 'inline-block','margin': {'b': 200, 'r': 10, 'l': 30, 't': 10}}),
+        style={'width':'40vh','display': 'inline-block','margin': {'b': 200, 'r': 10, 'l': 30, 't': 10}}),
     
 
     html.Div([
         dcc.Graph(id='predictand_plot')],
-        style={'width':'55%','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align':'middle'}),
+        style={'width':'80vh','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align':'middle'}),
     html.Div([
         dcc.Graph(id='predictor_plot')],
-        style={'width':'55%','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align': 'middle'}),    
+        style={'width':'80vh','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align': 'middle'}),    
     
 
     ])
 
 page_2_layout = html.Div(children=[
-    html.H1(children='Sources of predictability - KPREP empirical forecast system'),
+    html.H1(children='KPREP empirical forecast system - Sources of predictability'),
 
     html.Div(children='''
         Dash: A web application framework for Python.
@@ -230,14 +239,18 @@ page_2_layout = html.Div(children=[
     # Create     
     html.Div([
         dcc.Graph(id='basemap_plot1')],
-        style={'width':'65%','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10}}),
+        style={'width':'80vh','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align':'middle'}),
     html.Div([
         dcc.Graph(id='xy_plot')],
-        style={'width':'25%','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10}}),
+        style={'width':'50vh','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align':'middle'}),
     
     html.Div([
         dcc.Graph(id='basemap_plot2')],
-        style={'width':'55%','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10}}),
+        style={'width':'80vh','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align':'middle'}),
+    
+    html.Div([
+        dcc.Graph(id='basemap_plot3')],
+        style={'width':'80vh','display': 'inline-block','margin': {'b': 50, 'r': 10, 'l': 30, 't': 10},'horizontal-align':'middle'}),
     
     ])
       
@@ -249,7 +262,7 @@ page_2_layout = html.Div(children=[
      dash.dependencies.Input('plot_type', 'value'),
      dash.dependencies.Input('variable', 'value'),
      dash.dependencies.Input('fc_time','value')])
-def update_map(clickData,plot_type,variable,fc_time):
+def update_map1(clickData,plot_type,variable,fc_time):
     return create_map(clickData,plot_type,variable,fc_time)
 
 # Update barplot
@@ -289,7 +302,7 @@ def update_po_timeseries(clickData,variable,fc_time):
      dash.dependencies.Input('predictand', 'value'),
      dash.dependencies.Input('predictor', 'value'),
      dash.dependencies.Input('fc_time','value')])
-def update_map(clickData,predictand,predictor,fc_time):
+def update_map2(clickData,predictand,predictor,fc_time):
     return create_map1(clickData,predictand,predictor,fc_time)
 
 # Update corplot map fitted predictors vs predictand
@@ -299,8 +312,18 @@ def update_map(clickData,predictand,predictor,fc_time):
      dash.dependencies.Input('predictand', 'value'),
      dash.dependencies.Input('predictor', 'value'),
      dash.dependencies.Input('fc_time','value')])
-def update_map(clickData,predictand,predictor,fc_time):
+def update_map3(clickData,predictand,predictor,fc_time):
     return create_map2(clickData,predictand,predictor,fc_time)
+
+# Update corplot map fitted predictors vs predictand
+@app.callback(
+    dash.dependencies.Output('basemap_plot3', 'figure'),
+    [dash.dependencies.Input('basemap_plot1','clickData'),
+     dash.dependencies.Input('predictand', 'value'),
+     dash.dependencies.Input('predictor', 'value'),
+     dash.dependencies.Input('fc_time','value')])
+def update_map4(clickData,predictand,predictor,fc_time):
+    return create_map3(clickData,predictand,predictor,fc_time)
 
    
 # Update xyplot                    
@@ -353,7 +376,7 @@ def display_page(pathname):
     elif pathname == bd2+'/kprep-pp':
         return page_2_layout
     else:
-        return index_page
+        return page_1_layout
     # You could also return a 404 "URL not found" page here
 
 
