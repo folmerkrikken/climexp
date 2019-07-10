@@ -18,7 +18,7 @@ EOF
 
 #<iframe src="http://127.0.0.1/myapp/kprep_sop:8050" width=700 height=600>
 cat <<EOF
-<iframe src="http://127.0.0.1/myapp/kprep_sop" style="width:100%;height:1000;border:none">
+<iframe src="https://climexp/knmi.nl/myapp/kprep_sop" style="width:100%;height:1000;border:none">
 EOF
 
 
