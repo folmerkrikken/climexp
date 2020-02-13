@@ -1,16 +1,10 @@
-# uncompyle6 version 2.14.2
-# Python bytecode 2.7 (62211)
-# Decompiled from: Python 2.7.14 (default, Dec 11 2017, 16:08:01) 
-# [GCC 7.2.1 20170915 (Red Hat 7.2.1-2)]
-# Embedded file name: SPECS_forecast_v5_tools.py
-# Compiled at: 2018-01-09 20:16:22
-
 import os, sys, glob, re, pickle
 import numpy as np
 import datetime
 import time
 import scipy
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset, num2date, date2num
 from matplotlib import cm as CM
@@ -27,6 +21,8 @@ import pandas as pd
 import xarray as xr
 import cartopy.crs as ccrs
 from joblib import Parallel,delayed
+from sklearn.linear_model import Lasso
+
 
 month_nr = [
  '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
@@ -55,7 +51,7 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
 
 
 
-    # Make list of times that would give the future state of predictor data 
+    # Make list of times that would give the future state of predictor data
     timez_f = timez + pd.DateOffset(months=4)
     #print(FC)
     if FC: test = [test]
@@ -66,6 +62,9 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
        
     # Detrend data trough removing linear relation with co2, using only training data to determine the fit    
     #import pdb;pdb.set_trace()
+    #print('timez',timez)
+    #print('train',train)
+    print('test',test)
     predodata_3m_nc = remove_co2_po(predodata_3m.sel(time=timez), predodata_3m['CO2EQ'].sel(time=timez), train)
     predadata_3m_nc = remove_co2_pa(predadata_3m.sel(time=train), predodata_3m['CO2EQ'].sel(time=train), train)
     
@@ -73,7 +72,7 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     #import pdb;pdb.set_trace()
     if MLR_PRED:
         print('     MLR_PRED is True, fitting individual models for better estimate of future state of predictor')
-        # Detrend trend data..
+        # Detrend 3-month trend data..
         predodata_3m_trend_nc = remove_co2_po(predodata_3m_trend.sel(time=timez), predodata_3m['CO2EQ'].sel(time=timez), train)
         # Detrend future state of predictor
         if FC:
@@ -82,15 +81,17 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
             predodata_3m_f_nc = remove_co2_po(predodata_3m.sel(time=timez_f), predodata_3m['CO2EQ'].sel(time=timez_f), train+pd.DateOffset(months=4))
 
         predodata_3m_fit = fit_predictors(y=predodata_3m_f_nc, x1=predodata_3m_nc, x2=predodata_3m_trend_nc, train_p=train, train_f=train+pd.DateOffset(months=4))
-        if 'PERS' in predictors:
+        if 'PERS_TREND' in predictors:
             predodata_3m_fit['PERS_TREND'] = predodata_3m_trend_nc['PERS']
     else:
         predodata_3m_fit = predodata_3m_nc  # Check if I shouldn't add .sel(time=timez)
+
     #print(predodata_3m_fit)
     # Get the correlation between predictor and predictand with stepwise selection
     cor_nc, sig_nc = get_sig_pred(predodata_3m_fit.sel(time=train), predadata_3m_nc.sel(time=train), predadata_3m.sel(time=train))
     #print(cor_nc)
     # Get correlation between predictor and predictand   
+    #import pdb;pdb.set_trace()
     if FC:
         bdp = bdnc+'../plots/'
         # Get the correlation between predictor and predictand without stepwise selection
@@ -162,7 +163,7 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     # Fill in fit_test where possible, so if no sig predictors then clim and only co2 then trend
     kprep[:,nosigs] = clim[:,nosigs] #data_fit['clim'].sel(time=test).values[:,nosigs]
     kprep[:,onlyco2s] = trend[:,onlyco2s] #data_fit['trend'].sel(time=test).values[:,onlyco2s]
-    beta[:,0,sig_nc[0,:]<0.1] =  linregrez(predodata_3m['CO2EQ'].sel(time=train),predadata_3m.sel(time=train),BETA=True)[0][sig_nc[0,:]<0.1]
+    beta[:,0,sig_nc[0,:]<sig_val] =  linregrez(predodata_3m['CO2EQ'].sel(time=train),predadata_3m.sel(time=train),BETA=True)[0][sig_nc[0,:]<sig_val]
     
     # Create boolean array where there are significant predictors (excluding CO2EQ)
     pred_sel = sig_nc[1:, :, :] < sig_val
@@ -178,14 +179,13 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     Y_tr = predadata_3m_nc.sel(time=train).values                   # Detrended predictand training data
     X_tr = predodata_3m_fit.sel(time=train).to_array().values       # Detrended predictor training data
     X_te = predodata_3m_fit.sel(time=test).to_array().values        # Detrended predictor test data
-
     
     fit_train = np.full_like(Y_tr,np.nan)
     # Parallelized regression input > y,X_tr,X_te,sig, output > fit_train,fit_test,beta
-    
-    PARALLEL = False
+    #import pdb;pdb.set_trace()
+    PARALLEL = True
     if PARALLEL:
-        regr_output = np.asarray(Parallel(n_jobs=8)(delayed(regrezzion)(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[:,i,j])for i,j in zip(ii,jj)))
+        regr_output = np.asarray(Parallel(n_jobs=4)(delayed(regrezzion)(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[:,i,j])for i,j in zip(ii,jj)))
         
         
         # Put data obtained in regression back to right place..
@@ -194,15 +194,16 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
         beta[:,1:,rest] = np.vstack(regr_output[:,2]).T
     else:    
         for i,j in zip(ii,jj):
+            #print(i,j)
             fit_train[:,i,j],kprep[:,0,i,j],beta[:,1:,i,j] = regrezzion(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[:,i,j])
-        
+            #fit_train[:,i,j],kprep[:,0,i,j],beta[:,1:,i,j] = lasso_regr(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],alpha=0.1)#,pred_sel[:,i,j])
     # Generate ensemble based on random sampling 50 years from residuals (fit_train - Y_tr)
     # The transpose is needed because numpy changes the axis order when combining advanced and normal indexing
     for n in range(len(test)): 
         kprep[n,1:,rest] = (kprep[n,0,rest] + (fit_train[:,rest] - Y_tr[:,rest])[rand_yrs[n,1:],:]).T
-    
+
     # Create boolean array where to apply trend is significant and rest = True
-    rest_sig = rest & (sig_nc[0,:]<0.1)
+    rest_sig = rest & (sig_nc[0,:]<sig_val)
     
     kprep[:,:,rest_sig] = kprep[:,:,rest_sig] + trend[:,0,rest_sig][:,None,:]  # Manually add trend due to CO2 after regression
             
@@ -216,32 +217,21 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     data_fit['obs'] = (('time','lat','lon'),obs)
     beta_xr['beta'] = (('time','predictors','lat','lon'),beta)
 
-    #import pdb; pdb.set_trace()
-    #sys.exit()
     t3=time.time()
-
+    
+    #import pdb;pdb.set_trace()
     ### WRITE OUTPUT TO NETCDF
 
-    #data_fit.to_netcdf(bdnc+'pred_v2_'+predictand+'
-
-    # Test, do monthly output
-
-    
+   
     print('     Writing to netcdf')
-    #print(bdnc+'pred_v2_'+predictand)
-    #to_nc2(data_fit,bdnc + 'pred_v2_'+predictand)
-    #data_fit.to_netcdf(bdnc + 'pred_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')
-    #to_nc2(beta_xr,bdnc+ 'beta_v2_'+predictand)
-    #beta_xr.to_netcdf(bdnc + 'beta_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')#,encoding={'beta':{'dtype':'float32'}})
-    #predodata_3m_nc.to_netcdf(bdnc+'predictors_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')
-    #predodata_3m_fit.to_netcdf(bdnc+'predictors_fit_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')
+
     if FC:
         if MDC: name = str(mo)+'_'+str(lt)+'.nc'
         else: name = str(mo).zfill(2)+'.nc'
         #to_nc3(predodata_3m_nc,bdnc + 'predictors_v2_'+predictand)
         #to_nc3(predodata_3m_fit,bdnc + 'predictors_fit_v2_'+predictand)
         print(predadata_3m.attrs)
-        if MDC: predadata_3m.to_netcdf(bdnc + 'predadata_v2_'+predictand+name,'w')
+        if MDC: predadata_3m.to_netcdf(bdnc + 'predadata_v2_'+predictand+'_'+name,'w')
         else: predadata_3m.to_netcdf(bdnc + 'predadata_v2_'+predictand+'.nc','w')
         
         predodata_3m_nc.to_netcdf(bdnc + 'predodata_3m_nc_'+predictand+'_'+name)
@@ -250,212 +240,29 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     #if FC:
     #    predodata_3m_nc.to_netcdf(bdnc + 'predictors_v2_'+predictand+'.nc')
     #    predodata_3m_fit.to_netcdf(bdnc + 'predictors_fit_v2_'+predictand+'.nc')
-
+    #import pdb;pdb.set_trace()
     print('     regression loop done')
     print('     full function is: ',np.round((time.time()-t0),1),' seconds')
     print('     regr loop is: ',np.round((t2-t1),1),' seconds')
     print('     writing netcdf is: ',np.round((time.time()-t3),1),' seconds')
-    #print('predadata_3m')
-    #print(predadata_3m)
-    #print('predodata_3m_nc')
-    #print(predodata_3m_nc)
-    #print('predodata_3m_fit')
-    #print(predodata_3m_fit)
     
     return(data_fit,beta_xr)
 
 
 
 
-def regr_loop2(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test, ens_size, bdnc, resolution, predictand,predictors,MLR_PRED, FC=True, sig_val=0.1):
-    ## Some notes..
-    # 1 - The times written in the output files are all set to the month when the model is run, so the predictand data and the predictor data get the same timestamp in the output files, though they represent past (-2 months) and future (+2 months) data relative to the time stamp. The time stamp is the month the model is run. Hence, e.g. 2015-05-01 represent the forecast of May in 2015, with predictand data from FMA and predictor season is JJA.
-    # 2 - ...
-    print('     Started regression loop')
-    t0 = time.time()
-    
-    # Make list of times that would give the future state of predictor data 
-    timez_f = timez + pd.DateOffset(months=4)
 
-    if FC: test = [test]
-    else:  test = test
-        
-    # Detrend data trough removing linear relation with co2, using only training data to determine the fit    
-    predodata_3m_nc = remove_co2_po(predodata_3m.sel(time=timez), predodata_3m['CO2EQ'].sel(time=timez), train)
-    predadata_3m_nc = remove_co2_pa(predadata_3m.sel(time=train), predodata_3m['CO2EQ'].sel(time=train), train)
+def lasso_regr(y_train,x_train,x_test,alpha=0.1):
+    lassoReg = Lasso(alpha=alpha, normalize=True)
+    lassoReg.fit(x_train.T,y_train)
+    pred = lassoReg.predict(x_test.T)
     
-    # If MLR, then use mean and trend of last 3 months of predictor to predict the future state of the predictor
-    if MLR_PRED:
-        print('     MLR_PRED is True, fitting individual models for better estimate of future state of predictor')
-        # Detrend trend data..
-        predodata_3m_trend_nc = remove_co2_po(predodata_3m_trend.sel(time=timez), predodata_3m['CO2EQ'].sel(time=timez), train)
-        # Detrend future state of predictor
-        if FC:
-            predodata_3m_f_nc = remove_co2_po(predodata_3m.sel(time=timez_f[:-1]), predodata_3m['CO2EQ'].sel(time=timez_f[:-1]), train+pd.DateOffset(months=4))
-        else:
-            predodata_3m_f_nc = remove_co2_po(predodata_3m.sel(time=timez_f), predodata_3m['CO2EQ'].sel(time=timez_f), train+pd.DateOffset(months=4))
-
-        predodata_3m_fit = fit_predictors(y=predodata_3m_f_nc, x1=predodata_3m_nc, x2=predodata_3m_trend_nc, train_p=train, train_f=train+pd.DateOffset(months=4))
-        
-    else:
-        predodata_3m_fit = predodata_3m_nc  # Check if I shouldn't add .sel(time=timez)
-    
-    # Get correlation between predictor and predictand   
-    cor_nc, sig_nc = cor_pred(predodata_3m_fit.sel(time=train), predadata_3m_nc.sel(time=train), y=predadata_3m.sel(time=train))
-    if FC:
-        plotcor_pred(cor_nc,sig=sig_nc,bd='/nobackup/users/krikken/SPESv2/testplots/'+predictand+'/predcor/',savename='corr_pred_orig_'+str(test[0])[:7],suptitle=predictand+' '+str(test[0])[:7])
-    cor_nc, sig_nc = get_sig_pred(predodata_3m_fit.sel(time=train), predadata_3m_nc.sel(time=train), predadata_3m.sel(time=train))
-    sig_nc_np = sig_nc.to_array(dim='predictors').values
-        
-    #po_nc, pa_nc, pa, sig_val=0.1, BOOTSTRAP=False):
-        
-    if FC:    # save figure with correlation between predictor and predictand
-        plotcor_pred(cor_nc,sig=sig_nc,bd='/nobackup/users/krikken/SPESv2/testplots/'+predictand+'/predcor/',savename='corr_pred_stepwise_'+str(test[0])[:7],suptitle=predictand+' '+str(test[0])[:7])
-    
-    # Predefine dataset to write output to, and fill with nans
-    fit_test = np.full((len(test), ens_size, len(predodata_3m.lat), len(predodata_3m.lon)),np.nan,dtype='float32')
-
-    data_fit = xr.Dataset(coords={'lat': predadata_3m.lat,
-                             'lon': predadata_3m.lon,
-                             'time': test,      
-                             'ens': list(range(1, ens_size + 1))})    
-    
-    kprep = np.full((len(test), ens_size, len(predodata_3m.lat), len(predodata_3m.lon)),np.nan,dtype='float32')
-    clim= np.full_like(kprep,np.nan)
-    trend = np.full_like(kprep,np.nan)
-    obs = np.full((len(test), len(predodata_3m.lat), len(predodata_3m.lon)),np.nan,dtype='float32')
-    
-                          
-    beta = np.full((len(test),len(list(predodata_3m.data_vars.keys())),len(predodata_3m.lat), len(predodata_3m.lon)),np.nan,dtype='float32')
-
-    beta_xr = xr.Dataset(coords={'time':test,'predictors':list(range(beta.shape[1])),'lat':predadata_3m.lat,'lon':predadata_3m.lon})
-    #beta_xr.time.attrs = {'units':'days since 1901-01-01'}  
-    
-    # Create array with randomly selecting 51 years from training data for every test year
-    for n in range(len(test)):
-        if n == 0: rand_yrs = np.random.choice(list(range(len(train))), 51, replace=True)[None,:]
-        else: rand_yrs = np.vstack((rand_yrs,np.random.choice(list(range(len(train))), 51, replace=True)))
-    
-    # Put linear relation CO2EQ with predictand (trend) as separate variable in ouput dataset. Linear trend is calculated by removing the detrended predictor data from the original predictor data
-    trend[:,0,:,:] =  trend_pred(predadata_3m.sel(time=train),predodata_3m['CO2EQ'].sel(time=timez),xr.full_like(predodata_3m['PERS'].sel(time=timez),np.nan),train).sel(time=test).values
-        
-        #predadata_3m.sel(time=test) - predadata_3m_nc.sel(time=test)
-    
-    # Loop over different test years to fill the trend and climatolgy ensembles
-    for n in range(len(test)):
-        trend[n,1:,:,:] = trend[n,0,:,:] + predadata_3m_nc.sel(time=train).values[rand_yrs[n,1:], :, :]
-        clim[n,:] = predadata_3m.sel(time=train).values[rand_yrs[n,:], :, :]
+    fit_train = lassoReg.predict(x_train.T)
+    fit_test = lassoReg.predict(x_test.T)
+    beta = lassoReg.coef_
+    return(fit_train,fit_test,beta)
     
     
-    # Create boolean arrays where no significant predictors and where only co2 as significant predictor, these are used to fill in the data prior to the 'expensive' loop over most grid points..
-    onlynans = np.all(np.isnan(predadata_3m.sel(time=train).values), axis=0)
-    nosig = (np.sum(sig_nc_np < sig_val, axis=0) == 0) != onlynans
-    onlyco2 = (np.sum(sig_nc_np[1:, :] < sig_val, axis=0) == 0) & (sig_nc_np[0, :] < sig_val)
-    nosigs = np.tile(nosig[None, :], (51, 1, 1))
-    onlyco2s = np.tile(onlyco2[None, :], (51, 1, 1))
-    
-    # Fill in fit_test where possible, so if no sig predictors then clim and only co2 then trend
-    kprep[:,nosigs] = clim[:,nosigs] #data_fit['clim'].sel(time=test).values[:,nosigs]
-    kprep[:,onlyco2s] = trend[:,onlyco2s] #data_fit['trend'].sel(time=test).values[:,onlyco2s]
-    beta[:,0,sig_nc_np[0,:]<0.1] =  linregrez(predodata_3m['CO2EQ'].sel(time=train),predadata_3m.sel(time=train),BETA=True)[0][sig_nc_np[0,:]<0.1]
-    
-    # Create boolean array where there are significant predictors (excluding CO2EQ)
-    pred_sel = sig_nc_np[1:, :, :] < sig_val
-    pred_sel = np.concatenate((np.zeros((1,pred_sel.shape[1],pred_sel.shape[2]), dtype=bool), pred_sel),axis=0)
-    
-    rest = (np.sum(sig_nc_np[1:, :] < sig_val, axis=0) > 0)
-
-    # predodata_3m_fit is predictor data
-    # predadata_3m_nc is predictand data
-    #sig_bo = sig_nc.drop('CO2EQ').to_array(dim='predictors') < 0.1
-    #predadata_3m_nc.name = 'predictand'
-    #tmp = xr.merge([predodata_3m_fit.drop(('CO2EQ','CPREC')),predadata_3m_nc,sig_nc]).sel(time=train)
-    #stacked = tmp.stack(allpoints=['lon','lat']).squeeze()
-    #stacked = stacked.reset_coords(drop=True)
-    #fit = stacked.isel(allpoints=rest.flatten(order='F')).groupby('allpoints').apply(xr_regression,args=(sig_nc))
-    #coefs_unst = coefs.unstack('allpoints')
-    #fit_unst = fit.unstack('allpoints')
-    
-
-    # Convert data to numpy arrays before loop as it is very slow to do this in the loop per grid point..
-    Y_tr = predadata_3m_nc.sel(time=train).values                   # Detrended predictand training data
-    X_tr = predodata_3m_fit.sel(time=train).to_array().values       # Detrended predictor training data
-    X_te = predodata_3m_fit.sel(time=test).to_array().values        # Detrended predictor test data
-    
-
-    # Get grid points where we still need to loop over to get the model fit
-    ii, jj = np.where(rest)    
-
-    # Parallelized regression
-    regr_output = np.asarray(Parallel(n_jobs=8)(delayed(regrezzion)(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[1:,i,j])for i,j in zip(ii,jj)))
-    
-    # Put data obtained in regression back to right place..
-    fit_train = np.full_like(Y_tr,np.nan)
-    fit_train[:,rest] = np.vstack(regr_output[:,0]).T
-    kprep[:,0,rest] = np.vstack(regr_output[:,1]).T 
-    beta[:,1:,rest] = np.vstack(regr_output[:,2]).T
-    
-    # Generate ensembel based on random sampling 50 years from residuals (fit_train - Y_tr)
-    for n in range(len(test)): 
-        kprep[n,1:,:] = kprep[n,0,:] + (fit_train - Y_tr)[rand_yrs[n,1:]]
-
-    kprep = kprep + trend  # Manually add trend due to CO2 after regression
-
-    
-    
-    t1 = time.time()
-    for i, j in zip(ii, jj):
-        # Add constant to the predictor data as OLS does not assume an intercept, and drop non-significant predictors
-        X_train = sm.add_constant(X_tr[pred_sel[:,i,j],:,i,j].T)
-        X_test = sm.add_constant(X_te[pred_sel[:,i,j],:,i,j].T,has_constant='add')
-
-        # Fit model to data, drop missing data (nans)
-        model = sm.OLS(Y_tr[:,i,j], X_train, missing='drop')
-        results = model.fit()
-        
-        # Save model fit to numpy arrays
-        fit_train = results.predict(X_train)    
-        # Manually add linear trend due to CO2 to the model fit
-        kprep[:,0,i,j] = results.predict(X_test) + trend[:,0,i,j] 
-        beta[:,pred_sel[:,i,j],i,j] = results.params[1:]
-        for n in range(len(test)):
-            # ensemble = result + random sampling 50 the error of the forecast
-            kprep[n,1:,i,j] = kprep[n,0,i,j] + (fit_train - Y_tr[:,i,j])[rand_yrs[n,1:]]
-    t2 = time.time()
-    print(t2-t1)
-    if not FC:
-        obs = predadata_3m.sel(time=test).values
-    data_fit['kprep'] = (('time','ens','lat','lon'),kprep)
-    data_fit['trend'] = (('time','ens','lat','lon'),trend)
-    data_fit['clim'] = (('time','ens','lat','lon'),clim)
-    data_fit['obs'] = (('time','lat','lon'),obs)
-    
-    #data_fit['kprep'].values = fit_test
-    #beta_xr['beta'].values = beta
-    beta_xr['beta'] = (('time','predictors','lat','lon'),beta)
-    #try: yr = test[0].year
-    #except TypeError: yr = test.year
-    yr = test[0].year
-    mo = timez.month[0]
-    
-    print('     Writing to netcdf')
-    print(bdnc+'pred_v2_'+predictand)
-    to_nc2(data_fit,bdnc + 'pred_v2_'+predictand)
-    #data_fit.to_netcdf(bdnc + 'pred_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')
-    to_nc2(beta_xr,bdnc+ 'beta_v2_'+predictand)
-    #beta_xr.to_netcdf(bdnc + 'beta_v2_'+predictand+'_'+str(yr)+'_'+str(mo)+'.nc')#,encoding={'beta':{'dtype':'float32'}})
-    if FC:
-        to_nc3(predodata_3m_nc,bdnc + 'predictors_v2_'+predictand)
-        to_nc3(predodata_3m_fit,bdnc + 'predictors_fit_v2_'+predictand)
-        predadata_3m.to_netcdf(bdnc + 'predadata_v2_'+predictand+'.nc','w')
-    #if FC:
-    #    predodata_3m_nc.to_netcdf(bdnc + 'predictors_v2_'+predictand+'.nc')
-    #    predodata_3m_fit.to_netcdf(bdnc + 'predictors_fit_v2_'+predictand+'.nc')
-
-    print('     regression loop done')
-    print('     full function is: ',np.round((time.time()-t0),1),' seconds')
-    print('     regr loop is: ',np.round((t2-t1),1),' seconds')
-    return
 
 def regrezzion(y,X_tr,X_te,sig):
     beta = np.full_like(sig,np.nan,dtype='float64')
@@ -599,6 +406,8 @@ def remove_co2_po(data, data_co2, train):
         if pred == 'CO2EQ':
             data_out[pred].values = data[pred].values
         else:
+            #import pdb;pdb.set_trace()
+            #print(data)
             a, b = linregrez(data_co2.sel(time=train).values, data[pred].sel(time=train).values, BETA=True)[:2]
             if a.ndim == 1:
                 data_out_co2 = a * data_co2.values + b
@@ -619,13 +428,14 @@ def remove_co2_pa(data, data_co2, train):
     data_out.values = data.values - data_out_co2
     return data_out
 
-def trend_pred(data,pred,data_out,train):
+def trend_pred(data,pred,data_out,train,taxis=0):
     # Calculate linear relation of certain data with a predictor, fit based on training data
     #data_out = xr.full_like(pred, np.nan) # Create empty DataArray 
     # Fit is based on training data
-    a, b = linregrez(pred.sel(time=train).values, data.sel(time=train).values, BETA=True)[:2]
+    a, b = linregrez(pred.sel(time=train).values, data.sel(time=train).values, BETA=True,taxis=taxis)[:2]
     # linear trend calculated for full time series (i.e. timez)
-    data_out.values =  a[np.newaxis, :, :] * pred.values[:, np.newaxis, np.newaxis] + b[np.newaxis, :, :]
+    #data_out.values =  a[np.newaxis, :, :] * pred.values[:, np.newaxis, np.newaxis] + b[np.newaxis, :, :]
+    data_out.values =  np.expand_dims(a,taxis) * pred.values[:, np.newaxis, np.newaxis] + b[np.newaxis, :, :]
     return data_out
     
 
@@ -650,6 +460,7 @@ def nans_like(data):
 def rewrite_time(df):
     time_idx = pd.DatetimeIndex(df.time.values)
     df2 = pd.DataFrame({'year': time_idx.year,'month': time_idx.month,'day': np.ones(len(df.time.values))})
+    #df2.time.attrs = {'standard_name':'time','long_name':'Time','reference_time': pd.Timestamp('1891-01-01')}
     time = pd.to_datetime(df2)
     return time.values
 
@@ -786,7 +597,6 @@ def linregrez(x, y, taxis=0, COR=False, BETA=False, COV=False):
             return (pearson, p, beta, se_beta, inter, se_inter, cov)
         
 def linregrez_short(x, y, taxis=0):
-
     x_a = x - np.nanmean(x, axis=taxis, keepdims=True)
     y_a = y - np.nanmean(y, axis=taxis, keepdims=True)
     
@@ -799,6 +609,51 @@ def linregrez_short(x, y, taxis=0):
     inter = np.nanmean(y, axis=taxis) - beta * np.nanmean(x, axis=taxis)
 
     return pearson,p,beta,inter
+
+def comb_pvalues(sige): # Combine p-values using fishers method
+    X_var = -2. * np.nansum(np.log(sige),axis=0)
+    sig = 1. - stats.chi2.cdf(X_var,2*sige.shape[0])
+    return(sig)
+
+def comb_rvalues(core): # Combine r-values using ...
+    core = core - 0.0001 # Make small error to avoid divide by zero
+    z = 0.5 * np.log((1.+core)/(1.-core))
+    ze = np.nanmean(z,axis=0)
+    cor = (np.exp(2*ze)-1)/(np.exp(2*ze)+1)
+    return cor
+
+
+def linregrez_short_bs(x,y,taxis=0,bsn=20):
+    #import pdb;pdb.set_trace()
+    t0 = time.time()
+    pv = np.zeros((bsn,x.shape[1],x.shape[2]))
+    pearson = np.zeros_like(pv)
+    beta = np.zeros_like(pv)
+    inter = np.zeros_like(pv)
+    
+        
+                 
+    for bsi in range(bsn):
+        rand_yrs = np.random.choice(list(range(x.shape[0])), x.shape[0], replace=True)
+        x2 = x[rand_yrs,:]
+        y2 = y[rand_yrs,:]
+        
+        x_a = x2 - np.nanmean(x2, axis=taxis, keepdims=True)
+        y_a = y2 - np.nanmean(y2, axis=taxis, keepdims=True)
+
+        pearson[bsi,:] = np.nansum(x_a * y_a, axis=taxis) / np.sqrt(np.nansum(np.power(x_a, 2), axis=taxis) * np.nansum(np.power(y_a, 2), axis=taxis))
+        rdf = x2.shape[taxis]
+        t = pearson[bsi,:] / np.sqrt((1 - np.power(pearson[bsi,:], 2)) / (rdf - 2))
+        pv[bsi,:] = stats.t.sf(np.abs(t), rdf - 1) * 2
+
+        beta[bsi,:] = np.nanmean(x_a * y_a, axis=taxis) / np.nanmean(x_a ** 2, axis=taxis)
+        inter[bsi,:] = np.nanmean(y2, axis=taxis) - beta[bsi,:] * np.nanmean(x2, axis=taxis)
+    
+    p_avg = comb_pvalues(pv)
+    r_avg = comb_rvalues(pearson)
+    print('bootstrap function:',time.time()-t0)
+    #import pdb;pdb.set_trace()             
+    return p_avg,r_avg,np.nanmean(beta,axis=0),np.nanmean(inter,axis=0)
 
 def get_sig_pred(po_nc, pa_nc, pa, sig_val=0.1, BOOTSTRAP=False):
     # Predictors should be CO2 removed, but not the predictand!!
@@ -827,7 +682,7 @@ def get_sig_pred(po_nc, pa_nc, pa, sig_val=0.1, BOOTSTRAP=False):
         # Get correlation of sorted (from high to low correlation) predictors with predictand
         cor_sorted[p, :], sig_sorted[p, :],beta,inter = linregrez_short(po_nc_sorted[p, :], data) 
         #cor_sorted[p, :], sig_sorted[p, :] = linregrez(po_nc_sorted[p, :], data, COR=True) 
-        # Get regression coefficients of sorter predictor data with predictand
+        # Get regression coefficients of sorted predictor data with predictand
         #a, b = linregrez(po_nc_sorted[p, :], data, BETA=True)[:2]
         # Create boolean array where True if significant correlation
         sign = sig_sorted[p, :] < sig_val
@@ -901,13 +756,20 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
     #prec_ss = prec.sel(time=(tm>3) & (tm<11))
     #mdc = xr.full_like(prec_ss,np.nan).rename({'precip':'mdc'})
     #nr_years = len(np.unique(tmax_ss.time['time.year'].values))
-    #print(tmax_ss)
+    #print(tmax.values.shape)
     if 'leadtime' in tmax.coords:
         tmax_ss = tmax
         prec_ss = prec
-        mdc = xr.full_like(prec_ss,np.nan).rename({'precip':'mdc'})
-        tmax_np = np.moveaxis(tmax_ss.values,1,0)
-        prec_np = np.moveaxis(prec_ss.precip.values,1,0)
+        mdc = xr.full_like(prec,np.nan).rename({'precip':'mdc'})
+        #print(mdc)
+        idx_leadtime = list([i<8 for i in tmax_ss.values.shape]).index(1)
+        # move leadtime dimension to second place
+        print(idx_leadtime)
+        print('high',tmax_ss.values.shape)
+        tmax_np = np.moveaxis(tmax_ss.values,idx_leadtime,1)
+        prec_np = np.moveaxis(prec_ss.precip.values,idx_leadtime,1)
+        print(tmax_np.shape)
+        print(prec_np.shape)
     else:
         tmax_ss = tmax.sel(time=(tm>3) & (tm<11))
         prec_ss = prec.sel(time=(tm>3) & (tm<11))
@@ -915,7 +777,7 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
         nr_years = len(np.unique(tmax_ss.time['time.year'].values))
         tmax_np = np.reshape(tmax_ss.values,(nr_years,7,len(tmax_ss.lat),len(tmax_ss.lon)))
         prec_np = np.reshape(prec_ss.precip.values,(nr_years,7,len(prec_ss.lat),len(prec_ss.lon)))
-    print(tmax_np.shape)
+    #print(tmax_np.shape)
     tmax_np[tmax_np<0.]=0.    # Remove freezing days
     ndays_NH = np.array([30,31,30,31,31,30,31])
     ndays_SH = np.array([31,30,31,31,28,31,30])
@@ -924,6 +786,7 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
     MDC = nans_like(tmax_np)
     #print(tmax_np.shape[1],MDC.shape)
     for m in range(tmax_np.shape[1]):
+        #print(tmax_np.shape)
         Em = ndays_NH[m] * (0.36 * tmax_np[:,m,:] + Lf[m])
         RMeff = 0.83 * prec_np[:,m,:]
 
@@ -937,12 +800,16 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
         MDC_0 = MDC_m
     #print(MDC)    
     if 'leadtime' in tmax.coords:
-        mdc.mdc.values = np.moveaxis(MDC,0,1)
+        print(MDC.shape)
+        print(np.moveaxis(MDC,1,idx_leadtime).shape)
+        print(mdc.mdc.values.shape)
+        mdc.mdc.values = np.moveaxis(MDC,1,idx_leadtime)
+        #print(mdc)
     else:
         mdc.mdc.values = np.reshape(MDC,tmax_ss.values.shape)
     
     mdc.attrs = []
-    mdc.time.attrs = []
+    #mdc.time.attrs = []
     
     # Put nans at times when no mdc is calculated, i.e. november to march
     mdc_filled = xr.full_like(tmax,np.nan).combine_first(mdc)
@@ -951,8 +818,9 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
 
 def decode_timez(ds):
     timez = pd.date_range(ds.time.units.split(' ')[-1],periods=len(ds.time),freq='MS')
-    ds.time.values = timez
     ds.time.attrs = []
+    ds.time.values = timez
+    ds.time.attrs = {'standard_name':'time','long_name':'Time','units': 'days since 1891-01-01'}
     return ds
     
 def plotcor_pred(cor,sig=[],bd=[],savename=None,sig_val=0.1,suptitle=''):
@@ -970,14 +838,17 @@ def plotcor_pred(cor,sig=[],bd=[],savename=None,sig_val=0.1,suptitle=''):
     lons,lats = cor.lon.values,cor.lat.values
     cmap = 'RdYlBu_r'
     for ax,pred in zip(axes.flat[:len(cor.data_vars)],cor.data_vars):
-        pcont = ax.contourf(lons,lats,cor[pred].values,levels=np.arange(-1.,1.1,.2),cmap=cmap)
-        try:
-            xx,yy = np.where(sig[pred].values<sig_val)
-            ax.scatter(lons[yy],lats[xx],marker='.',c='k',s=0.7,lw=0.)
-        except:
-            print('no sig values')
-        ax.coastlines()
-        ax.set_title(pred)
+        if np.isnan(cor[pred].values).all():
+            continue
+        else:
+            pcont = ax.contourf(lons,lats,cor[pred].values,levels=np.arange(-1.,1.1,.2),cmap=cmap)
+            try:
+                xx,yy = np.where(sig[pred].values<sig_val)
+                ax.scatter(lons[yy],lats[xx],marker='.',c='k',s=0.7,lw=0.)
+            except:
+                print('no sig values')
+            ax.coastlines()
+            ax.set_title(pred)
     cax = matplotlib.axes.Axes(fig,[0.83, 0.4, 0.09, 0.3])
     fig.colorbar(pcont,ax=cax)  
     fig.suptitle(suptitle,fontsize=12)
