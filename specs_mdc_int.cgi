@@ -19,8 +19,8 @@ echo
 
 
 cat <<EOF
-#<iframe src="http://127.0.0.1/kprep_fc/kprep_sop" width=1400 height=2000>
-<iframe src="http://climexp/knmi.nl/kprep_fc/kprep_sop" style="width:100%;height:2000;border:none">
+#<iframe src="http://127.0.0.1/kprep_mdc/" width=1400 height=2000>
+<iframe src="http://climexp/knmi.nl/kprep_mdc/" style="width:100%;height:1000;border:none">
 EOF
 
 
