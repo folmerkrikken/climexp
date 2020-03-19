@@ -39,8 +39,8 @@ dict_times = dict(zip(months12,range(1,13)))
 
 # Create all info needed for the dropdowns
 info =  {'plottypes':{'Correlation':'cor','RMSESS':'rmsess','CRPSS':'crpss','Tercile summary  plot':'tercile','Forecast anomalies':'for_anom'},
-        'variables':{'Temperature':'GCEcom','Precipitation':'PRECIP','Sea-level pressure':'20CRslp'},
-        'variables_prad':{'Temperature':'GCEcom','Precipitation':'PRECIP','Sea-level pressure':'20CRslp'},
+        'variables':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
+        'variables_prad':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
         'variables_pred':{'CO2':'CO2EQ','NINO34':'NINO34','PDO':'PDO','AMO':'AMO','IOD':'IOD','PREC':'CPREC','PERS':'PERS','PERS_TREND':'PERS_TREND'},
         'bdnc':bdnc,
         'clickData':dict({u'points': [{u'y': -8., u'x': 21., u'pointNumber': 6, u'curveNumber': 632}]}),        

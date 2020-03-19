@@ -7,6 +7,7 @@ import sys
 from mpl_toolkits.basemap import Basemap
 import numpy as np
 import os
+import plotly.express as px
 
 #import plotly.plotly as py
 import chart_studio.plotly as py
@@ -144,9 +145,6 @@ styles = {
 }
 
 
-anno_text = "Data courtesy of Folmer Krikken"
-
-
 
 def create_map(clickData,plot_type,variable,fc_time,info,testdir=None,refdir=None):
     print(' ')
@@ -195,12 +193,12 @@ def create_map(clickData,plot_type,variable,fc_time,info,testdir=None,refdir=Non
         sig = scores.cor_sig.values.squeeze()
         
     if 'sig' in locals():
-       if plot_type == 'Forecast anomalies': 
-           #sigvals = np.where(np.logical_and(sig[:,:]>0.1,sig[:,:]<1.))
-           sigvals = np.where(sig[:,:]<0.1)
-           
-       else: sigvals = np.where(sig[:,:]<0.05)
-       lon2d, lat2d = np.meshgrid(scores.lon.values, scores.lat.values)
+        if plot_type == 'Forecast anomalies': 
+            #sigvals = np.where(np.logical_and(sig[:,:]>0.1,sig[:,:]<1.))
+            sigvals = np.where(sig[:,:]<0.1)
+        else: 
+             sigvals = np.where(sig[:,:]<0.05)
+        lon2d, lat2d = np.meshgrid(scores.lon.values, scores.lat.values)
 
     titel = variable+", "+plot_type+', valid for: '+season+' '+str(year)
     #titel = u"variable = "+variable+", plot type = "+plot_type+', valid for: '+season+' '+str(year)
@@ -325,6 +323,8 @@ def create_time_series(clickData,variable,ncdir,fc_time,info):
     kprep_mean = pred1d['kprep'].mean(dim='ens').values
     
     kprep_std = pred1d['kprep'].std(dim='ens').values * 2.
+    kprep_qt = pred1d['kprep'].quantile([0.05,0.5,0.95],dim='ens')
+    clim_qt = pred1d['clim'].quantile([0.05,0.5,0.95],dim='ens')
     clim_mean = pred1d['clim'].mean(dim='ens').values
     clim_std = pred1d['clim'].std(dim='ens').values * 2.
     trend = pred1d['trend'].mean(dim='ens').values
@@ -336,14 +336,16 @@ def create_time_series(clickData,variable,ncdir,fc_time,info):
     #print(len(time_pd))
     fig = go.Figure(
         data=
-            [go.Scatter(x=time_pd,y=kprep_mean+kprep_std,mode='lines',fillcolor='rgba(0,100,80,0.2)',line=go.scatter.Line(color='rgba(0,100,80,0.2)'),opacity=0.9,showlegend=False)]
+            [go.Scatter(x=time_pd,y=kprep_qt.sel(quantile=0.95).values,mode='lines',fillcolor='rgba(0,100,80,0.2)',line=go.scatter.Line(color='rgba(0,100,80,0.2)'),opacity=0.9,showlegend=False)]
             +
-            [go.Scatter(x=time_pd,y=kprep_mean-kprep_std,mode='lines',fill='tonexty',fillcolor='rgba(0,100,80,0.2)',line=go.scatter.Line(color='rgba(0,100,80,0.2)'),opacity=0.9,name='For. spread (2'+u"\u03C3"+')')]
+            [go.Scatter(x=time_pd,y=kprep_qt.sel(quantile=0.05).values,mode='lines',fill='tonexty',fillcolor='rgba(0,100,80,0.2)',line=go.scatter.Line(color='rgba(0,100,80,0.2)'),opacity=0.9,name='For. spread (2'+u"\u03C3"+')')]
             +
-            [go.Scatter(x=time_pd,y=kprep_mean,mode='lines',name='Forecast',line=dict(color='blue',width=4))]
+            [go.Scatter(x=time_pd,y=kprep_qt.sel(quantile=0.50),mode='lines',name='Forecast',line=dict(color='blue',width=4))]
             +
             [go.Scatter(x=time_pd_long,y=obs1d.values.squeeze(),mode='lines',name='Observations',line=dict(color='black'))]
-            +[go.Scatter(x=time_pd,y=clim_mean,mode='lines',name='Climatology',line=dict(color='green'))]
+            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.50),mode='lines',name='Climatology',line=dict(color='green'))]
+            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.95),mode='lines',showlegend=False,line=dict(color='green'))]
+            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.05),mode='lines',showlegend=False,line=dict(color='green'))]
             +[go.Scatter(x=time_pd,y=trend,mode='lines',name='Trend CO2',line=dict(color='red'))]
             #+[go.Scatter(x=time_pd,y=pred1d['obs'].values,mode='lines',name='Observations',line=dict(color='black'))]
             ,
@@ -418,7 +420,9 @@ def create_bar_plot(clickData,plot_type,ncdir,variable,fc_time,info):
     fig = tls.make_subplots(rows=1,cols=1)
     if nr_sigp == 0:
         print('no significant predictors..')
-        return()
+        fig = go.Figure(data=[],layout=go.Layout(title='No significant predictors..'))
+        fig.add_trace(go.Scatter(x=[0.5],y=[0.5],mode="text",name="no significant predictors.."))
+        return(fig)
     
     else:
         print('barplot - nr of significant predictors is ',nr_sigp)
@@ -712,31 +716,82 @@ def create_xyplot(clickData,predictand,predictor,fc_time,bdnc,info):
         
     prad1d = prad.sel(lon=lon_click,lat=lat_click,
         method=str('nearest')).sel(time=(prad['time.month']==mo))
+    
+    print('prad1d',prad1d)
+    print('pred1d',pred1d)
+    print('pred1d_fit',pred1d_fit)
 
-    time_pd = pred1d.time.to_pandas()
-    xdata = prad1d.to_array().values[0]
-    y_orig = pred1d.values[:len(xdata)]
-    y_fit = pred1d_fit.values[:len(xdata)]
+    data_orig = xr.merge([prad1d.to_array(name='predictand').squeeze(),pred1d.rename('orig'),pred1d_fit.rename('fit')]).to_dataframe()
+    #data_fit = xr.merge([prad1d.to_array(name='predictand').squeeze(),pred1d_fit]).to_dataframe()
+    print(data_orig)    
+    data_melt_orig = data_orig.dropna().melt(id_vars='predictand',value_vars=['orig','fit'])
+    #data_melt_fit = data_fit.dropna(dim='time').melt(id_vars='predictand',value_vars=['predictor_fit'])
+    print(data_melt_orig)
 
-    cor_orig = str(scipy.stats.pearsonr(xdata[10:],y_orig[10:]))[1:5]
-    cor_fit = str(scipy.stats.pearsonr(xdata[10:],y_fit[10:]))[1:5]
+    fig = px.scatter(data_melt_orig, x='value', y='predictand', color='variable',trendline='ols')
+    fig.data[-1].name = 'Diner'
+    fig.data[-1].showlegend = True
+
+    results = px.get_trendline_results(fig)
+    print(results.iloc[0])
+
+    fig.update_layout(
+        legend=go.layout.Legend(
+            #x=0.8,
+            #y=0.9,
+            traceorder="normal",
+            font=dict(
+                family="sans-serif",
+                size=12,
+                color="black"
+            ),
+            #bgcolor="LightSteelBlue",
+            bordercolor="Black",
+            borderwidth=2
+        )
+    )    
+    
+    fig.update_layout(go.Layout(
+            title = 'Correlation between burned area and observed and forecasted MDC (lat='+str(lat_click)+', lon='+str(lon_click)+')',
+            autosize=False,
+            height=500,
+            #yaxis=dict(title='Burned Area [km2]'),
+            ))
+    fig.update_yaxes(title_text=predictand)
+    fig.update_xaxes(title_text=predictor)
+    #fig.update_yaxes(title_text="Monthly Drought Code [-]", secondary_y=True)
+
+    print(' ')
+    print('>>> Finished create_cor_time_series <<<')
+    print(' ')        
+    
+    return(fig)    
+    
+    
+#     time_pd = pred1d.time.to_pandas()
+#     xdata = prad1d.to_array().values[0]
+#     y_orig = pred1d.values[:len(xdata)]
+#     y_fit = pred1d_fit.values[:len(xdata)]
+
+#     cor_orig = str(scipy.stats.pearsonr(xdata[10:],y_orig[10:]))[1:5]
+#     cor_fit = str(scipy.stats.pearsonr(xdata[10:],y_fit[10:]))[1:5]
    
     
-    trace1 = go.Scatter(x=xdata[10:],y=y_orig[10:],mode='markers',name='original  '+cor_orig,marker=dict(color='blue'))
-    trace2 = go.Scatter(x=xdata[10:],y=y_fit[10:],mode='markers',name='model fit '+cor_fit,marker=dict(color='green'))
+#     trace1 = go.Scatter(x=xdata[10:],y=y_orig[10:],mode='markers',name='original  '+cor_orig,marker=dict(color='blue'))
+#     trace2 = go.Scatter(x=xdata[10:],y=y_fit[10:],mode='markers',name='model fit '+cor_fit,marker=dict(color='green'))
     
         
-    return( go.Figure(data = [trace1,trace2],
-                       layout = go.Layout(
-                            title = 'Scatter plot of '+predictand+' with '+predictor+', lat='+str(lat_click)+', lon='+str(lon_click),
-                            #height =  225,
-                            margin = {'l': 70, 'b': 70, 'r': 10, 't': 100},
-                            autosize=False,
-                            #width=500.,
-                            #height=500.,
-                            xaxis=dict(title=predictand),
-                            yaxis=dict(title=predictor),
-                            legend=dict(x=0,y=1,font=dict(size=14)),
-                            )
-                        )
-        )    
+#     return( go.Figure(data = [trace1,trace2],
+#                        layout = go.Layout(
+#                             title = 'Scatter plot of '+predictand+' with '+predictor+', lat='+str(lat_click)+', lon='+str(lon_click),
+#                             #height =  225,
+#                             margin = {'l': 70, 'b': 70, 'r': 10, 't': 100},
+#                             autosize=False,
+#                             #width=500.,
+#                             #height=500.,
+#                             xaxis=dict(title=predictand),
+#                             yaxis=dict(title=predictor),
+#                             legend=dict(x=0,y=1,font=dict(size=14)),
+#                             )
+#                         )
+#         )    
