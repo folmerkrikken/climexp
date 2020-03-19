@@ -39,7 +39,7 @@ case "$prefix" in
     *) prefix=ensmean_;ensmean_selected=selected;plotname="Forecast anomalies";;
 esac
 
-firstdate=`ls kprep/plots/$dataset/25/ | tr " " "\n" | tail -1`
+firstdate=`ls ../climexp_data/KPREPData/plots/$dataset/25/ | tr " " "\n" | tail -1`
 firstyear=${firstdate%??}
 firstmonth=${firstdate#????}
 firstm=${firstmonth#0}
@@ -141,7 +141,7 @@ cat <<EOF
       <td width="81.5%" valign=top>
          <div id="printable" name="printable">
 <div class=bijschrift id=caption>$plotname $units of $nextseasonname $yy $varname made in early $analysismonth.</div>
-<img id="imageToSwap" src="kprep/plots/$dataset/25/$date/${dataset}_${prefix}$date.png" width="100%" />
+<img id="imageToSwap" src="../climexp_data/KPREPData/plots/$dataset/25/$date/${dataset}_${prefix}$date.png" width="100%" />
 <p>The development of this forecast system was supported by the EU-project <a href="http://www.specs-fp7.eu">SPECS</a>.
         </div>
       </td>
