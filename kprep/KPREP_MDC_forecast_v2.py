@@ -3,7 +3,7 @@ import os, sys, glob, re, pickle, time
 import numpy as np
 import scipy
 import matplotlib
-matplotlib.use('Agg') #Needed for parallel running
+#matplotlib.use('Agg') #Needed for parallel running
 import matplotlib.pyplot as plt
 import urllib.request, urllib.error, urllib.parse
 from KPREP_forecast_v2_tools import *
@@ -21,9 +21,9 @@ dt = datetime.date.today()
 #date_list = [dt.year, dt.month, dt.day]
 start0 = time.time()
 
-predictands = ['TMAX','PRECIP','MDC_FROM_TP']
-predictands = ['MDC']
-predictands = ['MDC_FROM_TP']
+predictands = ['TMAX','PRECIP','MDC']#,'MDC_FROM_TP']
+#predictands = ['MDC']
+#$predictands = ['MDC_FROM_TP']
 #predictands = ['PRECIP']
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
@@ -35,7 +35,7 @@ predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','TMAX','PRECIP','PERS','PERS_TR
 resolution = 10             # 10, 25 or 50
 
 ## Redo full hindcast period and remove original nc output file?
-overwrite = True
+overwrite = False
 ## Redo a specific month / year?
 overwrite_m = False          # Overwrite only the month specified with overw_m and overw_y
 overw_m = 2                 # Jan = 1, Feb = 2.. etc
@@ -131,7 +131,10 @@ predictorz = []
 # Get PREC and create climatology and anomalies
 prec_long = xr.open_dataset(bdid+'gpcc_10_combined.nc',decode_times=False).squeeze().drop('level').precip.to_dataset()
 prec_long = decode_timez(prec_long)
-prec = prec_long.sel(time=slice(str(styear-1),time_end),lat=slice(90,0))
+prec = prec_long.sel(time=slice(str(styear-1),time_end),lat=slice(72,0))
+# Data is in mm/day.. go to mm/month
+prec = prec * 30. # Assuming 30 day month now, update later to specific days in month #TODO
+
 prec = prec.rename({'precip':'PRECIP'})
 prec_clim = prec.sel(time=(prec['time.year']>1979) & (prec['time.year']<2011)).groupby('time.month').mean('time')
 prec_clim.to_netcdf(bdnc+'prec_climatology.nc')
@@ -141,13 +144,14 @@ prec_anom = (prec.groupby('time.month') - prec_clim).drop('month')
 # Then get TMAX, create climatology (already anomalies)
 tmax_long = xr.open_dataset(bdid+'berk_tmax_1x1.nc',decode_times=False).temperature.rename({'latitude':'lat','longitude':'lon'}).to_dataset()
 times_tmax = pd.date_range('1850-01-01',str(dt.year)+'-'+str(dt.month),freq='MS')
-tmax_long.time.values = times_tmax[:len(tmax_long.time)]
+tmax_long = tmax_long.assign_coords(time=times_tmax[:len(tmax_long.time)])
+#tmax_long.time.values = times_tmax[:len(tmax_long.time)]
 
 tmax_clim = xr.open_dataset(bdid+'berk_tmax_1x1.nc',decode_times=False).climatology.rename({'latitude':'lat','longitude':'lon','month_number':'month'}).to_dataset()
 tmax_clim = tmax_clim.assign_coords(month=np.arange(1,13,dtype='int')).rename({'climatology':'TMAX'})
 tmax_clim.to_netcdf(bdnc+'tmax_climatology.nc')
 
-tmax_anom = tmax_long.sel(time=slice(str(styear-1),time_end),lat=slice(90,0)).load()
+tmax_anom = tmax_long.sel(time=slice(str(styear-1),time_end),lat=slice(72,0)).load()
 tmax = ((tmax_anom.temperature.groupby('time.month') + tmax_clim.TMAX).drop('month')).to_dataset(name='TMAX')
 tmax_anom = tmax_anom.temperature.to_dataset(name='TMAX') # Make the syntax the same as prec_anom
 
@@ -159,7 +163,7 @@ mdc['mdc_anom'] = mdc_anom.to_array().squeeze().drop('variable')
 mdc.time.attrs = {'standard_name':'time','long_name':'Time'}
 mdc.to_netcdf(bdnc+'mdc_obs.nc')
 
-    
+#sys.exit() 
   
 for p,predictand in enumerate(predictands):
 
@@ -168,7 +172,7 @@ for p,predictand in enumerate(predictands):
         predictorz.append(['CO2EQ','NINO34','PDO','AMO','IOD','PRECIP','TMAX','PERS'])
 
         if 'predadata' in locals():
-            predadata = xr.merge([predadata,mdc.astype('float32')])
+            predadata = xr.merge([predadata,mdc.mdc_anom.to_dataset(name='MDC').astype('float32')])
         else:
             predadata = mdc.mdc_anom.to_dataset(name='MDC').astype('float32')
         
@@ -334,24 +338,23 @@ for p,predictand in enumerate(predictands):
         predodata_3m_trend = predodata_3m_trend.assign_coords(time=pd.to_datetime(predodata_3m_trend['time'].values) + pd.DateOffset(months=2))
     #sys.exit()
     
-    for st in range(3,10): # normally 3,10 - Loop over start dates from March to September 
+    for st in range(4,10): # normally 3,10 - Loop over start dates from March to September 
         print('  ')
         print('prediction month = ',months[st-1])
         #print('predictor season = ', '-'.join([months[st-3],months[st-2],months[st-1]]))
         #lt_range = np.arange(4+(st-3),6)
-        lt_range = np.arange(4+(st-3),11)
+        lt_range = np.arange(4+(st-4),11)
         #lt_range = np.arange(4+(st-3),4+(st-3)+1)
         #sys.exit()
         if predictand == 'MDC_FROM_TP':
-            if st == 4:
-                sys.exit()
+            #if st == 4: sys.exit()
             # First load tmax and precip forecast and construct anomalies
-            tm_anom = xr.open_dataset(bdnc+'pred_v2_TMAX_'+str(st)+'.nc').mean(dim='ens')#.drop('ens')
+            tm_anom = xr.open_dataset(bdnc+'pred_v2_TMAX_'+str(st)+'.nc').sel(quantile=0.5).squeeze().drop('quantile')
             tm_clim = xr.open_dataset(bdnc+'tmax_climatology.nc').rename({'month':'leadtime'})
             tm = tm_anom.kprep + tm_clim['TMAX'].sel(leadtime=tm_anom.leadtime.values)
             del(tm_clim,tm_anom)
-            pr_anom = xr.open_dataset(bdnc+'pred_v2_PRECIP_'+str(st)+'.nc').mean(dim='ens').squeeze()
-            pr_clim = xr.open_dataset(bdnc+'precip_climatology.nc').rename({'month':'leadtime'}).drop('level')
+            pr_anom = xr.open_dataset(bdnc+'pred_v2_PRECIP_'+str(st)+'.nc').sel(quantile=0.5).squeeze().drop('quantile')#mean(dim='ens').squeeze()
+            pr_clim = xr.open_dataset(bdnc+'prec_climatology.nc').rename({'month':'leadtime'})#.drop('level')
             pr = pr_anom.kprep + pr_clim.sel(leadtime=pr_anom.leadtime.values)
             del(pr_clim,pr_anom)
             
@@ -359,7 +362,7 @@ for p,predictand in enumerate(predictands):
             # than 3, then put observed tmax and precip before the forecasted values
             old_leadtimes = tm.leadtime.values
             montz = {4:'APR',5:'MAY',6:'JUN',7:'JUL',8:'AUG',9:'SEP',10:'OKT'}
-            if st == 4: sys.exit()
+            
             for elt in np.arange(4,11)[~np.isin(np.arange(4,11),old_leadtimes)]:
                 print(st,'hellooo!!!!!',elt)
                 # Construct time series that matches the times and leadtimes
@@ -373,7 +376,7 @@ for p,predictand in enumerate(predictands):
             # Now calculate the MDC and remove, if needed, the added leadtimes
             mdc_tp = mdi(tm,pr.rename({'PRECIP':'precip'}).squeeze()).sel(leadtime=old_leadtimes)
             print('shape mdc',st,mdc_tp.mdc.values.shape)
-            #sys.exit()
+            
             del(tm,pr)
             
             # Climatology based on forecasted mdc, is this right???
@@ -393,53 +396,139 @@ for p,predictand in enumerate(predictands):
             # lets construct ensemble
             #residuals = mdc_tp_anom.mdc - obs_mdc_lt
             residuals = obs_mdc_lt - mdc_tp_anom.mdc
-            ens = np.full((len(obs_mdc_lt.leadtime),len(obs_mdc_lt.time),51,len(obs_mdc_lt.lat),len(obs_mdc_lt.lon)),np.nan)
-            clim = np.full_like(ens,np.nan)
-            trend = np.full_like(ens,np.nan)
+
             
             timez = pd.to_datetime(mdc_tp_anom.time[:-1].values)
             tests = []
             [tests.append(timez[y:y+3]) for y in np.arange(np.array(np.where(timez.year == stvalyear)).squeeze(),len(timez),cv_years)]
             tests.append(pd.to_datetime(mdc_tp_anom.time[-1].values))
             #for y in np.arange(np.array(np.where(timez.year == stvalyear)).squeeze(),len(timez),cv_years):
-
-            for test in tests:
-                if endyear in np.array(test.year):
-                    train = timez
-                    ii = [list(pd.to_datetime(mdc_tp_anom.time.values)).index(test)]
-                    test = [test]
-                else:
-                    train = timez.drop(test)
-                    ii = [list(pd.to_datetime(mdc_tp_anom.time[:-1].values)).index(i) for i in list(test)]
-                print(test,ii)
-                #train = timez.drop(test)
-                rand_yrs = np.random.choice(list(range(len(train))), 51, replace=True)
-                #print(i,)
-                ens[:,ii,0,:,:] = mdc_tp_anom.mdc.sel(time=test).values
-                ens[:,ii,1:,:,:] = residuals.mdc.sel(time=train).values[:,rand_yrs[1:],:,:][:,np.newaxis,:] + ens[:,ii,0,:,:][:,:,np.newaxis,:,:]
-                clim[:,ii,:] = obs_mdc_lt.mdc.sel(time=train).values[:,rand_yrs,:][:,np.newaxis,:]
-                #if len(lt_range) == 1: taxis = 0
-                #else: taxis = 1
-                a, b = linregrez(predodata['CO2EQ'].sel(time=train).values,
-                                 mdc_tp_anom.mdc.sel(time=train).values, 
-                                 BETA=True,taxis=1)[:2]
-                trend_train = a[:,np.newaxis,:] * predodata['CO2EQ'].sel(time=train).values[None,:,None,None] + b[:,np.newaxis, :, :]
-                trend_test = a[:,np.newaxis,:] * predodata['CO2EQ'].sel(time=test).values[None,:,None,None] + b[:,np.newaxis, :, :]
-                residuals_trend = trend_train - mdc_tp_anom.mdc.sel(time=train).values
-                trend[:,ii,0,:,:] = trend_test
-                trend[:,ii,1:,:,:] = residuals_trend[:,rand_yrs[1:],:,:][:,np.newaxis,:] + trend[:,ii,0,:,:][:,:,np.newaxis,:,:]
             
+            for lt in lt_range:
+                print('leadtime: ',lt)
+                ens = np.full((len(obs_mdc_lt.time),51,len(obs_mdc_lt.lat),len(obs_mdc_lt.lon)),np.nan)
+                clim = np.full_like(ens,np.nan)
+                trend = np.full_like(ens,np.nan)                
+                for test in tests:
+                    if endyear in np.array(test.year):
+                        train = timez
+                        ii = [list(pd.to_datetime(mdc_tp_anom.time.values)).index(test)]
+                        test = [test]
+                    else:
+                        train = timez.drop(test)
+                        ii = [list(pd.to_datetime(mdc_tp_anom.time[:-1].values)).index(i) for i in list(test)]
+                    print(test,ii)
+                    #train = timez.drop(test)
+                    rand_yrs = np.random.choice(list(range(len(train))), 51, replace=True)
+                    #print(i,)
+                    ens[ii,0,:,:] = mdc_tp_anom.mdc.sel(leadtime=lt,time=test).values
+                    ens[ii,1:,:,:] = residuals.mdc.sel(leadtime=lt,time=train).values[rand_yrs[1:],:,:][np.newaxis,:] + ens[ii,0,:,:][:,np.newaxis,:,:]
+                    clim[ii,:] = obs_mdc_lt.mdc.sel(leadtime=lt,time=train).values[rand_yrs,:][np.newaxis,:]
+                    #if len(lt_range) == 1: taxis = 0
+                    #else: taxis = 1
+                    a, b = linregrez(predodata['CO2EQ'].sel(time=train).values,
+                                     mdc_tp_anom.mdc.sel(leadtime=lt,time=train).values, 
+                                     BETA=True,taxis=0)[:2]
+                    trend_train = a[np.newaxis,:] * predodata['CO2EQ'].sel(time=train).values[:,None,None] + b[np.newaxis, :, :]
+                    trend_test = a[np.newaxis,:] * predodata['CO2EQ'].sel(time=test).values[:,None,None] + b[np.newaxis, :, :]
+                    residuals_trend = trend_train - mdc_tp_anom.mdc.sel(leadtime=lt,time=train).values
+                    trend[ii,0,:,:] = trend_test
+                    trend[ii,1:,:,:] = residuals_trend[rand_yrs[1:],:,:][np.newaxis,:] + trend[ii,0,:,:][:,np.newaxis,:,:]
 
-            
+                data_fit_tot = mdc_tp_anom.sel(leadtime=lt).drop('leadtime').copy(deep=True)
+                data_fit_tot['obs'] = (('time','lat','lon'),obs_mdc_lt.sel(leadtime=lt).mdc)
+                data_fit_tot['kprep'] = (('time','ens','lat','lon'),ens)
+                data_fit_tot['clim'] = (('time','ens','lat','lon'),clim)
+                data_fit_tot['trend'] = (('time','ens','lat','lon'),trend)
+                #data_fit_tot = data_fit_tot_lt.assign_coords(ens=range(1,52))
+                #data_fit_tot.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'.nc')  
+                    
+            #sys.exit()
             #ens = mdc_tp_anom.mdc.values + residuals.values[:,rand_yrs,:,:]
-            
-            data_fit_tot_lt = mdc_tp_anom.copy(deep=True)
-            data_fit_tot_lt['obs'] = (('leadtime','time','lat','lon'),obs_mdc_lt.mdc)
-            data_fit_tot_lt['kprep'] = (('leadtime','time','ens','lat','lon'),ens)
-            data_fit_tot_lt['clim'] = (('leadtime','time','ens','lat','lon'),clim)
-            data_fit_tot_lt['trend'] = (('leadtime','time','ens','lat','lon'),trend)
-            data_fit_tot_lt = data_fit_tot_lt.assign_coords(ens=range(1,52))
+#                             ## Now calculate forecast scores
+#             sys.exit()
+#             data_fit_tot_lt = mdc_tp_anom.copy(deep=True)
+#             data_fit_tot_lt['obs'] = (('leadtime','time','lat','lon'),obs_mdc_lt.mdc)
+#             data_fit_tot_lt['kprep'] = (('leadtime','time','quantile','lat','lon'),ens)
+#             data_fit_tot_lt['clim'] = (('leadtime','time','quantile','lat','lon'),clim)
+#             data_fit_tot_lt['trend'] = (('leadtime','time','quantile','lat','lon'),trend)
+#             data_fit_tot_lt = data_fit_tot_lt.assign_coords(ens=range(1,52))
+#             data_fit_tot_lt.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'.nc')                
+                
+            #for i,lt in enumerate(lt_range):
+                print('Calculating skill scores') 
+                #data_fit_tot = data_fit_tot_lt.sel(leadtime=lt)
+                t0 = time.time()
+                timez = pd.DatetimeIndex(data_fit_tot['time'].values)
+                scores = xr.Dataset(coords={'lat': data_fit_tot['lat'],
+                        'lon': data_fit_tot['lon'],
+                        'time': timez[-1]}).expand_dims('time')
+
+                # Calculate significance of ensemble mean
+                tmp = data_fit_tot.kprep.isel(time=-1).median('ens').values
+                posneg = tmp > 0.
+                above = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values>0,axis=0)/51.)
+                below = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values<0,axis=0)/51.)
+                sig_ensmean = np.ones((len(data_fit_tot.lat),len(data_fit_tot.lon)))
+                sig_ensmean[posneg] = above[posneg]
+                sig_ensmean[~posneg] = below[~posneg]
+
+                print('month = ',str(lt))
+                # Create correlation scores and its significance
+                cor,sig = linregrez(data_fit_tot.kprep.median('ens').isel(time=slice(None,-1)).values,data_fit_tot.obs.isel(time=slice(None,-1)).values,COR=True)
+
+                scores['cor'] = (('time','lat','lon'),cor[np.newaxis,:,:])
+                scores['cor_sig'] = (('time','lat','lon'),sig[np.newaxis,:,:])
+
+                scores['rmsess'] = (('time','lat','lon'),                            f_rmse(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,ref=data_fit_tot['clim'].isel(time=slice(None,-1)).values,SS=True)[np.newaxis,:,:])
+
+                scores['crpss'] = (('time','lat','lon'),                        f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,SS=True,ref=data_fit_tot['clim'].isel(time=slice(None,-1)).values)[np.newaxis,:,:])
+
+
+                scores['tercile'] = (('time','lat','lon'), tercile_category(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['kprep'].isel(time=-1).values)[np.newaxis,:,:])
+
+                scores['for_anom'] = (('time','lat','lon'),data_fit_tot['kprep'].isel(time=-1).median(dim='ens').values[np.newaxis,:,:])
+
+                scores['for_anom_sig'] = (('time','lat','lon'),sig_ensmean[np.newaxis,:,:])
+
+
+                print('Calculated skill scores for '+months[lt-1]+', total time is '+str(np.round(time.time()-t0,2))+' seconds')
+
+                if lt == lt_range[0]:
+                    scores_lt = scores.assign_coords(leadtime=lt).expand_dims('leadtime')
+                else:
+                    scores_lt = xr.concat([scores_lt,scores.assign_coords(leadtime=lt)],dim='leadtime')
+
+                # Make quantiles from the ensemble to reduce memory usage
+                print('Calculating quantiles, this will take some time...')
+                
+                # Easiest way is to use the xarray command, but this takes forever..
+                #data_fit_tot_qt = data_fit_tot.quantile([0.05,0.50,0.95],dim='ens')
+                # So therefore just use numpy quantile
+                data_fit_tot_qt = data_fit_tot['obs'].to_dataset()
+                data_fit_tot_qt = data_fit_tot_qt.assign_coords(quantile=[0.05,0.5,0.95])
+                data_fit_tot_qt['kprep'] = (('quantile','time','lat','lon'),np.quantile(data_fit_tot.kprep.values,[0.05,0.5,0.95],axis=1))
+                data_fit_tot_qt['clim'] = (('quantile','time','lat','lon'),np.quantile(data_fit_tot.clim.values,[0.05,0.5,0.95],axis=1))
+                data_fit_tot_qt['trend'] = (('quantile','time','lat','lon'),np.quantile(data_fit_tot.trend.values,[0.05,0.5,0.95],axis=1))
+                print('Done calculating quantiles..')
+                
+                # Store the first value of the ensemble, which is the actual model fit. I need to store this to check if the sum of the individual
+                # predictor contributions matches with the forecasted value. I'll store it in the quantile dimension with 'fc' label
+                data_fit_tot_qt = xr.concat([data_fit_tot_qt,data_fit_tot.isel(ens=0).assign_coords(quantile=0.51)],dim='quantile')[['kprep','clim','trend']]
+                # Add obs again, had to remove it for the previous concat
+                data_fit_tot_qt = xr.merge([data_fit_tot_qt,data_fit_tot.obs])
+                
+                if lt == lt_range[0]:
+                    data_fit_tot_lt = data_fit_tot_qt.assign_coords(leadtime=lt).expand_dims('leadtime')
+                else:
+                    data_fit_tot_lt = xr.concat([data_fit_tot_lt,data_fit_tot_qt.assign_coords(leadtime=lt)],dim='leadtime')
+    
+                del(data_fit_tot)
+
             data_fit_tot_lt.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'.nc')
+            scores_lt.to_netcdf(bdnc+'scores_mdc_v2_'+predictand+'_'+str(st)+'.nc')              
+            
+
             del(ens,obs_mdc_lt,clim,trend)
             
             #sys.exit()
@@ -468,7 +557,9 @@ for p,predictand in enumerate(predictands):
                     for y in range(np.array(np.where(timez.year == stvalyear)).squeeze(),len(timez),cv_years):
                         test = timez[y:y+3]
                         train = timez.drop(test)
-                        
+                        print('predictand: ',predictand)
+                        print('start time: ',st)
+                        print('lead time: ',lt)
                         print('test years: ',test)
                         #sys.exit()
                         data_fit,beta_xr = regr_loop(predodata_3m,predodata_3m_trend,predadata_3m,timez,train,test,ens_size,bdnc,25,predictand,predictorz[p], MLR_PRED,FC=False,sig_val = 0.05,MDC=True,lt=lt) # hier wil ik naartoe
@@ -503,34 +594,34 @@ for p,predictand in enumerate(predictands):
                     except NameError:
                         data_fit_tot = data_fit.copy()
                         beta_xr_tot = beta_xr.copy()
-                    
+                
+                # Make quantiles from the ensemble to reduce memory usage
+                #data_fit_tot_qt = data_fit_tot.quantile([0.05,0.50,0.95],dim='ens')
+                print('Start calculating quantiles..')
+                data_fit_tot_qt = data_fit_tot['obs'].to_dataset()
+                data_fit_tot_qt = data_fit_tot_qt.assign_coords(quantile=[0.05,0.5,0.95])
+                data_fit_tot_qt['kprep'] = (('quantile','time','lat','lon'),np.quantile(data_fit_tot.kprep.values,[0.05,0.5,0.95],axis=1))
+                data_fit_tot_qt['clim'] = (('quantile','time','lat','lon'),np.quantile(data_fit_tot.clim.values,[0.05,0.5,0.95],axis=1))
+                data_fit_tot_qt['trend'] = (('quantile','time','lat','lon'),np.quantile(data_fit_tot.trend.values,[0.05,0.5,0.95],axis=1))
+                print('Done calculating quantiles..')
+                # Store the first value of the ensemble, which is the actual model fit. I need to store this to check if the sum of the individual
+                # predictor contributions matches with the forecasted value. I'll store it in the quantile dimension with 'fc' label
+                data_fit_tot_qt = xr.concat([data_fit_tot_qt,data_fit_tot.sel(ens=1).assign_coords(quantile=0.51)],dim='quantile').drop('ens')[['kprep','clim','trend']]
+                # Add obs again, had to remove it for the previous concat
+                data_fit_tot_qt = xr.merge([data_fit_tot_qt,data_fit_tot.obs])
+                
                 if lt == lt_range[0]:
-                    data_fit_tot_lt = data_fit_tot.assign_coords(leadtime=lt).expand_dims('leadtime')
+                    data_fit_tot_lt = data_fit_tot_qt.assign_coords(leadtime=lt).expand_dims('leadtime')
                     beta_xr_tot_lt = beta_xr_tot.assign_coords(leadtime=lt).expand_dims('leadtime')
                 else:
-                    data_fit_tot_lt = xr.concat([data_fit_tot_lt,data_fit_tot.assign_coords(leadtime=lt)],dim='leadtime')
+                    data_fit_tot_lt = xr.concat([data_fit_tot_lt,data_fit_tot_qt.assign_coords(leadtime=lt)],dim='leadtime')
                     beta_xr_tot_lt = xr.concat([beta_xr_tot_lt,beta_xr_tot.assign_coords(leadtime=lt)],dim='leadtime')
                 
-                del(data_fit_tot,beta_xr_tot)
-                    
-            #sys.exit()    
-            #data_fit_tot.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'_'+str(lt)+'.nc')
-            #beta_xr_tot.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+str(st)+'_'+str(lt)+'.nc')
-            data_fit_tot_lt.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'.nc')
-            beta_xr_tot_lt.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+str(st)+'.nc')
-             
-            
-
-        if VALIDATION:
-            for lt in lt_range:
                 
-                data_fit_tot = data_fit_tot_lt.sel(leadtime=lt)
-                #data_fit_tot = data_fit_tot_lt.drop('leadtime')
+                ## Now calculate forecast scores
                 
                 print('Calculating skill scores') 
             
-                #data_fit = xr.open_dataset(bdnc+'pred_v2_'+predictand+'.nc')#,chunks={'lat':1})
-
                 t0 = time.time()
                 timez = pd.DatetimeIndex(data_fit_tot['time'].values)
                 scores = xr.Dataset(coords={'lat': data_fit_tot['lat'],
@@ -567,20 +658,88 @@ f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs
                 
                 scores['for_anom_sig'] = (('time','lat','lon'),sig_ensmean[np.newaxis,:,:])
                 
-                #scores.to_netcdf(bdnc+'scores_mdc_v2_'+predictand+'_'+str(st)+'_'+str(lt)+'.nc')
-                #to_nc2(scorez,bdnc + 'scores_v2_'+predictand)
+
                 print('Calculated skill scores for '+months[lt]+', total time is '+str(np.round(time.time()-t0,2))+' seconds')
-            #if os.path.isfile(bdnc+'scores_v2_'+predictand+'.nc'):
-                #tmp = xr.open_dataset(bdnc+'scores_v2_'+predictand+'.nc')
-                #tmp.sortby('time').to_netcdf(bdnc+'scores_v2_'+predictand+'2.nc','w')
-                #os.remove(bdnc+'scores_v2_'+predictand+'.nc')
-                #os.rename(bdnc+'scores_v2_'+predictand+'2.nc',bdnc+'scores_v2_'+predictand+'.nc')
+
                 if lt == lt_range[0]:
                     scores_lt = scores.assign_coords(leadtime=lt).expand_dims('leadtime')
                 else:
                     scores_lt = xr.concat([scores_lt,scores.assign_coords(leadtime=lt)],dim='leadtime')
                 
-            scores_lt.to_netcdf(bdnc+'scores_mdc_v2_'+predictand+'_'+str(st)+'.nc')
+                del(data_fit_tot,beta_xr_tot,scores)
+                
+            #data_fit_tot_lt_qt.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'.nc')
+            #beta_xr_tot_lt.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+str(st)+'.nc')
+            
+                    
+            #sys.exit()
+            #data_fit_tot.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'_'+str(lt)+'.nc')
+            #beta_xr_tot.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+str(st)+'_'+str(lt)+'.nc')
+            #data_fit_tot_lt_qt = data_fit_tot_lt.quantile([0.05,0.50,0.95],dim='ens')
+            #data_fit_tot_lt_qt = data_fit_tot_lt[['.quantile([0.05,0.50,0.95],dim='ens')
+            #data_fit_tot_lt_qt = xr.concat([data_fit_tot_lt_qt
+            
+            # Save data to netcdf
+            data_fit_tot_lt.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+str(st)+'.nc')
+            beta_xr_tot_lt.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+str(st)+'.nc')
+            scores_lt.to_netcdf(bdnc+'scores_mdc_v2_'+predictand+'_'+str(st)+'.nc')             
+            
+
+#         if VALIDATION:
+#             for lt in lt_range:
+                
+#                 data_fit_tot = data_fit_tot_lt.sel(leadtime=lt)
+#                 #data_fit_tot = data_fit_tot_lt.drop('leadtime')
+                
+#                 print('Calculating skill scores') 
+            
+#                 #data_fit = xr.open_dataset(bdnc+'pred_v2_'+predictand+'.nc')#,chunks={'lat':1})
+
+#                 t0 = time.time()
+#                 timez = pd.DatetimeIndex(data_fit_tot['time'].values)
+#                 scores = xr.Dataset(coords={'lat': data_fit_tot['lat'],
+#                         'lon': data_fit_tot['lon'],
+#                         'time': timez[-1]}).expand_dims('time')
+
+#                 # Calculate significance of ensemble mean
+#                 tmp = data_fit_tot.kprep.isel(time=-1).sel(quantile=0.5).values
+#                 posneg = tmp > 0.
+#                 above = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values>0,axis=0)/51.)
+#                 below = 1.-(np.sum(data_fit_tot.kprep.isel(time=-1).values<0,axis=0)/51.)
+#                 sig_ensmean = np.ones((len(data_fit_tot.lat),len(data_fit_tot.lon)))
+#                 sig_ensmean[posneg] = above[posneg]
+#                 sig_ensmean[~posneg] = below[~posneg]
+
+#                 print('month = ',str(lt))
+#                 # Create correlation scores and its significance
+#                 cor,sig = linregrez(data_fit_tot.kprep.mean('ens').isel(time=slice(None,-1)).values,data_fit_tot.obs.isel(time=slice(None,-1)).values,COR=True)
+
+#                 scores['cor'] = (('time','lat','lon'),cor[np.newaxis,:,:])
+#                 scores['cor_sig'] = (('time','lat','lon'),sig[np.newaxis,:,:])
+                
+#                 scores['rmsess'] = (('time','lat','lon'),                            f_rmse(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,ref=data_fit_tot['clim'].isel(time=slice(None,-1)).values,SS=True)[np.newaxis,:,:])
+            
+#                 scores['crpss'] = (('time','lat','lon'),                        f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,SS=True,ref=data_fit_tot['clim'].isel(time=slice(None,-1)).values)[np.newaxis,:,:])
+                
+#                 if predictand != 'MDC_FROM_TP':
+#                     scores['crpss_co2'] = (('time','lat','lon'),
+# f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,SS=True,ref=data_fit_tot['trend'].isel(time=slice(None,-1)).values)[np.newaxis,:,:])                                   
+                
+#                 scores['tercile'] = (('time','lat','lon'), tercile_category(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['kprep'].isel(time=-1).values)[np.newaxis,:,:])
+                
+#                 scores['for_anom'] = (('time','lat','lon'),data_fit_tot['kprep'].isel(time=-1).mean(dim='ens').values[np.newaxis,:,:])
+                
+#                 scores['for_anom_sig'] = (('time','lat','lon'),sig_ensmean[np.newaxis,:,:])
+                
+
+#                 print('Calculated skill scores for '+months[lt]+', total time is '+str(np.round(time.time()-t0,2))+' seconds')
+
+#                 if lt == lt_range[0]:
+#                     scores_lt = scores.assign_coords(leadtime=lt).expand_dims('leadtime')
+#                 else:
+#                     scores_lt = xr.concat([scores_lt,scores.assign_coords(leadtime=lt)],dim='leadtime')
+                
+#             scores_lt.to_netcdf(bdnc+'scores_mdc_v2_'+predictand+'_'+str(st)+'.nc')
                 
           
             
@@ -630,7 +789,7 @@ f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs
 
 
                 #timez = pd.DatetimeIndex(data_fit['time'].sel(time=data_fit['time.month']==m+1).values)
-                year = str(data_fit_tot['time.year'][-1].values)        #str(timez[-1].year)
+                year = str(data_fit_tot_lt['time.year'][-1].values)        #str(timez[-1].year)
                 #season = monthzz[m+1:m+4]
                 season = months[lt-1]
                 print('validation for '+season+' '+year)
