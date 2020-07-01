@@ -4,7 +4,7 @@ import datetime
 import time
 import scipy
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset, num2date, date2num
 from matplotlib import cm as CM
@@ -183,7 +183,7 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     fit_train = np.full_like(Y_tr,np.nan)
     # Parallelized regression input > y,X_tr,X_te,sig, output > fit_train,fit_test,beta
     #import pdb;pdb.set_trace()
-    PARALLEL = True
+    PARALLEL = False
     if PARALLEL:
         regr_output = np.asarray(Parallel(n_jobs=4)(delayed(regrezzion)(Y_tr[:,i,j],X_tr[1:,:,i,j],X_te[1:,:,i,j],pred_sel[:,i,j])for i,j in zip(ii,jj)))
         
@@ -200,7 +200,7 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     # Generate ensemble based on random sampling 50 years from residuals (fit_train - Y_tr)
     # The transpose is needed because numpy changes the axis order when combining advanced and normal indexing
     for n in range(len(test)): 
-        kprep[n,1:,rest] = (kprep[n,0,rest] + (fit_train[:,rest] - Y_tr[:,rest])[rand_yrs[n,1:],:]).T
+        kprep[n,1:,rest] = (kprep[n,0,rest] - (fit_train[:,rest] - Y_tr[:,rest])[rand_yrs[n,1:],:]).T
 
     # Create boolean array where to apply trend is significant and rest = True
     rest_sig = rest & (sig_nc[0,:]<sig_val)
@@ -208,7 +208,8 @@ def regr_loop(predodata_3m, predodata_3m_trend, predadata_3m, timez, train, test
     kprep[:,:,rest_sig] = kprep[:,:,rest_sig] + trend[:,0,rest_sig][:,None,:]  # Manually add trend due to CO2 after regression
             
     t2 = time.time()
-    
+    #if test[0].month == 7:
+        #import pdb;pdb.set_trace()
     if not FC:
         obs = predadata_3m.sel(time=test).values
     data_fit['kprep'] = (('time','ens','lat','lon'),kprep)
@@ -557,10 +558,12 @@ def linregrez(x, y, taxis=0, COR=False, BETA=False, COV=False):
     else:
         if x.ndim == 1 and y.ndim > 1:
             a = list(np.shape(y) + (1, ))
-            #print a
+            #print(a)
             a.pop(taxis)
-            #print a
+            #print(a)
             x = np.rollaxis(np.tile(x, a), len(a) - 1, taxis)
+            #print(x.shape)
+            #print(y.shape)
         else:
             if x.ndim > 1 and y.ndim == 1:
                 a = list(np.shape(x) + (1, ))
@@ -596,6 +599,18 @@ def linregrez(x, y, taxis=0, COR=False, BETA=False, COV=False):
         if ALL:
             return (pearson, p, beta, se_beta, inter, se_inter, cov)
         
+
+def load_ecmwf_s5(predictand,m,obs,bias_correct=True,resolution=25):
+    namez = {'GCEcom':'t2m','20CRslp':'msl','GPCCcom':'tprate'}
+    data_s5 = xr.open_dataset('../../climexp_data/KPREPData/ecmwf_s5/'
+                             +namez[predictand]+'_s5_seas_'+str(m+1).zfill(2)+'_r'+str(resolution)+'.nc').rename({namez[predictand]:predictand})
+    data_s5_anom = data_s5 - data_s5.sel(time=slice('1980','2010')).mean('time')
+    if bias_correct:
+        data_s5_anom_bc = data_s5_anom + (obs.sel(time=slice(data_s5.time[0],obs.time[-1])).mean(dim='time')-data_s5_anom.sel(time=slice(data_s5.time[0],obs.time[-1])).mean(dim='time'))
+        return(data_s5_anom_bc)
+    else:
+        return(data_s5_anom)        
+       
 def linregrez_short(x, y, taxis=0):
     x_a = x - np.nanmean(x, axis=taxis, keepdims=True)
     y_a = y - np.nanmean(y, axis=taxis, keepdims=True)
@@ -775,8 +790,21 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
         prec_ss = prec.sel(time=(tm>3) & (tm<11))
         mdc = xr.full_like(prec_ss,np.nan).rename({'precip':'mdc'})
         nr_years = len(np.unique(tmax_ss.time['time.year'].values))
-        tmax_np = np.reshape(tmax_ss.values,(nr_years,7,len(tmax_ss.lat),len(tmax_ss.lon)))
-        prec_np = np.reshape(prec_ss.precip.values,(nr_years,7,len(prec_ss.lat),len(prec_ss.lon)))
+        # If the last year does not cover at least up to october, then add nans 
+        tmax_vals = tmax_ss.values
+        print(prec_ss)
+        prec_vals = prec_ss.precip.values
+        if (len(tmax_ss.time) % 7) != 0:
+            tmax_vals = np.concatenate((tmax_vals,
+                    np.full((7 - (len(prec_ss.time) % 7),tmax_vals.shape[1],tmax_vals.shape[2]),np.nan)),
+                    axis=0)
+            print(prec_vals.shape)
+            prec_vals = np.concatenate((prec_vals,
+                    np.full((7 - (len(prec_ss.time) % 7),tmax_vals.shape[1],tmax_vals.shape[2]),np.nan)),
+                    axis=0)
+            print(prec_vals.shape)
+        tmax_np = np.reshape(tmax_vals,(nr_years,7,len(tmax_ss.lat),len(tmax_ss.lon)))
+        prec_np = np.reshape(prec_vals,(nr_years,7,len(prec_ss.lat),len(prec_ss.lon)))
     #print(tmax_np.shape)
     tmax_np[tmax_np<0.]=0.    # Remove freezing days
     ndays_NH = np.array([30,31,30,31,31,30,31])
@@ -803,10 +831,10 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
         print(MDC.shape)
         print(np.moveaxis(MDC,1,idx_leadtime).shape)
         print(mdc.mdc.values.shape)
-        mdc.mdc.values = np.moveaxis(MDC,1,idx_leadtime)
+        mdc.mdc.values = np.moveaxis(MDC,1,idx_leadtime)#[:,tmax_ss.shape[0],:,:]
         #print(mdc)
     else:
-        mdc.mdc.values = np.reshape(MDC,tmax_ss.values.shape)
+        mdc.mdc.values = np.reshape(MDC,tmax_vals.shape)[:tmax_ss.shape[0],:,:]
     
     mdc.attrs = []
     #mdc.time.attrs = []
@@ -816,10 +844,17 @@ def mdi(tmax,prec,NH=True,CARRYOVER=False,con_a=0.5,con_b=0.5):
 
     return mdc_filled
 
+# def mdi_overwinter(mdc,precip,a=0.5,b=0.5):
+#     mdc_oct = mdc.sel(mdc['time.month']==10)
+#     precip_winter = precip.resampe(time='AS-NOV')
+    
+#     return 
+
 def decode_timez(ds):
     timez = pd.date_range(ds.time.units.split(' ')[-1],periods=len(ds.time),freq='MS')
     ds.time.attrs = []
-    ds.time.values = timez
+    ds = ds.assign_coords(time=timez)
+    #ds.time.values = timez
     ds.time.attrs = {'standard_name':'time','long_name':'Time','units': 'days since 1891-01-01'}
     return ds
     

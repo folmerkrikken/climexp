@@ -15,8 +15,9 @@ import chart_studio.plotly as py
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 import plotly.tools as tls
-
-
+import datetime
+from utils import info_titles
+import calendar
 #print(bdnc)
 global bdnc
 
@@ -89,7 +90,8 @@ plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.,'units':'[<sup
                                  'fr':[0.0,0.01,0.25,0.375,0.46,0.54,0.625,0.75,0.99,1.0],
                                  'tv':[-2,-1,-0.5,-0.2,0.2,0.5,1.0,2.0]},
                        'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-',},
-                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-',},
+                       'CRPSS (clim)':{'vmin':-0.5,'vmax':0.5,'units':'-',},
+                       'CRPSS (S5)':{'vmin':-0.5,'vmax':0.5,'units':'-',},
                        'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
                        'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':['#000099','#3355ff','#66aaff','#77ffff','#ffffff','#ffff33','#ffaa00','#ff4400','#cc0022']
@@ -98,7 +100,8 @@ plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.,'units':'[<sup
                                 'fr':[0.0,0.01,0.25,0.4,0.45,0.55,0.6,0.75,0.99,1.0],
                                 'tv':[-50,-25,-10.,-5.,5,10,25,50]},
                        'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
-                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'CRPSS (clim)':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'CRPSS (S5)':{'vmin':-0.5,'vmax':0.5,'units':'-'},
                        'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
                        'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':
@@ -108,14 +111,16 @@ plot_dict = {'GCEcom':{'Forecast anomalies':{'vmin':-2.,'vmax':2.,'units':'[<sup
                                 'fr':[0.0,0.01,0.25,0.375,0.45,0.55,0.625,0.75,0.99,1.0],
                                 'tv':[-4,-2,-1,-0.5,0.5,1,2,4]},
                        'RMSESS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
-                       'CRPSS':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'CRPSS (clim)':{'vmin':-0.5,'vmax':0.5,'units':'-'},
+                       'CRPSS (S5)':{'vmin':-0.5,'vmax':0.5,'units':'-'},
                        'Tercile summary plot':{'vmin':-100.,'vmax':100.,'units':'%'},
                        'Correlation':{'vmin':-1.,'vmax':1.,'units':'-'},
                        'colors':
                        ['#000099','#3355ff','#66aaff','#77ffff','#ffffff','#ffff33','#ffaa00','#ff4400','#cc0022']
                        },
             'RMSESS':{'fr':[0.0,0.01,0.15,0.3,0.4,0.6,0.7,0.85,0.99,1.0],'tv':[-0.5,-0.35,-0.2,-0.1,0.1,0.2,0.35,0.5]},
-            'CRPSS': {'fr':[0.0,0.01,0.15,0.3,0.4,0.6,0.7,0.85,0.99,1.0],'tv':[-0.5,-0.35,-0.2,-0.1,0.1,0.2,0.35,0.5]},
+            'CRPSS (clim)': {'fr':[0.0,0.01,0.15,0.3,0.4,0.6,0.7,0.85,0.99,1.0],'tv':[-0.5,-0.35,-0.2,-0.1,0.1,0.2,0.35,0.5]},
+            'CRPSS (S5)': {'fr':[0.0,0.01,0.15,0.3,0.4,0.6,0.7,0.85,0.99,1.0],'tv':[-0.5,-0.35,-0.2,-0.1,0.1,0.2,0.35,0.5]},
             'Tercile summary plot':{'fr':[0.0,0.15,0.2,0.25,0.3,0.7,0.75,0.8,0.85,1.0],'tv':[-100,-70,-60,-50,-40,40,50,60,70,100]},
             'Correlation':{'fr':[0.0,0.1,0.2,0.3,0.4,0.6,0.7,0.8,0.9,1.0],'tv':[-1,-0.8,-0.6,-0.4,-0.2,0.2,0.4,0.6,0.8,1.0]},
             }
@@ -199,11 +204,11 @@ def create_map(clickData,plot_type,variable,fc_time,info,testdir=None,refdir=Non
         else: 
              sigvals = np.where(sig[:,:]<0.05)
         lon2d, lat2d = np.meshgrid(scores.lon.values, scores.lat.values)
-
-    titel = variable+", "+plot_type+', valid for: '+season+' '+str(year)
+    titel = info_titles[variable]+' ('+season+' '+str(year)+') - '+info_titles[plot_type][0]+'<br>'+'Ens. size: 51 | Forecast base time: '+calendar.month_name[month]+' '+str(year)+' | '+info_titles[plot_type][1]
+    #titel = variable+", "+plot_type+', valid for: '+season+' '+str(year)
     #titel = u"variable = "+variable+", plot type = "+plot_type+', valid for: '+season+' '+str(year)
     colorz = plot_dict[info['variables'][variable]]['colors']
-    
+    #calendar.month_name[3]
     if plot_type == 'Forecast anomalies':
         fr = plot_dict[predictand][plot_type]['fr']
         tv = plot_dict[predictand][plot_type]['tv']
@@ -328,6 +333,7 @@ def create_time_series(clickData,variable,ncdir,fc_time,info):
     clim_mean = pred1d['clim'].mean(dim='ens').values
     clim_std = pred1d['clim'].std(dim='ens').values * 2.
     trend = pred1d['trend'].mean(dim='ens').values
+    s5_qt = pred1d['ecmwf_s5'].quantile([0.05,0.5,0.95],dim='ens')
     
     obs_nc = xr.open_dataset(ncdir+'predadata_v2_'+predictand+'.nc')
     obs1d = obs_nc.to_array().sel(lat=lat_click,lon=lon_click,method='nearest').sel(time=(obs_nc['time.month']==month)).load()
@@ -338,35 +344,41 @@ def create_time_series(clickData,variable,ncdir,fc_time,info):
         data=
             [go.Scatter(x=time_pd,y=kprep_qt.sel(quantile=0.95).values,mode='lines',fillcolor='rgba(0,100,80,0.2)',line=go.scatter.Line(color='rgba(0,100,80,0.2)'),opacity=0.9,showlegend=False)]
             +
-            [go.Scatter(x=time_pd,y=kprep_qt.sel(quantile=0.05).values,mode='lines',fill='tonexty',fillcolor='rgba(0,100,80,0.2)',line=go.scatter.Line(color='rgba(0,100,80,0.2)'),opacity=0.9,name='For. spread (2'+u"\u03C3"+')')]
+            [go.Scatter(x=time_pd,y=kprep_qt.sel(quantile=0.05).values,mode='lines',fill='tonexty',fillcolor='rgba(0,100,80,0.2)',line=go.scatter.Line(color='rgba(0,100,80,0.2)'),opacity=0.9,name='For. spread (5-95%)')]
             +
             [go.Scatter(x=time_pd,y=kprep_qt.sel(quantile=0.50),mode='lines',name='Forecast',line=dict(color='blue',width=4))]
             +
             [go.Scatter(x=time_pd_long,y=obs1d.values.squeeze(),mode='lines',name='Observations',line=dict(color='black'))]
-            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.50),mode='lines',name='Climatology',line=dict(color='green'))]
-            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.95),mode='lines',showlegend=False,line=dict(color='green'))]
-            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.05),mode='lines',showlegend=False,line=dict(color='green'))]
-            +[go.Scatter(x=time_pd,y=trend,mode='lines',name='Trend CO2',line=dict(color='red'))]
+            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.50),mode='lines',name='Climatology (5-50-95%)',showlegend=True,legendgroup='clim',line=dict(color='green'))]
+            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.95),mode='lines',name='Clim. spread (5-95%)',showlegend=False,legendgroup='clim',line=dict(color='green',dash='dash'))]
+            +[go.Scatter(x=time_pd,y=clim_qt.sel(quantile=0.05),mode='lines',name='Clim. spread (5-95%)',showlegend=False,legendgroup='clim',line=dict(color='green',dash='dash'))]
+            +[go.Scatter(x=time_pd,y=s5_qt.sel(quantile=0.50),mode='lines',name='ECMWF S5 (5-50-95%)',line=dict(color='orange'),legendgroup='s5',visible='legendonly')]
+            +[go.Scatter(x=time_pd,y=s5_qt.sel(quantile=0.95),mode='lines',name='S5 spread (5-95%)',showlegend=False,line=dict(color='orange',dash='dash'),legendgroup='s5',visible='legendonly')]
+            +[go.Scatter(x=time_pd,y=s5_qt.sel(quantile=0.05),mode='lines',showlegend=False,line=dict(color='orange',dash='dash'),legendgroup='s5',visible='legendonly')]
+                    
+            +[go.Scatter(x=time_pd,y=trend,mode='lines',name='Trend CO2',line=dict(color='red'),visible='legendonly')]
             #+[go.Scatter(x=time_pd,y=pred1d['obs'].values,mode='lines',name='Observations',line=dict(color='black'))]
             ,
             #),
 
         layout = go.Layout(
-            title = 'Time series of the forecast, forecast only on CO2, climatology and observations <br>latitude = '+str(lat_click)+', longitude = '+str(lon_click),
+            title = 'Time series of the forecast, forecast only on CO2, climatology and observations (lat='+str(lat_click)+', lon='+str(lon_click)+')<br>Click on the legend entries to add or remove lines from the plot',
             #height =  225,
-            #margin = {'l': 20, 'b': 30, 'r': 10, 't': 10},
+            margin = {'b': 40},
             autosize=False,
             #width=1000.,
             #height=400.,
             xaxis=dict(
                 rangeselector=dict(
+                x=0.05,
+                y=0.85,
                 buttons=list([
                 dict(count=len(time_pd),
-                     label='1961-current',
+                     label='1961-2020',
                      step='year',
                      stepmode='backward'),                    
                 dict(count=len(time_pd_long),
-                     label='1901-current',
+                     label='1901-2020',
                      step='year',
                      stepmode='backward'),
                 ]),
@@ -374,6 +386,9 @@ def create_time_series(clickData,variable,ncdir,fc_time,info):
             rangeslider=dict(),
             type='date'
             ),
+            #legend_orientation="h",
+            #font=dict(size=14),
+            #legend=dict(x=1.,y=1.15,font=dict(size=14)),            
             yaxis=dict(title=variable+' '+plot_dict[predictand]['Forecast anomalies']['units']),     
             )
     )
@@ -395,16 +410,6 @@ def create_bar_plot(clickData,plot_type,ncdir,variable,fc_time,info):
     lon_click=clickData['points'][0]['x']        
         
     month = np.int(fc_time[5:])
-    print('here2!!!',month,ncdir)
-    print(predictand)
-    
-    
-    #try: ncdir = info['testdirs'][ncdir]
-    #except KeyError: ncdir = info['refdirs'][ncdir]
-    
-    
-    
-
     # Load data
     pred_1d = xr.open_dataset(ncdir+'pred_v2_'+predictand+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=fc_time+'-01')
     #for_anom = pred_1d['kprep'].mean(dim='ens')
@@ -437,7 +442,7 @@ def create_bar_plot(clickData,plot_type,ncdir,variable,fc_time,info):
         vals = np.asarray(np.append((predo_1d.to_array(dim='predictors').values*beta_1d.beta.values)[sigp],for_anom.values))
         
         if 'CO2EQ' in np.asarray(predos)[sigp]: # add CO2 to first value of predictors
-                vals[0]=co2_anom  
+                vals[0]=co2_anom
         # Check if sum of predictors matches the forecasted anomalie
         dif = for_anom.values-np.sum(vals[:-1])
         if abs(dif) > 0.001: # Difference too big, why?
@@ -455,8 +460,9 @@ def create_bar_plot(clickData,plot_type,ncdir,variable,fc_time,info):
         layout = go.Layout(
             #height=500,
             #width='30%',
+            margin={'b':30},
             autosize=False,
-            title='Individual contribution predictors <br> latitude = '+str(lat_click)+', longitude = '+str(lon_click),
+            title='Individual contribution predictors (lat='+str(lat_click)+', lon='+str(lon_click)+')',
             yaxis=dict(title=variable+' '+plot_dict[predictand]['Forecast anomalies']['units']),
             )
    
@@ -471,31 +477,20 @@ def create_po_timeseries(clickData,variable,ncdir,fc_time,info):
     
     if clickData == None:
         clickData = info['clickData']
-    month = np.int(fc_time[5:])
-
     lat_click=clickData['points'][0]['y']
-    lon_click=clickData['points'][0]['x']   
+    lon_click=clickData['points'][0]['x']           
+
+    month = np.int(fc_time[5:])
     predictand = info['variables'][variable]
-
-    print('here!!!',month,ncdir)
-
-    
-
-    
-    
-    
-       
-    #tt = dict_times[fc_time]
-    mo = np.int(fc_time[5:])
     
     # Load monthly data for predictions
     pred = xr.open_dataset(ncdir+'pred_v2_'+predictand+'_'+str(month).zfill(2)+'.nc')#.sel(lon=lon_click,lat=lat_click,method=str('nearest'))
-    pred_1d = pred.sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=(pred['time.month']==mo))
+    pred_1d = pred.sel(lon=lon_click,lat=lat_click,method=str('nearest'),time=(pred['time.month']==month))
     for_anom = pred_1d['kprep'].mean(dim='ens').isel(time=-1).values
     co2_anom = pred_1d['trend'].mean(dim='ens').isel(time=-1).values
     
     predo = xr.open_dataset(bdnc+'predodata_3m_fit_'+predictand+'_'+str(month).zfill(2)+'.nc')
-    predo_1d = predo.sel(time=(predo['time.month']==mo),lon=lon_click,lat=lat_click,method='nearest')
+    predo_1d = predo.sel(time=(predo['time.month']==month),lon=lon_click,lat=lat_click,method='nearest')
     predos = list(predo_1d.data_vars)
 
     beta_1d = xr.open_dataset(ncdir+'beta_v2_'+predictand+'_'+str(month).zfill(2)+'.nc').sel(lon=lon_click,lat=lat_click,method=str('nearest'))#,time=fc_time+'-01')
@@ -510,7 +505,11 @@ def create_po_timeseries(clickData,variable,ncdir,fc_time,info):
     xaxs = ['x1','x2','x3','x4','x5','x6','x7','x8']
     yaxs = ['y1','y2','y3','y4','y5','y6','y7','y8']
     specs=[[{'secondary_y':True}] for i in range(8)]
-    fig = make_subplots(rows=np.int(nr_sigp), specs=specs[:nr_sigp])
+    fig = make_subplots(rows=np.int(nr_sigp),
+                        specs=specs[:nr_sigp],
+                        subplot_titles=np.asarray(predos)[sigp],
+                        shared_xaxes=True,
+                       )
 
     if nr_sigp == 0:
         print('no significant predictors..')
@@ -530,22 +529,33 @@ def create_po_timeseries(clickData,variable,ncdir,fc_time,info):
                 text=pre,
                 textposition='top center',
                 name=pre,
+                showlegend=False
                 ),
                 row=ii+1,col=1,secondary_y=False)
+            if pre == 'CO2EQ':
+                yy = pred_1d['trend'].isel(ens=0).values
+            else:  
+                yy = beta_1d.beta.sel(predictors=pre).values.squeeze()*predo_1d[pre].sel(time=beta_1d.time).values
             fig.add_trace(go.Scatter(
                 x=time_pd_beta, 
-                y=beta_1d.beta.sel(predictors=pre).values.squeeze()*predo_1d[pre].sel(time=beta_1d.time).values,
+                y=yy,
                 xaxis=xaxs[ii],
                 yaxis=yaxs[ii],
                 line=dict(color='black'),
                 showlegend=False,
                 #name="beta (regr. coef.)",
                 ),
-                row=ii+1,col=1,secondary_y=True)
+                row=ii+1,
+                col=1,
+                secondary_y=True,
+                
+                )
+            fig.update_yaxes(title_text=plot_dict[predictand]['Forecast anomalies']['units'], row=ii+1,col=1,secondary_y=True)
         print(time_pd)            
         print(beta_1d.beta.sel(predictors=pre))
         fig['layout'].update(   autosize=False,
-                                title='Time series of (fitted) predictor data (lat='+str(lat_click)+', lon='+str(lon_click)+')',
+                                margin = {'b': 40},                             
+                                title='Time series of (fitted) predictor data (lat='+str(lat_click)+', lon='+str(lon_click)+') <br>The black lines shows the contribution of a predictor to the hindcasts (secondary y-axis)',
                             )
         return(fig)
     
@@ -555,19 +565,13 @@ def create_mapp(clickData,predictand,predictor,fc_time,data_name,bdnc,info):
     year = np.int(fc_time[:4])
     
     if clickData == None:
-        lat_click = 0
-        lon_click = 0
-    else:
-        lat_click=clickData['points'][0]['y']
-        lon_click=clickData['points'][0]['x']
-    
+        clickData = info['clickData']
+    lat_click=clickData['points'][0]['y']
+    lon_click=clickData['points'][0]['x']
+
     predictand = info['variables'][predictand]
     predictor = info['variables_pred'][predictor]
     
-    #print(fc_time)
-    #if data_name == 'cor_predictors':
-    #    data_name2 = 'cor_orig'
-    #else: data_name2 = 'cor_stepwise'
     data_name2 = 'sig'+data_name[3:]
     if data_name == 'diff':
         cor_pred = xr.open_dataset(bdnc+'cor_pred/'+'cor_predictors_fit'+'_'+predictand+'_'+str(month).zfill(2)+'.nc')[predictor]
@@ -609,9 +613,11 @@ def create_mapp(clickData,predictand,predictor,fc_time,data_name,bdnc,info):
     if data_name == 'cor_predictors_fit':
         titel2 = 'Fitted, The predictor data is fitted on previous 3 month mean and trend'
     elif data_name == 'cor_predictors_nofit':
-        titel2 = 'No fit, The predictor data is the previous 3 month mean'
+        #titel2 = 'No fit, The predictor data is the previous 3 month mean'
+        titel2 = 'Correlation after stepwise predicter selection'
     else:
-        titel2 = 'Differce in correlation (fisher transformed), fitted - nofit'
+        #titel2 = 'Differce in correlation (fisher transformed), fitted - nofit'
+        titel2 = 'Correlation after stepwise predicter selection'
     #fig = go.Contour(
     #print(sig_pred)
     sigvals = np.where(sig_pred.values[:,:]<0.05)
@@ -672,7 +678,7 @@ def create_map1(clickData,predictand,predictor,fc_time,bdnc,info):
     return create_mapp(clickData,predictand,predictor,fc_time,'cor_predictors_fit',bdnc,info)
     
 def create_map2(clickData,predictand,predictor,fc_time,bdnc,info):    
-    return create_mapp(clickData,predictand,predictor,fc_time,'cor_predictors_nofit',bdnc,info)
+    return create_mapp(clickData,predictand,predictor,fc_time,'cor_predictors_stepwise',bdnc,info)
    
 def create_map3(clickData,predictand,predictor,fc_time,bdnc,info):    
     return create_mapp(clickData,predictand,predictor,fc_time,'diff',bdnc,info)
@@ -685,41 +691,42 @@ def create_xyplot(clickData,predictand,predictor,fc_time,bdnc,info):
 
     lat_click=clickData['points'][0]['y']
     lon_click=clickData['points'][0]['x']
-    
-    predictand = info['variables_prad'][predictand]
-    predictor = info['variables_pred'][predictor]
-    
+    print('!!!!!!!!!!!!!!!!!!!!')
+    print(predictand)
+    pa = info['variables_prad'][predictand]
+    po = info['variables_pred'][predictor]
+    print(predictand)
     #print('Hello2!!')
     #print(lat_click,lon_click)
     #print(fc_time)           
     #print lat_click
     #tt = dict_times[fc_time]
-    pred = xr.open_dataset(bdnc+'predodata_3m_nc_'+predictand+'_'+str(mo).zfill(2)+'.nc')
-    predfit = xr.open_dataset(bdnc+'predodata_3m_fit_'+predictand+'_'+str(mo).zfill(2)+'.nc')
+    pred = xr.open_dataset(bdnc+'predodata_3m_nc_'+pa+'_'+str(mo).zfill(2)+'.nc')
+    predfit = xr.open_dataset(bdnc+'predodata_3m_fit_'+pa+'_'+str(mo).zfill(2)+'.nc')
     #print(predictor)
-    if predictor == 'CO2':
-        prad = xr.open_dataset(bdnc+'predadata_v2_'+predictand+'.nc')
+    if po == 'CO2EQ':
+        prad = xr.open_dataset(bdnc+'predadata_v2_'+pa+'.nc')
     else:
-        prad = xr.open_dataset(bdnc+'predadata_3m_nc_'+predictand+'_'+str(mo).zfill(2)+'.nc')
+        prad = xr.open_dataset(bdnc+'predadata_3m_nc_'+pa+'_'+str(mo).zfill(2)+'.nc')
     # Select right location and time slice
     #pred1d = pred.sel(lon=lon_click,lat=lat_click,method=str('nearest')).isel(time=slice(None,-tt))
     try: 
         #print('try for 3d predictor..')
-        pred1d = pred[predictor].sel(lon=lon_click,lat=lat_click,
+        pred1d = pred[po].sel(lon=lon_click,lat=lat_click,
         method=str('nearest')).sel(time=(pred['time.month']==mo))
-        pred1d_fit = predfit[predictor].sel(lon=lon_click,lat=lat_click,
+        pred1d_fit = predfit[po].sel(lon=lon_click,lat=lat_click,
         method=str('nearest')).sel(time=(pred['time.month']==mo))
     except ValueError:
         #print('.. went for 1d predictor')
-        pred1d = pred[predictor].sel(time=(pred['time.month']==mo))
-        pred1d_fit = predfit[predictor].sel(time=(pred['time.month']==mo))
+        pred1d = pred[po].sel(time=(pred['time.month']==mo))
+        pred1d_fit = predfit[po].sel(time=(pred['time.month']==mo))
         
     prad1d = prad.sel(lon=lon_click,lat=lat_click,
         method=str('nearest')).sel(time=(prad['time.month']==mo))
     
-    print('prad1d',prad1d)
-    print('pred1d',pred1d)
-    print('pred1d_fit',pred1d_fit)
+    print('prad1d',prad1d.month)
+    print('pred1d',pred1d.month)
+    print('pred1d_fit',pred1d_fit.month)
 
     data_orig = xr.merge([prad1d.to_array(name='predictand').squeeze(),pred1d.rename('orig'),pred1d_fit.rename('fit')]).to_dataframe()
     #data_fit = xr.merge([prad1d.to_array(name='predictand').squeeze(),pred1d_fit]).to_dataframe()
@@ -729,7 +736,7 @@ def create_xyplot(clickData,predictand,predictor,fc_time,bdnc,info):
     print(data_melt_orig)
 
     fig = px.scatter(data_melt_orig, x='value', y='predictand', color='variable',trendline='ols')
-    fig.data[-1].name = 'Diner'
+    #fig.data[-1].name = 'Diner'
     fig.data[-1].showlegend = True
 
     results = px.get_trendline_results(fig)
@@ -752,7 +759,7 @@ def create_xyplot(clickData,predictand,predictor,fc_time,bdnc,info):
     )    
     
     fig.update_layout(go.Layout(
-            title = 'Correlation between burned area and observed and forecasted MDC (lat='+str(lat_click)+', lon='+str(lon_click)+')',
+            title = 'Correlation between '+predictand+' - '+predictor+' (lat='+str(lat_click)+', lon='+str(lon_click)+')',
             autosize=False,
             height=500,
             #yaxis=dict(title='Burned Area [km2]'),

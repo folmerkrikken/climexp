@@ -23,7 +23,8 @@ dt = datetime.date.today()
 start0 = time.time()
 
 predictands = ["GCEcom","20CRslp","GPCCcom"]
-#predictands = ["GPCCcom"]#,"20CRslp"]
+#predictands = ["GPCCcom"]
+#predictands = ["GPCCcom"]
 
 # Load these predictors, this does not mean that these are neceserally used.. see predictorz for those
 predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
@@ -31,13 +32,13 @@ predictors = ['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND']
 # NAMELIST
 
 ## Resolution, currently only 25 or 50 is supported..
-resolution = 25             # 10, 25 or 50
+resolution = 10             # 10, 25 or 50
 
 ## Redo full hindcast period and remove original nc output file?
 overwrite = True
 ## Redo a specific month / year?
 overwrite_m = False          # Overwrite only the month specified with overw_m and overw_y
-overw_m = 2                 # Jan = 1, Feb = 2.. etc
+overw_m = 10                 # Jan = 1, Feb = 2.. etc
 overw_y = 2019
 
 ## Update indices if possible
@@ -63,7 +64,7 @@ cv_years = 3                # Leave n out cross validation
 ## Validation period is 1961 - current
 
 ens_size =      51
-styear  =       1901    # Use data from this year until current
+styear  =       1951    # Use data from this year until current
 stvalyear =     1961    # Start validation from this year until previous year
 endyear =       dt.year
 endmonth =      dt.month-1  # -1 as numpy arrays start with 0
@@ -72,12 +73,20 @@ endmonth =      dt.month-1  # -1 as numpy arrays start with 0
 bd = os.getcwd()+'/'
 if bd == '/home/folmer/climexp/kprep/': # We're home
     bd_data = '/home/folmer/climexp_data/KPREPData/'
-else: # We're on climate explorer
-    bd_data = '/home/oldenbor/climexp_data/KPREPData/'
-
-bdid = bd_data+'inputdata/'
-bdp = bd+'plots/'
-bdnc = bd_data+'ncfiles/'
+    bdid = bd_data+'inputdata/'
+    bdp = bd+'plots/'
+    bdnc = bd_data+'ncfiles/'
+elif bd =='/data/climexp_data/kprep/': # We're on climate explorer
+    bd_data = '/data/climexp_data/KPREPData/'
+    bdid = bd_data+'inputdata/'
+    bdp = bd+'plots/'
+    bdnc = bd_data+'ncfiles/'
+else: # we're in the test suite
+    bd_data = '/home/folmer/climexp_data/KPREPData/'
+    bdid = bd_data+'inputdata/'
+    bdp = bd+'plots/'
+    bdnc = bd+'ncfiles/'
+    
 
 # Make directories if not already present
 if not os.path.isfile(bd_data+'targetgrid'): os.system('mkdir -p '+bd_data+'targetgrid')
@@ -125,32 +134,54 @@ for p,predictand in enumerate(predictands):
     elif predictand == 'GCEcom':
         ## These predictors are selelected for GCEcom in the first predictor selection step
         predictorz.append(['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND'])
-        gcecom = xr.open_dataset(bdid+'gcecom_r'+str(resolution)+'.nc').squeeze()
+        ghcn_cams = xr.open_dataset(bdid+'ghcn_cams_1948_cur_r25.nc')
+        ersstv5 = xr.open_dataset(bdid+'ersstv5_r25.nc',decode_times=False)
+        ersstv5 = ersstv5.assign_coords(time=pd.date_range('1854-01-01',freq='MS',periods=len(ersstv5.time)))
+        # Load data
+        
+        
+        gcecom = xr.open_dataset(bdid+'gcecom_r'+str(resolution)+'.nc').squeeze().sst.to_dataset()
         gcecom = gcecom.drop('lev')
         gcecom = gcecom.rename({'sst':'tas'})
-        gcecom.time.values = rewrite_time(gcecom)
-        
+        #gcecom.time.values = rewrite_time(gcecom)
+        # TEMP FIX ERA5
+        #era5= xr.open_dataset(bdid+'era5_tmax_prec_mslp_r25.nc')['t2m_0005'].sel(time='2019-11-01')
+        #gcecom = xr.concat([gcecom,era5.expand_dims('time').rename('tas').to_dataset()],dim='time')        
         # Create mask where no data / sea ice / too many missing values etc.
         mask = np.sum((gcecom.tas.round(3) == 271.350),axis=0)>100. 
-        mask[61:,:] = True
+        if resolution == 25:
+            mask[61:,:] = True
+        elif resolution == 10:
+            mask[156:,:] = True
+        else:
+            print('first check where to mask the data for Antarctica')
+            sys.exit()
+            
         
         # Create anomalies with 1980-2010 as baseline climatology
         
-        hadcrucw = xr.open_dataset(bdid+'had4_krig_v2_0_0_r'+str(resolution)+'.nc').squeeze()
+        hadcrucw = xr.open_dataset(bdid+'had4_krig_v2_0_0_r'+str(resolution)+'.nc').squeeze().temperature_anomaly.to_dataset()
         hadcrucw = hadcrucw.rename({'temperature_anomaly':'tas'})
-        hadcrucw = hadcrucw.drop('year')
-        hadcrucw = hadcrucw.drop('month')
-        hadcrucw.time.values = rewrite_time(hadcrucw) # TODO, make this simpler..
-        
+        #sys.exit()
+        #hadcrucw = hadcrucw.drop('year')
+        #hadcrucw = hadcrucw.drop('month')
+        hadcrucw = hadcrucw.assign_coords(time = rewrite_time(hadcrucw)) # TODO, make this simpler..
+        #sys.exit()
         # Create anomalies with 1980-2010 as baseline climatology
-        gcecom.tas.values = anom_df(gcecom.tas,1980,2010,1948)
-        hadcrucw.tas.values = anom_df(hadcrucw.tas,1980,2010,styear)
+        #gcecom.tas.values = anom_df(gcecom.tas,1980,2010,1948)
+        gcecom_anom = (gcecom.groupby('time.month') - gcecom.sel(time=slice('1980','2010')).groupby('time.month').mean('time')).drop('month')
+        hadcrucw_anom = (hadcrucw.groupby('time.month') - hadcrucw.sel(time=slice('1980','2010')).groupby('time.month').mean('time')).drop('month')
+        #hadcrucw.tas.values = anom_df(hadcrucw.tas,1980,2010,styear)
         #sys.exit()
         # Hadcrucw until 1979 and gcecom from 1980
-        com = xr.concat([hadcrucw.tas.sel(time=slice(None,'1979-12-01')),gcecom.tas.sel(time=slice('1980-01-01',None))],dim='time')
+        com = xr.concat([hadcrucw_anom.tas.sel(time=slice(None,'1979-12-01')),gcecom_anom.tas.sel(time=slice('1980-01-01',None))],dim='time')
         #com = xr.concat([hadcrucw.tas[:684,:],gcecom.tas[120:,:]],dim='time')
-        com.values[:,mask] = np.nan
-        #com = com.rename('GCEcom')
+        #com.values[:,mask] = np.nan
+        com = com.where(~mask)
+        
+        
+
+        #com = com.rename('GCEcom')a
         if p == 0: predadata = xr.Dataset({'GCEcom':com.astype('float32')}) 
         else: predadata = xr.merge([predadata,com.astype('float32')])
         
@@ -163,33 +194,35 @@ for p,predictand in enumerate(predictands):
         # These predictors are selelected for GPCCcom in the first predictor selection step
         predictorz.append(['CO2EQ','NINO34','PDO','AMO','IOD','PERS','PERS_TREND'])
         #gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc').squeeze()
-        gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze()
+        gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze().precip.to_dataset()
         gpcccom = decode_timez(gpcccom)
         # Remove too much of the data
         gpcccom = gpcccom.dropna(dim='time',how='all')
         # Create anomalies with 1980-2010 as baseline climatology
-        gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
-        gpcccom.time.values = rewrite_time(gpcccom)
+        gpcccom_anom = gpcccom.groupby('time.month') - gpcccom.sel(time=slice('1980','2010')).groupby('time.month').mean('time')
+        #gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
+        #gpcccom.time.values = rewrite_time(gpcccom)
 
-        gpcccom = gpcccom.precip.rename('GPCCcom')
-        if p == 0: predadata = xr.Dataset({'GPCCcom':gpcccom.astype('float32')})
-        else: predadata = xr.merge([predadata,gpcccom.astype('float32')])
+        gpcccom_anom = gpcccom_anom.precip.rename('GPCCcom')
+        if p == 0: predadata = xr.Dataset({'GPCCcom':gpcccom_anom.astype('float32')})
+        else: predadata = xr.merge([predadata,gpcccom_anom.astype('float32')])
 
 
     elif predictand == '20CRslp':
         # These predictors are selelected for 20CRslp in the first predictor selection step
         predictorz.append(['CO2EQ','NINO34','PDO','AMO','IOD','CPREC','PERS','PERS_TREND'])
-        slp = xr.open_dataset(bdid+'slp_mon_mean_1901-current_r25.nc').squeeze()
-        slp.prmsl.values = anom_df(slp.prmsl,1980,2010,styear)
-        slp = slp.prmsl.rename('20CRslp')
-        slp.time.values = rewrite_time(slp)
-        if p == 0: predadata = xr.Dataset({'20CRslp':slp.astype('float32')})
-        else: predadata = xr.merge([predadata,slp.astype('float32')])
+        slp = xr.open_dataset(bdid+'slp_mon_mean_1901-current_r'+str(resolution)+'.nc').squeeze().rename({'prmsl':'20CRslp'})
+        slp_anom = slp.groupby('time.month') - slp.sel(time=slice('1980','2010')).groupby('time.month').mean('time')
+        #slp.prmsl.values = anom_df(slp.prmsl,1980,2010,styear)
+        #slp_anom = slp_anom.prmsl.rename('20CRslp')
+        #slp.time.values = rewrite_time(slp)
+        if p == 0: predadata = xr.Dataset({'20CRslp':slp_anom.astype('float32')})
+        else: predadata = xr.merge([predadata,slp_anom.astype('float32')])
 
     else:
         print('predictand not yet known.. exiting!')
         sys.exit()
-
+#sys.exit()
  
 print('-- Done reading in predictand data for fitting, time = ',str(np.int(time.time()-start1)),' seconds --') 
 
@@ -215,14 +248,28 @@ for i,pred in enumerate(predictors):
         continue
 
     elif pred == 'CPREC':    # Cum precip [time,lat,lon] - 1901 -current
-        gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze()
-        gpcccom = decode_timez(gpcccom)
-        gpcccom = gpcccom.dropna(dim='time',how='all')
-        gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
-        gpcccom = gpcccom.precip.rename('CPREC')
-        #gpcccom.time.values = rewrite_time(gpcccom)
-        if i == 0: predodata = df
-        else: predodata = xr.merge([predodata,gpcccom.sel(time=slice('1901-01-01',gpcccom.time[-1])).astype('float32')])
+        if 'gpcccom_anom' not in locals():
+            gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze().precip.to_dataset()
+            gpcccom = decode_timez(gpcccom)
+            # Remove too much of the data
+            gpcccom = gpcccom.dropna(dim='time',how='all')
+            # Create anomalies with 1980-2010 as baseline climatology
+            gpcccom_anom = gpcccom.groupby('time.month') - gpcccom.sel(time=slice('1980','2010')).groupby('time.month').mean('time')
+            
+        if i == 0: 
+            predodata = gpcccom_anom.rename('CPREC').sel(time=slice('1901-01-01',None)).astype('float32')
+        else:
+            predodata = xr.merge([predodata,gpcccom_anom.rename('CPREC').sel(time=slice('1901-01-01',None)).astype('float32')])            
+            
+       
+#         gpcccom = xr.open_dataset(bdid+'gpcc_10_combined_r'+str(resolution)+'.nc',decode_times=False).squeeze().precip.to_dataset()
+#         gpcccom = decode_timez(gpcccom)
+#         gpcccom = gpcccom.dropna(dim='time',how='all')
+#         gpcccom.precip.values = anom_df(gpcccom.precip,1980,2010,styear)
+#         gpcccom = gpcccom.precip.rename('CPREC')
+#         #gpcccom.time.values = rewrite_time(gpcccom)
+#         if i == 0: predodata = gpcccom_anom.precip.rename('CPREC').sel(time=slice('1901-01-01',None))
+#         else: predodata = xr.merge([predodata,gpcccom.sel(time=slice('1901-01-01',gpcccom.time[-1])).astype('float32')])
 
     else:
         df = load_clim_index(indices_locs[pred],styear,endyear,endmonth,pred)
@@ -246,7 +293,7 @@ for var in predodata:
             print('exiting..')
             sys.exit()
 
-
+predodata.time.attrs = {'standard_name':'time','long_name':'Time','reference_time': pd.Timestamp('1891-01-01')}
 # *************************************************************************   
 # Now start the predictor selection and the forecasting / hindcasting loop
 # *************************************************************************
@@ -279,19 +326,26 @@ for p,predictand in enumerate(predictands):
     print(mon_range)
     # Rolling 3-month mean, first and last timestep become nans, so remove last timestep (slice(None,-1))
     # use predictorz[p][:-1] to exclude 'PERS_TREND' from this operation as this predictor is added later
-    predodata_3m = predodata[predictorz[p][:-1]].rolling(time=3,center=True).mean().isel(time=slice(None,-1))
+    try: predictorz[p].remove('PERS_TREND')
+    except ValueError: print('PERS_TREND not in predictorz[p]') 
+    
+    predodata_3m = predodata[predictorz[p]].rolling(time=3,center=True).mean().isel(time=slice(None,-1))
     predadata_3m = predadata[predictand].rolling(time=3,center=True).mean().isel(time=slice(None,-1))
     
     # Change time values of predictor and predictand data for simplicity. Add 2 months for predictor data and subtract 2 months for predicand data. This means the dates do not represent the exact time off the data anymore, but is much easier for selecting the right training / testing data etc.
-    predodata_3m['time'].values = pd.DatetimeIndex(predodata_3m['time'].values) + pd.DateOffset(months=2)
-    predadata_3m['time'].values = pd.DatetimeIndex(predadata_3m['time'].values) - pd.DateOffset(months=2)
+    #predodata_3m['time'].values = pd.DatetimeIndex(predodata_3m['time'].values) + pd.DateOffset(months=2)
+    #predodata_3m['time'].values = pd.to_datetime(predodata_3m['time'].values) + pd.DateOffset(months=2)
+    predodata_3m = predodata_3m.assign_coords(time=pd.to_datetime(predodata_3m['time'].values) + pd.DateOffset(months=2))
+    #predadata_3m['time'].values = pd.to_datetime(predadata_3m['time'].values) - pd.DateOffset(months=2)
+    predadata_3m = predadata_3m.assign_coords(time=pd.to_datetime(predadata_3m['time'].values) - pd.DateOffset(months=2))
     
     if MLR_PRED: 
         print('MLR_PRED is True, calculating trend over previous 3 months for all predictors')
         #sys.exit()
         #predodata_3m_trend = pred_trend(predodata[predictorz[p][:-1]]).isel(time=slice(None,-1))
         predodata_3m_trend = predodata[predictorz[p][:-1]].rolling(time=3,center=True).reduce(calc_trend) 
-        predodata_3m_trend['time'].values = pd.DatetimeIndex(predodata_3m_trend['time'].values) + pd.DateOffset(months=2)
+        #predodata_3m_trend['time'].values = pd.DatetimeIndex(predodata_3m_trend['time'].values) + pd.DateOffset(months=2)
+        predodata_3m_trend = predodata_3m_trend.assign_coords(time=pd.to_datetime(predodata_3m_trend['time'].values) + pd.DateOffset(months=2))
 
     
 
@@ -304,27 +358,27 @@ for p,predictand in enumerate(predictands):
         try: print('predictor season = ', '-'.join([months[m+1],months[m+2],months[m+3]]))
         except IndexError: print('predictor season = ', '-'.join([months[m-11],months[m-10],months[m-9]]))
         
-        if HINDCAST and CAUSAL: #TODO > fix causal hindcast
-            print('Hindcasting mode, causal ',str(stvalyear),'-current')
-            timez = pd.DatetimeIndex(predodata['time'].sel(time=predodata['time.month']==m+1).values)[1:]
-            if timez[-1].month + 2 >= times[-1].month: timez = timez[:-1]
+#         if HINDCAST and CAUSAL: #TODO > fix causal hindcast
+#             print('Hindcasting mode, causal ',str(stvalyear),'-current')
+#             timez = pd.DatetimeIndex(predodata['time'].sel(time=predodata['time.month']==m+1).values)[1:]
+#             if timez[-1].month + 2 >= times[-1].month: timez = timez[:-1]
             
             
-            for y in range(np.where(timez.year == stvalyear)[0],len(timez)):
-                train = timez[:y]
-                test = timez[y]
+#             for y in range(np.where(timez.year == stvalyear)[0],len(timez)):
+#                 train = timez[:y]
+#                 test = timez[y]
 
-                if predictand == 'GPCCcom':
-                    train = train[50:]
+#                 if predictand == 'GPCCcom':
+#                     train = train[50:]
                 
-                print('test years: ',test)
+#                 print('test years: ',test)
 
-                regr_loop(predodata_3m,predodata_3m_trend,predadata_3m,timez,train,test,ens_size,bdnc,25,predictand,predictorz[p], MLR_PRED,FC=False,sig_val = 0.1) # hier wil ik naartoe
+#                 regr_loop(predodata_3m,predodata_3m_trend,predadata_3m,timez,train,test,ens_size,bdnc,25,predictand,predictorz[p], MLR_PRED,FC=False,sig_val = 0.1) # hier wil ik naartoe
 
             
-        elif HINDCAST and CROSVAL:
+        if HINDCAST and CROSVAL:
             print('Hindcasting mode, leave ',str(cv_years),' out cross-validation')
-            timez = pd.DatetimeIndex(predodata['time'].sel(time=predodata['time.month']==m+1).values)[1:-1]
+            timez = pd.DatetimeIndex(predodata_3m['time'].sel(time=predodata_3m['time.month']==m+1).values)[1:-1]
 
             for y in range(np.array(np.where(timez.year == stvalyear)).squeeze(),len(timez),cv_years):
                 test = timez[y:y+3]
@@ -369,7 +423,16 @@ for p,predictand in enumerate(predictands):
             except NameError:
                 data_fit_tot = data_fit.copy()
                 beta_xr_tot = beta_xr.copy()
-               
+
+        #data_fit = xr.open_dataset(bdnc+'pred_v2_'+predictand+'.nc')#,chunks={'lat':1})
+        data_s5 = load_ecmwf_s5(predictand,m,data_fit_tot['obs'],bias_correct=True,resolution=resolution)
+        timez_s5 = data_s5.time[:-1]
+
+        # Add ecwmf_S5 to data_fit_tot
+        data_fit_tot['ecmwf_s5'] = data_s5[predictand].rename({'number':'ens'})
+                            
+                
+                
         data_fit_tot.to_netcdf(bdnc+'pred_v2_'+predictand+'_'+mon+'.nc')
         beta_xr_tot.to_netcdf(bdnc+'beta_v2_'+predictand+'_'+mon+'.nc')
         
@@ -381,12 +444,11 @@ for p,predictand in enumerate(predictands):
     #    os.remove(bdnc+fil+predictand+'.nc')
     #    os.rename(bdnc+fil+predictand+'2.nc',bdnc+fil+predictand+'.nc')
         
-    
+        #sys.exit()
     
         if VALIDATION:
             print('Calculating skill scores') 
         
-            #data_fit = xr.open_dataset(bdnc+'pred_v2_'+predictand+'.nc')#,chunks={'lat':1})
 
             t0 = time.time()
             timez = pd.DatetimeIndex(data_fit_tot['time'].sel(time=data_fit_tot['time.month']==m+1).values)
@@ -414,8 +476,8 @@ for p,predictand in enumerate(predictands):
          
             scores['crpss'] = (('time','lat','lon'),                        f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,SS=True,ref=data_fit_tot['clim'].isel(time=slice(None,-1)).values)[np.newaxis,:,:])
             
-            scores['crpss_co2'] = (('time','lat','lon'),
-            f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,SS=True,ref=data_fit_tot['trend'].isel(time=slice(None,-1)).values)[np.newaxis,:,:])                                   
+            scores['crpss_co2'] = (('time','lat','lon'),            f_crps2(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['obs'].isel(time=slice(None,-1)).values,SS=True,ref=data_fit_tot['trend'].isel(time=slice(None,-1)).values)[np.newaxis,:,:])                                   
+            scores['crpss_s5'] = (('time','lat','lon'),            f_crps2(data_fit_tot['kprep'].sel(time=timez_s5).values,data_fit_tot['obs'].sel(time=timez_s5).values,SS=True,ref=data_s5[predictand].sel(time=timez_s5).values)[np.newaxis,:,:])                                     
             
             #scores['tercile'] = (('time','lat','lon'), tercile_category(data_fit_tot['kprep'].isel(time=slice(None,-1)).values,data_fit_tot['kprep'].isel(time=-1).values)[np.newaxis,:,:])
             # use 1980-2010 for tercile data
@@ -434,7 +496,7 @@ for p,predictand in enumerate(predictands):
             #os.remove(bdnc+'scores_v2_'+predictand+'.nc')
             #os.rename(bdnc+'scores_v2_'+predictand+'2.nc',bdnc+'scores_v2_'+predictand+'.nc')
 
-        if VALIDATION:
+        #if VALIDATION:
             #predictand = 'GCEcom' 
             print('Start validation for the last year in mon_range')
             #data_fit = xr.open_dataset(bdnc+'pred_v2_'+predictand+'.nc')

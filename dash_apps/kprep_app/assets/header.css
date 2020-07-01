@@ -28,7 +28,7 @@
 .tab.selected {
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.2);
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-top-style: none;
   border-right-style: none;
   color: black;
@@ -43,6 +43,7 @@
 
 .tab.first.selected {
   border-left-style: none;
+  border-bottom-style: solid;
   font-size:18px;
   color:DimGray;
   font-weight:bold;

@@ -23,7 +23,7 @@ import dash_html_components as html
 
 from app_kprep import app
 
-from utils import Header_pp as Header
+from utils import Header_pp,info
 
 
 # Where is the data stored?
@@ -33,18 +33,18 @@ if not os.path.isdir(bd):
 bdnc = bd+'ncfiles/'
 
 # Create dictionary with available times
-timez = xr.open_mfdataset(bdnc+'scores*GCEcom*.nc',concat_dim='time').time.sortby('time').values
+timez = xr.open_mfdataset(bdnc+'scores*GCEcom*.nc',combine='by_coords',concat_dim='time').time.sortby('time').values
 months12 = pd.to_datetime(timez).strftime('%Y-%m')[::-1]
 dict_times = dict(zip(months12,range(1,13)))
 
-# Create all info needed for the dropdowns
-info =  {'plottypes':{'Correlation':'cor','RMSESS':'rmsess','CRPSS':'crpss','Tercile summary  plot':'tercile','Forecast anomalies':'for_anom'},
-        'variables':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
-        'variables_prad':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
-        'variables_pred':{'CO2':'CO2EQ','NINO34':'NINO34','PDO':'PDO','AMO':'AMO','IOD':'IOD','PREC':'CPREC','PERS':'PERS','PERS_TREND':'PERS_TREND'},
-        'bdnc':bdnc,
-        'clickData':dict({u'points': [{u'y': -8., u'x': 21., u'pointNumber': 6, u'curveNumber': 632}]}),        
-        }
+# # Create all info needed for the dropdowns
+# info =  {'plottypes':{'Correlation':'cor','RMSESS':'rmsess','CRPSS':'crpss','Tercile summary  plot':'tercile','Forecast anomalies':'for_anom'},
+#         'variables':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
+#         'variables_prad':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
+#         'variables_pred':{'CO2':'CO2EQ','NINO34':'NINO34','PDO':'PDO','AMO':'AMO','IOD':'IOD','PREC':'CPREC','PERS':'PERS','PERS_TREND':'PERS_TREND'},
+#         'bdnc':bdnc,
+#         'clickData':dict({u'points': [{u'y': -8., u'x': 21., u'pointNumber': 6, u'curveNumber': 632}]}),        
+#         }
 
 # Don't know what this is for..
 styles = {
@@ -76,7 +76,7 @@ style_box = {'width': '60%', 'display': 'inline-block',
 #def create_layout(app):
 
 page_2_layout = html.Div(children=[
-    html.Div([Header(app)]),    
+    html.Div([Header_pp(app)]),    
     html.Br(),
 
     # 
@@ -136,13 +136,13 @@ page_2_layout = html.Div(children=[
         html.Br(),
         html.Div([
             html.H6(
-                "Predictor plot 1",
+                "Predictor-Predictand correlation map - original predictor data",
                 className="subtitle padded",
             ),
             #html.H6('By clicking on the map you can further specify the region of interest'),
             dcc.Graph(id='basemap_plot1')],
             #style={'width':'65vh','display': 'inline-block','margin': {'b': 10, 'r': 10, 'l': 10, 't': 10}}),
-            style= {'width': '40%', 'display': 'inline-block',
+            style= {'width': '47%', 'display': 'inline-block',
                                              'border-radius': '5px',
                                              'box-shadow': '4px 4px 4px grey',
                                              'background-color': '#f9f9f9',
@@ -151,9 +151,26 @@ page_2_layout = html.Div(children=[
                                              'margin-left': '10px',
                                              #'textAlign':'center',
                     }),
+
         html.Div([
             html.H6(
-                "Local scatter plot",
+                "Predictor-Predictand correlation map - after predictor selection",
+                className="subtitle padded",
+            ),        
+            dcc.Graph(id='basemap_plot2')],
+            #style={'width':'100vh','display': 'inline-block','margin': {'b': 10, 'r': 10, 'l': 10, 't': 10}}),
+            style= {'width': '47%', 'display': 'inline-block',
+                                             'border-radius': '5px',
+                                             'box-shadow': '4px 4px 4px grey',
+                                             'background-color': '#f9f9f9',
+                                             'padding': '10px',
+                                             'margin-bottom': '10px',
+                                             'margin-left': '10px',
+                                             #'textAlign':'center',
+                   }),
+        html.Div([
+            html.H6(
+                "Scatter plot predictor-predictand",
                 className="subtitle padded",
             ),        
             dcc.Graph(id='xy_plot')],
@@ -166,23 +183,7 @@ page_2_layout = html.Div(children=[
                                              'margin-bottom': '10px',
                                              'margin-left': '10px',
                                              #'textAlign':'center',
-                   }), 
-        html.Div([
-            html.H6(
-                "Local forecast",
-                className="subtitle padded",
-            ),        
-            dcc.Graph(id='basemap_plot2')],
-            #style={'width':'100vh','display': 'inline-block','margin': {'b': 10, 'r': 10, 'l': 10, 't': 10}}),
-            style= {'width': '40%', 'display': 'inline-block',
-                                             'border-radius': '5px',
-                                             'box-shadow': '4px 4px 4px grey',
-                                             'background-color': '#f9f9f9',
-                                             'padding': '10px',
-                                             'margin-bottom': '10px',
-                                             'margin-left': '10px',
-                                             #'textAlign':'center',
-                   }),                
+                   }),             
         ],style = {'width': '95%', 'display': 'inline-block',
                                              'border-radius': '15px',
                                              'box-shadow': '8px 8px 8px grey',

@@ -24,7 +24,7 @@ import dash_html_components as html
 
 from app_kprep import app
 
-from utils import Header_sop as Header
+from utils import Header_sop,info,info_sop
 
 # Where is the data stored?
 bd = '/home/oldenbor/climexp_data/KPREPData/'
@@ -34,18 +34,18 @@ bdnc = bd+'ncfiles/'
 
 
 # Create dictionary with available times
-timez = xr.open_mfdataset(bdnc+'scores*GCEcom*.nc',concat_dim='time').time.sortby('time').values
+timez = xr.open_mfdataset(bdnc+'scores*GCEcom*.nc',combine='by_coords',concat_dim='time').time.sortby('time').values
 months12 = pd.to_datetime(timez).strftime('%Y-%m')[::-1]
 dict_times = dict(zip(months12,range(1,13)))
 
 # Create all info needed for the dropdowns
-info =  {'plottypes':{'Correlation':'cor','RMSESS':'rmsess','CRPSS':'crpss','Tercile summary plot':'tercile','Forecast anomalies':'for_anom'},
-        'variables':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
-        'variables_prad':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
-        'variables_pred':{'CO2':'CO2EQ','NINO34':'NINO34','PDO':'PDO','AMO':'AMO','IOD':'IOD','PREC':'CPREC','PERS':'PERS','PERS_TREND':'PERS_TREND'},
-        'bdnc':bdnc,
-        'clickData':dict({u'points': [{u'y': -8., u'x': 21., u'pointNumber': 6, u'curveNumber': 632}]}),        
-        }
+# info =  {'plottypes':{'Correlation':'cor','RMSESS':'rmsess','CRPSS':'crpss','Tercile summary plot':'tercile','Forecast anomalies':'for_anom'},
+#         'variables':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
+#         'variables_prad':{'Temperature':'GCEcom','Precipitation':'GPCCcom','Sea-level pressure':'20CRslp'},
+#         'variables_pred':{'CO2':'CO2EQ','NINO34':'NINO34','PDO':'PDO','AMO':'AMO','IOD':'IOD','PREC':'CPREC','PERS':'PERS','PERS_TREND':'PERS_TREND'},
+#         'bdnc':bdnc,
+#         'clickData':dict({u'points': [{u'y': -8., u'x': 21., u'pointNumber': 6, u'curveNumber': 632}]}),        
+#         }
 
 
 # Since we're adding callbacks to elements that don't exist in the app.layout,
@@ -68,7 +68,7 @@ style_box = {'width': '60%', 'display': 'inline-block',
 ## Set page layout
 
 page_1_layout = html.Div(children=[
-    html.Div([Header(app)]),    
+    html.Div([Header_sop(app)]),    
     html.Br(),
 
     # 
@@ -76,7 +76,13 @@ page_1_layout = html.Div(children=[
         [
         html.Div(
             [
-
+            html.Div(
+                [
+                html.Div(
+                    [
+                    dcc.Markdown(info_sop),#,style=style_box),
+                    ],style={'width': '60%', 'display': 'inline-block','textAlign':'center'}),
+                ],style={'textAlign':'center'}),
                 html.Div(
                     [
 
@@ -145,7 +151,7 @@ page_1_layout = html.Div(children=[
                     }),
         html.Div([
             html.H6(
-                "Individual contribution predicotrs",
+                "Individual contribution predictors",
                 className="subtitle padded",
             ),        
             dcc.Graph(id='bar_plot')],
